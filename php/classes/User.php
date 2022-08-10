@@ -90,14 +90,14 @@ class User {
     }
 
     function visit($client_id, $seq){
-        if($this->_override->getCount('visit','client_id', $client_id) == 3){$sq = $seq;
-            foreach ($this->_override->getData('schedule') as $schedule){$sq++;$visit_name='Visit '.$sq;
-                $last_visit_date=$this->_override->getlastRow('visit','client_id', $client_id, 'id')[0]['visit_date'];
+        if($this->_override->getCount('visit','client_id', $client_id) == 1){$sq = $seq;
+            foreach ($this->_override->getData('schedule') as $schedule){$sq+=7;$visit_name='Day '.$sq;
+                $last_visit_date=$this->_override->getlastRow('visit','client_id', $client_id, 'id')[0]['expected_date'];
                 $nxt_visit = date('Y-m-d', strtotime($last_visit_date. ' + '.$schedule['days'].' days'));
                 $this->createRecord('visit',array(
                     'visit_name' => $visit_name,
                     'visit_code' => $schedule['visit'],
-                    'visit_date' => $nxt_visit,
+                    'expected_date' => $nxt_visit,
                     'visit_window' => $schedule['window'],
                     'client_id' => $client_id,
                     'seq_no' => $sq,
@@ -105,7 +105,7 @@ class User {
                 ));
             }
         }
-        return true;
+        return $this->_override->getData('schedule');
     }
 
     function getBrowser() {

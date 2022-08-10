@@ -135,9 +135,7 @@ if ($user->isLoggedIn()) {
                 'id_type' => array(
                     'required' => true,
                 ),
-                'population_group' => array(
-                    'required' => true,
-                ),
+
                 'street' => array(
                     'required' => true,
                 ),
@@ -174,14 +172,20 @@ if ($user->isLoggedIn()) {
                         $attachment_file = '';
                     }
                     if($errorM == false){
-                        $screening_id = '';
+                        $chk=true;
+                        $screening_id = $random->get_rand_alphanumeric(8);
+                        $check_screening=$override->get('clients','participant_id', $screening_id)[0];
+                        while($chk){
+                            $screening_id = strtoupper($random->get_rand_alphanumeric(8));
+                            if(!$check_screening=$override->get('clients','participant_id', $screening_id)){
+                                $chk=false;
+                            }
 
-                        $check_screening=$override->getNews('study_id','status', 0, 'site_id', $user->data()->site_id)[0];
-                        $s_id = $check_screening['study_id'];
+                        }
 
                         $user->createRecord('clients', array(
-                            'participant_id' => $s_id,
-                            'study_id' => $s_id,
+                            'participant_id' => $screening_id,
+                            'study_id' => '',
                             'clinic_date' => Input::get('clinic_date'),
                             'firstname' => Input::get('firstname'),
                             'lastname' => Input::get('lastname'),
@@ -190,7 +194,6 @@ if ($user->isLoggedIn()) {
                             'id_number' => Input::get('id_number'),
                             'id_type' => Input::get('id_type'),
                             'gender' => Input::get('gender'),
-                            'population_group' => Input::get('population_group'),
                             'marital_status' => Input::get('marital_status'),
                             'education_level' => Input::get('education_level'),
                             'workplace' => Input::get('workplace'),
@@ -200,7 +203,6 @@ if ($user->isLoggedIn()) {
                             'street' => Input::get('street'),
                             'ward' => Input::get('ward'),
                             'block_no' => Input::get('block_no'),
-                            'created_on' => date('Y-m-d'),
                             'site_id' => $user->data()->site_id,
                             'staff_id' => $user->data()->id,
                             'client_image' => $attachment_file,
@@ -210,25 +212,14 @@ if ($user->isLoggedIn()) {
 
                         $client = $override->lastRow('clients', 'id')[0];
 
-                        $user->updateRecord('study_id', array('status'=>1), $check_screening['id']);
-
                         $user->createRecord('visit', array(
-                                'visit_name' => 'Visit 1',
-                                'visit_code' => 'V1',
-                                'visit_date' => date('Y-m-d'),
-                                'visit_window' => 14,
+                                'visit_name' => 'Day 0',
+                                'visit_code' => 'D0',
+                                'expected_date' => date('Y-m-d'),
+                                'visit_window' => 2,
                                 'status' => 1,
-                                'seq_no' => 1,
+                                'seq_no' => 0,
                                 'client_id' => $client['id'],
-                        ));
-
-                        $user->createRecord('visit', array(
-                            'visit_name' => 'Visit 2',
-                            'visit_code' => 'V2',
-                            'visit_window' => 14,
-                            'status' => 0,
-                            'seq_no' => 2,
-                            'client_id' => $client['id'],
                         ));
 
                         $successMessage = 'Client Added Successful';
@@ -540,18 +531,7 @@ if ($user->isLoggedIn()) {
                                                 <option value="Voters ID">Voters ID</option>
                                                 <option value="National ID">National ID</option>
                                                 <option value="Employment ID">Employment ID</option>
-                                                <option value="Introductory Letter">Introductory Letter</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="row-form clearfix">
-                                        <div class="col-md-3">Population Group</div>
-                                        <div class="col-md-9">
-                                            <select name="population_group" style="width: 100%;" required>
-                                                <option value="">Select</option>
-                                                <option value="General Population">General Population</option>
-                                                <option value="Police and Prison Forces">Police and Prison Forces</option>
+                                                <option value="Hospital ID">Hospital ID</option>
                                             </select>
                                         </div>
                                     </div>

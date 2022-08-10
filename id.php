@@ -5,7 +5,7 @@ $override = new OverideData();
 if ($user->isLoggedIn()) {
     $client = $override->get('clients','id',$_GET['cid'])[0];
     if($client['client_image'] !='' || is_null($client['client_image'])){$img=$client['client_image'];}else{$img='img/users/blank.png';}
-    $endDate = date('Y-m-d', strtotime('+1 year', strtotime($client['clinic_date'])));
+    $endDate = '2022-12-31';
 } else {
     Redirect::to('index.php');
 }
@@ -278,7 +278,7 @@ if ($user->isLoggedIn()) {
             <div class="card-body" id="mycard">
                 <div class='container' style='text-align:left; border:2px dotted black;'>
                     <img src='img/nimr.png' alt='' style="width: 10vh">
-                    <img src='img/tancov.png' alt='' style="float: right;width: 30vh" >
+                    <h1 style="float: right;width: 34vh;font-weight: bolder;margin-top: 10px;" >HETACOV-TRIAL</h1>
                     <div class='header'>
                     </div>
                     <div class='container-2'>

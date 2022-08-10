@@ -167,9 +167,6 @@ if ($user->isLoggedIn()) {
                 'dob' => array(
                     'required' => true,
                 ),
-                'population_group' => array(
-                    'required' => true,
-                ),
                 'street' => array(
                     'required' => true,
                 ),
@@ -220,7 +217,6 @@ if ($user->isLoggedIn()) {
                             'id_type' => Input::get('id_type'),
                             'gender' => Input::get('gender'),
                             'marital_status' => Input::get('marital_status'),
-                            'population_group' => Input::get('population_group'),
                             'education_level' => Input::get('education_level'),
                             'workplace' => Input::get('workplace'),
                             'occupation' => Input::get('occupation'),
@@ -277,25 +273,57 @@ if ($user->isLoggedIn()) {
                 $pageError = $validate->errors();
             }
         }
-        elseif (Input::get('add_unscheduled')){
+        elseif (Input::get('add_screening')){
             $validate = $validate->check($_POST, array(
-                'reasons' => array(
-                    'required' => true,
-                ),
+
             ));
             if ($validate->passed()) {
+                $eligibility=0;
+                if(Input::get('age_18')==1 && Input::get('tr_pcr')==1 && Input::get('hospitalized')==1 &&
+                    Input::get('moderate_severe')==1 && Input::get('peptic_ulcers')==2 && (Input::get('pregnant')==2 || Input::get('pregnant')==3)){
+                    $eligibility=1;
+                }
                 try {
-                    $user->createRecord('unscheduled', array(
-                        'visit_code' => Input::get('vc'),
-                        'seq' => Input::get('sq'),
-                        'client_id' => Input::get('cid'),
-                        'visit_date' => Input::get('visit_date'),
-                        'reasons' => Input::get('reasons'),
-                        'created_on' => date('Y-m-d'),
-                        'staff_id' => $user->data()->id,
-                        'status' => Input::get('visit_status'),
-                    ));
-                    $successMessage = 'Visit Successful Added';
+                    if($override->get('screening','client_id',Input::get('cid'))){
+                        $cl_id=$override->get('screening','client_id',Input::get('cid'))[0]['id'];
+                        $user->updateRecord('screening', array(
+                            'sample_date' => Input::get('sample_date'),
+                            'results_date' => Input::get('results_date'),
+                            'covid_result' => Input::get('covid_result'),
+                            'age_18' => Input::get('age_18'),
+                            'tr_pcr' => Input::get('tr_pcr'),
+                            'hospitalized' => Input::get('hospitalized'),
+                            'moderate_severe' => Input::get('moderate_severe'),
+                            'peptic_ulcers' => Input::get('peptic_ulcers'),
+                            'pregnant' => Input::get('pregnant'),
+                            'eligibility' => $eligibility,
+                            'created_on' => date('Y-m-d'),
+                            'staff_id' => $user->data()->id,
+                            'site_id' => $user->data()->site_id,
+                            'status'=> 1,
+                            'client_id' => Input::get('cid'),
+                        ),$cl_id);
+                    }else{
+                        $user->createRecord('screening', array(
+                            'sample_date' => Input::get('sample_date'),
+                            'results_date' => Input::get('results_date'),
+                            'covid_result' => Input::get('covid_result'),
+                            'age_18' => Input::get('age_18'),
+                            'tr_pcr' => Input::get('tr_pcr'),
+                            'hospitalized' => Input::get('hospitalized'),
+                            'moderate_severe' => Input::get('moderate_severe'),
+                            'peptic_ulcers' => Input::get('peptic_ulcers'),
+                            'pregnant' => Input::get('pregnant'),
+                            'eligibility' => $eligibility,
+                            'created_on' => date('Y-m-d'),
+                            'staff_id' => $user->data()->id,
+                            'site_id' => $user->data()->site_id,
+                            'status'=> 1,
+                            'client_id' => Input::get('cid'),
+                        ));
+                    }
+
+                    $successMessage = 'Screening Successful Added';
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -303,20 +331,102 @@ if ($user->isLoggedIn()) {
                 $pageError = $validate->errors();
             }
         }
-        elseif (Input::get('add_enroll')){
+        elseif (Input::get('add_lab')){
             $validate = $validate->check($_POST, array(
 
             ));
             if ($validate->passed()) {
-                if(Input::get('eligible')==1 && Input::get('consent')==1 && Input::get('enroll_status')==1){
-                    $check=$override->getNews('visit','visit_code','V4','client_id', Input::get('cid'))[0];
-                    if(!$check){
-                        $user->updateRecord('clients', array("enrolled"=>1),Input::get('cid'));
-                        $user->visit(Input::get('cid'), Input::get('seq'));
+                $eligibility=0;
+                $clnt=$override->get('clients','id',Input::get('cid'))[0];
+                $sc_e=$override->get('screening', 'client_id', Input::get('cid'))[0];
+                $std_id=$override->getNews('study_id','site_id',$user->data()->site_id,'status', 0)[0];
+                if((Input::get('wbc')>=1.5 && Input::get('wbc')<=11.0) && (Input::get('hb')>=8.5 && Input::get('hb')<=16.5)
+                    && (Input::get('plt')>=50 && Input::get('plt')<=500) && (Input::get('alt')>=2.0 && Input::get('alt')<=195.0)
+                    && (Input::get('ast')>=2.0 && Input::get('ast')<=195.0) && (Input::get('pt')>=9.9 && Input::get('pt')<=19.6)
+                    && (Input::get('ptt')>=22.1 && Input::get('ptt')<=91.6)){
+                    if($clnt['gender']=='male' && (Input::get('sc')>=44.0 && Input::get('sc')<=158.4) && $sc_e['eligibility'] == 1){
+                        $eligibility=1;
+                        if($override->getCount('visit','client_id', Input::get('cid')) == 1){
+                            $user->visit(Input::get('cid'), 0);
+                            $user->updateRecord('study_id',array('status'=>1,'client_id'=>Input::get('cid')),$std_id['id']);
+                            $user->updateRecord('clients',array('study_id'=>$std_id['study_id'],'enrolled'=>1),Input::get('cid'));
+                        }
+                    }elseif ($clnt['gender']=='female' && (Input::get('sc')>=62.0 && Input::get('sc')<=190.8) && $sc_e['eligibility'] == 1){
+                        $eligibility=1;
+                        if($override->getCount('visit','client_id', Input::get('cid')) == 1){
+                            $user->visit(Input::get('cid'), 0);
+                            $user->updateRecord('study_id',array('status'=>1,'client_id'=>Input::get('cid')),$std_id['id']);
+                            $user->updateRecord('clients',array('study_id'=>$std_id['study_id'],'enrolled'=>1),Input::get('cid'));
+                        }
                     }
-                    $successMessage = 'Visit Successful Enrolled';
-                }else{
-                    $errorMessage='Please make sure, client meet eligibility criteria and signed Consent form';
+                }
+                try {
+                    if($override->get('lab','client_id',Input::get('cid'))){
+                        $l_id=$override->get('lab','client_id',Input::get('cid'))[0]['id'];
+                        $user->updateRecord('lab', array(
+                            'wbc' => Input::get('wbc'),
+                            'hb' => Input::get('hb'),
+                            'plt' => Input::get('plt'),
+                            'alt' => Input::get('alt'),
+                            'ast' => Input::get('ast'),
+                            'sc' => Input::get('sc'),
+                            'pt' => Input::get('pt'),
+                            'ptt' => Input::get('ptt'),
+                            'eligibility' => $eligibility,
+                            'created_on' => date('Y-m-d'),
+                            'staff_id' => $user->data()->id,
+                            'site_id' => $user->data()->site_id,
+                            'status'=> 1,
+                            'client_id' => Input::get('cid'),
+                        ),$l_id);
+                    }else{
+                        $user->createRecord('lab', array(
+                            'wbc' => Input::get('wbc'),
+                            'hb' => Input::get('hb'),
+                            'plt' => Input::get('plt'),
+                            'alt' => Input::get('alt'),
+                            'ast' => Input::get('ast'),
+                            'sc' => Input::get('sc'),
+                            'pt' => Input::get('pt'),
+                            'ptt' => Input::get('ptt'),
+                            'eligibility' => $eligibility,
+                            'created_on' => date('Y-m-d'),
+                            'staff_id' => $user->data()->id,
+                            'site_id' => $user->data()->site_id,
+                            'status'=> 1,
+                            'client_id' => Input::get('cid'),
+                        ));
+                    }
+
+                    $successMessage = 'Screening Successful Added';
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        }
+        elseif (Input::get('edit_visit')) {
+            $validate = $validate->check($_POST, array(
+                'visit_date' => array(
+                    'required' => true,
+                ),
+                'visit_status' => array(
+                    'required' => true,
+                ),
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->updateRecord('visit', array(
+                        'visit_date' => Input::get('visit_date'),
+                        'created_on' => date('Y-m-d'),
+                        'status' => 1,
+                        'visit_status' => Input::get('visit_status'),
+                        'reasons' => Input::get('reasons'),
+                    ), Input::get('id'));
+
+                } catch (Exception $e) {
+                    die($e->getMessage());
                 }
             } else {
                 $pageError = $validate->errors();
@@ -901,7 +1011,7 @@ if ($user->isLoggedIn()) {
                                                                                 <option value="Voters ID">Voters ID</option>
                                                                                 <option value="National ID">National ID</option>
                                                                                 <option value="Employment ID">Employment ID</option>
-                                                                                <option value="Introductory Letter">Introductory Letter</option>
+                                                                                <option value="Hospital ID">Hospital ID</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -1086,18 +1196,7 @@ if ($user->isLoggedIn()) {
                                                                                 <option value="Voters ID">Voters ID</option>
                                                                                 <option value="National ID">National ID</option>
                                                                                 <option value="Employment ID">Employment ID</option>
-                                                                                <option value="Introductory Letter">Introductory Letter</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="row-form clearfix">
-                                                                        <div class="col-md-3">Population Group</div>
-                                                                        <div class="col-md-9">
-                                                                            <select name="population_group" style="width: 100%;" required>
-                                                                                <option value="<?=$client['population_group']?>"><?=$client['population_group']?></option>
-                                                                                <option value="General Population">General Population</option>
-                                                                                <option value="Police and Prison Forces">Police and Prison Forces</option>
+                                                                                <option value="Hospital ID">Hospital ID</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -1236,7 +1335,8 @@ if ($user->isLoggedIn()) {
                                                 <a href="#"><img src="<?=$img?>" width="300" class="img-thumbnail"></a>
                                             </div>
                                             <h5><?='Name: '.$patient['firstname'].' '.$patient['lastname'].' Age: '.$patient['age']?></h5>
-                                            <h4><strong style="font-size: larger">Study ID: <?=$patient['participant_id']?></strong></h4>
+                                            <h4><strong style="font-size: medium">Screening ID: <?=$patient['participant_id']?></strong></h4>
+                                            <h4><strong style="font-size: larger">Study ID: <?=$patient['study_id']?></strong></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -1272,47 +1372,39 @@ if ($user->isLoggedIn()) {
                                             </thead>
                                             <tbody>
                                             <?php $x=1;foreach ($override->get('visit', 'client_id', $_GET['cid']) as $visit) {
-                                                if($visit['visit_code'] == 'V1' || $visit['visit_code'] == 'V2'){$v_typ='Screening';}elseif ($visit['visit_code'] == 'V3'){$v_typ='Enrollment';}else{$v_typ='Follow Up';}?>
+                                                $sc=$override->get('screening','client_id',$_GET['cid'])[0];
+                                                $lb=$override->get('lab','client_id',$_GET['cid'])[0];
+                                                $cntV=$override->getCount('visit','client_id',$visit['client_id']);
+                                                if($visit['status']==0){$btnV='Add';}elseif ($visit['status']==1){$btnV='Edit';}
+                                                if($sc){$btnS='Edit';}else{$btnS='Add';}
+                                                if($lb){$btnL='Edit';}else{$btnL='Add';}
+                                                if($visit['visit_code'] == 'D0'){$v_typ='Screening & Enrollment';}else{$v_typ='Follow Up';}
+                                                if($x==1 || ($x>1 && $sc['eligibility']==1 && $lb['eligibility']==1)){?>
                                                 <tr>
                                                     <td><?=$x?></td>
                                                     <td> <?=$visit['visit_name'] ?></td>
                                                     <td> <?=$visit['visit_code'] ?></td>
                                                     <td> <?=$v_typ ?></td>
-                                                    <td> <?= $visit['visit_date'] ?></td>
-                                                    <?php if($visit['status'] == 1) {?>
-                                                        <td>
-                                                            <a href="#<?= $visit['id'] ?>" role="button" class="btn btn-success">Done</a>
-                                                            <?php if($visit['seq_no'] > 3){?>
-                                                                <a href="#addUnscheduled<?= $visit['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Add Unscheduled</a>
-                                                            <?php }?>
-                                                        </td>
-                                                        <td>
-                                                            <?php if($visit['visit_code'] == 'V3'){?>
-                                                                <a href="#addEnroll<?= $visit['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Add Enrollment</a>
-                                                            <?php }?>
-                                                        </td>
-                                                    <?php }elseif($visit['status'] == 0){?>
-                                                        <td><a href="#<?= $visit['id'] ?>" role="button" class="btn btn-warning">Pending</a></td>
-                                                        <td>
-                                                            <a href="#addVisit<?= $visit['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Add</a>
-                                                            <?php if($visit['seq_no'] > 3){?>
-                                                                <a href="#addUnscheduled<?= $visit['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Add Unscheduled</a>
-                                                            <?php }?>
-                                                            <?php if($visit['visit_code'] == 'V3'){?>
-                                                                <a href="#addEnroll<?= $visit['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Add Enrollment</a>
-                                                            <?php }?>
-                                                        </td>
-                                                    <?php }elseif ($visit['status'] == 2){?>
-                                                        <td>
-                                                            <a href="#<?= $visit['id'] ?>" role="button" class="btn btn-warning">Not Done</a>
-                                                            <?php if($visit['seq_no'] > 3){?>
-                                                                <a href="#addUnscheduled<?= $visit['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Add Unscheduled</a>
-                                                            <?php }?>
-                                                            <?php if($visit['visit_code'] == 'V3'){?>
-                                                                <a href="#addEnroll<?= $visit['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Add Enrollment</a>
-                                                            <?php }?>
-                                                        </td>
-                                                    <?php }?>
+                                                    <td> <?=$visit['visit_date'] ?></td>
+                                                    <td>
+                                                        <?php if($visit['status']==1){?>
+                                                            <a href="#" role="button" class="btn btn-success">Done</a>
+                                                        <?php }elseif ($visit['status']==0){?>
+                                                            <a href="#" role="button" class="btn btn-warning">Pending</a>
+                                                        <?php }?>
+                                                    </td>
+                                                    <td>
+                                                        <?php if($visit['seq_no'] > 0){?>
+                                                            <a href="#addVisit<?= $visit['id'] ?>" role="button" class="btn btn-info" data-toggle="modal"><?=$btnV?> Visit</a>
+                                                        <?php }else{?>
+                                                            <a href="#addScreening<?= $visit['id'] ?>" role="button" class="btn btn-info" data-toggle="modal"><?=$btnS?> Screening</a>
+                                                            <a href="#addLab<?= $visit['id'] ?>" role="button" class="btn btn-info" data-toggle="modal"><?=$btnL?> Lab Results</a>
+                                                        <?php }?>
+                                                        <?php if(($sc && $lb) && ($sc['eligibility'] ==0 || $lb['eligibility']==0)){?>
+                                                            <a href="#" role="button" class="btn btn-danger" data-toggle="modal">Not Eligible <?=$sc['eligibility']?></a>
+                                                        <?php }?>
+
+                                                    </td>
                                                 </tr>
                                                 <div class="modal fade" id="addVisit<?= $visit['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
@@ -1340,7 +1432,11 @@ if ($user->isLoggedIn()) {
                                                                             <div class="col-md-3">Current Status</div>
                                                                             <div class="col-md-9">
                                                                                 <select name="visit_status" style="width: 100%;" required>
-                                                                                    <option value="">Select</option>
+                                                                                    <?php if($visit['status'] !=0){?>
+                                                                                        <option value="<?=$visit['visit_status']?>"><?=$visit['visit_status']?></option>
+                                                                                    <?php }else{?>
+                                                                                        <option value="">Select</option>
+                                                                                    <?php }?>
                                                                                     <option value="1">Attended</option>
                                                                                     <option value="2">Missed Visit</option>
                                                                                     <option value="3">Vaccinated</option>
@@ -1353,15 +1449,15 @@ if ($user->isLoggedIn()) {
                                                                         </div>
 
                                                                         <div class="row-form clearfix">
-                                                                            <div class="col-md-3">Reasons:</div>
+                                                                            <div class="col-md-3">Notes:</div>
                                                                             <div class="col-md-9">
-                                                                                <textarea name="reasons" rows="4" ></textarea>
+                                                                                <textarea name="reasons" rows="4" ><?php if($visit['status'] !=0){echo $visit['reasons'];}?></textarea>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-3">Date:</div>
                                                                             <div class="col-md-9">
-                                                                                <input value="<?=$visit['visit_date']?>" class="validate[required,custom[date]]" type="text" name="visit_date" id="visit_date"/> <span>Example: 2010-12-01</span>
+                                                                                <input value="<?php if($visit['status'] !=0){echo $visit['visit_date'];}?>" class="validate[required,custom[date]]" type="text" name="visit_date" id="visit_date"/> <span>Example: 2010-12-01</span>
                                                                             </div>
                                                                         </div>
                                                                         <div class="dr"><span></span></div>
@@ -1370,7 +1466,6 @@ if ($user->isLoggedIn()) {
                                                                 <div class="modal-footer">
                                                                     <input type="hidden" name="id" value="<?=$visit['id'] ?>">
                                                                     <input type="hidden" name="vc" value="<?=$visit['visit_code'] ?>">
-                                                                    <input type="hidden" name="seq" value="<?=$visit['seq_no'] ?>">
                                                                     <input type="hidden" name="cid" value="<?=$visit['client_id'] ?>">
                                                                     <input type="submit" name="edit_visit" class="btn btn-warning" value="Save">
                                                                     <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -1379,137 +1474,179 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="modal fade" id="addUnscheduled<?= $visit['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="addScreening<?= $visit['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <form method="post">
                                                                 <div class="modal-header">
                                                                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                                    <h4>Add Unscheduled Visit</h4>
+                                                                    <h4>Add Screening</h4>
                                                                 </div>
                                                                 <div class="modal-body modal-body-np">
                                                                     <div class="row">
-                                                                        <?php $unscheduled=$override->getlastRow1('unscheduled','visit_code',$visit['visit_code'],'client_id',$visit['client_id'], 'id');
-                                                                        if($unscheduled){$sq=$unscheduled[0]['seq']+1;}else{$sq=1;}?>
                                                                         <div class="block-fluid">
                                                                             <div class="row-form clearfix">
-                                                                                <div class="col-md-3">Visit:</div>
-                                                                                <div class="col-md-9"><input type="text" name="name" value="<?=$visit['visit_code'].'.'.$sq?>" disabled /></div>
+                                                                                <div class="col-md-8">Date of COVID-19 sample taken:</div>
+                                                                                <div class="col-md-4"><input type="text" name="sample_date" value="<?=$sc['sample_date']?>" /><span>Example: 2010-12-01</span></div>
                                                                             </div>
                                                                         </div>
-
                                                                         <div class="block-fluid">
                                                                             <div class="row-form clearfix">
-                                                                                <div class="col-md-3">Visit Type:</div>
-                                                                                <div class="col-md-9"><input type="text" name="name" value="Unscheduled" disabled /></div>
+                                                                                <div class="col-md-8">Date of COVID-19 results:</div>
+                                                                                <div class="col-md-4"><input type="text" name="results_date" value="<?=$sc['results_date']?>" /><span>Example: 2010-12-01</span></div>
                                                                             </div>
                                                                         </div>
 
                                                                         <div class="row-form clearfix">
-                                                                            <div class="col-md-3">Status</div>
-                                                                            <div class="col-md-9">
-                                                                                <select name="visit_status" style="width: 100%;" required>
-                                                                                    <option value="">Select</option>
-                                                                                    <option value="1">Attended</option>
-                                                                                    <option value="2">Not Attended</option>
+                                                                            <div class="col-md-8">COVID-19 results</div>
+                                                                            <div class="col-md-4">
+                                                                                <select name="covid_result" style="width: 100%;" required>
+                                                                                    <option value="<?=$sc['covid_result']?>"><?php if($sc){if($sc['covid_result']==1){echo 'Positive';}elseif($sc['covid_result']==2){echo 'Negative';}}else{echo 'Select';}?></option>
+                                                                                    <option value="1">Positive</option>
+                                                                                    <option value="2">Negative</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
+
                                                                         <div class="row-form clearfix">
-                                                                            <div class="col-md-3">Date:</div>
-                                                                            <div class="col-md-9">
-                                                                                <input value="" class="validate[required,custom[date]]" type="text" name="visit_date" id="visit_date"/> <span>Example: 2010-12-01</span>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row-form clearfix">
-                                                                            <div class="col-md-3">Reasons:</div>
-                                                                            <div class="col-md-9">
-                                                                               <textarea name="reasons" rows="4" required></textarea>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="dr"><span></span></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <input type="hidden" name="sq" value="<?=$sq?>">
-                                                                    <input type="hidden" name="vc" value="<?=$visit['visit_code'] ?>">
-                                                                    <input type="hidden" name="seq" value="<?=$visit['seq_no'] ?>">
-                                                                    <input type="hidden" name="cid" value="<?=$visit['client_id'] ?>">
-                                                                    <input type="submit" name="add_unscheduled" class="btn btn-warning" value="Save">
-                                                                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal fade" id="addEnroll<?= $visit['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <form method="post">
-                                                                <div class="modal-header">
-                                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                                    <h4>Add Enrollment Visit</h4>
-                                                                </div>
-                                                                <div class="modal-body modal-body-np">
-                                                                    <div class="row">
-                                                                        <div class="row-form clearfix">
-                                                                            <div class="col-md-3">Current Status</div>
-                                                                            <div class="col-md-9">
-                                                                                <select name="enroll_status" style="width: 100%;" required>
-                                                                                    <option value="">Select</option>
-                                                                                    <option value="1">Vaccinated</option>
-                                                                                    <option value="2">Not Vaccinated</option>
+                                                                            <div class="col-md-8">Aged eighteen years and above</div>
+                                                                            <div class="col-md-4">
+                                                                                <select name="age_18" style="width: 100%;" required>
+                                                                                    <option value="<?=$sc['age_18']?>"><?php if($sc){if($sc['age_18']==1){echo 'Yes';}elseif($sc['age_18']==2){echo 'No';}}else{echo 'Select';}?></option>
+                                                                                    <option value="1">Yes</option>
+                                                                                    <option value="2">No</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
+
                                                                         <div class="row-form clearfix">
-                                                                            <div class="col-md-5">Eligibility:</div>
-                                                                            <div class="col-md-7">
-                                                                                <select name="eligible" style="width: 100%;" required>
-                                                                                    <option value="">Select</option>
-                                                                                    <option value="1">Eligible</option>
-                                                                                    <option value="2">Not Eligible</option>
+                                                                            <div class="col-md-8">Is the participant confirmed to have COVID-19 by RT-PCR?</div>
+                                                                            <div class="col-md-4">
+                                                                                <select name="tr_pcr" style="width: 100%;" required>
+                                                                                    <option value="<?=$sc['tr_pcr']?>"><?php if($sc){if($sc['tr_pcr']==1){echo 'Yes';}elseif($sc['tr_pcr']==2){echo 'No';}}else{echo 'Select';}?></option>
+                                                                                    <option value="1">Yes</option>
+                                                                                    <option value="2">No</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
+
                                                                         <div class="row-form clearfix">
-                                                                            <div class="col-md-5">Consent:</div>
-                                                                            <div class="col-md-7">
-                                                                                <select name="consent" style="width: 100%;" required>
-                                                                                    <option value="">Select</option>
-                                                                                    <option value="1">Signed and Confirm</option>
-                                                                                    <option value="2">Not Signed</option>
+                                                                            <div class="col-md-8">Is the participant hospitalized?</div>
+                                                                            <div class="col-md-4">
+                                                                                <select name="hospitalized" style="width: 100%;" required>
+                                                                                    <option value="<?=$sc['hospitalized']?>"><?php if($sc){if($sc['hospitalized']==1){echo 'Yes';}elseif($sc['hospitalized']==2){echo 'No';}}else{echo 'Select';}?></option>
+                                                                                    <option value="1">Yes</option>
+                                                                                    <option value="2">No</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
+
                                                                         <div class="row-form clearfix">
-                                                                            <div class="col-md-3">Reasons:</div>
-                                                                            <div class="col-md-9">
-                                                                                <textarea name="reasons" rows="4" ></textarea>
+                                                                            <div class="col-md-8">Does the participant have moderate or severe form of COVID-19?</div>
+                                                                            <div class="col-md-4">
+                                                                                <select name="moderate_severe" style="width: 100%;" required>
+                                                                                    <option value="<?=$sc['moderate_severe']?>"><?php if($sc){if($sc['moderate_severe']==1){echo 'Yes';}elseif($sc['moderate_severe']==2){echo 'No';}}else{echo 'Select';}?></option>
+                                                                                    <option value="1">Yes</option>
+                                                                                    <option value="2">No</option>
+                                                                                </select>
                                                                             </div>
                                                                         </div>
+
                                                                         <div class="row-form clearfix">
-                                                                            <div class="col-md-3">Date:</div>
-                                                                            <div class="col-md-9">
-                                                                                <input value="" class="validate[required,custom[date]]" type="text" name="visit_date" id="visit_date"/> <span>Example: 2010-12-01</span>
+                                                                            <div class="col-md-8">Does the participant have history of peptic ulcers disease?</div>
+                                                                            <div class="col-md-4">
+                                                                                <select name="peptic_ulcers" style="width: 100%;" required>
+                                                                                    <option value="<?=$sc['peptic_ulcers']?>"><?php if($sc){if($sc['peptic_ulcers']==1){echo 'Yes';}elseif($sc['peptic_ulcers']==2){echo 'No';}}else{echo 'Select';}?></option>
+                                                                                    <option value="1">Yes</option>
+                                                                                    <option value="2">No</option>
+                                                                                </select>
                                                                             </div>
                                                                         </div>
+
+                                                                        <div class="row-form clearfix">
+                                                                            <div class="col-md-8">Is the participant pregnant?</div>
+                                                                            <div class="col-md-4">
+                                                                                <select name="pregnant" style="width: 100%;" required>
+                                                                                    <option value="<?=$sc['age_18']?>"><?php if($sc){if($sc['pregnant']==1){echo 'Yes';}elseif($sc['pregnant']==2){echo 'No';}elseif($sc['pregnant']==3){echo 'Not Applicable';}}else{echo 'Select';}?></option>
+                                                                                    <option value="1">Yes</option>
+                                                                                    <option value="2">No</option>
+                                                                                    <option value="3">Not Applicable</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
                                                                         <div class="dr"><span></span></div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <input type="hidden" name="id" value="<?=$visit['id'] ?>">
-                                                                    <input type="hidden" name="vc" value="<?=$visit['visit_code'] ?>">
-                                                                    <input type="hidden" name="seq" value="<?=$visit['seq_no'] ?>">
                                                                     <input type="hidden" name="cid" value="<?=$visit['client_id'] ?>">
-                                                                    <input type="submit" name="add_enroll" class="btn btn-warning" value="Save">
+                                                                    <input type="submit" name="add_screening" class="btn btn-warning" value="Save">
                                                                     <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
                                                                 </div>
                                                             </form>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            <?php $x++;} ?>
+                                                <div class="modal fade" id="addLab<?= $visit['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <form method="post">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                    <h4>Add Lab Results</h4>
+                                                                </div>
+                                                                <div class="modal-body modal-body-np">
+                                                                    <div class="row">
+                                                                        <div class="row-form clearfix">
+                                                                            <div class="col-md-7">White blood cell count (WBC)</div>
+                                                                            <div class="col-md-5">
+                                                                                <input type="number" name="wbc" value="<?=$lb['wbc']?>" step="0.001"/>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row-form clearfix">
+                                                                            <div class="col-md-7">Hemoglobin levels (Hb)</div>
+                                                                            <div class="col-md-5"><input type="number" name="hb" value="<?=$lb['hb']?>" step="0.01"/></div>
+                                                                        </div>
+                                                                        <div class="row-form clearfix">
+                                                                            <div class="col-md-7">Platelet count (Plt)</div>
+                                                                            <div class="col-md-5"><input type="number" name="plt" value="<?=$lb['plt']?>" step="0.01"/></div>
+                                                                        </div>
+                                                                        <div class="row-form clearfix">
+                                                                            <div class="col-md-7">ALT levels</div>
+                                                                            <div class="col-md-5"><input type="number" name="alt" value="<?=$lb['alt']?>" step="0.01"/></div>
+                                                                        </div>
+                                                                        <div class="row-form clearfix">
+                                                                            <div class="col-md-7">AST levels</div>
+                                                                            <div class="col-md-5"><input type="number" name="ast" value="<?=$lb['ast']?>" step="0.01"/></div>
+                                                                        </div>
+                                                                        <div class="row-form clearfix">
+                                                                            <div class="col-md-7">Serum creatinine levels</div>
+                                                                            <div class="col-md-5"><input type="number" name="sc" value="<?=$lb['sc']?>" step="0.01"/></div>
+                                                                        </div>
+                                                                        <div class="row-form clearfix">
+                                                                            <div class="col-md-7">PT</div>
+                                                                            <div class="col-md-5"><input type="number" name="pt" value="<?=$lb['pt']?>" step="0.01"/></div>
+                                                                        </div>
+                                                                        <div class="row-form clearfix">
+                                                                            <div class="col-md-7">PTT</div>
+                                                                            <div class="col-md-5"><input type="number" name="ptt" value="<?=$lb['ptt']?>" step="0.01"/></div>
+                                                                        </div>
+
+                                                                        <div class="dr"><span></span></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <input type="hidden" name="id" value="<?=$visit['id'] ?>">
+                                                                    <input type="hidden" name="cid" value="<?=$visit['client_id'] ?>">
+                                                                    <input type="submit" name="add_lab" class="btn btn-warning" value="Save">
+                                                                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php }$x++;} ?>
                                             </tbody>
                                         </table>
                                     </div>
