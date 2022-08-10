@@ -28,7 +28,7 @@ if ($user->isLoggedIn()) {
 <html lang="en">
 
 <head>
-    <title> Dashboard - TanCov</title>
+    <title> Dashboard - HetaCov</title>
     <?php include "head.php"; ?>
 </head>
 

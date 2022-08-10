@@ -249,7 +249,7 @@ if ($user->isLoggedIn()) {
 <html lang="en">
 
 <head>
-    <title> Add - TanCov </title>
+    <title> Add - HetaCov </title>
     <?php include "head.php"; ?>
 </head>
 

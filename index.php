@@ -78,7 +78,7 @@ if(!$user->isLoggedIn()) {
 <html lang="en">
 
 <head>
-    <title> Login - TanCov </title>
+    <title> Login - HetaCov </title>
     <?php include 'head.php'?>
 </head>
 <body>

@@ -24,7 +24,7 @@ if ($user->isLoggedIn()) {
 
     <link rel="icon" type="image/png" href="images/favicon.png"/>
 
-    <title> Tancov | ID Card </title>
+    <title> HetaCov | ID Card </title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">

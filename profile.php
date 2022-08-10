@@ -50,7 +50,7 @@ if($user->isLoggedIn()) {
 <html lang="en">
 
 <head>
-    <title> Profile - TanCov </title>
+    <title> Profile - HetaCov </title>
     <?php include "head.php";?>
 </head>
 <body>
@@ -70,7 +70,7 @@ if($user->isLoggedIn()) {
         <div class="workplace">
 
             <div class="page-header">
-                <h1>User info <small>TanCov</small></h1>
+                <h1>User info <small>HetaCov</small></h1>
             </div>
             <div class="row">
                 <div class="col-md-6">
