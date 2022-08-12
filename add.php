@@ -207,6 +207,7 @@ if ($user->isLoggedIn()) {
                             'staff_id' => $user->data()->id,
                             'client_image' => $attachment_file,
                             'comments' => Input::get('comments'),
+                            'initials' => Input::get('initials'),
                             'status' => 1,
                         ));
 
@@ -215,7 +216,7 @@ if ($user->isLoggedIn()) {
                         $user->createRecord('visit', array(
                                 'visit_name' => 'Day 0',
                                 'visit_code' => 'D0',
-                                'expected_date' => date('Y-m-d'),
+                                'visit_date' => date('Y-m-d'),
                                 'visit_window' => 2,
                                 'status' => 1,
                                 'seq_no' => 0,
@@ -494,6 +495,13 @@ if ($user->isLoggedIn()) {
                                         <div class="col-md-3">Age:</div>
                                         <div class="col-md-9">
                                             <input value="" class="validate[required]" type="number" name="age" id="age" />
+                                        </div>
+                                    </div>
+
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">Initials:</div>
+                                        <div class="col-md-9">
+                                            <input value="" class="validate[required]" type="text" name="initials" id="initials" />
                                         </div>
                                     </div>
 

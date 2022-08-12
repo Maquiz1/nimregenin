@@ -916,7 +916,9 @@ if ($user->isLoggedIn()) {
                                                 <a href="#clientView<?= $client['id'] ?>" role="button" class="btn btn-default" data-toggle="modal">View</a>
                                                 <a href="#client<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Edit</a>
                                                 <a href="id.php?cid=<?= $client['id'] ?>"  class="btn btn-warning" >Patient ID</a>
-                                                <a href="#delete<?= $client['id'] ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete</a>
+                                                <?php if($user->data()->accessLevel == 1){?>
+                                                    <a href="#delete<?= $client['id'] ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete</a>
+                                                <?php }?>
                                                 <a href="info.php?id=4&cid=<?=$client['id']?>" role="button" class="btn btn-warning" >Schedule</a>
                                             </td>
 
@@ -981,6 +983,13 @@ if ($user->isLoggedIn()) {
                                                                         <div class="col-md-3">Age:</div>
                                                                         <div class="col-md-9">
                                                                             <input value="<?=$client['age']?>" class="validate[required]" type="text" name="age" id="age" disabled/>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row-form clearfix">
+                                                                        <div class="col-md-3">Initials:</div>
+                                                                        <div class="col-md-9">
+                                                                            <input value="<?=$client['initials']?>" class="validate[required]" type="text" name="initials" id="initials" disabled/>
                                                                         </div>
                                                                     </div>
 
@@ -1160,6 +1169,13 @@ if ($user->isLoggedIn()) {
                                                                         <div class="col-md-3">Age:</div>
                                                                         <div class="col-md-9">
                                                                             <input value="<?=$client['age']?>" class="validate[required]" type="text" name="age" id="age" />
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row-form clearfix">
+                                                                        <div class="col-md-3">Initials:</div>
+                                                                        <div class="col-md-9">
+                                                                            <input value="<?=$client['initials']?>" class="validate[required]" type="text" name="initials" id="initials" />
                                                                         </div>
                                                                     </div>
 
@@ -1600,37 +1616,35 @@ if ($user->isLoggedIn()) {
                                                                     <div class="row">
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-7">White blood cell count (WBC)</div>
-                                                                            <div class="col-md-5">
-                                                                                <input type="number" name="wbc" value="<?=$lb['wbc']?>" step="0.001"/>
-                                                                            </div>
+                                                                            <div class="col-md-5"><input type="number" name="wbc" value="<?=$lb['wbc']?>" step="0.001"/><span> x 10^9/L</span></div>
                                                                         </div>
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-7">Hemoglobin levels (Hb)</div>
-                                                                            <div class="col-md-5"><input type="number" name="hb" value="<?=$lb['hb']?>" step="0.01"/></div>
+                                                                            <div class="col-md-5"><input type="number" name="hb" value="<?=$lb['hb']?>" step="0.01"/><span> g/dL</span></div>
                                                                         </div>
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-7">Platelet count (Plt)</div>
-                                                                            <div class="col-md-5"><input type="number" name="plt" value="<?=$lb['plt']?>" step="0.01"/></div>
+                                                                            <div class="col-md-5"><input type="number" name="plt" value="<?=$lb['plt']?>" step="0.01"/><span> x 10^9/L</span></div>
                                                                         </div>
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-7">ALT levels</div>
-                                                                            <div class="col-md-5"><input type="number" name="alt" value="<?=$lb['alt']?>" step="0.01"/></div>
+                                                                            <div class="col-md-5"><input type="number" name="alt" value="<?=$lb['alt']?>" step="0.01"/><span> U/L</span></div>
                                                                         </div>
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-7">AST levels</div>
-                                                                            <div class="col-md-5"><input type="number" name="ast" value="<?=$lb['ast']?>" step="0.01"/></div>
+                                                                            <div class="col-md-5"><input type="number" name="ast" value="<?=$lb['ast']?>" step="0.01"/><span> U/L</span></div>
                                                                         </div>
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-7">Serum creatinine levels</div>
-                                                                            <div class="col-md-5"><input type="number" name="sc" value="<?=$lb['sc']?>" step="0.01"/></div>
+                                                                            <div class="col-md-5"><input type="number" name="sc" value="<?=$lb['sc']?>" step="0.01"/><span> umol/L</span></div>
                                                                         </div>
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-7">PT</div>
-                                                                            <div class="col-md-5"><input type="number" name="pt" value="<?=$lb['pt']?>" step="0.01"/></div>
+                                                                            <div class="col-md-5"><input type="number" name="pt" value="<?=$lb['pt']?>" step="0.01"/><span> seconds</span></div>
                                                                         </div>
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-7">PTT</div>
-                                                                            <div class="col-md-5"><input type="number" name="ptt" value="<?=$lb['ptt']?>" step="0.01"/></div>
+                                                                            <div class="col-md-5"><input type="number" name="ptt" value="<?=$lb['ptt']?>" step="0.01"/><span> seconds</span></div>
                                                                         </div>
 
                                                                         <div class="dr"><span></span></div>
