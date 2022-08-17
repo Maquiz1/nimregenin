@@ -1087,7 +1087,7 @@ if ($user->isLoggedIn()) {
                                         </div>
                                         <div class="modal fade" id="client<?= $client['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
-                                                <form enctype="multipart/form-data" method="post">
+                                                <form id="validation" enctype="multipart/form-data" method="post">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -1391,7 +1391,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="modal fade" id="addVisit<?= $visit['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
-                                                            <form method="post">
+                                                            <form id="validation" method="post">
                                                                 <div class="modal-header">
                                                                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                                                     <h4>Add Visit</h4>

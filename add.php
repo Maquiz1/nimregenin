@@ -447,7 +447,7 @@ if ($user->isLoggedIn()) {
                                 <h1>Add Client</h1>
                             </div>
                             <div class="block-fluid">
-                                <form enctype="multipart/form-data" method="post">
+                                <form id="validation" enctype="multipart/form-data" method="post">
 
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">Study</div>
@@ -487,7 +487,7 @@ if ($user->isLoggedIn()) {
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">Date of Birth:</div>
                                         <div class="col-md-9">
-                                            <input value="" class="validate[required,custom[date]]" type="text" name="dob" id="dob"/> <span>Example: 2010-12-01</span>
+                                            <input value="" class="validate[required,custom[date]]" type="text" name="dob" id="date"/> <span>Example: 2010-12-01</span>
                                         </div>
                                     </div>
 
