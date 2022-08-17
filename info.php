@@ -203,6 +203,7 @@ if ($user->isLoggedIn()) {
                         $image = Input::get('client_image');
                     }
                     if($errorM == false){
+                        $age = $user->dateDiffYears(date('Y-m-d'),Input::get('dob'));
                         $user->updateRecord('clients', array(
                             'participant_id' => Input::get('participant_id'),
                             'clinic_date' => Input::get('clinic_date'),
@@ -210,7 +211,7 @@ if ($user->isLoggedIn()) {
                             'midlename' => Input::get('midlename'),
                             'lastname' => Input::get('lastname'),
                             'dob' => Input::get('dob'),
-                            'age' => Input::get('age'),
+                            'age' => $age,
                             'id_number' => Input::get('id_number'),
                             'gender' => Input::get('gender'),
                             'marital_status' => Input::get('marital_status'),
@@ -1146,7 +1147,7 @@ if ($user->isLoggedIn()) {
                                                                     <div class="row-form clearfix">
                                                                         <div class="col-md-3">Age:</div>
                                                                         <div class="col-md-9">
-                                                                            <input value="<?=$client['age']?>" class="validate[required]" type="text" name="age" id="age" />
+                                                                            <input value="<?=$client['age']?>" class="validate[required]" type="text" name="age" id="age" disabled/>
                                                                         </div>
                                                                     </div>
 

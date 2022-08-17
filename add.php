@@ -132,10 +132,6 @@ if ($user->isLoggedIn()) {
                 'dob' => array(
                     'required' => true,
                 ),
-                'id_type' => array(
-                    'required' => true,
-                ),
-
                 'street' => array(
                     'required' => true,
                 ),
@@ -179,6 +175,7 @@ if ($user->isLoggedIn()) {
                             }
 
                         }
+                        $age = $user->dateDiffYears(date('Y-m-d'),Input::get('dob'));
 
                         $user->createRecord('clients', array(
                             'participant_id' => $screening_id,
@@ -188,7 +185,7 @@ if ($user->isLoggedIn()) {
                             'middlename' => Input::get('middlename'),
                             'lastname' => Input::get('lastname'),
                             'dob' => Input::get('dob'),
-                            'age' => Input::get('age'),
+                            'age' => $age,
                             'id_number' => Input::get('id_number'),
                             'gender' => Input::get('gender'),
                             'marital_status' => Input::get('marital_status'),
@@ -491,13 +488,6 @@ if ($user->isLoggedIn()) {
                                         <div class="col-md-3">Date of Birth:</div>
                                         <div class="col-md-9">
                                             <input value="" class="validate[required,custom[date]]" type="text" name="dob" id="dob"/> <span>Example: 2010-12-01</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="row-form clearfix">
-                                        <div class="col-md-3">Age:</div>
-                                        <div class="col-md-9">
-                                            <input value="" class="validate[required]" type="number" name="age" id="age" />
                                         </div>
                                     </div>
 
