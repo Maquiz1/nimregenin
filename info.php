@@ -173,9 +173,6 @@ if ($user->isLoggedIn()) {
                 'phone_number' => array(
                     'required' => true,
                 ),
-                'age' => array(
-                    'required' => true,
-                ),
             ));
             if ($validate->passed()) {
                 try {
@@ -210,11 +207,11 @@ if ($user->isLoggedIn()) {
                             'participant_id' => Input::get('participant_id'),
                             'clinic_date' => Input::get('clinic_date'),
                             'firstname' => Input::get('firstname'),
+                            'midlename' => Input::get('midlename'),
                             'lastname' => Input::get('lastname'),
                             'dob' => Input::get('dob'),
                             'age' => Input::get('age'),
                             'id_number' => Input::get('id_number'),
-                            'id_type' => Input::get('id_type'),
                             'gender' => Input::get('gender'),
                             'marital_status' => Input::get('marital_status'),
                             'education_level' => Input::get('education_level'),
@@ -342,8 +339,7 @@ if ($user->isLoggedIn()) {
                 $std_id=$override->getNews('study_id','site_id',$user->data()->site_id,'status', 0)[0];
                 if((Input::get('wbc')>=1.5 && Input::get('wbc')<=11.0) && (Input::get('hb')>=8.5 && Input::get('hb')<=16.5)
                     && (Input::get('plt')>=50 && Input::get('plt')<=500) && (Input::get('alt')>=2.0 && Input::get('alt')<=195.0)
-                    && (Input::get('ast')>=2.0 && Input::get('ast')<=195.0) && (Input::get('pt')>=9.9 && Input::get('pt')<=19.6)
-                    && (Input::get('ptt')>=22.1 && Input::get('ptt')<=91.6)){
+                    && (Input::get('ast')>=2.0 && Input::get('ast')<=195.0)){
                     if($clnt['gender']=='male' && (Input::get('sc')>=44.0 && Input::get('sc')<=158.4) && $sc_e['eligibility'] == 1){
                         $eligibility=1;
                         if($override->getCount('visit','client_id', Input::get('cid')) == 1){
@@ -370,8 +366,6 @@ if ($user->isLoggedIn()) {
                             'alt' => Input::get('alt'),
                             'ast' => Input::get('ast'),
                             'sc' => Input::get('sc'),
-                            'pt' => Input::get('pt'),
-                            'ptt' => Input::get('ptt'),
                             'eligibility' => $eligibility,
                             'created_on' => date('Y-m-d'),
                             'staff_id' => $user->data()->id,
@@ -387,8 +381,6 @@ if ($user->isLoggedIn()) {
                             'alt' => Input::get('alt'),
                             'ast' => Input::get('ast'),
                             'sc' => Input::get('sc'),
-                            'pt' => Input::get('pt'),
-                            'ptt' => Input::get('ptt'),
                             'eligibility' => $eligibility,
                             'created_on' => date('Y-m-d'),
                             'staff_id' => $user->data()->id,
@@ -966,6 +958,12 @@ if ($user->isLoggedIn()) {
                                                                         </div>
                                                                     </div>
                                                                     <div class="row-form clearfix">
+                                                                        <div class="col-md-3">Middle Name:</div>
+                                                                        <div class="col-md-9">
+                                                                            <input value="<?=$client['middlename']?>" class="validate[required]" type="text" name="middlename" id="middlename" disabled/>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row-form clearfix">
                                                                         <div class="col-md-3">Last Name:</div>
                                                                         <div class="col-md-9">
                                                                             <input value="<?=$client['lastname']?>" class="validate[required]" type="text" name="lastname" id="lastname" disabled/>
@@ -1005,37 +1003,11 @@ if ($user->isLoggedIn()) {
                                                                     </div>
 
                                                                     <div class="row-form clearfix">
-                                                                        <div class="col-md-3">ID Number:</div>
+                                                                        <div class="col-md-3">Hospital ID:</div>
                                                                         <div class="col-md-9">
                                                                             <input value="<?=$client['id_number']?>" class="validate[required]" type="text" name="id_number" id="id_number" disabled/>
                                                                         </div>
                                                                     </div>
-
-                                                                    <div class="row-form clearfix">
-                                                                        <div class="col-md-3">Identification Type</div>
-                                                                        <div class="col-md-9">
-                                                                            <select name="id_type" style="width: 100%;" disabled>
-                                                                                <option value="<?=$client['id_type']?>"><?=$client['id_type']?></option>
-                                                                                <option value="Driving License">Driving License</option>
-                                                                                <option value="Voters ID">Voters ID</option>
-                                                                                <option value="National ID">National ID</option>
-                                                                                <option value="Employment ID">Employment ID</option>
-                                                                                <option value="Hospital ID">Hospital ID</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="row-form clearfix">
-                                                                        <div class="col-md-3">Population Group</div>
-                                                                        <div class="col-md-9">
-                                                                            <select name="population_group" style="width: 100%;" disabled>
-                                                                                <option value="<?=$client['population_group']?>"><?=$client['population_group']?></option>
-                                                                                <option value="General Population">General Population</option>
-                                                                                <option value="Police and Prison Forces">Police and Prison Forces</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-
 
                                                                     <div class="row-form clearfix">
                                                                         <div class="col-md-3">Marital Status</div>
@@ -1093,7 +1065,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
 
                                                                     <div class="row-form clearfix">
-                                                                        <div class="col-md-3">Block Number:</div>
+                                                                        <div class="col-md-3">House Number:</div>
                                                                         <div class="col-md-9"><input value="<?=$client['block_no']?>" class="" type="text" name="block_no" id="block_no"  disabled/></div>
                                                                     </div>
                                                                     <div class="row-form clearfix">
@@ -1152,6 +1124,12 @@ if ($user->isLoggedIn()) {
                                                                         </div>
                                                                     </div>
                                                                     <div class="row-form clearfix">
+                                                                        <div class="col-md-3">Middle Name:</div>
+                                                                        <div class="col-md-9">
+                                                                            <input value="<?=$client['middlename']?>" class="validate[required]" type="text" name="middlename" id="middlename" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row-form clearfix">
                                                                         <div class="col-md-3">Last Name:</div>
                                                                         <div class="col-md-9">
                                                                             <input value="<?=$client['lastname']?>" class="validate[required]" type="text" name="lastname" id="lastname" />
@@ -1197,25 +1175,12 @@ if ($user->isLoggedIn()) {
                                                                         </div>
                                                                     </div>
                                                                     <div class="row-form clearfix">
-                                                                        <div class="col-md-3">ID Number:</div>
+                                                                        <div class="col-md-3">Hospital ID:</div>
                                                                         <div class="col-md-9">
                                                                             <input value="<?=$client['id_number']?>" class="validate[required]" type="text" name="id_number" id="id_number" />
                                                                         </div>
                                                                     </div>
 
-                                                                    <div class="row-form clearfix">
-                                                                        <div class="col-md-3">Identification Type</div>
-                                                                        <div class="col-md-9">
-                                                                            <select name="id_type" style="width: 100%;" required>
-                                                                                <option value="<?=$client['id_type']?>"><?=$client['id_type']?></option>
-                                                                                <option value="Driving License">Driving License</option>
-                                                                                <option value="Voters ID">Voters ID</option>
-                                                                                <option value="National ID">National ID</option>
-                                                                                <option value="Employment ID">Employment ID</option>
-                                                                                <option value="Hospital ID">Hospital ID</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
 
                                                                     <div class="row-form clearfix">
                                                                         <div class="col-md-3">Marital Status</div>
@@ -1273,7 +1238,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
 
                                                                     <div class="row-form clearfix">
-                                                                        <div class="col-md-3">Block Number:</div>
+                                                                        <div class="col-md-3">House Number:</div>
                                                                         <div class="col-md-9"><input value="<?=$client['block_no']?>" class="" type="text" name="block_no" id="block_no"  /></div>
                                                                     </div>
                                                                     <div class="row-form clearfix">
@@ -1637,14 +1602,6 @@ if ($user->isLoggedIn()) {
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-7">Serum creatinine levels</div>
                                                                             <div class="col-md-5"><input type="number" name="sc" value="<?=$lb['sc']?>" step="0.01"/><span> umol/L</span></div>
-                                                                        </div>
-                                                                        <div class="row-form clearfix">
-                                                                            <div class="col-md-7">PT</div>
-                                                                            <div class="col-md-5"><input type="number" name="pt" value="<?=$lb['pt']?>" step="0.01"/><span> seconds</span></div>
-                                                                        </div>
-                                                                        <div class="row-form clearfix">
-                                                                            <div class="col-md-7">PTT</div>
-                                                                            <div class="col-md-5"><input type="number" name="ptt" value="<?=$lb['ptt']?>" step="0.01"/><span> seconds</span></div>
                                                                         </div>
 
                                                                         <div class="dr"><span></span></div>

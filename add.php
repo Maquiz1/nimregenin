@@ -143,9 +143,6 @@ if ($user->isLoggedIn()) {
                     'required' => true,
                     'unique' => 'clients',
                 ),
-                'age' => array(
-                    'required' => true,
-                ),
             ));
             if ($validate->passed()) {
                 $errorM = false;
@@ -188,11 +185,11 @@ if ($user->isLoggedIn()) {
                             'study_id' => '',
                             'clinic_date' => Input::get('clinic_date'),
                             'firstname' => Input::get('firstname'),
+                            'middlename' => Input::get('middlename'),
                             'lastname' => Input::get('lastname'),
                             'dob' => Input::get('dob'),
                             'age' => Input::get('age'),
                             'id_number' => Input::get('id_number'),
-                            'id_type' => Input::get('id_type'),
                             'gender' => Input::get('gender'),
                             'marital_status' => Input::get('marital_status'),
                             'education_level' => Input::get('education_level'),
@@ -478,6 +475,12 @@ if ($user->isLoggedIn()) {
                                         </div>
                                     </div>
                                     <div class="row-form clearfix">
+                                        <div class="col-md-3">Middle Name:</div>
+                                        <div class="col-md-9">
+                                            <input value="" class="validate[required]" type="text" name="middlename" id="middlename" />
+                                        </div>
+                                    </div>
+                                    <div class="row-form clearfix">
                                         <div class="col-md-3">Last Name:</div>
                                         <div class="col-md-9">
                                             <input value="" class="validate[required]" type="text" name="lastname" id="lastname" />
@@ -506,13 +509,6 @@ if ($user->isLoggedIn()) {
                                     </div>
 
                                     <div class="row-form clearfix">
-                                        <div class="col-md-5">Client Image:</div>
-                                        <div class="col-md-7">
-                                            <input type="file" id="image" name="image"/>
-                                        </div>
-                                    </div>
-
-                                    <div class="row-form clearfix">
                                         <div class="col-md-3">Gender</div>
                                         <div class="col-md-9">
                                             <select name="gender" style="width: 100%;" required>
@@ -524,23 +520,9 @@ if ($user->isLoggedIn()) {
                                     </div>
 
                                     <div class="row-form clearfix">
-                                        <div class="col-md-3">ID Number:</div>
+                                        <div class="col-md-3">Hospital ID Number:</div>
                                         <div class="col-md-9">
                                             <input value="" type="text" name="id_number" id="id_number" />
-                                        </div>
-                                    </div>
-
-                                    <div class="row-form clearfix">
-                                        <div class="col-md-3">Identification Type</div>
-                                        <div class="col-md-9">
-                                            <select name="id_type" style="width: 100%;" required>
-                                                <option value="">Select</option>
-                                                <option value="Driving License">Driving License</option>
-                                                <option value="Voters ID">Voters ID</option>
-                                                <option value="National ID">National ID</option>
-                                                <option value="Employment ID">Employment ID</option>
-                                                <option value="Hospital ID">Hospital ID</option>
-                                            </select>
                                         </div>
                                     </div>
 
@@ -600,7 +582,7 @@ if ($user->isLoggedIn()) {
                                     </div>
 
                                     <div class="row-form clearfix">
-                                        <div class="col-md-3">Block Number:</div>
+                                        <div class="col-md-3">House Number:</div>
                                         <div class="col-md-9"><input value="" class="" type="text" name="block_no" id="block_no"  /></div>
                                     </div>
 
