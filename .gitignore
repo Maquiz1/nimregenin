@@ -19,7 +19,7 @@
 # Generated files
 .idea/**/contentModel.xml
 
-php/core/init.php
+php/core/
 
 # Sensitive or high-churn files
 .idea/**/dataSources/
