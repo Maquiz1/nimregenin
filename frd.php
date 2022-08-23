@@ -4,7 +4,6 @@ $user = new User();
 $override = new OverideData();
 $email = new Email();
 $random = new Random();
-//$fpdf = new FPDF();
 
 $x = 1;
 
