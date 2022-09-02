@@ -1486,6 +1486,7 @@ if ($user->isLoggedIn()) {
                                                                                     <option value="<?=$sc['covid_result']?>"><?php if($sc){if($sc['covid_result']==1){echo 'Positive';}elseif($sc['covid_result']==2){echo 'Negative';}}else{echo 'Select';}?></option>
                                                                                     <option value="1">Positive</option>
                                                                                     <option value="2">Negative</option>
+                                                                                    <option value="3">PCR not done – Rapid Antigen test for COVID-19 is Negative</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -1508,6 +1509,7 @@ if ($user->isLoggedIn()) {
                                                                                     <option value="<?=$sc['tr_pcr']?>"><?php if($sc){if($sc['tr_pcr']==1){echo 'Yes';}elseif($sc['tr_pcr']==2){echo 'No';}}else{echo 'Select';}?></option>
                                                                                     <option value="1">Yes</option>
                                                                                     <option value="2">No</option>
+                                                                                    <option value="3">Not Applicable</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
