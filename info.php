@@ -1380,10 +1380,12 @@ if ($user->isLoggedIn()) {
                                                             <a href="#addVisit<?= $visit['id'] ?>" role="button" class="btn btn-info" data-toggle="modal"><?=$btnV?> Visit</a>
                                                         <?php }else{?>
                                                             <a href="#addScreening<?= $visit['id'] ?>" role="button" class="btn btn-info" data-toggle="modal"><?=$btnS?> Screening</a>
-                                                            <a href="#addLab<?= $visit['id'] ?>" role="button" class="btn btn-info" data-toggle="modal"><?=$btnL?> Lab Results</a>
+                                                            <?php if($sc['eligibility']==1){?>
+                                                                <a href="#addLab<?= $visit['id'] ?>" role="button" class="btn btn-info" data-toggle="modal"><?=$btnL?> Lab Results</a>
+                                                            <?php }?>
                                                         <?php }?>
-                                                        <?php if(($sc && $lb) && ($sc['eligibility'] ==0 || $lb['eligibility']==0)){?>
-                                                            <a href="#" role="button" class="btn btn-danger" data-toggle="modal">Not Eligible <?=$sc['eligibility']?></a>
+                                                        <?php if(($sc && $lb) && ($sc['eligibility']==0 || $lb['eligibility']==0)){?>
+                                                            <a href="#" role="button" class="btn btn-danger" data-toggle="modal">Not Eligible</a>
                                                         <?php }?>
 
                                                     </td>
