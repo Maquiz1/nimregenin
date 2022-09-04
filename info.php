@@ -1384,7 +1384,7 @@ if ($user->isLoggedIn()) {
                                                                 <a href="#addLab<?= $visit['id'] ?>" role="button" class="btn btn-info" data-toggle="modal"><?=$btnL?> Lab Results</a>
                                                             <?php }?>
                                                         <?php }?>
-                                                        <?php if(($sc && $lb) && ($sc['eligibility']==0 || $lb['eligibility']==0)){?>
+                                                        <?php if(($sc || $lb) && ($sc['eligibility']==0 || $lb['eligibility']==0)){?>
                                                             <a href="#" role="button" class="btn btn-danger" data-toggle="modal">Not Eligible</a>
                                                         <?php }?>
 
