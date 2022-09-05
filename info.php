@@ -339,7 +339,7 @@ if ($user->isLoggedIn()) {
                 $sc_e=$override->get('screening', 'client_id', Input::get('cid'))[0];
                 $std_id=$override->getNews('study_id','site_id',$user->data()->site_id,'status', 0)[0];
                 if((Input::get('wbc')>=1.5 && Input::get('wbc')<=11.0) && (Input::get('hb')>=8.5 && Input::get('hb')<=16.5)
-                    && (Input::get('plt')>=50 && Input::get('plt')<=500) && (Input::get('alt')>=2.0 && Input::get('alt')<=195.0)
+                    && (Input::get('plt')>=50 && Input::get('plt')<=1000) && (Input::get('alt')>=2.0 && Input::get('alt')<=195.0)
                     && (Input::get('ast')>=2.0 && Input::get('ast')<=195.0)){
                     if($clnt['gender']=='male' && (Input::get('sc')>=44.0 && Input::get('sc')<=158.4) && $sc_e['eligibility'] == 1){
                         $eligibility=1;
