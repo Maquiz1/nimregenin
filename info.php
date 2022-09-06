@@ -425,6 +425,16 @@ if ($user->isLoggedIn()) {
                 $pageError = $validate->errors();
             }
         }
+        elseif (Input::get('search_by_site')){
+            $validate = $validate->check($_POST, array(
+                'site' => array(
+                    'required' => true,
+                ),
+            ));
+            if (!$validate->passed()) {
+                $pageError = $validate->errors();
+            }
+        }
     }
 } else {
     Redirect::to('index.php');
@@ -857,6 +867,30 @@ if ($user->isLoggedIn()) {
                         </div>
                     <?php } elseif ($_GET['id'] == 3) { ?>
                         <div class="col-md-12">
+                            <?php if($user->data()->power==1){?>
+                                <div class="head clearfix">
+                                    <div class="isw-ok"></div>
+                                    <h1>Search by Site</h1>
+                                </div>
+                                <div class="block-fluid">
+                                    <form id="validation" method="post">
+                                        <div class="row-form clearfix">
+                                            <div class="col-md-1">Site:</div>
+                                            <div class="col-md-4">
+                                                <select name="site" required>
+                                                    <option value="">Select Site</option>
+                                                    <?php foreach ($override->getData('site') as $site){?>
+                                                        <option value="<?=$site['id']?>"><?=$site['name']?></option>
+                                                    <?php }?>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input type="submit" name="search_by_site" value="Search" class="btn btn-info">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            <?php }?>
                             <div class="head clearfix">
                                 <div class="isw-grid"></div>
                                 <h1>List of Clients</h1>
@@ -874,7 +908,11 @@ if ($user->isLoggedIn()) {
                                 </ul>
                             </div>
                             <?php if($user->data()->power == 1){
-                                $clients=$override->get('clients', 'status', 1);
+                                if(Input::get('search_by_site')){
+                                    $clients=$override->getNews('clients','site_id',Input::get('site'), 'status',1);
+                                }else{
+                                    $clients=$override->get('clients', 'status', 1);
+                                }
                             }else {
                                 $clients=$override->getNews('clients','site_id',$user->data()->site_id, 'status',1);
                             }?>
