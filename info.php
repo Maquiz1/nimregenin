@@ -278,7 +278,7 @@ if ($user->isLoggedIn()) {
             if ($validate->passed()) {
                 $eligibility=0;
                 if(Input::get('age_18')==1 && Input::get('tr_pcr')==1 && Input::get('hospitalized')==1 &&
-                    Input::get('moderate_severe')==1 && Input::get('peptic_ulcers')==2 && (Input::get('pregnant')==2 || Input::get('pregnant')==3)){
+                    Input::get('moderate_severe')==1 && Input::get('peptic_ulcers')==2 && Input::get('consented')==1 && (Input::get('pregnant')==2 || Input::get('pregnant')==3)){
                     $eligibility=1;
                 }
                 try {
@@ -320,7 +320,7 @@ if ($user->isLoggedIn()) {
                             'client_id' => Input::get('cid'),
                         ));
                     }
-
+                    $user->updateRecord('clients',array('consented'=>Input::get('consented')),Input::get('cid'));
                     $successMessage = 'Screening Successful Added';
                 } catch (Exception $e) {
                     die($e->getMessage());
@@ -1595,6 +1595,17 @@ if ($user->isLoggedIn()) {
                                                                                     <option value="1">Yes</option>
                                                                                     <option value="2">No</option>
                                                                                     <option value="3">Not Applicable</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row-form clearfix">
+                                                                            <div class="col-md-8">Did the participant consent to be part of the study?</div>
+                                                                            <div class="col-md-4">
+                                                                                <select name="consented" style="width: 100%;" required>
+                                                                                    <option value="<?=$sc['consented']?>"><?php if($sc){if($sc['consented']==1){echo 'Yes';}elseif($sc['consented']==2){echo 'No';}}else{echo 'Select';}?></option>
+                                                                                    <option value="1">Yes</option>
+                                                                                    <option value="2">No</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
