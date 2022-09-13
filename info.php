@@ -295,6 +295,7 @@ if ($user->isLoggedIn()) {
                             'peptic_ulcers' => Input::get('peptic_ulcers'),
                             'pregnant' => Input::get('pregnant'),
                             'eligibility' => $eligibility,
+                            'consented' => Input::get('consented'),
                             'created_on' => date('Y-m-d'),
                             'staff_id' => $user->data()->id,
                             'site_id' => $user->data()->site_id,
@@ -313,6 +314,7 @@ if ($user->isLoggedIn()) {
                             'peptic_ulcers' => Input::get('peptic_ulcers'),
                             'pregnant' => Input::get('pregnant'),
                             'eligibility' => $eligibility,
+                            'consented' => Input::get('consented'),
                             'created_on' => date('Y-m-d'),
                             'staff_id' => $user->data()->id,
                             'site_id' => $user->data()->site_id,
@@ -1422,10 +1424,11 @@ if ($user->isLoggedIn()) {
                                                                 <a href="#addLab<?= $visit['id'] ?>" role="button" class="btn btn-info" data-toggle="modal"><?=$btnL?> Lab Results</a>
                                                             <?php }?>
                                                         <?php }?>
-                                                        <?php if(($sc || $lb) && ($sc['eligibility']==0 || $lb['eligibility']==0)){?>
+                                                        <?php if($sc['eligibility']==0){?>
+                                                            <a href="#" role="button" class="btn btn-danger" data-toggle="modal">Not Eligible</a>
+                                                        <?php }elseif ($lb['eligibility']==0){?>
                                                             <a href="#" role="button" class="btn btn-danger" data-toggle="modal">Not Eligible</a>
                                                         <?php }?>
-
                                                     </td>
                                                 </tr>
                                                 <div class="modal fade" id="addVisit<?= $visit['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -1591,7 +1594,7 @@ if ($user->isLoggedIn()) {
                                                                             <div class="col-md-8">Is the participant pregnant?</div>
                                                                             <div class="col-md-4">
                                                                                 <select name="pregnant" style="width: 100%;" required>
-                                                                                    <option value="<?=$sc['age_18']?>"><?php if($sc){if($sc['pregnant']==1){echo 'Yes';}elseif($sc['pregnant']==2){echo 'No';}elseif($sc['pregnant']==3){echo 'Not Applicable';}}else{echo 'Select';}?></option>
+                                                                                    <option value="<?=$sc['pregnant']?>"><?php if($sc){if($sc['pregnant']==1){echo 'Yes';}elseif($sc['pregnant']==2){echo 'No';}elseif($sc['pregnant']==3){echo 'Not Applicable';}}else{echo 'Select';}?></option>
                                                                                     <option value="1">Yes</option>
                                                                                     <option value="2">No</option>
                                                                                     <option value="3">Not Applicable</option>
