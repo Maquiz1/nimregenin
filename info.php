@@ -925,7 +925,7 @@ if ($user->isLoggedIn()) {
                                 }
                             }else {
                                 $pagNum=0;
-                                $clients=$override->getNews('clients','site_id',$user->data()->site_id, 'status',1);
+                                $pagNum=$override->countData('clients','site_id',$user->data()->site_id, 'status',1);
                                 $pages = ceil($pagNum / $numRec);if(!$_GET['page'] || $_GET['page'] == 1){$page = 0;}else{$page = ($_GET['page']*$numRec)-$numRec;}
                                 $clients=$override->getWithLimit1('clients', 'site_id',$user->data()->site_id,'status', 1,$page,$numRec);
                             }?>
