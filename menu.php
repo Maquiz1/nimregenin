@@ -64,11 +64,6 @@ if ($user->data()->accessLevel == 1) {
                 </ul>
             </li>
 
-<!--            <li class="active">-->
-<!--                <a href="printer.php">-->
-<!--                    <span class="isw-print"></span><span class="text">Print Barcode</span>-->
-<!--                </a>-->
-<!--            </li>-->
             <li class="active">
                 <a href="zebra.php" target="_blank">
                     <span class="isw-print"></span><span class="text">Zebra Print</span>
