@@ -1532,13 +1532,13 @@ if ($user->isLoggedIn()) {
                                                                         <div class="block-fluid">
                                                                             <div class="row-form clearfix">
                                                                                 <div class="col-md-8">Date of COVID-19 sample taken:</div>
-                                                                                <div class="col-md-4"><input type="text" name="sample_date" value="<?=$sc['sample_date']?>" /><span>Example: 2010-12-01</span></div>
+                                                                                <div class="col-md-4"><input type="text" name="sample_date" value="<?php if($sc){echo $sc['sample_date'];}?>" /><span>Example: 2010-12-01</span></div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="block-fluid">
                                                                             <div class="row-form clearfix">
                                                                                 <div class="col-md-8">Date of COVID-19 results:</div>
-                                                                                <div class="col-md-4"><input type="text" name="results_date" value="<?=$sc['results_date']?>" /><span>Example: 2010-12-01</span></div>
+                                                                                <div class="col-md-4"><input type="text" name="results_date" value="<?php if($sc){echo $sc['results_date'];}?>" /><span>Example: 2010-12-01</span></div>
                                                                             </div>
                                                                         </div>
 
@@ -1658,27 +1658,27 @@ if ($user->isLoggedIn()) {
                                                                     <div class="row">
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-7">White blood cell count (WBC)</div>
-                                                                            <div class="col-md-5"><input type="number" name="wbc" value="<?=$lb['wbc']?>" step="0.001"/><span> x 10^9/L</span></div>
+                                                                            <div class="col-md-5"><input type="number" name="wbc" value="<?php if($lb){echo $lb['wbc'];}?>" step="0.001"/><span> x 10^9/L</span></div>
                                                                         </div>
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-7">Hemoglobin levels (Hb)</div>
-                                                                            <div class="col-md-5"><input type="number" name="hb" value="<?=$lb['hb']?>" step="0.01"/><span> g/dL</span></div>
+                                                                            <div class="col-md-5"><input type="number" name="hb" value="<?php if($lb){echo $lb['hb'];}?>" step="0.01"/><span> g/dL</span></div>
                                                                         </div>
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-7">Platelet count (Plt)</div>
-                                                                            <div class="col-md-5"><input type="number" name="plt" value="<?=$lb['plt']?>" step="0.01"/><span> x 10^9/L</span></div>
+                                                                            <div class="col-md-5"><input type="number" name="plt" value="<?php if($lb){echo $lb['plt'];}?>" step="0.01"/><span> x 10^9/L</span></div>
                                                                         </div>
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-7">ALT levels</div>
-                                                                            <div class="col-md-5"><input type="number" name="alt" value="<?=$lb['alt']?>" step="0.01"/><span> U/L</span></div>
+                                                                            <div class="col-md-5"><input type="number" name="alt" value="<?php if($lb){echo $lb['alt'];}?>" step="0.01"/><span> U/L</span></div>
                                                                         </div>
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-7">AST levels</div>
-                                                                            <div class="col-md-5"><input type="number" name="ast" value="<?=$lb['ast']?>" step="0.01"/><span> U/L</span></div>
+                                                                            <div class="col-md-5"><input type="number" name="ast" value="<?php if($lb){echo $lb['ast'];}?>" step="0.01"/><span> U/L</span></div>
                                                                         </div>
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-7">Serum creatinine levels</div>
-                                                                            <div class="col-md-5"><input type="number" name="sc" value="<?=$lb['sc']?>" step="0.01"/><span> umol/L</span></div>
+                                                                            <div class="col-md-5"><input type="number" name="sc" value="<?php if($lb){echo $lb['sc'];}?>" step="0.01"/><span> umol/L</span></div>
                                                                         </div>
 
                                                                         <div class="dr"><span></span></div>
