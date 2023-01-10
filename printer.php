@@ -22,7 +22,7 @@ if ($user->isLoggedIn()) {
 <html lang="en">
 
 <head>
-    <title> Printer - HetaCov </title>
+    <title> Printer - NIMREGENIN </title>
     <?php include "head.php"; ?>
 </head>
 

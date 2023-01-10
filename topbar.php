@@ -39,7 +39,7 @@ if(Input::exists('post')){
 }
 ?>
 <div class="header">
-    <h4 style="font-weight: bold;color: #f8f8f8" href="#"> &nbsp;HetaCov Clients Tracking </h4>
+    <h4 style="font-weight: bold;color: #f8f8f8" href="#"> &nbsp;NIMREGENIN Clients Tracking </h4>
     <ul class="header_menu">
         <li class="list_icon"><a href="#">&nbsp;</a></li>
         <li class="settings_icon">

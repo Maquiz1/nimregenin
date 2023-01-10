@@ -454,7 +454,7 @@ if ($user->isLoggedIn()) {
 <html lang="en">
 
 <head>
-    <title> Info - HetaCov </title>
+    <title> Info - NIMREGENIN </title>
     <?php include "head.php"; ?>
 </head>
 

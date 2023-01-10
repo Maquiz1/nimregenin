@@ -278,7 +278,7 @@ if ($user->isLoggedIn()) {
             <div class="card-body" id="mycard">
                 <div class='container' style='text-align:left; border:2px dotted black;'>
                     <img src='img/nimr.png' alt='' style="width: 10vh">
-                    <h1 style="float: right;width: 34vh;font-weight: bolder;margin-top: 10px;" >HETACOV-TRIAL</h1>
+                    <h1 style="float: right;width: 34vh;font-weight: bolder;margin-top: 10px;" >NIMREGENIN-TRIAL</h1>
                     <div class='header'>
                     </div>
                     <div class='container-2'>
