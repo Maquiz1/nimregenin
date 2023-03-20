@@ -78,8 +78,7 @@ if ($user->isLoggedIn()) {
             } else {
                 $pageError = $validate->errors();
             }
-        }
-        elseif (Input::get('add_position')) {
+        } elseif (Input::get('add_position')) {
             $validate = $validate->check($_POST, array(
                 'name' => array(
                     'required' => true,
@@ -97,8 +96,7 @@ if ($user->isLoggedIn()) {
             } else {
                 $pageError = $validate->errors();
             }
-        }
-        elseif (Input::get('add_site')) {
+        } elseif (Input::get('add_site')) {
             $validate = $validate->check($_POST, array(
                 'name' => array(
                     'required' => true,
@@ -116,8 +114,7 @@ if ($user->isLoggedIn()) {
             } else {
                 $pageError = $validate->errors();
             }
-        }
-        elseif (Input::get('add_client')) {
+        } elseif (Input::get('add_client')) {
             $validate = new validate();
             $validate = $validate->check($_POST, array(
                 'clinic_date' => array(
@@ -151,8 +148,7 @@ if ($user->isLoggedIn()) {
                             $attachment_file = $folderName . basename($_FILES['image']['name']);
                             if (@move_uploaded_file($_FILES['image']["tmp_name"], $attachment_file)) {
                                 $file = true;
-                            } else {
-                                {
+                            } else { {
                                     $errorM = true;
                                     $errorMessage = 'Your profile Picture Not Uploaded ,';
                                 }
@@ -160,22 +156,21 @@ if ($user->isLoggedIn()) {
                         } else {
                             $errorM = true;
                             $errorMessage = 'None supported file format';
-                        }//not supported format
-                    }else{
+                        } //not supported format
+                    } else {
                         $attachment_file = '';
                     }
-                    if($errorM == false){
-                        $chk=true;
+                    if ($errorM == false) {
+                        $chk = true;
                         $screening_id = $random->get_rand_alphanumeric(8);
-                        $check_screening=$override->get('clients','participant_id', $screening_id)[0];
-                        while($chk){
+                        $check_screening = $override->get('clients', 'participant_id', $screening_id)[0];
+                        while ($chk) {
                             $screening_id = strtoupper($random->get_rand_alphanumeric(8));
-                            if(!$check_screening=$override->get('clients','participant_id', $screening_id)){
-                                $chk=false;
+                            if (!$check_screening = $override->get('clients', 'participant_id', $screening_id)) {
+                                $chk = false;
                             }
-
                         }
-                        $age = $user->dateDiffYears(date('Y-m-d'),Input::get('dob'));
+                        $age = $user->dateDiffYears(date('Y-m-d'), Input::get('dob'));
 
                         $user->createRecord('clients', array(
                             'participant_id' => $screening_id,
@@ -208,13 +203,13 @@ if ($user->isLoggedIn()) {
                         $client = $override->lastRow('clients', 'id')[0];
 
                         $user->createRecord('visit', array(
-                                'visit_name' => 'Day 0',
-                                'visit_code' => 'D0',
-                                'visit_date' => date('Y-m-d'),
-                                'visit_window' => 2,
-                                'status' => 1,
-                                'seq_no' => 0,
-                                'client_id' => $client['id'],
+                            'visit_name' => 'Day 0',
+                            'visit_code' => 'D0',
+                            'visit_date' => date('Y-m-d'),
+                            'visit_window' => 2,
+                            'status' => 1,
+                            'seq_no' => 0,
+                            'client_id' => $client['id'],
                         ));
 
                         $successMessage = 'Client Added Successful';
@@ -462,7 +457,7 @@ if ($user->isLoggedIn()) {
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">Date:</div>
                                         <div class="col-md-9">
-                                            <input value="" class="validate[required,custom[date]]" type="text" name="clinic_date" id="clinic_date"/> <span>Example: 2010-12-01</span>
+                                            <input value="" class="validate[required,custom[date]]" type="text" name="clinic_date" id="clinic_date" /> <span>Example: 2010-12-01</span>
                                         </div>
                                     </div>
                                     <div class="row-form clearfix">
@@ -487,7 +482,7 @@ if ($user->isLoggedIn()) {
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">Date of Birth:</div>
                                         <div class="col-md-9">
-                                            <input value="" class="validate[required,custom[date]]" type="text" name="dob" id="date"/> <span>Example: 2010-12-01</span>
+                                            <input value="" class="validate[required,custom[date]]" type="text" name="dob" id="date" /> <span>Example: 2010-12-01</span>
                                         </div>
                                     </div>
 
@@ -560,7 +555,7 @@ if ($user->isLoggedIn()) {
                                     </div>
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">Relative's Phone Number:</div>
-                                        <div class="col-md-9"><input value="" class="" type="text" name="other_phone" id="phone"  /> <span>Example: 0700 000 111</span></div>
+                                        <div class="col-md-9"><input value="" class="" type="text" name="other_phone" id="phone" /> <span>Example: 0700 000 111</span></div>
                                     </div>
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">Residence Street:</div>
@@ -573,7 +568,7 @@ if ($user->isLoggedIn()) {
 
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">House Number:</div>
-                                        <div class="col-md-9"><input value="" class="" type="text" name="block_no" id="block_no"  /></div>
+                                        <div class="col-md-9"><input value="" class="" type="text" name="block_no" id="block_no" /></div>
                                     </div>
 
                                     <div class="row-form clearfix">
@@ -618,14 +613,14 @@ if ($user->isLoggedIn()) {
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">Start Date:</div>
                                         <div class="col-md-9">
-                                            <input value="" class="validate[required,custom[date]]" type="text" name="start_date" id="start_date"/> <span>Example: 2010-12-01</span>
+                                            <input value="" class="validate[required,custom[date]]" type="text" name="start_date" id="start_date" /> <span>Example: 2010-12-01</span>
                                         </div>
                                     </div>
 
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">End Date:</div>
                                         <div class="col-md-9">
-                                            <input value="" class="validate[required,custom[date]]" type="text" name="end_date" id="end_date"/> <span>Example: 2010-12-01</span>
+                                            <input value="" class="validate[required,custom[date]]" type="text" name="end_date" id="end_date" /> <span>Example: 2010-12-01</span>
                                         </div>
                                     </div>
 
@@ -684,21 +679,436 @@ if ($user->isLoggedIn()) {
 
                         </div>
                     <?php } elseif ($_GET['id'] == 8) { ?>
+                        <div class="col-md-offset-1 col-md-8">
+                            <div class="head clearfix">
+                                <div class="isw-ok"></div>
+                                <h1>CRF 1</h1>
+                            </div>
+                            <div class="block-fluid">
+                                <form id="validation" method="post">
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">Date:</div>
+                                        <div class="col-md-9"><input value="" class="validate[required,custom[date]]" type="text" name="ecg_date" id="ecg_date" required /> <span>Example: 2023-01-01</span></div>
+                                    </div>
 
-                    <?php } elseif ($_GET['id'] == 9) { ?>
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">Patients initials:</div>
+                                        <div class="col-md-9"><input value="" type="text" name="pt_initial" id="pt_initial" required /> <span>First, Middle, Last</span></div>
+                                    </div>
 
-                    <?php } elseif ($_GET['id'] == 10) { ?>
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">Date of birth:</div>
+                                        <div class="col-md-9"><input value="" class="validate[required,custom[date]]" type="text" name="ecg_date" id="ecg_date" required /> <span>Example: 2023-01-01</span></div>
+                                    </div>
+                                    <div class="row-form clearfix">
 
-                    <?php } elseif ($_GET['id'] == 11) { ?>
+                                        <div class="col-md-3">Age:</div>
+                                        <div class="col-md-9"><input value="" type="number" name="age" id="age" required /></div>
+                                    </div>
 
-                    <?php } elseif ($_GET['id'] == 12 && $user->data()->position == 1) { ?>
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">Sex:</div>
+                                        <div class="col-md-9">
+                                            <select name="sex" id="sex" style="width: 100%;" required>
+                                                <option value="">Select</option>
+                                                <option value="1">Male</option>
+                                                <option value="2">Female</option>
+                                            </select>
+                                        </div>
+                                    </div>
 
-                    <?php } ?>
-                    <div class="dr"><span></span></div>
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">1. Diabetic Mellitus:</div>
+                                        <div class="col-md-9">
+                                            <select name="diabetic" id="diabetic" style="width: 100%;" required>
+                                                <option value="">Select</option>
+                                                <option value="1">Yes</option>
+                                                <option value="2">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">1. Is the patient on Medication?</div>
+                                        <div class="col-md-9">
+                                            <select name="diabetic_medicatn" id="diabetic_medicatn" style="width: 100%;">
+                                                <option value="">Select</option>
+                                                <option value="1">Yes</option>
+                                                <option value="2">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-form clearfix" id="diabetic_medicatn_name">
+                                        <div class="col-md-3">1. Mention the medications:</div>
+                                        <div class="col-md-9"><textarea name="diabetic_medicatn_name" rows="4"></textarea> </div>
+                                    </div>
+
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">2. Hypertension:</div>
+                                        <div class="col-md-9">
+                                            <select name="hypertension" id="hypertension" style="width: 100%;" required>
+                                                <option value="">Select</option>
+                                                <option value="1">Yes</option>
+                                                <option value="2">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">2. Is the patient on Medication?</div>
+                                        <div class="col-md-9">
+                                            <select name="hypertension_medicatn" id="hypertension_medicatn" style="width: 100%;">
+                                                <option value="">Select</option>
+                                                <option value="1">Yes</option>
+                                                <option value="2">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-form clearfix" id="hypertension_medicatn_name">
+                                        <div class="col-md-3">2. Mention the medications:</div>
+                                        <div class="col-md-9"><textarea name="hypertension_medicatn_name" rows="4"></textarea> </div>
+                                    </div>
+
+
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">3. Any other heart problem apart from hypertension?:</div>
+                                        <div class="col-md-9">
+                                            <select name="heart" id="heart" style="width: 100%;" required>
+                                                <option value="">Select</option>
+                                                <option value="1">Yes</option>
+                                                <option value="2">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">3. Is the patient on Medication?</div>
+                                        <div class="col-md-9">
+                                            <select name="heart_medicatn" id="heart_medicatn" style="width: 100%;">
+                                                <option value="">Select</option>
+                                                <option value="1">Yes</option>
+                                                <option value="2">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-form clearfix" id="heart_medicatn_name">
+                                        <div class="col-md-3">3. Mention the medications:</div>
+                                        <div class="col-md-9"><textarea name="heart_medicatn_name" rows="4"></textarea> </div>
+                                    </div>
+
+
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">4. Asthma:</div>
+                                        <div class="col-md-9">
+                                            <select name="asthma" id="asthma" style="width: 100%;" required>
+                                                <option value="">Select</option>
+                                                <option value="1">Yes</option>
+                                                <option value="2">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">4. Is the patient on Medication?</div>
+                                        <div class="col-md-9">
+                                            <select name="asthma_medicatn" id="asthma_medicatn" style="width: 100%;">
+                                                <option value="">Select</option>
+                                                <option value="1">Yes</option>
+                                                <option value="2">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-form clearfix" id="asthma_medicatn_name">
+                                        <div class="col-md-3">4. Mention the medications:</div>
+                                        <div class="col-md-9"><textarea name="asthma_medicatn_name" rows="4"></textarea> </div>
+                                    </div>
+
+
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">5. Any other form of Chronic Obstructive Diseases (COPD):</div>
+                                        <div class="col-md-9">
+                                            <select name="chronic" id="chronic" style="width: 100%;" required>
+                                                <option value="">Select</option>
+                                                <option value="1">Yes</option>
+                                                <option value="2">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">5. Is the patient on Medication?</div>
+                                        <div class="col-md-9">
+                                            <select name="chronic_medicatn" id="chronic_medicatn" style="width: 100%;">
+                                                <option value="">Select</option>
+                                                <option value="1">Yes</option>
+                                                <option value="2">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-form clearfix" id="chronic_medicatn_name">
+                                        <div class="col-md-3">5. Mention the medications:</div>
+                                        <div class="col-md-9"><textarea name="chronic_medicatn_name" rows="4"></textarea> </div>
+                                    </div>
+
+
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">6. HIV/AIDS:</div>
+                                        <div class="col-md-9">
+                                            <select name="hiv_aids" id="hiv_aids" style="width: 100%;" required>
+                                                <option value="">Select</option>
+                                                <option value="1">Yes</option>
+                                                <option value="2">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">6. Is the patient on Medication?</div>
+                                        <div class="col-md-9">
+                                            <select name="hiv_aids_medicatn" id="hiv_aids_medicatn" style="width: 100%;">
+                                                <option value="">Select</option>
+                                                <option value="1">Yes</option>
+                                                <option value="2">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-form clearfix" id="hiv_aids_medicatn_name">
+                                        <div class="col-md-3">6. Mention the medications:</div>
+                                        <div class="col-md-9"><textarea name="hiv_aids_medicatn_name" rows="4"></textarea> </div>
+                                    </div>
+
+
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">7. Has the patient suffered from Pulmonary Tuberculosis in the past 2years?:</div>
+                                        <div class="col-md-9">
+                                            <select name="tuberculosis" id="tuberculosis" style="width: 100%;" required>
+                                                <option value="">Select</option>
+                                                <option value="1">Yes</option>
+                                                <option value="2">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-form clearfix" id="tuberculosis_medicatn_name">
+                                        <div class="col-md-3">7. Mention the medications used:</div>
+                                        <div class="col-md-9"><textarea name="tuberculosis_medicatn_name" rows="4"></textarea> </div>
+                                    </div>
+
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">8. Any other medical condition:</div>
+                                        <div class="col-md-9">
+                                            <select name="other_medical" id="other_medical" style="width: 100%;" required>
+                                                <option value="">Select</option>
+                                                <option value="1">Male</option>
+                                                <option value="2">Female</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-form clearfix" id="other_specify">
+                                        <div class="col-md-3">8. Specify the medications:</div>
+                                        <div class="col-md-9"><textarea name="other_specify" rows="4"></textarea> </div>
+                                    </div>
+
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">8. Is the patient on Medication?</div>
+                                        <div class="col-md-9">
+                                            <select name="other_medical_medicatn" id="other_medical_medicatn" style="width: 100%;">
+                                                <option value="">Select</option>
+                                                <option value="1">Yes</option>
+                                                <option value="2">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-form clearfix" id="other_medicatn_name">
+                                        <div class="col-md-3">8. Mention the medications:</div>
+                                        <div class="col-md-9"><textarea name="other_medicatn_name" rows="4"></textarea> </div>
+                                    </div>
+
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">9. Any surgery was done (within a Month):</div>
+                                        <div class="col-md-9">
+                                            <select name="surgery" id="surgery" style="width: 100%;" required>
+                                                <option value="">Select</option>
+                                                <option value="1">Yes</option>
+                                                <option value="2">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-form clearfix" id="surgery_specify">
+                                        <div class="col-md-3">9. Specify:</div>
+                                        <div class="col-md-9"><textarea name="surgery_specify" rows="4"></textarea> </div>
+                                    </div>
+
+                                    <div class="row-form clearfix" id="surgery_medicatn_name">
+                                        <div class="col-md-3">9. Mention the medications used</div>
+                                        <div class="col-md-9"><textarea name="surgery_medicatn_name" rows="4"></textarea> </div>
+                                    </div>
+
+
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">10. Has the patient ever used any herbal preparation?:</div>
+                                        <div class="col-md-9">
+                                            <select name="herbal" id="herbal" style="width: 100%;" required>
+                                                <option value="">Select</option>
+                                                <option value="1">Yes</option>
+                                                <option value="2">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">12. Which herbal preparation was used</div>
+                                        <div class="col-md-9">
+                                            <select name="herbal_preparation" id="herbal_preparation" style="width: 100%;" required>
+                                                <option value="">Select</option>
+                                                <option value="1">NIMRCAF</option>
+                                                <option value="2">Bupiji oil</option>
+                                                <option value="3">Covidol</option>
+                                                <option value="4">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-form clearfix" id="herbal_preparation_other">
+                                        <div class="col-md-3">12. Specify:</div>
+                                        <div class="col-md-9"><textarea name="herbal_preparation_other" rows="4"></textarea> </div>
+                                    </div>
+
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">13. Is the patient vaccinated</div>
+                                        <div class="col-md-9">
+                                            <select name="vaccinated" id="vaccinated" style="width: 100%;">
+                                                <option value="">Select</option>
+                                                <option value="1">Yes</option>
+                                                <option value="2">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-form clearfix" id="vaccinated_medicatn">
+                                        <div class="col-md-3">13. Specify</div>
+                                        <div class="col-md-9"><textarea name="vaccinated_medicatn" rows="4"></textarea> </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Medications (all medication should be in generic names):</label>
+                                                    <input value="" type="text" name="standard_medication1" id="standard_medication1" required />
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Start:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_start1" id="standard_start1" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Ongoing?:</label>
+                                                    <select name="standard_ongoing1" id="standard_ongoing1" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="2">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>End:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_end1" id="standard_end1" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Dose:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_dose1" id="standard_dose1" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Frequecy:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_frequecy1" id="standard_frequecy1" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Remarks:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_remarks1" id="standard_remarks1" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-form clearfix" id="crf1_cmpltd_date">
+                                        <div class="col-md-3">Date of Completion</div>
+                                        <input value="" class="validate[required]" type="text" name="crf1_cmpltd_date" id="crf1_cmpltd_date" />
+                                    </div>
+
+
+
+                                    <div class="footer tar">
+                                        <input type="submit" name="add_results" value="Submit" class="btn btn-default">
+                                    </div>
+                            </div>
+
+
+                            </form>
+                        </div>
+
                 </div>
 
+            <?php } elseif ($_GET['id'] == 9) { ?>
+
+            <?php } elseif ($_GET['id'] == 10) { ?>
+
+            <?php } elseif ($_GET['id'] == 11) { ?>
+
+            <?php } elseif ($_GET['id'] == 12 && $user->data()->position == 1) { ?>
+
+            <?php } ?>
+            <div class="dr"><span></span></div>
             </div>
+
         </div>
+    </div>
     </div>
 
 
