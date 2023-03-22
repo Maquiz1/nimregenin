@@ -561,7 +561,7 @@ if ($user->isLoggedIn()) {
                     ));
 
 
-                    $successMessage = 'CRF3 added Successful';
+                    $successMessage = 'CRF5 added Successful';
                     Redirect::to('info.php?id=6&cid=' . $_GET['cid']);
                 } catch (Exception $e) {
                     die($e->getMessage());
@@ -2361,7 +2361,7 @@ if ($user->isLoggedIn()) {
                                     </div>
 
                                     <div class="footer tar">
-                                        <input type="submit" name="add_crf4" value="Submit" class="btn btn-default">
+                                        <input type="submit" name="add_crf3" value="Submit" class="btn btn-default">
                                     </div>
                                 </form>
                             </div>
