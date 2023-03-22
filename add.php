@@ -220,6 +220,465 @@ if ($user->isLoggedIn()) {
             } else {
                 $pageError = $validate->errors();
             }
+        } elseif (Input::get('add_crf1')) {
+            $validate = $validate->check($_POST, array(
+                'diabetic' => array(
+                    'required' => true,
+                ),
+
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->createRecord('crf1', array(
+                        'diabetic' => Input::get('diabetic'),
+                        'diabetic_medicatn' => Input::get('diabetic_medicatn'),
+                        'diabetic_medicatn_name' => Input::get('diabetic_medicatn_name'),
+                        'hypertension' => Input::get('hypertension'),
+                        'hypertension_medicatn' => Input::get('hypertension_medicatn'),
+                        'hypertension_medicatn_name' => Input::get('hypertension_medicatn_name'),
+                        'heart' => Input::get('heart'),
+                        'heart_medicatn' => Input::get('heart_medicatn'),
+                        'heart_medicatn_name' => Input::get('heart_medicatn_name'),
+                        'asthma' => Input::get('asthma'),
+                        'asthma_medicatn' => Input::get('asthma_medicatn'),
+                        'asthma_medicatn_name' => Input::get('asthma_medicatn_name'),
+                        'chronic' => Input::get('chronic'),
+                        'chronic_medicatn' => Input::get('chronic_medicatn'),
+                        'chronic_medicatn_name' => Input::get('chronic_medicatn_name'),
+                        'hiv_aids' => Input::get('hiv_aids'),
+                        'hiv_aids_medicatn' => Input::get('hiv_aids_medicatn'),
+                        'hiv_aids_medicatn_name' => Input::get('hiv_aids_medicatn_name'),
+                        'tuberculosis' => Input::get('tuberculosis'),
+                        'tuberculosis_medicatn_name' => Input::get('tuberculosis_medicatn_name'),
+                        'other_medical' => Input::get('other_medical'),
+                        'other_specify' => Input::get('other_specify'),
+                        'other_medical_medicatn' => Input::get('other_medical_medicatn'),
+                        'other_medicatn_name' => Input::get('other_medicatn_name'),
+                        'surgery' => Input::get('surgery'),
+                        'surgery_specify' => Input::get('surgery_specify'),
+                        'surgery_medicatn_name' => Input::get('surgery_medicatn_name'),
+                        'herbal' => Input::get('herbal'),
+                        'herbal_preparation' => Input::get('herbal_preparation'),
+                        'herbal_preparation_other' => Input::get('herbal_preparation_other'),
+                        'vaccinated' => Input::get('vaccinated'),
+                        'vaccinated_medicatn' => Input::get('vaccinated_medicatn'),
+                        'standard_medication1' => Input::get('standard_medication1'),
+                        'standard_start1' => Input::get('standard_start1'),
+                        'standard_ongoing1' => Input::get('standard_ongoing1'),
+                        'standard_end1' => Input::get('standard_end1'),
+                        'standard_dose1' => Input::get('standard_dose1'),
+                        'standard_frequecy1' => Input::get('standard_frequecy1'),
+                        'standard_remarks1' => Input::get('standard_remarks1'),
+                        'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ));
+
+
+                    $successMessage = 'CRF1 added Successful';
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('add_crf2')) {
+            $validate = $validate->check($_POST, array(
+                'crf2_date' => array(
+                    'required' => true,
+                ),
+
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->createRecord('crf2', array(
+                        'crf2_date' => Input::get('crf2_date'),
+                        'height' => Input::get('height'),
+                        'weight' => Input::get('weight'),
+                        'bmi' => Input::get('bmi'),
+                        'time' => Input::get('time'),
+                        'temperature' => Input::get('temperature'),
+                        'method' => Input::get('method'),
+                        'oxygen' => Input::get('oxygen'),
+                        'on_oxygen' => Input::get('on_oxygen'),
+                        'days_on_oxygen' => Input::get('days_on_oxygen'),
+                        'cylinder_used' => Input::get('cylinder_used'),
+                        'respiratory_rate' => Input::get('respiratory_rate'),
+                        'heart_rate' => Input::get('heart_rate'),
+                        'systolic' => Input::get('systolic'),
+                        'diastolic' => Input::get('diastolic'),
+                        'method2' => Input::get('method2'),
+                        'time2' => Input::get('time2'),
+                        'appearance' => Input::get('appearance'),
+                        'appearance_comments' => Input::get('appearance_comments'),
+                        'appearance_signifcnt' => Input::get('appearance_signifcnt'),
+                        'heent' => Input::get('heent'),
+                        'heent_comments' => Input::get('heent_comments'),
+                        'heent_signifcnt' => Input::get('heent_signifcnt'),
+                        'respiratory' => Input::get('respiratory'),
+                        'respiratory_comments' => Input::get('respiratory_comments'),
+                        'respiratory_signifcnt' => Input::get('respiratory_signifcnt'),
+                        'cardiovascular' => Input::get('cardiovascular'),
+                        'cardiovascular_comments' => Input::get('cardiovascular_comments'),
+                        'cardiovascular_signifcnt' => Input::get('cardiovascular_signifcnt'),
+                        'abdnominal' => Input::get('abdnominal'),
+                        'abdnominal_comments' => Input::get('abdnominal_comments'),
+                        'abdnominal_signifcnt' => Input::get('abdnominal_signifcnt'),
+                        'urogenital' => Input::get('urogenital'),
+                        'urogenital_comments' => Input::get('urogenital_comments'),
+                        'urogenital_signifcnt' => Input::get('urogenital_signifcnt'),
+                        'musculoskeletal' => Input::get('musculoskeletal'),
+                        'musculoskeletal_comments' => Input::get('musculoskeletal_comments'),
+                        'musculoskeletal_signifcnt' => Input::get('musculoskeletal_signifcnt'),
+                        'neurological' => Input::get('neurological'),
+                        'neurological_comments' => Input::get('neurological_comments'),
+                        'neurological_signifcnt' => Input::get('neurological_signifcnt'),
+                        'psychological' => Input::get('psychological'),
+                        'psychological_comments' => Input::get('psychological_comments'),
+                        'psychological_signifcnt' => Input::get('psychological_signifcnt'),
+                        'endocrime' => Input::get('endocrime'),
+                        'endocrime_comments' => Input::get('endocrime_comments'),
+                        'endocrime_signifcnt' => Input::get('endocrime_signifcnt'),
+                        'hematological' => Input::get('hematological'),
+                        'hematological_comments' => Input::get('hematological_comments'),
+                        'hematological_signifcnt' => Input::get('hematological_signifcnt'),
+                        'skin' => Input::get('skin'),
+                        'skin_comments' => Input::get('skin_comments'),
+                        'skin_signifcnt' => Input::get('skin_signifcnt'),
+                        'physical_exams_other' => Input::get('physical_exams_other'),
+                        'physical_other_specify' => Input::get('physical_other_specify'),
+                        'physical_other_system' => Input::get('physical_other_system'),
+                        'physical_other_comments' => Input::get('physical_other_comments'),
+                        'physical_other_signifcnt' => Input::get('physical_other_signifcnt'),
+                        'additional_notes' => Input::get('additional_notes'),
+                        'physical_performed' => Input::get('physical_performed'),
+                        'crf2_cmpltd_date' => Input::get('crf2_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ));
+
+
+                    $successMessage = 'CRF2 added Successful';
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('add_crf3')) {
+            $validate = $validate->check($_POST, array(
+                'crf3_date' => array(
+                    'required' => true,
+                ),
+
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->createRecord('crf3', array(
+                        'crf3_date' => Input::get('crf3_date'),
+                        'fever' => Input::get('fever'),
+                        'shivering' => Input::get('shivering'),
+                        'cough' => Input::get('cough'),
+                        'pain' => Input::get('pain'),
+                        'breath' => Input::get('breath'),
+                        'vomit' => Input::get('vomit'),
+                        'diarrhoea' => Input::get('diarrhoea'),
+                        'headache' => Input::get('headache'),
+                        'difficult' => Input::get('difficult'),
+                        'nose' => Input::get('nose'),
+                        'throat' => Input::get('throat'),
+                        'fatigue' => Input::get('fatigue'),
+                        'muscle' => Input::get('muscle'),
+                        'smell' => Input::get('smell'),
+                        'taste' => Input::get('taste'),
+                        'sneezing' => Input::get('sneezing'),
+                        'dizziness' => Input::get('dizziness'),
+                        'blurred' => Input::get('blurred'),
+                        'symptoms_other' => Input::get('symptoms_other'),
+                        'other_comments' => Input::get('other_comments'),
+                        'oxygen_therapy' => Input::get('oxygen_therapy'),
+                        'oxygen_therapy_yes' => Input::get('oxygen_therapy_yes'),
+                        'oxygen_therapy_herbal' => Input::get('oxygen_therapy_herbal'),
+                        'oxygen_therapy_litres' => Input::get('oxygen_therapy_litres'),
+                        'oxygen_plant' => Input::get('oxygen_plant'),
+                        'oxygen_therapy_start' => Input::get('oxygen_therapy_start'),
+                        'oxygen_therapy_ongoing' => Input::get('oxygen_therapy_ongoing'),
+                        'oxygen_therapy_end' => Input::get('oxygen_therapy_end'),
+                        'oxygen_days' => Input::get('oxygen_days'),
+                        'cpap_use' => Input::get('cpap_use'),
+                        'cpap_yes' => Input::get('cpap_yes'),
+                        'cpap_herbal' => Input::get('cpap_herbal'),
+                        'cpap_fi02' => Input::get('cpap_fi02'),
+                        'cpap_sat02' => Input::get('cpap_sat02'),
+                        'cpap_cylinder' => Input::get('cpap_cylinder'),
+                        'cpap_plant' => Input::get('cpap_plant'),
+                        'cpap_start' => Input::get('cpap_start'),
+                        'cpap_ongoing' => Input::get('cpap_ongoing'),
+                        'cpap_end' => Input::get('cpap_end'),
+                        'ventilator' => Input::get('ventilator'),
+                        'ventilator_yes' => Input::get('ventilator_yes'),
+                        'ventilator_herbal' => Input::get('ventilator_herbal'),
+                        'ventilator_fi02' => Input::get('ventilator_fi02'),
+                        'ventilator_litres' => Input::get('ventilator_litres'),
+                        'ventilator_start' => Input::get('ventilator_start'),
+                        'ventilator_ongoing' => Input::get('ventilator_ongoing'),
+                        'ventilator_end' => Input::get('ventilator_end'),
+                        'crf3_cmpltd_date' => Input::get('crf3_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ));
+
+
+                    $successMessage = 'CRF3 added Successful';
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('add_crf4')) {
+            $validate = $validate->check($_POST, array(
+                'sample_date' => array(
+                    'required' => true,
+                ),
+
+            ));
+            if ($validate->passed()) {
+                print_r($_POST);
+                try {
+                    $user->createRecord('crf4', array(
+                        'sample_date' => Input::get('sample_date'),
+                        'renal_urea' => Input::get('renal_urea'),
+                        'renal_creatinine' => Input::get('renal_creatinine'),
+                        'renal_creatinine_grade' => Input::get('renal_creatinine_grade'),
+                        'renal_egfr' => Input::get('renal_egfr'),
+                        'liver_ast' => Input::get('liver_ast'),
+                        'liver_ast_grade' => Input::get('liver_ast_grade'),
+                        'liver_alt' => Input::get('liver_alt'),
+                        'liver_alt_grade' => Input::get('liver_alt_grade'),
+                        'liver_alp' => Input::get('liver_alp'),
+                        'liver_alp_grade' => Input::get('liver_alp_grade'),
+                        'liver_pt' => Input::get('liver_pt'),
+                        'liver_pt_grade' => Input::get('liver_pt_grade'),
+                        'liver_ptt' => Input::get('liver_ptt'),
+                        'liver_ptt_grade' => Input::get('liver_ptt_grade'),
+                        'liver_inr' => Input::get('liver_inr'),
+                        'liver_inr_grade' => Input::get('liver_inr_grade'),
+                        'liver_ggt' => Input::get('liver_ggt'),
+                        'liver_albumin' => Input::get('liver_albumin'),
+                        'liver_albumin_grade' => Input::get('liver_albumin_grade'),
+                        'liver_bilirubin_total' => Input::get('liver_bilirubin_total'),
+                        'bilirubin_total_grade' => Input::get('bilirubin_total_grade'),
+                        'liver_bilirubin_direct' => Input::get('liver_bilirubin_direct'),
+                        'bilirubin_direct_grade' => Input::get('bilirubin_direct_grade'),
+                        'rbg' => Input::get('rbg'),
+                        'rbg_grade' => Input::get('rbg_grade'),
+                        'ldh' => Input::get('ldh'),
+                        'crp' => Input::get('crp'),
+                        'd_dimer' => Input::get('d_dimer'),
+                        'ferritin' => Input::get('ferritin'),
+                        'wbc' => Input::get('wbc'),
+                        'wbc_grade' => Input::get('wbc_grade'),
+                        'abs_neutrophil' => Input::get('abs_neutrophil'),
+                        'abs_neutrophil_grade' => Input::get('abs_neutrophil_grade'),
+                        'abs_lymphocytes' => Input::get('abs_lymphocytes'),
+                        'abs_lymphocytes_grade' => Input::get('abs_lymphocytes_grade'),
+                        'abs_eosinophils' => Input::get('abs_eosinophils'),
+                        'abs_monocytes' => Input::get('abs_monocytes'),
+                        'abs_basophils' => Input::get('abs_basophils'),
+                        'hb' => Input::get('hb'),
+                        'hb_grade' => Input::get('hb_grade'),
+                        'mcv' => Input::get('mcv'),
+                        'mch' => Input::get('mch'),
+                        'hct' => Input::get('hct'),
+                        'rbc' => Input::get('rbc'),
+                        'plt' => Input::get('plt'),
+                        'plt_grade' => Input::get('plt_grade'),
+                        'chest_xray' => Input::get('chest_xray'),
+                        'ct_chest' => Input::get('ct_chest'),
+                        'ct_chest_specify' => Input::get('ct_chest_specify'),
+                        'ecg_specify' => Input::get('ecg_specify'),
+                        'crf4_cmpltd_date' => Input::get('crf4_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ));
+
+
+                    $successMessage = 'CRF3 added Successful';
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('add_crf5')) {
+            $validate = $validate->check($_POST, array(
+                'crf3_date' => array(
+                    'required' => true,
+                ),
+
+            ));
+            if ($validate->passed()) {
+                print_r($_POST);
+                try {
+                    $user->createRecord('crf5', array(
+                        'crf3_date' => Input::get('crf3_date'),
+                        'fever' => Input::get('fever'),
+                        'shivering' => Input::get('shivering'),
+                        'cough' => Input::get('cough'),
+                        'pain' => Input::get('pain'),
+                        'breath' => Input::get('breath'),
+                        'vomit' => Input::get('vomit'),
+                        'diarrhoea' => Input::get('diarrhoea'),
+                        'headache' => Input::get('headache'),
+                        'difficult' => Input::get('difficult'),
+                        'nose' => Input::get('nose'),
+                        'throat' => Input::get('throat'),
+                        'fatigue' => Input::get('fatigue'),
+                        'muscle' => Input::get('muscle'),
+                        'smell' => Input::get('smell'),
+                        'taste' => Input::get('taste'),
+                        'sneezing' => Input::get('sneezing'),
+                        'dizziness' => Input::get('dizziness'),
+                        'blurred' => Input::get('blurred'),
+                        'symptoms_other' => Input::get('symptoms_other'),
+                        'other_comments' => Input::get('other_comments'),
+                        'oxygen_therapy' => Input::get('oxygen_therapy'),
+                        'oxygen_therapy_yes' => Input::get('oxygen_therapy_yes'),
+                        'oxygen_therapy_herbal' => Input::get('oxygen_therapy_herbal'),
+                        'oxygen_therapy_litres' => Input::get('oxygen_therapy_litres'),
+                        'oxygen_plant' => Input::get('oxygen_plant'),
+                        'oxygen_therapy_start' => Input::get('oxygen_therapy_start'),
+                        'oxygen_therapy_ongoing' => Input::get('oxygen_therapy_ongoing'),
+                        'oxygen_therapy_end' => Input::get('oxygen_therapy_end'),
+                        'oxygen_days' => Input::get('oxygen_days'),
+                        'cpap_use' => Input::get('cpap_use'),
+                        'cpap_yes' => Input::get('cpap_yes'),
+                        'cpap_herbal' => Input::get('cpap_herbal'),
+                        'cpap_fi02' => Input::get('cpap_fi02'),
+                        'cpap_sat02' => Input::get('cpap_sat02'),
+                        'cpap_cylinder' => Input::get('cpap_cylinder'),
+                        'cpap_plant' => Input::get('cpap_plant'),
+                        'cpap_start' => Input::get('cpap_start'),
+                        'cpap_ongoing' => Input::get('cpap_ongoing'),
+                        'cpap_end' => Input::get('cpap_end'),
+                        'ventilator' => Input::get('ventilator'),
+                        'ventilator_yes' => Input::get('ventilator_yes'),
+                        'ventilator_herbal' => Input::get('ventilator_herbal'),
+                        'ventilator_fi02' => Input::get('ventilator_fi02'),
+                        'ventilator_litres' => Input::get('ventilator_litres'),
+                        'ventilator_start' => Input::get('ventilator_start'),
+                        'ventilator_ongoing' => Input::get('ventilator_ongoing'),
+                        'ventilator_end' => Input::get('ventilator_end'),
+                        'crf3_cmpltd_date' => Input::get('crf3_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ));
+
+
+                    $successMessage = 'CRF3 added Successful';
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('add_crf6')) {
+            $validate = $validate->check($_POST, array(
+                'crf3_date' => array(
+                    'required' => true,
+                ),
+
+            ));
+            if ($validate->passed()) {
+                print_r($_POST);
+                try {
+                    $user->createRecord('crf6', array(
+                        'crf3_date' => Input::get('crf3_date'),
+                        'fever' => Input::get('fever'),
+                        'shivering' => Input::get('shivering'),
+                        'cough' => Input::get('cough'),
+                        'pain' => Input::get('pain'),
+                        'breath' => Input::get('breath'),
+                        'vomit' => Input::get('vomit'),
+                        'diarrhoea' => Input::get('diarrhoea'),
+                        'headache' => Input::get('headache'),
+                        'difficult' => Input::get('difficult'),
+                        'nose' => Input::get('nose'),
+                        'throat' => Input::get('throat'),
+                        'fatigue' => Input::get('fatigue'),
+                        'muscle' => Input::get('muscle'),
+                        'smell' => Input::get('smell'),
+                        'taste' => Input::get('taste'),
+                        'sneezing' => Input::get('sneezing'),
+                        'dizziness' => Input::get('dizziness'),
+                        'blurred' => Input::get('blurred'),
+                        'symptoms_other' => Input::get('symptoms_other'),
+                        'other_comments' => Input::get('other_comments'),
+                        'oxygen_therapy' => Input::get('oxygen_therapy'),
+                        'oxygen_therapy_yes' => Input::get('oxygen_therapy_yes'),
+                        'oxygen_therapy_herbal' => Input::get('oxygen_therapy_herbal'),
+                        'oxygen_therapy_litres' => Input::get('oxygen_therapy_litres'),
+                        'oxygen_plant' => Input::get('oxygen_plant'),
+                        'oxygen_therapy_start' => Input::get('oxygen_therapy_start'),
+                        'oxygen_therapy_ongoing' => Input::get('oxygen_therapy_ongoing'),
+                        'oxygen_therapy_end' => Input::get('oxygen_therapy_end'),
+                        'oxygen_days' => Input::get('oxygen_days'),
+                        'cpap_use' => Input::get('cpap_use'),
+                        'cpap_yes' => Input::get('cpap_yes'),
+                        'cpap_herbal' => Input::get('cpap_herbal'),
+                        'cpap_fi02' => Input::get('cpap_fi02'),
+                        'cpap_sat02' => Input::get('cpap_sat02'),
+                        'cpap_cylinder' => Input::get('cpap_cylinder'),
+                        'cpap_plant' => Input::get('cpap_plant'),
+                        'cpap_start' => Input::get('cpap_start'),
+                        'cpap_ongoing' => Input::get('cpap_ongoing'),
+                        'cpap_end' => Input::get('cpap_end'),
+                        'ventilator' => Input::get('ventilator'),
+                        'ventilator_yes' => Input::get('ventilator_yes'),
+                        'ventilator_herbal' => Input::get('ventilator_herbal'),
+                        'ventilator_fi02' => Input::get('ventilator_fi02'),
+                        'ventilator_litres' => Input::get('ventilator_litres'),
+                        'ventilator_start' => Input::get('ventilator_start'),
+                        'ventilator_ongoing' => Input::get('ventilator_ongoing'),
+                        'ventilator_end' => Input::get('ventilator_end'),
+                        'crf3_cmpltd_date' => Input::get('crf3_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ));
+
+
+                    $successMessage = 'CRF3 added Successful';
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
         }
     }
 } else {
@@ -885,8 +1344,8 @@ if ($user->isLoggedIn()) {
                                         <div class="col-md-9">
                                             <select name="other_medical" id="other_medical" style="width: 100%;" required>
                                                 <option value="">Select</option>
-                                                <option value="1">Male</option>
-                                                <option value="2">Female</option>
+                                                <option value="1">Yes</option>
+                                                <option value="2">No</option>
                                             </select>
                                         </div>
                                     </div>
@@ -991,33 +1450,6 @@ if ($user->isLoggedIn()) {
                                         <h1>(all medication should be in generic names)</h1>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Medications :</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Medications :</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Medications :</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
 
                                     <div class="row">
                                         <div class="col-sm-6">
@@ -1104,7 +1536,7 @@ if ($user->isLoggedIn()) {
                                     </div>
 
                                     <div class="footer tar">
-                                        <input type="submit" name="add_results" value="Submit" class="btn btn-default">
+                                        <input type="submit" name="add_crf1" value="Submit" class="btn btn-default">
                                     </div>
                                 </form>
                             </div>
@@ -1120,7 +1552,7 @@ if ($user->isLoggedIn()) {
                                 <form id="validation" method="post">
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">Date:</div>
-                                        <div class="col-md-9"><input value="" class="validate[required,custom[date]]" type="text" name="height" id="height" required /> <span>Example: 2023-01-01</span></div>
+                                        <div class="col-md-9"><input value="" class="validate[required,custom[date]]" type="text" name="crf2_date" id="crf2_date" required /> <span>Example: 2023-01-01</span></div>
                                     </div>
 
                                     <div class="row-form clearfix">
@@ -1190,12 +1622,12 @@ if ($user->isLoggedIn()) {
 
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">Respiratory Rate:</div>
-                                        <div class="col-md-9"><input value="" type="text" name="time" id="time" required /> <span>breaths/min:</span></div>
+                                        <div class="col-md-9"><input value="" type="text" name="respiratory_rate" id="respiratory_rate" required /> <span>breaths/min:</span></div>
                                     </div>
 
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">Heart Rate:</div>
-                                        <div class="col-md-9"><input value="" type="text" name="time" id="time" required /> <span>beats/min:</span></div>
+                                        <div class="col-md-9"><input value="" type="text" name="heart_rate" id="heart_rate" required /> <span>beats/min:</span></div>
                                     </div>
 
                                     <div class="row-form clearfix">
@@ -1533,12 +1965,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Psychological:</label>
-                                                    <select name="psychological" id="psychological" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Normal</option>
-                                                        <option value="2">Abnormal</option>
-                                                        <option value="3">Not examined</option>
-                                                    </select>
+                                                    <input value="" type="text" name="psychological" id="psychological" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1575,12 +2002,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Endocrine:</label>
-                                                    <select name="endocrime" id="endocrime" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Normal</option>
-                                                        <option value="2">Abnormal</option>
-                                                        <option value="3">Not examined</option>
-                                                    </select>
+                                                    <input value="" type="text" name="endocrime" id="endocrime" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1617,12 +2039,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Hematological/Lymphatic:</label>
-                                                    <select name="hematological" id="hematological" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Normal</option>
-                                                        <option value="2">Abnormal</option>
-                                                        <option value="3">Not examined</option>
-                                                    </select>
+                                                    <input value="" type="text" name="hematological" id="hematological" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1633,7 +2050,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Comments:</label>
-                                                    <input value="" type="text" name="endocrime_comments" id="endocrime_comments" />
+                                                    <input value="" type="text" name="hematological_comments" id="hematological_comments" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1660,12 +2077,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Skin/Dermatological:</label>
-                                                    <select name="skin" id="skin" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Normal</option>
-                                                        <option value="2">Abnormal</option>
-                                                        <option value="3">Not examined</option>
-                                                    </select>
+                                                    <input value="" type="text" name="skin" id="skin" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1704,7 +2116,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Other:</label>
-                                                    <select name="other" id="other" style="width: 100%;" required>
+                                                    <select name="physical_exams_other" id="physical_exams_other" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -1718,7 +2130,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Other (specify):</label>
-                                                    <input value="" type="text" name="other_specify2" id="other_specify2" />
+                                                    <input value="" type="text" name="physical_other_specify" id="physical_other_specify" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1728,7 +2140,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Finding:</label>
-                                                    <select name="other_system" id="other_system" style="width: 100%;" required>
+                                                    <select name="physical_other_system" id="physical_other_system" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Normal</option>
                                                         <option value="2">Abnormal</option>
@@ -1745,7 +2157,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Comments:</label>
-                                                    <input value="" type="text" name="other_comments" id="other_comments" />
+                                                    <input value="" type="text" name="physical_other_comments" id="physical_other_comments" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1755,7 +2167,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Clinically Significant?:</label>
-                                                    <select name="other_signifcnt" id="other_signifcnt" style="width: 100%;" required>
+                                                    <select name="physical_other_signifcnt" id="physical_other_signifcnt" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -1791,11 +2203,11 @@ if ($user->isLoggedIn()) {
 
                                     <div class="row-form clearfix" id="crf2_cmpltd_date">
                                         <div class="col-md-3">Date of Completion</div>
-                                        <input value="" class="validate[required]" type="text" name="crf2_cmpltd_date" id="crf1_cmpltd_date" />
+                                        <input value="" class="validate[required]" type="text" name="crf2_cmpltd_date" />
                                     </div>
 
                                     <div class="footer tar">
-                                        <input type="submit" name="add_results" value="Submit" class="btn btn-default">
+                                        <input type="submit" name="add_crf2" value="Submit" class="btn btn-default">
                                     </div>
                                 </form>
                             </div>
@@ -2074,7 +2486,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>S. Other, specify:</label>
-                                                    <select name="crf3_other" id="crf3_other" style="width: 100%;" required>
+                                                    <select name="symptoms_other" id="symptoms_other" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -2109,7 +2521,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>1A. Use of oxygen therapy:</label>
-                                                    <select name="use_oxygen" id="use_oxygen" style="width: 100%;" required>
+                                                    <select name="oxygen_therapy" id="oxygen_therapy" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -2122,7 +2534,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>1B. If Yes:</label>
-                                                    <select name="oxygen_yes" id="oxygen_yes" style="width: 100%;" required>
+                                                    <select name="oxygen_therapy_yes" id="oxygen_therapy_yes" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">NASAL PRONG</option>
                                                         <option value="2">FACE MASK</option>
@@ -2141,7 +2553,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>1C. Is the patient using/used herbal medicines</label>
-                                                    <select name="oxygen_herbal" id="oxygen_herbal" style="width: 100%;" required>
+                                                    <select name="oxygen_therapy_herbal" id="oxygen_therapy_herbal" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -2155,84 +2567,17 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>1D. How many litres of oxygen:</label>
-                                                    <input value="" type="text" name="oxygen_litres" id="oxygen_litres" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1E. Use of oxygen therapy:</label>
-                                                    <select name="use_oxygen" id="use_oxygen" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1F. If Yes:</label>
-                                                    <select name="oxygen_yes" id="oxygen_yes" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">NASAL PRONG</option>
-                                                        <option value="2">FACE MASK</option>
-                                                        <option value="3">NRBM</option>
-                                                        <option value="4">CPAP</option>
-                                                        <option value="5">VENT</option>
-                                                    </select>
+                                                    <input value="" type="text" name="oxygen_therapy_litres" id="oxygen_therapy_litres" />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
 
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1G. Is the patient using/used herbal medicines</label>
-                                                    <select name="oxygen_herbal" id="oxygen_herbal" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1H. How many litres of oxygen:</label>
-                                                    <input value="" type="text" name="oxygen_cylinder" id="oxygen_cylinder" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     <div class="row">
 
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1I. How many cylinder of oxygen used per day?:</label>
-                                                    <input value="" type="text" name="oxygen_cylinder" id="oxygen_cylinder" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-12">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -2249,7 +2594,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>1K. Start date of oxygen therapy:</label>
-                                                    <input value="" type="text" name="oxygen_start" id="oxygen_start" />
+                                                    <input value="" type="text" name="oxygen_therapy_start" id="oxygen_therapy_start" />
                                                 </div>
                                             </div>
                                         </div>
@@ -2258,7 +2603,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>1L. Ongoing ?:</label>
-                                                    <select name="oxygen_ongoing" id="oxygen_ongoing" style="width: 100%;" required>
+                                                    <select name="oxygen_therapy_ongoing" id="oxygen_therapy_ongoing" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -2275,7 +2620,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>1M. End date of oxygen therapy:</label>
-                                                    <input value="" type="text" name="oxygen_end" id="oxygen_end" />
+                                                    <input value="" type="text" name="oxygen_therapy_end" id="oxygen_therapy_end" />
                                                 </div>
                                             </div>
                                         </div>
@@ -2341,7 +2686,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -2351,22 +2696,12 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>2E. SatO2:</label>
                                                     <input value="" type="text" name="cpap_sat02" id="cpap_sat02" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>2F. FiO2:</label>
-                                                    <input value="" type="text" name="cpap_fi02" id="cpap_fi02" />
                                                 </div>
                                             </div>
                                         </div>
@@ -2546,7 +2881,7 @@ if ($user->isLoggedIn()) {
                                     </div>
 
                                     <div class="footer tar">
-                                        <input type="submit" name="add_results" value="Submit" class="btn btn-default">
+                                        <input type="submit" name="add_crf3" value="Submit" class="btn btn-default">
                                     </div>
                                 </form>
                             </div>
@@ -2562,7 +2897,7 @@ if ($user->isLoggedIn()) {
                                 <form id="validation" method="post">
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">Date of Sample Collection:</div>
-                                        <div class="col-md-9"><input value="" class="validate[required,custom[date]]" type="text" name="crf3_date" id="crf3_date" required /> <span>Example: 2023-01-01</span></div>
+                                        <div class="col-md-9"><input value="" class="validate[required,custom[date]]" type="text" name="sample_date" id="sample_date" required /> <span>Example: 2023-01-01</span></div>
                                     </div>
 
                                     <div class="head clearfix">
@@ -2605,9 +2940,9 @@ if ($user->isLoggedIn()) {
                                                         <option value="">Select</option>
                                                         <option value="1">Zero</option>
                                                         <option value="2">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="2">Three</option>
-                                                        <option value="2">Four</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -2652,9 +2987,9 @@ if ($user->isLoggedIn()) {
                                                         <option value="">Select</option>
                                                         <option value="1">Zero</option>
                                                         <option value="2">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="2">Three</option>
-                                                        <option value="2">Four</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -2681,9 +3016,9 @@ if ($user->isLoggedIn()) {
                                                         <option value="">Select</option>
                                                         <option value="1">Zero</option>
                                                         <option value="2">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="2">Three</option>
-                                                        <option value="2">Four</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -2710,9 +3045,9 @@ if ($user->isLoggedIn()) {
                                                         <option value="">Select</option>
                                                         <option value="1">Zero</option>
                                                         <option value="2">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="2">Three</option>
-                                                        <option value="2">Four</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -2739,9 +3074,9 @@ if ($user->isLoggedIn()) {
                                                         <option value="">Select</option>
                                                         <option value="1">Zero</option>
                                                         <option value="2">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="2">Three</option>
-                                                        <option value="2">Four</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -2768,9 +3103,9 @@ if ($user->isLoggedIn()) {
                                                         <option value="">Select</option>
                                                         <option value="1">Zero</option>
                                                         <option value="2">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="2">Three</option>
-                                                        <option value="2">Four</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -2797,9 +3132,9 @@ if ($user->isLoggedIn()) {
                                                         <option value="">Select</option>
                                                         <option value="1">Zero</option>
                                                         <option value="2">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="2">Three</option>
-                                                        <option value="2">Four</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -2826,9 +3161,9 @@ if ($user->isLoggedIn()) {
                                                         <option value="">Select</option>
                                                         <option value="1">Zero</option>
                                                         <option value="2">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="2">Three</option>
-                                                        <option value="2">Four</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -2867,9 +3202,9 @@ if ($user->isLoggedIn()) {
                                                         <option value="">Select</option>
                                                         <option value="1">Zero</option>
                                                         <option value="2">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="2">Three</option>
-                                                        <option value="2">Four</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -2896,9 +3231,9 @@ if ($user->isLoggedIn()) {
                                                         <option value="">Select</option>
                                                         <option value="1">Zero</option>
                                                         <option value="2">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="2">Three</option>
-                                                        <option value="2">Four</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -2925,9 +3260,9 @@ if ($user->isLoggedIn()) {
                                                         <option value="">Select</option>
                                                         <option value="1">Zero</option>
                                                         <option value="2">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="2">Three</option>
-                                                        <option value="2">Four</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -2954,9 +3289,9 @@ if ($user->isLoggedIn()) {
                                                         <option value="">Select</option>
                                                         <option value="1">Zero</option>
                                                         <option value="2">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="2">Three</option>
-                                                        <option value="2">Four</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -3030,9 +3365,9 @@ if ($user->isLoggedIn()) {
                                                         <option value="">Select</option>
                                                         <option value="1">Zero</option>
                                                         <option value="2">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="2">Three</option>
-                                                        <option value="2">Four</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -3042,7 +3377,7 @@ if ($user->isLoggedIn()) {
 
 
                                     <div class="row">
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-6">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -3061,9 +3396,9 @@ if ($user->isLoggedIn()) {
                                                         <option value="">Select</option>
                                                         <option value="1">Zero</option>
                                                         <option value="2">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="2">Three</option>
-                                                        <option value="2">Four</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -3090,9 +3425,9 @@ if ($user->isLoggedIn()) {
                                                         <option value="">Select</option>
                                                         <option value="1">Zero</option>
                                                         <option value="2">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="2">Three</option>
-                                                        <option value="2">Four</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -3100,7 +3435,7 @@ if ($user->isLoggedIn()) {
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -3110,7 +3445,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -3120,7 +3455,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -3151,9 +3486,9 @@ if ($user->isLoggedIn()) {
                                                         <option value="">Select</option>
                                                         <option value="1">Zero</option>
                                                         <option value="2">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="2">Three</option>
-                                                        <option value="2">Four</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -3180,16 +3515,6 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>MCHC</label>
-                                                    <input value="" type="text" name="mchc" id="mchc" />
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
 
                                     <div class="row">
@@ -3212,13 +3537,58 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Platelet count (Plt)</label>
+                                                    <input value="" type="text" name="plt" id="plt" />
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <div class="col-sm-6">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>MCHC</label>
-                                                    <input value="" type="text" name="mchc" id="mchc" />
+                                                    <label>Grade</label>
+                                                    <select name="plt_grade" id="plt_grade" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Zero</option>
+                                                        <option value="2">One</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>9. Chest X-ray</label>
+                                                    <select name="chest_xray" id="chest_xray" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Normal</option>
+                                                        <option value="2">Abnormal</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>9. Specify (Report from Radiologist)</label>
+                                                    <input value="" type="text" name="chest_specify" id="chest_specify" />
                                                 </div>
                                             </div>
                                         </div>
@@ -3226,13 +3596,67 @@ if ($user->isLoggedIn()) {
 
 
 
-                                    <div class="row-form clearfix" id="crf3_cmpltd_date">
+                                    <div class="row">
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>10. CT-chest</label>
+                                                    <select name="ct_chest" id="ct_chest" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Normal</option>
+                                                        <option value="2">Abnormal</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>10. Specify (Report from Radiologist)</label>
+                                                    <input value="" type="text" name="ct_chest_specify" id="ct_chest_specify" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>11. ECG report</label>
+                                                    <select name="ecg" id="ecg" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Normal</option>
+                                                        <option value="2">Abnormal</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>11. Specify (Report from Radiologist)</label>
+                                                    <input value="" type="text" name="ecg_specify" id="ecg_specify" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-form clearfix" id="crf4_cmpltd_date">
                                         <div class="col-md-3">Date of Completion</div>
-                                        <input value="" class="validate[required]" type="text" name="crf3_cmpltd_date" id="crf1_cmpltd_date" />
+                                        <input value="" class="validate[required]" type="text" name="crf4_cmpltd_date" id="crf1_cmpltd_date" />
                                     </div>
 
                                     <div class="footer tar">
-                                        <input type="submit" name="add_results" value="Submit" class="btn btn-default">
+                                        <input type="submit" name="add_crf4" value="Submit" class="btn btn-default">
                                     </div>
                                 </form>
                             </div>

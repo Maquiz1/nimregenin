@@ -72,6 +72,11 @@ if ($user->data()->accessLevel == 1) {
                         </a>
                     </li>
                     <li>
+                        <a href="add.php?id=11">
+                            <span class="glyphicon glyphicon-user"></span><span class="text">Add CRF4</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="info.php?id=3">
                             <span class="glyphicon glyphicon-registration-mark"></span><span class="text">Clients</span>
                         </a>

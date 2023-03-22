@@ -987,6 +987,7 @@ if ($user->isLoggedIn()) {
                                                 <a href="#clientView<?= $client['id'] ?>" role="button" class="btn btn-default" data-toggle="modal">View</a>
                                                 <a href="#client<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Edit</a>
                                                 <a href="id.php?cid=<?= $client['id'] ?>"  class="btn btn-warning" >Patient ID</a>
+                                                <a href="info.php?id=6&cid=<?=$client['id']?>" role="button" class="btn btn-success" >Study CRF</a>
                                                 <?php if($user->data()->accessLevel == 1){?>
                                                     <a href="#delete<?= $client['id'] ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete</a>
                                                 <?php }?>
@@ -1790,7 +1791,150 @@ if ($user->isLoggedIn()) {
                             </div>
                         </div>
                     <?php } elseif ($_GET['id'] == 6) { ?>
+                        <div class="col-md-2">
+                        <?php $patient = $override->get('clients', 'id', $_GET['cid'])[0]?>
+                        <div class="ucard clearfix">
+                            <div class="right">
+                                <div class="image">
+                                    <?php if($patient['client_image'] !='' || is_null($patient['client_image'])){$img=$patient['client_image'];}else{$img='img/users/blank.png';}?>
+                                    <a href="#"><img src="<?=$img?>" width="300" class="img-thumbnail"></a>
+                                </div>
+                                <h5><?='Name: '.$patient['firstname'].' '.$patient['lastname'].' Age: '.$patient['age']?></h5>
+                                <h4><strong style="font-size: medium">Screening ID: <?=$patient['participant_id']?></strong></h4>
+                                <h4><strong style="font-size: larger">Study ID: <?=$patient['study_id']?></strong></h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="head clearfix">
+                            <div class="isw-grid"></div>
+                            <h1>Study CRF (Enrollment)</h1>
+                            <ul class="buttons">
+                                <li><a href="#" class="isw-download"></a></li>
+                                <li><a href="#" class="isw-attachment"></a></li>
+                                <li>
+                                    <a href="#" class="isw-settings"></a>
+                                    <ul class="dd-list">
+                                        <li><a href="#"><span class="isw-plus"></span> New document</a></li>
+                                        <li><a href="#"><span class="isw-edit"></span> Edit</a></li>
+                                        <li><a href="#"><span class="isw-delete"></span> Delete</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="block-fluid">
+                            <table cellpadding="0" cellspacing="0" width="100%" class="table">
+                                <thead>
+                                <tr>
+                                    <th width="5%">#</th>
+                                    <th width="25%">Name</th>
+                                    <th width="65%">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>CRF 1</td>
+                                    <?php if($override->get('crf1', 'patient_id', $_GET['cid'])){?>
+                                        <td><a href="add.php?id=8&cid=<?=$_GET['cid']?>" class="btn btn-success" disabled> Change </a> </td>
+                                    <?php }else{?>
+                                        <td><a href="add.php?id=8&cid=<?=$_GET['cid']?>" class="btn btn-warning">Add </a> </td>
+                                    <?php }?>
+                                </tr>
 
+                                <tr>
+                                    <td>2</td>
+                                    <td>CRF 2</td>
+                                    <?php if($override->get('crf2', 'patient_id', $_GET['cid'])){?>
+                                        <td><a href="add.php?id=9&cid=<?=$_GET['cid']?>" class="btn btn-success" disabled> Change </a> </td>
+                                    <?php }else{?>
+                                        <td><a href="add.php?id=9&cid=<?=$_GET['cid']?>" class="btn btn-warning">Add </a> </td>
+                                    <?php }?>
+                                </tr> 
+                                
+                                <tr>
+                                    <td>3</td>
+                                    <td>CRF 3</td>
+                                    <?php if($override->get('crf3', 'patient_id', $_GET['cid'])){?>
+                                        <td><a href="add.php?id=10&cid=<?=$_GET['cid']?>" class="btn btn-success" disabled> Change </a> </td>
+                                    <?php }else{?>
+                                        <td><a href="add.php?id=10&cid=<?=$_GET['cid']?>" class="btn btn-warning">Add </a> </td>
+                                    <?php }?>
+                                </tr> 
+
+                                <tr>
+                                    <td>4</td>
+                                    <td>CRF 4</td>
+                                    <?php if($override->get('crf4', 'patient_id', $_GET['cid'])){?>
+                                        <td><a href="add.php?id=11&cid=<?=$_GET['cid']?>" class="btn btn-success" disabled> Change </a> </td>
+                                    <?php }else{?>
+                                        <td><a href="add.php?id=11&cid=<?=$_GET['cid']?>" class="btn btn-warning">Add </a> </td>
+                                    <?php }?>
+                                </tr> 
+
+                                <tr>
+                                    <td>5</td>
+                                    <td>CRF 5</td>
+                                    <?php if($override->get('crf5', 'patient_id', $_GET['cid'])){?>
+                                        <td><a href="add.php?id=12&cid=<?=$_GET['cid']?>" class="btn btn-success" disabled> Change </a> </td>
+                                    <?php }else{?>
+                                        <td><a href="add.php?id=12&cid=<?=$_GET['cid']?>" class="btn btn-warning">Add </a> </td>
+                                    <?php }?>
+                                </tr> 
+
+                                <tr>
+                                    <td>6</td>
+                                    <td>CRF 6</td>
+                                    <?php if($override->get('crf6', 'patient_id', $_GET['cid'])){?>
+                                        <td><a href="add.php?id=13&cid=<?=$_GET['cid']?>" class="btn btn-success" disabled> Change </a> </td>
+                                    <?php }else{?>
+                                        <td><a href="add.php?id=13&cid=<?=$_GET['cid']?>" class="btn btn-warning">Add </a> </td>
+                                    <?php }?>
+                                </tr> 
+
+                                <?php if($override->get2('diagnosis', 'patient_id', $_GET['cid'], 'cardiac', 1)){?>
+
+                                <tr>
+                                    <td>9</td>
+                                    <td>Cardiac</td>
+                                    <?php if($override->get('cardiac', 'patient_id', $_GET['cid'])){?>
+                                        <td><a href="add.php?id=11&cid=<?=$_GET['cid']?>" class="btn btn-success" disabled=> CHange </a> </td>
+                                    <?php }else{?>
+                                        <td><a href="add.php?id=11&cid=<?=$_GET['cid']?>" class="btn btn-warning"> Add </a> </td>
+                                    <?php }?>
+                                </tr>
+                                <?php }?>
+                                <?php if($override->get2('diagnosis', 'patient_id', $_GET['cid'], 'diabetes', 1)){?>
+
+                                <tr>
+                                    <td>10</td>
+                                    <td>Diabetes</td>
+                                    <?php if($override->get('diabetic', 'patient_id', $_GET['cid'])){?>
+                                        <td><a href="add.php?id=12&cid=<?=$_GET['cid']?>" class="btn btn-success" disabled> Change </a> </td>
+                                    <?php }else{?>
+                                        <td><a href="add.php?id=12&cid=<?=$_GET['cid']?>" class="btn btn-warning"> Add </a> </td>
+                                    <?php }?>
+                                </tr>
+                                <?php }?>
+
+                                <?php if($override->get2('diagnosis', 'patient_id', $_GET['cid'], 'sickle_cell', 1)){?>
+
+                                <tr>
+                                    <td>11</td>
+                                    <td>Sickle cell</td>
+                                    <?php if($override->get('sickle_cell', 'patient_id', $_GET['cid'])){?>
+                                        <td><a href="add.php?id=13&cid=<?=$_GET['cid']?>" class="btn btn-success" disabled=""> Change </a> </td>
+                                    <?php }else{?>
+                                        <td><a href="add.php?id=13&cid=<?=$_GET['cid']?>" class="btn btn-warning"> Add </a> </td>
+                                    <?php }?>
+
+                                </tr>
+                                <?php }?>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                     <?php } elseif ($_GET['id'] == 7) { ?>
 
                     <?php } ?>
