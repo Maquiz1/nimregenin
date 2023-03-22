@@ -456,7 +456,6 @@ if ($user->isLoggedIn()) {
 
             ));
             if ($validate->passed()) {
-                print_r($_POST);
                 try {
                     $user->createRecord('crf4', array(
                         'sample_date' => Input::get('sample_date'),
@@ -605,7 +604,7 @@ if ($user->isLoggedIn()) {
             }
         } elseif (Input::get('add_crf6')) {
             $validate = $validate->check($_POST, array(
-                'crf3_date' => array(
+                'today_date' => array(
                     'required' => true,
                 ),
 
@@ -614,55 +613,24 @@ if ($user->isLoggedIn()) {
                 print_r($_POST);
                 try {
                     $user->createRecord('crf6', array(
-                        'crf3_date' => Input::get('crf3_date'),
-                        'fever' => Input::get('fever'),
-                        'shivering' => Input::get('shivering'),
-                        'cough' => Input::get('cough'),
-                        'pain' => Input::get('pain'),
-                        'breath' => Input::get('breath'),
-                        'vomit' => Input::get('vomit'),
-                        'diarrhoea' => Input::get('diarrhoea'),
-                        'headache' => Input::get('headache'),
-                        'difficult' => Input::get('difficult'),
-                        'nose' => Input::get('nose'),
-                        'throat' => Input::get('throat'),
-                        'fatigue' => Input::get('fatigue'),
-                        'muscle' => Input::get('muscle'),
-                        'smell' => Input::get('smell'),
-                        'taste' => Input::get('taste'),
-                        'sneezing' => Input::get('sneezing'),
-                        'dizziness' => Input::get('dizziness'),
-                        'blurred' => Input::get('blurred'),
-                        'symptoms_other' => Input::get('symptoms_other'),
-                        'other_comments' => Input::get('other_comments'),
-                        'oxygen_therapy' => Input::get('oxygen_therapy'),
-                        'oxygen_therapy_yes' => Input::get('oxygen_therapy_yes'),
-                        'oxygen_therapy_herbal' => Input::get('oxygen_therapy_herbal'),
-                        'oxygen_therapy_litres' => Input::get('oxygen_therapy_litres'),
-                        'oxygen_plant' => Input::get('oxygen_plant'),
-                        'oxygen_therapy_start' => Input::get('oxygen_therapy_start'),
-                        'oxygen_therapy_ongoing' => Input::get('oxygen_therapy_ongoing'),
-                        'oxygen_therapy_end' => Input::get('oxygen_therapy_end'),
-                        'oxygen_days' => Input::get('oxygen_days'),
-                        'cpap_use' => Input::get('cpap_use'),
-                        'cpap_yes' => Input::get('cpap_yes'),
-                        'cpap_herbal' => Input::get('cpap_herbal'),
-                        'cpap_fi02' => Input::get('cpap_fi02'),
-                        'cpap_sat02' => Input::get('cpap_sat02'),
-                        'cpap_cylinder' => Input::get('cpap_cylinder'),
-                        'cpap_plant' => Input::get('cpap_plant'),
-                        'cpap_start' => Input::get('cpap_start'),
-                        'cpap_ongoing' => Input::get('cpap_ongoing'),
-                        'cpap_end' => Input::get('cpap_end'),
-                        'ventilator' => Input::get('ventilator'),
-                        'ventilator_yes' => Input::get('ventilator_yes'),
-                        'ventilator_herbal' => Input::get('ventilator_herbal'),
-                        'ventilator_fi02' => Input::get('ventilator_fi02'),
-                        'ventilator_litres' => Input::get('ventilator_litres'),
-                        'ventilator_start' => Input::get('ventilator_start'),
-                        'ventilator_ongoing' => Input::get('ventilator_ongoing'),
-                        'ventilator_end' => Input::get('ventilator_end'),
-                        'crf3_cmpltd_date' => Input::get('crf3_cmpltd_date'),
+                        'today_date' => Input::get('today_date'),
+                        'terminate_date' => Input::get('terminate_date'),
+                        'completed120days' => Input::get('completed120days'),
+                        'reported_dead' => Input::get('reported_dead'),
+                        'withdrew_consent' => Input::get('withdrew_consent'),
+                        'start_date' => Input::get('start_date'),
+                        'end_date' => Input::get('end_date'),
+                        'date_death' => Input::get('date_death'),
+                        'primary_cause' => Input::get('primary_cause'),
+                        'secondary_cause' => Input::get('secondary_cause'),
+                        'withdrew_reason' => Input::get('withdrew_reason'),
+                        'withdrew_other' => Input::get('withdrew_other'),
+                        'terminated_reason' => Input::get('terminated_reason'),
+                        'outcome' => Input::get('outcome'),
+                        'outcome_date' => Input::get('outcome_date'),
+                        'summary' => Input::get('summary'),
+                        'clinician_name' => Input::get('clinician_name'),                        
+                        'crf6_cmpltd_date' => Input::get('crf6_cmpltd_date'),
                         'patient_id' => $_GET['cid'],
                         'staff_id' => $user->data()->id,
                         'status' => 1,
@@ -1005,10 +973,10 @@ if ($user->isLoggedIn()) {
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="row-form clearfix">
+                                    <!-- <div class="row-form clearfix">
                                         <div class="col-md-3">Workplace/station site:</div>
                                         <div class="col-md-9"><input value="" class="" type="text" name="workplace" id="workplace" required /></div>
-                                    </div>
+                                    </div> -->
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">Occupation:</div>
                                         <div class="col-md-9"><input value="" class="" type="text" name="occupation" id="occupation" required /></div>
@@ -1030,10 +998,10 @@ if ($user->isLoggedIn()) {
                                         <div class="col-md-9"><input value="" class="" type="text" name="ward" id="ward" required /></div>
                                     </div>
 
-                                    <div class="row-form clearfix">
+                                    <!-- <div class="row-form clearfix">
                                         <div class="col-md-3">House Number:</div>
                                         <div class="col-md-9"><input value="" class="" type="text" name="block_no" id="block_no" /></div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">Comments:</div>
@@ -1268,7 +1236,7 @@ if ($user->isLoggedIn()) {
 
 
                                     <div class="row-form clearfix">
-                                        <div class="col-md-3">5. Any other form of Chronic Obstructive Diseases (COPD):</div>
+                                        <div class="col-md-3">5. Renal problem?:</div>
                                         <div class="col-md-9">
                                             <select name="chronic" id="chronic" style="width: 100%;" required>
                                                 <option value="">Select</option>
@@ -1323,7 +1291,7 @@ if ($user->isLoggedIn()) {
                                     </div>
 
 
-                                    <div class="row-form clearfix">
+                                    <!-- <div class="row-form clearfix">
                                         <div class="col-md-3">7. Has the patient suffered from Pulmonary Tuberculosis in the past 2years?:</div>
                                         <div class="col-md-9">
                                             <select name="tuberculosis" id="tuberculosis" style="width: 100%;" required>
@@ -1337,10 +1305,10 @@ if ($user->isLoggedIn()) {
                                     <div class="row-form clearfix" id="tuberculosis_medicatn_name">
                                         <div class="col-md-3">7. Mention the medications used:</div>
                                         <div class="col-md-9"><textarea name="tuberculosis_medicatn_name" rows="4"></textarea> </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="row-form clearfix">
-                                        <div class="col-md-3">8. Any other medical condition:</div>
+                                        <div class="col-md-3">7. Any other medical condition:</div>
                                         <div class="col-md-9">
                                             <select name="other_medical" id="other_medical" style="width: 100%;" required>
                                                 <option value="">Select</option>
@@ -1351,12 +1319,12 @@ if ($user->isLoggedIn()) {
                                     </div>
 
                                     <div class="row-form clearfix" id="other_specify">
-                                        <div class="col-md-3">8. Specify the medications:</div>
+                                        <div class="col-md-3">7. Specify the medical conditions?:</div>
                                         <div class="col-md-9"><textarea name="other_specify" rows="4"></textarea> </div>
                                     </div>
 
                                     <div class="row-form clearfix">
-                                        <div class="col-md-3">8. Is the patient on Medication?</div>
+                                        <div class="col-md-3">7. Is the patient on Medication?</div>
                                         <div class="col-md-9">
                                             <select name="other_medical_medicatn" id="other_medical_medicatn" style="width: 100%;">
                                                 <option value="">Select</option>
@@ -1367,11 +1335,11 @@ if ($user->isLoggedIn()) {
                                     </div>
 
                                     <div class="row-form clearfix" id="other_medicatn_name">
-                                        <div class="col-md-3">8. Mention the medications:</div>
+                                        <div class="col-md-3">7. Mention the medications:</div>
                                         <div class="col-md-9"><textarea name="other_medicatn_name" rows="4"></textarea> </div>
                                     </div>
 
-                                    <div class="row-form clearfix">
+                                    <!-- <div class="row-form clearfix">
                                         <div class="col-md-3">9. Any surgery was done (within a Month):</div>
                                         <div class="col-md-9">
                                             <select name="surgery" id="surgery" style="width: 100%;" required>
@@ -1390,11 +1358,11 @@ if ($user->isLoggedIn()) {
                                     <div class="row-form clearfix" id="surgery_medicatn_name">
                                         <div class="col-md-3">9. Mention the medications used</div>
                                         <div class="col-md-9"><textarea name="surgery_medicatn_name" rows="4"></textarea> </div>
-                                    </div>
+                                    </div> -->
 
 
                                     <div class="row-form clearfix">
-                                        <div class="col-md-3">10. Has the patient ever used any herbal preparation?:</div>
+                                        <div class="col-md-3">8. Are you using NIMREGENIN herbal preparation?:</div>
                                         <div class="col-md-9">
                                             <select name="herbal" id="herbal" style="width: 100%;" required>
                                                 <option value="">Select</option>
@@ -1404,8 +1372,8 @@ if ($user->isLoggedIn()) {
                                         </div>
                                     </div>
 
-                                    <div class="row-form clearfix">
-                                        <div class="col-md-3">12. Which herbal preparation was used</div>
+                                    <!-- <div class="row-form clearfix">
+                                        <div class="col-md-3">9. Which herbal preparation was used</div>
                                         <div class="col-md-9">
                                             <select name="herbal_preparation" id="herbal_preparation" style="width: 100%;" required>
                                                 <option value="">Select</option>
@@ -1415,9 +1383,9 @@ if ($user->isLoggedIn()) {
                                                 <option value="4">Other</option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> -->
 
-                                    <div class="row-form clearfix" id="herbal_preparation_other">
+                                    <!-- <div class="row-form clearfix" id="herbal_preparation_other">
                                         <div class="col-md-3">12. Specify:</div>
                                         <div class="col-md-9"><textarea name="herbal_preparation_other" rows="4"></textarea> </div>
                                     </div>
@@ -1436,7 +1404,7 @@ if ($user->isLoggedIn()) {
                                     <div class="row-form clearfix" id="vaccinated_medicatn">
                                         <div class="col-md-3">13. Specify</div>
                                         <div class="col-md-9"><textarea name="vaccinated_medicatn" rows="4"></textarea> </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="head clearfix">
                                         <div class="isw-ok"></div>
@@ -1592,11 +1560,11 @@ if ($user->isLoggedIn()) {
                                     </div>
 
                                     <div class="row-form clearfix">
-                                        <div class="col-md-3">Oxygen:</div>
-                                        <div class="col-md-9"><input value="" type="text" name="oxygen" id="oxygen" required /></div>
+                                        <div class="col-md-3">Oxygen Saturation:</div>
+                                        <div class="col-md-9"><input value="" type="text" name="oxygen" id="oxygen" required /><span> % </span></div>
                                     </div>
 
-                                    <div class="row-form clearfix">
+                                    <!-- <div class="row-form clearfix">
                                         <div class="col-md-3">On:</div>
                                         <div class="col-md-9">
                                             <select name="on_oxygen" id="on_oxygen" style="width: 100%;" required>
@@ -1618,7 +1586,7 @@ if ($user->isLoggedIn()) {
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">number of cylinder used:</div>
                                         <div class="col-md-9"><input value="" type="text" name="cylinder_used" id="cylinder_used" required /></div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">Respiratory Rate:</div>
@@ -1640,7 +1608,7 @@ if ($user->isLoggedIn()) {
                                         <div class="col-md-9"><input value="" type="text" name="diastolic" id="diastolic" required /> <span>mmHg:</span></div>
                                     </div>
 
-                                    <div class="row-form clearfix">
+                                    <!-- <div class="row-form clearfix">
                                         <div class="col-md-3">Method:</div>
                                         <div class="col-md-9">
                                             <select name="method2" id="method2" style="width: 100%;" required>
@@ -1649,7 +1617,7 @@ if ($user->isLoggedIn()) {
                                                 <option value="2">Automated</option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="head clearfix">
                                         <div class="isw-ok"></div>
@@ -1657,7 +1625,7 @@ if ($user->isLoggedIn()) {
                                     </div>
 
                                     <div class="row-form clearfix">
-                                        <div class="col-md-3">Time:</div>
+                                        <div class="col-md-3">Physical Examnitaion Time:</div>
                                         <div class="col-md-9"><input value="" type="text" name="time2" id="time2" required /> <span>(using the 24-hour format of hh: mm):</span></div>
                                     </div>
 
@@ -2178,7 +2146,6 @@ if ($user->isLoggedIn()) {
                                     </div>
 
                                     <div class="row">
-
                                         <div class="col-sm-6">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
@@ -2198,7 +2165,6 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
 
                                     <div class="row-form clearfix" id="crf2_cmpltd_date">
@@ -2244,61 +2210,8 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-3">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>B. Shivering:</label>
-                                                    <select name="shivering" id="shivering" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>C. Dry cough:</label>
-                                                    <select name="cough" id="cough" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>D. Chest pain:</label>
-                                                    <select name="pain" id="pain" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>E. Shortness of breath:</label>
-                                                    <select name="breath" id="breath" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
+
                                         <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
@@ -2312,6 +2225,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
@@ -2325,6 +2239,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
@@ -2340,7 +2255,9 @@ if ($user->isLoggedIn()) {
                                         </div>
                                     </div>
 
+
                                     <div class="row">
+
                                         <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
@@ -2354,19 +2271,8 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-3">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>J. Runny nose:</label>
-                                                    <select name="nose" id="nose" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
+
+
                                         <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
@@ -2393,10 +2299,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
-
-                                    <div class="row">
                                         <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
@@ -2410,11 +2313,15 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+
+
+                                    <div class="row">
                                         <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>N. Loss of smell:</label>
+                                                    <label>N. Loss of consciousness:</label>
                                                     <select name="smell" id="smell" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
@@ -2423,12 +2330,13 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>O. Loss of taste:</label>
-                                                    <select name="taste" id="taste" style="width: 100%;" required>
+                                                    <label>N. Backpain:</label>
+                                                    <select name="smell" id="smell" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -2436,12 +2344,85 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>P. Sneezing:</label>
-                                                    <select name="sneezing" id="sneezing" style="width: 100%;" required>
+                                                    <label>N. Unexplained weight loss:</label>
+                                                    <select name="smell" id="smell" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="2">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>N. Heartburn and Indigestion:</label>
+                                                    <select name="smell" id="smell" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="2">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>N. Swelling:</label>
+                                                    <select name="smell" id="smell" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="2">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>N. Abnormal PV bleeding:</label>
+                                                    <select name="smell" id="smell" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="2">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>N. Abnormal PV discharge:</label>
+                                                    <select name="smell" id="smell" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="2">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>N. Abnormal micitrition habits:</label>
+                                                    <select name="smell" id="smell" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -2451,41 +2432,44 @@ if ($user->isLoggedIn()) {
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Q. Dizziness/fainting::</label>
-                                                    <select name="dizziness" id="dizziness" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>R. Blurred vision:</label>
-                                                    <select name="blurred" id="blurred" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     <div class="row">
-                                        <div class="col-sm-6">
+
+                                        <div class="col-sm-4">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>S. Other, specify:</label>
+                                                    <label>N. Convulsions:</label>
+                                                    <select name="smell" id="smell" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="2">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>N. Blood in urine:</label>
+                                                    <select name="smell" id="smell" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="2">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>S. Other symptoms:, specify:</label>
                                                     <select name="symptoms_other" id="symptoms_other" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
@@ -2495,7 +2479,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -2506,382 +2490,13 @@ if ($user->isLoggedIn()) {
                                         </div>
                                     </div>
 
-                                    <div class="head clearfix">
-                                        <div class="isw-ok"></div>
-                                        <h1>Use of supportive treatments</h1>
-                                    </div>
-                                    <div class="head clearfix">
-                                        <div class="isw-ok"></div>
-                                        <h1>OXYGEN THERAPY</h1>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1A. Use of oxygen therapy:</label>
-                                                    <select name="oxygen_therapy" id="oxygen_therapy" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1B. If Yes:</label>
-                                                    <select name="oxygen_therapy_yes" id="oxygen_therapy_yes" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">NASAL PRONG</option>
-                                                        <option value="2">FACE MASK</option>
-                                                        <option value="3">NRBM</option>
-                                                        <option value="4">CPAP</option>
-                                                        <option value="5">VENT</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1C. Is the patient using/used herbal medicines</label>
-                                                    <select name="oxygen_therapy_herbal" id="oxygen_therapy_herbal" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1D. How many litres of oxygen:</label>
-                                                    <input value="" type="text" name="oxygen_therapy_litres" id="oxygen_therapy_litres" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="row">
-
-                                        <div class="col-sm-12">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1J. Oxygen plant cylinder used:</label>
-                                                    <input value="" type="text" name="oxygen_plant" id="oxygen_plant" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1K. Start date of oxygen therapy:</label>
-                                                    <input value="" type="text" name="oxygen_therapy_start" id="oxygen_therapy_start" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1L. Ongoing ?:</label>
-                                                    <select name="oxygen_therapy_ongoing" id="oxygen_therapy_ongoing" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1M. End date of oxygen therapy:</label>
-                                                    <input value="" type="text" name="oxygen_therapy_end" id="oxygen_therapy_end" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1N. Total days patient has been using oxygen:</label>
-                                                    <input value="" type="text" name="oxygen_days" id="oxygen_days" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="head clearfix">
-                                        <div class="isw-ok"></div>
-                                        <h1>CPAP</h1>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>2A. Use of CPAP:</label>
-                                                    <select name="cpap_use" id="cpap_use" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>2B. If Yes:</label>
-                                                    <select name="cpap_yes" id="cpap_yes" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">NASAL PRONG</option>
-                                                        <option value="2">FACE MASK</option>
-                                                        <option value="3">NRBM</option>
-                                                        <option value="4">CPAP</option>
-                                                        <option value="5">VENT</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>2C. Is the patient using/used herbal medicines</label>
-                                                    <select name="cpap_herbal" id="cpap_herbal" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>2D. FiO2:</label>
-                                                    <input value="" type="text" name="cpap_fi02" id="cpap_fi02" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-3">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>2E. SatO2:</label>
-                                                    <input value="" type="text" name="cpap_sat02" id="cpap_sat02" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>2G. How many cylinder of oxygen used per day?:</label>
-                                                    <input value="" type="text" name="cpap_cylinder" id="cpap_cylinder" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1H. Oxygen plant cylinder used:</label>
-                                                    <input value="" type="text" name="cpap_plant" id="cpap_plant" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1I. Start date of CPAP:</label>
-                                                    <input value="" type="text" name="cpap_start" id="cpap_start" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1J. Ongoing ?:</label>
-                                                    <select name="cpap_ongoing" id="cpap_ongoing" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1K. End date of CPAP:</label>
-                                                    <input value="" type="text" name="cpap_end" id="cpap_end" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="head clearfix">
-                                        <div class="isw-ok"></div>
-                                        <h1>VENTILATOR</h1>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>3A. Use of VENTILATOR:</label>
-                                                    <select name="ventilator" id="ventilator" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>3B. If Yes:</label>
-                                                    <select name="ventilator_yes" id="ventilator_yes" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">NASAL PRONG</option>
-                                                        <option value="2">FACE MASK</option>
-                                                        <option value="3">NRBM</option>
-                                                        <option value="4">CPAP</option>
-                                                        <option value="5">VENT</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>3C. Is the patient using/used herbal medicines</label>
-                                                    <select name="ventilator_herbal" id="ventilator_herbal" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>3D. FiO2:</label>
-                                                    <input value="" type="text" name="ventilator_fi02" id="ventilator_fi02" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>3E. L/min:</label>
-                                                    <input value="" type="text" name="ventilator_litres" id="ventilator_litres" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-
-                                        <div class="col-sm-4">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>3F. Start date of ventilator:</label>
-                                                    <input value="" type="text" name="ventilator_start" id="ventilator_start" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>3G. Ongoing ?:</label>
-                                                    <select name="ventilator_ongoing" id="ventilator_ongoing" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>3H. End date of ventilator:</label>
-                                                    <input value="" type="text" name="ventilator_end" id="ventilator_end" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row-form clearfix" id="crf3_cmpltd_date">
+                                    <div class="row-form clearfix" id="crf4_cmpltd_date">
                                         <div class="col-md-3">Date of Completion</div>
-                                        <input value="" class="validate[required]" type="text" name="crf3_cmpltd_date" id="crf1_cmpltd_date" />
+                                        <input value="" class="validate[required]" type="text" name="crf4_cmpltd_date" id="crf1_cmpltd_date" />
                                     </div>
 
                                     <div class="footer tar">
-                                        <input type="submit" name="add_crf3" value="Submit" class="btn btn-default">
+                                        <input type="submit" name="add_crf4" value="Submit" class="btn btn-default">
                                     </div>
                                 </form>
                             </div>
@@ -2932,25 +2547,6 @@ if ($user->isLoggedIn()) {
                                         </div>
 
                                         <div class="col-sm-4">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Grade</label>
-                                                    <select name="renal_creatinine_grade" id="renal_creatinine_grade" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Zero</option>
-                                                        <option value="2">One</option>
-                                                        <option value="3">Two</option>
-                                                        <option value="4">Three</option>
-                                                        <option value="5">Four</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-12">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -3142,35 +2738,6 @@ if ($user->isLoggedIn()) {
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>INR</label>
-                                                    <input value="" type="text" name="liver_inr" id="liver_inr" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Grade</label>
-                                                    <select name="liver_inr_grade" id="liver_inr_grade" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Zero</option>
-                                                        <option value="2">One</option>
-                                                        <option value="3">Two</option>
-                                                        <option value="4">Three</option>
-                                                        <option value="5">Four</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
                                         <div class="col-sm-12">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
@@ -3293,48 +2860,6 @@ if ($user->isLoggedIn()) {
                                                         <option value="4">Three</option>
                                                         <option value="5">Four</option>
                                                     </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>LDH</label>
-                                                    <input value="" type="text" name="ldh" id="ldh" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-3">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>CRP</label>
-                                                    <input value="" type="text" name="crp" id="crp" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-3">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>D-dimer</label>
-                                                    <input value="" type="text" name="d_dimer" id="d_dimer" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-3">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Ferritin</label>
-                                                    <input value="" type="text" name="ferritin" id="ferritin" />
                                                 </div>
                                             </div>
                                         </div>
@@ -3567,6 +3092,31 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>9. Cancer antigen15-3</label>
+                                                    <input value="" type="text" name="cancer" id="cancer" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>9. Prostate specific antigen</label>
+                                                    <input value="" type="text" name="prostate" id="prostate" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="row">
 
                                         <div class="col-sm-6">
@@ -3602,7 +3152,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>10. CT-chest</label>
+                                                    <label>10. CT-scan</label>
                                                     <select name="ct_chest" id="ct_chest" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Normal</option>
@@ -3629,7 +3179,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>11. ECG report</label>
+                                                    <label>11. Abnorminal utra-sound</label>
                                                     <select name="ecg" id="ecg" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Normal</option>
@@ -3662,7 +3212,962 @@ if ($user->isLoggedIn()) {
                             </div>
                         </div>
                     <?php } elseif ($_GET['id'] == 12) { ?>
+                        <div class="col-md-offset-1 col-md-8">
+                            <div class="head clearfix">
+                                <div class="isw-ok"></div>
+                                <h1>CRF 5</h1>
+                            </div>
+                            <div class="block-fluid">
+                                <form id="validation" method="post">
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">Date of Sample Collection:</div>
+                                        <div class="col-md-9"><input value="" class="validate[required,custom[date]]" type="text" name="sample_date" id="sample_date" required /> <span>Example: 2023-01-01</span></div>
+                                    </div>
+
+                                    <div class="head clearfix">
+                                        <div class="isw-ok"></div>
+                                        <h1>Blood tests:</h1>
+                                    </div>
+
+                                    <div class="head clearfix">
+                                        <div class="isw-ok"></div>
+                                        <h1>1. Renal function test</h1>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Serum urea levels</label>
+                                                    <input value="" type="text" name="renal_urea" id="renal_urea" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Serum creatinine levels</label>
+                                                    <input value="" type="text" name="renal_creatinine" id="renal_creatinine" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>eGFR mL/min per 1.73 m2</label>
+                                                    <input value="" type="text" name="renal_egfr" id="renal_egfr" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="head clearfix">
+                                        <div class="isw-ok"></div>
+                                        <h1>2. Liver function test</h1>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>AST levels</label>
+                                                    <input value="" type="text" name="liver_ast" id="liver_ast" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Grade</label>
+                                                    <select name="liver_ast_grade" id="liver_ast_grade" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Zero</option>
+                                                        <option value="2">One</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>ALT levels</label>
+                                                    <input value="" type="text" name="liver_alt" id="liver_alt" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Grade</label>
+                                                    <select name="liver_alt_grade" id="liver_alt_grade" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Zero</option>
+                                                        <option value="2">One</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>ALP levels</label>
+                                                    <input value="" type="text" name="liver_alp" id="liver_alp" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Grade</label>
+                                                    <select name="liver_alp_grade" id="liver_alp_grade" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Zero</option>
+                                                        <option value="2">One</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>PT</label>
+                                                    <input value="" type="text" name="liver_pt" id="liver_pt" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Grade</label>
+                                                    <select name="liver_pt_grade" id="liver_pt_grade" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Zero</option>
+                                                        <option value="2">One</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>PTT</label>
+                                                    <input value="" type="text" name="liver_ptt" id="liver_ptt" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Grade</label>
+                                                    <select name="liver_ptt_grade" id="liver_ptt_grade" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Zero</option>
+                                                        <option value="2">One</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>INR</label>
+                                                    <input value="" type="text" name="liver_inr" id="liver_inr" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Grade</label>
+                                                    <select name="liver_inr_grade" id="liver_inr_grade" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Zero</option>
+                                                        <option value="2">One</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>GGT levels</label>
+                                                    <input value="" type="text" name="liver_ggt" id="liver_ggt" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Serum albumin levels</label>
+                                                    <input value="" type="text" name="liver_albumin" id="liver_albumin" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Grade</label>
+                                                    <select name="liver_albumin_grade" id="liver_albumin_grade" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Zero</option>
+                                                        <option value="2">One</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Bilirubin total</label>
+                                                    <input value="" type="text" name="liver_bilirubin_total" id="liver_bilirubin_total" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Grade</label>
+                                                    <select name="bilirubin_total_grade" id="bilirubin_total_grade" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Zero</option>
+                                                        <option value="2">One</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Bilirubin direct</label>
+                                                    <input value="" type="text" name="liver_bilirubin_direct" id="liver_bilirubin_direct" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Grade</label>
+                                                    <select name="bilirubin_direct_grade" id="bilirubin_direct_grade" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Zero</option>
+                                                        <option value="2">One</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>RBG</label>
+                                                    <input value="" type="text" name="rbg" id="rbg" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Grade</label>
+                                                    <select name="rbg_grade" id="rbg_grade" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Zero</option>
+                                                        <option value="2">One</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="head clearfix">
+                                        <div class="isw-ok"></div>
+                                        <h1>Full blood count</h1>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>White blood cell count (WBC)</label>
+                                                    <input value="" type="text" name="wbc" id="wbc" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Grade</label>
+                                                    <select name="wbc_grade" id="wbc_grade" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Zero</option>
+                                                        <option value="2">One</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>ABS Neutrophil</label>
+                                                    <input value="" type="text" name="abs_neutrophil" id="abs_neutrophil" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Grade</label>
+                                                    <select name="abs_neutrophil_grade" id="abs_neutrophil_grade" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Zero</option>
+                                                        <option value="2">One</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>ABS Lymphocytes</label>
+                                                    <input value="" type="text" name="abs_lymphocytes" id="abs_lymphocytes" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Grade</label>
+                                                    <select name="abs_lymphocytes_grade" id="abs_lymphocytes_grade" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Zero</option>
+                                                        <option value="2">One</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>ABS Eosinophils</label>
+                                                    <input value="" type="text" name="abs_eosinophils" id="abs_eosinophils" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>ABS Monocytes</label>
+                                                    <input value="" type="text" name="abs_monocytes" id="abs_monocytes" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>ABS Basophils</label>
+                                                    <input value="" type="text" name="abs_basophils" id="abs_basophils" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>AHemoglobin levels (Hb)</label>
+                                                    <input value="" type="text" name="hb" id="hb" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Grade</label>
+                                                    <select name="hb_grade" id="hb_grade" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Zero</option>
+                                                        <option value="2">One</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>MCV</label>
+                                                    <input value="" type="text" name="mcv" id="mcv" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>MCH</label>
+                                                    <input value="" type="text" name="mch" id="mch" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Hematocrit levels (Hct)</label>
+                                                    <input value="" type="text" name="hct" id="hct" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Red blood cell count (RBC)</label>
+                                                    <input value="" type="text" name="rbc" id="rbc" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Platelet count (Plt)</label>
+                                                    <input value="" type="text" name="plt" id="plt" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Grade</label>
+                                                    <select name="plt_grade" id="plt_grade" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Zero</option>
+                                                        <option value="2">One</option>
+                                                        <option value="3">Two</option>
+                                                        <option value="4">Three</option>
+                                                        <option value="5">Four</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>9. Cancer antigen15-3</label>
+                                                    <input value="" type="text" name="cancer" id="cancer" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>9. Prostate specific antigen</label>
+                                                    <input value="" type="text" name="prostate" id="prostate" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>9. Chest X-ray</label>
+                                                    <select name="chest_xray" id="chest_xray" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Normal</option>
+                                                        <option value="2">Abnormal</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>9. Specify (Report from Radiologist)</label>
+                                                    <input value="" type="text" name="chest_specify" id="chest_specify" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="row">
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>10. CT-scan</label>
+                                                    <select name="ct_chest" id="ct_chest" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Normal</option>
+                                                        <option value="2">Abnormal</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>10. Specify (Report from Radiologist)</label>
+                                                    <input value="" type="text" name="ct_chest_specify" id="ct_chest_specify" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>11. Abnorminal utra-sound</label>
+                                                    <select name="ecg" id="ecg" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Normal</option>
+                                                        <option value="2">Abnormal</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>11. Specify (Report from Radiologist)</label>
+                                                    <input value="" type="text" name="ecg_specify" id="ecg_specify" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-form clearfix" id="crf4_cmpltd_date">
+                                        <div class="col-md-3">Date of Completion</div>
+                                        <input value="" class="validate[required]" type="text" name="crf4_cmpltd_date" id="crf1_cmpltd_date" />
+                                    </div>
+
+                                    <div class="footer tar">
+                                        <input type="submit" name="add_crf4" value="Submit" class="btn btn-default">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     <?php } elseif ($_GET['id'] == 13) { ?>
+                        <div class="col-md-offset-1 col-md-8">
+                            <div class="head clearfix">
+                                <div class="isw-ok"></div>
+                                <h1>CRF 6: TERMINATION OF STUDY</h1>
+                            </div>
+                            <div class="block-fluid">
+                                <form id="validation" method="post">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <div class="form-group">
+                                                    <label>1.a Todays date:</label>
+                                                    <div class="col-md-9"><input value="" class="validate[required,custom[date]]" type="text" name="today_date" id="today_date" required /> <span>Example: 2023-01-01</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <div class="form-group">
+                                                    <label>1.b Date patient terminated the study:</label>
+                                                    <div class="col-md-9"><input value="" class="validate[required,custom[date]]" type="text" name="terminate_date" id="terminate_date" required /> <span>Example: 2023-01-01</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <label>2. Reason for study termination</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>2. a. Patient completed 120 days of follow-up</label>
+                                                    <select name="completed120days" id="completed120days" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="2">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>2. b. Patient is reported/known to have died </label>
+                                                    <select name="reported_dead" id="reported_dead" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="2">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>2. c. Patient withdrew consent to participate </label>
+                                                    <select name="withdrew_consent" id="withdrew_consent" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="2">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>2.a.i Start date</label>
+                                                    <input value="" type="text" name="start_date" id="start_date" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>2.a.ii End date:</label>
+                                                    <input value="" type="text" name="end_date" id="end_date" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>2. b.i when was the date of death? </label>
+                                                    <input value="" type="text" name="date_death" id="date_death" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>2. b.ii The primary cause of death</label>
+                                                    <textarea value="" name="primary_cause" rows="4"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>2. b.iii The secondary cause of death</label>
+                                                    <textarea value="" name="secondary_cause" rows="4"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>2. b). Reason for withdrawal</label>
+                                                    <select name="withdrew_reason" id="withdrew_reason" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Unwilling to say</option>
+                                                        <option value="2">Side effects of the herbal preparation (NIMRCAF/ Covidol / Bupiji )</option>
+                                                        <option value="3">Side effects of Standard Care</option>
+                                                        <option value="4">Moving to another area</option>
+                                                        <option value="5">Other {withdrew_other}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>2. c) Specify</label>
+                                                    <textarea value="" name="withdrew_other" rows="4"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>2 d) Specify the reason</label>
+                                                    <textarea value="" name="terminated_reason" rows="4"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>4. Outcome</label>
+                                                    <select name="outcome" id="outcome" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Recovered/Resolved</option>
+                                                        <option value="2">Recovered with sequelae</option>
+                                                        <option value="3">Severity worsened</option>
+                                                        <option value="4">Recovering/Resolving at the end of study</option>
+                                                        <option value="5">Not recovered/resolved at the end of study</option>
+                                                        <option value="6">Unknown/Lost to follow up</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>5. Outcome date</label>
+                                                    <input value="" type="text" name="outcome_date" id="outcome_date" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>6. Provide/summarise the adverse event</label>
+                                                    <textarea value="" name="summary" rows="4"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>7.Responsible Clinician Name</label>
+                                                    <input value="" type="text" name="clinician_name" id="clinician_name" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Date of Completion</label>
+                                                    <input value="" class="validate[required]" type="text" name="crf6_cmpltd_date" id="crf6_cmpltd_date" />
+                                                    <span>Example : 2002-08-21</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="footer tar">
+                                        <input type="submit" name="add_crf6" value="Submit" class="btn btn-default">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     <?php } elseif ($_GET['id'] == 14) { ?>
                     <?php } elseif ($_GET['id'] == 15) { ?>
 
