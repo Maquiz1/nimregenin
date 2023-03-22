@@ -56,7 +56,7 @@ if ($user->data()->accessLevel == 1) {
                             <span class="glyphicon glyphicon-user"></span><span class="text">Add Client</span>
                         </a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="add.php?id=8">
                             <span class="glyphicon glyphicon-user"></span><span class="text">Add CRF1</span>
                         </a>
@@ -75,7 +75,7 @@ if ($user->data()->accessLevel == 1) {
                         <a href="add.php?id=11">
                             <span class="glyphicon glyphicon-user"></span><span class="text">Add CRF4</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li>
                         <a href="info.php?id=3">
                             <span class="glyphicon glyphicon-registration-mark"></span><span class="text">Clients</span>
