@@ -1685,7 +1685,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Comments:</label>
-                                                    <input value="" type="text" name="heent_comments"  />
+                                                    <input value="" type="text" name="heent_comments" />
                                                 </div>
                                             </div>
                                         </div>
@@ -2486,7 +2486,7 @@ if ($user->isLoggedIn()) {
 
                                     <div class="row">
 
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-6">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -2500,7 +2500,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-6">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -2513,14 +2513,14 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
 
-
-
-                                        <div class="col-sm-4">
+                                    <div class="row">
+                                        <div class="col-sm-6">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>S. Other symptoms:, specify:</label>
+                                                    <label>S. Other symptoms:</label>
                                                     <select name="symptoms_other" id="symptoms_other" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
@@ -2530,20 +2530,35 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-6" id="symptoms_other_specify">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>S. Comments:</label>
-                                                    <input value="" type="text" name="other_comments" id="other_comments" />
+                                                    <label>S. Specify:</label>
+                                                    <input value="" type="text" name="symptoms_other_specify" />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="row-form clearfix" id="crf4_cmpltd_date">
-                                        <div class="col-md-3">Date of Completion</div>
-                                        <input value="" class="validate[required]" type="text" name="crf4_cmpltd_date" id="crf1_cmpltd_date" />
+                                    <div class="col-sm-6">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>S. Comments:</label>
+                                                <input value="" type="text" name="other_comments" id="other_comments" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Date of Completion:</label>
+                                                <input value="" class="validate[required]" type="text" name="crf4_cmpltd_date" id="crf1_cmpltd_date" />
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="footer tar">
@@ -4258,10 +4273,16 @@ if ($user->isLoggedIn()) {
                 }
             });
 
+            $('#symptoms_other_specify').hide();
+            $('#symptoms_other').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "1") {
+                    $('#symptoms_other_specify').show();
+                } else {
+                    $('#symptoms_other_specify').hide();
+                }
+            });
             
-            
-
-
         });
     </script>
 </body>
