@@ -248,27 +248,25 @@ if ($user->isLoggedIn()) {
                         'hiv_aids' => Input::get('hiv_aids'),
                         'hiv_aids_medicatn' => Input::get('hiv_aids_medicatn'),
                         'hiv_aids_medicatn_name' => Input::get('hiv_aids_medicatn_name'),
-                        'tuberculosis' => Input::get('tuberculosis'),
-                        'tuberculosis_medicatn_name' => Input::get('tuberculosis_medicatn_name'),
                         'other_medical' => Input::get('other_medical'),
                         'other_specify' => Input::get('other_specify'),
                         'other_medical_medicatn' => Input::get('other_medical_medicatn'),
                         'other_medicatn_name' => Input::get('other_medicatn_name'),
-                        'surgery' => Input::get('surgery'),
-                        'surgery_specify' => Input::get('surgery_specify'),
-                        'surgery_medicatn_name' => Input::get('surgery_medicatn_name'),
                         'herbal' => Input::get('herbal'),
                         'herbal_preparation' => Input::get('herbal_preparation'),
+                        'herbal_start' => Input::get('herbal_start'),
+                        'herbal_ongoing' => Input::get('herbal_ongoing'),
+                        'herbal_end' => Input::get('herbal_end'),
+                        'herbal_dose' => Input::get('herbal_dose'),
+                        'herbal_frequecy' => Input::get('herbal_frequecy'),
                         'herbal_preparation_other' => Input::get('herbal_preparation_other'),
-                        'vaccinated' => Input::get('vaccinated'),
-                        'vaccinated_medicatn' => Input::get('vaccinated_medicatn'),
-                        'standard_medication1' => Input::get('standard_medication1'),
-                        'standard_start1' => Input::get('standard_start1'),
-                        'standard_ongoing1' => Input::get('standard_ongoing1'),
-                        'standard_end1' => Input::get('standard_end1'),
-                        'standard_dose1' => Input::get('standard_dose1'),
-                        'standard_frequecy1' => Input::get('standard_frequecy1'),
-                        'standard_remarks1' => Input::get('standard_remarks1'),
+                        'standard_medication' => Input::get('standard_medication'),
+                        'standard_start' => Input::get('standard_start'),
+                        'standard_ongoing' => Input::get('standard_ongoing'),
+                        'standard_end' => Input::get('standard_end'),
+                        'standard_dose' => Input::get('standard_dose'),
+                        'standard_frequecy' => Input::get('standard_frequecy'),
+                        'standard_remarks' => Input::get('standard_remarks'),
                         'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
                         'patient_id' => $_GET['cid'],
                         'staff_id' => $user->data()->id,
@@ -1333,7 +1331,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Ongoing?:</label>
-                                                    <select name="herbal_ongoing" id="herbal_ongoing" style="width: 100%;" required>
+                                                    <select name="herbal_ongoing" id="herbal_ongoing" style="width: 100%;">
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -1393,7 +1391,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Medications :</label>
-                                                    <input value="" type="text" name="standard_medication1" id="standard_medication1" required />
+                                                    <input value="" type="text" name="standard_medication" id="standard_medication" required />
                                                 </div>
                                             </div>
                                         </div>
@@ -1403,7 +1401,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Start:</label>
-                                                    <input value="" class="validate[required]" type="text" name="standard_start1" id="standard_start1" />
+                                                    <input value="" class="validate[required]" type="text" name="standard_start" id="standard_start" required />
                                                 </div>
                                             </div>
                                         </div>
@@ -1413,7 +1411,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Ongoing?:</label>
-                                                    <select name="standard_ongoing1" id="standard_ongoing1" style="width: 100%;" required>
+                                                    <select name="standard_ongoing" id="standard_ongoing" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -1421,12 +1419,12 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-2" id="standard_end1">
+                                        <div class="col-sm-2" id="standard_end">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>End:</label>
-                                                    <input value="" class="validate[required]" type="text" name="standard_end1" />
+                                                    <input value="" class="validate[required]" type="text" name="standard_end" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1437,7 +1435,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Dose:</label>
-                                                    <input value="" class="validate[required]" type="text" name="standard_dose1" id="standard_dose1" />
+                                                    <input value="" class="validate[required]" type="text" name="standard_dose" id="standard_dose" required />
                                                 </div>
                                             </div>
                                         </div>
@@ -1447,7 +1445,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Frequecy:</label>
-                                                    <input value="" class="validate[required]" type="text" name="standard_frequecy1" id="standard_frequecy1" />
+                                                    <input value="" class="validate[required]" type="text" name="standard_frequecy" id="standard_frequecy" required />
                                                 </div>
                                             </div>
                                         </div>
@@ -1458,7 +1456,7 @@ if ($user->isLoggedIn()) {
                                             <!-- select -->
                                             <div class="form-group">
                                                 <label>Remarks:</label>
-                                                <input value="" class="validate[required]" type="text" name="standard_remarks1" id="standard_remarks1" />
+                                                <input value="" class="validate[required]" type="text" name="standard_remarks" id="standard_remarks" required />
                                             </div>
                                         </div>
                                     </div>
@@ -1488,75 +1486,130 @@ if ($user->isLoggedIn()) {
                             </div>
                             <div class="block-fluid">
                                 <form id="validation" method="post">
-                                    <div class="row-form clearfix">
-                                        <div class="col-md-3">Date:</div>
-                                        <div class="col-md-9"><input value="" class="validate[required,custom[date]]" type="text" name="crf2_date" id="crf2_date" required /> <span>Example: 2023-01-01</span></div>
-                                    </div>
 
-                                    <div class="row-form clearfix">
-                                        <div class="col-md-3">Height:</div>
-                                        <div class="col-md-9"><input value="" type="text" name="height" id="height" required /> <span>cm</span></div>
-                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Date</label>
+                                                    <input value="" class="validate[required,custom[date]]" type="text" name="crf2_date" id="crf2_date" required /> <span>Example: 2023-01-01</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Height</label>
+                                                    <input value="" type="text" name="height" id="height" required /> <span>cm</span>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                    <div class="row-form clearfix">
-                                        <div class="col-md-3">Weight:</div>
-                                        <div class="col-md-9"><input value="" type="text" name="weight" id="weight" required /> <span>kg</span></div>
-                                    </div>
-                                    <div class="row-form clearfix">
-                                        <div class="col-md-3">BMI:</div>
-                                        <div class="col-md-9"><input value="" type="text" name="bmi" id="bmi" required /> <span>kg/m2:</span></div>
-                                    </div>
-
-                                    <div class="row-form clearfix">
-                                        <div class="col-md-3">Time:</div>
-                                        <div class="col-md-9"><input value="" type="text" name="time" id="time" required /> <span>(using the 24-hour format of hh: mm):</span></div>
-                                    </div>
-
-                                    <div class="row-form clearfix">
-                                        <div class="col-md-3">Temperature:</div>
-                                        <div class="col-md-9"><input value="" type="text" name="temperature" id="temperature" required /> <span>Celsius:</span></div>
-                                    </div>
-
-                                    <div class="row-form clearfix">
-                                        <div class="col-md-3">Method:</div>
-                                        <div class="col-md-9">
-                                            <select name="method" id="method" style="width: 100%;" required>
-                                                <option value="">Select</option>
-                                                <option value="1">Oral</option>
-                                                <option value="2">Axillary</option>
-                                                <option value="3">Tympanic</option>
-                                            </select>
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Weight</label>
+                                                    <input value="" type="text" name="weight" id="weight" required /> <span>kg</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>BMI</label>
+                                                    <input value="" type="text" name="bmi" id="bmi" required /> <span>kg/m2:</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div class="row-form clearfix">
-                                        <div class="col-md-3">Oxygen Saturation:</div>
-                                        <div class="col-md-9"><input value="" type="text" name="oxygen" id="oxygen" required /><span> % </span></div>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Time</label>
+                                                    <input value="" type="text" name="time" id="time" required /> <span>(using the 24-hour format of hh: mm):</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Temperature</label>
+                                                    <input value="" type="text" name="temperature" id="temperature" required /> <span>Celsius:</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Method</label>
+                                                    <select name="method" id="method" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Oral</option>
+                                                        <option value="2">Axillary</option>
+                                                        <option value="3">Tympanic</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Oxygen Saturation</label>
+                                                    <input value="" type="text" name="oxygen" id="oxygen" required /><span> % </span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
-
-
-                                    <div class="row-form clearfix">
-                                        <div class="col-md-3">Respiratory Rate:</div>
-                                        <div class="col-md-9"><input value="" type="text" name="respiratory_rate" id="respiratory_rate" required /> <span>breaths/min:</span></div>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Respiratory Rate</label>
+                                                    <input value="" type="text" name="respiratory_rate" id="respiratory_rate" required /> <span>breaths/min:</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Heart Rate</label>
+                                                    <input value="" type="text" name="heart_rate" id="heart_rate" required /> <span>beats/min:</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Systolic Blood Pressure:</label>
+                                                    <input value="" type="text" name="systolic" id="systolic" required /> <span>mmHg:</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Diastolic Blood Pressure</label>
+                                                    <input value="" type="text" name="diastolic" id="diastolic" required /> <span>mmHg:</span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-
-                                    <div class="row-form clearfix">
-                                        <div class="col-md-3">Heart Rate:</div>
-                                        <div class="col-md-9"><input value="" type="text" name="heart_rate" id="heart_rate" required /> <span>beats/min:</span></div>
-                                    </div>
-
-                                    <div class="row-form clearfix">
-                                        <div class="col-md-3">Systolic Blood Pressure:</div>
-                                        <div class="col-md-9"><input value="" type="text" name="systolic" id="systolic" required /> <span>mmHg:</span></div>
-                                    </div>
-
-                                    <div class="row-form clearfix">
-                                        <div class="col-md-3">Diastolic Blood Pressure:</div>
-                                        <div class="col-md-9"><input value="" type="text" name="diastolic" id="diastolic" required /> <span>mmHg:</span></div>
-                                    </div>
-
-
 
                                     <div class="head clearfix">
                                         <div class="isw-ok"></div>
@@ -1574,18 +1627,23 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>General Appearance:</label>
-                                                    <input value="" type="text" name="appearance" id="appearance" required />
+                                                    <select name="appearance" id="appearance" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Normal</option>
+                                                        <option value="2">Abnormal</option>
+                                                        <option value="3">Not examined</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
 
 
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-4" id="appearance_comments">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Comments:</label>
-                                                    <input value="" type="text" name="appearance_comments" id="appearance_comments" />
+                                                    <input value="" type="text" name="appearance_comments" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1611,18 +1669,23 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>H/E/E/N/T:</label>
-                                                    <input value="" type="text" name="heent" id="heent" required />
+                                                    <select name="heent" id="heent" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Normal</option>
+                                                        <option value="2">Abnormal</option>
+                                                        <option value="3">Not examined</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
 
 
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-4" id="heent_comments">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Comments:</label>
-                                                    <input value="" type="text" name="heent_comments" id="heent_comments" />
+                                                    <input value="" type="text" name="heent_comments"  />
                                                 </div>
                                             </div>
                                         </div>
@@ -1648,18 +1711,23 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Respiratory:</label>
-                                                    <input value="" type="text" name="respiratory" id="respiratory" required />
+                                                    <select name="respiratory" id="respiratory" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Normal</option>
+                                                        <option value="2">Abnormal</option>
+                                                        <option value="3">Not examined</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
 
 
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-4" id="respiratory_comments">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Comments:</label>
-                                                    <input value="" type="text" name="respiratory_comments" id="respiratory_comments" />
+                                                    <input value="" type="text" name="respiratory_comments" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1685,18 +1753,23 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Cardiovascular:</label>
-                                                    <input value="" type="text" name="cardiovascular" id="cardiovascular" required />
+                                                    <select name="cardiovascular" id="cardiovascular" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Normal</option>
+                                                        <option value="2">Abnormal</option>
+                                                        <option value="3">Not examined</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
 
 
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-4" id="cardiovascular_comments">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Comments:</label>
-                                                    <input value="" type="text" name="cardiovascular_comments" id="cardiovascular_comments" />
+                                                    <input value="" type="text" name="cardiovascular_comments" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1723,18 +1796,23 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Abdominal/Gastrointestinal:</label>
-                                                    <input value="" type="text" name="abdnominal" id="abdnominal" required />
+                                                    <select name="abdnominal" id="abdnominal" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Normal</option>
+                                                        <option value="2">Abnormal</option>
+                                                        <option value="3">Not examined</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
 
 
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-4" id="abdnominal_comments">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Comments:</label>
-                                                    <input value="" type="text" name="abdnominal_comments" id="abdnominal_comments" />
+                                                    <input value="" type="text" name="abdnominal_comments" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1761,18 +1839,23 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Urogenital:</label>
-                                                    <input value="" type="text" name="urogenital" id="urogenital" required />
+                                                    <select name="urogenital" id="urogenital" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Normal</option>
+                                                        <option value="2">Abnormal</option>
+                                                        <option value="3">Not examined</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
 
 
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-4" id="urogenital_comments">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Comments:</label>
-                                                    <input value="" type="text" name="urogenital_comments" id="urogenital_comments" />
+                                                    <input value="" type="text" name="urogenital_comments" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1798,18 +1881,23 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Musculoskeletal:</label>
-                                                    <input value="" type="text" name="musculoskeletal" id="musculoskeletal" required />
+                                                    <select name="musculoskeletal" id="musculoskeletal" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Normal</option>
+                                                        <option value="2">Abnormal</option>
+                                                        <option value="3">Not examined</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
 
 
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-4" id="musculoskeletal_comments">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Comments:</label>
-                                                    <input value="" type="text" name="musculoskeletal_comments" id="musculoskeletal_comments" />
+                                                    <input value="" type="text" name="musculoskeletal_comments" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1835,18 +1923,23 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Neurological:</label>
-                                                    <input value="" type="text" name="neurological" id="neurological" required />
+                                                    <select name="neurological" id="neurological" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Normal</option>
+                                                        <option value="2">Abnormal</option>
+                                                        <option value="3">Not examined</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
 
 
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-4" id="neurological_comments">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Comments:</label>
-                                                    <input value="" type="text" name="neurological_comments" id="neurological_comments" />
+                                                    <input value="" type="text" name="neurological_comments" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1872,18 +1965,23 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Psychological:</label>
-                                                    <input value="" type="text" name="psychological" id="psychological" />
+                                                    <select name="psychological" id="psychological" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Normal</option>
+                                                        <option value="2">Abnormal</option>
+                                                        <option value="3">Not examined</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
 
 
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-4" id="psychological_comments">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Comments:</label>
-                                                    <input value="" type="text" name="psychological_comments" id="psychological_comments" />
+                                                    <input value="" type="text" name="psychological_comments" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1909,18 +2007,23 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Endocrine:</label>
-                                                    <input value="" type="text" name="endocrime" id="endocrime" />
+                                                    <select name="endocrime" id="endocrime" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Normal</option>
+                                                        <option value="2">Abnormal</option>
+                                                        <option value="3">Not examined</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
 
 
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-4" id="endocrime_comments">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Comments:</label>
-                                                    <input value="" type="text" name="endocrime_comments" id="endocrime_comments" />
+                                                    <input value="" type="text" name="endocrime_comments" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1946,18 +2049,23 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Hematological/Lymphatic:</label>
-                                                    <input value="" type="text" name="hematological" id="hematological" />
+                                                    <select name="hematological" id="hematological" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Normal</option>
+                                                        <option value="2">Abnormal</option>
+                                                        <option value="3">Not examined</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
 
 
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-4" id="hematological_comments">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Comments:</label>
-                                                    <input value="" type="text" name="hematological_comments" id="hematological_comments" />
+                                                    <input value="" type="text" name="hematological_comments" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1984,18 +2092,23 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Skin/Dermatological:</label>
-                                                    <input value="" type="text" name="skin" id="skin" />
+                                                    <select name="skin" id="skin" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Normal</option>
+                                                        <option value="2">Abnormal</option>
+                                                        <option value="3">Not examined</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
 
 
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-4" id="skin_comments">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Comments:</label>
-                                                    <input value="" type="text" name="skin_comments" id="skin_comments" />
+                                                    <input value="" type="text" name="skin_comments" />
                                                 </div>
                                             </div>
                                         </div>
@@ -2017,12 +2130,11 @@ if ($user->isLoggedIn()) {
 
 
                                     <div class="row">
-
                                         <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Other:</label>
+                                                    <label>Other System?:</label>
                                                     <select name="physical_exams_other" id="physical_exams_other" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
@@ -2032,17 +2144,17 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6" id="physical_other_specify">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Other (specify):</label>
-                                                    <input value="" type="text" name="physical_other_specify" id="physical_other_specify" />
+                                                    <input value="" type="text" name="physical_other_specify" />
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-3" id="physical_other_system1">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -2059,12 +2171,12 @@ if ($user->isLoggedIn()) {
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6" id="physical_other_comments">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Comments:</label>
-                                                    <input value="" type="text" name="physical_other_comments" id="physical_other_comments" />
+                                                    <input value="" type="text" name="physical_other_comments" />
                                                 </div>
                                             </div>
                                         </div>
@@ -3824,7 +3936,7 @@ if ($user->isLoggedIn()) {
                 var getUid = $(this).val();
                 if (getUid === "1") {
                     $('#diabetic_medicatn1').show();
-                } else{
+                } else {
                     $('#diabetic_medicatn1').hide();
                 }
             });
@@ -3834,18 +3946,18 @@ if ($user->isLoggedIn()) {
                 var getUid = $(this).val();
                 if (getUid === "1") {
                     $('#diabetic_medicatn_name').show();
-                }else{
+                } else {
                     $('#diabetic_medicatn_name').hide();
                 }
             });
 
-            
+
             $('#hypertension_medicatn1').hide();
             $('#hypertension').change(function() {
                 var getUid = $(this).val();
                 if (getUid === "1") {
                     $('#hypertension_medicatn1').show();
-                } else{
+                } else {
                     $('#hypertension_medicatn1').hide();
                 }
             });
@@ -3855,7 +3967,7 @@ if ($user->isLoggedIn()) {
                 var getUid = $(this).val();
                 if (getUid === "1") {
                     $('#hypertension_medicatn_name').show();
-                }else{
+                } else {
                     $('#hypertension_medicatn_name').hide();
                 }
             });
@@ -3866,7 +3978,7 @@ if ($user->isLoggedIn()) {
                 var getUid = $(this).val();
                 if (getUid === "1") {
                     $('#heart_medicatn1').show();
-                } else{
+                } else {
                     $('#heart_medicatn1').hide();
                 }
             });
@@ -3876,7 +3988,7 @@ if ($user->isLoggedIn()) {
                 var getUid = $(this).val();
                 if (getUid === "1") {
                     $('#heart_medicatn_name').show();
-                }else{
+                } else {
                     $('#heart_medicatn_name').hide();
                 }
             });
@@ -3887,7 +3999,7 @@ if ($user->isLoggedIn()) {
                 var getUid = $(this).val();
                 if (getUid === "1") {
                     $('#asthma_medicatn1').show();
-                } else{
+                } else {
                     $('#asthma_medicatn1').hide();
                 }
             });
@@ -3897,7 +4009,7 @@ if ($user->isLoggedIn()) {
                 var getUid = $(this).val();
                 if (getUid === "1") {
                     $('#asthma_medicatn_name').show();
-                }else{
+                } else {
                     $('#asthma_medicatn_name').hide();
                 }
             });
@@ -3908,7 +4020,7 @@ if ($user->isLoggedIn()) {
                 var getUid = $(this).val();
                 if (getUid === "1") {
                     $('#chronic_medicatn1').show();
-                } else{
+                } else {
                     $('#chronic_medicatn1').hide();
                 }
             });
@@ -3918,7 +4030,7 @@ if ($user->isLoggedIn()) {
                 var getUid = $(this).val();
                 if (getUid === "1") {
                     $('#chronic_medicatn_name').show();
-                }else{
+                } else {
                     $('#chronic_medicatn_name').hide();
                 }
             });
@@ -3929,7 +4041,7 @@ if ($user->isLoggedIn()) {
                 var getUid = $(this).val();
                 if (getUid === "1") {
                     $('#hiv_aids_medicatn1').show();
-                } else{
+                } else {
                     $('#hiv_aids_medicatn1').hide();
                 }
             });
@@ -3939,7 +4051,7 @@ if ($user->isLoggedIn()) {
                 var getUid = $(this).val();
                 if (getUid === "1") {
                     $('#hiv_aids_medicatn_name').show();
-                }else{
+                } else {
                     $('#hiv_aids_medicatn_name').hide();
                 }
             });
@@ -3951,9 +4063,9 @@ if ($user->isLoggedIn()) {
                 if (getUid === "1") {
                     $('#other_specify').show();
                     $('#other_medical_medicatn1').show();
-                } else{
+                } else {
                     $('#other_specify').hide();
-                    $('#other_medical_medicatn1').show();
+                    $('#other_medical_medicatn1').hide();
                 }
             });
 
@@ -3962,7 +4074,7 @@ if ($user->isLoggedIn()) {
                 var getUid = $(this).val();
                 if (getUid === "1") {
                     $('#other_medicatn_name').show();
-                }else{
+                } else {
                     $('#other_medicatn_name').hide();
                 }
             });
@@ -3975,7 +4087,7 @@ if ($user->isLoggedIn()) {
                 if (getUid === "1") {
                     $('#herbal_preparation').show();
                     $('#herbal_header').show();
-                } else{
+                } else {
                     $('#herbal_header').hide();
                     $('#herbal_preparation').hide();
                 }
@@ -3986,21 +4098,168 @@ if ($user->isLoggedIn()) {
                 var getUid = $(this).val();
                 if (getUid === "1") {
                     $('#herbal_end').show();
-                }else{
+                } else {
                     $('#herbal_end').hide();
                 }
             });
 
-            $('#standard_end1').hide();
-            $('#standard_ongoing1').change(function() {
+            $('#standard_end').hide();
+            $('#standard_ongoing').change(function() {
                 var getUid = $(this).val();
                 if (getUid === "1") {
-                    $('#standard_end1').show();
-                }else{
-                    $('#standard_end1').hide();
+                    $('#standard_end').show();
+                } else {
+                    $('#standard_end').hide();
                 }
             });
 
+
+            $('#appearance_comments').hide();
+            $('#appearance').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "2") {
+                    $('#appearance_comments').show();
+                } else {
+                    $('#appearance_comments').hide();
+                }
+            });
+
+            $('#heent_comments').hide();
+            $('#heent').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "2") {
+                    $('#heent_comments').show();
+                } else {
+                    $('#heent_comments').hide();
+                }
+            });
+
+            $('#respiratory_comments').hide();
+            $('#respiratory').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "2") {
+                    $('#respiratory_comments').show();
+                } else {
+                    $('#respiratory_comments').hide();
+                }
+            });
+
+            $('#cardiovascular_comments').hide();
+            $('#cardiovascular').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "2") {
+                    $('#cardiovascular_comments').show();
+                } else {
+                    $('#cardiovascular_comments').hide();
+                }
+            });
+
+            $('#abdnominal_comments').hide();
+            $('#abdnominal').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "2") {
+                    $('#abdnominal_comments').show();
+                } else {
+                    $('#abdnominal_comments').hide();
+                }
+            });
+
+            $('#urogenital_comments').hide();
+            $('#urogenital').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "2") {
+                    $('#urogenital_comments').show();
+                } else {
+                    $('#urogenital_comments').hide();
+                }
+            });
+
+
+            $('#musculoskeletal_comments').hide();
+            $('#musculoskeletal').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "2") {
+                    $('#musculoskeletal_comments').show();
+                } else {
+                    $('#musculoskeletal_comments').hide();
+                }
+            });
+
+            $('#neurological_comments').hide();
+            $('#neurological').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "2") {
+                    $('#neurological_comments').show();
+                } else {
+                    $('#neurological_comments').hide();
+                }
+            });
+
+            $('#psychological_comments').hide();
+            $('#psychological').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "2") {
+                    $('#psychological_comments').show();
+                } else {
+                    $('#psychological_comments').hide();
+                }
+            });
+
+            $('#endocrime_comments').hide();
+            $('#endocrime').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "2") {
+                    $('#endocrime_comments').show();
+                } else {
+                    $('#endocrime_comments').hide();
+                }
+            });
+
+            $('#hematological_comments').hide();
+            $('#hematological').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "2") {
+                    $('#hematological_comments').show();
+                } else {
+                    $('#hematological_comments').hide();
+                }
+            });
+
+            $('#skin_comments').hide();
+            $('#skin').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "2") {
+                    $('#skin_comments').show();
+                } else {
+                    $('#skin_comments').hide();
+                }
+            });
+
+            $('#physical_other_specify').hide();
+            $('#physical_other_system1').hide();
+            $('#physical_exams_other').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "1") {
+                    $('#physical_other_specify').show();
+                    $('#physical_other_system1').show();
+                } else {
+                    $('#physical_other_specify').hide();
+                    $('#physical_other_system1').hide();
+                }
+            });
+
+            $('#physical_other_comments').hide();
+            $('#physical_other_system').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "2") {
+                    $('#physical_other_comments').show();
+                } else {
+                    $('#physical_other_comments').hide();
+                }
+            });
+
+            
+            
 
 
         });
