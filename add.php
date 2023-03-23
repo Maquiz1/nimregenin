@@ -3140,12 +3140,12 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6" id="chest_specify">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>9. Specify (Report from Radiologist)</label>
-                                                    <input value="" type="text" name="chest_specify" id="chest_specify" />
+                                                    <input value="" type="text" name="chest_specify" />
                                                 </div>
                                             </div>
                                         </div>
@@ -3160,7 +3160,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>10. CT-Scan chest and abdomen report</label>
-                                                    <select name="ct_chest" id="ct_chest" style="width: 100%;" required>
+                                                    <select name="ct_chest" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Normal</option>
                                                         <option value="2">Abnormal</option>
@@ -3169,12 +3169,12 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6" id="ct_chest_specify">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>10. Specify (Report from Radiologist)</label>
-                                                    <input value="" type="text" name="ct_chest_specify" id="ct_chest_specify" />
+                                                    <input value="" type="text" name="ct_chest_specify" />
                                                 </div>
                                             </div>
                                         </div>
@@ -3195,12 +3195,12 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6" id="ecg_specify">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>11. Specify (Report from Radiologist)</label>
-                                                    <input value="" type="text" name="ecg_specify" id="ecg_specify" />
+                                                    <input value="" type="text" name="ecg_specify" />
                                                 </div>
                                             </div>
                                         </div>
@@ -3253,7 +3253,11 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>Adverse Event Category</label>
                                                     <input value="" type="text" name="ae_category" id="ae_category" required />
-                                                    <span>**lookup corresponding AE Category at: http://safetyprofiler-ctep.nci.nih.gov/CTC/CTC.aspx </span>
+                                                    <span>
+                                                         <a href="http://safetyprofiler-ctep.nci.nih.gov/CTC/CTC.aspx" class="btn btn-info">
+                                                         **lookup corresponding AE Category at: http://safetyprofiler-ctep.nci.nih.gov/CTC/CTC.aspx 
+                                                        </a>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -3285,12 +3289,12 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-4" id="ae_end_date">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>End date:</label>
-                                                    <input value="" type="text" name="ae_end_date" id="ae_end_date" />
+                                                    <input value="" type="text" name="ae_end_date" />
                                                 </div>
                                             </div>
                                         </div>
@@ -3527,7 +3531,7 @@ if ($user->isLoggedIn()) {
                                     </div>
 
 
-                                    <div class="row">
+                                    <div class="row" id="start_end_date">
                                         <div class="col-sm-6">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
@@ -3551,7 +3555,7 @@ if ($user->isLoggedIn()) {
 
 
 
-                                    <div class="row">
+                                    <div class="row" id="death_details">
                                         <div class="col-sm-4">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
@@ -3583,13 +3587,13 @@ if ($user->isLoggedIn()) {
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-sm-4">
+                                    <div class="row" id="withdrew_reason1">
+                                        <div class="col-sm-12">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>2. b). Reason for withdrawal</label>
-                                                    <select name="withdrew_reason" id="withdrew_reason" style="width: 100%;" required>
+                                                    <select name="withdrew_reason" id="withdrew_reason" style="width: 100%;" >
                                                         <option value="">Select</option>
                                                         <option value="1">Unwilling to say</option>
                                                         <option value="2">Side effects of the herbal preparation (NIMRCAF/ Covidol / Bupiji )</option>
@@ -3601,22 +3605,12 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-4">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>2. c) Specify</label>
-                                                    <textarea value="" name="withdrew_other" rows="4"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-12" id="withdrew_other">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>2 d) Specify the reason</label>
-                                                    <textarea value="" name="terminated_reason" rows="4"></textarea>
+                                                    <textarea value="" name="withdrew_other" rows="4"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -4222,6 +4216,89 @@ if ($user->isLoggedIn()) {
                     $('#symptoms_other_specify').hide();
                 }
             });
+
+            $('#ecg_specify').hide();
+            $('#ecg').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "2") {
+                    $('#ecg_specify').show();
+                } else {
+                    $('#ecg_specify').hide();
+                }
+            });
+
+            $('#ct_chest_specify').hide();
+            $('#ct_chest').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "2") {
+                    $('#ct_chest_specify').show();
+                } else {
+                    $('#ct_chest_specify').hide();
+                }
+            });
+
+            $('#chest_specify').hide();
+            $('#chest_xray').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "2") {
+                    $('#chest_specify').show();
+                } else {
+                    $('#chest_specify').hide();
+                }
+            });
+
+            $('#ae_end_date').hide();
+            $('#ae_ongoing').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "1") {
+                    $('#ae_end_date').show();
+                } else {
+                    $('#ae_end_date').hide();
+                }
+            }); 
+            
+            $('#start_end_date').hide();
+            $('#completed120days').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "1") {
+                    $('#start_end_date').show();
+                } else {
+                    $('#start_end_date').hide();
+                }
+            }); 
+
+
+            $('#death_details').hide();
+            $('#reported_dead').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "1") {
+                    $('#death_details').show();
+                } else {
+                    $('#death_details').hide();
+                }
+            }); 
+
+            $('#withdrew_reason1').hide();
+            $('#withdrew_consent').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "1") {
+                    $('#withdrew_reason1').show();
+                } else {
+                    $('#withdrew_reason1').hide();
+                }
+            }); 
+
+            $('#withdrew_other').hide();
+            $('#withdrew_reason').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "5") {
+                    $('#withdrew_other').show();
+                } else {
+                    $('#withdrew_other').hide();
+                }
+            }); 
+            
+            
 
         });
     </script>
