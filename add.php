@@ -552,7 +552,7 @@ if ($user->isLoggedIn()) {
                         'ae_relationship' => Input::get('ae_relationship'),
                         'ae_staff_initial' => Input::get('ae_staff_initial'),
                         'ae_date' => Input::get('ae_date'),
-                        'crf5_cmpltd_date' => Input::get('crf5_cmpltd_date'),                        
+                        'crf5_cmpltd_date' => Input::get('crf5_cmpltd_date'),
                         'patient_id' => $_GET['cid'],
                         'staff_id' => $user->data()->id,
                         'status' => 1,
@@ -1096,7 +1096,7 @@ if ($user->isLoggedIn()) {
                                         </div>
                                     </div>
 
-                                    <div class="row-form clearfix">
+                                    <div class="row-form clearfix" id="diabetic_medicatn1">
                                         <div class="col-md-3">1. Is the patient on Medication?</div>
                                         <div class="col-md-9">
                                             <select name="diabetic_medicatn" id="diabetic_medicatn" style="width: 100%;">
@@ -1123,7 +1123,7 @@ if ($user->isLoggedIn()) {
                                         </div>
                                     </div>
 
-                                    <div class="row-form clearfix">
+                                    <div class="row-form clearfix" id="hypertension_medicatn1">
                                         <div class="col-md-3">2. Is the patient on Medication?</div>
                                         <div class="col-md-9">
                                             <select name="hypertension_medicatn" id="hypertension_medicatn" style="width: 100%;">
@@ -1151,7 +1151,7 @@ if ($user->isLoggedIn()) {
                                         </div>
                                     </div>
 
-                                    <div class="row-form clearfix">
+                                    <div class="row-form clearfix" id="heart_medicatn1">
                                         <div class="col-md-3">3. Is the patient on Medication?</div>
                                         <div class="col-md-9">
                                             <select name="heart_medicatn" id="heart_medicatn" style="width: 100%;">
@@ -1179,7 +1179,7 @@ if ($user->isLoggedIn()) {
                                         </div>
                                     </div>
 
-                                    <div class="row-form clearfix">
+                                    <div class="row-form clearfix" id="asthma_medicatn1">
                                         <div class="col-md-3">4. Is the patient on Medication?</div>
                                         <div class="col-md-9">
                                             <select name="asthma_medicatn" id="asthma_medicatn" style="width: 100%;">
@@ -1207,7 +1207,7 @@ if ($user->isLoggedIn()) {
                                         </div>
                                     </div>
 
-                                    <div class="row-form clearfix">
+                                    <div class="row-form clearfix" id="chronic_medicatn1">
                                         <div class="col-md-3">5. Is the patient on Medication?</div>
                                         <div class="col-md-9">
                                             <select name="chronic_medicatn" id="chronic_medicatn" style="width: 100%;">
@@ -1235,7 +1235,7 @@ if ($user->isLoggedIn()) {
                                         </div>
                                     </div>
 
-                                    <div class="row-form clearfix">
+                                    <div class="row-form clearfix" id="hiv_aids_medicatn1">
                                         <div class="col-md-3">6. Is the patient on Medication?</div>
                                         <div class="col-md-9">
                                             <select name="hiv_aids_medicatn" id="hiv_aids_medicatn" style="width: 100%;">
@@ -1250,9 +1250,6 @@ if ($user->isLoggedIn()) {
                                         <div class="col-md-3">6. Mention the medications:</div>
                                         <div class="col-md-9"><textarea name="hiv_aids_medicatn_name" rows="4"></textarea> </div>
                                     </div>
-
-
-
 
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">7. Any other medical condition:</div>
@@ -1270,7 +1267,7 @@ if ($user->isLoggedIn()) {
                                         <div class="col-md-9"><textarea name="other_specify" rows="4"></textarea> </div>
                                     </div>
 
-                                    <div class="row-form clearfix">
+                                    <div class="row-form clearfix" id="other_medical_medicatn1">
                                         <div class="col-md-3">7. Is the patient on Medication?</div>
                                         <div class="col-md-9">
                                             <select name="other_medical_medicatn" id="other_medical_medicatn" style="width: 100%;">
@@ -1287,6 +1284,10 @@ if ($user->isLoggedIn()) {
                                     </div>
 
 
+                                    <div class="head clearfix">
+                                        <div class="isw-ok"></div>
+                                        <h1>USE OF HERBAL MEDICINES</h1>
+                                    </div>
 
 
                                     <div class="row-form clearfix">
@@ -1301,10 +1302,81 @@ if ($user->isLoggedIn()) {
                                     </div>
 
 
+                                    <div class="head clearfix" id="herbal_header">
+                                        <div class="isw-ok"></div>
+                                        <h1>Herbal preparation</h1>
+                                    </div>
+
+                                    <div class="row" id="herbal_preparation">
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>NIMREGENIN</label>
+                                                    <input value="NIMREGENIN" type="text" name="herbal_preparation" readonly />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Start Date:</label>
+                                                    <input value="" class="validate[required]" type="text" name="herbal_start" id="herbal_start" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Ongoing?:</label>
+                                                    <select name="herbal_ongoing" id="herbal_ongoing" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="2">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2" id="herbal_end">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>End:</label>
+                                                    <input value="" class="validate[required]" type="text" name="herbal_end" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Dose:</label>
+                                                    <input value="" class="validate[required]" type="text" name="herbal_dose" id="herbal_dose" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Frequecy:</label>
+                                                    <input value="" class="validate[required]" type="text" name="herbal_frequecy" id="herbal_frequecy" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
 
                                     <div class="head clearfix">
                                         <div class="isw-ok"></div>
-                                        <h1>DSTANDARD OF CARE TREATMENT Provide lists of medications
+                                        <h1>DSTANDARD OF CARE TREATMENT
+                                            Provide lists of medications
                                             and supportive care given to the COVID-19 patient (To be
                                             retrieved from patient file/medical personnel)</h1>
                                     </div>
@@ -1316,7 +1388,7 @@ if ($user->isLoggedIn()) {
 
 
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -1349,18 +1421,16 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-2" id="standard_end1">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>End:</label>
-                                                    <input value="" class="validate[required]" type="text" name="standard_end1" id="standard_end1" />
+                                                    <input value="" class="validate[required]" type="text" name="standard_end1" />
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="row">
 
                                         <div class="col-sm-2">
                                             <div class="row-form clearfix">
@@ -1381,22 +1451,26 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="col-sm-8">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Remarks:</label>
-                                                    <input value="" class="validate[required]" type="text" name="standard_remarks1" id="standard_remarks1" />
-                                                </div>
-                                            </div>
-                                        </div>
-
                                     </div>
 
-                                    <div class="row-form clearfix" id="crf1_cmpltd_date">
-                                        <div class="col-md-3">Date of Completion</div>
-                                        <input value="" class="validate[required]" type="text" name="crf1_cmpltd_date" id="crf1_cmpltd_date" />
+                                    <div class="col-sm-6">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Remarks:</label>
+                                                <input value="" class="validate[required]" type="text" name="standard_remarks1" id="standard_remarks1" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Date of Completion:</label>
+                                                <input value="" class="validate[required]" type="text" name="crf1_cmpltd_date" id="crf1_cmpltd_date" />
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="footer tar">
@@ -3553,9 +3627,79 @@ if ($user->isLoggedIn()) {
                             </div>
                         </div>
                     <?php } elseif ($_GET['id'] == 14) { ?>
+                        <div class="modal fade" id="addVisit<?= $visit['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form id="validation" method="post">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <h4>Add Visit</h4>
+                                        </div>
+                                        <div class="modal-body modal-body-np">
+                                            <div class="row">
+                                                <div class="block-fluid">
+                                                    <div class="row-form clearfix">
+                                                        <div class="col-md-3">Visit:</div>
+                                                        <div class="col-md-9"><input type="text" name="name" value="<?= $visit['visit_name'] . ' (' . $visit['visit_code'] . ')' ?>" disabled /></div>
+                                                    </div>
+                                                </div>
+                                                <div class="block-fluid">
+                                                    <div class="row-form clearfix">
+                                                        <div class="col-md-3">Visit Type:</div>
+                                                        <div class="col-md-9"><input type="text" name="name" value="<?= $v_typ ?>" disabled /></div>
+                                                    </div>
+                                                </div>
+                                                <div class="row-form clearfix">
+                                                    <div class="col-md-3">Current Status</div>
+                                                    <div class="col-md-9">
+                                                        <select name="visit_status" style="width: 100%;" required>
+                                                            <?php if ($visit['status'] != 0) { ?>
+                                                                <option value="<?= $visit['visit_status'] ?>"><?= $visit['visit_status'] ?></option>
+                                                            <?php } else { ?>
+                                                                <option value="">Select</option>
+                                                            <?php } ?>
+                                                            <option value="1">Attended</option>
+                                                            <option value="2">Missed Visit</option>
+                                                            <option value="3">Vaccinated</option>
+                                                            <option value="4">Not Vaccinated</option>
+                                                            <option value="5">Follow Up Visit</option>
+                                                            <option value="6">Early Termination</option>
+                                                            <option value="7">Termination</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row-form clearfix">
+                                                    <div class="col-md-3">Notes:</div>
+                                                    <div class="col-md-9">
+                                                        <textarea name="reasons" rows="4"><?php if ($visit['status'] != 0) {
+                                                                                                echo $visit['reasons'];
+                                                                                            } ?></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="row-form clearfix">
+                                                    <div class="col-md-3">Date:</div>
+                                                    <div class="col-md-9">
+                                                        <input value="<?php if ($visit['status'] != 0) {
+                                                                            echo $visit['visit_date'];
+                                                                        } ?>" class="validate[required,custom[date]]" type="text" name="visit_date" id="visit_date" /> <span>Example: 2010-12-01</span>
+                                                    </div>
+                                                </div>
+                                                <div class="dr"><span></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input type="hidden" name="id" value="<?= $visit['id'] ?>">
+                                            <input type="hidden" name="vc" value="<?= $visit['visit_code'] ?>">
+                                            <input type="hidden" name="cid" value="<?= $visit['client_id'] ?>">
+                                            <input type="submit" name="edit_visit" class="btn btn-warning" value="Save">
+                                            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     <?php } elseif ($_GET['id'] == 15) { ?>
-
-
                     <?php } elseif ($_GET['id'] == 16 && $user->data()->position == 1) { ?>
 
                     <?php } ?>
@@ -3674,6 +3818,190 @@ if ($user->isLoggedIn()) {
                 });
 
             });
+
+            $('#diabetic_medicatn1').hide();
+            $('#diabetic').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "1") {
+                    $('#diabetic_medicatn1').show();
+                } else{
+                    $('#diabetic_medicatn1').hide();
+                }
+            });
+
+            $('#diabetic_medicatn_name').hide();
+            $('#diabetic_medicatn').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "1") {
+                    $('#diabetic_medicatn_name').show();
+                }else{
+                    $('#diabetic_medicatn_name').hide();
+                }
+            });
+
+            
+            $('#hypertension_medicatn1').hide();
+            $('#hypertension').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "1") {
+                    $('#hypertension_medicatn1').show();
+                } else{
+                    $('#hypertension_medicatn1').hide();
+                }
+            });
+
+            $('#hypertension_medicatn_name').hide();
+            $('#hypertension_medicatn').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "1") {
+                    $('#hypertension_medicatn_name').show();
+                }else{
+                    $('#hypertension_medicatn_name').hide();
+                }
+            });
+
+
+            $('#heart_medicatn1').hide();
+            $('#heart').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "1") {
+                    $('#heart_medicatn1').show();
+                } else{
+                    $('#heart_medicatn1').hide();
+                }
+            });
+
+            $('#heart_medicatn_name').hide();
+            $('#heart_medicatn').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "1") {
+                    $('#heart_medicatn_name').show();
+                }else{
+                    $('#heart_medicatn_name').hide();
+                }
+            });
+
+
+            $('#asthma_medicatn1').hide();
+            $('#asthma').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "1") {
+                    $('#asthma_medicatn1').show();
+                } else{
+                    $('#asthma_medicatn1').hide();
+                }
+            });
+
+            $('#asthma_medicatn_name').hide();
+            $('#asthma_medicatn').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "1") {
+                    $('#asthma_medicatn_name').show();
+                }else{
+                    $('#asthma_medicatn_name').hide();
+                }
+            });
+
+
+            $('#chronic_medicatn1').hide();
+            $('#chronic').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "1") {
+                    $('#chronic_medicatn1').show();
+                } else{
+                    $('#chronic_medicatn1').hide();
+                }
+            });
+
+            $('#chronic_medicatn_name').hide();
+            $('#chronic_medicatn').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "1") {
+                    $('#chronic_medicatn_name').show();
+                }else{
+                    $('#chronic_medicatn_name').hide();
+                }
+            });
+
+
+            $('#hiv_aids_medicatn1').hide();
+            $('#hiv_aids').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "1") {
+                    $('#hiv_aids_medicatn1').show();
+                } else{
+                    $('#hiv_aids_medicatn1').hide();
+                }
+            });
+
+            $('#hiv_aids_medicatn_name').hide();
+            $('#hiv_aids_medicatn').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "1") {
+                    $('#hiv_aids_medicatn_name').show();
+                }else{
+                    $('#hiv_aids_medicatn_name').hide();
+                }
+            });
+
+            $('#other_medical_medicatn1').hide();
+            $('#other_specify').hide();
+            $('#other_medical').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "1") {
+                    $('#other_specify').show();
+                    $('#other_medical_medicatn1').show();
+                } else{
+                    $('#other_specify').hide();
+                    $('#other_medical_medicatn1').show();
+                }
+            });
+
+            $('#other_medicatn_name').hide();
+            $('#other_medical_medicatn').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "1") {
+                    $('#other_medicatn_name').show();
+                }else{
+                    $('#other_medicatn_name').hide();
+                }
+            });
+
+
+            $('#herbal_preparation').hide();
+            $('#herbal_header').hide();
+            $('#herbal').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "1") {
+                    $('#herbal_preparation').show();
+                    $('#herbal_header').show();
+                } else{
+                    $('#herbal_header').hide();
+                    $('#herbal_preparation').hide();
+                }
+            });
+
+            $('#herbal_end').hide();
+            $('#herbal_ongoing').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "1") {
+                    $('#herbal_end').show();
+                }else{
+                    $('#herbal_end').hide();
+                }
+            });
+
+            $('#standard_end1').hide();
+            $('#standard_ongoing1').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "1") {
+                    $('#standard_end1').show();
+                }else{
+                    $('#standard_end1').hide();
+                }
+            });
+
+
 
         });
     </script>
