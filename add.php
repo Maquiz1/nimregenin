@@ -1390,7 +1390,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Medications :</label>
+                                                    <label>1. Medications :</label>
                                                     <input value="" type="text" name="standard_medication" id="standard_medication" required />
                                                 </div>
                                             </div>
@@ -1451,12 +1451,276 @@ if ($user->isLoggedIn()) {
                                         </div>
                                     </div>
 
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>2. Medications :</label>
+                                                    <input value="" type="text" name="standard_medication" id="standard_medication" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Start:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_start" id="standard_start"  />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Ongoing?:</label>
+                                                    <select name="standard_ongoing" id="standard_ongoing" style="width: 100%;" >
+                                                        <option value="">Select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="2">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2" id="standard_end">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>End:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_end" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Dose:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_dose" id="standard_dose"  />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Frequecy:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_frequecy" id="standard_frequecy"  />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>3. Medications :</label>
+                                                    <input value="" type="text" name="standard_medication" id="standard_medication" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Start:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_start" id="standard_start"  />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Ongoing?:</label>
+                                                    <select name="standard_ongoing" id="standard_ongoing" style="width: 100%;" >
+                                                        <option value="">Select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="2">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2" id="standard_end">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>End:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_end" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Dose:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_dose" id="standard_dose"  />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Frequecy:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_frequecy" id="standard_frequecy"  />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>4. Medications :</label>
+                                                    <input value="" type="text" name="standard_medication" id="standard_medication" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Start:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_start" id="standard_start"  />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Ongoing?:</label>
+                                                    <select name="standard_ongoing" id="standard_ongoing" style="width: 100%;" >
+                                                        <option value="">Select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="2">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2" id="standard_end">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>End:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_end" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Dose:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_dose" id="standard_dose"  />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Frequecy:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_frequecy" id="standard_frequecy"  />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>5. Medications :</label>
+                                                    <input value="" type="text" name="standard_medication" id="standard_medication" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Start:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_start" id="standard_start"  />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Ongoing?:</label>
+                                                    <select name="standard_ongoing" id="standard_ongoing" style="width: 100%;" >
+                                                        <option value="">Select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="2">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2" id="standard_end">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>End:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_end" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Dose:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_dose" id="standard_dose"  />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Frequecy:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_frequecy" id="standard_frequecy"  />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="col-sm-6">
                                         <div class="row-form clearfix">
                                             <!-- select -->
                                             <div class="form-group">
                                                 <label>Remarks:</label>
-                                                <input value="" class="validate[required]" type="text" name="standard_remarks" id="standard_remarks" required />
+                                                <input value="" class="validate[required]" type="text" name="standard_remarks" id="standard_remarks"  />
                                             </div>
                                         </div>
                                     </div>

@@ -429,6 +429,142 @@ if ($user->isLoggedIn()) {
                 Redirect::to($url);
                 $pageError = $validate->errors();
             }
+        } elseif (Input::get('add_Inclusion')) {
+            $validate = $validate->check($_POST, array());
+            if ($validate->passed()) {
+                $eligibility = 0;
+                if (
+                    Input::get('age_18') == 1 && Input::get('breast_feeding') == 1 && Input::get('cdk') == 1 && Input::get('biopsy') == 1
+                    && Input::get('consented') == 1 && (Input::get('pregnant') == 1)
+                ) {
+                    $eligibility = 1;
+                }
+                try {
+                    if ($override->get('screening', 'client_id', Input::get('cid'))) {
+                        $cl_id = $override->get('screening', 'client_id', Input::get('cid'))[0]['id'];
+                        $user->updateRecord('screening', array(
+                            'sample_date' => Input::get('sample_date'),
+                            'results_date' => Input::get('results_date'),
+                            'covid_result' => Input::get('covid_result'),
+                            'age_18' => Input::get('age_18'),
+                            'tr_pcr' => Input::get('tr_pcr'),
+                            'hospitalized' => Input::get('hospitalized'),
+                            'moderate_severe' => Input::get('moderate_severe'),
+                            'peptic_ulcers' => Input::get('peptic_ulcers'),
+                            'breast_feeding' => Input::get('breast_feeding'),
+                            'cdk' => Input::get('cdk'),
+                            'biopsy' => Input::get('biopsy'),
+                            'pregnant' => Input::get('pregnant'),
+                            'eligibility' => $eligibility,
+                            'consented' => Input::get('consented'),
+                            'created_on' => date('Y-m-d'),
+                            'staff_id' => $user->data()->id,
+                            'site_id' => $user->data()->site_id,
+                            'status' => 1,
+                            'client_id' => Input::get('cid'),
+                        ), $cl_id);
+                    } else {
+                        $user->createRecord('screening', array(
+                            'sample_date' => Input::get('sample_date'),
+                            'results_date' => Input::get('results_date'),
+                            'covid_result' => Input::get('covid_result'),
+                            'age_18' => Input::get('age_18'),
+                            'tr_pcr' => Input::get('tr_pcr'),
+                            'hospitalized' => Input::get('hospitalized'),
+                            'moderate_severe' => Input::get('moderate_severe'),
+                            'peptic_ulcers' => Input::get('peptic_ulcers'),
+                            'breast_feeding' => Input::get('breast_feeding'),
+                            'cdk' => Input::get('cdk'),
+                            'biopsy' => Input::get('biopsy'),
+                            'pregnant' => Input::get('pregnant'),
+                            'eligibility' => $eligibility,
+                            'consented' => Input::get('consented'),
+                            'created_on' => date('Y-m-d'),
+                            'staff_id' => $user->data()->id,
+                            'site_id' => $user->data()->site_id,
+                            'status' => 1,
+                            'client_id' => Input::get('cid'),
+                        ));
+                    }
+                    $user->updateRecord('clients', array('consented' => Input::get('consented')), Input::get('cid'));
+                    $successMessage = 'Inclusion Successful Added';
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('add_Exclusion')) {
+            $validate = $validate->check($_POST, array());
+            if ($validate->passed()) {
+                $eligibility = 0;
+                $clnt = $override->get('clients', 'id', Input::get('cid'))[0];
+                $sc_e = $override->get('screening', 'client_id', Input::get('cid'))[0];
+                $std_id = $override->getNews('study_id', 'site_id', $user->data()->site_id, 'status', 0)[0];
+                if ((Input::get('breast_cancer') == 2 && Input::get('cervical_cancer') == 2 && Input::get('brain_cancer') == 2 && Input::get('prostate_cancer') == 2)
+            
+                ) {
+                    if (Input::get('breast_cancer') == 2 && Input::get('cervical_cancer') == 2 && Input::get('brain_cancer') == 2 && Input::get('prostate_cancer') == 2 && $sc_e['eligibility'] == 1) {
+                        $eligibility = 1;
+                        if ($override->getCount('visit', 'client_id', Input::get('cid')) == 1) {
+                            $user->visit(Input::get('cid'), 0);
+                            $user->updateRecord('study_id', array('status' => 1, 'client_id' => Input::get('cid')), $std_id['id']);
+                            $user->updateRecord('clients', array('study_id' => $std_id['study_id'], 'enrolled' => 1), Input::get('cid'));
+                        }
+                    } elseif (Input::get('breast_cancer') == 2 && Input::get('cervical_cancer') == 2 && Input::get('brain_cancer') == 2 && Input::get('prostate_cancer') == 2 && $sc_e['eligibility'] == 1) {
+                        $eligibility = 1;
+                        if ($override->getCount('visit', 'client_id', Input::get('cid')) == 1) {
+                            $user->visit(Input::get('cid'), 0);
+                            $user->updateRecord('study_id', array('status' => 1, 'client_id' => Input::get('cid')), $std_id['id']);
+                            $user->updateRecord('clients', array('study_id' => $std_id['study_id'], 'enrolled' => 1), Input::get('cid'));
+                        }
+                    }
+                }
+                try {
+                    if ($override->get('lab', 'client_id', Input::get('cid'))) {
+                        $l_id = $override->get('lab', 'client_id', Input::get('cid'))[0]['id'];
+                        $user->updateRecord('lab', array(
+                            'wbc' => Input::get('wbc'),
+                            'hb' => Input::get('hb'),
+                            'plt' => Input::get('plt'),
+                            'alt' => Input::get('alt'),
+                            'ast' => Input::get('ast'),
+                            'sc' => Input::get('sc'),
+                            'breast_cancer' => Input::get('breast_cancer'),
+                            'cervical_cancer' => Input::get('cervical_cancer'),
+                            'brain_cancer' => Input::get('brain_cancer'),
+                            'prostate_cancer' => Input::get('prostate_cancer'),
+                            'eligibility' => $eligibility,
+                            'created_on' => date('Y-m-d'),
+                            'staff_id' => $user->data()->id,
+                            'site_id' => $user->data()->site_id,
+                            'status' => 1,
+                            'client_id' => Input::get('cid'),
+                        ), $l_id);
+                    } else {
+                        $user->createRecord('lab', array(
+                            'wbc' => Input::get('wbc'),
+                            'hb' => Input::get('hb'),
+                            'plt' => Input::get('plt'),
+                            'alt' => Input::get('alt'),
+                            'ast' => Input::get('ast'),
+                            'sc' => Input::get('sc'),
+                            'eligibility' => $eligibility,
+                            'created_on' => date('Y-m-d'),
+                            'staff_id' => $user->data()->id,
+                            'site_id' => $user->data()->site_id,
+                            'status' => 1,
+                            'client_id' => Input::get('cid'),
+                        ));
+                    }
+
+                    $successMessage = 'Screening Successful Added';
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
         }
     }
 } else {
@@ -2178,28 +2314,28 @@ if ($user->isLoggedIn()) {
                                                             <td>
                                                                 <?php if ($visit['seq_no'] > 0) { ?>
                                                                     <a href="#addVisit<?= $visit['id'] ?>" role="button" class="btn btn-info" data-toggle="modal"><?= $btnV ?>Visit</a>
-                                                                    </td>
-                                                                    <td>
-                                                                    <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>" role="button" class="btn btn-info"><?= $btnV ?>Study CRF</a>
-                                                                    </td>
-                                                                    <td>
-                                                                <?php } else { ?>
-                                                                    <a href="#addScreening<?= $visit['id'] ?>" role="button" class="btn btn-info" data-toggle="modal"><?= $btnS ?> Screening</a>
-                                                                    </td>
-                                                                    <td>
-                                                                    <?php if ($sc['eligibility'] == 1) { ?>
-                                                                        <a href="#addLab<?= $visit['id'] ?>" role="button" class="btn btn-info" data-toggle="modal"><?= $btnL ?> Lab Results</a>
-                                                                    <?php } ?>
-                                                                    </td>
-                                                                    <td>
+                                                            </td>
+                                                            <td>
+                                                                <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>" role="button" class="btn btn-info"><?= $btnV ?>Study CRF</a>
+                                                            </td>
+                                                            <td>
+                                                            <?php } else { ?>
+                                                                <a href="#addInclusion<?= $visit['id'] ?>" role="button" class="btn btn-info" data-toggle="modal"><?= $btnS ?> Inclusion Criteria</a>
+                                                            </td>
+                                                            <td>
+                                                                <?php if ($sc['eligibility'] == 1) { ?>
+                                                                    <a href="#addExclusion<?= $visit['id'] ?>" role="button" class="btn btn-info" data-toggle="modal"><?= $btnL ?> Exclusion Criteria</a>
                                                                 <?php } ?>
-                                                                <?php if ($sc['eligibility'] == 0) { ?>
-                                                                    <a href="#" role="button" class="btn btn-danger" data-toggle="modal">Not Eligible</a>
-                                                                    </td>
-                                                                    <td>
-                                                                <?php } elseif ($lb['eligibility'] == 0) { ?>
-                                                                    <a href="#" role="button" class="btn btn-danger" data-toggle="modal">Not Eligible</a>
-                                                                <?php } ?>
+                                                            </td>
+                                                            <td>
+                                                            <?php } ?>
+                                                            <?php if ($sc['eligibility'] == 0) { ?>
+                                                                <a href="#" role="button" class="btn btn-danger" data-toggle="modal">Not Eligible</a>
+                                                            </td>
+                                                            <td>
+                                                            <?php } elseif ($lb['eligibility'] == 0) { ?>
+                                                                <a href="#" role="button" class="btn btn-danger" data-toggle="modal">Not Eligible</a>
+                                                            <?php } ?>
                                                             </td>
                                                         </tr>
                                                         <div class="modal fade" id="addVisit<?= $visit['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -2473,6 +2609,270 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        <div class="modal fade" id="addInclusion<?= $visit['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <form method="post">
+                                                                        <div class="modal-header">
+                                                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                            <h4>Add Inclusion</h4>
+                                                                        </div>
+                                                                        <div class="modal-body modal-body-np">
+                                                                            <div class="row">
+                                                                                <!-- <div class="block-fluid">
+                                                                                    <div class="row-form clearfix">
+                                                                                        <div class="col-md-8">Date of COVID-19 sample taken:</div>
+                                                                                        <div class="col-md-4"><input type="text" name="sample_date" value="<?php if ($sc) {
+                                                                                                                                                                echo $sc['sample_date'];
+                                                                                                                                                            } ?>" /><span>Example: 2010-12-01</span></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="block-fluid">
+                                                                                    <div class="row-form clearfix">
+                                                                                        <div class="col-md-8">Date of COVID-19 results:</div>
+                                                                                        <div class="col-md-4"><input type="text" name="results_date" value="<?php if ($sc) {
+                                                                                                                                                                echo $sc['results_date'];
+                                                                                                                                                            } ?>" /><span>Example: 2010-12-01</span></div>
+                                                                                    </div>
+                                                                                </div> -->
+
+                                                                                <!-- <div class="row-form clearfix">
+                                                                                    <div class="col-md-8">COVID-19 results</div>
+                                                                                    <div class="col-md-4">
+                                                                                        <select name="covid_result" style="width: 100%;" required>
+                                                                                            <option value="<?= $sc['covid_result'] ?>"><?php if ($sc) {
+                                                                                                                                            if ($sc['covid_result'] == 1) {
+                                                                                                                                                echo 'Positive';
+                                                                                                                                            } elseif ($sc['covid_result'] == 2) {
+                                                                                                                                                echo 'Negative';
+                                                                                                                                            }
+                                                                                                                                        } else {
+                                                                                                                                            echo 'Select';
+                                                                                                                                        } ?></option>
+                                                                                            <option value="1">Positive</option>
+                                                                                            <option value="2">Negative</option>
+                                                                                            <option value="3">PCR not done – Rapid Antigen test for COVID-19 is Negative</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div> -->
+
+                                                                                <div class="row-form clearfix">
+                                                                                    <div class="col-md-8">Aged eighteen years and above</div>
+                                                                                    <div class="col-md-4">
+                                                                                        <select name="age_18" style="width: 100%;" required>
+                                                                                            <option value="<?= $sc['age_18'] ?>"><?php if ($sc) {
+                                                                                                                                        if ($sc['age_18'] == 1) {
+                                                                                                                                            echo 'Yes';
+                                                                                                                                        } elseif ($sc['age_18'] == 2) {
+                                                                                                                                            echo 'No';
+                                                                                                                                        }
+                                                                                                                                    } else {
+                                                                                                                                        echo 'Select';
+                                                                                                                                    } ?></option>
+                                                                                            <option value="1">Yes</option>
+                                                                                            <option value="2">No</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <!-- <div class="row-form clearfix">
+                                                                                    <div class="col-md-8">Is the participant confirmed to have COVID-19 by RT-PCR?</div>
+                                                                                    <div class="col-md-4">
+                                                                                        <select name="tr_pcr" style="width: 100%;" required>
+                                                                                            <option value="<?= $sc['tr_pcr'] ?>"><?php if ($sc) {
+                                                                                                                                        if ($sc['tr_pcr'] == 1) {
+                                                                                                                                            echo 'Yes';
+                                                                                                                                        } elseif ($sc['tr_pcr'] == 2) {
+                                                                                                                                            echo 'No';
+                                                                                                                                        }
+                                                                                                                                    } else {
+                                                                                                                                        echo 'Select';
+                                                                                                                                    } ?></option>
+                                                                                            <option value="1">Yes</option>
+                                                                                            <option value="2">No</option>
+                                                                                            <option value="3">Not Applicable</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div> -->
+
+                                                                                <!-- <div class="row-form clearfix">
+                                                                                    <div class="col-md-8">Is the participant hospitalized?</div>
+                                                                                    <div class="col-md-4">
+                                                                                        <select name="hospitalized" style="width: 100%;" required>
+                                                                                            <option value="<?= $sc['hospitalized'] ?>"><?php if ($sc) {
+                                                                                                                                            if ($sc['hospitalized'] == 1) {
+                                                                                                                                                echo 'Yes';
+                                                                                                                                            } elseif ($sc['hospitalized'] == 2) {
+                                                                                                                                                echo 'No';
+                                                                                                                                            }
+                                                                                                                                        } else {
+                                                                                                                                            echo 'Select';
+                                                                                                                                        } ?></option>
+                                                                                            <option value="1">Yes</option>
+                                                                                            <option value="2">No</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div> -->
+
+                                                                                <!-- <div class="row-form clearfix">
+                                                                                    <div class="col-md-8">Does the participant have moderate or severe form of COVID-19?</div>
+                                                                                    <div class="col-md-4">
+                                                                                        <select name="moderate_severe" style="width: 100%;" required>
+                                                                                            <option value="<?= $sc['moderate_severe'] ?>"><?php if ($sc) {
+                                                                                                                                                if ($sc['moderate_severe'] == 1) {
+                                                                                                                                                    echo 'Yes';
+                                                                                                                                                } elseif ($sc['moderate_severe'] == 2) {
+                                                                                                                                                    echo 'No';
+                                                                                                                                                }
+                                                                                                                                            } else {
+                                                                                                                                                echo 'Select';
+                                                                                                                                            } ?></option>
+                                                                                            <option value="1">Yes</option>
+                                                                                            <option value="2">No</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div> -->
+
+                                                                                <!-- <div class="row-form clearfix">
+                                                                                    <div class="col-md-8">Does the participant have history of peptic ulcers disease?</div>
+                                                                                    <div class="col-md-4">
+                                                                                        <select name="peptic_ulcers" style="width: 100%;" required>
+                                                                                            <option value="<?= $sc['peptic_ulcers'] ?>"><?php if ($sc) {
+                                                                                                                                            if ($sc['peptic_ulcers'] == 1) {
+                                                                                                                                                echo 'Yes';
+                                                                                                                                            } elseif ($sc['peptic_ulcers'] == 2) {
+                                                                                                                                                echo 'No';
+                                                                                                                                            }
+                                                                                                                                        } else {
+                                                                                                                                            echo 'Select';
+                                                                                                                                        } ?></option>
+                                                                                            <option value="1">Yes</option>
+                                                                                            <option value="2">No</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div> -->
+
+                                                                                <div class="row-form clearfix">
+                                                                                    <div class="col-md-8">Is the participant pregnant?</div>
+                                                                                    <div class="col-md-4">
+                                                                                        <select name="pregnant" style="width: 100%;" required>
+                                                                                            <option value="<?= $sc['pregnant'] ?>"><?php if ($sc) {
+                                                                                                                                        if ($sc['pregnant'] == 1) {
+                                                                                                                                            echo 'Yes';
+                                                                                                                                        } elseif ($sc['pregnant'] == 2) {
+                                                                                                                                            echo 'No';
+                                                                                                                                        } elseif ($sc['pregnant'] == 3) {
+                                                                                                                                            echo 'Not Applicable';
+                                                                                                                                        }
+                                                                                                                                    } else {
+                                                                                                                                        echo 'Select';
+                                                                                                                                    } ?></option>
+                                                                                            <option value="1">Yes</option>
+                                                                                            <option value="2">No</option>
+                                                                                            <option value="3">Not Applicable</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="row-form clearfix">
+                                                                                    <div class="col-md-8">Is the participant Breast feeding?</div>
+                                                                                    <div class="col-md-4">
+                                                                                        <select name="breast_feeding" style="width: 100%;" required>
+                                                                                            <option value="<?= $sc['breast_feeding'] ?>"><?php if ($sc) {
+                                                                                                                                                if ($sc['breast_feeding'] == 1) {
+                                                                                                                                                    echo 'Yes';
+                                                                                                                                                } elseif ($sc['breast_feeding'] == 2) {
+                                                                                                                                                    echo 'No';
+                                                                                                                                                } elseif ($sc['breast_feeding'] == 3) {
+                                                                                                                                                    echo 'Not Applicable';
+                                                                                                                                                }
+                                                                                                                                            } else {
+                                                                                                                                                echo 'Select';
+                                                                                                                                            } ?></option>
+                                                                                            <option value="1">Yes</option>
+                                                                                            <option value="2">No</option>
+                                                                                            <option value="3">Not Applicable</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="row-form clearfix">
+                                                                                    <div class="col-md-8">CKD?</div>
+                                                                                    <div class="col-md-4">
+                                                                                        <select name="cdk" style="width: 100%;" required>
+                                                                                            <option value="<?= $sc['cdk'] ?>"><?php if ($sc) {
+                                                                                                                                    if ($sc['cdk'] == 1) {
+                                                                                                                                        echo 'Yes';
+                                                                                                                                    } elseif ($sc['cdk'] == 2) {
+                                                                                                                                        echo 'No';
+                                                                                                                                    } elseif ($sc['cdk'] == 3) {
+                                                                                                                                        echo 'Not Applicable';
+                                                                                                                                    }
+                                                                                                                                } else {
+                                                                                                                                    echo 'Select';
+                                                                                                                                } ?></option>
+                                                                                            <option value="1">Yes</option>
+                                                                                            <option value="2">No</option>
+                                                                                            <option value="3">Not Applicable</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="row-form clearfix">
+                                                                                    <div class="col-md-8">Diagnosed with cancer by biopsy?</div>
+                                                                                    <div class="col-md-4">
+                                                                                        <select name="biopsy" style="width: 100%;" required>
+                                                                                            <option value="<?= $sc['biopsy'] ?>"><?php if ($sc) {
+                                                                                                                                        if ($sc['biopsy'] == 1) {
+                                                                                                                                            echo 'Yes';
+                                                                                                                                        } elseif ($sc['biopsy'] == 2) {
+                                                                                                                                            echo 'No';
+                                                                                                                                        } elseif ($sc['biopsy'] == 3) {
+                                                                                                                                            echo 'Not Applicable';
+                                                                                                                                        }
+                                                                                                                                    } else {
+                                                                                                                                        echo 'Select';
+                                                                                                                                    } ?></option>
+                                                                                            <option value="1">Yes</option>
+                                                                                            <option value="2">No</option>
+                                                                                            <option value="3">Not Applicable</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="row-form clearfix">
+                                                                                    <div class="col-md-8">Did the participant consent to be part of the study?</div>
+                                                                                    <div class="col-md-4">
+                                                                                        <select name="consented" style="width: 100%;" required>
+                                                                                            <option value="<?= $sc['consented'] ?>"><?php if ($sc) {
+                                                                                                                                        if ($sc['consented'] == 1) {
+                                                                                                                                            echo 'Yes';
+                                                                                                                                        } elseif ($sc['consented'] == 2) {
+                                                                                                                                            echo 'No';
+                                                                                                                                        }
+                                                                                                                                    } else {
+                                                                                                                                        echo 'Select';
+                                                                                                                                    } ?></option>
+                                                                                            <option value="1">Yes</option>
+                                                                                            <option value="2">No</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="dr"><span></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <input type="hidden" name="id" value="<?= $visit['id'] ?>">
+                                                                            <input type="hidden" name="cid" value="<?= $visit['client_id'] ?>">
+                                                                            <input type="submit" name="add_Inclusion" class="btn btn-warning" value="Save">
+                                                                            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         <div class="modal fade" id="addLab<?= $visit['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
@@ -2527,6 +2927,143 @@ if ($user->isLoggedIn()) {
                                                                             <input type="hidden" name="id" value="<?= $visit['id'] ?>">
                                                                             <input type="hidden" name="cid" value="<?= $visit['client_id'] ?>">
                                                                             <input type="submit" name="add_lab" class="btn btn-warning" value="Save">
+                                                                            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal fade" id="addExclusion<?= $visit['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <form method="post">
+                                                                        <div class="modal-header">
+                                                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                            <h4>Add Exclusion criteria</h4>
+                                                                        </div>
+                                                                        <div class="modal-body modal-body-np">
+                                                                            <div class="row">
+
+                                                                                <div class="row-form clearfix">
+                                                                                    <div class="col-md-8">Breast cancer</div>
+                                                                                    <div class="col-md-4">
+                                                                                        <select name="breast_cancer" style="width: 100%;" required>
+                                                                                            <option value="<?= $lb['breast_cancer'] ?>"><?php if ($lb) {
+                                                                                                                                        if ($lb['breast_cancer'] == 1) {
+                                                                                                                                            echo 'Yes';
+                                                                                                                                        } elseif ($lb['breast_cancer'] == 2) {
+                                                                                                                                            echo 'No';
+                                                                                                                                        }
+                                                                                                                                    } else {
+                                                                                                                                        echo 'Select';
+                                                                                                                                    } ?></option>
+                                                                                            <option value="1">Yes</option>
+                                                                                            <option value="2">No</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="row-form clearfix">
+                                                                                    <div class="col-md-8">Cervical cancer</div>
+                                                                                    <div class="col-md-4">
+                                                                                        <select name="cervical_cancer" style="width: 100%;" required>
+                                                                                            <option value="<?= $lb['cervical_cancer'] ?>"><?php if ($lb) {
+                                                                                                                                        if ($lb['cervical_cancer'] == 1) {
+                                                                                                                                            echo 'Yes';
+                                                                                                                                        } elseif ($lb['cervical_cancer'] == 2) {
+                                                                                                                                            echo 'No';
+                                                                                                                                        }
+                                                                                                                                    } else {
+                                                                                                                                        echo 'Select';
+                                                                                                                                    } ?></option>
+                                                                                            <option value="1">Yes</option>
+                                                                                            <option value="2">No</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="row-form clearfix">
+                                                                                    <div class="col-md-8">ABrain cancer</div>
+                                                                                    <div class="col-md-4">
+                                                                                        <select name="brain_cancer" style="width: 100%;" required>
+                                                                                            <option value="<?= $lb['brain_cancer'] ?>"><?php if ($lb) {
+                                                                                                                                        if ($lb['brain_cancer'] == 1) {
+                                                                                                                                            echo 'Yes';
+                                                                                                                                        } elseif ($lb['brain_cancer'] == 2) {
+                                                                                                                                            echo 'No';
+                                                                                                                                        }
+                                                                                                                                    } else {
+                                                                                                                                        echo 'Select';
+                                                                                                                                    } ?></option>
+                                                                                            <option value="1">Yes</option>
+                                                                                            <option value="2">No</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="row-form clearfix">
+                                                                                    <div class="col-md-8">Prostate cancer</div>
+                                                                                    <div class="col-md-4">
+                                                                                        <select name="prostate_cancer" style="width: 100%;" required>
+                                                                                            <option value="<?= $lb['prostate_cancer'] ?>"><?php if ($lb) {
+                                                                                                                                        if ($lb['prostate_cancer'] == 1) {
+                                                                                                                                            echo 'Yes';
+                                                                                                                                        } elseif ($lb['prostate_cancer'] == 2) {
+                                                                                                                                            echo 'No';
+                                                                                                                                        }
+                                                                                                                                    } else {
+                                                                                                                                        echo 'Select';
+                                                                                                                                    } ?></option>
+                                                                                            <option value="1">Yes</option>
+                                                                                            <option value="2">No</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <!-- <div class="row-form clearfix">
+                                                                                    <div class="col-md-7">White blood cell count (WBC)</div>
+                                                                                    <div class="col-md-5"><input type="number" name="wbc" value="<?php if ($lb) {
+                                                                                                                                                        echo $lb['wbc'];
+                                                                                                                                                    } ?>" step="0.001" /><span> x 10^9/L</span></div>
+                                                                                </div>
+                                                                                <div class="row-form clearfix">
+                                                                                    <div class="col-md-7">Hemoglobin levels (Hb)</div>
+                                                                                    <div class="col-md-5"><input type="number" name="hb" value="<?php if ($lb) {
+                                                                                                                                                    echo $lb['hb'];
+                                                                                                                                                } ?>" step="0.01" /><span> g/dL</span></div>
+                                                                                </div>
+                                                                                <div class="row-form clearfix">
+                                                                                    <div class="col-md-7">Platelet count (Plt)</div>
+                                                                                    <div class="col-md-5"><input type="number" name="plt" value="<?php if ($lb) {
+                                                                                                                                                        echo $lb['plt'];
+                                                                                                                                                    } ?>" step="0.01" /><span> x 10^9/L</span></div>
+                                                                                </div>
+                                                                                <div class="row-form clearfix">
+                                                                                    <div class="col-md-7">ALT levels</div>
+                                                                                    <div class="col-md-5"><input type="number" name="alt" value="<?php if ($lb) {
+                                                                                                                                                        echo $lb['alt'];
+                                                                                                                                                    } ?>" step="0.01" /><span> U/L</span></div>
+                                                                                </div>
+                                                                                <div class="row-form clearfix">
+                                                                                    <div class="col-md-7">AST levels</div>
+                                                                                    <div class="col-md-5"><input type="number" name="ast" value="<?php if ($lb) {
+                                                                                                                                                        echo $lb['ast'];
+                                                                                                                                                    } ?>" step="0.01" /><span> U/L</span></div>
+                                                                                </div>
+                                                                                <div class="row-form clearfix">
+                                                                                    <div class="col-md-7">Serum creatinine levels</div>
+                                                                                    <div class="col-md-5"><input type="number" name="sc" value="<?php if ($lb) {
+                                                                                                                                                    echo $lb['sc'];
+                                                                                                                                                } ?>" step="0.01" /><span> umol/L</span></div>
+                                                                                </div> -->
+
+                                                                                <div class="dr"><span></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <input type="hidden" name="id" value="<?= $visit['id'] ?>">
+                                                                            <input type="hidden" name="cid" value="<?= $visit['client_id'] ?>">
+                                                                            <input type="submit" name="add_Exclusion" class="btn btn-warning" value="Save">
                                                                             <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
                                                                         </div>
                                                                     </form>
