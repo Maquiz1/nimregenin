@@ -612,6 +612,96 @@ if ($user->isLoggedIn()) {
             } else {
                 $pageError = $validate->errors();
             }
+        } elseif (Input::get('add_crf7')) {
+            $validate = $validate->check($_POST, array(
+                'today_date' => array(
+                    'required' => true,
+                ),
+
+            ));
+            if ($validate->passed()) {
+                print_r($_POST);
+                try {
+                    $user->createRecord('crf6', array(
+                        'today_date' => Input::get('today_date'),
+                        'terminate_date' => Input::get('terminate_date'),
+                        'completed120days' => Input::get('completed120days'),
+                        'reported_dead' => Input::get('reported_dead'),
+                        'withdrew_consent' => Input::get('withdrew_consent'),
+                        'start_date' => Input::get('start_date'),
+                        'end_date' => Input::get('end_date'),
+                        'date_death' => Input::get('date_death'),
+                        'primary_cause' => Input::get('primary_cause'),
+                        'secondary_cause' => Input::get('secondary_cause'),
+                        'withdrew_reason' => Input::get('withdrew_reason'),
+                        'withdrew_other' => Input::get('withdrew_other'),
+                        'terminated_reason' => Input::get('terminated_reason'),
+                        'outcome' => Input::get('outcome'),
+                        'outcome_date' => Input::get('outcome_date'),
+                        'summary' => Input::get('summary'),
+                        'clinician_name' => Input::get('clinician_name'),
+                        'crf6_cmpltd_date' => Input::get('crf6_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ));
+
+
+                    $successMessage = 'CRF3 added Successful';
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('add_crf8')) {
+            $validate = $validate->check($_POST, array(
+                'today_date' => array(
+                    'required' => true,
+                ),
+
+            ));
+            if ($validate->passed()) {
+                print_r($_POST);
+                try {
+                    $user->createRecord('crf6', array(
+                        'today_date' => Input::get('today_date'),
+                        'terminate_date' => Input::get('terminate_date'),
+                        'completed120days' => Input::get('completed120days'),
+                        'reported_dead' => Input::get('reported_dead'),
+                        'withdrew_consent' => Input::get('withdrew_consent'),
+                        'start_date' => Input::get('start_date'),
+                        'end_date' => Input::get('end_date'),
+                        'date_death' => Input::get('date_death'),
+                        'primary_cause' => Input::get('primary_cause'),
+                        'secondary_cause' => Input::get('secondary_cause'),
+                        'withdrew_reason' => Input::get('withdrew_reason'),
+                        'withdrew_other' => Input::get('withdrew_other'),
+                        'terminated_reason' => Input::get('terminated_reason'),
+                        'outcome' => Input::get('outcome'),
+                        'outcome_date' => Input::get('outcome_date'),
+                        'summary' => Input::get('summary'),
+                        'clinician_name' => Input::get('clinician_name'),
+                        'crf6_cmpltd_date' => Input::get('crf6_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ));
+
+
+                    $successMessage = 'CRF3 added Successful';
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
         }
     }
 } else {
@@ -1467,7 +1557,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Start:</label>
-                                                    <input value="" class="validate[required]" type="text" name="standard_start" id="standard_start"  />
+                                                    <input value="" class="validate[required]" type="text" name="standard_start" id="standard_start" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1477,7 +1567,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Ongoing?:</label>
-                                                    <select name="standard_ongoing" id="standard_ongoing" style="width: 100%;" >
+                                                    <select name="standard_ongoing" id="standard_ongoing" style="width: 100%;">
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -1501,7 +1591,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Dose:</label>
-                                                    <input value="" class="validate[required]" type="text" name="standard_dose" id="standard_dose"  />
+                                                    <input value="" class="validate[required]" type="text" name="standard_dose" id="standard_dose" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1511,7 +1601,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Frequecy:</label>
-                                                    <input value="" class="validate[required]" type="text" name="standard_frequecy" id="standard_frequecy"  />
+                                                    <input value="" class="validate[required]" type="text" name="standard_frequecy" id="standard_frequecy" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1533,7 +1623,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Start:</label>
-                                                    <input value="" class="validate[required]" type="text" name="standard_start" id="standard_start"  />
+                                                    <input value="" class="validate[required]" type="text" name="standard_start" id="standard_start" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1543,7 +1633,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Ongoing?:</label>
-                                                    <select name="standard_ongoing" id="standard_ongoing" style="width: 100%;" >
+                                                    <select name="standard_ongoing" id="standard_ongoing" style="width: 100%;">
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -1567,7 +1657,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Dose:</label>
-                                                    <input value="" class="validate[required]" type="text" name="standard_dose" id="standard_dose"  />
+                                                    <input value="" class="validate[required]" type="text" name="standard_dose" id="standard_dose" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1577,7 +1667,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Frequecy:</label>
-                                                    <input value="" class="validate[required]" type="text" name="standard_frequecy" id="standard_frequecy"  />
+                                                    <input value="" class="validate[required]" type="text" name="standard_frequecy" id="standard_frequecy" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1599,7 +1689,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Start:</label>
-                                                    <input value="" class="validate[required]" type="text" name="standard_start" id="standard_start"  />
+                                                    <input value="" class="validate[required]" type="text" name="standard_start" id="standard_start" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1609,7 +1699,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Ongoing?:</label>
-                                                    <select name="standard_ongoing" id="standard_ongoing" style="width: 100%;" >
+                                                    <select name="standard_ongoing" id="standard_ongoing" style="width: 100%;">
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -1633,7 +1723,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Dose:</label>
-                                                    <input value="" class="validate[required]" type="text" name="standard_dose" id="standard_dose"  />
+                                                    <input value="" class="validate[required]" type="text" name="standard_dose" id="standard_dose" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1643,7 +1733,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Frequecy:</label>
-                                                    <input value="" class="validate[required]" type="text" name="standard_frequecy" id="standard_frequecy"  />
+                                                    <input value="" class="validate[required]" type="text" name="standard_frequecy" id="standard_frequecy" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1665,7 +1755,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Start:</label>
-                                                    <input value="" class="validate[required]" type="text" name="standard_start" id="standard_start"  />
+                                                    <input value="" class="validate[required]" type="text" name="standard_start" id="standard_start" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1675,7 +1765,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Ongoing?:</label>
-                                                    <select name="standard_ongoing" id="standard_ongoing" style="width: 100%;" >
+                                                    <select name="standard_ongoing" id="standard_ongoing" style="width: 100%;">
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -1699,7 +1789,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Dose:</label>
-                                                    <input value="" class="validate[required]" type="text" name="standard_dose" id="standard_dose"  />
+                                                    <input value="" class="validate[required]" type="text" name="standard_dose" id="standard_dose" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1709,7 +1799,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Frequecy:</label>
-                                                    <input value="" class="validate[required]" type="text" name="standard_frequecy" id="standard_frequecy"  />
+                                                    <input value="" class="validate[required]" type="text" name="standard_frequecy" id="standard_frequecy" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1720,7 +1810,7 @@ if ($user->isLoggedIn()) {
                                             <!-- select -->
                                             <div class="form-group">
                                                 <label>Remarks:</label>
-                                                <input value="" class="validate[required]" type="text" name="standard_remarks" id="standard_remarks"  />
+                                                <input value="" class="validate[required]" type="text" name="standard_remarks" id="standard_remarks" />
                                             </div>
                                         </div>
                                     </div>
@@ -3518,8 +3608,8 @@ if ($user->isLoggedIn()) {
                                                     <label>Adverse Event Category</label>
                                                     <input value="" type="text" name="ae_category" id="ae_category" required />
                                                     <span>
-                                                         <a href="http://safetyprofiler-ctep.nci.nih.gov/CTC/CTC.aspx" class="btn btn-info">
-                                                         **lookup corresponding AE Category at: http://safetyprofiler-ctep.nci.nih.gov/CTC/CTC.aspx 
+                                                        <a href="http://safetyprofiler-ctep.nci.nih.gov/CTC/CTC.aspx" class="btn btn-info">
+                                                            **lookup corresponding AE Category at: http://safetyprofiler-ctep.nci.nih.gov/CTC/CTC.aspx
                                                         </a>
                                                     </span>
                                                 </div>
@@ -3857,7 +3947,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>2. b). Reason for withdrawal</label>
-                                                    <select name="withdrew_reason" id="withdrew_reason" style="width: 100%;" >
+                                                    <select name="withdrew_reason" id="withdrew_reason" style="width: 100%;">
                                                         <option value="">Select</option>
                                                         <option value="1">Unwilling to say</option>
                                                         <option value="2">Side effects of the herbal preparation (NIMRCAF/ Covidol / Bupiji )</option>
@@ -4025,7 +4115,145 @@ if ($user->isLoggedIn()) {
                             </div>
                         </div>
                     <?php } elseif ($_GET['id'] == 15) { ?>
+                        <div class="col-md-offset-1 col-md-8">
+                            <div class="head clearfix">
+                                <div class="isw-ok"></div>
+                                <h1>CRF 7: Quality of Life Questionnaire </h1>
+                            </div>
+                            <div class="block-fluid">
+                                <form id="validation" method="post">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <div class="form-group">
+                                                    <label>Tarehe ya Leo:</label>
+                                                    <div class="col-md-9"><input value="" class="validate[required,custom[date]]" type="text" name="tdate" id="tdate" required /> <span>Example: 2023-01-01</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>A. Uwezo wa kutembea</label>
+                                                    <select name="mobility" id="mobility" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Sina tatizo katika kutembea </option>
+                                                        <option value="2">Nina matatizo kiasi katika kutembea</option>
+                                                        <option value="3">Siwezi kutembea kabisa</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>B. Uwezo wa kujihudumia</label>
+                                                    <select name="self_care" id="self_care" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Sina tatizo kujihudumia mwenyewe</option>
+                                                        <option value="2">Nina matatizo kiasi katika kujisafisha au kuvaa mwenyewe</option>
+                                                        <option value="3">Siwezi kujisafisha wala kuvaa mwenyewe</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>C. Shughuli za kila siku (mfano: kazi, kusoma shuleni/chuoni, kazi za nyumbani,
+                                                        shughuli za kifamilia au starehe)</label>
+                                                    <select name="usual_active" id="usual_active" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Sina tatizo katika kufanya shughuli zangu za kila siku</option>
+                                                        <option value="2">Nina matatizo kiasi katika kufanya shughuli zangu za kila siku</option>
+                                                        <option value="3">Siwezi kabisa kufanya shughuli zangu za kila siku</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>D. Maumivu/Kutojisikia vizuri</label>
+                                                    <select name="pain" id="pain" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Sina maumivu au najisikia vizuri</option>
+                                                        <option value="2">Nina maumivu kiasi au najisikia vibaya kiasi</option>
+                                                        <option value="3">Nina maumivu makali au najisikia vibaya sana</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>E. Wasiwasi/sonona</label>
+                                                    <select name="kujihudumia" id="kujihudumia" style="width: 100%;" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1">Sina wasiwasi au sonona</option>
+                                                        <option value="2">Nina wasiwasi kiasi au sonona kiasi</option>
+                                                        <option value="3">Nina wasiwasi sana au nina sonona sana</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="head clearfix">
+                                        <div class="isw-ok"></div>
+                                        <h1>ON-SITE MONITORING</h1>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <div class="form-group">
+                                                    <label>DATE FORM COMPLETED:</label>
+                                                    <div class="col-md-9"><input value="" class="validate[required,custom[date]]" type="text" name="FDATE" id="FDATE" required /> <span>Example: 2023-01-01</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <div class="form-group">
+                                                    <label>NAME OF PERSON CHECKING FORM:</label>
+                                                    <input value="" type="text" name="cpersid" id="cpersid" required />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <div class="form-group">
+                                                    <label>DATE FORM CHECKED:</label>
+                                                    <div class="col-md-9"><input value="" class="validate[required,custom[date]]" type="text" name="cDATE" id="cDATE" required /> <span>Example: 2023-01-01</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="footer tar">
+                                        <input type="submit" name="add_crf7" value="Submit" class="btn btn-default">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     <?php } elseif ($_GET['id'] == 16 && $user->data()->position == 1) { ?>
+
+                    <?php } elseif ($_GET['id'] == 17 && $user->data()->position == 1) { ?>
+                    <?php } elseif ($_GET['id'] == 18 && $user->data()->position == 1) { ?>
+
+                    <?php } elseif ($_GET['id'] == 19 && $user->data()->position == 1) { ?>
 
                     <?php } ?>
                     <div class="dr"><span></span></div>
@@ -4519,8 +4747,8 @@ if ($user->isLoggedIn()) {
                 } else {
                     $('#ae_end_date').hide();
                 }
-            }); 
-            
+            });
+
             $('#start_end_date').hide();
             $('#completed120days').change(function() {
                 var getUid = $(this).val();
@@ -4529,7 +4757,7 @@ if ($user->isLoggedIn()) {
                 } else {
                     $('#start_end_date').hide();
                 }
-            }); 
+            });
 
 
             $('#death_details').hide();
@@ -4540,7 +4768,7 @@ if ($user->isLoggedIn()) {
                 } else {
                     $('#death_details').hide();
                 }
-            }); 
+            });
 
             $('#withdrew_reason1').hide();
             $('#withdrew_consent').change(function() {
@@ -4550,7 +4778,7 @@ if ($user->isLoggedIn()) {
                 } else {
                     $('#withdrew_reason1').hide();
                 }
-            }); 
+            });
 
             $('#withdrew_other').hide();
             $('#withdrew_reason').change(function() {
@@ -4560,9 +4788,9 @@ if ($user->isLoggedIn()) {
                 } else {
                     $('#withdrew_other').hide();
                 }
-            }); 
-            
-            
+            });
+
+
 
         });
     </script>

@@ -501,9 +501,7 @@ if ($user->isLoggedIn()) {
                 $clnt = $override->get('clients', 'id', Input::get('cid'))[0];
                 $sc_e = $override->get('screening', 'client_id', Input::get('cid'))[0];
                 $std_id = $override->getNews('study_id', 'site_id', $user->data()->site_id, 'status', 0)[0];
-                if ((Input::get('breast_cancer') == 2 && Input::get('cervical_cancer') == 2 && Input::get('brain_cancer') == 2 && Input::get('prostate_cancer') == 2)
-            
-                ) {
+                if ((Input::get('breast_cancer') == 2 && Input::get('cervical_cancer') == 2 && Input::get('brain_cancer') == 2 && Input::get('prostate_cancer') == 2)) {
                     if (Input::get('breast_cancer') == 2 && Input::get('cervical_cancer') == 2 && Input::get('brain_cancer') == 2 && Input::get('prostate_cancer') == 2 && $sc_e['eligibility'] == 1) {
                         $eligibility = 1;
                         if ($override->getCount('visit', 'client_id', Input::get('cid')) == 1) {
@@ -2175,6 +2173,16 @@ if ($user->isLoggedIn()) {
                                             <?php } ?>
                                         </tr>
 
+                                        <tr>
+                                            <td>7</td>
+                                            <td>CRF 7</td>
+                                            <?php if ($override->get('crf7', 'patient_id', $_GET['cid'])) { ?>
+                                                <td><a href="add.php?id=15&cid=<?= $_GET['cid'] ?>" class="btn btn-success" disabled> Change </a> </td>
+                                            <?php } else { ?>
+                                                <td><a href="add.php?id=15&cid=<?= $_GET['cid'] ?>" class="btn btn-warning">Add </a> </td>
+                                            <?php } ?>
+                                        </tr>
+
                                         <?php if ($override->get2('diagnosis', 'patient_id', $_GET['cid'], 'cardiac', 1)) { ?>
 
                                             <tr>
@@ -2949,14 +2957,14 @@ if ($user->isLoggedIn()) {
                                                                                     <div class="col-md-4">
                                                                                         <select name="breast_cancer" style="width: 100%;" required>
                                                                                             <option value="<?= $lb['breast_cancer'] ?>"><?php if ($lb) {
-                                                                                                                                        if ($lb['breast_cancer'] == 1) {
-                                                                                                                                            echo 'Yes';
-                                                                                                                                        } elseif ($lb['breast_cancer'] == 2) {
-                                                                                                                                            echo 'No';
-                                                                                                                                        }
-                                                                                                                                    } else {
-                                                                                                                                        echo 'Select';
-                                                                                                                                    } ?></option>
+                                                                                                                                            if ($lb['breast_cancer'] == 1) {
+                                                                                                                                                echo 'Yes';
+                                                                                                                                            } elseif ($lb['breast_cancer'] == 2) {
+                                                                                                                                                echo 'No';
+                                                                                                                                            }
+                                                                                                                                        } else {
+                                                                                                                                            echo 'Select';
+                                                                                                                                        } ?></option>
                                                                                             <option value="1">Yes</option>
                                                                                             <option value="2">No</option>
                                                                                         </select>
@@ -2968,14 +2976,14 @@ if ($user->isLoggedIn()) {
                                                                                     <div class="col-md-4">
                                                                                         <select name="cervical_cancer" style="width: 100%;" required>
                                                                                             <option value="<?= $lb['cervical_cancer'] ?>"><?php if ($lb) {
-                                                                                                                                        if ($lb['cervical_cancer'] == 1) {
-                                                                                                                                            echo 'Yes';
-                                                                                                                                        } elseif ($lb['cervical_cancer'] == 2) {
-                                                                                                                                            echo 'No';
-                                                                                                                                        }
-                                                                                                                                    } else {
-                                                                                                                                        echo 'Select';
-                                                                                                                                    } ?></option>
+                                                                                                                                                if ($lb['cervical_cancer'] == 1) {
+                                                                                                                                                    echo 'Yes';
+                                                                                                                                                } elseif ($lb['cervical_cancer'] == 2) {
+                                                                                                                                                    echo 'No';
+                                                                                                                                                }
+                                                                                                                                            } else {
+                                                                                                                                                echo 'Select';
+                                                                                                                                            } ?></option>
                                                                                             <option value="1">Yes</option>
                                                                                             <option value="2">No</option>
                                                                                         </select>
@@ -2987,14 +2995,14 @@ if ($user->isLoggedIn()) {
                                                                                     <div class="col-md-4">
                                                                                         <select name="brain_cancer" style="width: 100%;" required>
                                                                                             <option value="<?= $lb['brain_cancer'] ?>"><?php if ($lb) {
-                                                                                                                                        if ($lb['brain_cancer'] == 1) {
-                                                                                                                                            echo 'Yes';
-                                                                                                                                        } elseif ($lb['brain_cancer'] == 2) {
-                                                                                                                                            echo 'No';
-                                                                                                                                        }
-                                                                                                                                    } else {
-                                                                                                                                        echo 'Select';
-                                                                                                                                    } ?></option>
+                                                                                                                                            if ($lb['brain_cancer'] == 1) {
+                                                                                                                                                echo 'Yes';
+                                                                                                                                            } elseif ($lb['brain_cancer'] == 2) {
+                                                                                                                                                echo 'No';
+                                                                                                                                            }
+                                                                                                                                        } else {
+                                                                                                                                            echo 'Select';
+                                                                                                                                        } ?></option>
                                                                                             <option value="1">Yes</option>
                                                                                             <option value="2">No</option>
                                                                                         </select>
@@ -3006,14 +3014,14 @@ if ($user->isLoggedIn()) {
                                                                                     <div class="col-md-4">
                                                                                         <select name="prostate_cancer" style="width: 100%;" required>
                                                                                             <option value="<?= $lb['prostate_cancer'] ?>"><?php if ($lb) {
-                                                                                                                                        if ($lb['prostate_cancer'] == 1) {
-                                                                                                                                            echo 'Yes';
-                                                                                                                                        } elseif ($lb['prostate_cancer'] == 2) {
-                                                                                                                                            echo 'No';
-                                                                                                                                        }
-                                                                                                                                    } else {
-                                                                                                                                        echo 'Select';
-                                                                                                                                    } ?></option>
+                                                                                                                                                if ($lb['prostate_cancer'] == 1) {
+                                                                                                                                                    echo 'Yes';
+                                                                                                                                                } elseif ($lb['prostate_cancer'] == 2) {
+                                                                                                                                                    echo 'No';
+                                                                                                                                                }
+                                                                                                                                            } else {
+                                                                                                                                                echo 'Select';
+                                                                                                                                            } ?></option>
                                                                                             <option value="1">Yes</option>
                                                                                             <option value="2">No</option>
                                                                                         </select>
@@ -3079,6 +3087,13 @@ if ($user->isLoggedIn()) {
                                 </div>
                             </div>
                         </div>
+
+                    <?php } elseif ($_GET['id'] == 8) { ?>
+                    <?php } elseif ($_GET['id'] == 9) { ?>
+                    <?php } elseif ($_GET['id'] == 10) { ?>
+
+                    <?php } elseif ($_GET['id'] == 11) { ?>
+
 
                     <?php } ?>
                 </div>
