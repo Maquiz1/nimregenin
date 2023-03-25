@@ -4128,12 +4128,15 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>A. Uwezo wa kutembea</label>
                                                     <select name="mobility" id="mobility" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <?php if ($visit['status'] != 0) { ?>
-                                                            <option value="<?= $visit['visit_status'] ?>"><?= $visit['visit_status'] ?></option>
-                                                        <?php } else { ?>
-                                                            <option value="">Select</option>
-                                                        <?php } ?>
+                                                        <?php
+                                                        $data = $override->get('crf7', 'patient_id', $_GET['cid']);
+                                                        foreach ($data as $st) {
+                                                            if ($st['status'] != 0) { ?>
+                                                                <option value="<?= $st['mobility'] ?>"><?= $st['mobility'] ?></option>
+                                                            <?php } else { ?>
+                                                                <option value="">Select</option>
+                                                        <?php }
+                                                        } ?>
                                                         <option value="1">Sina tatizo katika kutembea </option>
                                                         <option value="2">Nina matatizo kiasi katika kutembea</option>
                                                         <option value="3">Siwezi kutembea kabisa</option>
