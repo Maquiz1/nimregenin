@@ -630,7 +630,7 @@ if ($user->isLoggedIn()) {
                         'pain' => Input::get('pain'),
                         'FDATE' => Input::get('FDATE'),
                         'cpersid' => Input::get('cpersid'),
-                        'cDATE' => Input::get('cDATE'),                        
+                        'cDATE' => Input::get('cDATE'),
                         'patient_id' => $_GET['cid'],
                         'staff_id' => $user->data()->id,
                         'status' => 1,
@@ -4129,6 +4129,11 @@ if ($user->isLoggedIn()) {
                                                     <label>A. Uwezo wa kutembea</label>
                                                     <select name="mobility" id="mobility" style="width: 100%;" required>
                                                         <option value="">Select</option>
+                                                        <?php if ($visit['status'] != 0) { ?>
+                                                            <option value="<?= $visit['visit_status'] ?>"><?= $visit['visit_status'] ?></option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
+                                                        <?php } ?>
                                                         <option value="1">Sina tatizo katika kutembea </option>
                                                         <option value="2">Nina matatizo kiasi katika kutembea</option>
                                                         <option value="3">Siwezi kutembea kabisa</option>
