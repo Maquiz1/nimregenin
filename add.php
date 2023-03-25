@@ -614,7 +614,7 @@ if ($user->isLoggedIn()) {
             }
         } elseif (Input::get('add_crf7')) {
             $validate = $validate->check($_POST, array(
-                'today_date' => array(
+                'tdate' => array(
                     'required' => true,
                 ),
 
@@ -622,25 +622,15 @@ if ($user->isLoggedIn()) {
             if ($validate->passed()) {
                 print_r($_POST);
                 try {
-                    $user->createRecord('crf6', array(
-                        'today_date' => Input::get('today_date'),
-                        'terminate_date' => Input::get('terminate_date'),
-                        'completed120days' => Input::get('completed120days'),
-                        'reported_dead' => Input::get('reported_dead'),
-                        'withdrew_consent' => Input::get('withdrew_consent'),
-                        'start_date' => Input::get('start_date'),
-                        'end_date' => Input::get('end_date'),
-                        'date_death' => Input::get('date_death'),
-                        'primary_cause' => Input::get('primary_cause'),
-                        'secondary_cause' => Input::get('secondary_cause'),
-                        'withdrew_reason' => Input::get('withdrew_reason'),
-                        'withdrew_other' => Input::get('withdrew_other'),
-                        'terminated_reason' => Input::get('terminated_reason'),
-                        'outcome' => Input::get('outcome'),
-                        'outcome_date' => Input::get('outcome_date'),
-                        'summary' => Input::get('summary'),
-                        'clinician_name' => Input::get('clinician_name'),
-                        'crf6_cmpltd_date' => Input::get('crf6_cmpltd_date'),
+                    $user->createRecord('crf7', array(
+                        'tdate' => Input::get('tdate'),
+                        'mobility' => Input::get('mobility'),
+                        'self_care' => Input::get('self_care'),
+                        'usual_active' => Input::get('usual_active'),
+                        'pain' => Input::get('pain'),
+                        'FDATE' => Input::get('FDATE'),
+                        'cpersid' => Input::get('cpersid'),
+                        'cDATE' => Input::get('cDATE'),                        
                         'patient_id' => $_GET['cid'],
                         'staff_id' => $user->data()->id,
                         'status' => 1,
@@ -649,7 +639,7 @@ if ($user->isLoggedIn()) {
                     ));
 
 
-                    $successMessage = 'CRF3 added Successful';
+                    $successMessage = 'CRF7 added Successful';
                     Redirect::to('info.php?id=6&cid=' . $_GET['cid']);
                 } catch (Exception $e) {
                     die($e->getMessage());
@@ -4201,7 +4191,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>E. Wasiwasi/sonona</label>
-                                                    <select name="kujihudumia" id="kujihudumia" style="width: 100%;" required>
+                                                    <select name="anxiety" id="anxiety" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Sina wasiwasi au sonona</option>
                                                         <option value="2">Nina wasiwasi kiasi au sonona kiasi</option>
