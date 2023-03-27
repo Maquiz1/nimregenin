@@ -540,33 +540,60 @@ if ($user->isLoggedIn()) {
             if ($validate->passed()) {
                 print_r($_POST);
                 try {
-                    $user->createRecord('crf5', array(
-                        'vid' => $_GET["vid"],
-                        'vcode' => $_GET["vcode"],
-                        'date_reported' => Input::get('date_reported'),
-                        'ae_description' => Input::get('ae_description'),
-                        'ae_category' => Input::get('ae_category'),
-                        'ae_start_date' => Input::get('ae_start_date'),
-                        'ae_ongoing' => Input::get('ae_ongoing'),
-                        'ae_end_date' => Input::get('ae_end_date'),
-                        'ae_outcome' => Input::get('ae_outcome'),
-                        'ae_severity' => Input::get('ae_severity'),
-                        'ae_serious' => Input::get('ae_serious'),
-                        'ae_expected' => Input::get('ae_expected'),
-                        'ae_treatment' => Input::get('ae_treatment'),
-                        'ae_taken' => Input::get('ae_taken'),
-                        'ae_relationship' => Input::get('ae_relationship'),
-                        'ae_staff_initial' => Input::get('ae_staff_initial'),
-                        'ae_date' => Input::get('ae_date'),
-                        'crf5_cmpltd_date' => Input::get('crf5_cmpltd_date'),
-                        'patient_id' => $_GET['cid'],
-                        'staff_id' => $user->data()->id,
-                        'status' => 1,
-                        'created_on' => date('Y-m-d'),
-                        'site_id' => $user->data()->site_id,
-                    ));
-
-
+                    if ($override->get('crf5', 'patient_id', $_GET['cid'])) {
+                        $l_id = $override->get('crf5', 'patient_id', $_GET['cid'])[0]['id'];
+                        $user->updateRecord('crf5', array(
+                            'vid' => $_GET["vid"],
+                            'vcode' => $_GET["vcode"],
+                            'date_reported' => Input::get('date_reported'),
+                            'ae_description' => Input::get('ae_description'),
+                            'ae_category' => Input::get('ae_category'),
+                            'ae_start_date' => Input::get('ae_start_date'),
+                            'ae_ongoing' => Input::get('ae_ongoing'),
+                            'ae_end_date' => Input::get('ae_end_date'),
+                            'ae_outcome' => Input::get('ae_outcome'),
+                            'ae_severity' => Input::get('ae_severity'),
+                            'ae_serious' => Input::get('ae_serious'),
+                            'ae_expected' => Input::get('ae_expected'),
+                            'ae_treatment' => Input::get('ae_treatment'),
+                            'ae_taken' => Input::get('ae_taken'),
+                            'ae_relationship' => Input::get('ae_relationship'),
+                            'ae_staff_initial' => Input::get('ae_staff_initial'),
+                            'ae_date' => Input::get('ae_date'),
+                            'crf5_cmpltd_date' => Input::get('crf5_cmpltd_date'),
+                            'patient_id' => $_GET['cid'],
+                            'staff_id' => $user->data()->id,
+                            'status' => 1,
+                            'created_on' => date('Y-m-d'),
+                            'site_id' => $user->data()->site_id,
+                        ), $l_id);
+                    } else {
+                        $user->createRecord('crf5', array(
+                            'vid' => $_GET["vid"],
+                            'vcode' => $_GET["vcode"],
+                            'date_reported' => Input::get('date_reported'),
+                            'ae_description' => Input::get('ae_description'),
+                            'ae_category' => Input::get('ae_category'),
+                            'ae_start_date' => Input::get('ae_start_date'),
+                            'ae_ongoing' => Input::get('ae_ongoing'),
+                            'ae_end_date' => Input::get('ae_end_date'),
+                            'ae_outcome' => Input::get('ae_outcome'),
+                            'ae_severity' => Input::get('ae_severity'),
+                            'ae_serious' => Input::get('ae_serious'),
+                            'ae_expected' => Input::get('ae_expected'),
+                            'ae_treatment' => Input::get('ae_treatment'),
+                            'ae_taken' => Input::get('ae_taken'),
+                            'ae_relationship' => Input::get('ae_relationship'),
+                            'ae_staff_initial' => Input::get('ae_staff_initial'),
+                            'ae_date' => Input::get('ae_date'),
+                            'crf5_cmpltd_date' => Input::get('crf5_cmpltd_date'),
+                            'patient_id' => $_GET['cid'],
+                            'staff_id' => $user->data()->id,
+                            'status' => 1,
+                            'created_on' => date('Y-m-d'),
+                            'site_id' => $user->data()->site_id,
+                        ));
+                    }
                     $successMessage = 'CRF5 added Successful';
                     Redirect::to('info.php?id=6&cid=' . $_GET['cid']);
                 } catch (Exception $e) {
@@ -3535,7 +3562,20 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <div class="form-group">
                                                     <label>Date Reported:</label>
-                                                    <div class="col-md-9"><input value="" class="validate[required,custom[date]]" type="text" name="date_reported" id="date_reported" required /> <span>Example: 2023-01-01</span></div>
+                                                    <?php
+                                                    $data = $override->get('crf5', 'patient_id', $_GET['cid']);
+                                                    foreach ($data as $st) {
+                                                        if ($st['date_reported'] != "") {
+                                                    ?>
+                                                            <div class="col-md-9"><input value="<?= $st['date_reported'] ?>" class="validate[required,custom[date]]" type="text" name="date_reported" id="date_reported" required /> <span>Example: 2023-01-01</span></div>
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <div class="col-md-9"><input value="" class="validate[required,custom[date]]" type="text" name="date_reported" id="date_reported" required /> <span>Example: 2023-01-01</span></div>
+                                                    <?php
+                                                        }
+                                                    }
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -3544,7 +3584,20 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <div class="form-group">
                                                     <label>Adverse Event Description:</label>
-                                                    <textarea value="" name="ae_description" rows="4"></textarea>
+                                                    <?php
+                                                    $data = $override->get('crf5', 'patient_id', $_GET['cid']);
+                                                    foreach ($data as $st) {
+                                                        if ($st['ae_description'] != "") {
+                                                    ?>
+                                                            <textarea value="<?= $st['tdate'] ?>" name="ae_description" rows="4"></textarea>
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <textarea value="" name="ae_description" rows="4"></textarea>
+                                                    <?php
+                                                        }
+                                                    }
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -3557,7 +3610,20 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Adverse Event Category</label>
-                                                    <input value="" type="text" name="ae_category" id="ae_category" required />
+                                                    <?php
+                                                    $data = $override->get('crf5', 'patient_id', $_GET['cid']);
+                                                    foreach ($data as $st) {
+                                                        if ($st['ae_category'] != "") {
+                                                    ?>
+                                                            <input value="<?= $st['ae_category'] ?>" type="text" name="ae_category" id="ae_category" required />
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <input value="" type="text" name="ae_category" id="ae_category" required />
+                                                    <?php
+                                                        }
+                                                    }
+                                                    ?>
                                                     <span>
                                                         <a href="http://safetyprofiler-ctep.nci.nih.gov/CTC/CTC.aspx" class="btn btn-info">
                                                             **lookup corresponding AE Category at: http://safetyprofiler-ctep.nci.nih.gov/CTC/CTC.aspx
@@ -3575,7 +3641,20 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Start date</label>
-                                                    <input value="" type="text" name="ae_start_date" id="ae_start_date" />
+                                                    <?php
+                                                    $data = $override->get('crf5', 'patient_id', $_GET['cid']);
+                                                    foreach ($data as $st) {
+                                                        if ($st['ae_start_date'] != "") {
+                                                    ?>
+                                                            <input value="<?= $st['ae_start_date'] ?>" type="text" name="ae_start_date" id="ae_start_date" />
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <input value="" type="text" name="ae_start_date" />
+                                                    <?php
+                                                        }
+                                                    }
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -3586,7 +3665,17 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>Ongoing ?</label>
                                                     <select name="ae_ongoing" id="ae_ongoing" style="width: 100%;" required>
-                                                        <option value="">Select</option>
+                                                        <?php
+                                                        $data = $override->get('crf5', 'patient_id', $_GET['cid']);
+                                                        foreach ($data as $st) {
+                                                            if ($st['ae_ongoing'] == 1) { ?>
+                                                                <option value="<?= $st['ae_ongoing'] ?>">Yes</option>
+                                                            <?php } else if ($st['ae_ongoing'] == 2) { ?>
+                                                                <option value="<?= $st['ae_ongoing'] ?>">No</option>
+                                                            <?php } else { ?>
+                                                                <option value="">Select</option>
+                                                        <?php }
+                                                        } ?>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
                                                     </select>
@@ -3599,7 +3688,20 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>End date:</label>
-                                                    <input value="" type="text" name="ae_end_date" />
+                                                    <?php
+                                                    $data = $override->get('crf5', 'patient_id', $_GET['cid']);
+                                                    foreach ($data as $st) {
+                                                        if ($st['ae_end_date'] != "") {
+                                                    ?>
+                                                            <input value="<?= $st['ae_end_date'] ?>" type="text" name="ae_end_date" id="ae_end_date" />
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <input value="" type="text" name="ae_end_date" />
+                                                    <?php
+                                                        }
+                                                    }
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -3613,7 +3715,25 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>Outcome</label>
                                                     <select name="ae_outcome" id="ae_outcome" style="width: 100%;" required>
-                                                        <option value="">Select</option>
+                                                        <?php
+                                                        $data = $override->get('crf5', 'patient_id', $_GET['cid']);
+                                                        foreach ($data as $st) {
+                                                            if ($st['ae_outcome'] == 0) { ?>
+                                                                <option value="<?= $st['ae_outcome'] ?>">Fatal</option>
+                                                            <?php } else if ($st['ae_outcome'] == 1) { ?>
+                                                                <option value="<?= $st['ae_outcome'] ?>">Intervention continues</option>
+                                                            <?php } else if ($st['ae_outcome'] == 2) { ?>
+                                                                <option value="<?= $st['ae_outcome'] ?>">Not recovered/not resolved </option>
+                                                            <?php } else if ($st['ae_outcome'] == 3) { ?>
+                                                                <option value="<?= $st['ae_outcome'] ?>">Recovered w/sequelae</option>
+                                                            <?php } else if ($st['ae_outcome'] == 4) { ?>
+                                                                <option value="<?= $st['ae_outcome'] ?>">Recovered w/o sequelae</option>
+                                                            <?php } else if ($st['ae_outcome'] == 5) { ?>
+                                                                <option value="<?= $st['ae_outcome'] ?>">Recovered/ Resolving</option>
+                                                            <?php } else { ?>
+                                                                <option value="">Select</option>
+                                                        <?php }
+                                                        } ?>
                                                         <option value="0">Fatal</option>
                                                         <option value="1">Intervention continues</option>
                                                         <option value="2">Not recovered/not resolved </option>
@@ -3631,7 +3751,23 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>Severity</label>
                                                     <select name="ae_severity" id="ae_severity" style="width: 100%;" required>
-                                                        <option value="">Select</option>
+                                                        <?php
+                                                        $data = $override->get('crf5', 'patient_id', $_GET['cid']);
+                                                        foreach ($data as $st) {
+                                                            if ($st['ae_severity'] == 1) { ?>
+                                                                <option value="<?= $st['ae_severity'] ?>">Mild</option>
+                                                            <?php } else if ($st['ae_severity'] == 2) { ?>
+                                                                <option value="<?= $st['ae_severity'] ?>">Moderate</option>
+                                                            <?php } else if ($st['ae_severity'] == 3) { ?>
+                                                                <option value="<?= $st['ae_severity'] ?>">severe </option>
+                                                            <?php } else if ($st['ae_severity'] == 4) { ?>
+                                                                <option value="<?= $st['ae_severity'] ?>">Life-threatening</option>
+                                                            <?php } else if ($st['ae_severity'] == 5) { ?>
+                                                                <option value="<?= $st['ae_severity'] ?>">Fatal</option>
+                                                            <?php } else { ?>
+                                                                <option value="">Select</option>
+                                                        <?php }
+                                                        } ?>
                                                         <option value="1">Mild</option>
                                                         <option value="2">Moderate</option>
                                                         <option value="3">severe</option>
@@ -3650,7 +3786,17 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>Serious</label>
                                                     <select name="ae_serious" id="ae_serious" style="width: 100%;" required>
-                                                        <option value="">Select</option>
+                                                        <?php
+                                                        $data = $override->get('crf5', 'patient_id', $_GET['cid']);
+                                                        foreach ($data as $st) {
+                                                            if ($st['ae_serious'] == 1) { ?>
+                                                                <option value="<?= $st['ae_serious'] ?>">Yes</option>
+                                                            <?php } else if ($st['ae_serious'] == 2) { ?>
+                                                                <option value="<?= $st['ae_serious'] ?>">No</option>
+                                                            <?php } else { ?>
+                                                                <option value="">Select</option>
+                                                        <?php }
+                                                        } ?>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
                                                     </select>
@@ -3666,7 +3812,17 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>Expected</label>
                                                     <select name="ae_expected" id="ae_expected" style="width: 100%;" required>
-                                                        <option value="">Select</option>
+                                                        <?php
+                                                        $data = $override->get('crf5', 'patient_id', $_GET['cid']);
+                                                        foreach ($data as $st) {
+                                                            if ($st['ae_expected'] == 1) { ?>
+                                                                <option value="<?= $st['ae_expected'] ?>">Yes</option>
+                                                            <?php } else if ($st['ae_expected'] == 2) { ?>
+                                                                <option value="<?= $st['ae_expected'] ?>">No</option>
+                                                            <?php } else { ?>
+                                                                <option value="">Select</option>
+                                                        <?php }
+                                                        } ?>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
                                                     </select>
@@ -3680,7 +3836,19 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>Treatment</label>
                                                     <select name="ae_treatment" id="ae_treatment" style="width: 100%;" required>
-                                                        <option value="">Select</option>
+                                                        <?php
+                                                        $data = $override->get('crf5', 'patient_id', $_GET['cid']);
+                                                        foreach ($data as $st) {
+                                                            if ($st['ae_treatment'] == 1) { ?>
+                                                                <option value="<?= $st['ae_treatment'] ?>">Medication(s)</option>
+                                                            <?php } else if ($st['ae_treatment'] == 2) { ?>
+                                                                <option value="<?= $st['ae_treatment'] ?>">Non-medication TX</option>
+                                                            <?php } else if ($st['ae_treatment'] == 3) { ?>
+                                                                <option value="<?= $st['ae_treatment'] ?>">Subject discontinued</option>
+                                                            <?php } else { ?>
+                                                                <option value="">Select</option>
+                                                        <?php }
+                                                        } ?>
                                                         <option value="0">None</option>
                                                         <option value="1">Medication(s)</option>
                                                         <option value="2">Non-medication TX </option>
@@ -3698,7 +3866,21 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>Action Taken</label>
                                                     <select name="ae_taken" id="ae_taken" style="width: 100%;" required>
-                                                        <option value="">Select</option>
+                                                        <?php
+                                                        $data = $override->get('crf5', 'patient_id', $_GET['cid']);
+                                                        foreach ($data as $st) {
+                                                            if ($st['ae_taken'] == 0) { ?>
+                                                                <option value="<?= $st['ae_taken'] ?>">Not Applicable</option>
+                                                            <?php } else if ($st['ae_taken'] == 1) { ?>
+                                                                <option value="<?= $st['ae_taken'] ?>">None</option>
+                                                            <?php } else if ($st['ae_taken'] == 2) { ?>
+                                                                <option value="<?= $st['ae_taken'] ?>">Interrupted</option>
+                                                            <?php } else if ($st['ae_taken'] == 3) { ?>
+                                                                <option value="<?= $st['ae_taken'] ?>">Discontinued</option>
+                                                            <?php } else { ?>
+                                                                <option value="">Select</option>
+                                                        <?php }
+                                                        } ?>
                                                         <option value="0">Not Applicable</option>
                                                         <option value="1">None</option>
                                                         <option value="2">Interrupted </option>
@@ -3714,7 +3896,23 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>Relationship to study teatment</label>
                                                     <select name="ae_relationship" id="ae_relationship" style="width: 100%;" required>
-                                                        <option value="">Select</option>
+                                                        <?php
+                                                        $data = $override->get('crf5', 'patient_id', $_GET['cid']);
+                                                        foreach ($data as $st) {
+                                                            if ($st['ae_relationship'] == 1) { ?>
+                                                                <option value="<?= $st['ae_relationship'] ?>">Unrelated</option>
+                                                            <?php } else if ($st['ae_relationship'] == 2) { ?>
+                                                                <option value="<?= $st['ae_relationship'] ?>">Unlikely</option>
+                                                            <?php } else if ($st['ae_relationship'] == 3) { ?>
+                                                                <option value="<?= $st['ae_relationship'] ?>">Possible</option>
+                                                            <?php } else if ($st['ae_relationship'] == 4) { ?>
+                                                                <option value="<?= $st['ae_relationship'] ?>">Probable</option>
+                                                            <?php } else if ($st['ae_relationship'] == 5) { ?>
+                                                                <option value="<?= $st['ae_relationship'] ?>">Definite</option>
+                                                            <?php } else { ?>
+                                                                <option value="">Select</option>
+                                                        <?php }
+                                                        } ?>
                                                         <option value="1">Unrelated</option>
                                                         <option value="2">Unlikely</option>
                                                         <option value="3">Possible </option>
@@ -3732,7 +3930,20 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Staff Initials</label>
-                                                    <input value="" type="text" name="ae_staff_initial" id="ae_staff_initial" />
+                                                    <?php
+                                                    $data = $override->get('crf5', 'patient_id', $_GET['cid']);
+                                                    foreach ($data as $st) {
+                                                        if ($st['ae_staff_initial'] != "") {
+                                                    ?>
+                                                            <input value="<?= $st['ae_staff_initial'] ?>" type="text" name="ae_staff_initial" id="ae_staff_initial" />
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <input value="" type="text" name="ae_staff_initial" id="ae_staff_initial" />
+                                                    <?php
+                                                        }
+                                                    }
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -3742,7 +3953,21 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Date:</label>
-                                                    <input value="" type="text" name="ae_date" id="ae_date" />
+                                                    <?php
+                                                    $data = $override->get('crf5', 'patient_id', $_GET['cid']);
+                                                    foreach ($data as $st) {
+                                                        if ($st['ae_date'] != "") {
+                                                    ?>
+                                                            <input value="<?= $st['ae_date'] ?>" type="text" name="ae_date" id="ae_date" />
+
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <input value="" type="text" name="ae_date" id="ae_date" />
+                                                    <?php
+                                                        }
+                                                    }
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -3934,7 +4159,7 @@ if ($user->isLoggedIn()) {
                                                             if ($st['end_date'] != "") {
                                                     ?>
                                                                 <input value="<?= $st['end_date'] ?>" class="validate[required,custom[date]]" type="text" name="end_date" id="end_date" required /> <span>Example: 2023-01-01</span>
-                                                        <?php
+                                                            <?php
                                                             } else { ?>
                                                                 <input value="" class="validate[required,custom[date]]" type="text" name="end_date" id="end_date" /> <span>Example: 2023-01-01</span>
                                                         <?php
@@ -4186,6 +4411,9 @@ if ($user->isLoggedIn()) {
                                                             if ($st['clinician_name'] != "") {
                                                     ?>
                                                                 <input value="<?= $st['clinician_name'] ?>" type="text" name="clinician_name" id="clinician_name" />
+                                                            <?php
+                                                            } else { ?>
+                                                                <input value="" class="validate[required,custom[date]]" type="text" name="clinician_name" id="clinician_name" /> <span>Example: 2023-01-01</span>
                                                         <?php
                                                             }
                                                         }
@@ -5160,25 +5388,28 @@ if ($user->isLoggedIn()) {
                 }
             });
 
-            $('#ae_end_date').hide();
             $('#ae_ongoing').change(function() {
                 var getUid = $(this).val();
-                if (getUid === "1") {
+                if (getUid === "2") {
                     $('#ae_end_date').show();
                 } else {
                     $('#ae_end_date').hide();
                 }
             });
 
-            $('#start_end_date').hide();
-            $('#completed120days').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "1") {
-                    $('#start_end_date').show();
-                } else {
-                    $('#start_end_date').hide();
-                }
-            });
+            if ("#start_end_date" != "") {
+                $('#start_end_date').show();
+                $('#completed120days').change(function() {
+                    var getUid = $(this).val();
+                    if (getUid === "1") {
+                        $('#start_end_date').show();
+                    } else {
+                        $('#start_end_date').hide();
+                    }
+                });
+            } else {
+                $('#start_end_date').hide();
+            }
 
 
             $('#death_details').hide();
