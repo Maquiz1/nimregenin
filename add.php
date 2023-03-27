@@ -4922,528 +4922,533 @@ if ($user->isLoggedIn()) {
 
             });
 
-            $('#diabetic_medicatn1').hide();
-            $('#diabetic').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "1") {
-                    $('#diabetic_medicatn1').show();
-                } else {
-                    $('#diabetic_medicatn1').hide();
-                }
-            });
+        });
 
-            $('#diabetic_medicatn_name').hide();
-            $('#diabetic_medicatn').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "1") {
-                    $('#diabetic_medicatn_name').show();
-                } else {
-                    $('#diabetic_medicatn_name').hide();
-                }
-            });
+        $('#diabetic_medicatn1').hide();
+        $('#diabetic').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "1") {
+                $('#diabetic_medicatn1').show();
+            } else {
+                $('#diabetic_medicatn1').hide();
+            }
+        });
 
-
-            $('#hypertension_medicatn1').hide();
-            $('#hypertension').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "1") {
-                    $('#hypertension_medicatn1').show();
-                } else {
-                    $('#hypertension_medicatn1').hide();
-                }
-            });
-
-            $('#hypertension_medicatn_name').hide();
-            $('#hypertension_medicatn').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "1") {
-                    $('#hypertension_medicatn_name').show();
-                } else {
-                    $('#hypertension_medicatn_name').hide();
-                }
-            });
+        $('#diabetic_medicatn_name').hide();
+        $('#diabetic_medicatn').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "1") {
+                $('#diabetic_medicatn_name').show();
+            } else {
+                $('#diabetic_medicatn_name').hide();
+            }
+        });
 
 
-            $('#heart_medicatn1').hide();
-            $('#heart').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "1") {
-                    $('#heart_medicatn1').show();
-                } else {
-                    $('#heart_medicatn1').hide();
-                }
-            });
+        $('#hypertension_medicatn1').hide();
+        $('#hypertension').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "1") {
+                $('#hypertension_medicatn1').show();
+            } else {
+                $('#hypertension_medicatn1').hide();
+            }
+        });
 
-            $('#heart_medicatn_name').hide();
-            $('#heart_medicatn').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "1") {
-                    $('#heart_medicatn_name').show();
-                } else {
-                    $('#heart_medicatn_name').hide();
-                }
-            });
-
-
-            $('#asthma_medicatn1').hide();
-            $('#asthma').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "1") {
-                    $('#asthma_medicatn1').show();
-                } else {
-                    $('#asthma_medicatn1').hide();
-                }
-            });
-
-            $('#asthma_medicatn_name').hide();
-            $('#asthma_medicatn').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "1") {
-                    $('#asthma_medicatn_name').show();
-                } else {
-                    $('#asthma_medicatn_name').hide();
-                }
-            });
+        $('#hypertension_medicatn_name').hide();
+        $('#hypertension_medicatn').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "1") {
+                $('#hypertension_medicatn_name').show();
+            } else {
+                $('#hypertension_medicatn_name').hide();
+            }
+        });
 
 
-            $('#chronic_medicatn1').hide();
-            $('#chronic').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "1") {
-                    $('#chronic_medicatn1').show();
-                } else {
-                    $('#chronic_medicatn1').hide();
-                }
-            });
+        $('#heart_medicatn1').hide();
+        $('#heart').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "1") {
+                $('#heart_medicatn1').show();
+            } else {
+                $('#heart_medicatn1').hide();
+            }
+        });
 
-            $('#chronic_medicatn_name').hide();
-            $('#chronic_medicatn').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "1") {
-                    $('#chronic_medicatn_name').show();
-                } else {
-                    $('#chronic_medicatn_name').hide();
-                }
-            });
-
-
-            $('#hiv_aids_medicatn1').hide();
-            $('#hiv_aids').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "1") {
-                    $('#hiv_aids_medicatn1').show();
-                } else {
-                    $('#hiv_aids_medicatn1').hide();
-                }
-            });
-
-            $('#hiv_aids_medicatn_name').hide();
-            $('#hiv_aids_medicatn').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "1") {
-                    $('#hiv_aids_medicatn_name').show();
-                } else {
-                    $('#hiv_aids_medicatn_name').hide();
-                }
-            });
-
-            $('#other_medical_medicatn1').hide();
-            $('#other_specify').hide();
-            $('#other_medical').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "1") {
-                    $('#other_specify').show();
-                    $('#other_medical_medicatn1').show();
-                } else {
-                    $('#other_specify').hide();
-                    $('#other_medical_medicatn1').hide();
-                }
-            });
-
-            $('#other_medicatn_name').hide();
-            $('#other_medical_medicatn').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "1") {
-                    $('#other_medicatn_name').show();
-                } else {
-                    $('#other_medicatn_name').hide();
-                }
-            });
+        $('#heart_medicatn_name').hide();
+        $('#heart_medicatn').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "1") {
+                $('#heart_medicatn_name').show();
+            } else {
+                $('#heart_medicatn_name').hide();
+            }
+        });
 
 
-            $('#nimregenin_preparation').hide();
-            $('#nimregenin_header').hide();
-            $('#nimregenin_herbal').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "1") {
-                    $('#nimregenin_preparation').show();
-                    $('#nimregenin_header').show();
-                } else {
-                    $('#nimregenin_header').hide();
-                    $('#nimregenin_preparation').hide();
-                }
-            });
+        $('#asthma_medicatn1').hide();
+        $('#asthma').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "1") {
+                $('#asthma_medicatn1').show();
+            } else {
+                $('#asthma_medicatn1').hide();
+            }
+        });
 
-            $('#nimregenin_end').hide();
-            $('#nimregenin_ongoing').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "2") {
-                    $('#nimregenin_end').show();
-                } else {
-                    $('#nimregenin_end').hide();
-                }
-            });
-
-            $('#herbal_preparation').hide();
-            $('#herbal_header').hide();
-            $('#other_herbal').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "1") {
-                    $('#herbal_preparation').show();
-                    $('#herbal_header').show();
-                } else {
-                    $('#herbal_header').hide();
-                    $('#herbal_preparation').hide();
-                }
-            });
-
-            $('#herbal_end').hide();
-            $('#herbal_ongoing').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "2") {
-                    $('#herbal_end').show();
-                } else {
-                    $('#herbal_end').hide();
-                }
-            });
+        $('#asthma_medicatn_name').hide();
+        $('#asthma_medicatn').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "1") {
+                $('#asthma_medicatn_name').show();
+            } else {
+                $('#asthma_medicatn_name').hide();
+            }
+        });
 
 
-            $('#standard_end').hide();
-            $('#standard_ongoing').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "1") {
-                    $('#standard_end').show();
-                } else {
-                    $('#standard_end').hide();
-                }
-            });
+        $('#chronic_medicatn1').hide();
+        $('#chronic').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "1") {
+                $('#chronic_medicatn1').show();
+            } else {
+                $('#chronic_medicatn1').hide();
+            }
+        });
+
+        $('#chronic_medicatn_name').hide();
+        $('#chronic_medicatn').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "1") {
+                $('#chronic_medicatn_name').show();
+            } else {
+                $('#chronic_medicatn_name').hide();
+            }
+        });
 
 
-            // function calculateBMI() {
+        $('#hiv_aids_medicatn1').hide();
+        $('#hiv_aids').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "1") {
+                $('#hiv_aids_medicatn1').show();
+            } else {
+                $('#hiv_aids_medicatn1').hide();
+            }
+        });
 
-            //     let height = parseInt(document.querySelector("#height").value);
-            //     let weight = parseInt(document.querySelector("#weight").value);
+        $('#hiv_aids_medicatn_name').hide();
+        $('#hiv_aids_medicatn').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "1") {
+                $('#hiv_aids_medicatn_name').show();
+            } else {
+                $('#hiv_aids_medicatn_name').hide();
+            }
+        });
 
-            //     alert(weight);
+        $('#other_medical_medicatn1').hide();
+        $('#other_specify').hide();
+        $('#other_medical').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "1") {
+                $('#other_specify').show();
+                $('#other_medical_medicatn1').show();
+            } else {
+                $('#other_specify').hide();
+                $('#other_medical_medicatn1').hide();
+            }
+        });
 
-            //     let result = document.querySelector("#result");
-
-
-            //     // validation value or not
-            //     if (height === "" || isNaN(height))
-            //         result.innerHTML = "Enter a valid Height!";
-
-            //     else if (weight === "" || isNaN(weight))
-            //         result.innerHTML = "Enter a valid Weight!";
-
-            //     // If entered value is valid, calculate the BMI
-            //     else {
-
-            //         let bmi = (weight / ((height * height) / 10000)).toFixed(2);
-
-            //         // Dividing as per the bmi conditions
-            //         if (bmi < 18.6) result.innerHTML =
-            //             `Under Weight : <span>${bmi}</span>`;
-
-            //         else if (bmi >= 18.6 && bmi < 24.9)
-            //             result.innerHTML =
-            //             `Normal : <span>${bmi}</span>`;
-
-            //         else result.innerHTML =
-            //             `Over Weight : <span>${bmi}</span>`;
-            //     }
-            // }
-
-
-            $('#appearance_comments').hide();
-            $('#appearance_signifcnt').hide();
-            $('#appearance').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "2") {
-                    $('#appearance_comments').show();
-                    $('#appearance_signifcnt').show();
-                } else {
-                    $('#appearance_comments').hide();
-                    $('#appearance_signifcnt').hide();
-                }
-            });
-
-            $('#heent_comments').hide();
-            $('#heent_signifcnt').hide();
-            $('#heent').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "2") {
-                    $('#heent_comments').show();
-                    $('#heent_signifcnt').show();
-                } else {
-                    $('#heent_comments').hide();
-                    $('#heent_signifcnt').hide();
-                }
-            });
-
-            $('#respiratory_comments').hide();
-            $('#respiratory_signifcnt').hide();
-            $('#respiratory').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "2") {
-                    $('#respiratory_comments').show();
-                    $('#respiratory_signifcnt').show();
-                } else {
-                    $('#respiratory_comments').hide();
-                    $('#respiratory_signifcnt').hide();
-                }
-            });
-
-            $('#cardiovascular_comments').hide();
-            $('#cardiovascular_signifcnt').hide();
-            $('#cardiovascular').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "2") {
-                    $('#cardiovascular_comments').show();
-                    $('#cardiovascular_signifcnt').show();
-                } else {
-                    $('#cardiovascular_comments').hide();
-                    $('#cardiovascular_signifcnt').hide();
-                }
-            });
-
-            $('#abdnominal_comments').hide();
-            $('#abdnominal_signifcnt').hide();
-            $('#abdnominal').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "2") {
-                    $('#abdnominal_comments').show();
-                    $('#abdnominal_signifcnt').show();
-                } else {
-                    $('#abdnominal_comments').hide();
-                    $('#abdnominal_signifcnt').hide();
-                }
-            });
-
-            $('#urogenital_comments').hide();
-            $('#urogenital_signifcnt').hide();
-            $('#urogenital').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "2") {
-                    $('#urogenital_comments').show();
-                    $('#urogenital_signifcnt').show();
-                } else {
-                    $('#urogenital_comments').hide();
-                    $('#urogenital_signifcnt').hide();
-                }
-            });
+        $('#other_medicatn_name').hide();
+        $('#other_medical_medicatn').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "1") {
+                $('#other_medicatn_name').show();
+            } else {
+                $('#other_medicatn_name').hide();
+            }
+        });
 
 
-            $('#musculoskeletal_comments').hide();
-            $('#musculoskeletal_signifcnt').hide();
-            $('#musculoskeletal').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "2") {
-                    $('#musculoskeletal_comments').show();
-                    $('#musculoskeletal_signifcnt').show();
-                } else {
-                    $('#musculoskeletal_comments').hide();
-                    $('#musculoskeletal_signifcnt').hide();
-                }
-            });
+        $('#nimregenin_preparation').hide();
+        $('#nimregenin_header').hide();
+        $('#nimregenin_herbal').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "1") {
+                $('#nimregenin_preparation').show();
+                $('#nimregenin_header').show();
+            } else {
+                $('#nimregenin_header').hide();
+                $('#nimregenin_preparation').hide();
+            }
+        });
 
-            $('#neurological_comments').hide();
-            $('#neurological_signifcnt').hide();
-            $('#neurological').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "2") {
-                    $('#neurological_comments').show();
-                    $('#neurological_signifcnt').show();
-                } else {
-                    $('#neurological_comments').hide();
-                    $('#neurological_signifcnt').hide();
-                }
-            });
+        $('#nimregenin_end').hide();
+        $('#nimregenin_ongoing').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#nimregenin_end').show();
+            } else {
+                $('#nimregenin_end').hide();
+            }
+        });
 
-            $('#psychological_comments').hide();
-            $('#psychological_signifcnt').hide();
-            $('#psychological').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "2") {
-                    $('#psychological_comments').show();
-                    $('#psychological_signifcnt').show();
-                } else {
-                    $('#psychological_comments').hide();
-                    $('#psychological_signifcnt').hide();
-                }
-            });
+        $('#herbal_preparation').hide();
+        $('#herbal_header').hide();
+        $('#other_herbal').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "1") {
+                $('#herbal_preparation').show();
+                $('#herbal_header').show();
+            } else {
+                $('#herbal_header').hide();
+                $('#herbal_preparation').hide();
+            }
+        });
 
-            $('#endocrime_comments').hide();
-            $('#endocrime_signifcnt').hide();
-            $('#endocrime').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "2") {
-                    $('#endocrime_comments').show();
-                    $('#endocrime_signifcnt').show();
-                } else {
-                    $('#endocrime_comments').hide();
-                    $('#endocrime_signifcnt').hide();
-                }
-            });
+        $('#herbal_end').hide();
+        $('#herbal_ongoing').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#herbal_end').show();
+            } else {
+                $('#herbal_end').hide();
+            }
+        });
 
-            $('#lymphatic_comments').hide();
-            $('#lymphatic_signifcnt').hide();
-            $('#lymphatic').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "2") {
-                    $('#lymphatic_comments').show();
-                    $('#lymphatic_signifcnt').show();
-                } else {
-                    $('#lymphatic_comments').hide();
-                    $('#lymphatic_signifcnt').hide();
-                }
-            });
 
-            $('#skin_comments').hide();
-            $('#skin_signifcnt').hide();
-            $('#skin').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "2") {
-                    $('#skin_comments').show();
-                    $('#skin_signifcnt').show();
-                } else {
-                    $('#skin_comments').hide();
-                    $('#skin_signifcnt').hide();
-                }
-            });
+        $('#standard_end').hide();
+        $('#standard_ongoing').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "1") {
+                $('#standard_end').show();
+            } else {
+                $('#standard_end').hide();
+            }
+        });
 
-            $('#physical_other_specify').hide();
-            $('#physical_other_system1').hide();
-            $('#physical_exams_other').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "1") {
-                    $('#physical_other_specify').show();
-                    $('#physical_other_system1').show();
-                } else {
-                    $('#physical_other_specify').hide();
-                    $('#physical_other_system1').hide();
-                }
-            });
 
-            $('#physical_other_comments').hide();
-            $('#physical_other_signifcnt').hide();
-            $('#physical_other_system').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "2") {
-                    $('#physical_other_comments').show();
-                    $('#physical_other_signifcnt').show();
-                } else {
-                    $('#physical_other_comments').hide();
-                    $('#physical_other_signifcnt').hide();
-                }
-            });
+        // function calculateBMI() {
 
-            $('#symptoms_other_specify').hide();
-            $('#symptoms_other').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "1") {
-                    $('#symptoms_other_specify').show();
-                } else {
-                    $('#symptoms_other_specify').hide();
-                }
-            });
+        //     let height = parseInt(document.querySelector("#height").value);
+        //     let weight = parseInt(document.querySelector("#weight").value);
 
-            $('#ecg_specify').hide();
-            $('#ecg').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "2") {
-                    $('#ecg_specify').show();
-                } else {
-                    $('#ecg_specify').hide();
-                }
-            });
+        //     alert(weight);
 
-            $('#ct_chest_specify').hide();
-            $('#ct_chest').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "2") {
-                    $('#ct_chest_specify').show();
-                } else {
-                    $('#ct_chest_specify').hide();
-                }
-            });
+        //     let result = document.querySelector("#result");
 
-            $('#chest_specify').hide();
-            $('#chest_xray').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "2") {
-                    $('#chest_specify').show();
-                } else {
-                    $('#chest_specify').hide();
-                }
-            });
 
-            $('#ae_ongoing').change(function() {
+        //     // validation value or not
+        //     if (height === "" || isNaN(height))
+        //         result.innerHTML = "Enter a valid Height!";
+
+        //     else if (weight === "" || isNaN(weight))
+        //         result.innerHTML = "Enter a valid Weight!";
+
+        //     // If entered value is valid, calculate the BMI
+        //     else {
+
+        //         let bmi = (weight / ((height * height) / 10000)).toFixed(2);
+
+        //         // Dividing as per the bmi conditions
+        //         if (bmi < 18.6) result.innerHTML =
+        //             `Under Weight : <span>${bmi}</span>`;
+
+        //         else if (bmi >= 18.6 && bmi < 24.9)
+        //             result.innerHTML =
+        //             `Normal : <span>${bmi}</span>`;
+
+        //         else result.innerHTML =
+        //             `Over Weight : <span>${bmi}</span>`;
+        //     }
+        // }
+
+
+        $('#appearance_comments').hide();
+        $('#appearance_signifcnt').hide();
+        $('#appearance').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#appearance_comments').show();
+                $('#appearance_signifcnt').show();
+            } else {
+                $('#appearance_comments').hide();
+                $('#appearance_signifcnt').hide();
+            }
+        });
+
+        $('#heent_comments').hide();
+        $('#heent_signifcnt').hide();
+        $('#heent').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#heent_comments').show();
+                $('#heent_signifcnt').show();
+            } else {
+                $('#heent_comments').hide();
+                $('#heent_signifcnt').hide();
+            }
+        });
+
+        $('#respiratory_comments').hide();
+        $('#respiratory_signifcnt').hide();
+        $('#respiratory').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#respiratory_comments').show();
+                $('#respiratory_signifcnt').show();
+            } else {
+                $('#respiratory_comments').hide();
+                $('#respiratory_signifcnt').hide();
+            }
+        });
+
+        $('#cardiovascular_comments').hide();
+        $('#cardiovascular_signifcnt').hide();
+        $('#cardiovascular').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#cardiovascular_comments').show();
+                $('#cardiovascular_signifcnt').show();
+            } else {
+                $('#cardiovascular_comments').hide();
+                $('#cardiovascular_signifcnt').hide();
+            }
+        });
+
+        $('#abdnominal_comments').hide();
+        $('#abdnominal_signifcnt').hide();
+        $('#abdnominal').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#abdnominal_comments').show();
+                $('#abdnominal_signifcnt').show();
+            } else {
+                $('#abdnominal_comments').hide();
+                $('#abdnominal_signifcnt').hide();
+            }
+        });
+
+        $('#urogenital_comments').hide();
+        $('#urogenital_signifcnt').hide();
+        $('#urogenital').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#urogenital_comments').show();
+                $('#urogenital_signifcnt').show();
+            } else {
+                $('#urogenital_comments').hide();
+                $('#urogenital_signifcnt').hide();
+            }
+        });
+
+
+        $('#musculoskeletal_comments').hide();
+        $('#musculoskeletal_signifcnt').hide();
+        $('#musculoskeletal').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#musculoskeletal_comments').show();
+                $('#musculoskeletal_signifcnt').show();
+            } else {
+                $('#musculoskeletal_comments').hide();
+                $('#musculoskeletal_signifcnt').hide();
+            }
+        });
+
+        $('#neurological_comments').hide();
+        $('#neurological_signifcnt').hide();
+        $('#neurological').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#neurological_comments').show();
+                $('#neurological_signifcnt').show();
+            } else {
+                $('#neurological_comments').hide();
+                $('#neurological_signifcnt').hide();
+            }
+        });
+
+        $('#psychological_comments').hide();
+        $('#psychological_signifcnt').hide();
+        $('#psychological').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#psychological_comments').show();
+                $('#psychological_signifcnt').show();
+            } else {
+                $('#psychological_comments').hide();
+                $('#psychological_signifcnt').hide();
+            }
+        });
+
+        $('#endocrime_comments').hide();
+        $('#endocrime_signifcnt').hide();
+        $('#endocrime').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#endocrime_comments').show();
+                $('#endocrime_signifcnt').show();
+            } else {
+                $('#endocrime_comments').hide();
+                $('#endocrime_signifcnt').hide();
+            }
+        });
+
+        $('#lymphatic_comments').hide();
+        $('#lymphatic_signifcnt').hide();
+        $('#lymphatic').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#lymphatic_comments').show();
+                $('#lymphatic_signifcnt').show();
+            } else {
+                $('#lymphatic_comments').hide();
+                $('#lymphatic_signifcnt').hide();
+            }
+        });
+
+        $('#skin_comments').hide();
+        $('#skin_signifcnt').hide();
+        $('#skin').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#skin_comments').show();
+                $('#skin_signifcnt').show();
+            } else {
+                $('#skin_comments').hide();
+                $('#skin_signifcnt').hide();
+            }
+        });
+
+        $('#physical_other_specify').hide();
+        $('#physical_other_system1').hide();
+        $('#physical_exams_other').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "1") {
+                $('#physical_other_specify').show();
+                $('#physical_other_system1').show();
+            } else {
+                $('#physical_other_specify').hide();
+                $('#physical_other_system1').hide();
+            }
+        });
+
+        $('#physical_other_comments').hide();
+        $('#physical_other_signifcnt').hide();
+        $('#physical_other_system').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#physical_other_comments').show();
+                $('#physical_other_signifcnt').show();
+            } else {
+                $('#physical_other_comments').hide();
+                $('#physical_other_signifcnt').hide();
+            }
+        });
+
+        $('#symptoms_other_specify').hide();
+        $('#symptoms_other').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "1") {
+                $('#symptoms_other_specify').show();
+            } else {
+                $('#symptoms_other_specify').hide();
+            }
+        });
+
+        $('#ecg_specify').hide();
+        $('#ecg').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#ecg_specify').show();
+            } else {
+                $('#ecg_specify').hide();
+            }
+        });
+
+        $('#ct_chest_specify').hide();
+        $('#ct_chest').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#ct_chest_specify').show();
+            } else {
+                $('#ct_chest_specify').hide();
+            }
+        });
+
+        $('#chest_specify').hide();
+        $('#chest_xray').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#chest_specify').show();
+            } else {
+                $('#chest_specify').hide();
+            }
+        });
+
+
+        var getUid1 = $("#ae_ongoing").val();
+        alert(getUid1);
+        if ($('#ae_ongoing').val() == "2" || $('#ae_ongoing').change(function() {
                 var getUid = $(this).val();
                 if (getUid === "2") {
                     $('#ae_end_date').show();
                 } else {
                     $('#ae_end_date').hide();
                 }
-            });
+            })) {
+            $('#ae_end_date').show();
+        } else {
+            $('#ae_end_date').hide();
+        }
 
-            if ("#start_end_date" != "") {
-                $('#start_end_date').show();
-                $('#completed120days').change(function() {
-                    var getUid = $(this).val();
-                    if (getUid === "1") {
-                        $('#start_end_date').show();
-                    } else {
-                        $('#start_end_date').hide();
-                    }
-                });
+        if ("#start_end_date" != "") {
+            $('#start_end_date').show();
+            $('#completed120days').change(function() {
+                var getUid = $(this).val();
+                if (getUid === "1") {
+                    $('#start_end_date').show();
+                } else {
+                    $('#start_end_date').hide();
+                }
+            });
+        } else {
+            $('#start_end_date').hide();
+        }
+
+
+        $('#death_details').hide();
+        $('#reported_dead').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "1") {
+                $('#death_details').show();
             } else {
-                $('#start_end_date').hide();
+                $('#death_details').hide();
             }
+        });
 
+        $('#withdrew_reason1').hide();
+        $('#withdrew_consent').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "1") {
+                $('#withdrew_reason1').show();
+            } else {
+                $('#withdrew_reason1').hide();
+            }
+        });
 
-            $('#death_details').hide();
-            $('#reported_dead').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "1") {
-                    $('#death_details').show();
-                } else {
-                    $('#death_details').hide();
-                }
-            });
-
-            $('#withdrew_reason1').hide();
-            $('#withdrew_consent').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "1") {
-                    $('#withdrew_reason1').show();
-                } else {
-                    $('#withdrew_reason1').hide();
-                }
-            });
-
-            $('#withdrew_other').hide();
-            $('#withdrew_reason').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "5") {
-                    $('#withdrew_other').show();
-                } else {
-                    $('#withdrew_other').hide();
-                }
-            });
-
-
-
+        $('#withdrew_other').hide();
+        $('#withdrew_reason').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "5") {
+                $('#withdrew_other').show();
+            } else {
+                $('#withdrew_other').hide();
+            }
         });
     </script>
 </body>
