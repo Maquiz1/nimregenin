@@ -5391,19 +5391,19 @@ if ($user->isLoggedIn()) {
         });
 
 
-        var getUid1 = $("#ae_ongoing").val();
-        alert(getUid1);
-        if ($('#ae_ongoing').val() == "2" || $('#ae_ongoing').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "2") {
-                    $('#ae_end_date').show();
-                } else {
-                    $('#ae_end_date').hide();
-                }
-            })) {
-            $('#ae_end_date').show();
-        } else {
+
+        if ($('#ae_ongoing').val() == "1") {
             $('#ae_end_date').hide();
+        } else if ($('#ae_ongoing').change(function() {
+                var getUid = $(this).val();
+            })) {
+            if (getUid === "2") {
+                $('#ae_end_date').show();
+            } else {
+                $('#ae_end_date').hide();
+            }
+        } else {
+            $('#ae_end_date').show();
         }
 
         if ("#start_end_date" != "") {
