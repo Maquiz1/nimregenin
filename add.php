@@ -225,7 +225,6 @@ if ($user->isLoggedIn()) {
                 'diagnosis_date' => array(
                     'required' => true,
                 ),
-
             ));
             if ($validate->passed()) {
                 try {
@@ -252,14 +251,21 @@ if ($user->isLoggedIn()) {
                         'other_specify' => Input::get('other_specify'),
                         'other_medical_medicatn' => Input::get('other_medical_medicatn'),
                         'other_medicatn_name' => Input::get('other_medicatn_name'),
-                        'herbal' => Input::get('herbal'),
+                        'nimregenin_herbal' => Input::get('nimregenin_herbal'),
+                        'nimregenin_preparation' => Input::get('nimregenin_preparation'),
+                        'nimregenin_start' => Input::get('nimregenin_start'),
+                        'nimregenin_ongoing' => Input::get('nimregenin_ongoing'),
+                        'nimregenin_end' => Input::get('nimregenin_end'),
+                        'nimregenin_dose' => Input::get('nimregenin_dose'),
+                        'nimregenin_frequecy' => Input::get('nimregenin_frequecy'),
+                        'other_herbal' => Input::get('other_herbal'),
                         'herbal_preparation' => Input::get('herbal_preparation'),
                         'herbal_start' => Input::get('herbal_start'),
                         'herbal_ongoing' => Input::get('herbal_ongoing'),
                         'herbal_end' => Input::get('herbal_end'),
                         'herbal_dose' => Input::get('herbal_dose'),
-                        'herbal_frequecy' => Input::get('herbal_frequecy'),
-                        'herbal_preparation_other' => Input::get('herbal_preparation_other'),
+                        'herbal_frequency' => Input::get('herbal_frequency'),
+                        'radiotherapy' => Input::get('radiotherapy'),
                         'standard_medication' => Input::get('standard_medication'),
                         'standard_start' => Input::get('standard_start'),
                         'standard_ongoing' => Input::get('standard_ongoing'),
@@ -274,10 +280,8 @@ if ($user->isLoggedIn()) {
                         'created_on' => date('Y-m-d'),
                         'site_id' => $user->data()->site_id,
                     ));
-
-
                     $successMessage = 'CRF1 added Successful';
-                    Redirect::to('info.php?id=6&cid=' . $_GET['cid']);
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode']);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -307,7 +311,6 @@ if ($user->isLoggedIn()) {
                         'heart_rate' => Input::get('heart_rate'),
                         'systolic' => Input::get('systolic'),
                         'diastolic' => Input::get('diastolic'),
-                        'method2' => Input::get('method2'),
                         'time2' => Input::get('time2'),
                         'appearance' => Input::get('appearance'),
                         'appearance_comments' => Input::get('appearance_comments'),

@@ -168,7 +168,7 @@ if ($user->isLoggedIn()) {
                                                 <td><?= $client['gender'] ?></td>
                                                 <td><?= $client['age'] ?></td>
                                                 <td>
-                                                    <a href="info.php?id=4&cid=<?= $client['id'] ?>" role="button" class="btn btn-warning">Schedule</a>
+                                                    <a href="info.php?id=7&cid=<?= $client['id'] ?>" role="button" class="btn btn-warning">Schedule</a>
                                                 </td>
 
                                             </tr>
