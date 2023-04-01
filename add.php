@@ -363,10 +363,8 @@ if ($user->isLoggedIn()) {
                         'created_on' => date('Y-m-d'),
                         'site_id' => $user->data()->site_id,
                     ));
-
-
                     $successMessage = 'CRF2 added Successful';
-                    Redirect::to('info.php?id=6&cid=' . $_GET['cid']);
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'].'&vid=' . $_GET['vid'].'&vcode=' . $_GET['vcode']);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -443,7 +441,7 @@ if ($user->isLoggedIn()) {
 
 
                     $successMessage = 'CRF3 added Successful';
-                    Redirect::to('info.php?id=6&cid=' . $_GET['cid']);
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'].'&vid=' . $_GET['vid'].'&vcode=' . $_GET['vcode']);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -2069,7 +2067,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Clinically Significant?:</label>
-                                                    <select name="respiratory_signifcnt" style="width: 100%;" required>
+                                                    <select name="respiratory_signifcnt" style="width: 100%;">
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -2466,7 +2464,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Other System?:</label>
+                                                    <label>Is there any Other physical System?:</label>
                                                     <select name="physical_exams_other" id="physical_exams_other" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
@@ -2491,7 +2489,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Finding:</label>
-                                                    <select name="physical_other_system" id="physical_other_system" style="width: 100%;" required>
+                                                    <select name="physical_other_system" id="physical_other_system" style="width: 100%;">
                                                         <option value="">Select</option>
                                                         <option value="1">Normal</option>
                                                         <option value="2">Abnormal</option>

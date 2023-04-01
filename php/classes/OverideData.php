@@ -75,6 +75,12 @@ class OverideData{
         return $result;
     }
 
+    public function get1($table,$where,$id,$where1,$id1){
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where1 = '$id1'");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     public function getRQ1($table){
         $query = $this->_pdo->query("SELECT * FROM $table");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
