@@ -364,7 +364,7 @@ if ($user->isLoggedIn()) {
                         'site_id' => $user->data()->site_id,
                     ));
                     $successMessage = 'CRF2 added Successful';
-                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'].'&vid=' . $_GET['vid'].'&vcode=' . $_GET['vcode']);
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode']);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -415,7 +415,7 @@ if ($user->isLoggedIn()) {
 
 
                     $successMessage = 'CRF3 added Successful';
-                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'].'&vid=' . $_GET['vid'].'&vcode=' . $_GET['vcode']);
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode']);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -2955,11 +2955,11 @@ if ($user->isLoggedIn()) {
                                                     <label>Grade</label>
                                                     <select name="liver_ast_grade" id="liver_ast_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
-                                                        <option value="1">Zero</option>
-                                                        <option value="2">One</option>
-                                                        <option value="3">Two</option>
-                                                        <option value="4">Three</option>
-                                                        <option value="5">Four</option>
+                                                        <option value="0">Zero</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                        <option value="4">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -2985,11 +2985,11 @@ if ($user->isLoggedIn()) {
                                                     <label>Grade</label>
                                                     <select name="liver_alt_grade" id="liver_alt_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
-                                                        <option value="1">Zero</option>
-                                                        <option value="2">One</option>
-                                                        <option value="3">Two</option>
-                                                        <option value="4">Three</option>
-                                                        <option value="5">Four</option>
+                                                        <option value="0">Zero</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                        <option value="4">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -3015,11 +3015,11 @@ if ($user->isLoggedIn()) {
                                                     <label>Grade</label>
                                                     <select name="liver_alp_grade" id="liver_alp_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
-                                                        <option value="1">Zero</option>
-                                                        <option value="2">One</option>
-                                                        <option value="3">Two</option>
-                                                        <option value="4">Three</option>
-                                                        <option value="5">Four</option>
+                                                        <option value="0">Zero</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                        <option value="4">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -3045,11 +3045,11 @@ if ($user->isLoggedIn()) {
                                                     <label>Grade</label>
                                                     <select name="liver_pt_grade" id="liver_pt_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
-                                                        <option value="1">Zero</option>
-                                                        <option value="2">One</option>
-                                                        <option value="3">Two</option>
-                                                        <option value="4">Three</option>
-                                                        <option value="5">Four</option>
+                                                        <option value="0">Zero</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                        <option value="4">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -3075,11 +3075,11 @@ if ($user->isLoggedIn()) {
                                                     <label>Grade</label>
                                                     <select name="liver_ptt_grade" id="liver_ptt_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
-                                                        <option value="1">Zero</option>
-                                                        <option value="2">One</option>
-                                                        <option value="3">Two</option>
-                                                        <option value="4">Three</option>
-                                                        <option value="5">Four</option>
+                                                        <option value="0">Zero</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                        <option value="4">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -3105,11 +3105,11 @@ if ($user->isLoggedIn()) {
                                                     <label>Grade</label>
                                                     <select name="liver_inr_grade" id="liver_inr_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
-                                                        <option value="1">Zero</option>
-                                                        <option value="2">One</option>
-                                                        <option value="3">Two</option>
-                                                        <option value="4">Three</option>
-                                                        <option value="5">Four</option>
+                                                        <option value="0">Zero</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                        <option value="4">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -3148,11 +3148,11 @@ if ($user->isLoggedIn()) {
                                                     <label>Grade</label>
                                                     <select name="liver_albumin_grade" id="liver_albumin_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
-                                                        <option value="1">Zero</option>
-                                                        <option value="2">One</option>
-                                                        <option value="3">Two</option>
-                                                        <option value="4">Three</option>
-                                                        <option value="5">Four</option>
+                                                        <option value="0">Zero</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                        <option value="4">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -3178,11 +3178,11 @@ if ($user->isLoggedIn()) {
                                                     <label>Grade</label>
                                                     <select name="bilirubin_total_grade" id="bilirubin_total_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
-                                                        <option value="1">Zero</option>
-                                                        <option value="2">One</option>
-                                                        <option value="3">Two</option>
-                                                        <option value="4">Three</option>
-                                                        <option value="5">Four</option>
+                                                        <option value="0">Zero</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                        <option value="4">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -3208,11 +3208,11 @@ if ($user->isLoggedIn()) {
                                                     <label>Grade</label>
                                                     <select name="bilirubin_direct_grade" id="bilirubin_direct_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
-                                                        <option value="1">Zero</option>
-                                                        <option value="2">One</option>
-                                                        <option value="3">Two</option>
-                                                        <option value="4">Three</option>
-                                                        <option value="5">Four</option>
+                                                        <option value="0">Zero</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                        <option value="4">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -3238,11 +3238,11 @@ if ($user->isLoggedIn()) {
                                                     <label>Grade</label>
                                                     <select name="rbg_grade" id="rbg_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
-                                                        <option value="1">Zero</option>
-                                                        <option value="2">One</option>
-                                                        <option value="3">Two</option>
-                                                        <option value="4">Three</option>
-                                                        <option value="5">Four</option>
+                                                        <option value="0">Zero</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                        <option value="4">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -3274,11 +3274,11 @@ if ($user->isLoggedIn()) {
                                                     <label>Grade</label>
                                                     <select name="hb_grade" id="hb_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
-                                                        <option value="1">Zero</option>
-                                                        <option value="2">One</option>
-                                                        <option value="3">Two</option>
-                                                        <option value="4">Three</option>
-                                                        <option value="5">Four</option>
+                                                        <option value="0">Zero</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                        <option value="4">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -3328,11 +3328,11 @@ if ($user->isLoggedIn()) {
                                                     <label>Grade</label>
                                                     <select name="wbc_grade" id="wbc_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
-                                                        <option value="1">Zero</option>
-                                                        <option value="2">One</option>
-                                                        <option value="3">Two</option>
-                                                        <option value="4">Three</option>
-                                                        <option value="5">Four</option>
+                                                        <option value="0">Zero</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                        <option value="4">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -3359,11 +3359,11 @@ if ($user->isLoggedIn()) {
                                                     <label>Grade</label>
                                                     <select name="abs_lymphocytes_grade" id="abs_lymphocytes_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
-                                                        <option value="1">Zero</option>
-                                                        <option value="2">One</option>
-                                                        <option value="3">Two</option>
-                                                        <option value="4">Three</option>
-                                                        <option value="5">Four</option>
+                                                        <option value="0">Zero</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                        <option value="4">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -3390,11 +3390,11 @@ if ($user->isLoggedIn()) {
                                                     <label>Grade</label>
                                                     <select name="plt_grade" id="plt_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
-                                                        <option value="1">Zero</option>
-                                                        <option value="2">One</option>
-                                                        <option value="3">Two</option>
-                                                        <option value="4">Three</option>
-                                                        <option value="5">Four</option>
+                                                        <option value="0">Zero</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                        <option value="4">Four</option>
                                                     </select>
                                                 </div>
                                             </div>
