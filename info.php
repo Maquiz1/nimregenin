@@ -3692,6 +3692,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['method'] ?>">Axillary</option>
                                                         <?php } elseif ($patient['method'] == "3") { ?>
                                                             <option value="<?= $patient['method'] ?>">Tympanic</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Oral</option>
                                                         <option value="2">Axillary</option>
@@ -3764,6 +3766,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['appearance'] ?>">Abnormal</option>
                                                         <?php } elseif ($patient['appearance'] == "3") { ?>
                                                             <option value="<?= $patient['appearance'] ?>">Not examined</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Normal</option>
                                                         <option value="2">Abnormal</option>
@@ -3794,6 +3798,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['appearance_signifcnt'] ?>">Yes</option>
                                                         <?php } elseif ($patient['appearance_signifcnt'] == "2") { ?>
                                                             <option value="<?= $patient['appearance_signifcnt'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -3816,6 +3822,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['heent'] ?>">Abnormal</option>
                                                         <?php } elseif ($patient['heent'] == "3") { ?>
                                                             <option value="<?= $patient['heent'] ?>">Not examined</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Normal</option>
                                                         <option value="2">Abnormal</option>
@@ -3846,6 +3854,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['heent_signifcnt'] ?>">Yes</option>
                                                         <?php } elseif ($patient['heent_signifcnt'] == "2") { ?>
                                                             <option value="<?= $patient['heent_signifcnt'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -3868,6 +3878,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['respiratory'] ?>">Abnormal</option>
                                                         <?php } elseif ($patient['respiratory'] == "3") { ?>
                                                             <option value="<?= $patient['respiratory'] ?>">Not examined</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Normal</option>
                                                         <option value="2">Abnormal</option>
@@ -3898,6 +3910,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['respiratory_signifcnt'] ?>">Yes</option>
                                                         <?php } elseif ($patient['respiratory_signifcnt'] == "2") { ?>
                                                             <option value="<?= $patient['respiratory_signifcnt'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -3920,6 +3934,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['cardiovascular'] ?>">Abnormal</option>
                                                         <?php } elseif ($patient['cardiovascular'] == "3") { ?>
                                                             <option value="<?= $patient['cardiovascular'] ?>">Not examined</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Normal</option>
                                                         <option value="2">Abnormal</option>
@@ -3950,6 +3966,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['cardiovascular_signifcnt'] ?>">Yes</option>
                                                         <?php } elseif ($patient['cardiovascular_signifcnt'] == "2") { ?>
                                                             <option value="<?= $patient['cardiovascular_signifcnt'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -3973,6 +3991,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['abdnominal'] ?>">Abnormal</option>
                                                         <?php } elseif ($patient['abdnominal'] == "3") { ?>
                                                             <option value="<?= $patient['abdnominal'] ?>">Not examined</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Normal</option>
                                                         <option value="2">Abnormal</option>
@@ -4003,6 +4023,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['abdnominal_signifcnt'] ?>">Yes</option>
                                                         <?php } elseif ($patient['abdnominal_signifcnt'] == "2") { ?>
                                                             <option value="<?= $patient['abdnominal_signifcnt'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -4026,6 +4048,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['urogenital'] ?>">Abnormal</option>
                                                         <?php } elseif ($patient['urogenital'] == "3") { ?>
                                                             <option value="<?= $patient['urogenital'] ?>">Not examined</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Normal</option>
                                                         <option value="2">Abnormal</option>
@@ -4056,6 +4080,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['urogenital_signifcnt'] ?>">Yes</option>
                                                         <?php } elseif ($patient['urogenital_signifcnt'] == "2") { ?>
                                                             <option value="<?= $patient['urogenital_signifcnt'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -4078,6 +4104,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['musculoskeletal'] ?>">Abnormal</option>
                                                         <?php } elseif ($patient['musculoskeletal'] == "3") { ?>
                                                             <option value="<?= $patient['musculoskeletal'] ?>">Not examined</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Normal</option>
                                                         <option value="2">Abnormal</option>
@@ -4108,6 +4136,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['musculoskeletal_signifcnt'] ?>">Yes</option>
                                                         <?php } elseif ($patient['musculoskeletal_signifcnt'] == "2") { ?>
                                                             <option value="<?= $patient['musculoskeletal_signifcnt'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -4130,6 +4160,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['neurological'] ?>">Abnormal</option>
                                                         <?php } elseif ($patient['neurological'] == "3") { ?>
                                                             <option value="<?= $patient['neurological'] ?>">Not examined</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Normal</option>
                                                         <option value="2">Abnormal</option>
@@ -4160,6 +4192,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['neurological_signifcnt'] ?>">Yes</option>
                                                         <?php } elseif ($patient['neurological_signifcnt'] == "2") { ?>
                                                             <option value="<?= $patient['neurological_signifcnt'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -4182,6 +4216,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['psychological'] ?>">Abnormal</option>
                                                         <?php } elseif ($patient['psychological'] == "3") { ?>
                                                             <option value="<?= $patient['psychological'] ?>">Not examined</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Normal</option>
                                                         <option value="2">Abnormal</option>
@@ -4212,6 +4248,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['psychological_signifcnt'] ?>">Yes</option>
                                                         <?php } elseif ($patient['psychological_signifcnt'] == "2") { ?>
                                                             <option value="<?= $patient['psychological_signifcnt'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -4234,6 +4272,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['endocrime'] ?>">Abnormal</option>
                                                         <?php } elseif ($patient['endocrime'] == "3") { ?>
                                                             <option value="<?= $patient['endocrime'] ?>">Not examined</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Normal</option>
                                                         <option value="2">Abnormal</option>
@@ -4264,6 +4304,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['endocrime_signifcnt'] ?>">Yes</option>
                                                         <?php } elseif ($patient['endocrime_signifcnt'] == "2") { ?>
                                                             <option value="<?= $patient['endocrime_signifcnt'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -4286,6 +4328,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['lymphatic'] ?>">Abnormal</option>
                                                         <?php } elseif ($patient['lymphatic'] == "3") { ?>
                                                             <option value="<?= $patient['lymphatic'] ?>">Not examined</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Normal</option>
                                                         <option value="2">Abnormal</option>
@@ -4316,6 +4360,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['lymphatic_signifcnt'] ?>">Yes</option>
                                                         <?php } elseif ($patient['lymphatic_signifcnt'] == "2") { ?>
                                                             <option value="<?= $patient['lymphatic_signifcnt'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -4339,6 +4385,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['skin'] ?>">Abnormal</option>
                                                         <?php } elseif ($patient['skin'] == "3") { ?>
                                                             <option value="<?= $patient['skin'] ?>">Not examined</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Normal</option>
                                                         <option value="2">Abnormal</option>
@@ -4369,6 +4417,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['skin_signifcnt'] ?>">Yes</option>
                                                         <?php } elseif ($patient['skin_signifcnt'] == "2") { ?>
                                                             <option value="<?= $patient['skin_signifcnt'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -4390,6 +4440,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['physical_exams_other'] ?>">Yes</option>
                                                         <?php } elseif ($patient['physical_exams_other'] == "2") { ?>
                                                             <option value="<?= $patient['physical_exams_other'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -4420,6 +4472,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['physical_other_system'] ?>">Abnormal</option>
                                                         <?php } elseif ($patient['physical_other_system'] == "3") { ?>
                                                             <option value="<?= $patient['physical_other_system'] ?>">Not examined</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Normal</option>
                                                         <option value="2">Abnormal</option>
@@ -4451,6 +4505,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['physical_other_signifcnt'] ?>">Yes</option>
                                                         <?php } elseif ($patient['physical_other_signifcnt'] == "2") { ?>
                                                             <option value="<?= $patient['physical_other_signifcnt'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -4523,15 +4579,15 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['fever'] ?>">Yes</option>
                                                         <?php } elseif ($patient['fever'] == "2") { ?>
                                                             <option value="<?= $patient['fever'] ?>">No</option>
-                                                        <?php } ?>
+                                                        <?php } else { ?>
                                                             <option value="">Select</option>
-                                                            <option value="1">Yes</option>
-                                                            <option value="2">No</option>
+                                                        <?php } ?>
+                                                        <option value="1">Yes</option>
+                                                        <option value="2">No</option>
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
-
 
                                         <div class="col-sm-3">
                                             <div class="row-form clearfix">
@@ -4543,8 +4599,9 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['vomiting'] ?>">Yes</option>
                                                         <?php } elseif ($patient['vomiting'] == "2") { ?>
                                                             <option value="<?= $patient['vomiting'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
-                                                        <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
                                                     </select>
@@ -4562,8 +4619,9 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['diarrhoea'] ?>">Yes</option>
                                                         <?php } elseif ($patient['diarrhoea'] == "2") { ?>
                                                             <option value="<?= $patient['diarrhoea'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
-                                                        <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
                                                     </select>
@@ -4581,8 +4639,9 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['headaches'] ?>">Yes</option>
                                                         <?php } elseif ($patient['headaches'] == "2") { ?>
                                                             <option value="<?= $patient['headaches'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
-                                                        <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
                                                     </select>
@@ -4604,8 +4663,9 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['difficult_breathing'] ?>">Yes</option>
                                                         <?php } elseif ($patient['difficult_breathing'] == "2") { ?>
                                                             <option value="<?= $patient['difficult_breathing'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
-                                                        <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
                                                     </select>
@@ -4624,8 +4684,9 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['sore_throat'] ?>">Yes</option>
                                                         <?php } elseif ($patient['sore_throat'] == "2") { ?>
                                                             <option value="<?= $patient['sore_throat'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
-                                                        <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
                                                     </select>
@@ -4642,8 +4703,9 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['fatigue'] ?>">Yes</option>
                                                         <?php } elseif ($patient['fatigue'] == "2") { ?>
                                                             <option value="<?= $patient['fatigue'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
-                                                        <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
                                                     </select>
@@ -4661,8 +4723,9 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['muscle_pain'] ?>">Yes</option>
                                                         <?php } elseif ($patient['muscle_pain'] == "2") { ?>
                                                             <option value="<?= $patient['muscle_pain'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
-                                                        <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
                                                     </select>
@@ -4683,8 +4746,9 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['loss_consciousness'] ?>">Yes</option>
                                                         <?php } elseif ($patient['loss_consciousness'] == "2") { ?>
                                                             <option value="<?= $patient['loss_consciousness'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
-                                                        <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
                                                     </select>
@@ -4702,8 +4766,9 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['backpain'] ?>">Yes</option>
                                                         <?php } elseif ($patient['backpain'] == "2") { ?>
                                                             <option value="<?= $patient['backpain'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
-                                                        <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
                                                     </select>
@@ -4721,8 +4786,9 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['weight_loss'] ?>">Yes</option>
                                                         <?php } elseif ($patient['weight_loss'] == "2") { ?>
                                                             <option value="<?= $patient['weight_loss'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
-                                                        <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
                                                     </select>
@@ -4740,8 +4806,9 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['heartburn_indigestion'] ?>">Yes</option>
                                                         <?php } elseif ($patient['heartburn_indigestion'] == "2") { ?>
                                                             <option value="<?= $patient['heartburn_indigestion'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
-                                                        <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
                                                     </select>
@@ -4761,8 +4828,9 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['swelling'] ?>">Yes</option>
                                                         <?php } elseif ($patient['swelling'] == "2") { ?>
                                                             <option value="<?= $patient['swelling'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
-                                                        <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
                                                     </select>
@@ -4780,8 +4848,9 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['pv_bleeding'] ?>">Yes</option>
                                                         <?php } elseif ($patient['pv_bleeding'] == "2") { ?>
                                                             <option value="<?= $patient['pv_bleeding'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
-                                                        <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
                                                     </select>
@@ -4799,8 +4868,9 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['pv_discharge'] ?>">Yes</option>
                                                         <?php } elseif ($patient['pv_discharge'] == "2") { ?>
                                                             <option value="<?= $patient['pv_discharge'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
-                                                        <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
                                                     </select>
@@ -4818,8 +4888,9 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['micitrition'] ?>">Yes</option>
                                                         <?php } elseif ($patient['micitrition'] == "2") { ?>
                                                             <option value="<?= $patient['micitrition'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
-                                                        <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
                                                     </select>
@@ -4841,8 +4912,9 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['convulsions'] ?>">Yes</option>
                                                         <?php } elseif ($patient['convulsions'] == "2") { ?>
                                                             <option value="<?= $patient['convulsions'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
-                                                        <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
                                                     </select>
@@ -4860,8 +4932,9 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['blood_urine'] ?>">Yes</option>
                                                         <?php } elseif ($patient['blood_urine'] == "2") { ?>
                                                             <option value="<?= $patient['blood_urine'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
-                                                        <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
                                                     </select>
@@ -4881,8 +4954,9 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['symptoms_other'] ?>">Yes</option>
                                                         <?php } elseif ($patient['symptoms_other'] == "2") { ?>
                                                             <option value="<?= $patient['symptoms_other'] ?>">No</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select</option>
                                                         <?php } ?>
-                                                        <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
                                                     </select>
