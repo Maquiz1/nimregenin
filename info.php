@@ -2273,7 +2273,7 @@ if ($user->isLoggedIn()) {
                                         <tr>
                                             <td>3</td>
                                             <td>CRF 3</td>
-                                            <?php if ($override->get('crf3', 'patient_id', $_GET['cid'])) { ?>
+                                            <?php if ($override->get1('crf3', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])) { ?>
                                                 <td><a href="info.php?id=10&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>" class="btn btn-success" disabled> Change </a> </td>
                                             <?php } else { ?>
                                                 <td><a href="add.php?id=10&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>" class="btn btn-warning">Add </a> </td>
@@ -4551,7 +4551,7 @@ if ($user->isLoggedIn()) {
                             </div>
                         </div>
                     <?php } elseif ($_GET['id'] == 10) { ?>
-                        <?php $patient = $override->get('crf3', 'patient_id', $_GET['cid'])[0] ?>
+                        <?php $patient = $override->get1('crf3', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
                         <div class="col-md-offset-1 col-md-8">
                             <div class="head clearfix">
                                 <div class="isw-ok"></div>

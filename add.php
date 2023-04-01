@@ -385,52 +385,26 @@ if ($user->isLoggedIn()) {
                         'vcode' => $_GET["vcode"],
                         'crf3_date' => Input::get('crf3_date'),
                         'fever' => Input::get('fever'),
-                        'shivering' => Input::get('shivering'),
-                        'cough' => Input::get('cough'),
-                        'pain' => Input::get('pain'),
-                        'breath' => Input::get('breath'),
-                        'vomit' => Input::get('vomit'),
+                        'vomiting' => Input::get('vomiting'),
                         'diarrhoea' => Input::get('diarrhoea'),
-                        'headache' => Input::get('headache'),
-                        'difficult' => Input::get('difficult'),
-                        'nose' => Input::get('nose'),
-                        'throat' => Input::get('throat'),
+                        'headaches' => Input::get('headaches'),
+                        'difficult_breathing' => Input::get('difficult_breathing'),
+                        'sore_throat' => Input::get('sore_throat'),
                         'fatigue' => Input::get('fatigue'),
-                        'muscle' => Input::get('muscle'),
-                        'smell' => Input::get('smell'),
-                        'taste' => Input::get('taste'),
-                        'sneezing' => Input::get('sneezing'),
-                        'dizziness' => Input::get('dizziness'),
-                        'blurred' => Input::get('blurred'),
+                        'muscle_pain' => Input::get('muscle_pain'),
+                        'loss_consciousness' => Input::get('loss_consciousness'),
+                        'backpain' => Input::get('backpain'),
+                        'weight_loss' => Input::get('weight_loss'),
+                        'heartburn_indigestion' => Input::get('heartburn_indigestion'),
+                        'swelling' => Input::get('swelling'),
+                        'pv_bleeding' => Input::get('pv_bleeding'),
+                        'pv_discharge' => Input::get('pv_discharge'),
+                        'micitrition' => Input::get('micitrition'),
+                        'convulsions' => Input::get('convulsions'),
+                        'blood_urine' => Input::get('blood_urine'),
                         'symptoms_other' => Input::get('symptoms_other'),
+                        'symptoms_other_specify' => Input::get('symptoms_other_specify'),
                         'other_comments' => Input::get('other_comments'),
-                        'oxygen_therapy' => Input::get('oxygen_therapy'),
-                        'oxygen_therapy_yes' => Input::get('oxygen_therapy_yes'),
-                        'oxygen_therapy_herbal' => Input::get('oxygen_therapy_herbal'),
-                        'oxygen_therapy_litres' => Input::get('oxygen_therapy_litres'),
-                        'oxygen_plant' => Input::get('oxygen_plant'),
-                        'oxygen_therapy_start' => Input::get('oxygen_therapy_start'),
-                        'oxygen_therapy_ongoing' => Input::get('oxygen_therapy_ongoing'),
-                        'oxygen_therapy_end' => Input::get('oxygen_therapy_end'),
-                        'oxygen_days' => Input::get('oxygen_days'),
-                        'cpap_use' => Input::get('cpap_use'),
-                        'cpap_yes' => Input::get('cpap_yes'),
-                        'cpap_herbal' => Input::get('cpap_herbal'),
-                        'cpap_fi02' => Input::get('cpap_fi02'),
-                        'cpap_sat02' => Input::get('cpap_sat02'),
-                        'cpap_cylinder' => Input::get('cpap_cylinder'),
-                        'cpap_plant' => Input::get('cpap_plant'),
-                        'cpap_start' => Input::get('cpap_start'),
-                        'cpap_ongoing' => Input::get('cpap_ongoing'),
-                        'cpap_end' => Input::get('cpap_end'),
-                        'ventilator' => Input::get('ventilator'),
-                        'ventilator_yes' => Input::get('ventilator_yes'),
-                        'ventilator_herbal' => Input::get('ventilator_herbal'),
-                        'ventilator_fi02' => Input::get('ventilator_fi02'),
-                        'ventilator_litres' => Input::get('ventilator_litres'),
-                        'ventilator_start' => Input::get('ventilator_start'),
-                        'ventilator_ongoing' => Input::get('ventilator_ongoing'),
-                        'ventilator_end' => Input::get('ventilator_end'),
                         'crf3_cmpltd_date' => Input::get('crf3_cmpltd_date'),
                         'patient_id' => $_GET['cid'],
                         'staff_id' => $user->data()->id,
@@ -2598,7 +2572,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>B. Vomiting:</label>
-                                                    <select name="vomit" id="vomit" style="width: 100%;" required>
+                                                    <select name="vomiting" id="vomiting" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -2611,7 +2585,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>G. Diarrhoea:</label>
+                                                    <label>C. Diarrhoea:</label>
                                                     <select name="diarrhoea" id="diarrhoea" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
@@ -2626,7 +2600,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>H. Headaches:</label>
-                                                    <select name="headache" id="headache" style="width: 100%;" required>
+                                                    <select name="headaches" id="headaches" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -2644,7 +2618,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>I. Difficulty in breathing:</label>
-                                                    <select name="difficult" id="difficult" style="width: 100%;" required>
+                                                    <select name="difficult_breathing" id="difficult_breathing" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -2659,7 +2633,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>K. Sore throat:</label>
-                                                    <select name="throat" id="throat" style="width: 100%;" required>
+                                                    <select name="sore_throat" id="sore_throat" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -2686,7 +2660,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>M. Muscle pain:</label>
-                                                    <select name="muscle" id="muscle" style="width: 100%;" required>
+                                                    <select name="muscle_pain" id="muscle_pain" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -2703,7 +2677,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>N. Loss of consciousness:</label>
-                                                    <select name="smell" id="smell" style="width: 100%;" required>
+                                                    <select name="loss_consciousness" id="loss_consciousness" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -2717,7 +2691,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>N. Backpain:</label>
-                                                    <select name="smell" id="smell" style="width: 100%;" required>
+                                                    <select name="backpain" id="backpain" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -2731,7 +2705,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>N. Unexplained weight loss:</label>
-                                                    <select name="smell" id="smell" style="width: 100%;" required>
+                                                    <select name="weight_loss" id="weight_loss" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -2745,7 +2719,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>N. Heartburn and Indigestion:</label>
-                                                    <select name="smell" id="smell" style="width: 100%;" required>
+                                                    <select name="heartburn_indigestion" id="heartburn_indigestion" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -2761,7 +2735,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>N. Swelling:</label>
-                                                    <select name="smell" id="smell" style="width: 100%;" required>
+                                                    <select name="swelling" id="swelling" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -2775,7 +2749,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>N. Abnormal PV bleeding:</label>
-                                                    <select name="smell" id="smell" style="width: 100%;" required>
+                                                    <select name="pv_bleeding" id="pv_bleeding" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -2789,7 +2763,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>N. Abnormal PV discharge:</label>
-                                                    <select name="smell" id="smell" style="width: 100%;" required>
+                                                    <select name="pv_discharge" id="pv_discharge" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -2803,7 +2777,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>N. Abnormal micitrition habits:</label>
-                                                    <select name="smell" id="smell" style="width: 100%;" required>
+                                                    <select name="micitrition" id="micitrition" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -2821,7 +2795,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>N. Convulsions:</label>
-                                                    <select name="smell" id="smell" style="width: 100%;" required>
+                                                    <select name="convulsions" id="convulsions" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -2835,7 +2809,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>N. Blood in urine:</label>
-                                                    <select name="smell" id="smell" style="width: 100%;" required>
+                                                    <select name="blood_urine" id="blood_urine" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -2886,7 +2860,7 @@ if ($user->isLoggedIn()) {
                                             <!-- select -->
                                             <div class="form-group">
                                                 <label>Date of Completion:</label>
-                                                <input value="" class="validate[required]" type="text" name="crf4_cmpltd_date" id="crf1_cmpltd_date" />
+                                                <input value="" class="validate[required]" type="text" name="crf3_cmpltd_date" id="crf3_cmpltd_date" />
                                             </div>
                                         </div>
                                     </div>
