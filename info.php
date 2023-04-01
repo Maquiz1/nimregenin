@@ -700,6 +700,84 @@ if ($user->isLoggedIn()) {
             } else {
                 $pageError = $validate->errors();
             }
+        }elseif (Input::get('add_crf4')) {
+            $validate = $validate->check($_POST, array(
+                'sample_date' => array(
+                    'required' => true,
+                ),
+
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->updateRecord('crf4', array(
+                        'vid' => $_GET["vid"],
+                        'vcode' => $_GET["vcode"],
+                        'sample_date' => Input::get('sample_date'),
+                        'renal_urea' => Input::get('renal_urea'),
+                        'renal_creatinine' => Input::get('renal_creatinine'),
+                        'renal_creatinine_grade' => Input::get('renal_creatinine_grade'),
+                        'renal_egfr' => Input::get('renal_egfr'),
+                        'liver_ast' => Input::get('liver_ast'),
+                        'liver_ast_grade' => Input::get('liver_ast_grade'),
+                        'liver_alt' => Input::get('liver_alt'),
+                        'liver_alt_grade' => Input::get('liver_alt_grade'),
+                        'liver_alp' => Input::get('liver_alp'),
+                        'liver_alp_grade' => Input::get('liver_alp_grade'),
+                        'liver_pt' => Input::get('liver_pt'),
+                        'liver_pt_grade' => Input::get('liver_pt_grade'),
+                        'liver_ptt' => Input::get('liver_ptt'),
+                        'liver_ptt_grade' => Input::get('liver_ptt_grade'),
+                        'liver_inr' => Input::get('liver_inr'),
+                        'liver_inr_grade' => Input::get('liver_inr_grade'),
+                        'liver_ggt' => Input::get('liver_ggt'),
+                        'liver_albumin' => Input::get('liver_albumin'),
+                        'liver_albumin_grade' => Input::get('liver_albumin_grade'),
+                        'liver_bilirubin_total' => Input::get('liver_bilirubin_total'),
+                        'bilirubin_total_grade' => Input::get('bilirubin_total_grade'),
+                        'liver_bilirubin_direct' => Input::get('liver_bilirubin_direct'),
+                        'bilirubin_direct_grade' => Input::get('bilirubin_direct_grade'),
+                        'rbg' => Input::get('rbg'),
+                        'rbg_grade' => Input::get('rbg_grade'),
+                        'ldh' => Input::get('ldh'),
+                        'crp' => Input::get('crp'),
+                        'd_dimer' => Input::get('d_dimer'),
+                        'ferritin' => Input::get('ferritin'),
+                        'wbc' => Input::get('wbc'),
+                        'wbc_grade' => Input::get('wbc_grade'),
+                        'abs_neutrophil' => Input::get('abs_neutrophil'),
+                        'abs_neutrophil_grade' => Input::get('abs_neutrophil_grade'),
+                        'abs_lymphocytes' => Input::get('abs_lymphocytes'),
+                        'abs_lymphocytes_grade' => Input::get('abs_lymphocytes_grade'),
+                        'abs_eosinophils' => Input::get('abs_eosinophils'),
+                        'abs_monocytes' => Input::get('abs_monocytes'),
+                        'abs_basophils' => Input::get('abs_basophils'),
+                        'hb' => Input::get('hb'),
+                        'hb_grade' => Input::get('hb_grade'),
+                        'mcv' => Input::get('mcv'),
+                        'mch' => Input::get('mch'),
+                        'hct' => Input::get('hct'),
+                        'rbc' => Input::get('rbc'),
+                        'plt' => Input::get('plt'),
+                        'plt_grade' => Input::get('plt_grade'),
+                        'chest_xray' => Input::get('chest_xray'),
+                        'ct_chest' => Input::get('ct_chest'),
+                        'ct_chest_specify' => Input::get('ct_chest_specify'),
+                        'ecg_specify' => Input::get('ecg_specify'),
+                        'crf4_cmpltd_date' => Input::get('crf4_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ), Input::get('id'));
+                    $successMessage = 'CRF3 added Successful';
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
         }
     }
 } else {
@@ -5835,7 +5913,7 @@ if ($user->isLoggedIn()) {
 
                                     <div class="footer tar">
                                         <input type="hidden" name="id" value="<?= $patient['id'] ?>">
-                                        <input type="submit" name="add_crf4" value="Submit" class="btn btn-default">
+                                        <input type="submit" name="update_crf4" value="Submit" class="btn btn-default">
                                     </div>
                                 </form>
                             </div>
