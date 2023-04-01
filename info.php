@@ -582,11 +582,7 @@ if ($user->isLoggedIn()) {
                         'bmi' => Input::get('bmi'),
                         'time' => Input::get('time'),
                         'temperature' => Input::get('temperature'),
-                        'method' => Input::get('method'),
-                        'oxygen' => Input::get('oxygen'),
-                        'on_oxygen' => Input::get('on_oxygen'),
-                        'days_on_oxygen' => Input::get('days_on_oxygen'),
-                        'cylinder_used' => Input::get('cylinder_used'),
+                        'method' => Input::get('method'),                        
                         'respiratory_rate' => Input::get('respiratory_rate'),
                         'heart_rate' => Input::get('heart_rate'),
                         'systolic' => Input::get('systolic'),
@@ -7865,7 +7861,7 @@ if ($user->isLoggedIn()) {
                                                             <?php } else if ($st['self_care'] == 2) { ?>
                                                                 <option value="<?= $st['self_care'] ?>">Nina matatizo kiasi katika kujisafisha au kuvaa mwenyewe</option>
                                                             <?php } else if ($st['self_care'] == 3) { ?>
-                                                                <option value="<?= $st['self_care'] ?>">iwezi kujisafisha wala kuvaa mwenyewe</option>
+                                                                <option value="<?= $st['self_care'] ?>">Siwezi kujisafisha wala kuvaa mwenyewe</option>
                                                             <?php } else { ?>
                                                                 <option value="">Select</option>
                                                         <?php }
