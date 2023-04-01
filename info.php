@@ -700,7 +700,7 @@ if ($user->isLoggedIn()) {
             } else {
                 $pageError = $validate->errors();
             }
-        }elseif (Input::get('add_crf4')) {
+        } elseif (Input::get('update_crf4')) {
             $validate = $validate->check($_POST, array(
                 'sample_date' => array(
                     'required' => true,
@@ -759,10 +759,13 @@ if ($user->isLoggedIn()) {
                         'rbc' => Input::get('rbc'),
                         'plt' => Input::get('plt'),
                         'plt_grade' => Input::get('plt_grade'),
+                        'cancer' => Input::get('cancer'),
+                        'prostate' => Input::get('prostate'),
                         'chest_xray' => Input::get('chest_xray'),
                         'ct_chest' => Input::get('ct_chest'),
                         'ct_chest_specify' => Input::get('ct_chest_specify'),
-                        'ecg_specify' => Input::get('ecg_specify'),
+                        'ultrasound' => Input::get('ultrasound'),
+                        'ultrasound_specify' => Input::get('ultrasound_specify'),
                         'crf4_cmpltd_date' => Input::get('crf4_cmpltd_date'),
                         'patient_id' => $_GET['cid'],
                         'staff_id' => $user->data()->id,
@@ -770,7 +773,7 @@ if ($user->isLoggedIn()) {
                         'created_on' => date('Y-m-d'),
                         'site_id' => $user->data()->site_id,
                     ), Input::get('id'));
-                    $successMessage = 'CRF3 added Successful';
+                    $successMessage = 'CRF4 updated Successful';
                     Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode']);
                 } catch (Exception $e) {
                     die($e->getMessage());
@@ -2361,8 +2364,8 @@ if ($user->isLoggedIn()) {
                                         <tr>
                                             <td>4</td>
                                             <td>CRF 4</td>
-                                            <?php if ($override->get('crf4', 'patient_id', $_GET['cid'])) { ?>
-                                                <td><a href="add.php?id=11&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>" class="btn btn-success" disabled> Change </a> </td>
+                                            <?php if ($override->get1('crf4', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])) { ?>
+                                                <td><a href="info.php?id=11&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>" class="btn btn-success" disabled> Change </a> </td>
                                             <?php } else { ?>
                                                 <td><a href="add.php?id=11&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>" class="btn btn-warning">Add </a> </td>
                                             <?php } ?>
@@ -5082,7 +5085,7 @@ if ($user->isLoggedIn()) {
                         </div>
 
                     <?php } elseif ($_GET['id'] == 11) { ?>
-                        <?php $patient = $override->get1('crf3', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
+                        <?php $patient = $override->get1('crf4', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
                         <div class="col-md-offset-1 col-md-8">
                             <div class="head clearfix">
                                 <div class="isw-ok"></div>
@@ -5669,7 +5672,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>Grade</label>
                                                     <select name="wbc_grade" id="wbc_grade" style="width: 100%;" required>
-                                                    <?php if ($patient['wbc_grade'] == "0") { ?>
+                                                        <?php if ($patient['wbc_grade'] == "0") { ?>
                                                             <option value="<?= $patient['wbc_grade'] ?>">Zero</option>
                                                         <?php } elseif ($patient['wbc_grade'] == "1") { ?>
                                                             <option value="<?= $patient['wbc_grade'] ?>">One</option>
@@ -5880,11 +5883,11 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>11. Abdominal Ultrasound report</label>
-                                                    <select name="ecg" id="ecg" style="width: 100%;" required>
-                                                        <?php if ($patient['ecg'] == "1") { ?>
-                                                            <option value="<?= $patient['ecg'] ?>">Normal</option>
-                                                        <?php } elseif ($patient['ecg'] == "2") { ?>
-                                                            <option value="<?= $patient['ecg'] ?>">Abnormal</option>
+                                                    <select name="ultrasound" id="ultrasound" style="width: 100%;" required>
+                                                        <?php if ($patient['ultrasound'] == "1") { ?>
+                                                            <option value="<?= $patient['ultrasound'] ?>">Normal</option>
+                                                        <?php } elseif ($patient['ultrasound'] == "2") { ?>
+                                                            <option value="<?= $patient['ultrasound'] ?>">Abnormal</option>
                                                         <?php } else { ?>
                                                             <option value="">Select</option>
                                                         <?php } ?>
@@ -5895,12 +5898,12 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6" id="ecg_specify">
+                                        <div class="col-sm-6" id="ultrasound_specify">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>11. Specify (Report from Radiologist)</label>
-                                                    <input value="<?= $patient['ecg_specify'] ?>" type="text" name="ecg_specify" />
+                                                    <input value="<?= $patient['ultrasound_specify'] ?>" type="text" name="ultrasound_specify" />
                                                 </div>
                                             </div>
                                         </div>

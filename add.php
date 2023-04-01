@@ -481,10 +481,13 @@ if ($user->isLoggedIn()) {
                         'rbc' => Input::get('rbc'),
                         'plt' => Input::get('plt'),
                         'plt_grade' => Input::get('plt_grade'),
+                        'cancer' => Input::get('cancer'),
+                        'prostate' => Input::get('prostate'),
                         'chest_xray' => Input::get('chest_xray'),
                         'ct_chest' => Input::get('ct_chest'),
                         'ct_chest_specify' => Input::get('ct_chest_specify'),
-                        'ecg_specify' => Input::get('ecg_specify'),
+                        'ultrasound' => Input::get('ultrasound'),
+                        'ultrasound_specify' => Input::get('ultrasound_specify'),
                         'crf4_cmpltd_date' => Input::get('crf4_cmpltd_date'),
                         'patient_id' => $_GET['cid'],
                         'staff_id' => $user->data()->id,
@@ -492,10 +495,8 @@ if ($user->isLoggedIn()) {
                         'created_on' => date('Y-m-d'),
                         'site_id' => $user->data()->site_id,
                     ));
-
-
-                    $successMessage = 'CRF3 added Successful';
-                    Redirect::to('info.php?id=6&cid=' . $_GET['cid']);
+                    $successMessage = 'CRF4 added Successful';
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode']);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
