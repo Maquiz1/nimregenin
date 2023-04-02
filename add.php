@@ -227,6 +227,7 @@ if ($user->isLoggedIn()) {
                 ),
             ));
             if ($validate->passed()) {
+                print_r($_POST);
                 try {
                     $user->createRecord('crf1', array(
                         'vid' => $_GET["vid"],
@@ -265,14 +266,6 @@ if ($user->isLoggedIn()) {
                         'herbal_end' => Input::get('herbal_end'),
                         'herbal_dose' => Input::get('herbal_dose'),
                         'herbal_frequency' => Input::get('herbal_frequency'),
-                        'radiotherapy' => Input::get('radiotherapy'),
-                        'standard_medication' => Input::get('standard_medication'),
-                        'standard_start' => Input::get('standard_start'),
-                        'standard_ongoing' => Input::get('standard_ongoing'),
-                        'standard_end' => Input::get('standard_end'),
-                        'standard_dose' => Input::get('standard_dose'),
-                        'standard_frequecy' => Input::get('standard_frequecy'),
-                        'standard_remarks' => Input::get('standard_remarks'),
                         'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
                         'patient_id' => $_GET['cid'],
                         'staff_id' => $user->data()->id,
@@ -280,6 +273,30 @@ if ($user->isLoggedIn()) {
                         'created_on' => date('Y-m-d'),
                         'site_id' => $user->data()->site_id,
                     ));
+
+                    $si = 0;
+                    foreach (Input::get('treatment') as $sid) {
+                        $user->createRecord('chemotherapy', array(
+                            'vid' => $_GET["vid"],
+                            'vcode' => $_GET["vcode"],
+                            'treatment' => Input::get('treatment')[$si],
+                            'standard_medication' => Input::get('standard_medication')[$si],
+                            'standard_start' => Input::get('standard_start')[$si],
+                            'standard_ongoing' => Input::get('standard_ongoing')[$si],
+                            'standard_end' => Input::get('standard_end')[$si],
+                            'standard_dose' => Input::get('standard_dose')[$si],
+                            'standard_frequecy' => Input::get('standard_frequecy')[$si],
+                            'standard_remarks' => Input::get('standard_remarks')[$si],
+                            'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date')[$si],
+                            'patient_id' => $_GET['cid'],
+                            'staff_id' => $user->data()->id,
+                            'status' => 1,
+                            'created_on' => date('Y-m-d'),
+                            'site_id' => $user->data()->site_id,
+                        ));
+                        $si++;
+                    }
+
                     $successMessage = 'CRF1 added Successful';
                     Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode']);
                 } catch (Exception $e) {
@@ -1329,6 +1346,11 @@ if ($user->isLoggedIn()) {
                                         <h1>USE OF HERBAL MEDICINES</h1>
                                     </div>
 
+                                    <div class="head clearfix">
+                                        <div class="isw-ok"></div>
+                                        <h1>NIMREGENIN Herbal preparation</h1>
+                                    </div>
+
 
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">8. Are you using NIMREGENIN herbal preparation?:</div>
@@ -1339,12 +1361,6 @@ if ($user->isLoggedIn()) {
                                                 <option value="2">No</option>
                                             </select>
                                         </div>
-                                    </div>
-
-
-                                    <div class="head clearfix" id="nimregenin_header">
-                                        <div class="isw-ok"></div>
-                                        <h1>NIMREGENIN Herbal preparation</h1>
                                     </div>
 
                                     <div class="row" id="nimregenin_preparation">
@@ -1368,7 +1384,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-1">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -1412,6 +1428,12 @@ if ($user->isLoggedIn()) {
                                         </div>
                                     </div>
 
+
+                                    <div class="head clearfix">
+                                        <div class="isw-ok"></div>
+                                        <h1>Other Herbal preparation</h1>
+                                    </div>
+
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">8. Are you using any other herbal preparation?:</div>
                                         <div class="col-md-9">
@@ -1424,18 +1446,14 @@ if ($user->isLoggedIn()) {
                                     </div>
 
 
-                                    <div class="head clearfix" id="herbal_header">
-                                        <div class="isw-ok"></div>
-                                        <h1>Other Herbal preparation</h1>
-                                    </div>
 
-                                    <div class="row" id="herbal_preparation">
+                                    <div class="row" id="herbal_preparation1">
                                         <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Herbal preparation</label>
-                                                    <input value="" type="text" name="herbal_preparation" readonly />
+                                                    <label>1. Herbal preparation</label>
+                                                    <input value="" type="text" name="herbal_preparation1" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1444,18 +1462,18 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Start Date:</label>
-                                                    <input value="" class="validate[required]" type="text" name="herbal_start" id="herbal_start" />
+                                                    <label>1. Start Date:</label>
+                                                    <input value="" class="validate[required]" type="text" name="herbal_start1" />
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-1">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Ongoing?:</label>
-                                                    <select name="herbal_ongoing" id="herbal_ongoing" style="width: 100%;">
+                                                    <label>1. Ongoing?:</label>
+                                                    <select name="herbal_ongoing1" id="herbal_ongoing1" style="width: 100%;">
                                                         <option value="">Select</option>
                                                         <option value="1">Yes</option>
                                                         <option value="2">No</option>
@@ -1463,12 +1481,12 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-2" id="herbal_end">
+                                        <div class="col-sm-2" id="herbal_end1">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>End Date:</label>
-                                                    <input value="" class="validate[required]" type="text" name="herbal_end" />
+                                                    <label>1. End Date:</label>
+                                                    <input value="" class="validate[required]" type="text" name="herbal_end1" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1477,8 +1495,8 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Dose:</label>
-                                                    <input value="" class="validate[required]" type="text" name="herbal_dose" id="herbal_dose" />
+                                                    <label>1. Dose:</label>
+                                                    <input value="" type="text" name="herbal_dose1" id="herbal_dose1" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1487,8 +1505,271 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Frequecy:</label>
-                                                    <input value="" class="validate[required]" type="text" name="herbal_frequency" id="herbal_frequency" />
+                                                    <label>1. Frequecy:</label>
+                                                    <input value="" type="text" name="herbal_frequency1" id="herbal_frequency1" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row" id="herbal_preparation1">
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>2. Herbal preparation</label>
+                                                    <input value="" type="text" name="herbal_preparation2" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>2. Start Date:</label>
+                                                    <input value="" class="validate[required]" type="text" name="herbal_start2" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>2. Ongoing?:</label>
+                                                    <select name="herbal_ongoing2" id="herbal_ongoing2" style="width: 100%;">
+                                                        <option value="">Select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="2">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2" id="herbal_end2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>2. End Date:</label>
+                                                    <input value="" class="validate[required]" type="text" name="herbal_end2" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>2. Dose:</label>
+                                                    <input value="" type="text" name="herbal_dose2" id="herbal_dose2" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>2. Frequecy:</label>
+                                                    <input value="" type="text" name="herbal_frequency2" id="herbal_frequency2" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row" id="herbal_preparation3">
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>3. Herbal preparation</label>
+                                                    <input value="" type="text" name="herbal_preparation3" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>3. Start Date:</label>
+                                                    <input value="" class="validate[required]" type="text" name="herbal_start3" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>3. Ongoing?:</label>
+                                                    <select name="herbal_ongoing3" id="herbal_ongoing3" style="width: 100%;">
+                                                        <option value="">Select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="2">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2" id="herbal_end3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>3. End Date:</label>
+                                                    <input value="" class="validate[required]" type="text" name="herbal_end3" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>3. Dose:</label>
+                                                    <input value="" type="text" name="herbal_dose3" id="herbal_dose3" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>3. Frequecy:</label>
+                                                    <input value="" type="text" name="herbal_frequency3" id="herbal_frequency3" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row" id="herbal_preparation4">
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>4. Herbal preparation</label>
+                                                    <input value="" type="text" name="herbal_preparation4" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>4. Start Date:</label>
+                                                    <input value="" class="validate[required]" type="text" name="herbal_start4" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>4. Ongoing?:</label>
+                                                    <select name="herbal_ongoing4" id="herbal_ongoing4" style="width: 100%;">
+                                                        <option value="">Select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="2">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2" id="herbal_end4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>4. End Date:</label>
+                                                    <input value="" class="validate[required]" type="text" name="herbal_end4" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>4. Dose:</label>
+                                                    <input value="" type="text" name="herbal_dose4" id="herbal_dose4" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>4. Frequecy:</label>
+                                                    <input value="" type="text" name="herbal_frequency4" id="herbal_frequency4" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" id="herbal_preparation5">
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>1. Herbal preparation</label>
+                                                    <input value="" type="text" name="herbal_preparation5" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>5. Start Date:</label>
+                                                    <input value="" class="validate[required]" type="text" name="herbal_start5" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>5. Ongoing?:</label>
+                                                    <select name="herbal_ongoing5" id="herbal_ongoing5" style="width: 100%;">
+                                                        <option value="">Select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="2">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2" id="herbal_end5">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>5. End Date:</label>
+                                                    <input value="" class="validate[required]" type="text" name="herbal_end5" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>5. Dose:</label>
+                                                    <input value="" type="text" name="herbal_dose5" id="herbal_dose5" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>5. Frequecy:</label>
+                                                    <input value="" type="text" name="herbal_frequency5" id="herbal_frequency5" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1497,21 +1778,21 @@ if ($user->isLoggedIn()) {
 
                                     <div class="head clearfix">
                                         <div class="isw-ok"></div>
-                                        <h1>DSTANDARD OF CARE TREATMENT
-                                        </h1>
-                                    </div>
-                                    <div class="head clearfix">
-                                        <div class="isw-ok"></div>
+                                        <h2>DSTANDARD OF CARE TREATMENT
+                                        </h2>
                                         <h2>Provide lists of treatments and supportive care given to the cancer patient</h2>
                                     </div>
+
                                     <div class="head clearfix">
                                         <div class="isw-ok"></div>
-                                        <h1>(To be retrieved from patient file/medical personnel)</h1>
+                                        <h3>(To be retrieved from patient file/medical personnel)</h3>
+                                        <h1>(all medication should be in generic names)</h1>
+
                                     </div>
 
                                     <div class="head clearfix">
                                         <div class="isw-ok"></div>
-                                        <h1>(all medication should be in generic names)</h1>
+                                        <h1>1. Radiotherapy :</h1>
                                     </div>
 
 
@@ -1530,73 +1811,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Start:</label>
-                                                    <input value="" class="validate[required]" type="text" name="standard_start" id="standard_start" required />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Ongoing?:</label>
-                                                    <select name="standard_ongoing" id="standard_ongoing" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2" id="standard_end">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>End:</label>
-                                                    <input value="" class="validate[required]" type="text" name="standard_end" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Dose:</label>
-                                                    <input value="" class="validate[required]" type="text" name="standard_dose" id="standard_dose" required />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Frequecy:</label>
-                                                    <input value="" class="validate[required]" type="text" name="standard_frequecy" id="standard_frequecy" required />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>2. Chemotherapy :</label>
-                                                    <input value="" type="text" name="chemotherapy" id="chemotherapy" readonly />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Start:</label>
+                                                    <label>Start Date:</label>
                                                     <input value="" class="validate[required]" type="text" name="standard_start" id="standard_start" />
                                                 </div>
                                             </div>
@@ -1619,7 +1834,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>End:</label>
+                                                    <label>End Date:</label>
                                                     <input value="" class="validate[required]" type="text" name="standard_end" />
                                                 </div>
                                             </div>
@@ -1645,15 +1860,37 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="row">
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-6">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>3. Surgery :</label>
-                                                    <input value="Surgery" type="text" name="surgery" id="surgery" />
+                                                    <label>Remarks:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_remarks" id="standard_remarks" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- <div class="row2"> -->
+                                    <!-- select -->
+                                    <!-- <label>Add Row:</label>
+                                        <button class="clsButton" id="add_button">Add Row</button>
+                                    </div> -->
+
+                                    <div class="head clearfix">
+                                        <div class="isw-ok"></div>
+                                        <h1>2. Chemotherapy :</h1>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>1. Type of Chemotherapy</label>
+                                                    <input value="" type="text" name="chemotherapy" id="chemotherapy" />
                                                 </div>
                                             </div>
                                         </div>
@@ -1662,7 +1899,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Start Date:</label>
+                                                    <label>1. Start Date:</label>
                                                     <input value="" class="validate[required]" type="text" name="standard_start" id="standard_start" />
                                                 </div>
                                             </div>
@@ -1672,16 +1909,139 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Frequecy:</label>
-                                                    <input value="" class="validate[required]" type="text" name="standard_frequecy" id="standard_frequecy" />
+                                                    <label>1. Ongoing?</label>
+                                                    <select name="standard_ongoing" id="standard_ongoing" style="width: 100%;">
+                                                        <option value="">Select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="2">No</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-sm-2" id="standard_end">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>1. End Date:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_end" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+
                                         <div class="col-sm-2">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Remarks:</label>
+                                                    <label>1. Dose:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_dose" id="standard_dose" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>1. Frequecy:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_frequecy" id="standard_frequecy" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>1. Remarks:</label>
+                                                    <input value="" type="text" name="standard_remarks" id="standard_remarks" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="head clearfix">
+                                        <div class="isw-ok"></div>
+                                        <h1>3. Surgery :</h1>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>1. Type of surgery</label>
+                                                    <input value="" type="text" name="surgery" id="surgery" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>1. Start Date:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_start" id="standard_start" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>1. Number:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_frequecy" id="standard_frequecy" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>1. Remarks:</label>
+                                                    <input value="" type="text" name="remarks" id="remarks" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>2. Type of surgery</label>
+                                                    <input value="" type="text" name="surgery" id="surgery" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>2. Start Date:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_start" id="standard_start" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>2. Number:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_frequecy" id="standard_frequecy" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>2. Remarks:</label>
                                                     <input value="" type="text" name="remarks" id="remarks" />
                                                 </div>
                                             </div>
@@ -1689,8 +2049,49 @@ if ($user->isLoggedIn()) {
                                     </div>
 
 
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>3. Type of surgery</label>
+                                                    <input value="" type="text" name="surgery" id="surgery" />
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                    <div class="col-sm-6">
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>3. Start Date:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_start" id="standard_start" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>3. Number:</label>
+                                                    <input value="" class="validate[required]" type="text" name="standard_frequecy" id="standard_frequecy" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>3. Remarks:</label>
+                                                    <input value="" type="text" name="remarks" id="remarks" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-sm-12">
                                         <div class="row-form clearfix">
                                             <!-- select -->
                                             <div class="form-group">
@@ -4143,6 +4544,144 @@ if ($user->isLoggedIn()) {
             window.history.replaceState(null, null, window.location.href);
         }
 
+        $('#add_button').click(function() {
+            $('#span_product_details').html('');
+            add_product_row();
+        });
+
+
+        ;
+
+        function add_product_row(count = '', treat = 1) {
+            var html = ' ';
+            html += '<span id="row' + count + '">';
+            html += '<div class="row">';
+            html += '<div class="col-sm-6">';
+            html += '<div class="row-form clearfix">';
+            html += '<div class="form-group">';
+            html += '<label>Treatment ' + treat + ' ' + ' :</label>';
+            html += '<input type="text" name="treatment[]" id="treatment[]" class="form-control" required />';
+            html += '</div>';
+            html += '</div>';
+            html += '</div>';
+            html += '<div class="col-sm-3">';
+            html += '<div class="row-form clearfix">';
+            html += '<div class="form-group">';
+            html += '<label>standard_start :</label>';
+            html += '<input type="text" name="standard_start[]" id="standard_start[]" class="form-control" required />';
+            html += '</div>';
+            html += '</div>';
+            html += '</div>';
+            html += '<div class="col-sm-3">';
+            html += '<div class="row-form clearfix">';
+            html += '<div class="form-group">';
+            html += '<label>standard_ongoing :</label>';
+            html += '<input type="text" name="standard_ongoing[]" id="standard_ongoing[]" class="form-control" required />';
+            html += '</div>';
+            html += '</div>';
+            html += '</div>';
+            html += '<div class="col-sm-3">';
+            html += '<div class="row-form clearfix">';
+            html += '<div class="form-group">';
+            html += '<label>standard_end :</label>';
+            html += '<input type="text" name="standard_end[]" id="standard_end[]" class="form-control" required />';
+            html += '</div>';
+            html += '</div>';
+            html += '</div>';
+            html += '<div class="col-sm-3">';
+            html += '<div class="row-form clearfix">';
+            html += '<div class="form-group">';
+            html += '<label>standard_dose :</label>';
+            html += '<input type="text" name="standard_dose[]" id="standard_dose[]" class="form-control" required />';
+            html += '</div>';
+            html += '</div>';
+            html += '</div>';
+            html += '<div class="col-sm-3">';
+            html += '<div class="row-form clearfix">';
+            html += '<div class="form-group">';
+            html += '<label>standard_frequency :</label>';
+            html += '<input type="text" name="standard_frequency[]" id="standard_frequency[]" class="form-control" required />';
+            html += '</div>';
+            html += '</div>';
+            html += '</div>';
+            html += '<div class="col-sm-2">add';
+            html += '<div class="row-form clearfix">';
+            html += '<div class="form-group">';
+            if (count == '') {
+                html += '<button type="button" name="add_more" id="add_more" class="btn btn-success btn-xs">+</button>';
+            } else {
+                html += '<button type="button" name="remove" id="' + count + '" class="btn btn-danger btn-xs remove">-</button>'
+            }
+            html += '</div>';
+            html += '</div>';
+            html += '</div><br/>';
+            html += '</span>';
+
+            $('#span_product_details').append(html);
+            // $('.selectpicker').selectpicker();
+            console.log(html)
+        }
+
+        var count = 0;
+        var treat = 1;
+
+        //ADD ROW
+        $(document).on('click', '#add_more', function() {
+            count = count + 1;
+            treat = treat + 1;
+            add_product_row(count, treat);
+        })
+
+        //REMOVE ROW
+        $(document).on('click', '.remove', function() {
+            var row_no = $(this).attr("id");
+            $('#row' + row_no).remove()
+            treat = treat - 1;
+        })
+
+
+
+
+        var cloneCount = 1;
+
+        //add new row
+        $("#addrow").click(function() {
+            $('#rows')
+                .clone(true)
+                .attr('id', 'row' + cloneCount++, 'class', 'row')
+                .insertAfter('[id^=row]:last');
+            return false;
+        });
+
+        function addRow() {
+            // Get the table body element in which you want to add row
+            let table = document.getElementById("tableBody");
+
+            // Create row element
+            let row = document.createElement("tr")
+
+            // Create cells
+            let c1 = document.createElement("td")
+            let c2 = document.createElement("td")
+            let c3 = document.createElement("td")
+            let c4 = document.createElement("td")
+
+            // Insert data to cells
+            c1.innerText = "Elon"
+            c2.innerText = "42"
+            c3.innerText = "Houston"
+            c4.innerText = "C++"
+
+            // Append cells to row
+            row.appendChild(c1);
+            row.appendChild(c2);
+            row.appendChild(c3);
+            row.appendChild(c4);
+
+            // Append row to table body
+            table.appendChild(row)
+        }
+
         function calculateBMI() {
 
             let height = parseInt(document.querySelector("#height").value);
@@ -4432,26 +4971,78 @@ if ($user->isLoggedIn()) {
             }
         });
 
-        $('#herbal_preparation').hide();
+        $('#herbal_preparation1').hide();
+        $('#herbal_preparation2').hide();
+        $('#herbal_preparation3').hide();
+        $('#herbal_preparation4').hide();
+        $('#herbal_preparation5').hide();
         $('#herbal_header').hide();
         $('#other_herbal').change(function() {
             var getUid = $(this).val();
             if (getUid === "1") {
-                $('#herbal_preparation').show();
+                $('#herbal_preparation1').show();
+                $('#herbal_preparation2').show();
+                $('#herbal_preparation3').show();
+                $('#herbal_preparation4').show();
+                $('#herbal_preparation5').show();
                 $('#herbal_header').show();
             } else {
                 $('#herbal_header').hide();
-                $('#herbal_preparation').hide();
+                $('#herbal_preparation1').hide();
+                $('#herbal_preparation2').hide();
+                $('#herbal_preparation3').hide();
+                $('#herbal_preparation4').hide();
+                $('#herbal_preparation5').hide();
             }
         });
 
-        $('#herbal_end').hide();
-        $('#herbal_ongoing').change(function() {
+        $('#herbal_end1').hide();
+        $('#herbal_end2').hide();
+        $('#herbal_end3').hide();
+        $('#herbal_end4').hide();
+        $('#herbal_end5').hide();
+        $('#herbal_ongoing1').change(function() {
             var getUid = $(this).val();
             if (getUid === "2") {
-                $('#herbal_end').show();
+                $('#herbal_end1').show();
             } else {
-                $('#herbal_end').hide();
+                $('#herbal_end1').hide();
+            }
+        });
+
+        $('#herbal_ongoing2').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#herbal_end2').show();
+            } else {
+                $('#herbal_end2').hide();
+            }
+        });
+
+        $('#herbal_ongoing3').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#herbal_end3').show();
+            } else {
+                $('#herbal_end3').hide();
+            }
+        });
+
+        $('#herbal_ongoin41').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#herbal_end4').show();
+            } else {
+                $('#herbal_end4').hide();
+            }
+        });
+
+        $('#herbal_ongoing5').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#herbal_end5').show();
+            } else {
+                $('#herbal_end5').hide();
             }
         });
 

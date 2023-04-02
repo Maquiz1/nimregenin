@@ -624,6 +624,26 @@ if ($user->isLoggedIn()) {
                         'created_on' => date('Y-m-d'),
                         'site_id' => $user->data()->site_id,
                     ), Input::get('id'));
+
+                    $user->updateRecord('chemotherapy', array(
+                        'vid' => $_GET["vid"],
+                        'vcode' => $_GET["vcode"],              
+                        'treatment' => Input::get('treatment'),
+                        'standard_medication' => Input::get('standard_medication'),
+                        'standard_start' => Input::get('standard_start'),
+                        'standard_ongoing' => Input::get('standard_ongoing'),
+                        'standard_end' => Input::get('standard_end'),
+                        'standard_dose' => Input::get('standard_dose'),
+                        'standard_frequecy' => Input::get('standard_frequecy'),
+                        'standard_remarks' => Input::get('standard_remarks'),
+                        'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ), Input::get('id'));
+
                     $successMessage = 'CRF1 Updated Successful';
                     Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode']);
                 } catch (Exception $e) {
@@ -3348,6 +3368,7 @@ if ($user->isLoggedIn()) {
 
                     <?php } elseif ($_GET['id'] == 8) { ?>
                         <?php $patient = $override->get1('crf1', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
+                        <?php $chemotherapy = $override->get1('chemotherapy', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
                         <div class="col-md-offset-1 col-md-8">
                             <div class="head clearfix">
                                 <div class="isw-ok"></div>
@@ -3912,7 +3933,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>2. Chemotherapy :</label>
-                                                    <input value="<?= $patient['chemotherapy'] ?>" type="text" name="chemotherapy" id="chemotherapy" readonly />
+                                                    <input value="<?= $chemotherapy['treatment'] ?>" type="text" name="chemotherapy" id="chemotherapy" readonly />
                                                 </div>
                                             </div>
                                         </div>
@@ -3922,7 +3943,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Start:</label>
-                                                    <input value="<?= $patient['crf2_date'] ?>" class="validate[required]" type="text" name="standard_start" id="standard_start" />
+                                                    <input value="<?= $chemotherapy['standard_start'] ?>" class="validate[required]" type="text" name="standard_start" id="standard_start" />
                                                 </div>
                                             </div>
                                         </div>
@@ -3933,10 +3954,10 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>Ongoing?:</label>
                                                     <select name="standard_ongoing" id="standard_ongoing" style="width: 100%;">
-                                                        <?php if ($patient['standard_ongoing'] == "1") { ?>
-                                                            <option value="<?= $patient['standard_ongoing'] ?>">Yes</option>
-                                                        <?php } elseif ($patient['standard_ongoing'] == "2") { ?>
-                                                            <option value="<?= $patient['standard_ongoing'] ?>">No</option>
+                                                        <?php if ($chemotherapy['standard_ongoing'] == "1") { ?>
+                                                            <option value="<?= $chemotherapy['standard_ongoing'] ?>">Yes</option>
+                                                        <?php } elseif ($chemotherapy['standard_ongoing'] == "2") { ?>
+                                                            <option value="<?= $chemotherapy['standard_ongoing'] ?>">No</option>
                                                         <?php } else { ?>
                                                             <option value="">Select</option>
                                                         <?php } ?>
@@ -3951,7 +3972,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>End:</label>
-                                                    <input value="<?= $patient['standard_end'] ?>" class="validate[required]" type="text" name="standard_end" />
+                                                    <input value="<?= $chemotherapy['standard_end'] ?>" class="validate[required]" type="text" name="standard_end" />
                                                 </div>
                                             </div>
                                         </div>
@@ -3962,7 +3983,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Dose:</label>
-                                                    <input value="<?= $patient['standard_dose'] ?>" class="validate[required]" type="text" name="standard_dose" id="standard_dose" />
+                                                    <input value="<?= $chemotherapy['standard_dose'] ?>" class="validate[required]" type="text" name="standard_dose" id="standard_dose" />
                                                 </div>
                                             </div>
                                         </div>
@@ -3972,7 +3993,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Frequecy:</label>
-                                                    <input value="<?= $patient['standard_frequecy'] ?>" class="validate[required]" type="text" name="standard_frequecy" id="standard_frequecy" />
+                                                    <input value="<?= $chemotherapy['standard_frequecy'] ?>" class="validate[required]" type="text" name="standard_frequecy" id="standard_frequecy" />
                                                 </div>
                                             </div>
                                         </div>
