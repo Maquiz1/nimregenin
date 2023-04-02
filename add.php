@@ -5899,7 +5899,7 @@ if ($user->isLoggedIn()) {
         $('#start_end_date').hide();
         $('#completed120days').change(function() {
             var getUid = $(this).val();
-            if (getUid === "2") {
+            if (getUid === "1") {
                 $('#start_end_date').show();
             } else {
                 $('#start_end_date').hide();
