@@ -3404,7 +3404,6 @@ if ($user->isLoggedIn()) {
                                                                                                                                 } ?></option>
                                                                                             <option value="1">Yes</option>
                                                                                             <option value="2">No</option>
-                                                                                            <option value="3">Not Applicable</option>
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
@@ -3426,7 +3425,6 @@ if ($user->isLoggedIn()) {
                                                                                                                                         } ?></option>
                                                                                             <option value="1">Yes</option>
                                                                                             <option value="2">No</option>
-                                                                                            <option value="3">Not Applicable</option>
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
