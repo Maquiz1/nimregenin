@@ -253,6 +253,7 @@ if ($user->isLoggedIn()) {
 
                     if (Input::get('seq') == 2) {
                         $user->createRecord('visit', array(
+                            'study_id' => $_GET['sid'],
                             'visit_name' => 'Visit 3',
                             'visit_code' => 'V3',
                             'visit_window' => 14,
@@ -406,6 +407,7 @@ if ($user->isLoggedIn()) {
             if ($validate->passed()) {
                 try {
                     $user->updateRecord('visit', array(
+                        'study_id' => $_GET['sid'],
                         'visit_date' => Input::get('visit_date'),
                         'created_on' => date('Y-m-d'),
                         'status' => 1,
@@ -575,6 +577,7 @@ if ($user->isLoggedIn()) {
                     $user->updateRecord('crf1', array(
                         'vid' => $_GET["vid"],
                         'vcode' => $_GET["vcode"],
+                        'study_id' => $_GET['sid'],
                         'diagnosis_date' => Input::get('diagnosis_date'),
                         'diabetic' => Input::get('diabetic'),
                         'diabetic_medicatn' => Input::get('diabetic_medicatn'),
@@ -733,7 +736,7 @@ if ($user->isLoggedIn()) {
                     ), Input::get('id'));
 
                     $successMessage = 'CRF1 Updated Successful';
-                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode']);
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -750,6 +753,7 @@ if ($user->isLoggedIn()) {
             if ($validate->passed()) {
                 try {
                     $user->updateRecord('crf2', array(
+                        'study_id' => $_GET['sid'],
                         'vid' => $_GET['vid'],
                         'vcode' => $_GET['vcode'],
                         'crf2_date' => Input::get('crf2_date'),
@@ -815,7 +819,7 @@ if ($user->isLoggedIn()) {
                         'site_id' => $user->data()->site_id,
                     ), Input::get('id'));
                     $successMessage = 'CRF2 Updated Successful';
-                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode']);
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -832,6 +836,7 @@ if ($user->isLoggedIn()) {
             if ($validate->passed()) {
                 try {
                     $user->updateRecord('crf3', array(
+                        'study_id' => $_GET['sid'],
                         'vid' => $_GET["vid"],
                         'vcode' => $_GET["vcode"],
                         'crf3_date' => Input::get('crf3_date'),
@@ -864,7 +869,7 @@ if ($user->isLoggedIn()) {
                         'site_id' => $user->data()->site_id,
                     ), Input::get('id'));
                     $successMessage = 'CRF3 updated Successful';
-                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode']);
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -880,6 +885,7 @@ if ($user->isLoggedIn()) {
             if ($validate->passed()) {
                 try {
                     $user->updateRecord('crf4', array(
+                        'study_id' => $_GET['sid'],
                         'vid' => $_GET["vid"],
                         'vcode' => $_GET["vcode"],
                         'sample_date' => Input::get('sample_date'),
@@ -944,7 +950,7 @@ if ($user->isLoggedIn()) {
                         'site_id' => $user->data()->site_id,
                     ), Input::get('id'));
                     $successMessage = 'CRF4 updated Successful';
-                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode']);
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -961,6 +967,7 @@ if ($user->isLoggedIn()) {
             if ($validate->passed()) {
                 try {
                     $user->updateRecord('crf5', array(
+                        'study_id' => $_GET['sid'],
                         'vid' => $_GET["vid"],
                         'vcode' => $_GET["vcode"],
                         'date_reported' => Input::get('date_reported'),
@@ -986,7 +993,7 @@ if ($user->isLoggedIn()) {
                         'site_id' => $user->data()->site_id,
                     ), Input::get('id'));
                     $successMessage = 'CRF5 updated Successful';
-                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode']);
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -1003,6 +1010,7 @@ if ($user->isLoggedIn()) {
             if ($validate->passed()) {
                 try {
                     $user->updateRecord('crf6', array(
+                        'study_id' => $_GET['sid'],
                         'vid' => $_GET["vid"],
                         'vcode' => $_GET["vcode"],
                         'today_date' => Input::get('today_date'),
@@ -1030,7 +1038,7 @@ if ($user->isLoggedIn()) {
                         'site_id' => $user->data()->site_id,
                     ), Input::get('id'));
                     $successMessage = 'CRF6 updated Successful';
-                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode']);
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -1047,6 +1055,7 @@ if ($user->isLoggedIn()) {
             if ($validate->passed()) {
                 try {
                     $user->updateRecord('crf7', array(
+                        'study_id' => $_GET['sid'],
                         'vid' => $_GET['vid'],
                         'vcode' => $_GET['vcode'],
                         'tdate' => Input::get('tdate'),
@@ -1065,7 +1074,7 @@ if ($user->isLoggedIn()) {
                         'site_id' => $user->data()->site_id,
                     ), Input::get('id'));
                     $successMessage = 'CRF7 Updated Successful';
-                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode']);
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -2633,9 +2642,9 @@ if ($user->isLoggedIn()) {
                                                 <td>1</td>
                                                 <td>CRF 1: MEDICAL HISTORY, USE OF HERBAL MEDICINES AND STANDARD TREATMENT</td>
                                                 <?php if ($override->get1('crf1', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])) { ?>
-                                                    <td><a href="info.php?id=8&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>" class="btn btn-success"> Change </a> </td>
+                                                    <td><a href="info.php?id=8&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>&sid=<?= $_GET['sid'] ?>" class="btn btn-success"> Change </a> </td>
                                                 <?php } else { ?>
-                                                    <td><a href="add.php?id=8&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>" class="btn btn-warning">Add </a> </td>
+                                                    <td><a href="add.php?id=8&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>&sid=<?= $_GET['sid'] ?>" class="btn btn-warning">Add </a> </td>
                                                 <?php } ?>
                                             </tr>
                                         <?php } ?>
@@ -2644,9 +2653,9 @@ if ($user->isLoggedIn()) {
                                             <td>2</td>
                                             <td>CRF 2</td>
                                             <?php if ($override->get1('crf2', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])) { ?>
-                                                <td><a href="info.php?id=9&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>" class="btn btn-success"> Change </a> </td>
+                                                <td><a href="info.php?id=9&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>&sid=<?= $_GET['sid'] ?>" class="btn btn-success"> Change </a> </td>
                                             <?php } else { ?>
-                                                <td><a href="add.php?id=9&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>" class="btn btn-warning">Add </a> </td>
+                                                <td><a href="add.php?id=9&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>&sid=<?= $_GET['sid'] ?>" class="btn btn-warning">Add </a> </td>
                                             <?php } ?>
                                         </tr>
 
@@ -2654,9 +2663,9 @@ if ($user->isLoggedIn()) {
                                             <td>3</td>
                                             <td>CRF 3</td>
                                             <?php if ($override->get1('crf3', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])) { ?>
-                                                <td><a href="info.php?id=10&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>" class="btn btn-success"> Change </a> </td>
+                                                <td><a href="info.php?id=10&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>&sid=<?= $_GET['sid'] ?>" class="btn btn-success"> Change </a> </td>
                                             <?php } else { ?>
-                                                <td><a href="add.php?id=10&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>" class="btn btn-warning">Add </a> </td>
+                                                <td><a href="add.php?id=10&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>&sid=<?= $_GET['sid'] ?>" class="btn btn-warning">Add </a> </td>
                                             <?php } ?>
                                         </tr>
 
@@ -2664,9 +2673,9 @@ if ($user->isLoggedIn()) {
                                             <td>4</td>
                                             <td>CRF 4</td>
                                             <?php if ($override->get1('crf4', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])) { ?>
-                                                <td><a href="info.php?id=11&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>" class="btn btn-success"> Change </a> </td>
+                                                <td><a href="info.php?id=11&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>&sid=<?= $_GET['sid'] ?>" class="btn btn-success"> Change </a> </td>
                                             <?php } else { ?>
-                                                <td><a href="add.php?id=11&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>" class="btn btn-warning">Add </a> </td>
+                                                <td><a href="add.php?id=11&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>&sid=<?= $_GET['sid'] ?>" class="btn btn-warning">Add </a> </td>
                                             <?php } ?>
                                         </tr>
 
@@ -2674,9 +2683,9 @@ if ($user->isLoggedIn()) {
                                             <td>5</td>
                                             <td>CRF 5</td>
                                             <?php if ($override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])) { ?>
-                                                <td><a href="info.php?id=12&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>" class="btn btn-success"> Change </a> </td>
+                                                <td><a href="info.php?id=12&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>&sid=<?= $_GET['sid'] ?>" class="btn btn-success"> Change </a> </td>
                                             <?php } else { ?>
-                                                <td><a href="add.php?id=12&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>" class="btn btn-warning">Add </a> </td>
+                                                <td><a href="add.php?id=12&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>&sid=<?= $_GET['sid'] ?>" class="btn btn-warning">Add </a> </td>
                                             <?php } ?>
                                         </tr>
 
@@ -2684,9 +2693,9 @@ if ($user->isLoggedIn()) {
                                             <td>6</td>
                                             <td>CRF 6</td>
                                             <?php if ($override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])) { ?>
-                                                <td><a href="info.php?id=13&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>" class="btn btn-success"> Change </a> </td>
+                                                <td><a href="info.php?id=13&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>&sid=<?= $_GET['sid'] ?>" class="btn btn-success"> Change </a> </td>
                                             <?php } else { ?>
-                                                <td><a href="add.php?id=13&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>" class="btn btn-warning">Add </a> </td>
+                                                <td><a href="add.php?id=13&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>&sid=<?= $_GET['sid'] ?>" class="btn btn-warning">Add </a> </td>
                                             <?php } ?>
                                         </tr>
 
@@ -2694,9 +2703,9 @@ if ($user->isLoggedIn()) {
                                             <td>7</td>
                                             <td>CRF 7</td>
                                             <?php if ($override->get1('crf7', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])) { ?>
-                                                <td><a href="info.php?id=15&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>" class="btn btn-success"> Change </a> </td>
+                                                <td><a href="info.php?id=15&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>&sid=<?= $_GET['sid'] ?>" class="btn btn-success"> Change </a> </td>
                                             <?php } else { ?>
-                                                <td><a href="add.php?id=15&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>" class="btn btn-warning">Add </a> </td>
+                                                <td><a href="add.php?id=15&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>&sid=<?= $_GET['sid'] ?>" class="btn btn-warning">Add </a> </td>
                                             <?php } ?>
                                         </tr>
 
@@ -2808,9 +2817,9 @@ if ($user->isLoggedIn()) {
                                                             </td>
                                                             <td>
                                                                 <?php if ($btnV == 'Add') { ?>
-                                                                    <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>" role="button" class="btn btn-warning"><?= $btnV ?>Study CRF</a>
+                                                                    <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-warning"><?= $btnV ?>Study CRF</a>
                                                                 <?php } else { ?>
-                                                                    <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>" role="button" class="btn btn-info"><?= $btnV ?>Study CRF</a>
+                                                                    <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-info"><?= $btnV ?>Study CRF</a>
                                                                 <?php } ?>
                                                             </td>
                                                             <td>
@@ -2823,9 +2832,9 @@ if ($user->isLoggedIn()) {
                                                                 <?php if ($lb['eligibility'] == 1) { ?>
                                                                     <?php if ($btnV == 'Add') { ?>
                                                             <td>
-                                                                <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>" role="button" class="btn btn-warning"><?= $btnV ?>Study CRF</a>
+                                                                <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-warning"><?= $btnV ?>Study CRF</a>
                                                             <?php } else { ?>
-                                                                <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>" role="button" class="btn btn-info"><?= $btnV ?>Study CRF</a>
+                                                                <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-info"><?= $btnV ?>Study CRF</a>
                                                             </td>
                                                     <?php }
                                                                         } ?>

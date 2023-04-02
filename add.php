@@ -232,6 +232,7 @@ if ($user->isLoggedIn()) {
                     $user->createRecord('crf1', array(
                         'vid' => $_GET["vid"],
                         'vcode' => $_GET["vcode"],
+                        'study_id' => $_GET['sid'],
                         'diagnosis_date' => Input::get('diagnosis_date'),
                         'diabetic' => Input::get('diabetic'),
                         'diabetic_medicatn' => Input::get('diabetic_medicatn'),
@@ -278,6 +279,7 @@ if ($user->isLoggedIn()) {
                     $user->createRecord('herbal_treatment', array(
                         'vid' => $_GET["vid"],
                         'vcode' => $_GET["vcode"],
+                        'study_id' => $_GET['sid'],
                         'other_herbal' => Input::get('other_herbal'),
                         'herbal_preparation1' => Input::get('herbal_preparation1'),
                         'herbal_start1' => Input::get('herbal_start1'),
@@ -321,6 +323,7 @@ if ($user->isLoggedIn()) {
                     $user->createRecord('chemotherapy', array(
                         'vid' => $_GET["vid"],
                         'vcode' => $_GET["vcode"],
+                        'study_id' => $_GET['sid'],
                         'other_herbal' => Input::get('other_herbal'),
                         'chemotherapy1' => Input::get('chemotherapy1'),
                         'chemotherapy_start1' => Input::get('chemotherapy_start1'),
@@ -368,6 +371,7 @@ if ($user->isLoggedIn()) {
                     $user->createRecord('surgery', array(
                         'vid' => $_GET["vid"],
                         'vcode' => $_GET["vcode"],
+                        'study_id' => $_GET['sid'],
                         'other_herbal' => Input::get('other_herbal'),
                         'surgery1' => Input::get('surgery1'),
                         'surgery_start1' => Input::get('surgery_start1'),
@@ -413,7 +417,7 @@ if ($user->isLoggedIn()) {
                     // }
 
                     $successMessage = 'CRF1 added Successful';
-                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode']);
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -432,6 +436,7 @@ if ($user->isLoggedIn()) {
                     $user->createRecord('crf2', array(
                         'vid' => $_GET['vid'],
                         'vcode' => $_GET['vcode'],
+                        'study_id' => $_GET['sid'],
                         'crf2_date' => Input::get('crf2_date'),
                         'height' => Input::get('height'),
                         'weight' => Input::get('weight'),
@@ -495,7 +500,7 @@ if ($user->isLoggedIn()) {
                         'site_id' => $user->data()->site_id,
                     ));
                     $successMessage = 'CRF2 added Successful';
-                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode']);
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -514,6 +519,7 @@ if ($user->isLoggedIn()) {
                     $user->createRecord('crf3', array(
                         'vid' => $_GET["vid"],
                         'vcode' => $_GET["vcode"],
+                        'study_id' => $_GET['sid'],
                         'crf3_date' => Input::get('crf3_date'),
                         'fever' => Input::get('fever'),
                         'vomiting' => Input::get('vomiting'),
@@ -546,7 +552,7 @@ if ($user->isLoggedIn()) {
 
 
                     $successMessage = 'CRF3 added Successful';
-                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode']);
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -565,6 +571,7 @@ if ($user->isLoggedIn()) {
                     $user->createRecord('crf4', array(
                         'vid' => $_GET["vid"],
                         'vcode' => $_GET["vcode"],
+                        'study_id' => $_GET['sid'],
                         'sample_date' => Input::get('sample_date'),
                         'renal_urea' => Input::get('renal_urea'),
                         'renal_creatinine' => Input::get('renal_creatinine'),
@@ -627,7 +634,7 @@ if ($user->isLoggedIn()) {
                         'site_id' => $user->data()->site_id,
                     ));
                     $successMessage = 'CRF4 added Successful';
-                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode']);
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -646,6 +653,7 @@ if ($user->isLoggedIn()) {
                     $user->createRecord('crf5', array(
                         'vid' => $_GET["vid"],
                         'vcode' => $_GET["vcode"],
+                        'study_id' => $_GET['sid'],
                         'date_reported' => Input::get('date_reported'),
                         'ae_description' => Input::get('ae_description'),
                         'ae_category' => Input::get('ae_category'),
@@ -669,7 +677,7 @@ if ($user->isLoggedIn()) {
                         'site_id' => $user->data()->site_id,
                     ));
                     $successMessage = 'CRF5 added Successful';
-                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode']);
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -688,6 +696,7 @@ if ($user->isLoggedIn()) {
                     $user->createRecord('crf6', array(
                         'vid' => $_GET["vid"],
                         'vcode' => $_GET["vcode"],
+                        'study_id' => $_GET['sid'],
                         'today_date' => Input::get('today_date'),
                         'terminate_date' => Input::get('terminate_date'),
                         'completed120days' => Input::get('completed120days'),
@@ -713,7 +722,7 @@ if ($user->isLoggedIn()) {
                         'site_id' => $user->data()->site_id,
                     ));
                     $successMessage = 'CRF6 added Successful';
-                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode']);
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -732,6 +741,7 @@ if ($user->isLoggedIn()) {
                     $user->createRecord('crf7', array(
                         'vid' => $_GET['vid'],
                         'vcode' => $_GET['vcode'],
+                        'study_id' => $_GET['sid'],
                         'tdate' => Input::get('tdate'),
                         'mobility' => Input::get('mobility'),
                         'self_care' => Input::get('self_care'),
@@ -748,7 +758,7 @@ if ($user->isLoggedIn()) {
                         'site_id' => $user->data()->site_id,
                     ));
                     $successMessage = 'CRF7 added Successful';
-                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode']);
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -765,6 +775,7 @@ if ($user->isLoggedIn()) {
             if ($validate->passed()) {
                 try {
                     $user->createRecord('crf6', array(
+                        'study_id' => $_GET['sid'],
                         'today_date' => Input::get('today_date'),
                         'terminate_date' => Input::get('terminate_date'),
                         'completed120days' => Input::get('completed120days'),
@@ -792,7 +803,7 @@ if ($user->isLoggedIn()) {
 
 
                     $successMessage = 'CRF3 added Successful';
-                    Redirect::to('info.php?id=6&cid=' . $_GET['cid']);
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
