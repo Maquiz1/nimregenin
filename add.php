@@ -5886,35 +5886,25 @@ if ($user->isLoggedIn()) {
             }
         });
 
-
-
-        if ($('#ae_ongoing').val() == "1") {
-            $('#ae_end_date').hide();
-        } else if ($('#ae_ongoing').change(function() {
-                var getUid = $(this).val();
-            })) {
+        $('#ae_end_date').hide();
+        $('#ae_ongoing').change(function() {
+            var getUid = $(this).val();
             if (getUid === "2") {
                 $('#ae_end_date').show();
             } else {
                 $('#ae_end_date').hide();
             }
-        } else {
-            $('#ae_end_date').show();
-        }
+        });
 
-        if ("#start_end_date" != "") {
-            $('#start_end_date').show();
-            $('#completed120days').change(function() {
-                var getUid = $(this).val();
-                if (getUid === "1") {
-                    $('#start_end_date').show();
-                } else {
-                    $('#start_end_date').hide();
-                }
-            });
-        } else {
-            $('#start_end_date').hide();
-        }
+        $('#start_end_date').hide();
+        $('#completed120days').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#start_end_date').show();
+            } else {
+                $('#start_end_date').hide();
+            }
+        });
 
 
         $('#death_details').hide();
