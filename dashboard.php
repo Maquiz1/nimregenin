@@ -63,7 +63,7 @@ if ($user->isLoggedIn()) {
                     <div class="col-md-4">
                         <div class="wBlock green clearfix">
                             <div class="dSpace">
-                                <a href="info.php?id=8">
+                                <a href="info.php?id=3">
                                     <h3>Enrolled</h3>
                                     <span class="mChartBar" sparkType="bar" sparkBarColor="white">
                                         <!--5,10,15,20,23,21,25,20,15,10,25,20,10-->
@@ -77,7 +77,7 @@ if ($user->isLoggedIn()) {
                     <div class="col-md-4">
                         <div class="wBlock blue clearfix">
                             <div class="dSpace">
-                                <a href="info.php?id=9">
+                                <a href="#">
                                     <h3>End of study</h3>
                                     <span class="mChartBar" sparkType="bar" sparkBarColor="white">
                                         <!--240,234,150,290,310,240,210,400,320,198,250,222,111,240,221,340,250,190-->

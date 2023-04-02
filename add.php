@@ -129,9 +129,6 @@ if ($user->isLoggedIn()) {
                 'dob' => array(
                     'required' => true,
                 ),
-                'street' => array(
-                    'required' => true,
-                ),
                 'phone_number' => array(
                     'required' => true,
                     'unique' => 'clients',
@@ -187,8 +184,11 @@ if ($user->isLoggedIn()) {
                             'education_level' => Input::get('education_level'),
                             'workplace' => Input::get('workplace'),
                             'occupation' => Input::get('occupation'),
-                            'phone_number' => Input::get('phone_number'),
+                            'national_id' => Input::get('national_id'),                            
+                            'phone_number' => Input::get('phone_number'),                            
                             'other_phone' => Input::get('other_phone'),
+                            'region' => Input::get('region'),
+                            'district' => Input::get('district'),
                             'street' => Input::get('street'),
                             'ward' => Input::get('ward'),
                             'block_no' => Input::get('block_no'),
@@ -1129,6 +1129,14 @@ if ($user->isLoggedIn()) {
                                         <div class="col-md-3">Occupation:</div>
                                         <div class="col-md-9"><input value="" class="" type="text" name="occupation" id="occupation" required /></div>
                                     </div>
+
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">National ID:</div>
+                                        <div class="col-md-9">
+                                            <input value="" type="text" name="national_id" id="national_id" />
+                                        </div>
+                                    </div>
+
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">Phone Number:</div>
                                         <div class="col-md-9"><input value="" class="" type="text" name="phone_number" id="phone" required /> <span>Example: 0700 000 111</span></div>
@@ -1141,6 +1149,18 @@ if ($user->isLoggedIn()) {
                                         <div class="col-md-3">Residence Street:</div>
                                         <div class="col-md-9"><input value="" class="" type="text" name="street" id="street" required /></div>
                                     </div>
+
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">Region:</div>
+                                        <div class="col-md-9"><input value="" class="" type="text" name="region" id="region" required /></div>
+                                    </div>
+
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">District:</div>
+                                        <div class="col-md-9"><input value="" class="" type="text" name="district" id="district" required /></div>
+                                    </div>
+
+
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">Ward:</div>
                                         <div class="col-md-9"><input value="" class="" type="text" name="ward" id="ward" required /></div>
