@@ -277,6 +277,7 @@ if ($user->isLoggedIn()) {
                     $user->createRecord('herbal_treatment', array(
                         'vid' => $_GET["vid"],
                         'vcode' => $_GET["vcode"],
+                        'other_herbal' => Input::get('other_herbal'),
                         'herbal_preparation1' => Input::get('herbal_preparation1'),
                         'herbal_start1' => Input::get('herbal_start1'),
                         'herbal_ongoing1' => Input::get('herbal_ongoing1'),
@@ -319,6 +320,7 @@ if ($user->isLoggedIn()) {
                     $user->createRecord('chemotherapy', array(
                         'vid' => $_GET["vid"],
                         'vcode' => $_GET["vcode"],
+                        'other_herbal' => Input::get('other_herbal'),
                         'chemotherapy1' => Input::get('chemotherapy1'),
                         'chemotherapy_start1' => Input::get('chemotherapy_start1'),
                         'chemotherapy_ongoing1' => Input::get('chemotherapy_ongoing1'),
@@ -365,6 +367,7 @@ if ($user->isLoggedIn()) {
                     $user->createRecord('surgery', array(
                         'vid' => $_GET["vid"],
                         'vcode' => $_GET["vcode"],
+                        'other_herbal' => Input::get('other_herbal'),
                         'surgery1' => Input::get('surgery1'),
                         'surgery_start1' => Input::get('surgery_start1'),
                         'surgery_number1' => Input::get('surgery_number1'),
@@ -5543,6 +5546,10 @@ if ($user->isLoggedIn()) {
         });
 
         $('#chemotherapy_end1').hide();
+        $('#chemotherapy_end2').hide();
+        $('#chemotherapy_end3').hide();
+        $('#chemotherapy_end4').hide();
+        $('#chemotherapy_end5').hide();
         $('#chemotherapy_ongoing1').change(function() {
             var getUid = $(this).val();
             if (getUid === "2") {
@@ -5552,6 +5559,41 @@ if ($user->isLoggedIn()) {
             }
         });
 
+        $('#chemotherapy_ongoing2').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#chemotherapy_end2').show();
+            } else {
+                $('#chemotherapy_end2').hide();
+            }
+        });
+
+        $('#chemotherapy_ongoing3').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#chemotherapy_end3').show();
+            } else {
+                $('#chemotherapy_end3').hide();
+            }
+        });
+
+        $('#chemotherapy_ongoing4').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#chemotherapy_end4').show();
+            } else {
+                $('#chemotherapy_end4').hide();
+            }
+        });
+
+        $('#chemotherapy_ongoing5').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "2") {
+                $('#chemotherapy_end5').show();
+            } else {
+                $('#chemotherapy_end5').hide();
+            }
+        });
 
         // function calculateBMI() {
 

@@ -510,15 +510,15 @@ if ($user->isLoggedIn()) {
                 $clnt = $override->get('clients', 'id', Input::get('cid'))[0];
                 $sc_e = $override->get('screening', 'client_id', Input::get('cid'))[0];
                 $std_id = $override->getNews('study_id', 'site_id', $user->data()->site_id, 'status', 0)[0];
-                if (((Input::get('pregnant') == 2 || Input::get('pregnant') == 3) && Input::get('breast_feeding') == 2 && Input::get('cdk') == 2 && Input::get('liver_disease') == 2)) {
-                    if (Input::get('pregnant') == 2 && Input::get('breast_feeding') == 2 && Input::get('cdk') == 2 && Input::get('liver_disease') == 2 && $sc_e['eligibility'] == 1) {
+                if (((Input::get('pregnant') == 2 || Input::get('pregnant') == 3) && (Input::get('breast_feeding') == 2 || Input::get('breast_feeding') == 3) && Input::get('cdk') == 2 && Input::get('liver_disease') == 2)) {
+                    if (Input::get('pregnant') == 2 && (Input::get('breast_feeding') == 2 || Input::get('breast_feeding') == 3) && Input::get('cdk') == 2 && Input::get('liver_disease') == 2 && $sc_e['eligibility'] == 1) {
                         $eligibility = 1;
                         if ($override->getCount('visit', 'client_id', Input::get('cid')) == 1) {
                             $user->visit(Input::get('cid'), 0);
                             $user->updateRecord('study_id', array('status' => 1, 'client_id' => Input::get('cid')), $std_id['id']);
                             $user->updateRecord('clients', array('study_id' => $std_id['study_id'], 'enrolled' => 1), Input::get('cid'));
                         }
-                    } elseif ((Input::get('pregnant') == 2 || Input::get('pregnant') == 3) && Input::get('breast_feeding') == 2 && Input::get('cdk') == 2 && Input::get('liver_disease') == 2 && $sc_e['eligibility'] == 1) {
+                    } elseif ((Input::get('pregnant') == 2 || Input::get('pregnant') == 3) && (Input::get('breast_feeding') == 2 || Input::get('breast_feeding') == 3) && Input::get('cdk') == 2 && Input::get('liver_disease') == 2 && $sc_e['eligibility'] == 1) {
                         $eligibility = 1;
                         if ($override->getCount('visit', 'client_id', Input::get('cid')) == 1) {
                             $user->visit(Input::get('cid'), 0);
@@ -603,46 +603,134 @@ if ($user->isLoggedIn()) {
                         'nimregenin_dose' => Input::get('nimregenin_dose'),
                         'nimregenin_frequecy' => Input::get('nimregenin_frequecy'),
                         'other_herbal' => Input::get('other_herbal'),
-                        'herbal_preparation' => Input::get('herbal_preparation'),
-                        'herbal_start' => Input::get('herbal_start'),
-                        'herbal_ongoing' => Input::get('herbal_ongoing'),
-                        'herbal_end' => Input::get('herbal_end'),
-                        'herbal_dose' => Input::get('herbal_dose'),
-                        'herbal_frequency' => Input::get('herbal_frequency'),
                         'radiotherapy' => Input::get('radiotherapy'),
-                        'standard_medication' => Input::get('standard_medication'),
-                        'standard_start' => Input::get('standard_start'),
-                        'standard_ongoing' => Input::get('standard_ongoing'),
-                        'standard_end' => Input::get('standard_end'),
-                        'standard_dose' => Input::get('standard_dose'),
-                        'standard_frequecy' => Input::get('standard_frequecy'),
-                        'standard_remarks' => Input::get('standard_remarks'),
+                        'radiotherapy_start' => Input::get('radiotherapy_start'),
+                        'radiotherapy_ongoing' => Input::get('radiotherapy_ongoing'),
+                        'radiotherapy_end' => Input::get('radiotherapy_end'),
+                        'radiotherapy_dose' => Input::get('radiotherapy_dose'),
+                        'radiotherapy_frequecy' => Input::get('radiotherapy_frequecy'),
+                        'radiotherapy_remarks' => Input::get('radiotherapy_remarks'),
                         'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
                         'patient_id' => $_GET['cid'],
                         'staff_id' => $user->data()->id,
                         'status' => 1,
                         'created_on' => date('Y-m-d'),
                         'site_id' => $user->data()->site_id,
-                    ), Input::get('id'));
+                    ),Input::get('id'));
+
+                    $user->updateRecord('herbal_treatment', array(
+                        'vid' => $_GET["vid"],
+                        'vcode' => $_GET["vcode"],
+                        'other_herbal' => Input::get('other_herbal'),
+                        'herbal_preparation1' => Input::get('herbal_preparation1'),
+                        'herbal_start1' => Input::get('herbal_start1'),
+                        'herbal_ongoing1' => Input::get('herbal_ongoing1'),
+                        'herbal_end1' => Input::get('herbal_end1'),
+                        'herbal_dose1' => Input::get('herbal_dose1'),
+                        'herbal_frequency1' => Input::get('herbal_frequency1'),
+                        'herbal_preparation2' => Input::get('herbal_preparation2'),
+                        'herbal_start2' => Input::get('herbal_start2'),
+                        'herbal_ongoing2' => Input::get('herbal_ongoing2'),
+                        'herbal_end2' => Input::get('herbal_end2'),
+                        'herbal_dose2' => Input::get('herbal_dose2'),
+                        'herbal_frequency2' => Input::get('herbal_frequency2'),
+                        'herbal_preparation3' => Input::get('herbal_preparation3'),
+                        'herbal_start3' => Input::get('herbal_start3'),
+                        'herbal_ongoing3' => Input::get('herbal_ongoing3'),
+                        'herbal_end3' => Input::get('herbal_end3'),
+                        'herbal_dose3' => Input::get('herbal_dose3'),
+                        'herbal_frequency3' => Input::get('herbal_frequency3'),
+                        'herbal_preparation4' => Input::get('herbal_preparation4'),
+                        'herbal_start4' => Input::get('herbal_start4'),
+                        'herbal_ongoing4' => Input::get('herbal_ongoing4'),
+                        'herbal_end4' => Input::get('herbal_end4'),
+                        'herbal_dose4' => Input::get('herbal_dose4'),
+                        'herbal_frequency4' => Input::get('herbal_frequency4'),
+                        'herbal_preparation5' => Input::get('herbal_preparation5'),
+                        'herbal_start5' => Input::get('herbal_start5'),
+                        'herbal_ongoing5' => Input::get('herbal_ongoing5'),
+                        'herbal_end5' => Input::get('herbal_end5'),
+                        'herbal_dose5' => Input::get('herbal_dose5'),
+                        'herbal_frequency5' => Input::get('herbal_frequency5'),
+                        'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ),Input::get('id'));
+
 
                     $user->updateRecord('chemotherapy', array(
                         'vid' => $_GET["vid"],
-                        'vcode' => $_GET["vcode"],              
-                        'treatment' => Input::get('treatment'),
-                        'standard_medication' => Input::get('standard_medication'),
-                        'standard_start' => Input::get('standard_start'),
-                        'standard_ongoing' => Input::get('standard_ongoing'),
-                        'standard_end' => Input::get('standard_end'),
-                        'standard_dose' => Input::get('standard_dose'),
-                        'standard_frequecy' => Input::get('standard_frequecy'),
-                        'standard_remarks' => Input::get('standard_remarks'),
+                        'vcode' => $_GET["vcode"],
+                        'other_herbal' => Input::get('other_herbal'),
+                        'chemotherapy1' => Input::get('chemotherapy1'),
+                        'chemotherapy_start1' => Input::get('chemotherapy_start1'),
+                        'chemotherapy_ongoing1' => Input::get('chemotherapy_ongoing1'),
+                        'chemotherapy_end1' => Input::get('chemotherapy_end1'),
+                        'chemotherapy_dose1' => Input::get('chemotherapy_dose1'),
+                        'chemotherapy_frequecy1' => Input::get('chemotherapy_frequecy1'),
+                        'chemotherapy_remarks1' => Input::get('chemotherapy_remarks1'),
+                        'chemotherapy2' => Input::get('chemotherapy2'),
+                        'chemotherapy_start2' => Input::get('chemotherapy_start2'),
+                        'chemotherapy_ongoing2' => Input::get('chemotherapy_ongoing2'),
+                        'chemotherapy_end2' => Input::get('chemotherapy_end2'),
+                        'chemotherapy_dose2' => Input::get('chemotherapy_dose2'),
+                        'chemotherapy_frequecy2' => Input::get('chemotherapy_frequecy2'),
+                        'chemotherapy_remarks2' => Input::get('chemotherapy_remarks2'),
+                        'chemotherapy3' => Input::get('chemotherapy3'),
+                        'chemotherapy_start3' => Input::get('chemotherapy_start3'),
+                        'chemotherapy_ongoing3' => Input::get('chemotherapy_ongoing3'),
+                        'chemotherapy_end3' => Input::get('chemotherapy_end3'),
+                        'chemotherapy_dose3' => Input::get('chemotherapy_dose3'),
+                        'chemotherapy_frequecy3' => Input::get('chemotherapy_frequecy3'),
+                        'chemotherapy_remarks3' => Input::get('chemotherapy_remarks3'),
+                        'chemotherapy4' => Input::get('chemotherapy4'),
+                        'chemotherapy_start4' => Input::get('chemotherapy_start4'),
+                        'chemotherapy_ongoing4' => Input::get('chemotherapy_ongoing4'),
+                        'chemotherapy_end4' => Input::get('chemotherapy_end4'),
+                        'chemotherapy_dose4' => Input::get('chemotherapy_dose4'),
+                        'chemotherapy_frequecy4' => Input::get('chemotherapy_frequecy4'),
+                        'chemotherapy_remarks4' => Input::get('chemotherapy_remarks4'),
+                        'chemotherapy5' => Input::get('chemotherapy5'),
+                        'chemotherapy_start5' => Input::get('chemotherapy_start5'),
+                        'chemotherapy_ongoing5' => Input::get('chemotherapy_ongoing5'),
+                        'chemotherapy_end5' => Input::get('chemotherapy_end5'),
+                        'chemotherapy_dose5' => Input::get('chemotherapy_dose5'),
+                        'chemotherapy_frequecy5' => Input::get('chemotherapy_frequecy5'),
+                        'chemotherapy_remarks5' => Input::get('chemotherapy_remarks5'),
                         'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
                         'patient_id' => $_GET['cid'],
                         'staff_id' => $user->data()->id,
                         'status' => 1,
                         'created_on' => date('Y-m-d'),
                         'site_id' => $user->data()->site_id,
-                    ), Input::get('id'));
+                    ),Input::get('id'));
+
+                    $user->updateRecord('surgery', array(
+                        'vid' => $_GET["vid"],
+                        'vcode' => $_GET["vcode"],
+                        'other_herbal' => Input::get('other_herbal'),
+                        'surgery1' => Input::get('surgery1'),
+                        'surgery_start1' => Input::get('surgery_start1'),
+                        'surgery_number1' => Input::get('surgery_number1'),
+                        'surgery_remarks1' => Input::get('surgery_remarks1'),
+                        'surgery2' => Input::get('surgery2'),
+                        'surgery_start2' => Input::get('surgery_start2'),
+                        'surgery_number2' => Input::get('surgery_number2'),
+                        'surgery_remarks2' => Input::get('surgery_remarks2'),
+                        'surgery3' => Input::get('surgery3'),
+                        'surgery_start3' => Input::get('surgery_start3'),
+                        'surgery_number3' => Input::get('surgery_number3'),
+                        'surgery_remarks3' => Input::get('surgery_remarks3'),
+                        'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ),Input::get('id'));                   
 
                     $successMessage = 'CRF1 Updated Successful';
                     Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode']);
