@@ -1609,6 +1609,7 @@ if ($user->isLoggedIn()) {
                                             <th width="10%">Name</th>
                                             <th width="10%">Gender</th>
                                             <th width="10%">Age</th>
+                                            <th width="10%">SITE</th>
                                             <th width="40%">Action</th>
                                         </tr>
                                     </thead>
@@ -1626,10 +1627,15 @@ if ($user->isLoggedIn()) {
                                                     } ?>
                                                     <a href="#img<?= $client['id'] ?>" data-toggle="modal"><img src="<?= $img ?>" width="90" height="90" class="" /></a>
                                                 </td>
-                                                <td><?= $client['participant_id'] ?></td>
+                                                <td><?= $client['study_id'] ?></td>
                                                 <td> <?= $client['firstname'] . ' ' . $client['lastname'] ?></td>
                                                 <td><?= $client['gender'] ?></td>
                                                 <td><?= $client['age'] ?></td>
+                                                <?php if ($client['site_id'] == 1) { ?>
+                                                    <td>MNH - UPANGA </td>
+                                                <?php } else { ?>
+                                                    <td>MNH - UPANGA </td>
+                                                <?php } ?>
                                                 <td>
                                                     <a href="#clientView<?= $client['id'] ?>" role="button" class="btn btn-default" data-toggle="modal">View</a>
                                                     <a href="#client<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Edit</a>
