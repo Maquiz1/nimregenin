@@ -1634,7 +1634,7 @@ if ($user->isLoggedIn()) {
                                                 <?php if ($client['site_id'] == 1) { ?>
                                                     <td>MNH - UPANGA </td>
                                                 <?php } else { ?>
-                                                    <td>MNH - UPANGA </td>
+                                                    <td>ORCI </td>
                                                 <?php } ?>
                                                 <td>
                                                     <a href="#clientView<?= $client['id'] ?>" role="button" class="btn btn-default" data-toggle="modal">View</a>
