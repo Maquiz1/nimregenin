@@ -3902,7 +3902,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Serum urea levels</label>
-                                                    <input value="" type="text" name="renal_urea" id="renal_urea" />
+                                                    <input value="" type="text" name="renal_urea" id="renal_urea" required />
                                                     <SPan>XX.X ( mg/dl )</SPan>
                                                 </div>
                                             </div>
