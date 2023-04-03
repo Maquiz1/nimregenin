@@ -1875,26 +1875,26 @@ if ($user->isLoggedIn()) {
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-3">First Name:</div>
                                                                             <div class="col-md-9">
-                                                                                <input value="<?= $client['firstname'] ?>" class="validate[required]" type="text" name="firstname" id="firstname" />
+                                                                                <input value="<?= $client['firstname'] ?>" class="validate[required]" type="text" name="firstname" id="firstname" required/>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-3">Middle Name:</div>
                                                                             <div class="col-md-9">
-                                                                                <input value="<?= $client['middlename'] ?>" class="validate[required]" type="text" name="middlename" id="middlename" />
+                                                                                <input value="<?= $client['middlename'] ?>" class="validate[required]" type="text" name="middlename" id="middlename" required/>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-3">Last Name:</div>
                                                                             <div class="col-md-9">
-                                                                                <input value="<?= $client['lastname'] ?>" class="validate[required]" type="text" name="lastname" id="lastname" />
+                                                                                <input value="<?= $client['lastname'] ?>" class="validate[required]" type="text" name="lastname" id="lastname" required/>
                                                                             </div>
                                                                         </div>
 
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-3">Date of Birth:</div>
                                                                             <div class="col-md-9">
-                                                                                <input value="<?= $client['dob'] ?>" class="validate[required,custom[date]]" type="text" name="dob" id="dob" /> <span>Example: 2010-12-01</span>
+                                                                                <input value="<?= $client['dob'] ?>" class="validate[required,custom[date]]" type="text" name="dob" id="dob" required /> <span>Example: 2010-12-01</span>
                                                                             </div>
                                                                         </div>
 
@@ -1908,7 +1908,7 @@ if ($user->isLoggedIn()) {
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-3">Initials:</div>
                                                                             <div class="col-md-9">
-                                                                                <input value="<?= $client['initials'] ?>" class="validate[required]" type="text" name="initials" id="initials" />
+                                                                                <input value="<?= $client['initials'] ?>" class="validate[required]" type="text" name="initials" id="initials" required />
                                                                             </div>
                                                                         </div>
 
@@ -1932,7 +1932,7 @@ if ($user->isLoggedIn()) {
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-3">Hospital ID:</div>
                                                                             <div class="col-md-9">
-                                                                                <input value="<?= $client['id_number'] ?>" class="validate[required]" type="text" name="id_number" id="id_number" />
+                                                                                <input value="<?= $client['id_number'] ?>" type="text" name="id_number" id="id_number" />
                                                                             </div>
                                                                         </div>
 

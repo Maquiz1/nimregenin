@@ -131,7 +131,7 @@ if ($user->isLoggedIn()) {
                 ),
                 'phone_number' => array(
                     'required' => true,
-                    'unique' => 'clients',
+                    // 'unique' => 'clients',
                 ),
             ));
             if ($validate->passed()) {
@@ -1064,26 +1064,26 @@ if ($user->isLoggedIn()) {
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">First Name:</div>
                                         <div class="col-md-9">
-                                            <input value="" class="validate[required]" type="text" name="firstname" id="firstname" />
+                                            <input value="" class="validate[required]" type="text" name="firstname" id="firstname" required/>
                                         </div>
                                     </div>
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">Middle Name:</div>
                                         <div class="col-md-9">
-                                            <input value="" class="validate[required]" type="text" name="middlename" id="middlename" />
+                                            <input value="" class="validate[required]" type="text" name="middlename" id="middlename" required/>
                                         </div>
                                     </div>
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">Last Name:</div>
                                         <div class="col-md-9">
-                                            <input value="" class="validate[required]" type="text" name="lastname" id="lastname" />
+                                            <input value="" class="validate[required]" type="text" name="lastname" id="lastname" required/>
                                         </div>
                                     </div>
 
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">Date of Birth:</div>
                                         <div class="col-md-9">
-                                            <input value="" class="validate[required,custom[date]]" type="text" name="dob" id="date" /> <span>Example: 2010-12-01</span>
+                                            <input value="" class="validate[required,custom[date]]" type="text" name="dob" id="date" required /> <span>Example: 2010-12-01</span>
                                         </div>
                                     </div>
 
