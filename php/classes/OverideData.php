@@ -26,11 +26,25 @@ class OverideData{
         $num = $query->rowCount();
         return $num;
     }
+
+    public function getCount1($table,$field,$value,$field1,$value1){
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 = '$value1'");
+        $num = $query->rowCount();
+        return $num;
+    }
+
     public function countData($table,$field,$value,$field1,$value1){
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 = '$value1'");
         $num = $query->rowCount();
         return $num;
     }
+
+    public function countData2($table,$field,$value,$field1,$value1,$field2,$value2){
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 = '$value1' AND $field2 = '$value2'");
+        $num = $query->rowCount();
+        return $num;
+    }
+
     public function getData($table){
         $query = $this->_pdo->query("SELECT * FROM $table");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -125,6 +139,13 @@ class OverideData{
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    public function getWithLimit3($table,$where,$id,$where2,$id2,$where3,$id3,$page,$numRec){
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$id2' AND $where3 = '$id3' limit $page,$numRec");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     public function getWithLimit($table,$where,$id,$page,$numRec){
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' limit $page,$numRec");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);

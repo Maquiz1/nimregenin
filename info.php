@@ -9184,35 +9184,35 @@ if ($user->isLoggedIn()) {
                             <?php if ($user->data()->power == 1) {
                                 if ($_GET['sid'] != null) {
                                     $pagNum = 0;
-                                    $pagNum = $override->countData('clients', 'enrolled', 1, 'site_id', $_GET['sid']);
+                                    $pagNum = $override->countData2('clients', 'enrolled', 1,'status', 1,'site_id', $_GET['sid']);
                                     $pages = ceil($pagNum / $numRec);
                                     if (!$_GET['page'] || $_GET['page'] == 1) {
                                         $page = 0;
                                     } else {
                                         $page = ($_GET['page'] * $numRec) - $numRec;
                                     }
-                                    $clients = $override->getWithLimit1('clients', 'site_id', $_GET['sid'], 'enrolled', 1, $page, $numRec);
+                                    $clients = $override->getWithLimit3('clients', 'site_id', $_GET['sid'], 'enrolled', 1,'status', 1, $page, $numRec);
                                 } else {
                                     $pagNum = 0;
-                                    $pagNum = $override->getCount('clients', 'enrolled', 1);
+                                    $pagNum = $override->getCount1('clients', 'enrolled', 1,'status', 1);
                                     $pages = ceil($pagNum / $numRec);
                                     if (!$_GET['page'] || $_GET['page'] == 1) {
                                         $page = 0;
                                     } else {
                                         $page = ($_GET['page'] * $numRec) - $numRec;
                                     }
-                                    $clients = $override->getWithLimit('clients', 'enrolled', 1, $page, $numRec);
+                                    $clients = $override->getWithLimit1('clients', 'enrolled', 1,'status', 1, $page, $numRec);
                                 }
                             } else {
                                 $pagNum = 0;
-                                $pagNum = $override->countData('clients', 'site_id', $user->data()->site_id, 'enrolled', 1);
+                                $pagNum = $override->countData2('clients', 'site_id', $user->data()->site_id, 'enrolled', 1,'status', 1);
                                 $pages = ceil($pagNum / $numRec);
                                 if (!$_GET['page'] || $_GET['page'] == 1) {
                                     $page = 0;
                                 } else {
                                     $page = ($_GET['page'] * $numRec) - $numRec;
                                 }
-                                $clients = $override->getWithLimit1('clients', 'site_id', $user->data()->site_id, 'enrolled', 1, $page, $numRec);
+                                $clients = $override->getWithLimit3('clients', 'site_id', $user->data()->site_id, 'enrolled', 1,'status', 1, $page, $numRec);
                             } ?>
                             <div class="block-fluid">
                                 <table cellpadding="0" cellspacing="0" width="100%" class="table">
@@ -9624,7 +9624,7 @@ if ($user->isLoggedIn()) {
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <input type="hidden" name="id" value="<?= $client['id'] ?>">
-                                                                <input type="submit" name="delete_staff" value="Delete" class="btn btn-danger">
+                                                                <input type="submit" name="delete_client" value="Delete" class="btn btn-danger">
                                                                 <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
                                                             </div>
                                                         </div>
