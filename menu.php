@@ -32,7 +32,7 @@ if ($user->data()->accessLevel == 1) {
                 <span class="isw-grid"></span><span class="text">Dashboard</span>
             </a>
         </li>
-        <?php if ($user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) { ?>
+        <?php if ($user->data()->accessLevel == 1) { ?>
             <li class="openable">
                 <a href="#"><span class="isw-user"></span><span class="text">Staff</span></a>
                 <ul>
@@ -48,55 +48,6 @@ if ($user->data()->accessLevel == 1) {
                     </li>
                 </ul>
             </li>
-            <li class="openable">
-                <a href="#"><span class="isw-users"></span><span class="text">Clients</span></a>
-                <ul>
-                    <li>
-                        <a href="add.php?id=4">
-                            <span class="glyphicon glyphicon-user"></span><span class="text">Add Client</span>
-                        </a>
-                    </li>
-                    <!-- <li>
-                        <a href="add.php?id=8">
-                            <span class="glyphicon glyphicon-user"></span><span class="text">Add CRF1</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="add.php?id=9">
-                            <span class="glyphicon glyphicon-user"></span><span class="text">Add CRF2</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="add.php?id=10">
-                            <span class="glyphicon glyphicon-user"></span><span class="text">Add CRF3</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="add.php?id=11">
-                            <span class="glyphicon glyphicon-user"></span><span class="text">Add CRF4</span>
-                        </a>
-                    </li> -->
-                    <li>
-                        <a href="info.php?id=3">
-                            <span class="glyphicon glyphicon-registration-mark"></span><span class="text">Clients</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="active">
-                <a href="zebra.php" target="_blank">
-                    <span class="isw-print"></span><span class="text">Zebra Print</span>
-                </a>
-            </li>
-
-            <?php if($user->data()->power == 1){?>
-                <li class="active">
-                    <a href="zebra.php">
-                        <span class="isw-print"></span><span class="text">Zebra Print</span>
-                    </a>
-                </li>
-            <?php }?>
 
             <li class="openable">
                 <a href="#"><span class="isw-tag"></span><span class="text">Extra</span></a>
@@ -128,47 +79,33 @@ if ($user->data()->accessLevel == 1) {
                     </li>
                 </ul>
             </li>
-        <?php } else { ?>
-            <li class="openable">
-                <a href="#"><span class="isw-users"></span><span class="text">Clients</span></a>
-                <ul>
-                    <li>
-                        <a href="add.php?id=4">
-                            <span class="glyphicon glyphicon-user"></span><span class="text">Add Client</span>
-                        </a>
-                    </li>
 
-                    <li>
-                        <a href="info.php?id=3">
-                            <span class="glyphicon glyphicon-registration-mark"></span><span class="text">Clients</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-<!--            <li class="active">-->
-<!--                <a href="zebra.php" target="_blank">-->
-<!--                    <span class="isw-print"></span><span class="text">Zebra Print</span>-->
-<!--                </a>-->
-<!--            </li>-->
+        <?php } ?>
+        <li class="openable">
+            <a href="#"><span class="isw-users"></span><span class="text">Clients</span></a>
+            <ul>
+                <li>
+                    <a href="add.php?id=4">
+                        <span class="glyphicon glyphicon-user"></span><span class="text">Add Client</span>
+                    </a>
+                </li>
 
+                <li>
+                    <a href="info.php?id=3">
+                        <span class="glyphicon glyphicon-registration-mark"></span><span class="text">Clients</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <?php if ($user->data()->accessLevel == 1) { ?>
             <li class="active">
                 <a href="zebra.php" target="_blank">
                     <span class="isw-print"></span><span class="text">Zebra Print</span>
                 </a>
-            </li>
-
-            <li class="openable">
-                <a href="#"><span class="isw-tag"></span><span class="text">Extra</span></a>
-                <ul>
-                    <li>
-                        <a href="info.php?id=5">
-                            <span class="glyphicon glyphicon-list"></span><span class="text">Study IDs</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
+            </li>            
         <?php } ?>
+
     </ul>
 
     <div class="dr"><span></span></div>
