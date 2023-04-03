@@ -632,6 +632,7 @@ if ($user->isLoggedIn()) {
                         'cancer' => Input::get('cancer'),
                         'prostate' => Input::get('prostate'),
                         'chest_xray' => Input::get('chest_xray'),
+                        'chest_specify' => Input::get('chest_specify'),
                         'ct_chest' => Input::get('ct_chest'),
                         'ct_chest_specify' => Input::get('ct_chest_specify'),
                         'ultrasound' => Input::get('ultrasound'),
@@ -3925,7 +3926,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Grade</label>
+                                                    <label>Grade(Serum creatinine levels)</label>
                                                     <select name="renal_creatinine_grade" id="renal_creatinine_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="0">Zero</option>
@@ -3953,8 +3954,8 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Grade</label>
-                                                    <select name="renal_egfr_grade" id="renal_egfr_grade" style="width: 100%;" required>
+                                                    <label>Grade(eGFR)</label>
+                                                    <select name="renal_egfr_grade" id="renal_egfr_grade" style="width: 100%;">
                                                         <option value="">Select</option>
                                                         <option value="0">Zero</option>
                                                         <option value="1">One</option>
@@ -3989,7 +3990,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Grade</label>
+                                                    <label>Grade(AST levels)</label>
                                                     <select name="liver_ast_grade" id="liver_ast_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="0">Zero</option>
@@ -4017,7 +4018,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Grade</label>
+                                                    <label>Grade(ALT levels)</label>
                                                     <select name="liver_alt_grade" id="liver_alt_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="0">Zero</option>
@@ -4058,7 +4059,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Grade</label>
+                                                    <label>Grade(PT)</label>
                                                     <select name="liver_pt_grade" id="liver_pt_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="0">Zero</option>
@@ -4088,7 +4089,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Grade</label>
+                                                    <label>Grade(PTT)</label>
                                                     <select name="liver_ptt_grade" id="liver_ptt_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="0">Zero</option>
@@ -4116,7 +4117,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Grade</label>
+                                                    <label>Grade(INR)</label>
                                                     <select name="liver_inr_grade" id="liver_inr_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="0">Zero</option>
@@ -4168,7 +4169,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Grade</label>
+                                                    <label>Grade(Bilirubin total)</label>
                                                     <select name="bilirubin_total_grade" id="bilirubin_total_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="0">Zero</option>
@@ -4198,7 +4199,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Grade</label>
+                                                    <label>Grade(Bilirubin direct)</label>
                                                     <select name="bilirubin_direct_grade" id="bilirubin_direct_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="0">Zero</option>
@@ -4226,7 +4227,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Grade</label>
+                                                    <label>Grade(RBG)</label>
                                                     <select name="rbg_grade" id="rbg_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="0">Zero</option>
@@ -4263,7 +4264,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Grade</label>
+                                                    <label>Grade(Hb)</label>
                                                     <select name="hb_grade" id="hb_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="0">Zero</option>
@@ -4316,7 +4317,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Grade</label>
+                                                    <label>Grade(WBC)</label>
                                                     <select name="wbc_grade" id="wbc_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="0">Zero</option>
@@ -4346,7 +4347,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Grade</label>
+                                                    <label>Grade (Lymphocytes)</label>
                                                     <select name="abs_lymphocytes_grade" id="abs_lymphocytes_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="0">Zero</option>
@@ -4378,7 +4379,7 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Grade</label>
+                                                    <label>Grade (Plt)</label>
                                                     <select name="plt_grade" id="plt_grade" style="width: 100%;" required>
                                                         <option value="">Select</option>
                                                         <option value="0">Zero</option>

@@ -949,6 +949,7 @@ if ($user->isLoggedIn()) {
                         'cancer' => Input::get('cancer'),
                         'prostate' => Input::get('prostate'),
                         'chest_xray' => Input::get('chest_xray'),
+                        'chest_specify' => Input::get('chest_specify'),
                         'ct_chest' => Input::get('ct_chest'),
                         'ct_chest_specify' => Input::get('ct_chest_specify'),
                         'ultrasound' => Input::get('ultrasound'),
@@ -6499,11 +6500,6 @@ if ($user->isLoggedIn()) {
                             </div>
                             <div class="block-fluid">
                                 <form id="validation" method="post">
-                                    <div class="row-form clearfix">
-                                        <div class="col-md-3">Date of Sample Collection:</div>
-                                        <div class="col-md-9"><input value="<?= $patient['sample_date'] ?>" class="validate[required,custom[date]]" type="text" name="sample_date" id="sample_date" required /> <span>Example: 2023-01-01</span></div>
-                                    </div>
-
                                     <div class="head clearfix">
                                         <div class="isw-ok"></div>
                                         <h1>Blood tests:</h1>
@@ -6515,7 +6511,17 @@ if ($user->isLoggedIn()) {
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Date of Sample Collection:</label>
+                                                    <input value="<?= $patient['sample_date'] ?>" class="validate[required,custom[date]]" type="text" name="sample_date" id="sample_date" required /> <span>Example: 2023-01-01</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -6525,8 +6531,11 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div class="col-sm-4">
+
+                                    <div class="row">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -6537,13 +6546,13 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Grade</label>
                                                     <select name="renal_creatinine_grade" id="renal_creatinine_grade" style="width: 100%;" required>
-                                                    <?php if ($patient['renal_creatinine_grade'] == "0") { ?>
+                                                        <?php if ($patient['renal_creatinine_grade'] == "0") { ?>
                                                             <option value="<?= $patient['renal_creatinine_grade'] ?>">Zero</option>
                                                         <?php } elseif ($patient['renal_creatinine_grade'] == "1") { ?>
                                                             <option value="<?= $patient['renal_creatinine_grade'] ?>">One</option>
@@ -6556,7 +6565,7 @@ if ($user->isLoggedIn()) {
                                                         <?php } else { ?>
                                                             <option value="">Select</option>
                                                         <?php } ?>
-                                                                                                                <option value="0">Zero</option>
+                                                        <option value="0">Zero</option>
                                                         <option value="1">One</option>
                                                         <option value="2">Two</option>
                                                         <option value="3">Three</option>
@@ -6566,7 +6575,8 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-4">
+
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -6577,13 +6587,13 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Grade</label>
-                                                    <select name="renal_egfr_grade" id="renal_egfr_grade" style="width: 100%;" required>
-                                                    <?php if ($patient['renal_egfr_grade'] == "0") { ?>
+                                                    <select name="renal_egfr_grade" id="renal_egfr_grade" style="width: 100%;">
+                                                        <?php if ($patient['renal_egfr_grade'] == "0") { ?>
                                                             <option value="<?= $patient['renal_egfr_grade'] ?>">Zero</option>
                                                         <?php } elseif ($patient['renal_egfr_grade'] == "1") { ?>
                                                             <option value="<?= $patient['renal_egfr_grade'] ?>">One</option>
@@ -6596,7 +6606,7 @@ if ($user->isLoggedIn()) {
                                                         <?php } else { ?>
                                                             <option value="">Select</option>
                                                         <?php } ?>
-                                                                                                                <option value="0">Zero</option>
+                                                        <option value="0">Zero</option>
                                                         <option value="1">One</option>
                                                         <option value="2">Two</option>
                                                         <option value="3">Three</option>
@@ -6606,6 +6616,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
                                     </div>
+
 
 
                                     <div class="head clearfix">
