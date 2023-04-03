@@ -6625,7 +6625,7 @@ if ($user->isLoggedIn()) {
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -6636,7 +6636,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -6664,10 +6664,8 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -6678,7 +6676,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -6709,7 +6707,7 @@ if ($user->isLoggedIn()) {
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -6720,38 +6718,8 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Grade</label>
-                                                    <select name="liver_alp_grade" id="liver_alp_grade" style="width: 100%;" required>
-                                                        <?php if ($patient['liver_alp_grade'] == "0") { ?>
-                                                            <option value="<?= $patient['liver_alp_grade'] ?>">Zero</option>
-                                                        <?php } elseif ($patient['liver_alp_grade'] == "1") { ?>
-                                                            <option value="<?= $patient['liver_alp_grade'] ?>">One</option>
-                                                        <?php } else if ($patient['liver_alp_grade'] == "2") { ?>
-                                                            <option value="<?= $patient['liver_alp_grade'] ?>">Two</option>
-                                                        <?php } elseif ($patient['liver_alp_grade'] == "3") { ?>
-                                                            <option value="<?= $patient['liver_alp_grade'] ?>">Three</option>
-                                                        <?php } else if ($patient['liver_alp_grade'] == "4") { ?>
-                                                            <option value="<?= $patient['liver_alp_grade'] ?>">Four</option>
-                                                        <?php } else { ?>
-                                                            <option value="">Select</option>
-                                                        <?php } ?>
-                                                        <option value="0">Zero</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
-                                                        <option value="4">Four</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-6">
+                                        
+                                        <div class="col-sm-4">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -6762,7 +6730,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -6793,7 +6761,7 @@ if ($user->isLoggedIn()) {
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -6804,7 +6772,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -6832,10 +6800,8 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -6846,7 +6812,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -6877,7 +6843,7 @@ if ($user->isLoggedIn()) {
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-sm-12">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -6887,10 +6853,8 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -6900,39 +6864,9 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
+                                        
 
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Grade</label>
-                                                    <select name="liver_albumin_grade" id="liver_albumin_grade" style="width: 100%;" required>
-                                                        <?php if ($patient['liver_albumin_grade'] == "0") { ?>
-                                                            <option value="<?= $patient['liver_albumin_grade'] ?>">Zero</option>
-                                                        <?php } elseif ($patient['liver_albumin_grade'] == "1") { ?>
-                                                            <option value="<?= $patient['liver_albumin_grade'] ?>">One</option>
-                                                        <?php } else if ($patient['liver_albumin_grade'] == "2") { ?>
-                                                            <option value="<?= $patient['liver_albumin_grade'] ?>">Two</option>
-                                                        <?php } elseif ($patient['liver_albumin_grade'] == "3") { ?>
-                                                            <option value="<?= $patient['liver_albumin_grade'] ?>">Three</option>
-                                                        <?php } else if ($patient['liver_albumin_grade'] == "4") { ?>
-                                                            <option value="<?= $patient['liver_albumin_grade'] ?>">Four</option>
-                                                        <?php } else { ?>
-                                                            <option value="">Select</option>
-                                                        <?php } ?>
-                                                        <option value="0">Zero</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
-                                                        <option value="4">Four</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -6943,7 +6877,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -6974,7 +6908,7 @@ if ($user->isLoggedIn()) {
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -6985,7 +6919,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -7013,10 +6947,8 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -7027,7 +6959,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -7064,7 +6996,7 @@ if ($user->isLoggedIn()) {
 
 
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -7075,7 +7007,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -7103,10 +7035,8 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -7117,7 +7047,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -7130,7 +7060,7 @@ if ($user->isLoggedIn()) {
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -7141,7 +7071,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -7169,10 +7099,8 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
@@ -7184,7 +7112,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
                                                 <div class="form-group">
