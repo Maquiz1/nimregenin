@@ -130,7 +130,7 @@ if ($user->isLoggedIn()) {
                             <?php if ($user->data()->power == 1) {
                                 $visits = $override->getNews('visit', 'expected_date', date('Y-m-d'), 'status', 0);
                             } else {
-                                $visits = $override->get3('visit', 'expected_date', date('Y-m-d'), 'site_id', $user->data()->site_id, 'status', 0);
+                                $visits = $override->getNews('visit', 'expected_date', date('Y-m-d'), 'status', 0);
                             } ?>
                             <div class="block-fluid">
                                 <table cellpadding="0" cellspacing="0" width="100%" class="table">

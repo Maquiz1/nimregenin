@@ -1875,19 +1875,19 @@ if ($user->isLoggedIn()) {
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-3">First Name:</div>
                                                                             <div class="col-md-9">
-                                                                                <input value="<?= $client['firstname'] ?>" class="validate[required]" type="text" name="firstname" id="firstname" required/>
+                                                                                <input value="<?= $client['firstname'] ?>" class="validate[required]" type="text" name="firstname" id="firstname" required />
                                                                             </div>
                                                                         </div>
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-3">Middle Name:</div>
                                                                             <div class="col-md-9">
-                                                                                <input value="<?= $client['middlename'] ?>" class="validate[required]" type="text" name="middlename" id="middlename" required/>
+                                                                                <input value="<?= $client['middlename'] ?>" class="validate[required]" type="text" name="middlename" id="middlename" required />
                                                                             </div>
                                                                         </div>
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-3">Last Name:</div>
                                                                             <div class="col-md-9">
-                                                                                <input value="<?= $client['lastname'] ?>" class="validate[required]" type="text" name="lastname" id="lastname" required/>
+                                                                                <input value="<?= $client['lastname'] ?>" class="validate[required]" type="text" name="lastname" id="lastname" required />
                                                                             </div>
                                                                         </div>
 
@@ -2785,13 +2785,12 @@ if ($user->isLoggedIn()) {
                                                     $cntV = $override->getCount('visit', 'client_id', $visit['client_id']);
                                                     $client = $override->get('clients', 'id', $_GET['cid'])[0];
                                                     if ($visit['status'] == 0) {
-                                                        if ($x == 1) {
-                                                            $btnV = 'Add';
-                                                        } else {
-                                                            $btnV = 'Add';
-                                                        }
+                                                        $btnV = 'Add';
                                                     } elseif ($visit['status'] == 1) {
                                                         $btnV = 'Edit';
+                                                        // if ($x == 1) {
+                                                        //     $btnV = 'Add';
+                                                        // }
                                                     }
                                                     if ($sc) {
                                                         $btnS = 'Edit';
@@ -2840,7 +2839,11 @@ if ($user->isLoggedIn()) {
                                                             </td>
                                                             <td>
                                                             <?php } else { ?>
-                                                                <a href="#addInclusion<?= $visit['id'] ?>" role="button" class="btn btn-info" data-toggle="modal"><?= $btnS ?> Inclusion Criteria</a>
+                                                                <?php if ($sc['eligibility'] == 1) { ?>
+                                                                    <a href="#addInclusion<?= $visit['id'] ?>" role="button" class="btn btn-info" data-toggle="modal"><?= $btnS ?> Inclusion Criteria</a>
+                                                                <?php } else { ?>
+                                                                    <a href="#addInclusion<?= $visit['id'] ?>" role="button" class="btn btn-warning" data-toggle="modal"><?= $btnS ?> Inclusion Criteria</a>
+                                                                <?php } ?>
                                                                 <?php if ($sc['eligibility'] == 1) { ?>
                                                                     <a href="#addExclusion<?= $visit['id'] ?>" role="button" class="btn btn-info" data-toggle="modal"><?= $btnL ?> Exclusion Criteria</a>
                                                             </td>
@@ -6718,7 +6721,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
 
-                                        
+
                                         <div class="col-sm-4">
                                             <div class="row-form clearfix">
                                                 <!-- select -->
@@ -6864,7 +6867,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
 
                                         <div class="col-sm-3">
                                             <div class="row-form clearfix">
