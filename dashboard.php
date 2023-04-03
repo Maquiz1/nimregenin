@@ -141,6 +141,7 @@ if ($user->isLoggedIn()) {
                                             <th width="40">Picture</th>
                                             <th width="20%">Screening ID</th>
                                             <th width="20%">Study ID</th>
+                                            <th width="10%">Visit Name</th>
                                             <th width="10%">Name</th>
                                             <th width="10%">Gender</th>
                                             <th width="10%">Age</th>
@@ -164,6 +165,7 @@ if ($user->isLoggedIn()) {
                                                 </td>
                                                 <td><?= $client['participant_id'] ?></td>
                                                 <td><?= $client['study_id'] ?></td>
+                                                <td> <?= $visit['visit_name'] ?></td>
                                                 <td> <?= $client['firstname'] . ' ' . $client['lastname'] ?></td>
                                                 <td><?= $client['gender'] ?></td>
                                                 <td><?= $client['age'] ?></td>
