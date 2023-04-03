@@ -97,6 +97,11 @@ if ($user->isLoggedIn()) {
                 'status' => 0,
             ), Input::get('id'));
             $successMessage = 'User Deleted Successful';
+        }elseif (Input::get('delete_client')) {
+            $user->updateRecord('clients', array(
+                'status' => 0,
+            ), Input::get('id'));
+            $successMessage = 'User Deleted Successful';
         } elseif (Input::get('edit_study')) {
             $validate = $validate->check($_POST, array(
                 'name' => array(
@@ -2017,7 +2022,7 @@ if ($user->isLoggedIn()) {
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <input type="hidden" name="id" value="<?= $client['id'] ?>">
-                                                                <input type="submit" name="delete_staff" value="Delete" class="btn btn-danger">
+                                                                <input type="submit" name="delete_client" value="Delete" class="btn btn-danger">
                                                                 <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
                                                             </div>
                                                         </div>
