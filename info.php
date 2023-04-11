@@ -3507,7 +3507,7 @@ if ($user->isLoggedIn()) {
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">Date of diagnosis:</div>
                                         <div class="col-md-9">
-                                            <input value="<?= $patient['diagnosis_date'] ?>" class="validate[required]" type="text" name="diagnosis_date" id="diagnosis_date" required />
+                                            <input value="<?= $patient['diagnosis_date'] ?>" type="text" name="diagnosis_date" id="diagnosis_date" />
                                             <span>Example : 2000-12-26 </span>
                                         </div>
                                     </div>
@@ -3522,7 +3522,7 @@ if ($user->isLoggedIn()) {
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">1. Diabetic Mellitus:</div>
                                         <div class="col-md-9">
-                                            <select name="diabetic" id="diabetic" style="width: 100%;" required>
+                                            <select name="diabetic" id="diabetic" style="width: 100%;">
                                                 <?php if ($patient['diabetic'] == "1") { ?>
                                                     <option value="<?= $patient['diabetic'] ?>">Yes</option>
                                                 <?php } elseif ($patient['diabetic'] == "2") { ?>
@@ -3561,7 +3561,7 @@ if ($user->isLoggedIn()) {
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">2. Hypertension:</div>
                                         <div class="col-md-9">
-                                            <select name="hypertension" id="hypertension" style="width: 100%;" required>
+                                            <select name="hypertension" id="hypertension" style="width: 100%;">
                                                 <?php if ($patient['hypertension'] == "1") { ?>
                                                     <option value="<?= $patient['hypertension'] ?>">Yes</option>
                                                 <?php } elseif ($patient['hypertension'] == "2") { ?>
@@ -3601,7 +3601,7 @@ if ($user->isLoggedIn()) {
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">3. Any other heart problem apart from hypertension?:</div>
                                         <div class="col-md-9">
-                                            <select name="heart" id="heart" style="width: 100%;" required>
+                                            <select name="heart" id="heart" style="width: 100%;">
                                                 <?php if ($patient['heart'] == "1") { ?>
                                                     <option value="<?= $patient['heart'] ?>">Yes</option>
                                                 <?php } elseif ($patient['heart'] == "2") { ?>
@@ -3641,7 +3641,7 @@ if ($user->isLoggedIn()) {
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">4. Asthma:</div>
                                         <div class="col-md-9">
-                                            <select name="asthma" id="asthma" style="width: 100%;" required>
+                                            <select name="asthma" id="asthma" style="width: 100%;">
                                                 <?php if ($patient['asthma'] == "1") { ?>
                                                     <option value="<?= $patient['asthma'] ?>">Yes</option>
                                                 <?php } elseif ($patient['asthma'] == "2") { ?>
@@ -3681,7 +3681,7 @@ if ($user->isLoggedIn()) {
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">5. HIV/AIDS:</div>
                                         <div class="col-md-9">
-                                            <select name="hiv_aids" id="hiv_aids" style="width: 100%;" required>
+                                            <select name="hiv_aids" id="hiv_aids" style="width: 100%;">
                                                 <?php if ($patient['hiv_aids'] == "1") { ?>
                                                     <option value="<?= $patient['hiv_aids'] ?>">Yes</option>
                                                 <?php } elseif ($patient['hiv_aids'] == "2") { ?>
@@ -3720,7 +3720,7 @@ if ($user->isLoggedIn()) {
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">6. Any other medical condition:</div>
                                         <div class="col-md-9">
-                                            <select name="other_medical" id="other_medical" style="width: 100%;" required>
+                                            <select name="other_medical" id="other_medical" style="width: 100%;">
                                                 <?php if ($patient['other_medical'] == "1") { ?>
                                                     <option value="<?= $patient['other_medical'] ?>">Yes</option>
                                                 <?php } elseif ($patient['other_medical'] == "2") { ?>
@@ -3807,7 +3807,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Start Date:</label>
-                                                    <input value="<?= $patient['nimregenin_start'] ?>" class="validate[required]" type="text" name="nimregenin_start" id="nimregenin_start" />
+                                                    <input value="<?= $patient['nimregenin_start'] ?>" type="text" name="nimregenin_start" id="nimregenin_start" />
                                                 </div>
                                             </div>
                                         </div>
@@ -3836,7 +3836,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>End Date:</label>
-                                                    <input value="<?= $patient['nimregenin_end'] ?>" class="validate[required]" type="text" name="nimregenin_end" />
+                                                    <input value="<?= $patient['nimregenin_end'] ?>" type="text" name="nimregenin_end" />
                                                 </div>
                                             </div>
                                         </div>
@@ -3846,7 +3846,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Dose:</label>
-                                                    <input value="<?= $patient['nimregenin_dose'] ?>" class="validate[required]" type="text" name="nimregenin_dose" id="nimregenin_dose" />
+                                                    <input value="<?= $patient['nimregenin_dose'] ?>"  type="text" name="nimregenin_dose" id="nimregenin_dose" />
                                                 </div>
                                             </div>
                                         </div>
@@ -3856,7 +3856,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Frequecy:</label>
-                                                    <input value="<?= $patient['nimregenin_frequecy'] ?>" class="validate[required]" type="text" name="nimregenin_frequecy" id="nimregenin_frequecy" />
+                                                    <input value="<?= $patient['nimregenin_frequecy'] ?>" type="text" name="nimregenin_frequecy" id="nimregenin_frequecy" />
                                                 </div>
                                             </div>
                                         </div>
@@ -3906,7 +3906,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>1. Start Date:</label>
-                                                    <input value="<?= $herbal_treatment['herbal_start1'] ?>" class="validate[required,custom[date]]" type="text" name="herbal_start1" />
+                                                    <input value="<?= $herbal_treatment['herbal_start1'] ?>" type="text" name="herbal_start1" />
                                                     <span>Example: 2010-12-01</span>
                                                 </div>
                                             </div>
@@ -3936,7 +3936,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>1. End Date:</label>
-                                                    <input value="<?= $herbal_treatment['herbal_end1'] ?>" class="validate[required,custom[date]]" type="text" name="herbal_end1" />
+                                                    <input value="<?= $herbal_treatment['herbal_end1'] ?>"  type="text" name="herbal_end1" />
                                                     <span>Example: 2010-12-01</span>
                                                 </div>
                                             </div>
@@ -3980,7 +3980,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>2. Start Date:</label>
-                                                    <input value="<?= $herbal_treatment['herbal_start2'] ?>" class="validate[required,custom[date]]" type="text" name="herbal_start2" />
+                                                    <input value="<?= $herbal_treatment['herbal_start2'] ?>" type="text" name="herbal_start2" />
                                                     <span>Example: 2010-12-01</span>
                                                 </div>
                                             </div>
@@ -4010,7 +4010,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>2. End Date:</label>
-                                                    <input value="<?= $herbal_treatment['herbal_end2'] ?>" class="validate[required,custom[date]]" type="text" name="herbal_end2" />
+                                                    <input value="<?= $herbal_treatment['herbal_end2'] ?>" type="text" name="herbal_end2" />
                                                     <span>Example: 2010-12-01</span>
                                                 </div>
                                             </div>
@@ -4054,7 +4054,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>3. Start Date:</label>
-                                                    <input value="<?= $herbal_treatment['herbal_start3'] ?>" class="validate[required,custom[date]]" type="text" name="herbal_start3" />
+                                                    <input value="<?= $herbal_treatment['herbal_start3'] ?>"  type="text" name="herbal_start3" />
                                                     <span>Example: 2010-12-01</span>
                                                 </div>
                                             </div>
@@ -4084,7 +4084,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>3. End Date:</label>
-                                                    <input value="<?= $herbal_treatment['herbal_end3'] ?>" class="validate[required,custom[date]]" type="text" name="herbal_end3" />
+                                                    <input value="<?= $herbal_treatment['herbal_end3'] ?>" type="text" name="herbal_end3" />
                                                     <span>Example: 2010-12-01</span>
                                                 </div>
                                             </div>
@@ -4128,7 +4128,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>4. Start Date:</label>
-                                                    <input value="<?= $herbal_treatment['herbal_start4'] ?>" class="validate[required,custom[date]]" type="text" name="herbal_start4" />
+                                                    <input value="<?= $herbal_treatment['herbal_start4'] ?>" type="text" name="herbal_start4" />
                                                     <span>Example: 2010-12-01</span>
                                                 </div>
                                             </div>
@@ -4158,7 +4158,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>4. End Date:</label>
-                                                    <input value="<?= $herbal_treatment['herbal_end4'] ?>" class="validate[required,custom[date]]" type="text" name="herbal_end4" />
+                                                    <input value="<?= $herbal_treatment['herbal_end4'] ?>" type="text" name="herbal_end4" />
                                                     <span>Example: 2010-12-01</span>
                                                 </div>
                                             </div>
@@ -4201,7 +4201,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>5. Start Date:</label>
-                                                    <input value="<?= $herbal_treatment['herbal_start5'] ?>" class="validate[required,custom[date]]" type="text" name="herbal_start5" />
+                                                    <input value="<?= $herbal_treatment['herbal_start5'] ?>" type="text" name="herbal_start5" />
                                                     <span>Example: 2010-12-01</span>
                                                 </div>
                                             </div>
@@ -4231,7 +4231,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>5. End Date:</label>
-                                                    <input value="<?= $herbal_treatment['herbal_end5'] ?>" class="validate[required,custom[date]]" type="text" name="herbal_end5" />
+                                                    <input value="<?= $herbal_treatment['herbal_end5'] ?>" type="text" name="herbal_end5" />
                                                     <span>Example: 2010-12-01</span>
                                                 </div>
                                             </div>
@@ -4324,7 +4324,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>End:</label>
-                                                    <input value="<?= $patient['radiotherapy_end'] ?>" class="validate[required]" type="text" name="radiotherapy_end" />
+                                                    <input value="<?= $patient['radiotherapy_end'] ?>" type="text" name="radiotherapy_end" />
                                                 </div>
                                             </div>
                                         </div>
@@ -4335,7 +4335,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Dose:</label>
-                                                    <input value="<?= $patient['radiotherapy_dose'] ?>" class="validate[required]" type="text" name="radiotherapy_dose" id="radiotherapy_dose" />
+                                                    <input value="<?= $patient['radiotherapy_dose'] ?>" type="text" name="radiotherapy_dose" id="radiotherapy_dose" />
                                                 </div>
                                             </div>
                                         </div>
@@ -4345,7 +4345,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Frequecy:</label>
-                                                    <input value="<?= $patient['radiotherapy_frequecy'] ?>" class="validate[required]" type="text" name="radiotherapy_frequecy" id="radiotherapy_frequecy" />
+                                                    <input value="<?= $patient['radiotherapy_frequecy'] ?>" type="text" name="radiotherapy_frequecy" id="radiotherapy_frequecy" />
                                                 </div>
                                             </div>
                                         </div>
@@ -4372,7 +4372,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>1. Start Date:</label>
-                                                    <input value="<?= $chemotherapy['chemotherapy_start1'] ?>" class="validate[required,custom[date]]" type="text" name="chemotherapy_start1" id="chemotherapy_start1" />
+                                                    <input value="<?= $chemotherapy['chemotherapy_start1'] ?>" type="text" name="chemotherapy_start1" id="chemotherapy_start1" />
                                                     <span>Example: 2010-12-01</span>
                                                 </div>
                                             </div>
@@ -4402,7 +4402,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>1. End Date:</label>
-                                                    <input value="<?= $chemotherapy['chemotherapy_end1'] ?>" class="validate[required,custom[date]]" type="text" name="chemotherapy_end1" />
+                                                    <input value="<?= $chemotherapy['chemotherapy_end1'] ?>" type="text" name="chemotherapy_end1" />
                                                     <span>Example: 2010-12-01</span>
                                                 </div>
                                             </div>
@@ -4414,7 +4414,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>1. Dose:</label>
-                                                    <input value="<?= $chemotherapy['chemotherapy_dose1'] ?>" class="validate[required]" type="text" name="chemotherapy_dose1" id="chemotherapy_dose1" />
+                                                    <input value="<?= $chemotherapy['chemotherapy_dose1'] ?>" type="text" name="chemotherapy_dose1" id="chemotherapy_dose1" />
                                                 </div>
                                             </div>
                                         </div>
@@ -4424,7 +4424,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>1. Frequecy:</label>
-                                                    <input value="<?= $chemotherapy['chemotherapy_frequecy1'] ?>" class="validate[required]" type="text" name="chemotherapy_frequecy1" id="chemotherapy_frequecy1" />
+                                                    <input value="<?= $chemotherapy['chemotherapy_frequecy1'] ?>" type="text" name="chemotherapy_frequecy1" id="chemotherapy_frequecy1" />
                                                 </div>
                                             </div>
                                         </div>
@@ -4456,7 +4456,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>2. Start Date:</label>
-                                                    <input value="<?= $chemotherapy['chemotherapy_start2'] ?>" class="validate[required,custom[date]]" type="text" name="chemotherapy_start2" id="chemotherapy_start2" />
+                                                    <input value="<?= $chemotherapy['chemotherapy_start2'] ?>" type="text" name="chemotherapy_start2" id="chemotherapy_start2" />
                                                     <span>Example: 2010-12-01</span>
                                                 </div>
                                             </div>
@@ -4486,7 +4486,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>2. End Date:</label>
-                                                    <input value="<?= $chemotherapy['chemotherapy_end2'] ?>" class="validate[required,custom[date]]" type="text" name="chemotherapy_end2" />
+                                                    <input value="<?= $chemotherapy['chemotherapy_end2'] ?>" type="text" name="chemotherapy_end2" />
                                                     <span>Example: 2010-12-01</span>
                                                 </div>
                                             </div>
@@ -4498,7 +4498,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>2. Dose:</label>
-                                                    <input value="<?= $chemotherapy['chemotherapy_dose2'] ?>" class="validate[required]" type="text" name="chemotherapy_dose2" id="chemotherapy_dose2" />
+                                                    <input value="<?= $chemotherapy['chemotherapy_dose2'] ?>" type="text" name="chemotherapy_dose2" id="chemotherapy_dose2" />
                                                 </div>
                                             </div>
                                         </div>
@@ -4508,7 +4508,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>2. Frequecy:</label>
-                                                    <input value="<?= $chemotherapy['chemotherapy_frequecy2'] ?>" class="validate[required]" type="text" name="chemotherapy_frequecy2" id="chemotherapy_frequecy2" />
+                                                    <input value="<?= $chemotherapy['chemotherapy_frequecy2'] ?>" type="text" name="chemotherapy_frequecy2" id="chemotherapy_frequecy2" />
                                                 </div>
                                             </div>
                                         </div>
@@ -4540,7 +4540,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>3. Start Date:</label>
-                                                    <input value="<?= $chemotherapy['chemotherapy_start3'] ?>" class="validate[required,custom[date]]" type="text" name="chemotherapy_start3" id="chemotherapy_start3" />
+                                                    <input value="<?= $chemotherapy['chemotherapy_start3'] ?>" type="text" name="chemotherapy_start3" id="chemotherapy_start3" />
                                                     <span>Example: 2010-12-01</span>
                                                 </div>
                                             </div>
@@ -4570,7 +4570,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>3. End Date:</label>
-                                                    <input value="<?= $chemotherapy['chemotherapy_end3'] ?>" class="validate[required,custom[date]]" type="text" name="chemotherapy_end3" />
+                                                    <input value="<?= $chemotherapy['chemotherapy_end3'] ?>" type="text" name="chemotherapy_end3" />
                                                     <span>Example: 2010-12-01</span>
                                                 </div>
                                             </div>
@@ -4582,7 +4582,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>3. Dose:</label>
-                                                    <input value="<?= $chemotherapy['chemotherapy_dose3'] ?>" class="validate[required]" type="text" name="chemotherapy_dose3" id="chemotherapy_dose3" />
+                                                    <input value="<?= $chemotherapy['chemotherapy_dose3'] ?>" type="text" name="chemotherapy_dose3" id="chemotherapy_dose3" />
                                                 </div>
                                             </div>
                                         </div>
@@ -4592,7 +4592,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>3. Frequecy:</label>
-                                                    <input value="<?= $chemotherapy['chemotherapy_frequecy3'] ?>" class="validate[required]" type="text" name="chemotherapy_frequecy3" id="chemotherapy_frequecy3" />
+                                                    <input value="<?= $chemotherapy['chemotherapy_frequecy3'] ?>" type="text" name="chemotherapy_frequecy3" id="chemotherapy_frequecy3" />
                                                 </div>
                                             </div>
                                         </div>
@@ -4624,7 +4624,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>4. Start Date:</label>
-                                                    <input value="<?= $chemotherapy['chemotherapy_start4'] ?>" class="validate[required,custom[date]]" type="text" name="chemotherapy_start4" id="chemotherapy_start4" />
+                                                    <input value="<?= $chemotherapy['chemotherapy_start4'] ?>" type="text" name="chemotherapy_start4" id="chemotherapy_start4" />
                                                     <span>Example: 2010-12-01</span>
                                                 </div>
                                             </div>
@@ -4653,7 +4653,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>4. End Date:</label>
-                                                    <input value="<?= $chemotherapy['chemotherapy_end4'] ?>" class="validate[required,custom[date]]" type="text" name="chemotherapy_end4" />
+                                                    <input value="<?= $chemotherapy['chemotherapy_end4'] ?>" type="text" name="chemotherapy_end4" />
                                                     <span>Example: 2010-12-01</span>
                                                 </div>
                                             </div>
@@ -4665,7 +4665,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>4. Dose:</label>
-                                                    <input value="<?= $chemotherapy['chemotherapy_dose4'] ?>" class="validate[required]" type="text" name="chemotherapy_dose4" id="chemotherapy_dose4" />
+                                                    <input value="<?= $chemotherapy['chemotherapy_dose4'] ?>" type="text" name="chemotherapy_dose4" id="chemotherapy_dose4" />
                                                 </div>
                                             </div>
                                         </div>
@@ -4675,7 +4675,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>4. Frequecy:</label>
-                                                    <input value="<?= $chemotherapy['chemotherapy_frequecy4'] ?>" class="validate[required]" type="text" name="chemotherapy_frequecy4" id="chemotherapy_frequecy4" />
+                                                    <input value="<?= $chemotherapy['chemotherapy_frequecy4'] ?>"  type="text" name="chemotherapy_frequecy4" id="chemotherapy_frequecy4" />
                                                 </div>
                                             </div>
                                         </div>
@@ -4707,7 +4707,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>5. Start Date:</label>
-                                                    <input value="<?= $chemotherapy['chemotherapy_start5'] ?>" class="validate[required,custom[date]]" type="text" name="chemotherapy_start5" id="chemotherapy_start5" />
+                                                    <input value="<?= $chemotherapy['chemotherapy_start5'] ?>" type="text" name="chemotherapy_start5" id="chemotherapy_start5" />
                                                     <span>Example: 2010-12-01</span>
                                                 </div>
                                             </div>
@@ -4736,7 +4736,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>5. End Date:</label>
-                                                    <input value="<?= $chemotherapy['chemotherapy_end5'] ?>" class="validate[required,custom[date]]" type="text" name="chemotherapy_end5" />
+                                                    <input value="<?= $chemotherapy['chemotherapy_end5'] ?>" type="text" name="chemotherapy_end5" />
                                                     <span>Example: 2010-12-01</span>
                                                 </div>
                                             </div>
@@ -4748,7 +4748,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>5. Dose:</label>
-                                                    <input value="<?= $chemotherapy['chemotherapy_dose5'] ?>" class="validate[required]" type="text" name="chemotherapy_dose5" id="chemotherapy_dose5" />
+                                                    <input value="<?= $chemotherapy['chemotherapy_dose5'] ?>" type="text" name="chemotherapy_dose5" id="chemotherapy_dose5" />
                                                 </div>
                                             </div>
                                         </div>
@@ -4758,7 +4758,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>5. Frequecy:</label>
-                                                    <input value="<?= $chemotherapy['chemotherapy_frequecy5'] ?>" class="validate[required]" type="text" name="chemotherapy_frequecy5" id="chemotherapy_frequecy5" />
+                                                    <input value="<?= $chemotherapy['chemotherapy_frequecy5'] ?>" type="text" name="chemotherapy_frequecy5" id="chemotherapy_frequecy5" />
                                                 </div>
                                             </div>
                                         </div>
@@ -4795,7 +4795,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>1. Start Date:</label>
-                                                    <input value="<?= $surgery['surgery_start1'] ?>" class="validate[required,custom[date]]" type="text" name="surgery_start1" id="surgery_start1" />
+                                                    <input value="<?= $surgery['surgery_start1'] ?>" type="text" name="surgery_start1" id="surgery_start1" />
                                                     <span>Example: 2010-12-01</span>
                                                 </div>
                                             </div>
@@ -4806,7 +4806,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>1. Number:</label>
-                                                    <input value="<?= $surgery['surgery_number1'] ?>" class="validate[required]" type="text" name="surgery_number1" id="surgery_number1" />
+                                                    <input value="<?= $surgery['surgery_number1'] ?>" type="text" name="surgery_number1" id="surgery_number1" />
                                                 </div>
                                             </div>
                                         </div>
@@ -4837,7 +4837,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>2. Start Date:</label>
-                                                    <input value="<?= $surgery['surgery_start2'] ?>" class="validate[required,custom[date]]" type="text" name="surgery_start2" id="surgery_start2" />
+                                                    <input value="<?= $surgery['surgery_start2'] ?>" type="text" name="surgery_start2" id="surgery_start2" />
                                                     <span>Example: 2010-12-01</span>
                                                 </div>
                                             </div>
@@ -4848,7 +4848,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>2. Number:</label>
-                                                    <input value="<?= $surgery['surgery_number2'] ?>" class="validate[required]" type="text" name="surgery_number2" id="surgery_number2" />
+                                                    <input value="<?= $surgery['surgery_number2'] ?>" type="text" name="surgery_number2" id="surgery_number2" />
                                                 </div>
                                             </div>
                                         </div>
@@ -4880,7 +4880,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>3. Start Date:</label>
-                                                    <input value="<?= $surgery['surgery_start3'] ?>" class="validate[required,custom[date]]" type="text" name="surgery_start3" id="surgery_start3" />
+                                                    <input value="<?= $surgery['surgery_start3'] ?>" type="text" name="surgery_start3" id="surgery_start3" />
                                                     <span>Example: 2010-12-01</span>
                                                 </div>
                                             </div>
@@ -4891,7 +4891,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>3. Number:</label>
-                                                    <input value="<?= $surgery['surgery_number3'] ?>" class="validate[required]" type="text" name="surgery_number3" id="surgery_number3" />
+                                                    <input value="<?= $surgery['surgery_number3'] ?>" type="text" name="surgery_number3" id="surgery_number3" />
                                                 </div>
                                             </div>
                                         </div>
@@ -4913,7 +4913,7 @@ if ($user->isLoggedIn()) {
                                             <!-- select -->
                                             <div class="form-group">
                                                 <label>Date of Completion:</label>
-                                                <input value="<?= $patient['crf1_cmpltd_date'] ?>" class="validate[required]" type="text" name="crf1_cmpltd_date" id="crf1_cmpltd_date" />
+                                                <input value="<?= $patient['crf1_cmpltd_date'] ?>" type="text" name="crf1_cmpltd_date" id="crf1_cmpltd_date" />
                                             </div>
                                         </div>
                                     </div>
