@@ -1626,7 +1626,11 @@ if ($user->isLoggedIn()) {
                                             <tbody>
                                                 <tr>
                                                     <td><input value='' type="text" name="other_specify[]"></td>
-                                                    <td><input value='' type="text" name="other_medical_medicatn[]"><br></td>
+                                                    <td> <select name="other_medical_medicatn[]" id="other_medical_medicatn[]" style="width: 100%;">
+                                                            <option value="">Select</option>
+                                                            <option value="1">Yes</option>
+                                                            <option value="2">No</option>
+                                                        </select></td>
                                                     <td><input value='' type="text" name="other_medicatn_name[]"></td>
                                                     <td><button type="button" class="remove-row">Remove</button></td>
                                                 </tr>
@@ -1676,7 +1680,13 @@ if ($user->isLoggedIn()) {
                                                 <tr>
                                                     <td><input value="NIMREGENIN" type="text" name="nimregenin_preparation[]" readonly></td>
                                                     <td><input type="text" name="nimregenin_start[]"><br><span>Example: 2010-12-01</span></td>
-                                                    <td><input type="text" name="nimregenin_ongoing[]"></td>
+                                                    <td>
+                                                    <select name="nimregenin_ongoing[]" id="nimregenin_ongoing[]" style="width: 100%;">
+                                                            <option value="">Select</option>
+                                                            <option value="1">Yes</option>
+                                                            <option value="2">No</option>
+                                                        </select>                                                
+                                                </td>
                                                     <td><input type="text" name="nimregenin_end[]"><br><span>Example: 2010-12-01</span></td>
                                                     <td><input type="text" name="nimregenin_dose[]"><br><span>(mls)</span></td>
                                                     <td><input type="text" name="nimregenin_frequency[]"><br><span>(per day)</span></td>
@@ -1722,7 +1732,13 @@ if ($user->isLoggedIn()) {
                                                 <tr>
                                                     <td><input type="text" name="herbal_preparation[]"></td>
                                                     <td><input type="text" name="herbal_start[]"><br><span>Example: 2010-12-01</span></td>
-                                                    <td><input type="text" name="herbal_ongoing[]"></td>
+                                                    <td>
+                                                    <select name="herbal_ongoing[]" id="herbal_ongoing[]" style="width: 100%;">
+                                                            <option value="">Select</option>
+                                                            <option value="1">Yes</option>
+                                                            <option value="2">No</option>
+                                                        </select>                                                 
+                                                </td>
                                                     <td><input type="text" name="herbal_end[]"><br><span>Example: 2010-12-01</span></td>
                                                     <td><input type="text" name="herbal_dose[]"><br><span>(per day)</span></td>
                                                     <td><input type="text" name="herbal_frequency[]"><br><span>(per day)</span></td>
@@ -1783,7 +1799,13 @@ if ($user->isLoggedIn()) {
                                                 <tr>
                                                     <td><input value="Radiotherapy" type="text" name="radiotherapy[]" readonly></td>
                                                     <td><input type="text" name="radiotherapy_start[]"><br><span>Example: 2010-12-01</span></td>
-                                                    <td><input type="text" name="radiotherapy_ongoing[]"></td>
+                                                    <td>
+                                                    <select name="radiotherapy_ongoing[]" id="radiotherapy_ongoing[]" style="width: 100%;">
+                                                            <option value="">Select</option>
+                                                            <option value="1">Yes</option>
+                                                            <option value="2">No</option>
+                                                        </select>   
+                                                </td>
                                                     <td><input type="text" name="radiotherapy_end[]"><br><span>Example: 2010-12-01</span></td>
                                                     <td><input type="text" name="radiotherapy_dose[]"><br><span>(Grays)</span></td>
                                                     <td><input type="text" name="radiotherapy_frequecy[]"><br><span>(numbers)</span></td>
@@ -1829,7 +1851,13 @@ if ($user->isLoggedIn()) {
                                                 <tr>
                                                     <td><input type="text" name="chemotherapy[]"></td>
                                                     <td><input type="text" name="chemotherapy_start[]"><br><span>Example: 2010-12-01</span></td>
-                                                    <td><input type="text" name="chemotherapy_ongoing[]"></td>
+                                                    <td>
+                                                    <select name="chemotherapy_ongoing[]" id="chemotherapy_ongoing[]" style="width: 100%;">
+                                                            <option value="">Select</option>
+                                                            <option value="1">Yes</option>
+                                                            <option value="2">No</option>
+                                                        </select>  
+                                                </td>
                                                     <td><input type="text" name="chemotherapy_end[]"><br><span>Example: 2010-12-01</span></td>
                                                     <td><input type="text" name="chemotherapy_dose[]"><br><span>(mg)</span></td>
                                                     <td><input type="text" name="chemotherapy_frequecy[]"><br><span>(numbers)</span></td>
@@ -4506,8 +4534,8 @@ if ($user->isLoggedIn()) {
             window.history.replaceState(null, null, window.location.href);
         }
 
-         // Add row chemotherapy
-         document.getElementById("add-row1").addEventListener("click", function() {
+        // Add row chemotherapy
+        document.getElementById("add-row1").addEventListener("click", function() {
             var table = document.getElementById("medication_table").getElementsByTagName("tbody")[0];
             var newRow = table.insertRow(table.rows.length);
             var other_specify = newRow.insertCell(0);
@@ -4515,8 +4543,12 @@ if ($user->isLoggedIn()) {
             var other_medicatn_name = newRow.insertCell(2);
             var actionCell = newRow.insertCell(3);
             other_specify.innerHTML = '<input type="text" name="other_specify[]">';
-            other_medical_medicatn.innerHTML = '<input type="text" name="other_medical_medicatn[]">';
-            other_medicatn_name.innerHTML = '<input type="text" name="other_medicatn_name[]">';    
+            other_medical_medicatn.innerHTML = '<select name="other_medical_medicatn[]" id="other_medical_medicatn[]" style="width: 100%;">'
+            '<option value="">Select</option>'
+            '<option value="1">Yes</option>'
+            '<option value="2">No</option>'
+            '</select>';
+            other_medicatn_name.innerHTML = '<input type="text" name="other_medicatn_name[]">';
             actionCell.innerHTML = '<button type="button" class="remove-row">Remove</button>';
         });
 
