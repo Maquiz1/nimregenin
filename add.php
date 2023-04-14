@@ -4543,11 +4543,12 @@ if ($user->isLoggedIn()) {
             var other_medicatn_name = newRow.insertCell(2);
             var actionCell = newRow.insertCell(3);
             other_specify.innerHTML = '<input type="text" name="other_specify[]">';
-            other_medical_medicatn.innerHTML = '<select name="other_medical_medicatn[]" id="other_medical_medicatn[]" style="width: 100%;">'
-            '<option value="">Select</option>'
-            '<option value="1">Yes</option>'
-            '<option value="2">No</option>'
-            '</select>';
+            other_medical_medicatn.innerHTML = '<input type="text" name="other_medical_medicatn[]">';
+            // other_medical_medicatn.innerHTML = '<select name="other_medical_medicatn[]" id="other_medical_medicatn[]" style="width: 100%;">'
+            // '<option value="">Select</option>'
+            // '<option value="1">Yes</option>'
+            // '<option value="2">No</option>'
+            // '</select>';
             other_medicatn_name.innerHTML = '<input type="text" name="other_medicatn_name[]">';
             actionCell.innerHTML = '<button type="button" class="remove-row">Remove</button>';
         });
