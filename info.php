@@ -3886,8 +3886,9 @@ if ($user->isLoggedIn()) {
                                                             </select>
                                                         </td>
                                                         <td><input value='<?= $medication['other_medicatn_name'] ?>' type="text" name="other_medicatn_name[]"></td>
-                                                        <td><input value='<?= $medication['id'] ?>' type="hidden" name="medication_id[]"></td>
                                                         <td><button type="button" class="remove-row">Remove</button></td>
+                                                        <td><input value='<?= $medication['id'] ?>' type="hidden" name="medication_id[]"></td>
+
                                                     </tr>
                                                 <?php
                                                     $x++;
@@ -4047,8 +4048,8 @@ if ($user->isLoggedIn()) {
                                                         <td><input value='<?= $herbal_treatment['herbal_dose'] ?>' type="text" name="herbal_dose[]"><br><span>(per day)</span></td>
                                                         <td><input value='<?= $herbal_treatment['herbal_frequency'] ?>' type="text" name="herbal_frequency[]"><br><span>(per day)</span></td>
                                                         <td><input value='<?= $herbal_treatment['herbal_remarks'] ?>' type="text" name="herbal_remarks[]"><br></td>
-                                                        <td><input value='<?= $herbal_treatment['id'] ?>' type="hidden" name="herbal_id[]"></td>
                                                         <td><button type="button" class="remove-row2">Remove</button></td>
+                                                        <td><input value='<?= $herbal_treatment['id'] ?>' type="hidden" name="herbal_id[]"></td>
                                                     </tr>
                                                 <?php
                                                     $x++;
@@ -4212,8 +4213,8 @@ if ($user->isLoggedIn()) {
                                                         <td><input value="<?= $chemotherapy['chemotherapy_dose'] ?>" type="text" name="chemotherapy_dose[]"><br><span>(mg)</span></td>
                                                         <td><input value="<?= $chemotherapy['chemotherapy_frequecy'] ?>" type="text" name="chemotherapy_frequecy[]"><br><span>(numbers)</span></td>
                                                         <td><input value="<?= $chemotherapy['chemotherapy_remarks'] ?>" type="text" name="chemotherapy_remarks[]"></td>
+                                                        <td><button type="button" class="remove-row3">Remove</button></td>
                                                         <td><input value="<?= $chemotherapy['id'] ?>" type="hidden" name="chemotherapy_id[]"></td>
-                                                        <td><button type="button" class="remove-row">Remove</button></td>
                                                     </tr>
                                                 <?php
                                                     $x++;
@@ -4267,8 +4268,8 @@ if ($user->isLoggedIn()) {
                                                             <td><input value="<?= $surgery['surgery_start'] ?>" type="text" name="surgery_start[]"><br><span>Example: 2010-12-01</span></td>
                                                             <td><input value="<?= $surgery['surgery_number'] ?>" type="text" name="surgery_number[]"><br><span>(numbers)</span></td>
                                                             <td><input value="<?= $surgery['surgery_remarks'] ?>" type="text" name="surgery_remarks[]"></td>
-                                                            <td><input value="<?= $surgery['id'] ?>" type="hidden" name="surgery_id[]"></td>
                                                             <td><button type="button" class="remove-row">Remove</button></td>
+                                                            <td><input value="<?= $surgery['id'] ?>" type="hidden" name="surgery_id[]"></td>
                                                         </tr>
                                                     <?php
                                                         $x++;
