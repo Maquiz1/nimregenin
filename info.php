@@ -3859,7 +3859,6 @@ if ($user->isLoggedIn()) {
                                         <table id="medication_table">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
                                                     <th>6. Specify the medical conditions?</th>
                                                     <th>6. Is the patient on Medication?</th>
                                                     <th>6. Mention the medications ?</th>
@@ -3872,7 +3871,6 @@ if ($user->isLoggedIn()) {
                                                 foreach ($override->get1('other_medication', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']) as $medication) {
                                                 ?>
                                                     <tr>
-                                                        <td><?= $x ?></td>
                                                         <td><input value='<?= $medication['other_specify'] ?>' type="text" name="other_specify[]"></td>
                                                         <td>
                                                             <select name="other_medical_medicatn[]" id="other_medical_medicatn[]" style="width: 100%;">
@@ -3936,7 +3934,6 @@ if ($user->isLoggedIn()) {
                                         <table id="nimregenin_table">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
                                                     <th>Type of NIMREGENIN</th>
                                                     <th>Start Date</th>
                                                     <th>Ongoing ?</th>
@@ -3952,7 +3949,6 @@ if ($user->isLoggedIn()) {
                                                 foreach ($override->get1('nimregenin', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']) as $nimregenin) {
                                                 ?>
                                                     <tr>
-                                                        <td><?= $x ?></td>
                                                         <td><input value='<?= $nimregenin['nimregenin_preparation'] ?>' type="text" name="nimregenin_preparation[]"></td>
                                                         <td><input value='<?= $nimregenin['nimregenin_start'] ?>' type="text" name="nimregenin_start[]"><br><span>Example: 2010-12-01</span></td>
                                                         <td>
@@ -4016,7 +4012,6 @@ if ($user->isLoggedIn()) {
                                         <table id="herbal_table">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
                                                     <th>Type of Herbal</th>
                                                     <th>Start Date</th>
                                                     <th>Ongoing ?</th>
@@ -4033,7 +4028,6 @@ if ($user->isLoggedIn()) {
                                                 foreach ($override->get1('herbal_treatment', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']) as $herbal_treatment) {
                                                 ?>
                                                     <tr>
-                                                        <td><?= $x ?></td>
                                                         <td><input value='<?= $herbal_treatment['herbal_preparation'] ?>' type="text" name="herbal_preparation[]"></td>
                                                         <td><input value='<?= $herbal_treatment['herbal_start'] ?>' type="text" name="herbal_start[]"><br><span>Example: 2010-12-01</span></td>
                                                         <td>
@@ -4108,7 +4102,6 @@ if ($user->isLoggedIn()) {
                                         <table id="radiotherapy_table">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
                                                     <th>Type of Radiotherapy</th>
                                                     <th>Start Date</th>
                                                     <th>Ongoing ?</th>
@@ -4124,7 +4117,6 @@ if ($user->isLoggedIn()) {
                                                 foreach ($override->get1('radiotherapy', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']) as $radiotherapy) {
                                                 ?>
                                                     <tr>
-                                                        <td><?= $x ?></td>
                                                         <td><input value="<?= $radiotherapy['radiotherapy'] ?>" type="text" name="radiotherapy[]"></td>
                                                         <td><input value="<?= $radiotherapy['radiotherapy_start'] ?>" type="text" name="radiotherapy_start[]"><br><span>Example: 2010-12-01</span></td>
                                                         <td>
@@ -4185,7 +4177,6 @@ if ($user->isLoggedIn()) {
                                         <table id="chemotherapy_table">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
                                                     <th>Type of Chemotherapy</th>
                                                     <th>Start Date</th>
                                                     <th>Ongoing ?</th>
@@ -4202,7 +4193,6 @@ if ($user->isLoggedIn()) {
                                                 foreach ($override->get1('chemotherapy', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']) as $chemotherapy) {
                                                 ?>
                                                     <tr>
-                                                        <td><?= $x ?></td>
                                                         <td><input value="<?= $chemotherapy['chemotherapy'] ?>" type="text" name="chemotherapy[]"></td>
                                                         <td><input value="<?= $chemotherapy['chemotherapy_start'] ?>" type="text" name="chemotherapy_start[]"><br><span>Example: 2010-12-01</span></td>
                                                         <td>
@@ -4260,7 +4250,6 @@ if ($user->isLoggedIn()) {
                                             <table id="surgery_table">
                                                 <thead>
                                                     <tr>
-                                                        <th>#</th>
                                                         <th>Type of Surgery</th>
                                                         <th>Start Date</th>
                                                         <th>Frequecy</th>
@@ -4274,7 +4263,6 @@ if ($user->isLoggedIn()) {
                                                     foreach ($override->get1('surgery', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']) as $surgery) {
                                                     ?>
                                                         <tr>
-                                                            <td><?= $x ?></td>
                                                             <td><input value="<?= $surgery['surgery'] ?>" type="text" name="surgery[]"></td>
                                                             <td><input value="<?= $surgery['surgery_start'] ?>" type="text" name="surgery_start[]"><br><span>Example: 2010-12-01</span></td>
                                                             <td><input value="<?= $surgery['surgery_number'] ?>" type="text" name="surgery_number[]"><br><span>(numbers)</span></td>
