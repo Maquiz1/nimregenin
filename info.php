@@ -569,9 +569,9 @@ if ($user->isLoggedIn()) {
             }
         } elseif (Input::get('update_crf1')) {
             $validate = $validate->check($_POST, array(
-                'diagnosis_date' => array(
-                    'required' => true,
-                ),
+            //     'diagnosis_date' => array(
+            //         'required' => true,
+            //     ),
             ));
             if ($validate->passed()) {
                 try {
@@ -4127,7 +4127,19 @@ if ($user->isLoggedIn()) {
                                                         <td><?= $x ?></td>
                                                         <td><input value="<?= $radiotherapy['radiotherapy'] ?>" type="text" name="radiotherapy[]"></td>
                                                         <td><input value="<?= $radiotherapy['radiotherapy_start'] ?>" type="text" name="radiotherapy_start[]"><br><span>Example: 2010-12-01</span></td>
-                                                        <td><input value="<?= $radiotherapy['radiotherapy_ongoing'] ?>" type="text" name="radiotherapy_ongoing[]"></td>
+                                                        <td>
+                                                            <select name="radiotherapy_ongoing[]" id="radiotherapy_ongoing[]" style="width: 100%;">
+                                                                <?php if ($radiotherapy['radiotherapy_ongoing'] == "1") { ?>
+                                                                    <option value="<?= $radiotherapy['radiotherapy_ongoing'] ?>">Yes</option>
+                                                                <?php } elseif ($radiotherapy['radiotherapy_ongoing'] == "2") { ?>
+                                                                    <option value="<?= $radiotherapy['radiotherapy_ongoing'] ?>">No</option>
+                                                                <?php } else { ?>
+                                                                    <option value="">Select</option>
+                                                                <?php } ?>
+                                                                <option value="1">Yes</option>
+                                                                <option value="2">No</option>
+                                                            </select>
+                                                        </td>
                                                         <td><input value="<?= $radiotherapy['radiotherapy_end'] ?>" type="text" name="radiotherapy_end[]"><br><span>Example: 2010-12-01</span></td>
                                                         <td><input value="<?= $radiotherapy['radiotherapy_dose'] ?>" type="text" name="radiotherapy_dose[]"><br><span>(Grays)</span></td>
                                                         <td><input value="<?= $radiotherapy['radiotherapy_frequecy'] ?>" type="text" name="radiotherapy_frequecy[]"><br><span>(numbers)</span></td>
@@ -4193,7 +4205,19 @@ if ($user->isLoggedIn()) {
                                                         <td><?= $x ?></td>
                                                         <td><input value="<?= $chemotherapy['chemotherapy'] ?>" type="text" name="chemotherapy[]"></td>
                                                         <td><input value="<?= $chemotherapy['chemotherapy_start'] ?>" type="text" name="chemotherapy_start[]"><br><span>Example: 2010-12-01</span></td>
-                                                        <td><input value="<?= $chemotherapy['chemotherapy_ongoing'] ?>" type="text" name="chemotherapy_ongoing[]"></td>
+                                                        <td>
+                                                            <select name="chemotherapy_ongoing[]" id="chemotherapy_ongoing[]" style="width: 100%;">
+                                                                <?php if ($chemotherapy['chemotherapy_ongoing'] == "1") { ?>
+                                                                    <option value="<?= $chemotherapy['chemotherapy_ongoing'] ?>">Yes</option>
+                                                                <?php } elseif ($chemotherapy['chemotherapy_ongoing'] == "2") { ?>
+                                                                    <option value="<?= $chemotherapy['chemotherapy_ongoing'] ?>">No</option>
+                                                                <?php } else { ?>
+                                                                    <option value="">Select</option>
+                                                                <?php } ?>
+                                                                <option value="1">Yes</option>
+                                                                <option value="2">No</option>
+                                                            </select>
+                                                        </td>
                                                         <td><input value="<?= $chemotherapy['chemotherapy_end'] ?>" type="text" name="chemotherapy_end[]"><br><span>Example: 2010-12-01</span></td>
                                                         <td><input value="<?= $chemotherapy['chemotherapy_dose'] ?>" type="text" name="chemotherapy_dose[]"><br><span>(mg)</span></td>
                                                         <td><input value="<?= $chemotherapy['chemotherapy_frequecy'] ?>" type="text" name="chemotherapy_frequecy[]"><br><span>(numbers)</span></td>
