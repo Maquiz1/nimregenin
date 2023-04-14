@@ -1737,7 +1737,7 @@ if ($user->isLoggedIn()) {
                                             <td width="20">#</td>
                                             <th width="40">Picture</th>
                                             <th width="20%">ParticipantID</th>
-                                            <th width="8%">ON NIMREGENIN</th>
+                                            <th width="8%">USING NIMREGENIN ?</th>
                                             <th width="10%">Name</th>
                                             <th width="10%">Gender</th>
                                             <th width="10%">Age</th>
