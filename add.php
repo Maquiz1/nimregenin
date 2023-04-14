@@ -250,144 +250,11 @@ if ($user->isLoggedIn()) {
                         'hiv_aids_medicatn' => Input::get('hiv_aids_medicatn'),
                         'hiv_aids_medicatn_name' => Input::get('hiv_aids_medicatn_name'),
                         'other_medical' => Input::get('other_medical'),
-                        'other_specify' => Input::get('other_specify'),
-                        'other_medical_medicatn' => Input::get('other_medical_medicatn'),
-                        'other_medicatn_name' => Input::get('other_medicatn_name'),
                         'nimregenin_herbal' => Input::get('nimregenin_herbal'),
-                        'nimregenin_preparation' => Input::get('nimregenin_preparation'),
-                        'nimregenin_start' => Input::get('nimregenin_start'),
-                        'nimregenin_ongoing' => Input::get('nimregenin_ongoing'),
-                        'nimregenin_end' => Input::get('nimregenin_end'),
-                        'nimregenin_dose' => Input::get('nimregenin_dose'),
-                        'nimregenin_frequecy' => Input::get('nimregenin_frequecy'),
                         'other_herbal' => Input::get('other_herbal'),
                         'radiotherapy_performed' => Input::get('radiotherapy_performed'),
-                        'radiotherapy' => Input::get('radiotherapy'),
-                        'radiotherapy_start' => Input::get('radiotherapy_start'),
-                        'radiotherapy_ongoing' => Input::get('radiotherapy_ongoing'),
-                        'radiotherapy_end' => Input::get('radiotherapy_end'),
-                        'radiotherapy_dose' => Input::get('radiotherapy_dose'),
-                        'radiotherapy_frequecy' => Input::get('radiotherapy_frequecy'),
-                        'radiotherapy_remarks' => Input::get('radiotherapy_remarks'),
-                        'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                        'patient_id' => $_GET['cid'],
-                        'staff_id' => $user->data()->id,
-                        'status' => 1,
-                        'created_on' => date('Y-m-d'),
-                        'site_id' => $user->data()->site_id,
-                    ));
-
-                    $user->createRecord('herbal_treatment', array(
-                        'vid' => $_GET["vid"],
-                        'vcode' => $_GET["vcode"],
-                        'study_id' => $_GET['sid'],
-                        'other_herbal' => Input::get('other_herbal'),
-                        'herbal_preparation1' => Input::get('herbal_preparation1'),
-                        'herbal_start1' => Input::get('herbal_start1'),
-                        'herbal_ongoing1' => Input::get('herbal_ongoing1'),
-                        'herbal_end1' => Input::get('herbal_end1'),
-                        'herbal_dose1' => Input::get('herbal_dose1'),
-                        'herbal_frequency1' => Input::get('herbal_frequency1'),
-                        'herbal_preparation2' => Input::get('herbal_preparation2'),
-                        'herbal_start2' => Input::get('herbal_start2'),
-                        'herbal_ongoing2' => Input::get('herbal_ongoing2'),
-                        'herbal_end2' => Input::get('herbal_end2'),
-                        'herbal_dose2' => Input::get('herbal_dose2'),
-                        'herbal_frequency2' => Input::get('herbal_frequency2'),
-                        'herbal_preparation3' => Input::get('herbal_preparation3'),
-                        'herbal_start3' => Input::get('herbal_start3'),
-                        'herbal_ongoing3' => Input::get('herbal_ongoing3'),
-                        'herbal_end3' => Input::get('herbal_end3'),
-                        'herbal_dose3' => Input::get('herbal_dose3'),
-                        'herbal_frequency3' => Input::get('herbal_frequency3'),
-                        'herbal_preparation4' => Input::get('herbal_preparation4'),
-                        'herbal_start4' => Input::get('herbal_start4'),
-                        'herbal_ongoing4' => Input::get('herbal_ongoing4'),
-                        'herbal_end4' => Input::get('herbal_end4'),
-                        'herbal_dose4' => Input::get('herbal_dose4'),
-                        'herbal_frequency4' => Input::get('herbal_frequency4'),
-                        'herbal_preparation5' => Input::get('herbal_preparation5'),
-                        'herbal_start5' => Input::get('herbal_start5'),
-                        'herbal_ongoing5' => Input::get('herbal_ongoing5'),
-                        'herbal_end5' => Input::get('herbal_end5'),
-                        'herbal_dose5' => Input::get('herbal_dose5'),
-                        'herbal_frequency5' => Input::get('herbal_frequency5'),
-                        'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                        'patient_id' => $_GET['cid'],
-                        'staff_id' => $user->data()->id,
-                        'status' => 1,
-                        'created_on' => date('Y-m-d'),
-                        'site_id' => $user->data()->site_id,
-                    ));
-
-
-                    $user->createRecord('chemotherapy', array(
-                        'vid' => $_GET["vid"],
-                        'vcode' => $_GET["vcode"],
-                        'study_id' => $_GET['sid'],
-                        'other_herbal' => Input::get('other_herbal'),
                         'chemotherapy_performed' => Input::get('chemotherapy_performed'),
-                        'chemotherapy1' => Input::get('chemotherapy1'),
-                        'chemotherapy_start1' => Input::get('chemotherapy_start1'),
-                        'chemotherapy_ongoing1' => Input::get('chemotherapy_ongoing1'),
-                        'chemotherapy_end1' => Input::get('chemotherapy_end1'),
-                        'chemotherapy_dose1' => Input::get('chemotherapy_dose1'),
-                        'chemotherapy_frequecy1' => Input::get('chemotherapy_frequecy1'),
-                        'chemotherapy_remarks1' => Input::get('chemotherapy_remarks1'),
-                        'chemotherapy2' => Input::get('chemotherapy2'),
-                        'chemotherapy_start2' => Input::get('chemotherapy_start2'),
-                        'chemotherapy_ongoing2' => Input::get('chemotherapy_ongoing2'),
-                        'chemotherapy_end2' => Input::get('chemotherapy_end2'),
-                        'chemotherapy_dose2' => Input::get('chemotherapy_dose2'),
-                        'chemotherapy_frequecy2' => Input::get('chemotherapy_frequecy2'),
-                        'chemotherapy_remarks2' => Input::get('chemotherapy_remarks2'),
-                        'chemotherapy3' => Input::get('chemotherapy3'),
-                        'chemotherapy_start3' => Input::get('chemotherapy_start3'),
-                        'chemotherapy_ongoing3' => Input::get('chemotherapy_ongoing3'),
-                        'chemotherapy_end3' => Input::get('chemotherapy_end3'),
-                        'chemotherapy_dose3' => Input::get('chemotherapy_dose3'),
-                        'chemotherapy_frequecy3' => Input::get('chemotherapy_frequecy3'),
-                        'chemotherapy_remarks3' => Input::get('chemotherapy_remarks3'),
-                        'chemotherapy4' => Input::get('chemotherapy4'),
-                        'chemotherapy_start4' => Input::get('chemotherapy_start4'),
-                        'chemotherapy_ongoing4' => Input::get('chemotherapy_ongoing4'),
-                        'chemotherapy_end4' => Input::get('chemotherapy_end4'),
-                        'chemotherapy_dose4' => Input::get('chemotherapy_dose4'),
-                        'chemotherapy_frequecy4' => Input::get('chemotherapy_frequecy4'),
-                        'chemotherapy_remarks4' => Input::get('chemotherapy_remarks4'),
-                        'chemotherapy5' => Input::get('chemotherapy5'),
-                        'chemotherapy_start5' => Input::get('chemotherapy_start5'),
-                        'chemotherapy_ongoing5' => Input::get('chemotherapy_ongoing5'),
-                        'chemotherapy_end5' => Input::get('chemotherapy_end5'),
-                        'chemotherapy_dose5' => Input::get('chemotherapy_dose5'),
-                        'chemotherapy_frequecy5' => Input::get('chemotherapy_frequecy5'),
-                        'chemotherapy_remarks5' => Input::get('chemotherapy_remarks5'),
-                        'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                        'patient_id' => $_GET['cid'],
-                        'staff_id' => $user->data()->id,
-                        'status' => 1,
-                        'created_on' => date('Y-m-d'),
-                        'site_id' => $user->data()->site_id,
-                    ));
-
-                    $user->createRecord('surgery', array(
-                        'vid' => $_GET["vid"],
-                        'vcode' => $_GET["vcode"],
-                        'study_id' => $_GET['sid'],
-                        'other_herbal' => Input::get('other_herbal'),
                         'surgery_performed' => Input::get('surgery_performed'),
-                        'surgery1' => Input::get('surgery1'),
-                        'surgery_start1' => Input::get('surgery_start1'),
-                        'surgery_number1' => Input::get('surgery_number1'),
-                        'surgery_remarks1' => Input::get('surgery_remarks1'),
-                        'surgery2' => Input::get('surgery2'),
-                        'surgery_start2' => Input::get('surgery_start2'),
-                        'surgery_number2' => Input::get('surgery_number2'),
-                        'surgery_remarks2' => Input::get('surgery_remarks2'),
-                        'surgery3' => Input::get('surgery3'),
-                        'surgery_start3' => Input::get('surgery_start3'),
-                        'surgery_number3' => Input::get('surgery_number3'),
-                        'surgery_remarks3' => Input::get('surgery_remarks3'),
                         'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
                         'patient_id' => $_GET['cid'],
                         'staff_id' => $user->data()->id,
@@ -400,28 +267,136 @@ if ($user->isLoggedIn()) {
                         'nimregenin' => Input::get('nimregenin_herbal'),
                     ), $_GET['cid']);
 
-                    // $si = 0;
-                    // foreach (Input::get('treatment') as $sid) {
-                    //     $user->createRecord('chemotherapy', array(
-                    //         'vid' => $_GET["vid"],
-                    //         'vcode' => $_GET["vcode"],
-                    //         'treatment' => Input::get('treatment')[$si],
-                    //         'standard_medication' => Input::get('standard_medication')[$si],
-                    //         'standard_start' => Input::get('standard_start')[$si],
-                    //         'standard_ongoing' => Input::get('standard_ongoing')[$si],
-                    //         'standard_end' => Input::get('standard_end')[$si],
-                    //         'standard_dose' => Input::get('standard_dose')[$si],
-                    //         'standard_frequecy' => Input::get('standard_frequecy')[$si],
-                    //         'standard_remarks' => Input::get('standard_remarks')[$si],
-                    //         'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date')[$si],
-                    //         'patient_id' => $_GET['cid'],
-                    //         'staff_id' => $user->data()->id,
-                    //         'status' => 1,
-                    //         'created_on' => date('Y-m-d'),
-                    //         'site_id' => $user->data()->site_id,
-                    //     ));
-                    //     $si++;
-                    // }
+                    for ($i = 0; $i < count(Input::get('other_specify')); $i++) {
+                        $user->createRecord('other_medication', array(
+                            'vid' => $_GET["vid"],
+                            'vcode' => $_GET["vcode"],
+                            'study_id' => $_GET['sid'],
+                            'other_medical' => Input::get('other_medical'),
+                            'other_specify' => Input::get('other_specify')[$i],
+                            'other_medical_medicatn' => Input::get('other_medical_medicatn')[$i],
+                            'other_medicatn_name' => Input::get('other_medicatn_name')[$i],
+                            'medication_remarks' => Input::get('other_medication_remarks')[$i],
+                            'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                            'patient_id' => $_GET['cid'],
+                            'staff_id' => $user->data()->id,
+                            'status' => 1,
+                            'created_on' => date('Y-m-d'),
+                            'site_id' => $user->data()->site_id,
+                        ));
+                    }
+
+                    for ($i = 0; $i < count(Input::get('nimregenin_preparation')); $i++) {
+                        $user->createRecord('nimregenin', array(
+                            'vid' => $_GET["vid"],
+                            'vcode' => $_GET["vcode"],
+                            'study_id' => $_GET['sid'],
+                            'nimregenin_herbal' => Input::get('nimregenin_herbal'),
+                            'nimregenin_preparation' => Input::get('nimregenin_preparation')[$i],
+                            'nimregenin_start' => Input::get('nimregenin_start')[$i],
+                            'nimregenin_ongoing' => Input::get('nimregenin_ongoing')[$i],
+                            'nimregenin_end' => Input::get('nimregenin_end')[$i],
+                            'nimregenin_dose' => Input::get('nimregenin_dose')[$i],
+                            'nimregenin_frequecy' => Input::get('nimregenin_frequecy')[$i],
+                            'nimregenin_remarks' => Input::get('nimregenin_remarks')[$i],
+                            'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                            'patient_id' => $_GET['cid'],
+                            'staff_id' => $user->data()->id,
+                            'status' => 1,
+                            'created_on' => date('Y-m-d'),
+                            'site_id' => $user->data()->site_id,
+                        ));
+                    }
+
+
+                    for ($i = 0; $i < count(Input::get('radiotherapy')); $i++) {
+                        $user->createRecord('radiotherapy', array(
+                            'vid' => $_GET["vid"],
+                            'vcode' => $_GET["vcode"],
+                            'study_id' => $_GET['sid'],
+                            'other_herbal' => Input::get('other_herbal'),
+                            'radiotherapy_performed' => Input::get('radiotherapy_performed'),
+                            'radiotherapy' => Input::get('radiotherapy')[$i],
+                            'radiotherapy_start' => Input::get('radiotherapy_start')[$i],
+                            'radiotherapy_ongoing' => Input::get('radiotherapy_ongoing')[$i],
+                            'radiotherapy_end' => Input::get('radiotherapy_end')[$i],
+                            'radiotherapy_dose' => Input::get('radiotherapy_dose')[$i],
+                            'radiotherapy_frequecy' => Input::get('radiotherapy_frequecy')[$i],
+                            'radiotherapy_remarks' => Input::get('radiotherapy_remarks')[$i],
+                            'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                            'patient_id' => $_GET['cid'],
+                            'staff_id' => $user->data()->id,
+                            'status' => 1,
+                            'created_on' => date('Y-m-d'),
+                            'site_id' => $user->data()->site_id,
+                        ));
+                    }
+
+
+                    for ($i = 0; $i < count(Input::get('herbal_preparation')); $i++) {
+                        $user->createRecord('herbal_treatment', array(
+                            'vid' => $_GET["vid"],
+                            'vcode' => $_GET["vcode"],
+                            'study_id' => $_GET['sid'],
+                            'other_herbal' => Input::get('other_herbal'),
+                            'herbal_preparation' => Input::get('herbal_preparation')[$i],
+                            'herbal_start' => Input::get('herbal_start')[$i],
+                            'herbal_ongoing' => Input::get('herbal_ongoing')[$i],
+                            'herbal_end' => Input::get('herbal_end')[$i],
+                            'herbal_dose' => Input::get('herbal_dose')[$i],
+                            'herbal_frequency' => Input::get('herbal_frequency')[$i],
+                            'herbal_remarks' => Input::get('herbal_remarks')[$i],
+                            'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                            'patient_id' => $_GET['cid'],
+                            'staff_id' => $user->data()->id,
+                            'status' => 1,
+                            'created_on' => date('Y-m-d'),
+                            'site_id' => $user->data()->site_id,
+                        ));
+                    }
+
+                    for ($i = 0; $i < count(Input::get('chemotherapy')); $i++) {
+                        $user->createRecord('chemotherapy', array(
+                            'vid' => $_GET["vid"],
+                            'vcode' => $_GET["vcode"],
+                            'study_id' => $_GET['sid'],
+                            'other_herbal' => Input::get('other_herbal'),
+                            'chemotherapy_performed' => Input::get('chemotherapy_performed'),
+                            'chemotherapy' => Input::get('chemotherapy')[$i],
+                            'chemotherapy_start' => Input::get('chemotherapy_start')[$i],
+                            'chemotherapy_ongoing' => Input::get('chemotherapy_ongoing')[$i],
+                            'chemotherapy_end' => Input::get('chemotherapy_end')[$i],
+                            'chemotherapy_dose' => Input::get('chemotherapy_dose')[$i],
+                            'chemotherapy_frequecy' => Input::get('chemotherapy_frequecy')[$i],
+                            'chemotherapy_remarks' => Input::get('chemotherapy_remarks')[$i],
+                            'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                            'patient_id' => $_GET['cid'],
+                            'staff_id' => $user->data()->id,
+                            'status' => 1,
+                            'created_on' => date('Y-m-d'),
+                            'site_id' => $user->data()->site_id,
+                        ));
+                    }
+
+                    for ($i = 0; $i < count(Input::get('surgery')); $i++) {
+                        $user->createRecord('surgery', array(
+                            'vid' => $_GET["vid"],
+                            'vcode' => $_GET["vcode"],
+                            'study_id' => $_GET['sid'],
+                            'other_herbal' => Input::get('other_herbal'),
+                            'surgery_performed' => Input::get('surgery_performed'),
+                            'surgery' => Input::get('surgery')[$i],
+                            'surgery_start' => Input::get('surgery_start')[$i],
+                            'surgery_number' => Input::get('surgery_number')[$i],
+                            'surgery_remarks' => Input::get('surgery_remarks')[$i],
+                            'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                            'patient_id' => $_GET['cid'],
+                            'staff_id' => $user->data()->id,
+                            'status' => 1,
+                            'created_on' => date('Y-m-d'),
+                            'site_id' => $user->data()->site_id,
+                        ));
+                    }
 
                     $successMessage = 'CRF1 added Successful';
                     Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
@@ -828,7 +803,7 @@ if ($user->isLoggedIn()) {
             } else {
                 $pageError = $validate->errors();
             }
-        }elseif (Input::get('add_crf9')) {
+        } elseif (Input::get('add_crf9')) {
             $validate = $validate->check($_POST, array(
                 // 'name' => array(
                 //     'required' => true,
@@ -847,7 +822,37 @@ if ($user->isLoggedIn()) {
             } else {
                 $pageError = $validate->errors();
             }
-        } 
+        } elseif (Input::get('add_crf10')) {
+            $validate = $validate->check($_POST, array(
+                // 'chemotherapy' => array(
+                //     'required' => true,
+                // ),
+            ));
+            if ($validate->passed()) {
+
+                for ($i = 0; $i < count(Input::get('chemotherapy')); $i++) {
+                    $user->createRecord('chemotherapy', array(
+                        'vid' => $_GET["vid"],
+                        'vcode' => $_GET["vcode"],
+                        'chemotherapy' => Input::get('chemotherapy')[$si],
+                        'chemotherapy_start' => Input::get('chemotherapy_start')[$si],
+                        'chemotherapy_ongoing' => Input::get('chemotherapy_ongoing')[$si],
+                        'chemotherapy_end' => Input::get('chemotherapy_end')[$si],
+                        'chemotherapy_dose' => Input::get('chemotherapy_dose')[$si],
+                        'chemotherapy_frequecy' => Input::get('chemotherapy_frequecy')[$si],
+                        'chemotherapy_remarks' => Input::get('chemotherapy_remarks')[$si],
+                        'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ));
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        }
     }
 } else {
     Redirect::to('index.php');
@@ -859,6 +864,111 @@ if ($user->isLoggedIn()) {
 <head>
     <title> Add - NIMREGENIN </title>
     <?php include "head.php"; ?>
+    <style>
+        #chemotherapy_table {
+            border-collapse: collapse;
+        }
+
+        #surgery_table {
+            border-collapse: collapse;
+        }
+
+        #herbal_preparation_table {
+            border-collapse: collapse;
+        }
+
+        #chemotherapy_table th,
+        #chemotherapy_table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        #surgery_table th,
+        #surgery_table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        #herbal_preparation_table th,
+        #herbal_preparation_table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        #chemotherapy_table th {
+            text-align: left;
+            background-color: #f2f2f2;
+        }
+
+        #surgery_table th {
+            text-align: left;
+            background-color: #f2f2f2;
+        }
+
+        #herbal_table th {
+            text-align: left;
+            background-color: #f2f2f2;
+        }
+
+        #nimregenin_table {
+            border-collapse: collapse;
+        }
+
+        #nimregenin_table th,
+        #nimregenin_table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        #nimregenin_table th {
+            text-align: left;
+            background-color: #f2f2f2;
+        }
+
+        #radiotherapy_table {
+            border-collapse: collapse;
+        }
+
+        #radiotherapy_table th,
+        #radiotherapy_table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        #radiotherapy_table th {
+            text-align: left;
+            background-color: #f2f2f2;
+        }
+
+
+        #medication_table {
+            border-collapse: collapse;
+        }
+
+        #medication_table th,
+        #medication_table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        #medication_table th {
+            text-align: left;
+            background-color: #f2f2f2;
+        }
+
+        .remove-row {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .remove-row:hover {
+            background-color: #da190b;
+        }
+    </style>
 </head>
 
 <body>
@@ -1333,15 +1443,6 @@ if ($user->isLoggedIn()) {
                             <div class="block-fluid">
                                 <form id="crf1" method="post">
 
-                                    <!-- <table id="form1">
-                                        <tr>
-                                            <td><input type="text" name="name[]" placeholder="Name"></td>
-                                            <td><input type="text" name="email[]" placeholder="Email"></td>
-                                        </tr>
-                                    </table>
-                                    <button type="button" onclick="addRow()">Add Row</button>
-                                    <button type="button" onclick="submitForm()">Submit</button> -->
-
                                     <div class="head clearfix">
                                         <div class="isw-ok"></div>
                                         <h1>Medical History</h1>
@@ -1510,25 +1611,28 @@ if ($user->isLoggedIn()) {
                                         </div>
                                     </div>
 
-                                    <div class="row-form clearfix" id="other_specify">
-                                        <div class="col-md-3">6. Specify the medical conditions?:</div>
-                                        <div class="col-md-9"><textarea name="other_specify" rows="4"></textarea> </div>
-                                    </div>
 
-                                    <div class="row-form clearfix" id="other_medical_medicatn1">
-                                        <div class="col-md-3">6. Is the patient on Medication?</div>
-                                        <div class="col-md-9">
-                                            <select name="other_medical_medicatn" id="other_medical_medicatn" style="width: 100%;">
-                                                <option value="">Select</option>
-                                                <option value="1">Yes</option>
-                                                <option value="2">No</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                    <div class="row-form clearfix" id="other_medication">
 
-                                    <div class="row-form clearfix" id="other_medicatn_name">
-                                        <div class="col-md-3">6. Mention the medications:</div>
-                                        <div class="col-md-9"><textarea name="other_medicatn_name" rows="4"></textarea> </div>
+                                        <table id="medication_table">
+                                            <thead>
+                                                <tr>
+                                                    <th>6. Specify the medical conditions?</th>
+                                                    <th>6. Is the patient on Medication?</th>
+                                                    <th>6. Mention the medications ?</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input value='' type="text" name="other_specify[]"></td>
+                                                    <td><input value='' type="text" name="other_medical_medicatn[]"><br></td>
+                                                    <td><input value='' type="text" name="other_medicatn_name[]"></td>
+                                                    <td><button type="button" class="remove-row">Remove</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <button type="button" id="add-row1">Add Row</button>
                                     </div>
 
 
@@ -1554,73 +1658,32 @@ if ($user->isLoggedIn()) {
                                         </div>
                                     </div>
 
-                                    <div class="row" id="nimregenin_preparation">
-                                        <div class="col-sm-3">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>NIMREGENIN</label>
-                                                    <input value="NIMREGENIN" type="text" name="nimregenin_preparation" readonly />
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="row-form clearfix" id="nimregenin_preparation">
 
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Start Date:</label>
-                                                    <input value="" type="text" name="nimregenin_start" id="nimregenin_start" />
-                                                    <span>Example: 2023-01-01</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-1">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Ongoing?:</label>
-                                                    <select name="nimregenin_ongoing" id="nimregenin_ongoing" style="width: 100%;">
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2" id="nimregenin_end">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>End Date:</label>
-                                                    <input value="" type="text" name="nimregenin_end" />
-                                                    <span>Example: 2023-01-01</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Dose:</label>
-                                                    <input value="" type="text" name="nimregenin_dose" id="nimregenin_dose" />
-                                                    <span>mls</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Frequecy:</label>
-                                                    <input value="" type="text" name="nimregenin_frequecy" id="nimregenin_frequecy" />
-                                                    <span>(per day)</span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <table id="nimregenin_table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Type of Herbal</th>
+                                                    <th>Start Date</th>
+                                                    <th>Ongoing ?</th>
+                                                    <th>End Date</th>
+                                                    <th>Dose</th>
+                                                    <th>Frequecy</th>
+                                                    <th>Remarks</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input value="NIMREGENIN" type="text" name="nimregenin_preparation[]" readonly></td>
+                                                    <td><input type="text" name="nimregenin_start[]"><br><span>Example: 2010-12-01</span></td>
+                                                    <td><input type="text" name="nimregenin_ongoing[]"></td>
+                                                    <td><input type="text" name="nimregenin_end[]"><br><span>Example: 2010-12-01</span></td>
+                                                    <td><input type="text" name="nimregenin_dose[]"><br><span>(mls)</span></td>
+                                                    <td><input type="text" name="nimregenin_frequency[]"><br><span>(per day)</span></td>
+                                                    <td><input type="text" name="nimregenin_remarks[]"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
 
 
@@ -1640,354 +1703,35 @@ if ($user->isLoggedIn()) {
                                         </div>
                                     </div>
 
+                                    <div class="row-form clearfix" id="herbal">
 
-
-                                    <div class="row" id="herbal_preparation1">
-                                        <div class="col-sm-3">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1. Herbal preparation</label>
-                                                    <input value="" type="text" name="herbal_preparation1" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1. Start Date:</label>
-                                                    <input value="" type="text" name="herbal_start1" />
-                                                    <span>Example: 2010-12-01</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-1">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1. Ongoing?:</label>
-                                                    <select name="herbal_ongoing1" id="herbal_ongoing1" style="width: 100%;">
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2" id="herbal_end1">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1. End Date:</label>
-                                                    <input value="" type="text" name="herbal_end1" />
-                                                    <span>Example: 2010-12-01</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1. Dose:</label>
-                                                    <input value="" type="text" name="herbal_dose1" id="herbal_dose1" />
-                                                    <span>(per day)</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1. Frequecy:</label>
-                                                    <input value="" type="text" name="herbal_frequency1" id="herbal_frequency1" />
-                                                    <span>(per day)</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row" id="herbal_preparation2">
-                                        <div class="col-sm-3">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>2. Herbal preparation</label>
-                                                    <input value="" type="text" name="herbal_preparation2" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>2. Start Date:</label>
-                                                    <input value="" type="text" name="herbal_start2" />
-                                                    <span>Example: 2010-12-01</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-1">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>2. Ongoing?:</label>
-                                                    <select name="herbal_ongoing2" id="herbal_ongoing2" style="width: 100%;">
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2" id="herbal_end2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>2. End Date:</label>
-                                                    <input value="" type="text" name="herbal_end2" />
-                                                    <span>Example: 2010-12-01</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>2. Dose:</label>
-                                                    <input value="" type="text" name="herbal_dose2" id="herbal_dose2" />
-                                                    <span>(mls)</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>2. Frequecy:</label>
-                                                    <input value="" type="text" name="herbal_frequency2" id="herbal_frequency2" />
-                                                    <span>(per day)</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row" id="herbal_preparation3">
-                                        <div class="col-sm-3">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>3. Herbal preparation</label>
-                                                    <input value="" type="text" name="herbal_preparation3" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>3. Start Date:</label>
-                                                    <input value="" type="text" name="herbal_start3" />
-                                                    <span>Example: 2010-12-01</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-1">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>3. Ongoing?:</label>
-                                                    <select name="herbal_ongoing3" id="herbal_ongoing3" style="width: 100%;">
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2" id="herbal_end3">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>3. End Date:</label>
-                                                    <input value="" type="text" name="herbal_end3" />
-                                                    <span>Example: 2010-12-01</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>3. Dose:</label>
-                                                    <input value="" type="text" name="herbal_dose3" id="herbal_dose3" />
-                                                    <span>(mls)</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>3. Frequecy:</label>
-                                                    <input value="" type="text" name="herbal_frequency3" id="herbal_frequency3" />
-                                                    <span>(per day)</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row" id="herbal_preparation4">
-                                        <div class="col-sm-3">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>4. Herbal preparation</label>
-                                                    <input value="" type="text" name="herbal_preparation4" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>4. Start Date:</label>
-                                                    <input value="" type="text" name="herbal_start4" />
-                                                    <span>Example: 2010-12-01</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-1">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>4. Ongoing?:</label>
-                                                    <select name="herbal_ongoing4" id="herbal_ongoing4" style="width: 100%;">
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2" id="herbal_end4">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>4. End Date:</label>
-                                                    <input value="" type="text" name="herbal_end4" />
-                                                    <span>Example: 2010-12-01</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>4. Dose:</label>
-                                                    <input value="" type="text" name="herbal_dose4" id="herbal_dose4" />
-                                                    <span>(mls)</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>4. Frequecy:</label>
-                                                    <input value="" type="text" name="herbal_frequency4" id="herbal_frequency4" />
-                                                    <span>(per day)</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row" id="herbal_preparation5">
-                                        <div class="col-sm-3">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>5. Herbal preparation</label>
-                                                    <input value="" type="text" name="herbal_preparation5" />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>5. Start Date:</label>
-                                                    <input value="" type="text" name="herbal_start5" />
-                                                    <span>Example: 2010-12-01</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-1">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>5. Ongoing?:</label>
-                                                    <select name="herbal_ongoing5" id="herbal_ongoing5" style="width: 100%;">
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2" id="herbal_end5">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>5. End Date:</label>
-                                                    <input value="" type="text" name="herbal_end5" />
-                                                    <span>Example: 2010-12-01</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>5. Dose:</label>
-                                                    <input value="" type="text" name="herbal_dose5" id="herbal_dose5" />
-                                                    <span>(mls)</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>5. Frequecy:</label>
-                                                    <input value="" type="text" name="herbal_frequency5" id="herbal_frequency5" />
-                                                    <span>(per day)</span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <table id="herbal_preparation_table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Type of Herbal</th>
+                                                    <th>Start Date</th>
+                                                    <th>Ongoing ?</th>
+                                                    <th>End Date</th>
+                                                    <th>Dose</th>
+                                                    <th>Frequecy</th>
+                                                    <th>Remarks</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input type="text" name="herbal_preparation[]"></td>
+                                                    <td><input type="text" name="herbal_start[]"><br><span>Example: 2010-12-01</span></td>
+                                                    <td><input type="text" name="herbal_ongoing[]"></td>
+                                                    <td><input type="text" name="herbal_end[]"><br><span>Example: 2010-12-01</span></td>
+                                                    <td><input type="text" name="herbal_dose[]"><br><span>(per day)</span></td>
+                                                    <td><input type="text" name="herbal_frequency[]"><br><span>(per day)</span></td>
+                                                    <td><input type="text" name="herbal_remarks[]"></td>
+                                                    <td><button type="button" class="remove-row">Remove</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <button type="button" id="add-row2">Add Row</button>
                                     </div>
 
 
@@ -2021,93 +1765,34 @@ if ($user->isLoggedIn()) {
                                         </div>
                                     </div>
 
+                                    <div class="row-form clearfix" id="radiotherapy">
 
-                                    <div class="row" id="radiotherapy">
-                                        <div class="col-sm-3">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1. Radiotherapy :</label>
-                                                    <input value="Radiotherapy" type="text" name="radiotherapy" readonly />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Start Date:</label>
-                                                    <input value="" type="text" name="radiotherapy_start" id="radiotherapy_start" />
-                                                    <span>Example: 2010-12-01</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Ongoing?:</label>
-                                                    <select name="radiotherapy_ongoing" id="radiotherapy_ongoing" style="width: 100%;">
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2" id="radiotherapy_end">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>End Date:</label>
-                                                    <input value="" type="text" name="radiotherapy_end" />
-                                                    <span>Example: 2010-12-01</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Dose:</label>
-                                                    <input value="" class="validate[required]" type="text" name="radiotherapy_dose" id="radiotherapy_dose" />
-                                                    <span>(Grays)</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-2">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Frequecy:</label>
-                                                    <input value="" type="text" name="radiotherapy_frequecy" id="radiotherapy_frequecy" />
-                                                    <span>(numbers)</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-10">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Remarks:</label>
-                                                    <input value="" type="text" name="radiotherapy_remarks" id="radiotherapy_remarks" />
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <table id="radiotherapy_table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Type of Herbal</th>
+                                                    <th>Start Date</th>
+                                                    <th>Ongoing ?</th>
+                                                    <th>End Date</th>
+                                                    <th>Dose</th>
+                                                    <th>Frequecy</th>
+                                                    <th>Remarks</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input value="Radiotherapy" type="text" name="radiotherapy[]" readonly></td>
+                                                    <td><input type="text" name="radiotherapy_start[]"><br><span>Example: 2010-12-01</span></td>
+                                                    <td><input type="text" name="radiotherapy_ongoing[]"></td>
+                                                    <td><input type="text" name="radiotherapy_end[]"><br><span>Example: 2010-12-01</span></td>
+                                                    <td><input type="text" name="radiotherapy_dose[]"><br><span>(Grays)</span></td>
+                                                    <td><input type="text" name="radiotherapy_frequecy[]"><br><span>(numbers)</span></td>
+                                                    <td><input type="text" name="radiotherapy_remarks[]"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
 
-
-                                    <!-- <div class="row2"> -->
-                                    <!-- select -->
-                                    <!-- <label>Add Row:</label>
-                                        <button class="clsButton" id="add_button">Add Row</button>
-                                    </div> -->
 
                                     <div class="head clearfix">
                                         <div class="isw-ok"></div>
@@ -2126,407 +1811,35 @@ if ($user->isLoggedIn()) {
                                     </div>
 
                                     <div class="row-form clearfix" id="chemotherapy">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>1. Type of Chemotherapy</label>
-                                                        <input value="" type="text" name="chemotherapy1" id="chemotherapy1" />
-                                                    </div>
-                                                </div>
-                                            </div>
 
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>1. Start Date:</label>
-                                                        <input value="" type="text" name="chemotherapy_start1" id="chemotherapy_start1" />
-                                                        <span>Example: 2010-12-01</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>1. Ongoing?</label>
-                                                        <select name="chemotherapy_ongoing1" id="chemotherapy_ongoing1" style="width: 100%;">
-                                                            <option value="">Select</option>
-                                                            <option value="1">Yes</option>
-                                                            <option value="2">No</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-2" id="chemotherapy_end1">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>1. End Date:</label>
-                                                        <input value="" type="text" name="chemotherapy_end1" />
-                                                        <span>Example: 2010-12-01</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>1. Dose:</label>
-                                                        <input value="" type="text" name="chemotherapy_dose1" id="chemotherapy_dose1" />
-                                                        <span>(mg)</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>1. Frequecy:</label>
-                                                        <input value="" type="text" name="chemotherapy_frequecy1" id="chemotherapy_frequecy1" />
-                                                        <span>(numbers)</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-6">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>1. Remarks:</label>
-                                                        <input value="" type="text" name="chemotherapy_remarks1" id="chemotherapy_remarks1" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>2. Type of Chemotherapy</label>
-                                                        <input value="" type="text" name="chemotherapy2" id="chemotherapy2" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>2. Start Date:</label>
-                                                        <input value="" type="text" name="chemotherapy_start2" id="chemotherapy_start2" />
-                                                        <span>Example: 2010-12-01</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>2. Ongoing?</label>
-                                                        <select name="chemotherapy_ongoing2" id="chemotherapy_ongoing2" style="width: 100%;">
-                                                            <option value="">Select</option>
-                                                            <option value="1">Yes</option>
-                                                            <option value="2">No</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-2" id="chemotherapy_end2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>2. End Date:</label>
-                                                        <input value="" type="text" name="chemotherapy_end2" />
-                                                        <span>Example: 2010-12-01</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>2. Dose:</label>
-                                                        <input value="" type="text" name="chemotherapy_dose2" id="chemotherapy_dose2" />
-                                                        <span>(mg)</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>2. Frequecy:</label>
-                                                        <input value="" type="text" name="chemotherapy_frequecy2" id="chemotherapy_frequecy2" />
-                                                        <span>(numbers)</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-6">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>2. Remarks:</label>
-                                                        <input value="" type="text" name="chemotherapy_remarks2" id="chemotherapy_remarks2" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>3. Type of Chemotherapy</label>
-                                                        <input value="" type="text" name="chemotherapy3" id="chemotherapy3" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>3. Start Date:</label>
-                                                        <input value="" type="text" name="chemotherapy_start3" id="chemotherapy_start3" />
-                                                        <span>Example: 2010-12-01</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>3. Ongoing?</label>
-                                                        <select name="chemotherapy_ongoing3" id="chemotherapy_ongoing3" style="width: 100%;">
-                                                            <option value="">Select</option>
-                                                            <option value="1">Yes</option>
-                                                            <option value="2">No</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-2" id="chemotherapy_end3">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>3. End Date:</label>
-                                                        <input value="" type="text" name="chemotherapy_end3" />
-                                                        <span>Example: 2010-12-01</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>3. Dose:</label>
-                                                        <input value="" type="text" name="chemotherapy_dose3" id="chemotherapy_dose3" />
-                                                        <span>(mg)</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>3. Frequecy:</label>
-                                                        <input value="" type="text" name="chemotherapy_frequecy3" id="chemotherapy_frequecy3" />
-                                                        <span>(numbers)</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-6">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>3. Remarks:</label>
-                                                        <input value="" type="text" name="chemotherapy_remarks3" id="chemotherapy_remarks3" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>4. Type of Chemotherapy</label>
-                                                        <input value="" type="text" name="chemotherapy4" id="chemotherapy4" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>4. Start Date:</label>
-                                                        <input value="" type="text" name="chemotherapy_start4" id="chemotherapy_start4" />
-                                                        <span>Example: 2010-12-01</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>4. Ongoing?</label>
-                                                        <select name="chemotherapy_ongoing4" id="chemotherapy_ongoing4" style="width: 100%;">
-                                                            <option value="">Select</option>
-                                                            <option value="1">Yes</option>
-                                                            <option value="2">No</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-2" id="chemotherapy_end4">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>4. End Date:</label>
-                                                        <input value="" type="text" name="chemotherapy_end4" />
-                                                        <span>Example: 2010-12-01</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>4. Dose:</label>
-                                                        <input value="" type="text" name="chemotherapy_dose4" id="chemotherapy_dose4" />
-                                                        <span>(mg)</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>4. Frequecy:</label>
-                                                        <input value="" type="text" name="chemotherapy_frequecy4" id="chemotherapy_frequecy4" />
-                                                        <span>(numbers)</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-6">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>4. Remarks:</label>
-                                                        <input value="" type="text" name="chemotherapy_remarks4" id="chemotherapy_remarks4" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>5. Type of Chemotherapy</label>
-                                                        <input value="" type="text" name="chemotherapy5" id="chemotherapy5" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>5. Start Date:</label>
-                                                        <input value="" type="text" name="chemotherapy_start5" id="chemotherapy_start5" />
-                                                        <span>Example: 2010-12-01</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>5. Ongoing?</label>
-                                                        <select name="chemotherapy_ongoing5" id="chemotherapy_ongoing5" style="width: 100%;">
-                                                            <option value="">Select</option>
-                                                            <option value="1">Yes</option>
-                                                            <option value="2">No</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-2" id="chemotherapy_end5">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>5. End Date:</label>
-                                                        <input value="" type="text" name="chemotherapy_end5" />
-                                                        <span>Example: 2010-12-01</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>5. Dose:</label>
-                                                        <input value="" type="text" name="chemotherapy_dose5" id="chemotherapy_dose5" />
-                                                        <span>(mg)</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>5. Frequecy:</label>
-                                                        <input value="" type="text" name="chemotherapy_frequecy5" id="chemotherapy_frequecy5" />
-                                                        <span>(numbers)</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-6">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>5. Remarks:</label>
-                                                        <input value="" type="text" name="chemotherapy_remarks5" id="chemotherapy_remarks5" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <table id="chemotherapy_table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Type of Chemotherapy</th>
+                                                    <th>Start Date</th>
+                                                    <th>Ongoing ?</th>
+                                                    <th>End Date</th>
+                                                    <th>Dose</th>
+                                                    <th>Frequecy</th>
+                                                    <th>Remarks</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input type="text" name="chemotherapy[]"></td>
+                                                    <td><input type="text" name="chemotherapy_start[]"><br><span>Example: 2010-12-01</span></td>
+                                                    <td><input type="text" name="chemotherapy_ongoing[]"></td>
+                                                    <td><input type="text" name="chemotherapy_end[]"><br><span>Example: 2010-12-01</span></td>
+                                                    <td><input type="text" name="chemotherapy_dose[]"><br><span>(mg)</span></td>
+                                                    <td><input type="text" name="chemotherapy_frequecy[]"><br><span>(numbers)</span></td>
+                                                    <td><input type="text" name="chemotherapy_remarks[]"></td>
+                                                    <td><button type="button" class="remove-row">Remove</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <button type="button" id="add-row3">Add Row</button>
                                     </div>
-
 
 
                                     <div class="head clearfix">
@@ -2546,132 +1859,28 @@ if ($user->isLoggedIn()) {
                                     </div>
 
                                     <div class="row-form clearfix" id="surgery">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>1. Type of surgery</label>
-                                                        <input value="" type="text" name="surgery1" id="surgery1" />
-                                                    </div>
-                                                </div>
-                                            </div>
 
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>1. Start Date:</label>
-                                                        <input value="" type="text" name="surgery_start1" id="surgery_start1" />
-                                                        <span>Example: 2010-12-01</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>1. Number:</label>
-                                                        <input value="" type="text" name="surgery_number1" id="surgery_number1" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>1. Remarks:</label>
-                                                        <input value="" type="text" name="surgery_remarks1" id="surgery_remarks1" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>2. Type of surgery</label>
-                                                        <input value="" type="text" name="surgery2" id="surgery2" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>2. Start Date:</label>
-                                                        <input value="" type="text" name="surgery_start2" id="surgery_start2" />
-                                                        <span>Example: 2010-12-01</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>2. Number:</label>
-                                                        <input value="" type="text" name="surgery_number2" id="surgery_number2" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>2. Remarks:</label>
-                                                        <input value="" type="text" name="surgery_remarks2" id="surgery_remarks2" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>3. Type of surgery</label>
-                                                        <input value="" type="text" name="surgery3" id="surgery3" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>3. Start Date:</label>
-                                                        <input value="" type="text" name="surgery_start3" id="surgery_start3" />
-                                                        <span>Example: 2010-12-01</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-2">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>3. Number:</label>
-                                                        <input value="" type="text" name="surgery_number3" id="surgery_number3" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="row-form clearfix">
-                                                    <!-- select -->
-                                                    <div class="form-group">
-                                                        <label>3. Remarks:</label>
-                                                        <input value="" type="text" name="surgery_remarks3" id="surgery_remarks3" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <table id="surgery_table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Type of Surgery</th>
+                                                    <th>Start Date</th>
+                                                    <th>Frequecy</th>
+                                                    <th>Remarks</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input type="text" name="surgery[]"></td>
+                                                    <td><input type="text" name="surgery_start[]"><br><span>Example: 2010-12-01</span></td>
+                                                    <td><input type="text" name="surgery_number[]"><br><span>(numbers)</span></td>
+                                                    <td><input type="text" name="surgery_remarks[]"></td>
+                                                    <td><button type="button" class="remove-row">Remove</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <button type="button" id="add-row4">Add Row</button>
                                     </div>
 
                                     <div class="col-sm-12">
@@ -5258,90 +4467,27 @@ if ($user->isLoggedIn()) {
                                 </form>
                             </div>
                         </div>
-                    <?php } elseif ($_GET['id'] == 16) { ?>
-                        <div class="col-md-offset-1 col-md-8">
-                            <div class="head clearfix">
-                                <div class="isw-ok"></div>
-                                <h1>CRF 1: MEDICAL HISTORY, USE OF HERBAL MEDICINES AND STANDARD TREATMENT</h1>
-                            </div>
-                            <div class="block-fluid">
-
-                                <div class="container py-1">
-                                    <div class="row">
-                                        <div class="col-lg-7 mx-auto">
-                                            <div class="card rounded-0 border-0 shadow">
-                                                <div class="card-body p-5">
-
-                                                    <!--  Bootstrap table-->
-                                                    <div class="table-responsive">
-                                                        <table class="table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th scope="col">#</th>
-                                                                    <th scope="col">Name</th>
-                                                                    <th scope="col">Action</th>
-                                                                    <th scope="col">Handle</th>
-                                                                    <th scope="col"></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <!-- <th scope="row">2</th> -->
-
-                                                                <form id="crf1" method="post">
-                                                                    <!-- <TR>
-                                                                        <TD>Your name</TD>
-                                                                        <TD>
-                                                                            <INPUT TYPE="TEXT" NAME="name" SIZE="20">
-                                                                        </TD>
-                                                                    </TR>
-                                                                    <TR>
-                                                                        <TD>Your E-mail address</TD>
-                                                                        <TD><INPUT TYPE="TEXT" NAME="email" SIZE="25"></TD>
-                                                                    </TR> -->
-                                                                </form>
-                                                            </tbody>
-                                                        </table>
-                                                        <P><INPUT TYPE="SUBMIT" VALUE="Submit" NAME="B1"></P>
-                                                    </div>
-
-                                                    <!-- Add rows button-->
-                                                    <a class="btn btn-primary rounded-0 btn-block" id="insertRow" href="#">Add new row</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><a style="font-size: 8pt; text-decoration: none" target="_blank" href="http://frontendfreecode.com">Free Frontend</a>
+                    <?php } elseif ($_GET['id'] == 16  && $user->data()->power == 1) { ?>
 
 
+                    <?php } elseif ($_GET['id'] == 17  && $user->data()->power == 1) { ?>
 
-                            </div>
-                        </div>
+                    <?php } elseif ($_GET['id'] == 18  && $user->data()->power == 1) { ?>
 
-                    <?php } elseif ($_GET['id'] == 17) { ?>
-                        <form id="crf2" method="post">
-                            <table id="myTable">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                            <button type="button" onclick="addRow()">Add Row</button>
-                            <div class="footer tar">
-                                <input type="submit" name="add_crf9" value="Submit" class="btn btn-default">
-                            </div>
-                        </form>
-                    <?php } elseif ($_GET['id'] == 18 && $user->data()->position == 1) { ?>
 
-                    <?php } elseif ($_GET['id'] == 19 && $user->data()->position == 1) { ?>
+                    <?php } elseif ($_GET['id'] == 19  && $user->data()->power == 1) { ?>
 
-                    <?php } ?>
-                    <div class="dr"><span></span></div>
+
+                    <?php } elseif ($_GET['id'] == 20 && $user->data()->power == 1) { ?>
+
+
+                    <?php } elseif ($_GET['id'] == 21 && $user->data()->power == 1) { ?>
+
+
+                    <?php } elseif ($_GET['id'] == 22 && $user->data()->power == 1) { ?>
+
+                    <?php } ?> <div class="dr"><span></span></div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -5360,236 +4506,135 @@ if ($user->isLoggedIn()) {
             window.history.replaceState(null, null, window.location.href);
         }
 
-        function addRow() {
-            // Get the table and tbody elements
-            var table = document.getElementById("myTable");
-            var tbody = table.getElementsByTagName("tbody")[0];
+         // Add row chemotherapy
+         document.getElementById("add-row1").addEventListener("click", function() {
+            var table = document.getElementById("medication_table").getElementsByTagName("tbody")[0];
+            var newRow = table.insertRow(table.rows.length);
+            var other_specify = newRow.insertCell(0);
+            var other_medical_medicatn = newRow.insertCell(1);
+            var other_medicatn_name = newRow.insertCell(2);
+            var actionCell = newRow.insertCell(3);
+            other_specify.innerHTML = '<input type="text" name="other_specify[]">';
+            other_medical_medicatn.innerHTML = '<input type="text" name="other_medical_medicatn[]">';
+            other_medicatn_name.innerHTML = '<input type="text" name="other_medicatn_name[]">';    
+            actionCell.innerHTML = '<button type="button" class="remove-row">Remove</button>';
+        });
 
-            // Create a new row and cells
-            var row = document.createElement("tr");
-            var nameCell = document.createElement("td");
-            var emailCell = document.createElement("td");
+        // Add row chemotherapy
+        document.getElementById("add-row3").addEventListener("click", function() {
+            var table = document.getElementById("chemotherapy_table").getElementsByTagName("tbody")[0];
+            var newRow = table.insertRow(table.rows.length);
+            var chemotherapy = newRow.insertCell(0);
+            var chemotherapy_start = newRow.insertCell(1);
+            var chemotherapy_ongoing = newRow.insertCell(2);
+            var chemotherapy_end = newRow.insertCell(3);
+            var chemotherapy_dose = newRow.insertCell(4);
+            var chemotherapy_frequecy = newRow.insertCell(5);
+            var chemotherapy_remarks = newRow.insertCell(6);
+            var actionCell = newRow.insertCell(7);
+            chemotherapy.innerHTML = '<input type="text" name="chemotherapy[]">';
+            chemotherapy_start.innerHTML = '<input type="text" name="chemotherapy_start[]">';
+            chemotherapy_ongoing.innerHTML = '<input type="text" name="chemotherapy_ongoing[]">';
+            chemotherapy_end.innerHTML = '<input type="text" name="chemotherapy_end[]">';
+            chemotherapy_dose.innerHTML = '<input type="text" name="chemotherapy_dose[]">';
+            chemotherapy_frequecy.innerHTML = '<input type="text" name="chemotherapy_frequecy[]">';
+            chemotherapy_remarks.innerHTML = '<input type="text" name="chemotherapy_remarks[]">';
+            actionCell.innerHTML = '<button type="button" class="remove-row">Remove</button>';
+        });
 
-            // Add input fields to the cells
-            nameCell.innerHTML = '<td><input class="form-control rounded-0" type="text" name="name[]" placeholder="First name"></td>">';
-            emailCell.innerHTML = '<td><input class="form-control rounded-0" type="email" name="email[]" placeholder="First name"></td>">';
+        // Add row surgery
+        document.getElementById("add-row4").addEventListener("click", function() {
+            var table = document.getElementById("surgery_table").getElementsByTagName("tbody")[0];
+            var newRow = table.insertRow(table.rows.length);
+            var surgery = newRow.insertCell(0);
+            var surgery_start = newRow.insertCell(1);
+            var surgery_number = newRow.insertCell(2);
+            var surgery_remarks = newRow.insertCell(3);
+            var actionCell = newRow.insertCell(4);
+            surgery.innerHTML = '<input type="text" name="surgery[]">';
+            surgery_start.innerHTML = '<input type="text" name="surgery_start[]">';
+            surgery_number.innerHTML = '<input type="text" name="surgery_number[]">';
+            surgery_remarks.innerHTML = '<input type="text" name="surgery_remarks[]">';
+            actionCell.innerHTML = '<button type="button" class="remove-row">Remove</button>';
+        });
 
-            // Add the cells to the row and the row to the tbody
-            row.appendChild(nameCell);
-            row.appendChild(emailCell);
-            tbody.appendChild(row);
-        }
+        // Add row herbal treatment
+        document.getElementById("add-row2").addEventListener("click", function() {
+            var table = document.getElementById("herbal_preparation_table").getElementsByTagName("tbody")[0];
+            var newRow = table.insertRow(table.rows.length);
+            var herbal_preparation = newRow.insertCell(0);
+            var herbal_start = newRow.insertCell(1);
+            var herbal_ongoing = newRow.insertCell(2);
+            var herbal_end = newRow.insertCell(3);
+            var herbal_dose = newRow.insertCell(4);
+            var herbal_frequency = newRow.insertCell(5);
+            var herbal_remarks = newRow.insertCell(6);
+            var actionCell = newRow.insertCell(7);
+            herbal_preparation.innerHTML = '<input type="text" name="herbal_preparation[]">';
+            herbal_start.innerHTML = '<input type="text" name="herbal_start[]">';
+            herbal_ongoing.innerHTML = '<input type="text" name="herbal_ongoing[]">';
+            herbal_end.innerHTML = '<input type="text" name="herbal_end[]">';
+            herbal_dose.innerHTML = '<input type="text" name="herbal_dose[]">';
+            herbal_frequency.innerHTML = '<input type="text" name="herbal_frequency[]">';
+            herbal_remarks.innerHTML = '<input type="text" name="herbal_remarks[]">';
+            actionCell.innerHTML = '<button type="button" class="remove-row">Remove</button>';
+        });
 
-        $(function() {
-
-            // Start counting from the third row
-            var counter = 3;
-
-            $("#insertRow").on("click", function(event) {
-                event.preventDefault();
-
-                var newRow = $("<tr>");
-                var cols = '';
-
-                // Table columns
-                cols += '<th scrope="row">' + counter + '</th>';
-                cols += '<td><input class="form-control rounded-0" type="text" name="firstname" placeholder="First name"></td>';
-                cols += '<td><input class="form-control rounded-0" type="text" name="lastname" placeholder="Last name"></td>';
-                cols += '<td><input class="form-control rounded-0" type="text" name="handle" placeholder="Handle"></td>';
-                cols += '<td><button class="btn btn-danger rounded-0" id ="deleteRow"><i class="fa fa-trash"></i></button</td>';
-
-                // Insert the columns inside a row
-                newRow.append(cols);
-
-                // Insert the row inside a table
-                $("table").append(newRow);
-
-                // Increase counter after each row insertion
-                counter++;
-            });
-
-            // Remove row when delete btn is clicked
-            $("table").on("click", "#deleteRow", function(event) {
-                $(this).closest("tr").remove();
-                counter -= 1
-            });
+        // Remove row
+        document.addEventListener("click", function(e) {
+            if (e.target && e.target.classList.contains("remove-row")) {
+                var row = e.target.parentNode.parentNode;
+                row.parentNode.removeChild(row);
+            }
         });
 
 
 
         // function addRow() {
-        //     var table = document.getElementById('form1');
-        // var table = document.getElementsByTagName('table')[0];
-        //     var newRow = table.insertRow(-1);
-        //     var nameCell = newRow.insertCell(0);
-        //     var emailCell = newRow.insertCell(1);
-        //     nameCell.innerHTML = '<input type="text" name="name[]" placeholder="Name">';
-        //     emailCell.innerHTML = '<input type="text" name="email[]" placeholder="Email">';
-
-        //     console.log(nameCell)
+        //     var table = document.getElementById("myTable");
+        //     var row = table.insertRow(-1);
+        //     var cell1 = row.insertCell(0);
+        //     var cell2 = row.insertCell(1);
+        //     var cell3 = row.insertCell(2);
+        //     var cell4 = row.insertCell(3);
+        //     cell1.innerHTML = '<input type="text" name="item_name[]">';
+        //     cell2.innerHTML = '<input type="number" name="quantity[]" oninput="calculateTotal(this)">';
+        //     cell3.innerHTML = '<input type="number" name="price[]" oninput="calculateTotal(this)">';
+        //     cell4.innerHTML = '<input type="number" name="total[]" readonly>';
         // }
 
-        // function submitForm() {
-        //     var form = document.getElementById('crf1');
-        //     var formData = new FormData(form);
-        //     var xhr = new XMLHttpRequest();
-        //     xhr.open('POST', 'add.php', true);
-        //     xhr.onload = function() {
-        //         if (xhr.status === 200) {
-        //             alert(xhr.responseText);
-        //         } else {
-        //             alert('Error: ' + xhr.statusText);
-        //         }
-        //     };
-        //     xhr.send(formData);
+        // function deleteRow() {
+        //     var table = document.getElementById("myTable");
+        //     if (table.rows.length > 1) {
+        //         table.deleteRow(-1);
+        //     }
         // }
 
-        $('#add_button').click(function() {
-            $('#span_product_details').html('');
-            add_product_row();
-        });
+        // function calculateTotal(input) {
+        //     var row = input.parentNode.parentNode;
+        //     var quantity = row.querySelector('input[name="quantity[]"]').value;
+        //     var price = row.querySelector('input[name="price[]"]').value;
+        //     row.querySelector('input[name="total[]"]').value = quantity * price;
+        // }
 
-
-        ;
-
-        function add_product_row(count = '', treat = 1) {
-            var html = ' ';
-            html += '<span id="row' + count + '">';
-            html += '<div class="row">';
-            html += '<div class="col-sm-6">';
-            html += '<div class="row-form clearfix">';
-            html += '<div class="form-group">';
-            html += '<label>Treatment ' + treat + ' ' + ' :</label>';
-            html += '<input type="text" name="treatment[]" id="treatment[]" class="form-control" required />';
-            html += '</div>';
-            html += '</div>';
-            html += '</div>';
-            html += '<div class="col-sm-3">';
-            html += '<div class="row-form clearfix">';
-            html += '<div class="form-group">';
-            html += '<label>standard_start :</label>';
-            html += '<input type="text" name="standard_start[]" id="standard_start[]" class="form-control" required />';
-            html += '</div>';
-            html += '</div>';
-            html += '</div>';
-            html += '<div class="col-sm-3">';
-            html += '<div class="row-form clearfix">';
-            html += '<div class="form-group">';
-            html += '<label>standard_ongoing :</label>';
-            html += '<input type="text" name="standard_ongoing[]" id="standard_ongoing[]" class="form-control" required />';
-            html += '</div>';
-            html += '</div>';
-            html += '</div>';
-            html += '<div class="col-sm-3">';
-            html += '<div class="row-form clearfix">';
-            html += '<div class="form-group">';
-            html += '<label>standard_end :</label>';
-            html += '<input type="text" name="standard_end[]" id="standard_end[]" class="form-control" required />';
-            html += '</div>';
-            html += '</div>';
-            html += '</div>';
-            html += '<div class="col-sm-3">';
-            html += '<div class="row-form clearfix">';
-            html += '<div class="form-group">';
-            html += '<label>standard_dose :</label>';
-            html += '<input type="text" name="standard_dose[]" id="standard_dose[]" class="form-control" required />';
-            html += '</div>';
-            html += '</div>';
-            html += '</div>';
-            html += '<div class="col-sm-3">';
-            html += '<div class="row-form clearfix">';
-            html += '<div class="form-group">';
-            html += '<label>standard_frequency :</label>';
-            html += '<input type="text" name="standard_frequency[]" id="standard_frequency[]" class="form-control" required />';
-            html += '</div>';
-            html += '</div>';
-            html += '</div>';
-            html += '<div class="col-sm-2">add';
-            html += '<div class="row-form clearfix">';
-            html += '<div class="form-group">';
-            if (count == '') {
-                html += '<button type="button" name="add_more" id="add_more" class="btn btn-success btn-xs">+</button>';
-            } else {
-                html += '<button type="button" name="remove" id="' + count + '" class="btn btn-danger btn-xs remove">-</button>'
-            }
-            html += '</div>';
-            html += '</div>';
-            html += '</div><br/>';
-            html += '</span>';
-
-            $('#span_product_details').append(html);
-            // $('.selectpicker').selectpicker();
-            console.log(html)
-        }
-
-        var count = 0;
-        var treat = 1;
-
-        //ADD ROW
-        $(document).on('click', '#add_more', function() {
-            count = count + 1;
-            treat = treat + 1;
-            add_product_row(count, treat);
-        })
-
-        //REMOVE ROW
-        $(document).on('click', '.remove', function() {
-            var row_no = $(this).attr("id");
-            $('#row' + row_no).remove()
-            treat = treat - 1;
-        })
-
-
-
-
-        var cloneCount = 1;
-
-        //add new row
-        $("#addrow").click(function() {
-            $('#rows')
-                .clone(true)
-                .attr('id', 'row' + cloneCount++, 'class', 'row')
-                .insertAfter('[id^=row]:last');
-            return false;
-        });
-
-        function addRow1() {
-            // Get the table body element in which you want to add row
-            let table = document.getElementById("tableBody");
-
-            // Create row element
-            let row = document.createElement("tr")
-
-            // Create cells
-            let c1 = document.createElement("td")
-            let c2 = document.createElement("td")
-            let c3 = document.createElement("td")
-            let c4 = document.createElement("td")
-
-            // Insert data to cells
-            c1.innerText = "Elon"
-            c2.innerText = "42"
-            c3.innerText = "Houston"
-            c4.innerText = "C++"
-
-            // Append cells to row
-            row.appendChild(c1);
-            row.appendChild(c2);
-            row.appendChild(c3);
-            row.appendChild(c4);
-
-            // Append row to table body
-            table.appendChild(row)
-        }
+        // function calculateBMI(input) {
+        //     var row = input.parentNode.parentNode;
+        //     var height = row.querySelector('input[name="height[]"]').value;
+        //     var weight = row.querySelector('input[name="weight[]"]').value;
+        //     row.querySelector('input[name="total[]"]').value = (weight / ((height * height) / 10000)).toFixed(2);
+        // }
 
         function calculateBMI() {
 
             let height = parseInt(document.querySelector("#height").value);
             let weight = parseInt(document.querySelector("#weight").value);
 
+            // var row = input.parentNode.parentNode;
+            // var height = row.querySelector('input[name="height[]"]').value;
+            // var weight = row.querySelector('input[name="weight[]"]').value;
+            // row.querySelector('input[name="total[]"]').value = (weight / ((height * height) / 10000)).toFixed(2);
+
             let result = document.querySelector("#bmi");
-
-
 
 
             // validation value or not
@@ -5824,26 +4869,13 @@ if ($user->isLoggedIn()) {
             }
         });
 
-        $('#other_medical_medicatn1').hide();
-        $('#other_specify').hide();
+        $('#other_medication').hide();
         $('#other_medical').change(function() {
             var getUid = $(this).val();
             if (getUid === "1") {
-                $('#other_specify').show();
-                $('#other_medical_medicatn1').show();
+                $('#other_medication').show();
             } else {
-                $('#other_specify').hide();
-                $('#other_medical_medicatn1').hide();
-            }
-        });
-
-        $('#other_medicatn_name').hide();
-        $('#other_medical_medicatn').change(function() {
-            var getUid = $(this).val();
-            if (getUid === "1") {
-                $('#other_medicatn_name').show();
-            } else {
-                $('#other_medicatn_name').hide();
+                $('#other_medication').hide();
             }
         });
 
@@ -5871,35 +4903,16 @@ if ($user->isLoggedIn()) {
             }
         });
 
-        $('#herbal_preparation1').hide();
-        $('#herbal_preparation2').hide();
-        $('#herbal_preparation3').hide();
-        $('#herbal_preparation4').hide();
-        $('#herbal_preparation5').hide();
-        $('#herbal_header').hide();
+        $('#herbal').hide();
         $('#other_herbal').change(function() {
             var getUid = $(this).val();
             if (getUid === "1") {
-                $('#herbal_preparation1').show();
-                $('#herbal_preparation2').show();
-                $('#herbal_preparation3').show();
-                $('#herbal_preparation4').show();
-                $('#herbal_preparation5').show();
-                $('#herbal_header').show();
+                $('#herbal').show();
             } else {
-                $('#herbal_header').hide();
-                $('#herbal_preparation1').hide();
-                $('#herbal_preparation2').hide();
-                $('#herbal_preparation3').hide();
-                $('#herbal_preparation4').hide();
-                $('#herbal_preparation5').hide();
+                $('#herbal').hide();
             }
         });
 
-        $('#herbal_end1').hide();
-        $('#herbal_end2').hide();
-        $('#herbal_end3').hide();
-        $('#herbal_end4').hide();
         $('#herbal_end5').hide();
         $('#herbal_ongoing1').change(function() {
             var getUid = $(this).val();
@@ -5907,42 +4920,6 @@ if ($user->isLoggedIn()) {
                 $('#herbal_end1').show();
             } else {
                 $('#herbal_end1').hide();
-            }
-        });
-
-        $('#herbal_ongoing2').change(function() {
-            var getUid = $(this).val();
-            if (getUid === "2") {
-                $('#herbal_end2').show();
-            } else {
-                $('#herbal_end2').hide();
-            }
-        });
-
-        $('#herbal_ongoing3').change(function() {
-            var getUid = $(this).val();
-            if (getUid === "2") {
-                $('#herbal_end3').show();
-            } else {
-                $('#herbal_end3').hide();
-            }
-        });
-
-        $('#herbal_ongoing4').change(function() {
-            var getUid = $(this).val();
-            if (getUid === "2") {
-                $('#herbal_end4').show();
-            } else {
-                $('#herbal_end4').hide();
-            }
-        });
-
-        $('#herbal_ongoing5').change(function() {
-            var getUid = $(this).val();
-            if (getUid === "2") {
-                $('#herbal_end5').show();
-            } else {
-                $('#herbal_end5').hide();
             }
         });
 
@@ -5977,55 +4954,7 @@ if ($user->isLoggedIn()) {
             }
         });
 
-        $('#chemotherapy_end1').hide();
-        $('#chemotherapy_end2').hide();
-        $('#chemotherapy_end3').hide();
-        $('#chemotherapy_end4').hide();
-        $('#chemotherapy_end5').hide();
-        $('#chemotherapy_ongoing1').change(function() {
-            var getUid = $(this).val();
-            if (getUid === "2") {
-                $('#chemotherapy_end1').show();
-            } else {
-                $('#chemotherapy_end1').hide();
-            }
-        });
 
-        $('#chemotherapy_ongoing2').change(function() {
-            var getUid = $(this).val();
-            if (getUid === "2") {
-                $('#chemotherapy_end2').show();
-            } else {
-                $('#chemotherapy_end2').hide();
-            }
-        });
-
-        $('#chemotherapy_ongoing3').change(function() {
-            var getUid = $(this).val();
-            if (getUid === "2") {
-                $('#chemotherapy_end3').show();
-            } else {
-                $('#chemotherapy_end3').hide();
-            }
-        });
-
-        $('#chemotherapy_ongoing4').change(function() {
-            var getUid = $(this).val();
-            if (getUid === "2") {
-                $('#chemotherapy_end4').show();
-            } else {
-                $('#chemotherapy_end4').hide();
-            }
-        });
-
-        $('#chemotherapy_ongoing5').change(function() {
-            var getUid = $(this).val();
-            if (getUid === "2") {
-                $('#chemotherapy_end5').show();
-            } else {
-                $('#chemotherapy_end5').hide();
-            }
-        });
 
         $('#surgery').hide();
         $('#surgery_performed').change(function() {
@@ -6036,41 +4965,6 @@ if ($user->isLoggedIn()) {
                 $('#surgery').hide();
             }
         });
-
-        // function calculateBMI() {
-
-        //     let height = parseInt(document.querySelector("#height").value);
-        //     let weight = parseInt(document.querySelector("#weight").value);
-
-        //     alert(weight);
-
-        //     let result = document.querySelector("#result");
-
-
-        //     // validation value or not
-        //     if (height === "" || isNaN(height))
-        //         result.innerHTML = "Enter a valid Height!";
-
-        //     else if (weight === "" || isNaN(weight))
-        //         result.innerHTML = "Enter a valid Weight!";
-
-        //     // If entered value is valid, calculate the BMI
-        //     else {
-
-        //         let bmi = (weight / ((height * height) / 10000)).toFixed(2);
-
-        //         // Dividing as per the bmi conditions
-        //         if (bmi < 18.6) result.innerHTML =
-        //             `Under Weight : <span>${bmi}</span>`;
-
-        //         else if (bmi >= 18.6 && bmi < 24.9)
-        //             result.innerHTML =
-        //             `Normal : <span>${bmi}</span>`;
-
-        //         else result.innerHTML =
-        //             `Over Weight : <span>${bmi}</span>`;
-        //     }
-        // }
 
 
         $('#appearance_comments').hide();

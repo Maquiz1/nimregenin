@@ -98,24 +98,14 @@ if ($user->data()->accessLevel == 1) {
             </ul>
         </li>
 
-        <?php if ($user->data()->accessLevel == 1) { ?>
+        <?php if ($user->data()->accessLevel == 1  && $user->data()->power == 1) { ?>
             <li class="active">
                 <a href="zebra.php" target="_blank">
                     <span class="isw-print"></span><span class="text">Zebra Print</span>
                 </a>
             </li>  
-            <li class="active">
-                <a href="add.php?id=16" target="_blank">
-                    <span class="isw-print"></span><span class="text">Auto Rows Forms</span>
-                </a>
-            </li>     
             
-            <li class="active">
-                <a href="add.php?id=17">
-                    <span class="isw-print"></span><span class="text">Auto Rows Forms</span>
-                </a>
-            </li>    
-        <?php } ?>
+            <?php } ?>
 
     </ul>
 
