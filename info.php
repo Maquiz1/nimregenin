@@ -717,25 +717,50 @@ if ($user->isLoggedIn()) {
                         ), Input::get('chemotherapy_id')[$i]);
                     }
 
-                    for ($i = 0; $i < count(Input::get('surgery')); $i++) {
-                        $user->updateRecord('surgery', array(
-                            'vid' => $_GET["vid"],
-                            'vcode' => $_GET["vcode"],
-                            'study_id' => $_GET['sid'],
-                            'other_herbal' => Input::get('other_herbal'),
-                            'surgery_performed' => Input::get('surgery_performed'),
-                            'surgery' => Input::get('surgery')[$i],
-                            'surgery_start' => Input::get('surgery_start')[$i],
-                            'surgery_number' => Input::get('surgery_number')[$i],
-                            'surgery_remarks' => Input::get('surgery_remarks')[$i],
-                            'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                            'patient_id' => $_GET['cid'],
-                            'staff_id' => $user->data()->id,
-                            'status' => 1,
-                            'created_on' => date('Y-m-d'),
-                            'site_id' => $user->data()->site_id,
-                        ), Input::get('surgery_id')[$i]);
+                    if(count(Input::get('surgery_id')) == count(Input::get('surgery'))){
+                        for ($i = 0; $i < count(Input::get('surgery')); $i++) {
+                            $user->updateRecord('surgery', array(
+                                'vid' => $_GET["vid"],
+                                'vcode' => $_GET["vcode"],
+                                'study_id' => $_GET['sid'],
+                                'other_herbal' => Input::get('other_herbal'),
+                                'surgery_performed' => Input::get('surgery_performed'),
+                                'surgery' => Input::get('surgery')[$i],
+                                'surgery_start' => Input::get('surgery_start')[$i],
+                                'surgery_number' => Input::get('surgery_number')[$i],
+                                'surgery_remarks' => Input::get('surgery_remarks')[$i],
+                                'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                                'patient_id' => $_GET['cid'],
+                                'staff_id' => $user->data()->id,
+                                'status' => 1,
+                                'created_on' => date('Y-m-d'),
+                                'site_id' => $user->data()->site_id,
+                            ), Input::get('surgery_id')[$i]);
+                        }
+
                     }
+                    // else{
+                    //     for ($i = count(Input::get('surgery')) + 1; $i < count(Input::get('surgery_id')); $i++) {
+                    //         $user->createRecord('surgery', array(
+                    //             'vid' => $_GET["vid"],
+                    //             'vcode' => $_GET["vcode"],
+                    //             'study_id' => $_GET['sid'],
+                    //             'other_herbal' => Input::get('other_herbal'),
+                    //             'surgery_performed' => Input::get('surgery_performed'),
+                    //             'surgery' => Input::get('surgery')[$i],
+                    //             'surgery_start' => Input::get('surgery_start')[$i],
+                    //             'surgery_number' => Input::get('surgery_number')[$i],
+                    //             'surgery_remarks' => Input::get('surgery_remarks')[$i],
+                    //             'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                    //             'patient_id' => $_GET['cid'],
+                    //             'staff_id' => $user->data()->id,
+                    //             'status' => 1,
+                    //             'created_on' => date('Y-m-d'),
+                    //             'site_id' => $user->data()->site_id,
+                    //         ));
+                    //     }
+                    // }
+
 
                     $user->updateRecord('clients', array(
                         'nimregenin' => Input::get('nimregenin_herbal'),
@@ -1119,7 +1144,7 @@ if ($user->isLoggedIn()) {
             border-collapse: collapse;
         }
 
-        #herbal_table {
+        #herbal_preparation_table {
             border-collapse: collapse;
         }
 
@@ -1135,13 +1160,13 @@ if ($user->isLoggedIn()) {
             border: 1px solid #ddd;
         }
 
-        #herbal_table th,
-        #herbal_table td {
+        #herbal_preparation_table th,
+        #herbal_preparation_table td {
             padding: 8px;
             border: 1px solid #ddd;
         }
 
-        #herbal_table th {
+        #chemotherapy_table th {
             text-align: left;
             background-color: #f2f2f2;
         }
@@ -3862,7 +3887,7 @@ if ($user->isLoggedIn()) {
                                                     <th>6. Specify the medical conditions?</th>
                                                     <th>6. Is the patient on Medication?</th>
                                                     <th>6. Mention the medications ?</th>
-                                                    <th>Action</th>
+                                                    <!-- <th>Action</th> -->
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -3886,7 +3911,7 @@ if ($user->isLoggedIn()) {
                                                             </select>
                                                         </td>
                                                         <td><input value='<?= $medication['other_medicatn_name'] ?>' type="text" name="other_medicatn_name[]"></td>
-                                                        <td><button type="button" class="remove-row">Remove</button></td>
+                                                        <!-- <td><button type="button" class="remove-row">Remove</button></td> -->
                                                         <td><input value='<?= $medication['id'] ?>' type="hidden" name="medication_id[]"></td>
 
                                                     </tr>
@@ -3896,7 +3921,7 @@ if ($user->isLoggedIn()) {
                                                 ?>
                                             </tbody>
                                         </table>
-                                        <button type="button" id="add-row1">Add Row</button>
+                                        <!-- <button type="button" id="add-row1">Add Row</button> -->
                                     </div>
 
 
@@ -4020,7 +4045,7 @@ if ($user->isLoggedIn()) {
                                                     <th>Dose</th>
                                                     <th>Frequecy</th>
                                                     <th>Remarks</th>
-                                                    <th>Action</th>
+                                                    <!-- <th>Action</th> -->
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -4048,7 +4073,7 @@ if ($user->isLoggedIn()) {
                                                         <td><input value='<?= $herbal_treatment['herbal_dose'] ?>' type="text" name="herbal_dose[]"><br><span>(per day)</span></td>
                                                         <td><input value='<?= $herbal_treatment['herbal_frequency'] ?>' type="text" name="herbal_frequency[]"><br><span>(per day)</span></td>
                                                         <td><input value='<?= $herbal_treatment['herbal_remarks'] ?>' type="text" name="herbal_remarks[]"><br></td>
-                                                        <td><button type="button" class="remove-row">Remove</button></td>
+                                                        <!-- <td><button type="button" class="remove-row">Remove</button></td> -->
                                                         <td><input value='<?= $herbal_treatment['id'] ?>' type="hidden" name="herbal_id[]"></td>
                                                     </tr>
                                                 <?php
@@ -4057,7 +4082,7 @@ if ($user->isLoggedIn()) {
                                                 ?>
                                             </tbody>
                                         </table>
-                                        <button type="button" id="add-row2">Add Row</button>
+                                        <!-- <button type="button" id="add-row2">Add Row</button> -->
                                     </div>
 
 
@@ -4136,7 +4161,6 @@ if ($user->isLoggedIn()) {
                                                         <td><input value="<?= $radiotherapy['radiotherapy_end'] ?>" type="text" name="radiotherapy_end[]"><br><span>Example: 2010-12-01</span></td>
                                                         <td><input value="<?= $radiotherapy['radiotherapy_dose'] ?>" type="text" name="radiotherapy_dose[]"><br><span>(Grays)</span></td>
                                                         <td><input value="<?= $radiotherapy['radiotherapy_frequecy'] ?>" type="text" name="radiotherapy_frequecy[]"><br><span>(numbers)</span></td>
-                                                        <td><input value="<?= $radiotherapy['radiotherapy_frequecy'] ?>" type="text" name="radiotherapy_frequecy[]"></td>
                                                         <td><input value="<?= $radiotherapy['radiotherapy_remarks'] ?>" type="text" name="radiotherapy_remarks[]"></td>
                                                         <td><input value="<?= $radiotherapy['id'] ?>" type="hidden" name="radiotherapy_id[]"></td>
                                                     </tr>
@@ -4185,7 +4209,7 @@ if ($user->isLoggedIn()) {
                                                     <th>Dose</th>
                                                     <th>Frequecy</th>
                                                     <th>Remarks</th>
-                                                    <th>Action</th>
+                                                    <!-- <th>Action</th> -->
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -4213,7 +4237,7 @@ if ($user->isLoggedIn()) {
                                                         <td><input value="<?= $chemotherapy['chemotherapy_dose'] ?>" type="text" name="chemotherapy_dose[]"><br><span>(mg)</span></td>
                                                         <td><input value="<?= $chemotherapy['chemotherapy_frequecy'] ?>" type="text" name="chemotherapy_frequecy[]"><br><span>(numbers)</span></td>
                                                         <td><input value="<?= $chemotherapy['chemotherapy_remarks'] ?>" type="text" name="chemotherapy_remarks[]"></td>
-                                                        <td><button type="button" class="remove-row3">Remove</button></td>
+                                                        <!-- <td><button type="button" class="remove-row3">Remove</button></td> -->
                                                         <td><input value="<?= $chemotherapy['id'] ?>" type="hidden" name="chemotherapy_id[]"></td>
                                                     </tr>
                                                 <?php
@@ -4222,7 +4246,7 @@ if ($user->isLoggedIn()) {
                                                 ?>
                                             </tbody>
                                         </table>
-                                        <button type="button" id="add-row3">Add Row</button>
+                                        <!-- <button type="button" id="add-row3">Add Row</button> -->
                                     </div>
 
                                     <div class="head clearfix">
@@ -4255,7 +4279,7 @@ if ($user->isLoggedIn()) {
                                                         <th>Start Date</th>
                                                         <th>Frequecy</th>
                                                         <th>Remarks</th>
-                                                        <th>Action</th>
+                                                        <!-- <th>Action</th> -->
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -4268,7 +4292,7 @@ if ($user->isLoggedIn()) {
                                                             <td><input value="<?= $surgery['surgery_start'] ?>" type="text" name="surgery_start[]"><br><span>Example: 2010-12-01</span></td>
                                                             <td><input value="<?= $surgery['surgery_number'] ?>" type="text" name="surgery_number[]"><br><span>(numbers)</span></td>
                                                             <td><input value="<?= $surgery['surgery_remarks'] ?>" type="text" name="surgery_remarks[]"></td>
-                                                            <td><button type="button" class="remove-row">Remove</button></td>
+                                                            <!-- <td><button type="button" class="remove-row">Remove</button></td> -->
                                                             <td><input value="<?= $surgery['id'] ?>" type="hidden" name="surgery_id[]"></td>
                                                         </tr>
                                                     <?php
@@ -4277,7 +4301,7 @@ if ($user->isLoggedIn()) {
                                                     ?>
                                                 </tbody>
                                             </table>
-                                            <button type="button" id="add-row4">Add Row</button>
+                                            <!-- <button type="button" id="add-row4">Add Row</button> -->
                                         </div>
                                     </div>
 
@@ -9267,7 +9291,7 @@ if ($user->isLoggedIn()) {
         var other_medicatn_name = newRow.insertCell(2);
         var actionCell = newRow.insertCell(3);
         other_specify.innerHTML = '<input type="text" name="other_specify[]">';
-        other_medical_medicatn.innerHTML = '<input type="text" name="other_medical_medicatn[]">';
+        other_medical_medicatn.innerHTML = '<select name="other_medical_medicatn[]" id="other_medical_medicatn[]" style="width: 100%;"><option value="">Select</option><option value="1">Yes</option><option value="2">No</option></select>';
         other_medicatn_name.innerHTML = '<input type="text" name="other_medicatn_name[]">';
         actionCell.innerHTML = '<button type="button" class="remove-row">Remove</button>';
     });
@@ -9286,7 +9310,7 @@ if ($user->isLoggedIn()) {
         var actionCell = newRow.insertCell(7);
         chemotherapy.innerHTML = '<input type="text" name="chemotherapy[]">';
         chemotherapy_start.innerHTML = '<input type="text" name="chemotherapy_start[]">';
-        chemotherapy_ongoing.innerHTML = '<input type="text" name="chemotherapy_ongoing[]">';
+        chemotherapy_ongoing.innerHTML = '<select name="chemotherapy_ongoing[]" id="chemotherapy_ongoing[]" style="width: 100%;"><option value="">Select</option><option value="1">Yes</option><option value="2">No</option></select>';
         chemotherapy_end.innerHTML = '<input type="text" name="chemotherapy_end[]">';
         chemotherapy_dose.innerHTML = '<input type="text" name="chemotherapy_dose[]">';
         chemotherapy_frequecy.innerHTML = '<input type="text" name="chemotherapy_frequecy[]">';
@@ -9323,7 +9347,7 @@ if ($user->isLoggedIn()) {
         var actionCell = newRow.insertCell(6);
         herbal_preparation.innerHTML = '<input type="text" name="herbal_preparation[]">';
         herbal_start.innerHTML = '<input type="text" name="herbal_start[]">';
-        herbal_ongoing.innerHTML = '<input type="text" name="herbal_ongoing[]">';
+        herbal_ongoing.innerHTML = '<select name="herbal_ongoing[]" id="herbal_ongoing[]" style="width: 100%;"><option value="">Select</option><option value="1">Yes</option><option value="2">No</option></select>';
         herbal_end.innerHTML = '<input type="text" name="herbal_end[]">';
         herbal_dose.innerHTML = '<input type="text" name="herbal_dose[]">';
         herbal_frequency.innerHTML = '<input type="text" name="herbal_frequency[]">';
