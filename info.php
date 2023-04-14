@@ -3852,7 +3852,7 @@ if ($user->isLoggedIn()) {
                                                 <option value="2">No</option>
                                             </select>
                                         </div>
-                                    </div>                                   
+                                    </div>
 
                                     <div class="row-form clearfix" id="other_medication">
 
@@ -3874,8 +3874,20 @@ if ($user->isLoggedIn()) {
                                                     <tr>
                                                         <td><?= $x ?></td>
                                                         <td><input value='<?= $medication['other_specify'] ?>' type="text" name="other_specify[]"></td>
-                                                        <td><input value='<?= $medication['other_medical_medicatn'] ?>' type="text" name="other_medical_medicatn[]"><br></td>
-                                                        <td><input value='<?= $medication['other_medicatn_name'] ?>' type="text" name="other_medicatn_name[]"></td>                                                        
+                                                        <td>
+                                                            <select name="other_medical_medicatn[]" id="other_medical_medicatn[]" style="width: 100%;">
+                                                                <?php if ($medication['other_medical_medicatn'] == "1") { ?>
+                                                                    <option value="<?= $medication['other_medical_medicatn'] ?>">Yes</option>
+                                                                <?php } elseif ($medication['other_medical_medicatn'] == "2") { ?>
+                                                                    <option value="<?= $medication['other_medical_medicatn'] ?>">No</option>
+                                                                <?php } else { ?>
+                                                                    <option value="">Select</option>
+                                                                <?php } ?>
+                                                                <option value="1">Yes</option>
+                                                                <option value="2">No</option>
+                                                            </select>
+                                                        </td>
+                                                        <td><input value='<?= $medication['other_medicatn_name'] ?>' type="text" name="other_medicatn_name[]"></td>
                                                         <td><input value='<?= $medication['id'] ?>' type="hidden" name="medication_id[]"></td>
                                                         <td><button type="button" class="remove-row">Remove</button></td>
                                                     </tr>
@@ -3943,7 +3955,19 @@ if ($user->isLoggedIn()) {
                                                         <td><?= $x ?></td>
                                                         <td><input value='<?= $nimregenin['nimregenin_preparation'] ?>' type="text" name="nimregenin_preparation[]"></td>
                                                         <td><input value='<?= $nimregenin['nimregenin_start'] ?>' type="text" name="nimregenin_start[]"><br><span>Example: 2010-12-01</span></td>
-                                                        <td><input value='<?= $nimregenin['nimregenin_ongoing'] ?>' type="text" name="nimregenin_ongoing[]"></td>
+                                                        <td>
+                                                            <select name="nimregenin_ongoing[]" id="nimregenin_ongoing[]" style="width: 100%;">
+                                                                <?php if ($nimregenin['nimregenin_ongoing'] == "1") { ?>
+                                                                    <option value="<?= $nimregenin['nimregenin_ongoing'] ?>">Yes</option>
+                                                                <?php } elseif ($nimregenin['nimregenin_ongoing'] == "2") { ?>
+                                                                    <option value="<?= $nimregenin['nimregenin_ongoing'] ?>">No</option>
+                                                                <?php } else { ?>
+                                                                    <option value="">Select</option>
+                                                                <?php } ?>
+                                                                <option value="1">Yes</option>
+                                                                <option value="2">No</option>
+                                                            </select>
+                                                        </td>
                                                         <td><input value='<?= $nimregenin['nimregenin_end'] ?>' type="text" name="nimregenin_end[]"><br><span>Example: 2010-12-01</span></td>
                                                         <td><input value='<?= $nimregenin['nimregenin_dose'] ?>' type="text" name="nimregenin_dose[]"><br><span>(mls)</span></td>
                                                         <td><input value='<?= $nimregenin['nimregenin_frequecy'] ?>' type="text" name="nimregenin_frequecy[]"><br><span>(per day)</span></td>
@@ -4012,7 +4036,19 @@ if ($user->isLoggedIn()) {
                                                         <td><?= $x ?></td>
                                                         <td><input value='<?= $herbal_treatment['herbal_preparation'] ?>' type="text" name="herbal_preparation[]"></td>
                                                         <td><input value='<?= $herbal_treatment['herbal_start'] ?>' type="text" name="herbal_start[]"><br><span>Example: 2010-12-01</span></td>
-                                                        <td><input value='<?= $herbal_treatment['herbal_ongoing'] ?>' type="text" name="herbal_ongoing[]"></td>
+                                                        <td>
+                                                            <select name="herbal_ongoing[]" id="herbal_ongoing[]" style="width: 100%;">
+                                                                <?php if ($herbal_treatment['herbal_ongoing'] == "1") { ?>
+                                                                    <option value="<?= $herbal_treatment['herbal_ongoing'] ?>">Yes</option>
+                                                                <?php } elseif ($herbal_treatment['herbal_ongoing'] == "2") { ?>
+                                                                    <option value="<?= $herbal_treatment['herbal_ongoing'] ?>">No</option>
+                                                                <?php } else { ?>
+                                                                    <option value="">Select</option>
+                                                                <?php } ?>
+                                                                <option value="1">Yes</option>
+                                                                <option value="2">No</option>
+                                                            </select>
+                                                        </td>
                                                         <td><input value='<?= $herbal_treatment['herbal_end'] ?>' type="text" name="herbal_end[]"><br><span>Example: 2010-12-01</span></td>
                                                         <td><input value='<?= $herbal_treatment['herbal_dose'] ?>' type="text" name="herbal_dose[]"><br><span>(per day)</span></td>
                                                         <td><input value='<?= $herbal_treatment['herbal_frequency'] ?>' type="text" name="herbal_frequency[]"><br><span>(per day)</span></td>
@@ -9209,77 +9245,77 @@ if ($user->isLoggedIn()) {
         window.history.replaceState(null, null, window.location.href);
     }
 
-     // Add row chemotherapy
-     document.getElementById("add-row1").addEventListener("click", function() {
-            var table = document.getElementById("medication_table").getElementsByTagName("tbody")[0];
-            var newRow = table.insertRow(table.rows.length);
-            var other_specify = newRow.insertCell(0);
-            var other_medical_medicatn = newRow.insertCell(1);
-            var other_medicatn_name = newRow.insertCell(2);
-            var actionCell = newRow.insertCell(3);
-            other_specify.innerHTML = '<input type="text" name="other_specify[]">';
-            other_medical_medicatn.innerHTML = '<input type="text" name="other_medical_medicatn[]">';
-            other_medicatn_name.innerHTML = '<input type="text" name="other_medicatn_name[]">';    
-            actionCell.innerHTML = '<button type="button" class="remove-row">Remove</button>';
-        });
+    // Add row chemotherapy
+    document.getElementById("add-row1").addEventListener("click", function() {
+        var table = document.getElementById("medication_table").getElementsByTagName("tbody")[0];
+        var newRow = table.insertRow(table.rows.length);
+        var other_specify = newRow.insertCell(0);
+        var other_medical_medicatn = newRow.insertCell(1);
+        var other_medicatn_name = newRow.insertCell(2);
+        var actionCell = newRow.insertCell(3);
+        other_specify.innerHTML = '<input type="text" name="other_specify[]">';
+        other_medical_medicatn.innerHTML = '<input type="text" name="other_medical_medicatn[]">';
+        other_medicatn_name.innerHTML = '<input type="text" name="other_medicatn_name[]">';
+        actionCell.innerHTML = '<button type="button" class="remove-row">Remove</button>';
+    });
 
-        // Add row chemotherapy
-        document.getElementById("add-row3").addEventListener("click", function() {
-            var table = document.getElementById("chemotherapy_table").getElementsByTagName("tbody")[0];
-            var newRow = table.insertRow(table.rows.length);
-            var chemotherapy = newRow.insertCell(0);
-            var chemotherapy_start = newRow.insertCell(1);
-            var chemotherapy_ongoing = newRow.insertCell(2);
-            var chemotherapy_end = newRow.insertCell(3);
-            var chemotherapy_dose = newRow.insertCell(4);
-            var chemotherapy_frequecy = newRow.insertCell(5);
-            var chemotherapy_remarks = newRow.insertCell(6);
-            var actionCell = newRow.insertCell(7);
-            chemotherapy.innerHTML = '<input type="text" name="chemotherapy[]">';
-            chemotherapy_start.innerHTML = '<input type="text" name="chemotherapy_start[]">';
-            chemotherapy_ongoing.innerHTML = '<input type="text" name="chemotherapy_ongoing[]">';
-            chemotherapy_end.innerHTML = '<input type="text" name="chemotherapy_end[]">';
-            chemotherapy_dose.innerHTML = '<input type="text" name="chemotherapy_dose[]">';
-            chemotherapy_frequecy.innerHTML = '<input type="text" name="chemotherapy_frequecy[]">';
-            chemotherapy_remarks.innerHTML = '<input type="text" name="chemotherapy_remarks[]">';
-            actionCell.innerHTML = '<button type="button" class="remove-row">Remove</button>';
-        });
+    // Add row chemotherapy
+    document.getElementById("add-row3").addEventListener("click", function() {
+        var table = document.getElementById("chemotherapy_table").getElementsByTagName("tbody")[0];
+        var newRow = table.insertRow(table.rows.length);
+        var chemotherapy = newRow.insertCell(0);
+        var chemotherapy_start = newRow.insertCell(1);
+        var chemotherapy_ongoing = newRow.insertCell(2);
+        var chemotherapy_end = newRow.insertCell(3);
+        var chemotherapy_dose = newRow.insertCell(4);
+        var chemotherapy_frequecy = newRow.insertCell(5);
+        var chemotherapy_remarks = newRow.insertCell(6);
+        var actionCell = newRow.insertCell(7);
+        chemotherapy.innerHTML = '<input type="text" name="chemotherapy[]">';
+        chemotherapy_start.innerHTML = '<input type="text" name="chemotherapy_start[]">';
+        chemotherapy_ongoing.innerHTML = '<input type="text" name="chemotherapy_ongoing[]">';
+        chemotherapy_end.innerHTML = '<input type="text" name="chemotherapy_end[]">';
+        chemotherapy_dose.innerHTML = '<input type="text" name="chemotherapy_dose[]">';
+        chemotherapy_frequecy.innerHTML = '<input type="text" name="chemotherapy_frequecy[]">';
+        chemotherapy_remarks.innerHTML = '<input type="text" name="chemotherapy_remarks[]">';
+        actionCell.innerHTML = '<button type="button" class="remove-row">Remove</button>';
+    });
 
-        // Add row surgery
-        document.getElementById("add-row4").addEventListener("click", function() {
-            var table = document.getElementById("surgery_table").getElementsByTagName("tbody")[0];
-            var newRow = table.insertRow(table.rows.length);
-            var surgery = newRow.insertCell(0);
-            var surgery_start = newRow.insertCell(1);
-            var surgery_number = newRow.insertCell(2);
-            var surgery_remarks = newRow.insertCell(3);
-            var actionCell = newRow.insertCell(4);
-            surgery.innerHTML = '<input type="text" name="surgery[]">';
-            surgery_start.innerHTML = '<input type="text" name="surgery_start[]">';
-            surgery_number.innerHTML = '<input type="text" name="surgery_number[]">';
-            surgery_remarks.innerHTML = '<input type="text" name="surgery_remarks[]">';
-            actionCell.innerHTML = '<button type="button" class="remove-row">Remove</button>';
-        });
+    // Add row surgery
+    document.getElementById("add-row4").addEventListener("click", function() {
+        var table = document.getElementById("surgery_table").getElementsByTagName("tbody")[0];
+        var newRow = table.insertRow(table.rows.length);
+        var surgery = newRow.insertCell(0);
+        var surgery_start = newRow.insertCell(1);
+        var surgery_number = newRow.insertCell(2);
+        var surgery_remarks = newRow.insertCell(3);
+        var actionCell = newRow.insertCell(4);
+        surgery.innerHTML = '<input type="text" name="surgery[]">';
+        surgery_start.innerHTML = '<input type="text" name="surgery_start[]">';
+        surgery_number.innerHTML = '<input type="text" name="surgery_number[]">';
+        surgery_remarks.innerHTML = '<input type="text" name="surgery_remarks[]">';
+        actionCell.innerHTML = '<button type="button" class="remove-row">Remove</button>';
+    });
 
-        // Add row herbal treatment
-        document.getElementById("add-row2").addEventListener("click", function() {
-            var table = document.getElementById("herbal_preparation_table").getElementsByTagName("tbody")[0];
-            var newRow = table.insertRow(table.rows.length);
-            var herbal_preparation = newRow.insertCell(0);
-            var herbal_start = newRow.insertCell(1);
-            var herbal_ongoing = newRow.insertCell(2);
-            var herbal_end = newRow.insertCell(3);
-            var herbal_dose = newRow.insertCell(4);
-            var herbal_frequency = newRow.insertCell(5);
-            var actionCell = newRow.insertCell(6);
-            herbal_preparation.innerHTML = '<input type="text" name="herbal_preparation[]">';
-            herbal_start.innerHTML = '<input type="text" name="herbal_start[]">';
-            herbal_ongoing.innerHTML = '<input type="text" name="herbal_ongoing[]">';
-            herbal_end.innerHTML = '<input type="text" name="herbal_end[]">';
-            herbal_dose.innerHTML = '<input type="text" name="herbal_dose[]">';
-            herbal_frequency.innerHTML = '<input type="text" name="herbal_frequency[]">';
-            actionCell.innerHTML = '<button type="button" class="remove-row">Remove</button>';
-        });
+    // Add row herbal treatment
+    document.getElementById("add-row2").addEventListener("click", function() {
+        var table = document.getElementById("herbal_preparation_table").getElementsByTagName("tbody")[0];
+        var newRow = table.insertRow(table.rows.length);
+        var herbal_preparation = newRow.insertCell(0);
+        var herbal_start = newRow.insertCell(1);
+        var herbal_ongoing = newRow.insertCell(2);
+        var herbal_end = newRow.insertCell(3);
+        var herbal_dose = newRow.insertCell(4);
+        var herbal_frequency = newRow.insertCell(5);
+        var actionCell = newRow.insertCell(6);
+        herbal_preparation.innerHTML = '<input type="text" name="herbal_preparation[]">';
+        herbal_start.innerHTML = '<input type="text" name="herbal_start[]">';
+        herbal_ongoing.innerHTML = '<input type="text" name="herbal_ongoing[]">';
+        herbal_end.innerHTML = '<input type="text" name="herbal_end[]">';
+        herbal_dose.innerHTML = '<input type="text" name="herbal_dose[]">';
+        herbal_frequency.innerHTML = '<input type="text" name="herbal_frequency[]">';
+        actionCell.innerHTML = '<button type="button" class="remove-row">Remove</button>';
+    });
 
     // Remove row
     document.addEventListener("click", function(e) {
