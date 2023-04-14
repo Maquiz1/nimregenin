@@ -223,9 +223,9 @@ if ($user->isLoggedIn()) {
             }
         } elseif (Input::get('add_crf1')) {
             $validate = $validate->check($_POST, array(
-                'diagnosis_date' => array(
-                    'required' => true,
-                ),
+                // 'diagnosis_date' => array(
+                //     'required' => true,
+                // ),
             ));
             if ($validate->passed()) {
                 try {
