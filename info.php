@@ -4048,7 +4048,7 @@ if ($user->isLoggedIn()) {
                                                         <td><input value='<?= $herbal_treatment['herbal_dose'] ?>' type="text" name="herbal_dose[]"><br><span>(per day)</span></td>
                                                         <td><input value='<?= $herbal_treatment['herbal_frequency'] ?>' type="text" name="herbal_frequency[]"><br><span>(per day)</span></td>
                                                         <td><input value='<?= $herbal_treatment['herbal_remarks'] ?>' type="text" name="herbal_remarks[]"><br></td>
-                                                        <td><button type="button" class="remove-row2">Remove</button></td>
+                                                        <td><button type="button" class="remove-row">Remove</button></td>
                                                         <td><input value='<?= $herbal_treatment['id'] ?>' type="hidden" name="herbal_id[]"></td>
                                                     </tr>
                                                 <?php
@@ -4057,7 +4057,7 @@ if ($user->isLoggedIn()) {
                                                 ?>
                                             </tbody>
                                         </table>
-                                        <button type="button" id="add-row">Add Row</button>
+                                        <button type="button" id="add-row2">Add Row</button>
                                     </div>
 
 
