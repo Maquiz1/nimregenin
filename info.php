@@ -4010,7 +4010,7 @@ if ($user->isLoggedIn()) {
 
                                     <div class="row-form clearfix" id="herbal">
 
-                                        <table id="herbal_table">
+                                        <table id="herbal_preparation_table">
                                             <thead>
                                                 <tr>
                                                     <th>Type of Herbal</th>
