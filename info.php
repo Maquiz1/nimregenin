@@ -2648,7 +2648,7 @@ if ($user->isLoggedIn()) {
                                                                             <select name="visit_status" style="width: 100%;" required>
                                                                                 <option value="">Select</option>
                                                                                 <option value="1">Attended</option>
-                                                                                <option value="2">Missed Visit</option>                                                                                
+                                                                                <option value="2">Missed Visit</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -3284,7 +3284,7 @@ if ($user->isLoggedIn()) {
                                             </tr>
                                         <?php } ?>
 
-                                        <?php if ($_GET['vcode'] == 'D7' || $_GET['vcode'] == 'D14' || $_GET['vcode'] == 'D30' || $_GET['vcode'] == 'D60' || $_GET['vcode'] == 'D90' || $_GET['vcode'] == 'D120') { ?>
+                                        <?php if ($_GET['vcode'] == 'D0' || $_GET['vcode'] == 'D7' || $_GET['vcode'] == 'D14' || $_GET['vcode'] == 'D30' || $_GET['vcode'] == 'D60' || $_GET['vcode'] == 'D90' || $_GET['vcode'] == 'D120') { ?>
 
                                             <tr>
                                                 <td>2</td>
@@ -3416,6 +3416,13 @@ if ($user->isLoggedIn()) {
                                             <tbody>
                                                 <?php $x = 1;
                                                 foreach ($override->get('visit', 'client_id', $_GET['cid']) as $visit) {
+                                                    $crf1 = $override->get1('crf1', 'patient_id', $_GET['cid'], 'vcode', $visit['visit_code'])[0];
+                                                    $crf2 = $override->get1('crf2', 'patient_id', $_GET['cid'], 'vcode', $visit['visit_code'])[0];
+                                                    $crf3 = $override->get1('crf3', 'patient_id', $_GET['cid'], 'vcode', $visit['visit_code'])[0];
+                                                    $crf4 = $override->get1('crf4', 'patient_id', $_GET['cid'], 'vcode', $visit['visit_code'])[0];
+                                                    $crf5 = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $visit['visit_code'])[0];
+                                                    $crf6 = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $visit['visit_code'])[0];
+                                                    $crf7 = $override->get1('crf7', 'patient_id', $_GET['cid'], 'vcode', $visit['visit_code'])[0];
                                                     $sc = $override->get('screening', 'client_id', $_GET['cid'])[0];
                                                     $lb = $override->get('lab', 'client_id', $_GET['cid'])[0];
                                                     $cntV = $override->getCount('visit', 'client_id', $visit['client_id']);
@@ -3440,6 +3447,10 @@ if ($user->isLoggedIn()) {
                                                     }
                                                     if ($visit['visit_code'] == 'D0') {
                                                         $v_typ = 'Enrollment';
+                                                    } elseif ($visit['visit_code'] == 'END') {
+                                                        $v_typ = 'END STUDY';
+                                                    } elseif ($visit['visit_code'] == 'AE') {
+                                                        $v_typ = 'AE';
                                                     } else {
                                                         $v_typ = 'Follow Up';
                                                     }
@@ -3468,9 +3479,44 @@ if ($user->isLoggedIn()) {
                                                                     <?php } ?>
                                                             </td>
                                                             <td>
-                                                                <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-info"><?= $btnV ?>Study CRF</a>
-                                                            </td>
+                                                                <?php if ($visit['visit_code'] == 'D0') { ?>
 
+                                                                    <?php if ($crf1 && $crf2 && $crf3 && $crf4 && $crf7) { ?>
+                                                                        <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-info">Edit Study CRF</a>
+                                                                    <?php } else { ?>
+                                                                        <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-warning">Add Study CRF</a>
+                                                                    <?php } ?>
+
+                                                                <?php } elseif ($visit['visit_code'] == 'D7' || $visit['visit_code'] == 'D14' || $visit['visit_code'] == 'D30' || $visit['visit_code'] == 'D60' || $visit['visit_code'] == 'D90' || $visit['visit_code'] == 'D120') { ?>
+
+                                                                    <?php if ($crf2 && $crf3 && $crf4 && $crf7) { ?>
+                                                                        <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-info">Edit Study CRF</a>
+                                                                    <?php } else { ?>
+                                                                        <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-warning">Add Study CRF</a>
+                                                                    <?php } ?>
+
+
+                                                                <?php } elseif ($visit['visit_code'] == 'END') { ?>
+
+                                                                    <?php if ($crf6) { ?>
+                                                                        <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-info">Edit Study CRF</a>
+                                                                    <?php } else { ?>
+                                                                        <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-warning">Add Study CRF</a>
+                                                                    <?php } ?>
+
+
+                                                                <?php } elseif ($visit['visit_code'] == 'AE') { ?>
+
+                                                                    <?php if ($crf5) { ?>
+                                                                        <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-info">Edit Study CRF</a>
+                                                                    <?php } else { ?>
+                                                                        <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-warning">Add Study CRF</a>
+                                                                    <?php } ?>
+
+                                                                <?php } ?>
+
+
+                                                            </td>
                                                         <?php } ?>
                                                         </tr>
                                                         <div class="modal fade" id="addVisit<?= $visit['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -3498,18 +3544,18 @@ if ($user->isLoggedIn()) {
                                                                                 <div class="row-form clearfix">
                                                                                     <div class="col-md-3">Current Status</div>
                                                                                     <div class="col-md-9">
-                                                                                        <select name="visit_status" style="width: 100%;" required>                                                                                        
-                                                                                            <?php                                                                                            
-                                                                                                if ($visit['visit_status'] == 1) { ?>
-                                                                                                    <option value="<?= $visit['visit_status'] ?>">Attended</option>
-                                                                                                <?php } else if ($visit['visit_status'] == 2) { ?>
-                                                                                                    <option value="<?= $visit['visit_status'] ?>">Missed Visit</option>
-                                                                                                <?php } else { ?>
-                                                                                                    <option value="">Select</option>
-                                                                                            <?php 
+                                                                                        <select name="visit_status" style="width: 100%;" required>
+                                                                                            <?php
+                                                                                            if ($visit['visit_status'] == 1) { ?>
+                                                                                                <option value="<?= $visit['visit_status'] ?>">Attended</option>
+                                                                                            <?php } else if ($visit['visit_status'] == 2) { ?>
+                                                                                                <option value="<?= $visit['visit_status'] ?>">Missed Visit</option>
+                                                                                            <?php } else { ?>
+                                                                                                <option value="">Select</option>
+                                                                                            <?php
                                                                                             } ?>
                                                                                             <option value="1">Attended</option>
-                                                                                            <option value="2">Missed Visit</option>                                                                                  
+                                                                                            <option value="2">Missed Visit</option>
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>

@@ -200,18 +200,6 @@ if ($user->isLoggedIn()) {
                             'status' => 1,
                         ));
 
-                        // $client = $override->lastRow('clients', 'id')[0];
-
-                        // $user->createRecord('visit', array(
-                        //     'visit_name' => 'Day 0',
-                        //     'visit_code' => 'D0',
-                        //     'visit_date' => date('Y-m-d'),
-                        //     'visit_window' => 2,
-                        //     'status' => 1,
-                        //     'seq_no' => 0,
-                        //     'client_id' => $client['id'],
-                        // ));
-
                         $successMessage = 'Client Added Successful';
                         Redirect::to('info.php?id=3');
                     }
@@ -1803,7 +1791,7 @@ if ($user->isLoggedIn()) {
                                         <table id="radiotherapy_table">
                                             <thead>
                                                 <tr>
-                                                    <th>Type of Herbal</th>
+                                                    <th>Type of Radiotherapy</th>
                                                     <th>Start Date</th>
                                                     <th>Ongoing ?</th>
                                                     <th>End Date</th>
@@ -1966,7 +1954,6 @@ if ($user->isLoggedIn()) {
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="row-form clearfix">
-                                                <!-- select -->
                                                 <div class="form-group">
                                                     <label>Height</label>
                                                     <input value="" type="text" name="height" id="height" /> <span>cm</span>
@@ -1976,24 +1963,26 @@ if ($user->isLoggedIn()) {
 
                                         <div class="col-sm-3">
                                             <div class="row-form clearfix">
-                                                <!-- select -->
                                                 <div class="form-group">
                                                     <label>Weight</label>
                                                     <input value="" type="text" name="weight" id="weight" /> <span>kg</span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-3">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>BMI</label>
-                                                    <button onclick="calculateBMI()">Calculate</button>
-                                                    <div id="bmi"><span>kg/m2:</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <label for="result">BMI:</label><span>kg/m2:</span>
+                                        <p>Your BMI is: <span id="bmi"></span></p>
+
+
                                     </div>
+
+                                    <!-- <label for="weight">Weight (kg):</label>
+                                    <input type="number" id="weight" name="weight" />
+
+                                    <label for="height">Height (cm):</label>
+                                    <input type="number" id="height" name="height" />
+
+                                    <p>Your BMI is: <span id="bmi"></span></p> -->
+
 
 
                                     <div class="row">
@@ -4633,86 +4622,16 @@ if ($user->isLoggedIn()) {
         });
 
 
-
-        // function addRow() {
-        //     var table = document.getElementById("myTable");
-        //     var row = table.insertRow(-1);
-        //     var cell1 = row.insertCell(0);
-        //     var cell2 = row.insertCell(1);
-        //     var cell3 = row.insertCell(2);
-        //     var cell4 = row.insertCell(3);
-        //     cell1.innerHTML = '<input type="text" name="item_name[]">';
-        //     cell2.innerHTML = '<input type="number" name="quantity[]" oninput="calculateTotal(this)">';
-        //     cell3.innerHTML = '<input type="number" name="price[]" oninput="calculateTotal(this)">';
-        //     cell4.innerHTML = '<input type="number" name="total[]" readonly>';
-        // }
-
-        // function deleteRow() {
-        //     var table = document.getElementById("myTable");
-        //     if (table.rows.length > 1) {
-        //         table.deleteRow(-1);
-        //     }
-        // }
-
-        // function calculateTotal(input) {
-        //     var row = input.parentNode.parentNode;
-        //     var quantity = row.querySelector('input[name="quantity[]"]').value;
-        //     var price = row.querySelector('input[name="price[]"]').value;
-        //     row.querySelector('input[name="total[]"]').value = quantity * price;
-        // }
-
-        // function calculateBMI(input) {
-        //     var row = input.parentNode.parentNode;
-        //     var height = row.querySelector('input[name="height[]"]').value;
-        //     var weight = row.querySelector('input[name="weight[]"]').value;
-        //     row.querySelector('input[name="total[]"]').value = (weight / ((height * height) / 10000)).toFixed(2);
-        // }
-
-        function calculateBMI() {
-
-            let height = parseInt(document.querySelector("#height").value);
-            let weight = parseInt(document.querySelector("#weight").value);
-
-            // var row = input.parentNode.parentNode;
-            // var height = row.querySelector('input[name="height[]"]').value;
-            // var weight = row.querySelector('input[name="weight[]"]').value;
-            // row.querySelector('input[name="total[]"]').value = (weight / ((height * height) / 10000)).toFixed(2);
-
-            let result = document.querySelector("#bmi");
-
-
-            // validation value or not
-            if (height === "" || isNaN(height))
-                result.innerHTML = "Enter a valid Height!";
-
-            else if (weight === "" || isNaN(weight))
-                result.innerHTML = "Enter a valid Weight!";
-            // let bmi = (weight / ((height * height) / 10000)).toFixed(2);
-
-
-            // If entered value is valid, calculate the BMI
-            else {
-
-                let bmi = (weight / ((height * height) / 10000)).toFixed(2);
-
-                result.innerHTML = `<span>${bmi}</span>`;
-
-
-                // Dividing as per the bmi conditions
-                // if (bmi < 18.6) result.innerHTML =
-                //     `Under Weight : <span>${bmi}</span>`;
-
-                // else if (bmi >= 18.6 && bmi < 24.9)
-                //     result.innerHTML =
-                //     `Normal : <span>${bmi}</span>`;
-
-                // else result.innerHTML =
-                //     `Over Weight : <span>${bmi}</span>`;
-            }
-        }
-
-
         $(document).ready(function() {
+
+            // $('#weight, #height').on('input', function() {
+            //     var weight = $('#weight').val();
+            //     var height = $('#height').val() / 100; // Convert cm to m
+            //     var bmi = weight / (height * height);
+            //     $('#bmi').text(bmi.toFixed(2));
+            // });
+
+
             $('#fl_wait').hide();
             $('#wait_ds').hide();
             $('#region').change(function() {
@@ -5023,15 +4942,15 @@ if ($user->isLoggedIn()) {
 
 
 
-        // $('#surgery').hide();
-        // $('#surgery_performed').change(function() {
-        //     var getUid = $(this).val();
-        //     if (getUid === "1") {
-        //         $('#surgery').show();
-        //     } else {
-        //         $('#surgery').hide();
-        //     }
-        // });
+        $('#surgery').hide();
+        $('#surgery_performed').change(function() {
+            var getUid = $(this).val();
+            if (getUid === "1") {
+                $('#surgery').show();
+            } else {
+                $('#surgery').hide();
+            }
+        });
 
 
         $('#appearance_comments').hide();
