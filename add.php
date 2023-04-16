@@ -1969,20 +1969,15 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <label for="result">BMI:</label><span>kg/m2:</span>
-                                        <p>Your BMI is: <span id="bmi"></span></p>
-
-
+                                        <div class="col-sm-3">
+                                            <div class="row-form clearfix">
+                                                <div class="form-group">
+                                                    <label>BMI</label>
+                                                    <span id="bmi"></span>&nbsp;&nbsp;kg/m2
+                                                </div>
+                                            </div>
+                                        </div>                                        
                                     </div>
-
-                                    <!-- <label for="weight">Weight (kg):</label>
-                                    <input type="number" id="weight" name="weight" />
-
-                                    <label for="height">Height (cm):</label>
-                                    <input type="number" id="height" name="height" />
-
-                                    <p>Your BMI is: <span id="bmi"></span></p> -->
-
 
 
                                     <div class="row">
@@ -4537,99 +4532,35 @@ if ($user->isLoggedIn()) {
         <?php } ?>
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
-        }
-
-        // Add row chemotherapy
-        document.getElementById("add-row1").addEventListener("click", function() {
-            var table = document.getElementById("medication_table").getElementsByTagName("tbody")[0];
-            var newRow = table.insertRow(table.rows.length);
-            var other_specify = newRow.insertCell(0);
-            var other_medical_medicatn = newRow.insertCell(1);
-            var other_medicatn_name = newRow.insertCell(2);
-            var actionCell = newRow.insertCell(3);
-            other_specify.innerHTML = '<input type="text" name="other_specify[]">';
-            other_medical_medicatn.innerHTML = '<select name="other_medical_medicatn[]" id="other_medical_medicatn[]" style="width: 100%;"><option value="">Select</option><option value="1">Yes</option><option value="2">No</option></select>';
-            other_medicatn_name.innerHTML = '<input type="text" name="other_medicatn_name[]">';
-            actionCell.innerHTML = '<button type="button" class="remove-row">Remove</button>';
-        });
-
-        // Add row herbal treatment
-        document.getElementById("add-row2").addEventListener("click", function() {
-            var table = document.getElementById("herbal_preparation_table").getElementsByTagName("tbody")[0];
-            var newRow = table.insertRow(table.rows.length);
-            var herbal_preparation = newRow.insertCell(0);
-            var herbal_start = newRow.insertCell(1);
-            var herbal_ongoing = newRow.insertCell(2);
-            var herbal_end = newRow.insertCell(3);
-            var herbal_dose = newRow.insertCell(4);
-            var herbal_frequency = newRow.insertCell(5);
-            var herbal_remarks = newRow.insertCell(6);
-            var actionCell = newRow.insertCell(7);
-            herbal_preparation.innerHTML = '<input type="text" name="herbal_preparation[]">';
-            herbal_start.innerHTML = '<input type="text" name="herbal_start[]"><span>(Example: 2010-12-01)</span>';
-            herbal_ongoing.innerHTML = '<select name="herbal_ongoing[]" id="herbal_ongoing[]" style="width: 100%;"><option value="">Select</option><option value="1">Yes</option><option value="2">No</option></select>';
-            herbal_end.innerHTML = '<input type="text" name="herbal_end[]"><span>(Example: 2010-12-01)</span>';
-            herbal_dose.innerHTML = '<input type="text" name="herbal_dose[]"><span>(per day)</span>';
-            herbal_frequency.innerHTML = '<input type="text" name="herbal_frequency[]"><span>(per day)</span>';
-            herbal_remarks.innerHTML = '<input type="text" name="herbal_remarks[]">';
-            actionCell.innerHTML = '<button type="button" class="remove-row">Remove</button>';
-        });
-
-        // Add row chemotherapy
-        document.getElementById("add-row3").addEventListener("click", function() {
-            var table = document.getElementById("chemotherapy_table").getElementsByTagName("tbody")[0];
-            var newRow = table.insertRow(table.rows.length);
-            var chemotherapy = newRow.insertCell(0);
-            var chemotherapy_start = newRow.insertCell(1);
-            var chemotherapy_ongoing = newRow.insertCell(2);
-            var chemotherapy_end = newRow.insertCell(3);
-            var chemotherapy_dose = newRow.insertCell(4);
-            var chemotherapy_frequecy = newRow.insertCell(5);
-            var chemotherapy_remarks = newRow.insertCell(6);
-            var actionCell = newRow.insertCell(7);
-            chemotherapy.innerHTML = '<input type="text" name="chemotherapy[]">';
-            chemotherapy_start.innerHTML = '<input type="text" name="chemotherapy_start[]"><span>(Example: 2010-12-01)</span>';
-            chemotherapy_ongoing.innerHTML = '<select name="chemotherapy_ongoing[]" id="chemotherapy_ongoing[]" style="width: 100%;"><option value="">Select</option><option value="1">Yes</option><option value="2">No</option></select>';
-            chemotherapy_end.innerHTML = '<input type="text" name="chemotherapy_end[]"><span>(Example: 2010-12-01)</span>';
-            chemotherapy_dose.innerHTML = '<input type="text" name="chemotherapy_dose[]"><span>(mg)</span>';
-            chemotherapy_frequecy.innerHTML = '<input type="text" name="chemotherapy_frequecy[]"><span>(numbers)</span>';
-            chemotherapy_remarks.innerHTML = '<input type="text" name="chemotherapy_remarks[]">';
-            actionCell.innerHTML = '<button type="button" class="remove-row">Remove</button>';
-        });
-
-        // Add row surgery
-        document.getElementById("add-row4").addEventListener("click", function() {
-            var table = document.getElementById("surgery_table").getElementsByTagName("tbody")[0];
-            var newRow = table.insertRow(table.rows.length);
-            var surgery = newRow.insertCell(0);
-            var surgery_start = newRow.insertCell(1);
-            var surgery_number = newRow.insertCell(2);
-            var surgery_remarks = newRow.insertCell(3);
-            var actionCell = newRow.insertCell(4);
-            surgery.innerHTML = '<input type="text" name="surgery[]">';
-            surgery_start.innerHTML = '<input type="text" name="surgery_start[]"><span>(Example: 2010-12-01)</span>';
-            surgery_number.innerHTML = '<input type="text" name="surgery_number[]"><span>(numbers)</span>';
-            surgery_remarks.innerHTML = '<input type="text" name="surgery_remarks[]">';
-            actionCell.innerHTML = '<button type="button" class="remove-row">Remove</button>';
-        });
-
-        // Remove row
-        document.addEventListener("click", function(e) {
-            if (e.target && e.target.classList.contains("remove-row")) {
-                var row = e.target.parentNode.parentNode;
-                row.parentNode.removeChild(row);
-            }
-        });
+        }       
 
 
         $(document).ready(function() {
 
-            // $('#weight, #height').on('input', function() {
-            //     var weight = $('#weight').val();
-            //     var height = $('#height').val() / 100; // Convert cm to m
-            //     var bmi = weight / (height * height);
-            //     $('#bmi').text(bmi.toFixed(2));
-            // });
+            $('#weight, #height').on('input', function() {
+                setTimeout(function() {
+                    var weight = $('#weight').val();
+                    var height = $('#height').val() / 100; // Convert cm to m
+                    var bmi = weight / (height * height);
+                    $('#bmi').text(bmi.toFixed(2));
+                }, 1);
+            });
+
+            $("#one").on("input", null, null, function(e) {
+                if ($("#one").val().length == 2) {
+                    setTimeout(function() {
+                        $("#two").focus();
+                    }, 1);
+                }
+            });
+            $("#three").click(function() {
+                $("#four").focus();
+            });
+            $("#five").on("input", null, null, function() {
+                if ($("#five").val().length == 2) {
+                    $("#six").val("It works!");
+                }
+            });
 
 
             $('#fl_wait').hide();
@@ -4832,27 +4763,6 @@ if ($user->isLoggedIn()) {
             }
         });
 
-
-
-        // Get a reference to the table
-        // const table = document.getElementById("medication_table");
-
-        // // Get a reference to the rows in the table
-        // const rows = table.rows;
-
-        // // Iterate over the rows starting from the second row
-        // for (let i = 1; i < rows.length; i++) {
-        //     // Get a reference to the cells in the current row
-        //     const cells = rows[i].cells;
-
-        //     // Iterate over the cells in the current row
-        //     for (let j = 0; j < cells.length; j++) {
-        //         // Access the cell data using the innerHTML property
-        //         const cellData = cells[j].innerHTML;
-        //         console.log(cellData);
-        //         alert(cellData);
-        //     }
-        // }
 
 
         $('#other_medication').hide();
@@ -5258,6 +5168,89 @@ if ($user->isLoggedIn()) {
                 $('#withdrew_other').show();
             } else {
                 $('#withdrew_other').hide();
+            }
+        });
+
+
+        // Add row chemotherapy
+        document.getElementById("add-row1").addEventListener("click", function() {
+            var table = document.getElementById("medication_table").getElementsByTagName("tbody")[0];
+            var newRow = table.insertRow(table.rows.length);
+            var other_specify = newRow.insertCell(0);
+            var other_medical_medicatn = newRow.insertCell(1);
+            var other_medicatn_name = newRow.insertCell(2);
+            var actionCell = newRow.insertCell(3);
+            other_specify.innerHTML = '<input type="text" name="other_specify[]">';
+            other_medical_medicatn.innerHTML = '<select name="other_medical_medicatn[]" id="other_medical_medicatn[]" style="width: 100%;"><option value="">Select</option><option value="1">Yes</option><option value="2">No</option></select>';
+            other_medicatn_name.innerHTML = '<input type="text" name="other_medicatn_name[]">';
+            actionCell.innerHTML = '<button type="button" class="remove-row">Remove</button>';
+        });
+
+        // Add row herbal treatment
+        document.getElementById("add-row2").addEventListener("click", function() {
+            var table = document.getElementById("herbal_preparation_table").getElementsByTagName("tbody")[0];
+            var newRow = table.insertRow(table.rows.length);
+            var herbal_preparation = newRow.insertCell(0);
+            var herbal_start = newRow.insertCell(1);
+            var herbal_ongoing = newRow.insertCell(2);
+            var herbal_end = newRow.insertCell(3);
+            var herbal_dose = newRow.insertCell(4);
+            var herbal_frequency = newRow.insertCell(5);
+            var herbal_remarks = newRow.insertCell(6);
+            var actionCell = newRow.insertCell(7);
+            herbal_preparation.innerHTML = '<input type="text" name="herbal_preparation[]">';
+            herbal_start.innerHTML = '<input type="text" name="herbal_start[]"><span>(Example: 2010-12-01)</span>';
+            herbal_ongoing.innerHTML = '<select name="herbal_ongoing[]" id="herbal_ongoing[]" style="width: 100%;"><option value="">Select</option><option value="1">Yes</option><option value="2">No</option></select>';
+            herbal_end.innerHTML = '<input type="text" name="herbal_end[]"><span>(Example: 2010-12-01)</span>';
+            herbal_dose.innerHTML = '<input type="text" name="herbal_dose[]"><span>(per day)</span>';
+            herbal_frequency.innerHTML = '<input type="text" name="herbal_frequency[]"><span>(per day)</span>';
+            herbal_remarks.innerHTML = '<input type="text" name="herbal_remarks[]">';
+            actionCell.innerHTML = '<button type="button" class="remove-row">Remove</button>';
+        });
+
+        // Add row chemotherapy
+        document.getElementById("add-row3").addEventListener("click", function() {
+            var table = document.getElementById("chemotherapy_table").getElementsByTagName("tbody")[0];
+            var newRow = table.insertRow(table.rows.length);
+            var chemotherapy = newRow.insertCell(0);
+            var chemotherapy_start = newRow.insertCell(1);
+            var chemotherapy_ongoing = newRow.insertCell(2);
+            var chemotherapy_end = newRow.insertCell(3);
+            var chemotherapy_dose = newRow.insertCell(4);
+            var chemotherapy_frequecy = newRow.insertCell(5);
+            var chemotherapy_remarks = newRow.insertCell(6);
+            var actionCell = newRow.insertCell(7);
+            chemotherapy.innerHTML = '<input type="text" name="chemotherapy[]">';
+            chemotherapy_start.innerHTML = '<input type="text" name="chemotherapy_start[]"><span>(Example: 2010-12-01)</span>';
+            chemotherapy_ongoing.innerHTML = '<select name="chemotherapy_ongoing[]" id="chemotherapy_ongoing[]" style="width: 100%;"><option value="">Select</option><option value="1">Yes</option><option value="2">No</option></select>';
+            chemotherapy_end.innerHTML = '<input type="text" name="chemotherapy_end[]"><span>(Example: 2010-12-01)</span>';
+            chemotherapy_dose.innerHTML = '<input type="text" name="chemotherapy_dose[]"><span>(mg)</span>';
+            chemotherapy_frequecy.innerHTML = '<input type="text" name="chemotherapy_frequecy[]"><span>(numbers)</span>';
+            chemotherapy_remarks.innerHTML = '<input type="text" name="chemotherapy_remarks[]">';
+            actionCell.innerHTML = '<button type="button" class="remove-row">Remove</button>';
+        });
+
+        // Add row surgery
+        document.getElementById("add-row4").addEventListener("click", function() {
+            var table = document.getElementById("surgery_table").getElementsByTagName("tbody")[0];
+            var newRow = table.insertRow(table.rows.length);
+            var surgery = newRow.insertCell(0);
+            var surgery_start = newRow.insertCell(1);
+            var surgery_number = newRow.insertCell(2);
+            var surgery_remarks = newRow.insertCell(3);
+            var actionCell = newRow.insertCell(4);
+            surgery.innerHTML = '<input type="text" name="surgery[]">';
+            surgery_start.innerHTML = '<input type="text" name="surgery_start[]"><span>(Example: 2010-12-01)</span>';
+            surgery_number.innerHTML = '<input type="text" name="surgery_number[]"><span>(numbers)</span>';
+            surgery_remarks.innerHTML = '<input type="text" name="surgery_remarks[]">';
+            actionCell.innerHTML = '<button type="button" class="remove-row">Remove</button>';
+        });
+
+        // Remove row
+        document.addEventListener("click", function(e) {
+            if (e.target && e.target.classList.contains("remove-row")) {
+                var row = e.target.parentNode.parentNode;
+                row.parentNode.removeChild(row);
             }
         });
     </script>
