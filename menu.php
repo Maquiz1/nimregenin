@@ -77,6 +77,11 @@ if ($user->data()->accessLevel == 1) {
                             <span class="glyphicon glyphicon-share"></span><span class="text">Manage</span>
                         </a>
                     </li>
+                    <li class="active">
+                        <a href="info.php?id=20" target="_blank">
+                            <span class="isw-download"></span><span class="text">Download Data</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
 
@@ -103,9 +108,9 @@ if ($user->data()->accessLevel == 1) {
                 <a href="zebra.php" target="_blank">
                     <span class="isw-print"></span><span class="text">Zebra Print</span>
                 </a>
-            </li>  
-            
-            <?php } ?>
+            </li>
+
+        <?php } ?>
 
     </ul>
 

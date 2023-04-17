@@ -619,7 +619,7 @@ if ($user->isLoggedIn()) {
                 $lab_id = $override->getNews('lab', 'client_id', Input::get('id'), 'status', 1)[0];
                 if (!$client_study['study_id']) {
                     $study_id = $std_id['study_id'];
-                }else{
+                } else {
                     $study_id = $client_study['study_id'];
                 }
                 if (!$override->get('visit', 'client_id', Input::get('id'))) {
@@ -1270,6 +1270,87 @@ if ($user->isLoggedIn()) {
             } else {
                 $pageError = $validate->errors();
             }
+        }
+
+        if ($_GET['id'] == 20) {
+            $data = null;
+            $filename = null;
+            if (Input::get('clients')) {
+                $data = $override->getData('clients');
+                $filename = 'Clients';
+            } elseif (Input::get('visits')) {
+                $data = $override->getData('visit');
+                $filename = 'Visits';
+            } elseif (Input::get('lab')) {
+                $data = $override->getData('lab');
+                $filename = 'Exclusion Criteria';
+            } elseif (Input::get('study_id')) {
+                $data = $override->getData('study_id');
+                $filename = 'Study IDs';
+            } elseif (Input::get('sites')) {
+                $data = $override->getData('site');
+                $filename = 'Sites';
+            } elseif (Input::get('screening')) {
+                $data = $override->getData('screening');
+                $filename = 'Inclusion criteria';
+            }
+            elseif (Input::get('crf1')) {
+                $data = $override->getData('crf1');
+                $filename = 'CRF 1';
+            }
+            elseif (Input::get('crf2')) {
+                $data = $override->getData('crf2');
+                $filename = 'CRF 2';
+            }
+            elseif (Input::get('crf3')) {
+                $data = $override->getData('crf3');
+                $filename = 'CRF 3';
+            }
+            elseif (Input::get('crf4')) {
+                $data = $override->getData('crf4');
+                $filename = 'CRF 4';
+            }
+            elseif (Input::get('crf5')) {
+                $data = $override->getData('crf5');
+                $filename = 'CRF 5';
+            }
+            elseif (Input::get('crf5')) {
+                $data = $override->getData('crf5');
+                $filename = 'CRF 5';
+            }
+            elseif (Input::get('crf6')) {
+                $data = $override->getData('crf6');
+                $filename = 'CRF 6';
+            }
+            elseif (Input::get('crf7')) {
+                $data = $override->getData('crf7');
+                $filename = 'CRF 7';
+            }
+            elseif (Input::get('herbal')) {
+                $data = $override->getData('herbal_treatment');
+                $filename = 'Other Herbal Treatment';
+            }
+            elseif (Input::get('medication')) {
+                $data = $override->getData('other_medication');
+                $filename = 'other_medication';
+            }
+            elseif (Input::get('nimregenin')) {
+                $data = $override->getData('nimregenin');
+                $filename = 'nimregenin';
+            }
+            elseif (Input::get('radiotherapy')) {
+                $data = $override->getData('radiotherapy');
+                $filename = 'radiotherapy';
+            }
+            elseif (Input::get('chemotherapy')) {
+                $data = $override->getData('chemotherapy');
+                $filename = 'chemotherapy';
+            }
+            elseif (Input::get('surgery')) {
+                $data = $override->getData('surgery');
+                $filename = 'surgery';
+            }
+            $user->exportData($data, $filename);
         }
     }
 } else {
@@ -9350,6 +9431,170 @@ if ($user->isLoggedIn()) {
                                                                                     echo $i - 1;
                                                                                 } ?>" class="btn btn-default"> > </a>
                                 </div>
+                            </div>
+                        </div>
+
+
+
+                    <?php } elseif ($_GET['id'] == 20) { ?>
+                        <div class="col-md-6">
+                            <div class="head clearfix">
+                                <div class="isw-grid"></div>
+                                <h1>Download Data</h1>
+                                <ul class="buttons">
+                                    <li><a href="#" class="isw-download"></a></li>
+                                    <li><a href="#" class="isw-attachment"></a></li>
+                                    <li>
+                                        <a href="#" class="isw-settings"></a>
+                                        <ul class="dd-list">
+                                            <li><a href="#"><span class="isw-plus"></span> New document</a></li>
+                                            <li><a href="#"><span class="isw-edit"></span> Edit</a></li>
+                                            <li><a href="#"><span class="isw-delete"></span> Delete</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="block-fluid">
+                                <table cellpadding="0" cellspacing="0" width="100%" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th width="5%">#</th>
+                                            <th width="25%">Name</th>
+                                            <th width="25%">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Clients</td>
+                                            <td>
+                                                <form method="post"><input type="submit" name="clients" value="Download"></form>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>6</td>
+                                            <td>Inclusion</td>
+                                            <td>
+                                                <form method="post"><input type="submit" name="screening" value="Download"></form>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Exclusion</td>
+                                            <td>
+                                                <form method="post"><input type="submit" name="lab" value="Download"></form>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Visit</td>
+                                            <td>
+                                                <form method="post"><input type="submit" name="visits" value="Download"></form>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>1</td>
+                                            <td>CRF1</td>
+                                            <td>
+                                                <form method="post"><input type="submit" name="crf1" value="Download"></form>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>CFR2</td>
+                                            <td>
+                                                <form method="post"><input type="submit" name="crf2" value="Download"></form>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>CRF3</td>
+                                            <td>
+                                                <form method="post"><input type="submit" name="crf4" value="Download"></form>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>CRF4</td>
+                                            <td>
+                                                <form method="post"><input type="submit" name="crf5" value="Download"></form>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>CRF6</td>
+                                            <td>
+                                                <form method="post"><input type="submit" name="crf6" value="Download"></form>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>CRF7</td>
+                                            <td>
+                                                <form method="post"><input type="submit" name="cr7" value="Download"></form>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Other Medications</td>
+                                            <td>
+                                                <form method="post"><input type="submit" name="medication" value="Download"></form>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>NIMREGENIN</td>
+                                            <td>
+                                                <form method="post"><input type="submit" name="nimregenin" value="Download"></form>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>OTHER HERBAL TREATMENT</td>
+                                            <td>
+                                                <form method="post"><input type="submit" name="herbal" value="Download"></form>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Radiotherapy</td>
+                                            <td>
+                                                <form method="post"><input type="submit" name="radiotherapy" value="Download"></form>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Chemotherapy</td>
+                                            <td>
+                                                <form method="post"><input type="submit" name="chemotherapy" value="Download"></form>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Surgery</td>
+                                            <td>
+                                                <form method="post"><input type="submit" name="surgery" value="Download"></form>
+                                            </td>
+                                        </tr>                                     
+
+                                        <tr>
+                                            <td>4</td>
+                                            <td>Study IDs</td>
+                                            <td>
+                                                <form method="post"><input type="submit" name="study_id" value="Download"></form>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>Sites</td>
+                                            <td>
+                                                <form method="post"><input type="submit" name="sites" value="Download"></form>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     <?php } ?>
