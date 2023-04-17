@@ -603,32 +603,26 @@ if ($user->isLoggedIn()) {
                 $pageError = $validate->errors();
             }
         } elseif (Input::get('add_Enrollment')) {
-            $validate = $validate->check($_POST, array());
+            $validate = $validate->check($_POST, array(
+                'visit_date' => array(
+                    'required' => true,
+                ),
+            ));
             if ($validate->passed()) {
-                $eligibility = 0;
                 $std_id = $override->getNews('study_id', 'site_id', $user->data()->site_id, 'status', 0)[0];
-
-                if ($override->get('visit', 'client_id', Input::get('id'))) {
-                    $user->updateRecord('visit', array(
-                        'visit_name' => 'Day 0',
-                        'visit_code' => 'D0',
-                        'visit_date' => date('Y-m-d'),
-                        'visit_window' => 2,
-                        'status' => 1,
-                        'seq_no' => 0,
-                        'client_id' => Input::get('id'),
-                        'reasons' => Input::get('reasons'),
-                        'visit_status' => Input::get('visit_status'),
-                    ), Input::get('id'));
-                } else {
+                if (!$override->get('visit', 'client_id', Input::get('id'))) {
                     $user->createRecord('visit', array(
                         'visit_name' => 'Day 0',
                         'visit_code' => 'D0',
-                        'visit_date' => date('Y-m-d'),
+                        'study_id' => $std_id['study_id'],
+                        'expected_date' => '',
+                        'visit_date' => Input::get('visit_date'),
                         'visit_window' => 2,
-                        'status' => 1,
-                        'seq_no' => 0,
+                        'status' => 1,                       
                         'client_id' => Input::get('id'),
+                        'created_on' => date('Y-m-d'),
+                        'seq_no' => 0,
+                        'redcap' => 0,
                         'reasons' => Input::get('reasons'),
                         'visit_status' => Input::get('visit_status'),
                     ));
@@ -636,15 +630,53 @@ if ($user->isLoggedIn()) {
 
                 if ($override->getCount('visit', 'client_id', Input::get('id')) == 1) {
                     try {
-                        $user->visit(Input::get('id'), 0);
+                        $user->visit2(Input::get('id'), 0,$std_id['study_id']);
                         $user->updateRecord('study_id', array('status' => 1, 'client_id' => Input::get('id')), $std_id['id']);
                         $user->updateRecord('clients', array('study_id' => $std_id['study_id'], 'enrolled' => 1), Input::get('id'));
-                        $successMessage = 'Exclusion Successful Added';
+                    } catch (Exception $e) {
+                        die($e->getMessage());
+                    }
+                }
+                $successMessage = 'Enrollment  Added Successful';
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('edit_Enrollment')) {
+            $validate = $validate->check($_POST, array(
+                'visit_date' => array(
+                    'required' => true,
+                ),
+            ));
+            if ($validate->passed()) {
+                $std_id = $override->getNews('study_id', 'site_id', $user->data()->site_id, 'status', 0)[0];
+                if ($override->get('visit', 'client_id', Input::get('id'))) {
+                    $user->deleteRecord('visit', 'client_id', Input::get('id'));
+                    $user->createRecord('visit', array(
+                        'visit_name' => 'Day 0',
+                        'visit_code' => 'D0',
+                        'study_id' => $std_id['study_id'],
+                        'expected_date' => '',
+                        'visit_date' => Input::get('visit_date'),
+                        'visit_window' => 2,
+                        'status' => 1,                       
+                        'client_id' => Input::get('id'),
+                        'created_on' => date('Y-m-d'),
+                        'seq_no' => 0,
+                        'redcap' => 0,
+                        'reasons' => Input::get('reasons'),
+                        'visit_status' => Input::get('visit_status'),
+                    ));
+                }
+                if ($override->getCount('visit', 'client_id', Input::get('id')) == 1) {
+                    try {
+                        // $user->visit(Input::get('id'), 0);
+                        $user->visit2(Input::get('id'), 0,$std_id['study_id']);
                     } catch (Exception $e) {
                         die($e->getMessage());
                     }
                 }
                 $user->updateRecord('clients', array('enrolled' => 1), Input::get('id'));
+                $successMessage = 'Enrollment  Updated Successful';
             } else {
                 $pageError = $validate->errors();
             }
@@ -1851,9 +1883,10 @@ if ($user->isLoggedIn()) {
                                     <thead>
                                         <tr>
                                             <th><input type="checkbox" name="checkall" /></th>
-                                            <td width="20">#</td>
-                                            <th width="40">Picture</th>
-                                            <th width="20%">ParticipantID</th>
+                                            <td width="2">#</td>
+                                            <th width="20">Picture</th>
+                                            <th width="8%">ParticipantID</th>
+                                            <th width="8%">Enrollment Date</th>
                                             <th width="8%">USING NIMREGENIN ?</th>
                                             <th width="10%">Name</th>
                                             <th width="10%">Gender</th>
@@ -1868,6 +1901,7 @@ if ($user->isLoggedIn()) {
                                             $screening1 = $override->get('screening', 'client_id', $client['id'])[0];
                                             $screening2 = $override->get('lab', 'client_id', $client['id'])[0];
                                             $visit = $override->getCount('visit', 'client_id', $client['id']);
+                                            $visit_date = $override->firstRow('visit', 'visit_date', 'id', 'client_id', $client['id'])[0];
                                             $eligibility1 = 0;
                                             $eligibility2 = 0;
                                             if ($screening1) {
@@ -1898,6 +1932,7 @@ if ($user->isLoggedIn()) {
                                                     <a href="#img<?= $client['id'] ?>" data-toggle="modal"><img src="<?= $img ?>" width="90" height="90" class="" /></a>
                                                 </td>
                                                 <td><?= $client['study_id'] ?></td>
+                                                <td><?= $visit_date['visit_date'] ?></td>
                                                 <?php if ($client['nimregenin'] == 1) { ?>
                                                     <td>
                                                         <a href="#" class="btn btn-info">YES</a>
@@ -1942,7 +1977,7 @@ if ($user->isLoggedIn()) {
                                                     <?php } ?>
                                                     <?php if ($screening1['eligibility'] == 1 & $screening2['eligibility'] == 1) { ?>
                                                         <?php if ($visit >= 1) { ?>
-                                                            <a href="#addEnrollment<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Edit Enrollment</a>
+                                                            <a href="#editEnrollment<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Edit Enrollment</a>
                                                         <?php } else {  ?>
                                                             <a href="#addEnrollment<?= $client['id'] ?>" role="button" class="btn btn-warning" data-toggle="modal">Add Enrollment</a>
 
@@ -2619,11 +2654,6 @@ if ($user->isLoggedIn()) {
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <form id="validation" method="post">
-                                                            <?php
-                                                            $cntV = $override->getCount('visit', 'client_id', $client['id'])[0];
-                                                            $visit = $override->get('visit', 'client_id', $client['id'])[0];
-                                                            ?>
-
                                                             <div class="modal-header">
                                                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                                                 <h4>Add Visit</h4>
@@ -2633,13 +2663,13 @@ if ($user->isLoggedIn()) {
                                                                     <div class="block-fluid">
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-3">Visit:</div>
-                                                                            <div class="col-md-9"><input type="text" name="visit_name" value="Enrollment" disabled /></div>
+                                                                            <div class="col-md-9"><input type="text" value="Enrollment" disabled /></div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="block-fluid">
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-3">Visit Code:</div>
-                                                                            <div class="col-md-9"><input type="text" name="visit_code" value="DO" disabled /></div>
+                                                                            <div class="col-md-9"><input type="text" value="D0" disabled /></div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="row-form clearfix">
@@ -2671,6 +2701,76 @@ if ($user->isLoggedIn()) {
                                                             <div class="modal-footer">
                                                                 <input type="hidden" name="id" value="<?= $client['id'] ?>">
                                                                 <input type="submit" name="add_Enrollment" class="btn btn-warning" value="Save">
+                                                                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal fade" id="editEnrollment<?= $client['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <form id="validation" method="post">
+                                                            <?php
+                                                            $visit = $override->firstRow('visit', 'visit_date', 'id', 'client_id', $client['id'])[0];
+                                                            $visit_status = $override->firstRow('visit', 'visit_status', 'id', 'client_id', $client['id'])[0];
+                                                            ?>
+
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                <h4>Edit Visit</h4>
+                                                            </div>
+                                                            <div class="modal-body modal-body-np">
+                                                                <div class="row">
+                                                                    <div class="block-fluid">
+                                                                        <div class="row-form clearfix">
+                                                                            <div class="col-md-3">Visit:</div>
+                                                                            <div class="col-md-9"><input type="text" name="visit_name" value="Enrollment" disabled /></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="block-fluid">
+                                                                        <div class="row-form clearfix">
+                                                                            <div class="col-md-3">Visit Code:</div>
+                                                                            <div class="col-md-9"><input type="text" name="visit_code" value="D0" disabled /></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row-form clearfix">
+                                                                        <div class="col-md-3">Current Status</div>
+                                                                        <div class="col-md-9">
+                                                                            <select name="visit_status" style="width: 100%;" required>
+                                                                                <?php
+                                                                                if ($visit_status['visit_status'] == 1) { ?>
+                                                                                    <option value="<?= $visit_status['visit_status'] ?>">Attended</option>
+                                                                                <?php } else if ($visit_status['visit_status'] == 2) { ?>
+                                                                                    <option value="<?= $visit_status['visit_status'] ?>">Missed Visit</option>
+                                                                                <?php } else { ?>
+                                                                                    <option value="">Select</option>
+                                                                                <?php
+                                                                                } ?>
+                                                                                 <option value="1">Attended</option>
+                                                                                <option value="2">Missed Visit</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row-form clearfix">
+                                                                        <div class="col-md-3">Notes:</div>
+                                                                        <div class="col-md-9">
+                                                                            <textarea name="reasons" rows="4"></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row-form clearfix">
+                                                                        <div class="col-md-3">Date of Enrollment:</div>
+                                                                        <div class="col-md-9">
+                                                                            <input value="<?= $visit['visit_date'] ?>" class="validate[required,custom[date]]" type="text" name="visit_date" id="visit_date" /> <span>Example: 2010-12-01</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="dr"><span></span></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <input type="hidden" name="id" value="<?= $client['id'] ?>">
+                                                                <input type="submit" name="edit_Enrollment" class="btn btn-warning" value="Save">
                                                                 <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
                                                             </div>
                                                         </form>
@@ -4330,11 +4430,9 @@ if ($user->isLoggedIn()) {
                                         </div>
                                         <div class="col-sm-3">
                                             <div class="row-form clearfix">
-                                                <!-- select -->
                                                 <div class="form-group">
                                                     <label>BMI</label>
-                                                    <button onclick="calculateBMI()">Calculate</button>
-                                                    <div id="bmi"><span>kg/m2:</span></div>
+                                                    <span id="bmi"></span>&nbsp;&nbsp;kg/m2
                                                 </div>
                                             </div>
                                         </div>
@@ -9250,6 +9348,15 @@ if ($user->isLoggedIn()) {
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
+
+    $('#weight, #height').on('input', function() {
+        setTimeout(function() {
+            var weight = $('#weight').val();
+            var height = $('#height').val() / 100; // Convert cm to m
+            var bmi = weight / (height * height);
+            $('#bmi').text(bmi.toFixed(2));
+        }, 1);
+    });
 
     // Add row chemotherapy
     document.getElementById("add-row1").addEventListener("click", function() {

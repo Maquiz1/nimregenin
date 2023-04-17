@@ -158,4 +158,10 @@ class OverideData{
         return $result;
     }
 
+    public function firstRow($table,$param,$id,$where,$client_id){
+        $query = $this->_pdo->query("SELECT DISTINCT $param FROM $table WHERE $where = '$client_id' ORDER BY '$id' ASC");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
 }
