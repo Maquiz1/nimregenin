@@ -256,7 +256,7 @@ if ($user->isLoggedIn()) {
                     ), $_GET['cid']);
 
 
-                    if (!Input::get('other_specify')) {
+                    if (Input::get('other_medical')) {
                         for ($i = 0; $i < count(Input::get('other_specify')); $i++) {
                             $user->createRecord('other_medication', array(
                                 'vid' => $_GET["vid"],
@@ -277,7 +277,7 @@ if ($user->isLoggedIn()) {
                         }
                     }
 
-                    if (!Input::get('nimregenin_preparation')) {
+                    if (Input::get('nimregenin_herbal')) {
 
                         for ($i = 0; $i < count(Input::get('nimregenin_preparation')); $i++) {
                             $user->createRecord('nimregenin', array(
@@ -302,7 +302,7 @@ if ($user->isLoggedIn()) {
                         }
                     }
 
-                    if (!Input::get('radiotherapy')) {
+                    if (Input::get('radiotherapy_performed')) {
 
                         for ($i = 0; $i < count(Input::get('radiotherapy')); $i++) {
                             $user->createRecord('radiotherapy', array(
@@ -329,7 +329,7 @@ if ($user->isLoggedIn()) {
                     }
 
 
-                    if (!Input::get('herbal_preparation')) {
+                    if (Input::get('other_herbal')) {
 
                         for ($i = 0; $i < count(Input::get('herbal_preparation')); $i++) {
                             $user->createRecord('herbal_treatment', array(
@@ -354,7 +354,7 @@ if ($user->isLoggedIn()) {
                         }
                     }
 
-                    if (!Input::get('chemotherapy')) {
+                    if (Input::get('chemotherapy_performed')) {
 
                         for ($i = 0; $i < count(Input::get('chemotherapy')); $i++) {
                             $user->createRecord('chemotherapy', array(
@@ -380,7 +380,7 @@ if ($user->isLoggedIn()) {
                         }
                     }
 
-                    if (!Input::get('surgery')) {
+                    if (Input::get('surgery_performed') == 1) {
 
                         for ($i = 0; $i < count(Input::get('surgery')); $i++) {
                             $user->createRecord('surgery', array(

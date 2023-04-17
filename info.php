@@ -518,6 +518,7 @@ if ($user->isLoggedIn()) {
                         $user->updateRecord('screening', array(
                             'age_18' => Input::get('age_18'),
                             'biopsy' => Input::get('biopsy'),
+                            'study_id' => '',
                             'breast_cancer' => Input::get('breast_cancer'),
                             'brain_cancer' => Input::get('brain_cancer'),
                             'cervical_cancer' => Input::get('cervical_cancer'),
@@ -529,11 +530,12 @@ if ($user->isLoggedIn()) {
                             'site_id' => $user->data()->site_id,
                             'status' => 1,
                             'client_id' => Input::get('id'),
-                        ), Input::get('id'));
+                        ), Input::get('client_id'));
                     } else {
                         $user->createRecord('screening', array(
                             'age_18' => Input::get('age_18'),
                             'biopsy' => Input::get('biopsy'),
+                            'study_id' => '',
                             'breast_cancer' => Input::get('breast_cancer'),
                             'brain_cancer' => Input::get('brain_cancer'),
                             'cervical_cancer' => Input::get('cervical_cancer'),
@@ -570,6 +572,7 @@ if ($user->isLoggedIn()) {
                 try {
                     if ($override->get('lab', 'client_id', Input::get('id'))) {
                         $user->updateRecord('lab', array(
+                            'study_id' => '',
                             'pregnant' => Input::get('pregnant'),
                             'breast_feeding' => Input::get('breast_feeding'),
                             'cdk' => Input::get('cdk'),
@@ -580,9 +583,10 @@ if ($user->isLoggedIn()) {
                             'site_id' => $user->data()->site_id,
                             'status' => 1,
                             'client_id' => Input::get('id'),
-                        ), Input::get('id'));
+                        ), Input::get('client_id'));
                     } else {
                         $user->createRecord('lab', array(
+                            'study_id' => '',
                             'pregnant' => Input::get('pregnant'),
                             'breast_feeding' => Input::get('breast_feeding'),
                             'cdk' => Input::get('cdk'),
@@ -610,6 +614,8 @@ if ($user->isLoggedIn()) {
             ));
             if ($validate->passed()) {
                 $std_id = $override->getNews('study_id', 'site_id', $user->data()->site_id, 'status', 0)[0];
+                $screening_id = $override->getNews('screening', 'client_id', Input::get('id'), 'status', 1)[0];
+                $lab_id = $override->getNews('lab', 'client_id', Input::get('id'), 'status', 1)[0];
                 if (!$override->get('visit', 'client_id', Input::get('id'))) {
                     $user->createRecord('visit', array(
                         'visit_name' => 'Day 0',
@@ -637,6 +643,8 @@ if ($user->isLoggedIn()) {
                         die($e->getMessage());
                     }
                 }
+                $user->updateRecord('screening', array('study_id' => $std_id['study_id']), $screening_id['id']);
+                $user->updateRecord('lab', array('study_id' => $std_id['study_id']), $lab_id['id']);
                 $successMessage = 'Enrollment  Added Successful';
             } else {
                 $pageError = $validate->errors();
@@ -722,7 +730,7 @@ if ($user->isLoggedIn()) {
                         'site_id' => $user->data()->site_id,
                     ), Input::get('id'));
 
-                    if (!Input::get('other_specify')) {
+                    if (Input::get('other_medical') == 1) {
                         for ($i = 0; $i < count(Input::get('other_specify')); $i++) {
                             $user->updateRecord('other_medication', array(
                                 'vid' => $_GET["vid"],
@@ -742,7 +750,7 @@ if ($user->isLoggedIn()) {
                         }
                     }
 
-                    if (!Input::get('nimregenin_preparation')) {
+                    if (Input::get('nimregenin_herbal') == 1) {
                         for ($i = 0; $i < count(Input::get('nimregenin_preparation')); $i++) {
                             $user->updateRecord('nimregenin', array(
                                 'vid' => $_GET["vid"],
@@ -767,7 +775,7 @@ if ($user->isLoggedIn()) {
                     }
 
 
-                    if (!Input::get('radiotherapy')) {
+                    if (Input::get('radiotherapy_performed') == 1) {
                         for ($i = 0; $i < count(Input::get('radiotherapy')); $i++) {
                             $user->updateRecord('radiotherapy', array(
                                 'vid' => $_GET["vid"],
@@ -792,7 +800,7 @@ if ($user->isLoggedIn()) {
                         }
                     }
 
-                    if (!Input::get('herbal_preparation')) {
+                    if (Input::get('other_herbal') == 1) {
                         for ($i = 0; $i < count(Input::get('herbal_preparation')); $i++) {
                             $user->updateRecord('herbal_treatment', array(
                                 'vid' => $_GET["vid"],
@@ -816,7 +824,7 @@ if ($user->isLoggedIn()) {
                     }
 
 
-                    if (!Input::get('chemotherapy')) {
+                    if (Input::get('chemotherapy_performed') == 1) {
                         for ($i = 0; $i < count(Input::get('chemotherapy')); $i++) {
                             $user->updateRecord('chemotherapy', array(
                                 'vid' => $_GET["vid"],
@@ -840,7 +848,7 @@ if ($user->isLoggedIn()) {
                         }
                     }
 
-                    if (!Input::get('surgery')) {
+                    if (Input::get('surgery_performed') == 1) {
                         if (count(Input::get('surgery_id')) == count(Input::get('surgery'))) {
                             for ($i = 0; $i < count(Input::get('surgery')); $i++) {
                                 $user->updateRecord('surgery', array(
@@ -1987,7 +1995,6 @@ if ($user->isLoggedIn()) {
                                                         <a href="info.php?id=7&cid=<?= $client['id'] ?>" role="button" class="btn btn-success">schedule</a>
                                                     <?php } ?>
                                                 </td>
-
                                             </tr>
                                             <div class="modal fade" id="clientView<?= $client['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
@@ -2530,6 +2537,7 @@ if ($user->isLoggedIn()) {
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <input type="hidden" name="id" value="<?= $client['id'] ?>">
+                                                                <input type="hidden" name="client_id" value="<?= $screening['id'] ?>">
                                                                 <input type="hidden" name="gender" value="<?= $client['gender'] ?>">
                                                                 <input type="submit" name="add_Inclusion" class="btn btn-warning" value="Save">
                                                                 <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -2542,7 +2550,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <form method="post">
-                                                            <?php $screening2 = $override->get('lab', 'client_id', $client['id'])[0];
+                                                            <?php $lab = $override->get('lab', 'client_id', $client['id'])[0];
                                                             ?>
                                                             <div class="modal-header">
                                                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -2555,12 +2563,12 @@ if ($user->isLoggedIn()) {
                                                                         <div class="col-md-8">Is the participant pregnant?</div>
                                                                         <div class="col-md-4">
                                                                             <select name="pregnant" style="width: 100%;" required>
-                                                                                <option value="<?= $screening2['pregnant'] ?>"><?php if ($screening2) {
-                                                                                                                                    if ($screening2['pregnant'] == 1) {
+                                                                                <option value="<?= $lab['pregnant'] ?>"><?php if ($lab) {
+                                                                                                                                    if ($lab['pregnant'] == 1) {
                                                                                                                                         echo 'Yes';
-                                                                                                                                    } elseif ($screening2['pregnant'] == 2) {
+                                                                                                                                    } elseif ($lab['pregnant'] == 2) {
                                                                                                                                         echo 'No';
-                                                                                                                                    } elseif ($screening2['pregnant'] == 3) {
+                                                                                                                                    } elseif ($lab['pregnant'] == 3) {
                                                                                                                                         echo 'Not Applicable';
                                                                                                                                     }
                                                                                                                                 } else {
@@ -2577,12 +2585,12 @@ if ($user->isLoggedIn()) {
                                                                         <div class="col-md-8">Is the participant Breast feeding?</div>
                                                                         <div class="col-md-4">
                                                                             <select name="breast_feeding" style="width: 100%;" required>
-                                                                                <option value="<?= $screening2['breast_feeding'] ?>"><?php if ($screening2) {
-                                                                                                                                            if ($screening2['breast_feeding'] == 1) {
+                                                                                <option value="<?= $lab['breast_feeding'] ?>"><?php if ($lab) {
+                                                                                                                                            if ($lab['breast_feeding'] == 1) {
                                                                                                                                                 echo 'Yes';
-                                                                                                                                            } elseif ($screening2['breast_feeding'] == 2) {
+                                                                                                                                            } elseif ($lab['breast_feeding'] == 2) {
                                                                                                                                                 echo 'No';
-                                                                                                                                            } elseif ($screening2['breast_feeding'] == 3) {
+                                                                                                                                            } elseif ($lab['breast_feeding'] == 3) {
                                                                                                                                                 echo 'Not Applicable';
                                                                                                                                             }
                                                                                                                                         } else {
@@ -2599,12 +2607,12 @@ if ($user->isLoggedIn()) {
                                                                         <div class="col-md-8">CKD?</div>
                                                                         <div class="col-md-4">
                                                                             <select name="cdk" style="width: 100%;" required>
-                                                                                <option value="<?= $screening2['cdk'] ?>"><?php if ($screening2) {
-                                                                                                                                if ($screening2['cdk'] == 1) {
+                                                                                <option value="<?= $lab['cdk'] ?>"><?php if ($lab) {
+                                                                                                                                if ($lab['cdk'] == 1) {
                                                                                                                                     echo 'Yes';
-                                                                                                                                } elseif ($screening2['cdk'] == 2) {
+                                                                                                                                } elseif ($lab['cdk'] == 2) {
                                                                                                                                     echo 'No';
-                                                                                                                                } elseif ($screening2['cdk'] == 3) {
+                                                                                                                                } elseif ($lab['cdk'] == 3) {
                                                                                                                                     echo 'Not Applicable';
                                                                                                                                 }
                                                                                                                             } else {
@@ -2620,12 +2628,12 @@ if ($user->isLoggedIn()) {
                                                                         <div class="col-md-8">Liver Disease ?</div>
                                                                         <div class="col-md-4">
                                                                             <select name="liver_disease" style="width: 100%;" required>
-                                                                                <option value="<?= $screening2['liver_disease'] ?>"><?php if ($screening2) {
-                                                                                                                                        if ($screening2['liver_disease'] == 1) {
+                                                                                <option value="<?= $lab['liver_disease'] ?>"><?php if ($lab) {
+                                                                                                                                        if ($lab['liver_disease'] == 1) {
                                                                                                                                             echo 'Yes';
-                                                                                                                                        } elseif ($screening2['liver_disease'] == 2) {
+                                                                                                                                        } elseif ($lab['liver_disease'] == 2) {
                                                                                                                                             echo 'No';
-                                                                                                                                        } elseif ($screening2['liver_disease'] == 3) {
+                                                                                                                                        } elseif ($lab['liver_disease'] == 3) {
                                                                                                                                             echo 'Not Applicable';
                                                                                                                                         }
                                                                                                                                     } else {
@@ -2642,6 +2650,7 @@ if ($user->isLoggedIn()) {
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <input type="hidden" name="id" value="<?= $client['id'] ?>">
+                                                                <input type="hidden" name="client_id" value="<?= $lab['id'] ?>">
                                                                 <input type="hidden" name="gender" value="<?= $client['gender'] ?>">
                                                                 <input type="submit" name="add_Exclusion" class="btn btn-warning" value="Save">
                                                                 <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -3375,7 +3384,7 @@ if ($user->isLoggedIn()) {
                                         <?php if ($_GET['vcode'] == 'D0') { ?>
                                             <tr>
                                                 <td>1</td>
-                                                <td>CRF 1: MEDICAL HISTORY, USE OF HERBAL MEDICINES AND STANDARD TREATMENT</td>
+                                                <td>CRF 1</td>
                                                 <?php if ($override->get1('crf1', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])) { ?>
                                                     <td><a href="info.php?id=8&cid=<?= $_GET['cid'] ?>&vid=<?= $_GET['vid'] ?>&vcode=<?= $_GET['vcode'] ?>&sid=<?= $_GET['sid'] ?>" class="btn btn-success"> Change </a> </td>
                                                 <?php } else { ?>
