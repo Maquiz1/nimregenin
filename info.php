@@ -613,18 +613,24 @@ if ($user->isLoggedIn()) {
                 ),
             ));
             if ($validate->passed()) {
+                $client_study = $override->getNews('clients', 'id', Input::get('id'), 'status', 1)[0];
                 $std_id = $override->getNews('study_id', 'site_id', $user->data()->site_id, 'status', 0)[0];
                 $screening_id = $override->getNews('screening', 'client_id', Input::get('id'), 'status', 1)[0];
                 $lab_id = $override->getNews('lab', 'client_id', Input::get('id'), 'status', 1)[0];
+                if (!$client_study['study_id']) {
+                    $study_id = $std_id['study_id'];
+                }else{
+                    $study_id = $client_study['study_id'];
+                }
                 if (!$override->get('visit', 'client_id', Input::get('id'))) {
                     $user->createRecord('visit', array(
                         'visit_name' => 'Day 0',
                         'visit_code' => 'D0',
-                        'study_id' => $std_id['study_id'],
+                        'study_id' => $study_id,
                         'expected_date' => '',
                         'visit_date' => Input::get('visit_date'),
                         'visit_window' => 2,
-                        'status' => 1,                       
+                        'status' => 1,
                         'client_id' => Input::get('id'),
                         'created_on' => date('Y-m-d'),
                         'seq_no' => 0,
@@ -636,15 +642,24 @@ if ($user->isLoggedIn()) {
 
                 if ($override->getCount('visit', 'client_id', Input::get('id')) == 1) {
                     try {
-                        $user->visit2(Input::get('id'), 0,$std_id['study_id']);
-                        $user->updateRecord('study_id', array('status' => 1, 'client_id' => Input::get('id')), $std_id['id']);
-                        $user->updateRecord('clients', array('study_id' => $std_id['study_id'], 'enrolled' => 1), Input::get('id'));
+                        if (!$client_study['study_id']) {
+                            $user->visit2(Input::get('id'), 0, $std_id['study_id']);
+                            $user->updateRecord('study_id', array('status' => 1, 'client_id' => Input::get('id')), $std_id['id']);
+                            $user->updateRecord('clients', array('study_id' => $std_id['study_id'], 'enrolled' => 1), Input::get('id'));
+                        } else {
+                            $user->visit2(Input::get('id'), 0, $client_study['study_id']);
+                        }
                     } catch (Exception $e) {
                         die($e->getMessage());
                     }
                 }
-                $user->updateRecord('screening', array('study_id' => $std_id['study_id']), $screening_id['id']);
-                $user->updateRecord('lab', array('study_id' => $std_id['study_id']), $lab_id['id']);
+                if (!$client_study['study_id']) {
+                    $user->updateRecord('screening', array('study_id' => $std_id['study_id']), $screening_id['id']);
+                    $user->updateRecord('lab', array('study_id' => $std_id['study_id']), $lab_id['id']);
+                } else {
+                    $user->updateRecord('screening', array('study_id' => $client_study['study_id']), $screening_id['id']);
+                    $user->updateRecord('lab', array('study_id' => $client_study['study_id']), $lab_id['id']);
+                }
                 $successMessage = 'Enrollment  Added Successful';
             } else {
                 $pageError = $validate->errors();
@@ -666,7 +681,7 @@ if ($user->isLoggedIn()) {
                         'expected_date' => '',
                         'visit_date' => Input::get('visit_date'),
                         'visit_window' => 2,
-                        'status' => 1,                       
+                        'status' => 1,
                         'client_id' => Input::get('id'),
                         'created_on' => date('Y-m-d'),
                         'seq_no' => 0,
@@ -678,7 +693,7 @@ if ($user->isLoggedIn()) {
                 if ($override->getCount('visit', 'client_id', Input::get('id')) == 1) {
                     try {
                         // $user->visit(Input::get('id'), 0);
-                        $user->visit2(Input::get('id'), 0,$std_id['study_id']);
+                        $user->visit2(Input::get('id'), 0, $std_id['study_id']);
                     } catch (Exception $e) {
                         die($e->getMessage());
                     }
@@ -762,7 +777,7 @@ if ($user->isLoggedIn()) {
                                 'nimregenin_ongoing' => Input::get('nimregenin_ongoing')[$i],
                                 'nimregenin_end' => Input::get('nimregenin_end')[$i],
                                 'nimregenin_dose' => Input::get('nimregenin_dose')[$i],
-                                'nimregenin_frequecy' => Input::get('nimregenin_frequecy')[$i],
+                                'nimregenin_frequency' => Input::get('nimregenin_frequency')[$i],
                                 'nimregenin_remarks' => Input::get('nimregenin_remarks')[$i],
                                 'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
                                 'patient_id' => $_GET['cid'],
@@ -2564,11 +2579,33 @@ if ($user->isLoggedIn()) {
                                                                         <div class="col-md-4">
                                                                             <select name="pregnant" style="width: 100%;" required>
                                                                                 <option value="<?= $lab['pregnant'] ?>"><?php if ($lab) {
-                                                                                                                                    if ($lab['pregnant'] == 1) {
+                                                                                                                            if ($lab['pregnant'] == 1) {
+                                                                                                                                echo 'Yes';
+                                                                                                                            } elseif ($lab['pregnant'] == 2) {
+                                                                                                                                echo 'No';
+                                                                                                                            } elseif ($lab['pregnant'] == 3) {
+                                                                                                                                echo 'Not Applicable';
+                                                                                                                            }
+                                                                                                                        } else {
+                                                                                                                            echo 'Select';
+                                                                                                                        } ?></option>
+                                                                                <option value="1">Yes</option>
+                                                                                <option value="2">No</option>
+                                                                                <option value="3">Not Applicable</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row-form clearfix">
+                                                                        <div class="col-md-8">Is the participant Breast feeding?</div>
+                                                                        <div class="col-md-4">
+                                                                            <select name="breast_feeding" style="width: 100%;" required>
+                                                                                <option value="<?= $lab['breast_feeding'] ?>"><?php if ($lab) {
+                                                                                                                                    if ($lab['breast_feeding'] == 1) {
                                                                                                                                         echo 'Yes';
-                                                                                                                                    } elseif ($lab['pregnant'] == 2) {
+                                                                                                                                    } elseif ($lab['breast_feeding'] == 2) {
                                                                                                                                         echo 'No';
-                                                                                                                                    } elseif ($lab['pregnant'] == 3) {
+                                                                                                                                    } elseif ($lab['breast_feeding'] == 3) {
                                                                                                                                         echo 'Not Applicable';
                                                                                                                                     }
                                                                                                                                 } else {
@@ -2582,42 +2619,20 @@ if ($user->isLoggedIn()) {
                                                                     </div>
 
                                                                     <div class="row-form clearfix">
-                                                                        <div class="col-md-8">Is the participant Breast feeding?</div>
-                                                                        <div class="col-md-4">
-                                                                            <select name="breast_feeding" style="width: 100%;" required>
-                                                                                <option value="<?= $lab['breast_feeding'] ?>"><?php if ($lab) {
-                                                                                                                                            if ($lab['breast_feeding'] == 1) {
-                                                                                                                                                echo 'Yes';
-                                                                                                                                            } elseif ($lab['breast_feeding'] == 2) {
-                                                                                                                                                echo 'No';
-                                                                                                                                            } elseif ($lab['breast_feeding'] == 3) {
-                                                                                                                                                echo 'Not Applicable';
-                                                                                                                                            }
-                                                                                                                                        } else {
-                                                                                                                                            echo 'Select';
-                                                                                                                                        } ?></option>
-                                                                                <option value="1">Yes</option>
-                                                                                <option value="2">No</option>
-                                                                                <option value="3">Not Applicable</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="row-form clearfix">
                                                                         <div class="col-md-8">CKD?</div>
                                                                         <div class="col-md-4">
                                                                             <select name="cdk" style="width: 100%;" required>
                                                                                 <option value="<?= $lab['cdk'] ?>"><?php if ($lab) {
-                                                                                                                                if ($lab['cdk'] == 1) {
-                                                                                                                                    echo 'Yes';
-                                                                                                                                } elseif ($lab['cdk'] == 2) {
-                                                                                                                                    echo 'No';
-                                                                                                                                } elseif ($lab['cdk'] == 3) {
-                                                                                                                                    echo 'Not Applicable';
-                                                                                                                                }
-                                                                                                                            } else {
-                                                                                                                                echo 'Select';
-                                                                                                                            } ?></option>
+                                                                                                                        if ($lab['cdk'] == 1) {
+                                                                                                                            echo 'Yes';
+                                                                                                                        } elseif ($lab['cdk'] == 2) {
+                                                                                                                            echo 'No';
+                                                                                                                        } elseif ($lab['cdk'] == 3) {
+                                                                                                                            echo 'Not Applicable';
+                                                                                                                        }
+                                                                                                                    } else {
+                                                                                                                        echo 'Select';
+                                                                                                                    } ?></option>
                                                                                 <option value="1">Yes</option>
                                                                                 <option value="2">No</option>
                                                                             </select>
@@ -2629,16 +2644,16 @@ if ($user->isLoggedIn()) {
                                                                         <div class="col-md-4">
                                                                             <select name="liver_disease" style="width: 100%;" required>
                                                                                 <option value="<?= $lab['liver_disease'] ?>"><?php if ($lab) {
-                                                                                                                                        if ($lab['liver_disease'] == 1) {
-                                                                                                                                            echo 'Yes';
-                                                                                                                                        } elseif ($lab['liver_disease'] == 2) {
-                                                                                                                                            echo 'No';
-                                                                                                                                        } elseif ($lab['liver_disease'] == 3) {
-                                                                                                                                            echo 'Not Applicable';
-                                                                                                                                        }
-                                                                                                                                    } else {
-                                                                                                                                        echo 'Select';
-                                                                                                                                    } ?></option>
+                                                                                                                                    if ($lab['liver_disease'] == 1) {
+                                                                                                                                        echo 'Yes';
+                                                                                                                                    } elseif ($lab['liver_disease'] == 2) {
+                                                                                                                                        echo 'No';
+                                                                                                                                    } elseif ($lab['liver_disease'] == 3) {
+                                                                                                                                        echo 'Not Applicable';
+                                                                                                                                    }
+                                                                                                                                } else {
+                                                                                                                                    echo 'Select';
+                                                                                                                                } ?></option>
                                                                                 <option value="1">Yes</option>
                                                                                 <option value="2">No</option>
                                                                             </select>
@@ -2756,7 +2771,7 @@ if ($user->isLoggedIn()) {
                                                                                     <option value="">Select</option>
                                                                                 <?php
                                                                                 } ?>
-                                                                                 <option value="1">Attended</option>
+                                                                                <option value="1">Attended</option>
                                                                                 <option value="2">Missed Visit</option>
                                                                             </select>
                                                                         </div>
@@ -4070,7 +4085,7 @@ if ($user->isLoggedIn()) {
                                                         </td>
                                                         <td><input value='<?= $nimregenin['nimregenin_end'] ?>' type="text" name="nimregenin_end[]"><br><span>Example: 2010-12-01</span></td>
                                                         <td><input value='<?= $nimregenin['nimregenin_dose'] ?>' type="text" name="nimregenin_dose[]"><br><span>(mls)</span></td>
-                                                        <td><input value='<?= $nimregenin['nimregenin_frequecy'] ?>' type="text" name="nimregenin_frequecy[]"><br><span>(per day)</span></td>
+                                                        <td><input value='<?= $nimregenin['nimregenin_frequency'] ?>' type="text" name="nimregenin_frequency[]"><br><span>(per day)</span></td>
                                                         <td><input value='<?= $nimregenin['nimregenin_remarks'] ?>' type="text" name="nimregenin_remarks[]"><br></td>
                                                         <td><input value='<?= $nimregenin['id'] ?>' type="hidden" name="nimregenin_id[]"></td>
                                                     </tr>

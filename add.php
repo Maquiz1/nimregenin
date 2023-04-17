@@ -290,7 +290,7 @@ if ($user->isLoggedIn()) {
                                 'nimregenin_ongoing' => Input::get('nimregenin_ongoing')[$i],
                                 'nimregenin_end' => Input::get('nimregenin_end')[$i],
                                 'nimregenin_dose' => Input::get('nimregenin_dose')[$i],
-                                'nimregenin_frequecy' => Input::get('nimregenin_frequecy')[$i],
+                                'nimregenin_frequency' => Input::get('nimregenin_frequency')[$i],
                                 'nimregenin_remarks' => Input::get('nimregenin_remarks')[$i],
                                 'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
                                 'patient_id' => $_GET['cid'],
