@@ -3067,6 +3067,8 @@ if ($user->isLoggedIn()) {
                                         </div>
                                     </div>
 
+                                    <?php if (!$_GET['vcode'] == "D0") { ?>
+
                                     <div class="head clearfix">
                                         <div class="isw-ok"></div>
                                         <h1>Drug adherence (To be asked on day 7,14,30,60,90,120) For patients on NIMREGENIN only</h1>
@@ -3099,6 +3101,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
                                     </div>
+                                    <?php } ?>
 
 
                                     <div class="head clearfix">

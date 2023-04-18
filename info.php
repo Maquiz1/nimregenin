@@ -8,7 +8,7 @@ $random = new Random();
 $successMessage = null;
 $pageError = null;
 $errorMessage = null;
-$numRec = 15;
+$numRec = 25;
 if ($user->isLoggedIn()) {
     if (Input::exists('post')) {
         $validate = new validate();
@@ -5959,6 +5959,8 @@ if ($user->isLoggedIn()) {
                                         </div>
                                     </div>
 
+                                    <?php if (!$_GET['vcode'] == "D0") { ?>
+
                                     <div class="head clearfix">
                                         <div class="isw-ok"></div>
                                         <h1>Drug adherence (To be asked on day 7,14,30,60,90,120) For patients on NIMREGENIN only</h1>
@@ -5995,6 +5997,7 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
                                     </div>
+                                    <?php } ?>
 
 
                                     <div class="head clearfix">
@@ -6049,12 +6052,11 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Date of Completion:</label>
-                                                    <input value="<?= $patient['crf3_cmpltd_date'] ?>" class="validate[required]" type="text" name="crf3_cmpltd_date" id="crf3_cmpltd_date" />
+                                                    <input value="<?= $patient['crf3_cmpltd_date'] ?>" type="text" name="crf3_cmpltd_date" id="crf3_cmpltd_date" />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
 
                                     <div class="footer tar">
                                         <input type="hidden" name="id" value="<?= $patient['id'] ?>">
