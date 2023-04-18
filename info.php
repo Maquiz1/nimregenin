@@ -1293,60 +1293,46 @@ if ($user->isLoggedIn()) {
             } elseif (Input::get('screening')) {
                 $data = $override->getData('screening');
                 $filename = 'Inclusion criteria';
-            }
-            elseif (Input::get('crf1')) {
+            } elseif (Input::get('crf1')) {
                 $data = $override->getData('crf1');
                 $filename = 'CRF 1';
-            }
-            elseif (Input::get('crf2')) {
+            } elseif (Input::get('crf2')) {
                 $data = $override->getData('crf2');
                 $filename = 'CRF 2';
-            }
-            elseif (Input::get('crf3')) {
+            } elseif (Input::get('crf3')) {
                 $data = $override->getData('crf3');
                 $filename = 'CRF 3';
-            }
-            elseif (Input::get('crf4')) {
+            } elseif (Input::get('crf4')) {
                 $data = $override->getData('crf4');
                 $filename = 'CRF 4';
-            }
-            elseif (Input::get('crf5')) {
+            } elseif (Input::get('crf5')) {
                 $data = $override->getData('crf5');
                 $filename = 'CRF 5';
-            }
-            elseif (Input::get('crf5')) {
+            } elseif (Input::get('crf5')) {
                 $data = $override->getData('crf5');
                 $filename = 'CRF 5';
-            }
-            elseif (Input::get('crf6')) {
+            } elseif (Input::get('crf6')) {
                 $data = $override->getData('crf6');
                 $filename = 'CRF 6';
-            }
-            elseif (Input::get('crf7')) {
+            } elseif (Input::get('crf7')) {
                 $data = $override->getData('crf7');
                 $filename = 'CRF 7';
-            }
-            elseif (Input::get('herbal')) {
+            } elseif (Input::get('herbal')) {
                 $data = $override->getData('herbal_treatment');
                 $filename = 'Other Herbal Treatment';
-            }
-            elseif (Input::get('medication')) {
+            } elseif (Input::get('medication')) {
                 $data = $override->getData('other_medication');
                 $filename = 'other_medication';
-            }
-            elseif (Input::get('nimregenin')) {
+            } elseif (Input::get('nimregenin')) {
                 $data = $override->getData('nimregenin');
                 $filename = 'nimregenin';
-            }
-            elseif (Input::get('radiotherapy')) {
+            } elseif (Input::get('radiotherapy')) {
                 $data = $override->getData('radiotherapy');
                 $filename = 'radiotherapy';
-            }
-            elseif (Input::get('chemotherapy')) {
+            } elseif (Input::get('chemotherapy')) {
                 $data = $override->getData('chemotherapy');
                 $filename = 'chemotherapy';
-            }
-            elseif (Input::get('surgery')) {
+            } elseif (Input::get('surgery')) {
                 $data = $override->getData('surgery');
                 $filename = 'surgery';
             }
@@ -1952,35 +1938,61 @@ if ($user->isLoggedIn()) {
                             <?php if ($user->data()->power == 1) {
                                 if ($_GET['sid'] != null) {
                                     $pagNum = 0;
-                                    $pagNum = $override->countData('clients', 'status', 1, 'site_id', $_GET['sid']);
+                                    if ($_GET['status'] == 1) {
+                                        $pagNum = $override->countData('clients', 'status', 1, 'site_id', $_GET['sid']);
+                                    } elseif ($_GET['status'] == 2) {
+                                        $pagNum = $override->countData2('clients', 'enrolled', 1, 'status', 1, 'site_id', $_GET['sid']);
+                                    }
                                     $pages = ceil($pagNum / $numRec);
                                     if (!$_GET['page'] || $_GET['page'] == 1) {
                                         $page = 0;
                                     } else {
                                         $page = ($_GET['page'] * $numRec) - $numRec;
                                     }
-                                    $clients = $override->getWithLimit1('clients', 'site_id', $_GET['sid'], 'status', 1, $page, $numRec);
+
+                                    if ($_GET['status'] == 1) {
+                                        $clients = $override->getWithLimit1('clients', 'site_id', $_GET['sid'], 'status', 1, $page, $numRec);
+                                    } elseif ($_GET['status'] == 2) {
+                                        $clients = $override->getWithLimit3('clients', 'site_id', $_GET['sid'], 'enrolled', 1, 'status', 1, $page, $numRec);
+                                    }
                                 } else {
                                     $pagNum = 0;
-                                    $pagNum = $override->getCount('clients', 'status', 1);
+                                    if ($_GET['status'] == 1) {
+                                        $pagNum = $override->getCount('clients', 'status', 1);
+                                    } elseif ($_GET['status'] == 2) {
+                                        $pagNum = $override->getCount1('clients', 'enrolled', 1, 'status', 1);
+                                    }
                                     $pages = ceil($pagNum / $numRec);
                                     if (!$_GET['page'] || $_GET['page'] == 1) {
                                         $page = 0;
                                     } else {
                                         $page = ($_GET['page'] * $numRec) - $numRec;
                                     }
-                                    $clients = $override->getWithLimit('clients', 'status', 1, $page, $numRec);
+
+                                    if ($_GET['status'] == 1) {
+                                        $clients = $override->getWithLimit('clients', 'status', 1, $page, $numRec);
+                                    } elseif ($_GET['status'] == 2) {
+                                        $clients = $override->getWithLimit1('clients', 'enrolled', 1, 'status', 1, $page, $numRec);
+                                    }
                                 }
                             } else {
                                 $pagNum = 0;
-                                $pagNum = $override->countData('clients', 'site_id', $user->data()->site_id, 'status', 1);
+                                if ($_GET['status'] == 1) {
+                                    $pagNum = $override->countData('clients', 'site_id', $user->data()->site_id, 'status', 1);
+                                } elseif ($_GET['status'] == 2) {
+                                    $pagNum = $override->countData2('clients', 'site_id', $user->data()->site_id, 'enrolled', 1, 'status', 1);
+                                }
                                 $pages = ceil($pagNum / $numRec);
                                 if (!$_GET['page'] || $_GET['page'] == 1) {
                                     $page = 0;
                                 } else {
                                     $page = ($_GET['page'] * $numRec) - $numRec;
                                 }
-                                $clients = $override->getWithLimit1('clients', 'site_id', $user->data()->site_id, 'status', 1, $page, $numRec);
+                                if ($_GET['status'] == 1) {
+                                    $clients = $override->getWithLimit1('clients', 'site_id', $user->data()->site_id, 'status', 1, $page, $numRec);
+                                } elseif ($_GET['status'] == 2) {
+                                    $clients = $override->getWithLimit3('clients', 'site_id', $user->data()->site_id, 'enrolled', 1, 'status', 1, $page, $numRec);
+                                }
                             } ?>
                             <div class="block-fluid">
                                 <table cellpadding="0" cellspacing="0" width="100%" class="table">
@@ -5961,42 +5973,42 @@ if ($user->isLoggedIn()) {
 
                                     <?php if (!$_GET['vcode'] == "D0") { ?>
 
-                                    <div class="head clearfix">
-                                        <div class="isw-ok"></div>
-                                        <h1>Drug adherence (To be asked on day 7,14,30,60,90,120) For patients on NIMREGENIN only</h1>
-                                    </div>
+                                        <div class="head clearfix">
+                                            <div class="isw-ok"></div>
+                                            <h1>Drug adherence (To be asked on day 7,14,30,60,90,120) For patients on NIMREGENIN only</h1>
+                                        </div>
 
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1. Do you take NIMREGENIN as advised ie daily?:</label>
-                                                    <select name="adherence" id="adherence" style="width: 100%;">
-                                                        <?php if ($patient['adherence'] == "1") { ?>
-                                                            <option value="<?= $patient['adherence'] ?>">Yes</option>
-                                                        <?php } elseif ($patient['adherence'] == "2") { ?>
-                                                            <option value="<?= $patient['adherence'] ?>">No</option>
-                                                        <?php } else { ?>
-                                                            <option value="">Select</option>
-                                                        <?php } ?>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="row-form clearfix">
+                                                    <!-- select -->
+                                                    <div class="form-group">
+                                                        <label>1. Do you take NIMREGENIN as advised ie daily?:</label>
+                                                        <select name="adherence" id="adherence" style="width: 100%;">
+                                                            <?php if ($patient['adherence'] == "1") { ?>
+                                                                <option value="<?= $patient['adherence'] ?>">Yes</option>
+                                                            <?php } elseif ($patient['adherence'] == "2") { ?>
+                                                                <option value="<?= $patient['adherence'] ?>">No</option>
+                                                            <?php } else { ?>
+                                                                <option value="">Select</option>
+                                                            <?php } ?>
+                                                            <option value="1">Yes</option>
+                                                            <option value="2">No</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6" id="adherence_specify">
+                                                <div class="row-form clearfix">
+                                                    <!-- select -->
+                                                    <div class="form-group">
+                                                        <label>1. Specify why:</label>
+                                                        <input value="<?= $patient['adherence_specify'] ?>" type="text" name="adherence_specify" />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="col-sm-6" id="adherence_specify">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1. Specify why:</label>
-                                                    <input value="<?= $patient['adherence_specify'] ?>" type="text" name="adherence_specify" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <?php } ?>
 
 
@@ -9578,7 +9590,7 @@ if ($user->isLoggedIn()) {
                                             <td>
                                                 <form method="post"><input type="submit" name="surgery" value="Download"></form>
                                             </td>
-                                        </tr>                                     
+                                        </tr>
 
                                         <tr>
                                             <td>4</td>
