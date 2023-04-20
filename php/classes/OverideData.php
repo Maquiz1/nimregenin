@@ -33,6 +33,12 @@ class OverideData{
         return $num;
     }
 
+    public function getCount2($table,$field,$value,$field1,$value1,$field2,$value2){
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 = '$value1' OR $field2 = '$value2'");
+        $num = $query->rowCount();
+        return $num;
+    }
+
     public function countData($table,$field,$value,$field1,$value1){
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 = '$value1'");
         $num = $query->rowCount();
@@ -41,6 +47,12 @@ class OverideData{
 
     public function countData2($table,$field,$value,$field1,$value1,$field2,$value2){
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 = '$value1' AND $field2 = '$value2'");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+    public function countData3($table,$field,$value,$field1,$value1,$field2,$value2,$field3,$value3){
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 = '$value1' AND $field2 = '$value2' OR $field3 = '$value3'");
         $num = $query->rowCount();
         return $num;
     }
@@ -140,8 +152,20 @@ class OverideData{
         return $result;
     }
 
+    public function getWithLimit11($table,$where,$id,$where2,$id2,$where3,$id3,$page,$numRec){
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$id2' OR $where3 = '$id3'  limit $page,$numRec");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     public function getWithLimit3($table,$where,$id,$where2,$id2,$where3,$id3,$page,$numRec){
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$id2' AND $where3 = '$id3' limit $page,$numRec");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getWithLimit4($table,$where,$id,$where2,$id2,$where3,$id3,$where4,$id4,$page,$numRec){
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$id2' AND $where3 = '$id3' OR $where4 = '$id4' limit $page,$numRec");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }

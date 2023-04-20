@@ -15,10 +15,14 @@ $users = $override->getData('user');
 if ($user->isLoggedIn()) {
     if ($user->data()->power == 1) {
         $screened = $override->getNo('clients');
-        $enrolled = $override->getCount('clients', 'enrolled', 1);
+        $eligible = $override->getCount('clients', 'enrolled', 1);
+        // $eligible = $override->getCount('clients', 'enrolled', 1);
+        $enrolled = $override->getCount2('clients', 'status', 1, 'nimregenin', 1, 'nimregenin', 2);
     } else {
         $screened = $override->getCount('clients', 'site_id', $user->data()->site_id);
-        $enrolled = $override->countData('clients', 'enrolled', 1, 'site_id', $user->data()->site_id);
+        $eligible = $override->countData('clients', 'enrolled', 1, 'site_id', $user->data()->site_id);
+        // $eligible = $override->countData('clients', 'enrolled', 1, 'site_id', $user->data()->site_id);
+        $enrolled = $override->countData3('clients', 'status', 1, 'site_id', $user->data()->site_id, 'nimregenin', 1, 'nimregenin', 2);
     }
 } else {
     Redirect::to('index.php');
@@ -46,8 +50,8 @@ if ($user->isLoggedIn()) {
 
             <div class="workplace">
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="wBlock red clearfix">
+                    <div class="col-md-3">
+                        <div class="wBlock blue clearfix">
                             <div class="dSpace">
                             <a href="info.php?id=3&status=1">
                                     <h3>Screened</h3>
@@ -60,10 +64,24 @@ if ($user->isLoggedIn()) {
                         </div>
                     </div>
 
-                    <div class="col-md-4">
-                        <div class="wBlock green clearfix">
+                    <div class="col-md-3">
+                        <div class="wBlock yellow clearfix">
                             <div class="dSpace">
                                 <a href="info.php?id=3&status=2">
+                                    <h3>Eligible</h3>
+                                    <span class="mChartBar" sparkType="bar" sparkBarColor="white">
+                                        <!--5,10,15,20,23,21,25,20,15,10,25,20,10-->
+                                    </span>
+                                    <span class="number"><?= $eligible ?></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="wBlock green clearfix">
+                            <div class="dSpace">
+                                <a href="info.php?id=3&status=3">
                                     <h3>Enrolled</h3>
                                     <span class="mChartBar" sparkType="bar" sparkBarColor="white">
                                         <!--5,10,15,20,23,21,25,20,15,10,25,20,10-->
@@ -74,8 +92,8 @@ if ($user->isLoggedIn()) {
                         </div>
                     </div>
 
-                    <div class="col-md-4">
-                        <div class="wBlock blue clearfix">
+                    <div class="col-md-3">
+                        <div class="wBlock red clearfix">
                             <div class="dSpace">
                                 <a href="#">
                                     <h3>End of study</h3>

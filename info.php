@@ -1936,12 +1936,15 @@ if ($user->isLoggedIn()) {
                                 </ul>
                             </div>
                             <?php if ($user->data()->power == 1) {
+                                // $visit_date = $override->firstRow('visit', 'visit_date', 'id', 'client_id', $client['id'])[0];
                                 if ($_GET['sid'] != null) {
                                     $pagNum = 0;
                                     if ($_GET['status'] == 1) {
                                         $pagNum = $override->countData('clients', 'status', 1, 'site_id', $_GET['sid']);
                                     } elseif ($_GET['status'] == 2) {
                                         $pagNum = $override->countData2('clients', 'enrolled', 1, 'status', 1, 'site_id', $_GET['sid']);
+                                    } elseif ($_GET['status'] == 3) {
+                                        $pagNum = $override->countData3('clients', 'status', 1, 'site_id', $_GET['sid'], 'nimregenin', 1, 'nimregenin', 2);
                                     }
                                     $pages = ceil($pagNum / $numRec);
                                     if (!$_GET['page'] || $_GET['page'] == 1) {
@@ -1954,6 +1957,8 @@ if ($user->isLoggedIn()) {
                                         $clients = $override->getWithLimit1('clients', 'site_id', $_GET['sid'], 'status', 1, $page, $numRec);
                                     } elseif ($_GET['status'] == 2) {
                                         $clients = $override->getWithLimit3('clients', 'site_id', $_GET['sid'], 'enrolled', 1, 'status', 1, $page, $numRec);
+                                    } elseif ($_GET['status'] == 3) {
+                                        $clients = $override->getWithLimit4('clients', 'site_id', $_GET['sid'], 'status', 1, 'nimregenin', 1, 'nimregenin', 2, $page, $numRec);
                                     }
                                 } else {
                                     $pagNum = 0;
@@ -1961,6 +1966,8 @@ if ($user->isLoggedIn()) {
                                         $pagNum = $override->getCount('clients', 'status', 1);
                                     } elseif ($_GET['status'] == 2) {
                                         $pagNum = $override->getCount1('clients', 'enrolled', 1, 'status', 1);
+                                    } elseif ($_GET['status'] == 3) {
+                                        $pagNum = $override->getCount2('clients', 'status', 1, 'nimregenin', 1, 'nimregenin', 2);
                                     }
                                     $pages = ceil($pagNum / $numRec);
                                     if (!$_GET['page'] || $_GET['page'] == 1) {
@@ -1973,14 +1980,21 @@ if ($user->isLoggedIn()) {
                                         $clients = $override->getWithLimit('clients', 'status', 1, $page, $numRec);
                                     } elseif ($_GET['status'] == 2) {
                                         $clients = $override->getWithLimit1('clients', 'enrolled', 1, 'status', 1, $page, $numRec);
+                                    } elseif ($_GET['status'] == 3) {
+                                        $clients = $override->getWithLimit11('clients', 'status', 1, 'nimregenin', 1, 'nimregenin', 2, $page, $numRec);
                                     }
                                 }
                             } else {
+                                // $visit_date = $override->firstRow('visit', 'visit_date', 'id', 'client_id', $client['id'])[0];
+
                                 $pagNum = 0;
                                 if ($_GET['status'] == 1) {
                                     $pagNum = $override->countData('clients', 'site_id', $user->data()->site_id, 'status', 1);
                                 } elseif ($_GET['status'] == 2) {
                                     $pagNum = $override->countData2('clients', 'site_id', $user->data()->site_id, 'enrolled', 1, 'status', 1);
+                                } elseif ($_GET['status'] == 3) {
+                                    $pagNum = $override->countData3('clients', 'status', 1, 'site_id', $user->data()->site_id, 'nimregenin', 1, 'nimregenin', 2);
+
                                 }
                                 $pages = ceil($pagNum / $numRec);
                                 if (!$_GET['page'] || $_GET['page'] == 1) {
@@ -1992,6 +2006,9 @@ if ($user->isLoggedIn()) {
                                     $clients = $override->getWithLimit1('clients', 'site_id', $user->data()->site_id, 'status', 1, $page, $numRec);
                                 } elseif ($_GET['status'] == 2) {
                                     $clients = $override->getWithLimit3('clients', 'site_id', $user->data()->site_id, 'enrolled', 1, 'status', 1, $page, $numRec);
+                                } elseif ($_GET['status'] == 3) {
+                                    $clients = $override->getWithLimit4('clients', 'site_id', $user->data()->site_id, 'status', 1, 'nimregenin', 1, 'nimregenin', 2, $page, $numRec);
+
                                 }
                             } ?>
                             <div class="block-fluid">
@@ -2053,12 +2070,15 @@ if ($user->isLoggedIn()) {
                                                     <td>
                                                         <a href="#" class="btn btn-info">YES</a>
                                                     </td>
-                                                <?php } else { ?>
+                                                    <?php } elseif($client['nimregenin'] == 2) { ?>
                                                     <td>
                                                         <a href="#" class="btn btn-warning">NO</a>
                                                     </td>
-                                                <?php } ?>
-                                                <td> <?= $client['firstname'] . ' ' . $client['lastname'] ?></td>
+                                                    <?php } else { ?>
+                                                    <td>
+                                                        <a href="#" class="btn btn-danger">NOT DONE</a>
+                                                    </td>
+                                                <?php } ?>                                                <td> <?= $client['firstname'] . ' ' . $client['lastname'] ?></td>
                                                 <td><?= $client['gender'] ?></td>
                                                 <td><?= $client['age'] ?></td>
                                                 <?php if ($client['site_id'] == 1) { ?>
@@ -2075,6 +2095,8 @@ if ($user->isLoggedIn()) {
                                                     <?php } ?>
                                                     <a href="#client<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Edit</a>
                                                     <!-- <a href="info.php?id=4&cid=<?= $client['id'] ?>" role="button" class="btn btn-warning">Schedule</a> -->
+                                                    <?php if ($_GET['status'] == 1) { ?>
+
                                                     <?php if ($eligibility1 == 1) { ?>
                                                         <a href="#addInclusion<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Edit Inclusion</a>
                                                     <?php } elseif ($eligibility1 == 2) { ?>
@@ -2090,18 +2112,20 @@ if ($user->isLoggedIn()) {
                                                     <?php } else {  ?>
                                                         <a href="#addExclusion<?= $client['id'] ?>" role="button" class="btn btn-warning" data-toggle="modal">Add Exclusion</a>
 
-                                                    <?php } ?>
+                                                    <?php }} ?>
+                                                    <?php if ($_GET['status'] == 2) { ?>
                                                     <?php if ($screening1['eligibility'] == 1 & $screening2['eligibility'] == 1) { ?>
                                                         <?php if ($visit >= 1) { ?>
                                                             <a href="#editEnrollment<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Edit Enrollment</a>
                                                         <?php } else {  ?>
                                                             <a href="#addEnrollment<?= $client['id'] ?>" role="button" class="btn btn-warning" data-toggle="modal">Add Enrollment</a>
 
-                                                        <?php } ?>
+                                                        <?php }} ?>
                                                     <?php } ?>
                                                     <?php if ($visit >= 1) { ?>
+                                                        <?php if ($_GET['status'] == 3) { ?>
                                                         <a href="info.php?id=7&cid=<?= $client['id'] ?>" role="button" class="btn btn-success">schedule</a>
-                                                    <?php } ?>
+                                                    <?php } }?>
                                                 </td>
                                             </tr>
                                             <div class="modal fade" id="clientView<?= $client['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
