@@ -8,10 +8,10 @@ $users = $override->getData('user');
 if ($user->isLoggedIn()) {
     if ($user->data()->power == 1) {
         $registered = $override->getCount('clients', 'status', 1);
-        $deleted = $override->getCount('clients', 'status', 0);
+        $deleted = $override->countData('clients', 'status', 0, 'enrolled', 0);
     } else {
-        $registered = $override->getCount1('clients', 'status', 1, 'site_id', $user->data()->site_id);
-        $deleted = $override->getCount1('clients', 'status', 0, 'site_id', $user->data()->site_id);
+        $registered = $override->countData('clients', 'status', 1, 'site_id', $user->data()->site_id);
+        $deleted = $override->countData2('clients', 'status', 0, 'enrolled', 1, 'site_id', $user->data()->site_id);
     }
 } else {
     Redirect::to('index.php');
@@ -96,11 +96,11 @@ if ($user->isLoggedIn()) {
                             <span class="isw-download"></span><span class="text">Download Data</span>
                         </a>
                     </li>
-                    <li class="active">
+                    <!-- <li class="active">
                         <a href="info.php?id=3&status=6" target="_blank">
                             <span class="text">Deleted Clients </span> <span class="badge badge-secondary badge-pill"><?= $deleted ?></span>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </li>
 
@@ -121,11 +121,11 @@ if ($user->isLoggedIn()) {
                         <span class="badge badge-secondary badge-pill"><?= $registered ?></span>
                     </a>
                 </li>
-                <li class="active">
+                <!-- <li class="active">
                     <a href="info.php?id=3&status=7" target="_blank">
                         <span class="isw-download"></span><span class="text">Pending Clients Visits</span>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </li>
 
