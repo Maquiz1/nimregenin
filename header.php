@@ -77,7 +77,7 @@ if ($user->isLoggedIn()) {
                     <span class="mChartBar" sparkType="bar" sparkBarColor="white">
                         <!--240,234,150,290,310,240,210,400,320,198,250,222,111,240,221,340,250,190-->
                     </span>
-                    <span class="number"><?= $enrolled ?></span>
+                    <span class="number"><?= $end ?></span>
                 </a>
             </div>
         </div>

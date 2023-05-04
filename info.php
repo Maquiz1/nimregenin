@@ -2228,7 +2228,7 @@ if ($user->isLoggedIn()) {
                                                 } ?>
 
                                                 <td>
-                                                    <?php if ($_GET['status'] == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) { ?>
+                                                    <?php if ($_GET['status'] == 1) { ?>
                                                         <?php if ($user->data()->accessLevel == 1) { ?>
                                                             <a href="#clientView<?= $client['id'] ?>" role="button" class="btn btn-default" data-toggle="modal">View</a>
                                                             <a href="id.php?cid=<?= $client['id'] ?>" class="btn btn-warning">Patient ID</a>
@@ -2236,7 +2236,7 @@ if ($user->isLoggedIn()) {
                                                         <?php } ?>
                                                         <a href="#client<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Edit</a>
 
-                                                        <?php if ($screened == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) { ?>
+                                                        <?php if ($screened == 1) { ?>
                                                             <?php if ($screening1 >= 1) { ?>
                                                                 <a href="#addInclusion<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Edit Inclusion</a>
 
