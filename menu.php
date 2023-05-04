@@ -1,6 +1,20 @@
 <?php
-if ($user->data()->accessLevel == 1) {
+require_once 'php/core/init.php';
+$user = new User();
+$override = new OverideData();
+$email = new Email();
+$random = new Random();
+$users = $override->getData('user');
+if ($user->isLoggedIn()) {
+    if ($user->data()->power == 1) {
+        $registered = $override->getCount('clients', 'status', 1);
+        $deleted = $override->getCount('clients', 'status', 0);
+    } else {
+        $registered = $override->getCount1('clients', 'status', 1, 'site_id', $user->data()->site_id);
+        $deleted = $override->getCount1('clients', 'status', 0, 'site_id', $user->data()->site_id);
+    }
 } else {
+    Redirect::to('index.php');
 }
 ?>
 <div class="menu">
@@ -82,10 +96,16 @@ if ($user->data()->accessLevel == 1) {
                             <span class="isw-download"></span><span class="text">Download Data</span>
                         </a>
                     </li>
+                    <li class="active">
+                        <a href="info.php?id=3&status=6" target="_blank">
+                            <span class="text">Deleted Clients </span> <span class="badge badge-secondary badge-pill"><?= $deleted ?></span>
+                        </a>
+                    </li>
                 </ul>
             </li>
 
         <?php } ?>
+
         <li class="openable">
             <a href="#"><span class="isw-users"></span><span class="text">Clients</span></a>
             <ul>
@@ -96,8 +116,14 @@ if ($user->data()->accessLevel == 1) {
                 </li>
 
                 <li>
-                    <a href="info.php?id=3">
+                    <a href="info.php?id=3&status=5">
                         <span class="glyphicon glyphicon-registration-mark"></span><span class="text">Clients</span>
+                        <span class="badge badge-secondary badge-pill"><?= $registered ?></span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="info.php?id=3&status=7" target="_blank">
+                        <span class="isw-download"></span><span class="text">Pending Clients Visits</span>
                     </a>
                 </li>
             </ul>
@@ -109,7 +135,6 @@ if ($user->data()->accessLevel == 1) {
                     <span class="isw-print"></span><span class="text">Zebra Print</span>
                 </a>
             </li>
-
         <?php } ?>
 
     </ul>
