@@ -2709,7 +2709,7 @@ if ($user->isLoggedIn()) {
                                                                         <div class="col-md-9">
                                                                             <input class="validate[required,custom[date]]" type="text" name="screening_date" id="screening_date" value="<?php if ($screening['screening_date']) {
                                                                                                                                                                                             print_r($screening['screening_date']);
-                                                                                                                                                                                        }  ?>" />
+                                                                                                                                                                                        }  ?>" required />
                                                                             <span>Example: 2010-12-01</span>
                                                                         </div>
                                                                     </div>
@@ -2885,7 +2885,7 @@ if ($user->isLoggedIn()) {
                                                                         <div class="col-md-9">
                                                                             <input class="validate[required,custom[date]]" type="text" name="screening_date" id="screening_date" value="<?php if ($lab['screening_date']) {
                                                                                                                                                                                             print_r($lab['screening_date']);
-                                                                                                                                                                                        }  ?>" />
+                                                                                                                                                                                        }  ?>" required />
                                                                             <span>Example: 2010-12-01</span>
                                                                         </div>
                                                                     </div>
