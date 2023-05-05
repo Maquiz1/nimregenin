@@ -8,7 +8,7 @@ $random = new Random();
 $successMessage = null;
 $pageError = null;
 $errorMessage = null;
-$numRec = 25;
+$numRec = 30;
 if ($user->isLoggedIn()) {
     if (Input::exists('post')) {
         $validate = new validate();
@@ -92,6 +92,31 @@ if ($user->isLoggedIn()) {
                 'count' => 0,
             ), Input::get('id'));
             $successMessage = 'Account Unlock Successful';
+        } elseif (Input::get('change_screening_status')) {
+            $user->updateRecord('clients', array(
+                'screened' => Input::get('screened'),
+            ), Input::get('id'));
+            $successMessage = 'Screening status Updated Successful';
+        } elseif (Input::get('change_eligibility1_status')) {
+            $user->updateRecord('clients', array(
+                'eligibility1' => Input::get('eligibility1'),
+            ), Input::get('id'));
+            $successMessage = 'Eligibility1 status Updated Successful';
+        } elseif (Input::get('change_eligibility2_status')) {
+            $user->updateRecord('clients', array(
+                'eligibility2' => Input::get('eligibility2'),
+            ), Input::get('id'));
+            $successMessage = 'Eligibility2 status Updated Successful';
+        } elseif (Input::get('change_eligible_status')) {
+            $user->updateRecord('clients', array(
+                'eligible' => Input::get('eligible'),
+            ), Input::get('id'));
+            $successMessage = 'Eligible status Updated Successful';
+        } elseif (Input::get('change_enrolled_status')) {
+            $user->updateRecord('clients', array(
+                'enrolled' => Input::get('enrolled'),
+            ), Input::get('id'));
+            $successMessage = 'Enrolled status Updated Successful';
         } elseif (Input::get('delete_staff')) {
             $user->updateRecord('user', array(
                 'status' => 0,
@@ -101,7 +126,7 @@ if ($user->isLoggedIn()) {
             $user->updateRecord('clients', array(
                 'status' => 0,
             ), Input::get('id'));
-            $successMessage = 'User Deleted Successful';
+            $successMessage = 'Client Deleted Successful';
         } elseif (Input::get('edit_study')) {
             $validate = $validate->check($_POST, array(
                 'name' => array(
@@ -520,7 +545,7 @@ if ($user->isLoggedIn()) {
                         $user->updateRecord('screening', array(
                             'age_18' => Input::get('age_18'),
                             'biopsy' => Input::get('biopsy'),
-                            'study_id' => '',
+                            // 'study_id' => '',
                             'breast_cancer' => Input::get('breast_cancer'),
                             'brain_cancer' => Input::get('brain_cancer'),
                             'cervical_cancer' => Input::get('cervical_cancer'),
@@ -593,7 +618,7 @@ if ($user->isLoggedIn()) {
                 try {
                     if ($override->get('lab', 'client_id', Input::get('id'))) {
                         $user->updateRecord('lab', array(
-                            'study_id' => '',
+                            // 'study_id' => '',
                             'pregnant' => Input::get('pregnant'),
                             'breast_feeding' => Input::get('breast_feeding'),
                             'cdk' => Input::get('cdk'),
@@ -2096,6 +2121,7 @@ if ($user->isLoggedIn()) {
                                     <tbody>
                                         <?php $x = 1;
                                         foreach ($clients as $client) {
+
                                             $screening1 = $override->getCount('screening', 'client_id', $client['id']);
                                             $screening2 = $override->getCount('lab', 'client_id', $client['id']);
                                             $visit = $override->getCount('visit', 'client_id', $client['id']);
@@ -2228,11 +2254,16 @@ if ($user->isLoggedIn()) {
                                                 } ?>
 
                                                 <td>
-                                                    <?php if ($_GET['status'] == 1) { ?>
+                                                    <?php if ($_GET['status'] == 1 || $_GET['status'] == 5) { ?>
                                                         <?php if ($user->data()->accessLevel == 1) { ?>
                                                             <a href="#clientView<?= $client['id'] ?>" role="button" class="btn btn-default" data-toggle="modal">View</a>
                                                             <a href="id.php?cid=<?= $client['id'] ?>" class="btn btn-warning">Patient ID</a>
                                                             <a href="#delete<?= $client['id'] ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete</a>
+                                                            <a href="#screened<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">screened</a>
+                                                            <a href="#eligibility1<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">eligibility1</a>
+                                                            <a href="#eligibility2<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">eligibility2</a>
+                                                            <a href="#eligible<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">eligible</a>
+                                                            <a href="#enrolled<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">enrolled</a>
                                                         <?php } ?>
                                                         <a href="#client<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Edit</a>
 
@@ -2254,7 +2285,7 @@ if ($user->isLoggedIn()) {
                                                         }
                                                     } ?>
                                                     <?php if ($_GET['status'] == 2) { ?>
-                                                        <?php if ($eligible == 1  || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) { ?>
+                                                        <?php if ($eligible == 1) { ?>
                                                             <?php if ($visit >= 1) { ?>
                                                                 <a href="#editEnrollment<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Edit Enrollment</a>
                                                             <?php } else {  ?>
@@ -3056,6 +3087,211 @@ if ($user->isLoggedIn()) {
                                                             <div class="modal-footer">
                                                                 <input type="hidden" name="id" value="<?= $client['id'] ?>">
                                                                 <input type="submit" name="edit_Enrollment" class="btn btn-warning" value="Save">
+                                                                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal fade" id="screened<?= $client['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <form method="post">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                <h4>Change screened Status</h4>
+                                                            </div>
+                                                            <div class="modal-body modal-body-np">
+                                                                <div class="row">
+                                                                    <div class="row-form clearfix">
+                                                                        <div class="col-md-8">Screening?</div>
+                                                                        <div class="col-md-4">
+                                                                            <select name="screened" style="width: 100%;" required>
+                                                                                <option value="<?= $client['screened'] ?>"><?php if ($client) {
+                                                                                                                                if ($client['screened'] == 1) {
+                                                                                                                                    echo 'Yes';
+                                                                                                                                } else {
+                                                                                                                                    echo 'No';
+                                                                                                                                }
+                                                                                                                            } else {
+                                                                                                                                echo 'Select';
+                                                                                                                            } ?></option>
+                                                                                <option value="1">Yes</option>
+                                                                                <option value="0">No</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="dr"><span></span></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <input type="hidden" name="id" value="<?= $client['id'] ?>">
+                                                                <input type="submit" name="change_screening_status" class="btn btn-warning" value="Save">
+                                                                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal fade" id="eligibility1<?= $client['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <form method="post">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                <h4>Change Eligibility1 Status</h4>
+                                                            </div>
+                                                            <div class="modal-body modal-body-np">
+                                                                <div class="row">
+                                                                    <div class="row-form clearfix">
+                                                                        <div class="col-md-8">Eligibility1?</div>
+                                                                        <div class="col-md-4">
+                                                                            <select name="eligibility1" style="width: 100%;" required>
+                                                                                <option value="<?= $client['eligibility1'] ?>"><?php if ($client) {
+                                                                                                                                    if ($client['eligibility1'] == 1) {
+                                                                                                                                        echo 'Yes';
+                                                                                                                                    } else {
+                                                                                                                                        echo 'No';
+                                                                                                                                    }
+                                                                                                                                } else {
+                                                                                                                                    echo 'Select';
+                                                                                                                                } ?></option>
+                                                                                <option value="1">Yes</option>
+                                                                                <option value="0">No</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="dr"><span></span></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <input type="hidden" name="id" value="<?= $client['id'] ?>">
+                                                                <input type="submit" name="change_eligibility1_status" class="btn btn-warning" value="Save">
+                                                                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal fade" id="eligibility2<?= $client['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <form method="post">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                <h4>Change Eligibility2 Status</h4>
+                                                            </div>
+                                                            <div class="modal-body modal-body-np">
+                                                                <div class="row">
+                                                                    <div class="row-form clearfix">
+                                                                        <div class="col-md-8">Eligibility2?</div>
+                                                                        <div class="col-md-4">
+                                                                            <select name="eligibility2" style="width: 100%;" required>
+                                                                                <option value="<?= $client['eligibility2'] ?>"><?php if ($client) {
+                                                                                                                                    if ($client['eligibility2'] == 1) {
+                                                                                                                                        echo 'Yes';
+                                                                                                                                    } else {
+                                                                                                                                        echo 'No';
+                                                                                                                                    }
+                                                                                                                                } else {
+                                                                                                                                    echo 'Select';
+                                                                                                                                } ?></option>
+                                                                                <option value="1">Yes</option>
+                                                                                <option value="0">No</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="dr"><span></span></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <input type="hidden" name="id" value="<?= $client['id'] ?>">
+                                                                <input type="submit" name="change_eligibility2_status" class="btn btn-warning" value="Save">
+                                                                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal fade" id="eligible<?= $client['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <form method="post">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                <h4>Change Eligible Status</h4>
+                                                            </div>
+                                                            <div class="modal-body modal-body-np">
+                                                                <div class="row">
+                                                                    <div class="row-form clearfix">
+                                                                        <div class="col-md-8">Eligible?</div>
+                                                                        <div class="col-md-4">
+                                                                            <select name="eligible" style="width: 100%;" required>
+                                                                                <option value="<?= $client['eligible'] ?>"><?php if ($client) {
+                                                                                                                                if ($client['eligible'] == 1) {
+                                                                                                                                    echo 'Yes';
+                                                                                                                                } else {
+                                                                                                                                    echo 'No';
+                                                                                                                                }
+                                                                                                                            } else {
+                                                                                                                                echo 'Select';
+                                                                                                                            } ?></option>
+                                                                                <option value="1">Yes</option>
+                                                                                <option value="0">No</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="dr"><span></span></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <input type="hidden" name="id" value="<?= $client['id'] ?>">
+                                                                <input type="submit" name="change_eligible_status" class="btn btn-warning" value="Save">
+                                                                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal fade" id="enrolled<?= $client['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <form method="post">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                <h4>Change enrolled Status</h4>
+                                                            </div>
+                                                            <div class="modal-body modal-body-np">
+                                                                <div class="row">
+                                                                    <div class="row-form clearfix">
+                                                                        <div class="col-md-8">Enrolled?</div>
+                                                                        <div class="col-md-4">
+                                                                            <select name="enrolled" style="width: 100%;" required>
+                                                                                <option value="<?= $client['enrolled'] ?>"><?php if ($client) {
+                                                                                                                                if ($client['enrolled'] == 1) {
+                                                                                                                                    echo 'Yes';
+                                                                                                                                } else {
+                                                                                                                                    echo 'No';
+                                                                                                                                }
+                                                                                                                            } else {
+                                                                                                                                echo 'Select';
+                                                                                                                            } ?></option>
+                                                                                <option value="1">Yes</option>
+                                                                                <option value="0">No</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="dr"><span></span></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <input type="hidden" name="id" value="<?= $client['id'] ?>">
+                                                                <input type="submit" name="change_enrolled_status" class="btn btn-warning" value="Save">
                                                                 <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
                                                             </div>
                                                         </form>
