@@ -198,6 +198,7 @@ if ($user->isLoggedIn()) {
                             'comments' => Input::get('comments'),
                             'initials' => Input::get('initials'),
                             'status' => 1,
+                            'created_on' => date('Y-m-d'),
                         ));
 
                         $successMessage = 'Client Added Successful';

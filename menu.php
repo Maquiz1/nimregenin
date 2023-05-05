@@ -7,9 +7,11 @@ $random = new Random();
 $users = $override->getData('user');
 if ($user->isLoggedIn()) {
     if ($user->data()->power == 1) {
+        $all = $override->getNo('clients');
         $registered = $override->getCount('clients', 'status', 1);
         $deleted = $override->countData('clients', 'status', 0, 'enrolled', 0);
     } else {
+        $all = $override->getNo('clients');
         $registered = $override->countData('clients', 'status', 1, 'site_id', $user->data()->site_id);
         $deleted = $override->countData2('clients', 'status', 0, 'enrolled', 1, 'site_id', $user->data()->site_id);
     }
@@ -119,6 +121,13 @@ if ($user->isLoggedIn()) {
                     <a href="info.php?id=3&status=5">
                         <span class="glyphicon glyphicon-registration-mark"></span><span class="text">Clients</span>
                         <span class="badge badge-secondary badge-pill"><?= $registered ?></span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="info.php?id=3&status=6">
+                        <span class="glyphicon glyphicon-registration-mark"></span><span class="text">All Clients</span>
+                        <span class="badge badge-secondary badge-pill"><?= $all ?></span>
                     </a>
                 </li>
                 <!-- <li class="active">
