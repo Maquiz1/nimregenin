@@ -543,6 +543,7 @@ if ($user->isLoggedIn()) {
                 try {
                     if ($override->get('screening', 'client_id', Input::get('id'))) {
                         $user->updateRecord('screening', array(
+                            'screening_date' => Input::get('screening_date'),
                             'age_18' => Input::get('age_18'),
                             'biopsy' => Input::get('biopsy'),
                             // 'study_id' => '',
@@ -560,6 +561,7 @@ if ($user->isLoggedIn()) {
                         ), Input::get('screening_id'));
                     } else {
                         $user->createRecord('screening', array(
+                            'screening_date' => Input::get('screening_date'),
                             'age_18' => Input::get('age_18'),
                             'biopsy' => Input::get('biopsy'),
                             'study_id' => '',
@@ -618,6 +620,7 @@ if ($user->isLoggedIn()) {
                 try {
                     if ($override->get('lab', 'client_id', Input::get('id'))) {
                         $user->updateRecord('lab', array(
+                            'screening_date' => Input::get('screening_date'),
                             // 'study_id' => '',
                             'pregnant' => Input::get('pregnant'),
                             'breast_feeding' => Input::get('breast_feeding'),
@@ -632,6 +635,7 @@ if ($user->isLoggedIn()) {
                         ), Input::get('screening_id'));
                     } else {
                         $user->createRecord('lab', array(
+                            'screening_date' => Input::get('screening_date'),
                             'study_id' => '',
                             'pregnant' => Input::get('pregnant'),
                             'breast_feeding' => Input::get('breast_feeding'),
@@ -2699,6 +2703,16 @@ if ($user->isLoggedIn()) {
                                                             </div>
                                                             <div class="modal-body modal-body-np">
                                                                 <div class="row">
+
+                                                                    <div class="row-form clearfix">
+                                                                        <div class="col-md-3">Date of Screening:</div>
+                                                                        <div class="col-md-9">
+                                                                            <input class="validate[required,custom[date]]" type="text" name="screening_date" id="screening_date" value="<?php if ($screening['screening_date']) {
+                                                                                                                                                                                            print_r($screening['screening_date']);
+                                                                                                                                                                                        }  ?>" />
+                                                                            <span>Example: 2010-12-01</span>
+                                                                        </div>
+                                                                    </div>
                                                                     <div class="row-form clearfix">
                                                                         <div class="col-md-8">Aged eighteen years and above</div>
                                                                         <div class="col-md-4">
@@ -2865,6 +2879,16 @@ if ($user->isLoggedIn()) {
                                                             </div>
                                                             <div class="modal-body modal-body-np">
                                                                 <div class="row">
+
+                                                                    <div class="row-form clearfix">
+                                                                        <div class="col-md-3">Date of Screening:</div>
+                                                                        <div class="col-md-9">
+                                                                            <input class="validate[required,custom[date]]" type="text" name="screening_date" id="screening_date" value="<?php if ($lab['screening_date']) {
+                                                                                                                                                                                            print_r($lab['screening_date']);
+                                                                                                                                                                                        }  ?>" />
+                                                                            <span>Example: 2010-12-01</span>
+                                                                        </div>
+                                                                    </div>
 
                                                                     <div class="row-form clearfix">
                                                                         <div class="col-md-8">Is the participant pregnant?</div>
