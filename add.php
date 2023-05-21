@@ -3216,7 +3216,7 @@ if ($user->isLoggedIn()) {
                                                         <option value="1"> mg/dl </option>
                                                         <option value="2"> mmol/l </option>
                                                     </select>
-                                                    <SPan>XX.X ( mg/dl )</SPan>
+                                                    <SPan>XX.X</SPan>
                                                 </div>
                                             </div>
                                         </div>
@@ -3230,14 +3230,13 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>Serum creatinine levels</label>
                                                     <input value="" type="text" name="renal_creatinine" id="renal_creatinine" />
-                                                    <SPan>X.X ( mg/dl )(> 1.1 grade 0)(1.1 to 1.3 grade 1)(>1.3 to 1.8 grade 2)(> 1.8 to < 3.5 grade 3)(>= 3.5 grade 4)</SPan>
-                                                    <SPan>
-                                                        <select name="renal_creatinine_units">
-                                                            <option value="">Select</option>
-                                                            <option value="1"> mg/dl </option>
-                                                            <option value="2"> mmol/l </option>
-                                                        </select>
-                                                    </SPan>
+                                                    <select name="renal_creatinine_units">
+                                                        <option value="">Select</option>
+                                                        <option value="1"> mg/dl </option>
+                                                        <option value="2"> mmol/l </option>
+                                                    </select>
+                                                    <SPan>X.X (> 1.1 grade 0)(1.1 to 1.3 grade 1)(>1.3 to 1.8 grade 2)(> 1.8 to < 3.5 grade 3)(>= 3.5 grade 4)</SPan>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -3265,6 +3264,11 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>eGFR mL/min per 1.73 m2</label>
                                                     <input value="" type="text" name="renal_egfr" id="renal_egfr" />
+                                                    <select name="renal_egfr_units">
+                                                        <option value="">Select</option>
+                                                        <option value="1"> mg/dl </option>
+                                                        <option value="2"> mmol/l </option>
+                                                    </select>
                                                     <SPan>XXX.X ( ml/min ) (>= 90 grade 0)(< 90 to 60 grade 2)(< 60 to 30 grade 3)(< 30 grade 4)</SPan>
                                                 </div>
                                             </div>
@@ -3370,7 +3374,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>PT</label>
                                                     <input value="" type="text" name="liver_pt" id="liver_pt" />
-                                                    <SPan>XXX ( units/L )(< 1.1 grade 0)(1.1 to < 1.25 grade 1)(1.25 to < 1.5 grade 2)(> 1.5 to < 3 grade 3)(>= 3 grade 4)</SPan>
+                                                    <SPan>XXX ( seconds )(< 1.1 grade 0)(1.1 to < 1.25 grade 1)(1.25 to < 1.5 grade 2)(> 1.5 to < 3 grade 3)(>= 3 grade 4)</SPan>
                                                 </div>
                                             </div>
                                         </div>
@@ -3400,7 +3404,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>PTT</label>
                                                     <input value="" type="text" name="liver_ptt" id="liver_ptt" />
-                                                    <SPan>XXX ( units/L )(< 1.1 grade 0)(1.1 to < 1.66 grade 1)(1.66 to < 2.33 grade 2)(> 2.33 to < 3 grade 3)(>= 3 grade 4)</SPan>
+                                                    <SPan>XXX ( seconds )(< 1.1 grade 0)(1.1 to < 1.66 grade 1)(1.66 to < 2.33 grade 2)(> 2.33 to < 3 grade 3)(>= 3 grade 4)</SPan>
                                                 </div>
                                             </div>
                                         </div>
@@ -3428,7 +3432,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>INR</label>
                                                     <input value="" type="text" name="liver_inr" id="liver_inr" />
-                                                    <SPan>XXX ( units/L )(< 1.1 grade 0)(1.1 to < 1.25 grade 1)(1.25 to < 1.5 grade 2)(> 1.5 to < 3 grade 3)(>= 3 grade 4)</SPan>
+                                                    <SPan>XXX (< 1.1 grade 0)(1.1 to < 1.25 grade 1)(1.25 to < 1.5 grade 2)(> 1.5 to < 3 grade 3)(>= 3 grade 4)</SPan>
                                                 </div>
                                             </div>
                                         </div>
@@ -3480,7 +3484,14 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>Bilirubin total</label>
                                                     <input value="" type="text" name="liver_bilirubin_total" id="liver_bilirubin_total" />
-                                                    <SPan>XXX ( grams/L )(< 1.1 grade 0)(1.1 to < 1.6 grade 1)(1.6 to < 2.6 grade 2)(> 2.6 to < 5 grade 3)(>= 5 grade 4)</SPan>
+                                                    <select name="liver_bilirubin_total_units">
+                                                        <option value="">Select</option>
+                                                        <option value="1"> micromol/l </option>
+                                                        <option value="2"> mg/dl </option>
+                                                    </select>
+                                                    <SPan>
+                                                        XXX ( grams/L )
+                                                        (< 1.1 grade 0)(1.1 to < 1.6 grade 1)(1.6 to < 2.6 grade 2)(> 2.6 to < 5 grade 3)(>= 5 grade 4)</SPan>
                                                 </div>
                                             </div>
                                         </div>
@@ -3510,7 +3521,13 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>Bilirubin direct</label>
                                                     <input value="" type="text" name="liver_bilirubin_direct" id="liver_bilirubin_direct" />
-                                                    <SPan>XXX ( grams/L )(any value without hapatotoxicity symptoms = grade 0)(any value with signs and symptoms of heapatotoxicity = grade 3)(1any value with signs and symptoms of liver failure = grade 4)</SPan>
+                                                    <select name="liver_bilirubin_direct_units">
+                                                        <option value="">Select</option>
+                                                        <option value="1"> micromol/l </option>
+                                                        <option value="2"> mg/dl </option>
+                                                    </select>
+                                                    <SPan>XXX 
+                                                        ( grams/L )(any value without hapatotoxicity symptoms = grade 0)(any value with signs and symptoms of heapatotoxicity = grade 3)(1any value with signs and symptoms of liver failure = grade 4)</SPan>
                                                 </div>
                                             </div>
                                         </div>
@@ -3538,6 +3555,10 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>RBG</label>
                                                     <input value="" type="text" name="rbg" id="rbg" />
+                                                    <select name="rbg_units">
+                                                        <option value="">Select</option>
+                                                        <option value="1"> mmol/l </option>
+                                                    </select>
                                                     <SPan>XX ( mg/dl ) (< 6.44 grade 0)(6.44 to < 8.89 grade 1)(8.89 to < 13.89 grade 2)(> 13.89 to < 27.75 grade 3)(>= 27.75 grade 4)</SPan>
                                                 </div>
                                             </div>
@@ -4158,7 +4179,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>2.a.i Start date</label>
-                                                    <input value="" class="validate[required,custom[date]]" type="text" name="start_date" id="start_date" /> 
+                                                    <input value="" class="validate[required,custom[date]]" type="text" name="start_date" id="start_date" />
                                                     <span>Example: 2023-01-01</span>
                                                 </div>
                                             </div>
@@ -4170,7 +4191,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>2.a.ii End date:</label>
                                                     <input value="" class="validate[required,custom[date]]" type="text" name="end_date" id="end_date" />
-                                                     <span>Example: 2023-01-01</span>
+                                                    <span>Example: 2023-01-01</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -4185,7 +4206,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>2. b.i when was the date of death? </label>
                                                     <input value="" class="validate[required,custom[date]]" type="text" name="date_death" id="date_death" />
-                                                     <span>Example: 2023-01-01</span>
+                                                    <span>Example: 2023-01-01</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -4265,7 +4286,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>5. Outcome date</label>
                                                     <input value="" class="validate[required,custom[date]]" type="text" name="outcome_date" id="outcome_date" required />
-                                                     <span>Example: 2023-01-01</span>
+                                                    <span>Example: 2023-01-01</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -4300,7 +4321,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>Date of Completion</label>
                                                     <input value="" class="validate[required,custom[date]]" type="text" name="crf6_cmpltd_date" id="crf6_cmpltd_date" required />
-                                                     <span>Example: 2023-01-01</span>
+                                                    <span>Example: 2023-01-01</span>
                                                     <span>Example : 2002-08-21</span>
                                                 </div>
                                             </div>
