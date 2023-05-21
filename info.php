@@ -2022,11 +2022,15 @@ if ($user->isLoggedIn()) {
                                     } elseif ($_GET['status'] == 3) {
                                         $pagNum = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'site_id', $_GET['sid']);
                                     } elseif ($_GET['status'] == 4) {
-                                        $pagNum = $override->countData2('clients', 'status', 0, 'enrolled', 1, 'site_id', $_GET['sid']);
+                                        $pagNum = $override->countData2('clients', 'status', 1, 'end_study', 1, 'site_id', $_GET['sid']);
                                     } elseif ($_GET['status'] == 5) {
-                                        $pagNum = $override->countData2('clients', 'status', 1, 'screened', 0, 'site_id', $_GET['sid']);
+                                        $pagNum = $override->countData('clients', 'status', 1, 'site_id', $_GET['sid']);
                                     } elseif ($_GET['status'] == 6) {
-                                        $clients = $override->getNo('clients');
+                                        $pagNum = $override->countData2('clients', 'status', 1, 'screened', 0, 'site_id', $_GET['sid']);
+                                    } elseif ($_GET['status'] == 7) {
+                                        $pagNum = $override->getCount('clients', 'site_id', $_GET['sid']);
+                                    } elseif ($_GET['status'] == 8) {
+                                        $pagNum = $override->countData('clients', 'status', 0, 'site_id', $_GET['sid']);
                                     }
                                     $pages = ceil($pagNum / $numRec);
                                     if (!$_GET['page'] || $_GET['page'] == 1) {
@@ -2042,11 +2046,15 @@ if ($user->isLoggedIn()) {
                                     } elseif ($_GET['status'] == 3) {
                                         $clients = $override->getWithLimit3('clients', 'status', 1, 'enrolled', 1, 'site_id', $_GET['sid'], $page, $numRec);
                                     } elseif ($_GET['status'] == 4) {
-                                        $clients = $override->getWithLimit3('clients', 'status', 0, 'enrolled', 1, 'site_id', $_GET['sid'], $page, $numRec);
+                                        $clients = $override->getWithLimit3('clients', 'status', 1, 'end_study', 1, 'site_id', $_GET['sid'], $page, $numRec);
                                     } elseif ($_GET['status'] == 5) {
-                                        $clients = $override->getWithLimit3('clients', 'status', 1, 'screened', 0, 'site_id', $_GET['sid'], $page, $numRec);
+                                        $clients = $override->getWithLimit1('clients', 'status', 1, 'site_id', $_GET['sid'], $page, $numRec);
                                     } elseif ($_GET['status'] == 6) {
-                                        $clients = $override->getData('clients');
+                                        $clients = $override->getWithLimit3('clients', 'status', 1, 'screened', 0, 'site_id', $_GET['sid'], $page, $numRec);
+                                    } elseif ($_GET['status'] == 7) {
+                                        $clients = $override->getWithLimit('clients', 'site_id', $_GET['sid'], $page, $numRec);
+                                    } elseif ($_GET['status'] == 8) {
+                                        $clients = $override->getWithLimit1('clients', 'status', 0, 'site_id', $_GET['sid'], $page, $numRec);
                                     }
                                 } else {
                                     $pagNum = 0;
@@ -2057,11 +2065,15 @@ if ($user->isLoggedIn()) {
                                     } elseif ($_GET['status'] == 3) {
                                         $pagNum = $override->getCount1('clients', 'status', 1, 'enrolled', 1);
                                     } elseif ($_GET['status'] == 4) {
-                                        $pagNum = $override->getCount1('clients', 'status', 0, 'enrolled', 1);
+                                        $pagNum = $override->getCount1('clients', 'status', 1, 'end_study', 1);
                                     } elseif ($_GET['status'] == 5) {
+                                        $pagNum = $override->getCount('clients', 'status', 1);
+                                    } elseif ($_GET['status'] == 6) {
                                         $pagNum = $override->getCount1('clients', 'status', 1, 'screened', 0);
-                                    }elseif ($_GET['status'] == 6) {
+                                    } elseif ($_GET['status'] == 7) {
                                         $clients = $override->getNo('clients');
+                                    } elseif ($_GET['status'] == 8) {
+                                        $pagNum = $override->getCount('clients', 'status', 0);
                                     }
                                     $pages = ceil($pagNum / $numRec);
                                     if (!$_GET['page'] || $_GET['page'] == 1) {
@@ -2077,11 +2089,15 @@ if ($user->isLoggedIn()) {
                                     } elseif ($_GET['status'] == 3) {
                                         $clients = $override->getWithLimit1('clients', 'status', 1, 'enrolled', 1, $page, $numRec);
                                     } elseif ($_GET['status'] == 4) {
-                                        $clients = $override->getWithLimit1('clients', 'status', 0, 'enrolled', 1, $page, $numRec);
+                                        $clients = $override->getWithLimit1('clients', 'status', 1, 'end_study', 1, $page, $numRec);
                                     } elseif ($_GET['status'] == 5) {
-                                        $clients = $override->getWithLimit1('clients', 'status', 1, 'screened', 0, $page, $numRec);
+                                        $clients = $override->getWithLimit('clients', 'status', 1, $page, $numRec);
                                     } elseif ($_GET['status'] == 6) {
-                                        $clients = $override->getData('clients');
+                                        $clients = $override->getWithLimit1('clients', 'status', 1, 'screened', 0, $page, $numRec);
+                                    } elseif ($_GET['status'] == 7) {
+                                        $clients = $override->getDataLimit('clients', $page, $numRec);
+                                    } elseif ($_GET['status'] == 8) {
+                                        $clients = $override->getWithLimit('clients', 'status', 0, $page, $numRec);
                                     }
                                 }
                             } else {
@@ -2094,11 +2110,15 @@ if ($user->isLoggedIn()) {
                                 } elseif ($_GET['status'] == 3) {
                                     $pagNum = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'site_id', $user->data()->site_id);
                                 } elseif ($_GET['status'] == 4) {
-                                    $pagNum = $override->countData2('clients', 'status', 0, 'enrolled', 1, 'site_id', $user->data()->site_id);
+                                    $pagNum = $override->countData2('clients', 'status', 1, 'end_study', 1, 'site_id', $user->data()->site_id);
                                 } elseif ($_GET['status'] == 5) {
+                                    $pagNum = $override->countData('clients', 'status', 1, 'site_id', $user->data()->site_id);
+                                } elseif ($_GET['status'] == 6) {
                                     $pagNum = $override->countData2('clients', 'status', 1, 'screened', 0, 'site_id', $user->data()->site_id);
-                                }elseif ($_GET['status'] == 6) {
-                                    $clients = $override->getNo('clients');
+                                } elseif ($_GET['status'] == 7) {
+                                    $pagNum = $override->getCount('clients', 'site_id', $user->data()->site_id);
+                                } elseif ($_GET['status'] == 8) {
+                                    $pagNum = $override->countData('clients', 'status', 0, 'site_id', $user->data()->site_id);
                                 }
                                 $pages = ceil($pagNum / $numRec);
                                 if (!$_GET['page'] || $_GET['page'] == 1) {
@@ -2113,11 +2133,15 @@ if ($user->isLoggedIn()) {
                                 } elseif ($_GET['status'] == 3) {
                                     $clients = $override->getWithLimit3('clients', 'status', 1, 'enrolled', 1, 'site_id', $user->data()->site_id, $page, $numRec);
                                 } elseif ($_GET['status'] == 4) {
-                                    $clients = $override->getWithLimit3('clients', 'status', 0, 'enrolled', 1, 'site_id', $user->data()->site_id, $page, $numRec);
+                                    $clients = $override->getWithLimit3('clients', 'status', 1, 'end_study', 1, 'site_id', $user->data()->site_id, $page, $numRec);
                                 } elseif ($_GET['status'] == 5) {
+                                    $clients = $override->getWithLimit1('clients', 'status', 1, 'site_id', $user->data()->site_id, $page, $numRec);
+                                } elseif ($_GET['status'] == 6) {
                                     $clients = $override->getWithLimit3('clients', 'status', 1, 'screened', 0, 'site_id', $user->data()->site_id, $page, $numRec);
-                                }  elseif ($_GET['status'] == 6) {
-                                    $clients = $override->getData('clients');
+                                } elseif ($_GET['status'] == 7) {
+                                    $clients = $override->getWithLimit('clients', 'site_id', $user->data()->site_id, $page, $numRec);
+                                } elseif ($_GET['status'] == 8) {
+                                    $clients = $override->getWithLimit1('clients', 'status', 0, 'site_id', $user->data()->site_id, $page, $numRec);
                                 }
                             } ?>
                             <div class="block-fluid">
@@ -2260,7 +2284,7 @@ if ($user->isLoggedIn()) {
                                                 <?php }
                                                 } ?>
 
-                                                <?php if ($_GET['status'] == 5) { ?>
+                                                <?php if ($_GET['status'] == 5 || $_GET['status'] == 6 || $_GET['status'] == 7 || $_GET['status'] == 8) { ?>
 
                                                     <?php if ($client['screened'] == 1) { ?>
                                                         <td>
@@ -2274,7 +2298,7 @@ if ($user->isLoggedIn()) {
                                                 } ?>
 
                                                 <td>
-                                                    <?php if ($_GET['status'] == 1 || $_GET['status'] == 5 || $_GET['status'] == 6) { ?>
+                                                    <?php if ($_GET['status'] == 1 || $_GET['status'] == 5 || $_GET['status'] == 6 || $_GET['status'] == 7 || $_GET['status'] == 8) { ?>
                                                         <?php if ($user->data()->accessLevel == 1 || $user->data()->power == 1) { ?>
                                                             <a href="#clientView<?= $client['id'] ?>" role="button" class="btn btn-default" data-toggle="modal">View</a>
                                                             <a href="id.php?cid=<?= $client['id'] ?>" class="btn btn-warning">Patient ID</a>
@@ -2287,7 +2311,10 @@ if ($user->isLoggedIn()) {
                                                         <?php } ?>
                                                         <a href="#client<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Edit</a>
 
-                                                        <?php if ($screened == 1) { ?>
+                                                        <?php
+                                                        //  if ($screened == 1) {
+                                                            
+                                                            ?>
                                                             <?php if ($screening1 >= 1) { ?>
                                                                 <a href="#addInclusion<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Edit Inclusion</a>
 
@@ -2301,9 +2328,11 @@ if ($user->isLoggedIn()) {
                                                             <?php } else {  ?>
                                                                 <a href="#addExclusion<?= $client['id'] ?>" role="button" class="btn btn-warning" data-toggle="modal">Add Exclusion</a>
 
-                                                    <?php }
-                                                        }
-                                                    } ?>
+                                                    <?php 
+                                                    }
+                                                        // }
+                                                    } 
+                                                    ?>
                                                     <?php if ($_GET['status'] == 2) { ?>
                                                         <?php if ($eligible == 1) { ?>
                                                             <?php if ($visit >= 1) { ?>
@@ -6735,46 +6764,46 @@ if ($user->isLoggedIn()) {
                             <?php if ($_GET['vcode'] == 'D7' || $_GET['vcode'] == 'D90') { ?>
 
 
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>Serum creatinine levels</label>
-                                            <input value="<?= $patient['renal_creatinine'] ?>" type="text" name="renal_creatinine" id="renal_creatinine" />
-                                            <SPan>X.X ( mg/dl )</SPan>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Serum creatinine levels</label>
+                                                <input value="<?= $patient['renal_creatinine'] ?>" type="text" name="renal_creatinine" id="renal_creatinine" />
+                                                <SPan>X.X ( mg/dl )</SPan>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>Grade</label>
-                                            <select name="renal_creatinine_grade" id="renal_creatinine_grade" style="width: 100%;">
-                                                <?php if ($patient['renal_creatinine_grade'] == "0") { ?>
-                                                    <option value="<?= $patient['renal_creatinine_grade'] ?>">Zero</option>
-                                                <?php } elseif ($patient['renal_creatinine_grade'] == "1") { ?>
-                                                    <option value="<?= $patient['renal_creatinine_grade'] ?>">One</option>
-                                                <?php } else if ($patient['renal_creatinine_grade'] == "2") { ?>
-                                                    <option value="<?= $patient['renal_creatinine_grade'] ?>">Two</option>
-                                                <?php } elseif ($patient['renal_creatinine_grade'] == "3") { ?>
-                                                    <option value="<?= $patient['renal_creatinine_grade'] ?>">Three</option>
-                                                <?php } else if ($patient['renal_creatinine_grade'] == "4") { ?>
-                                                    <option value="<?= $patient['renal_creatinine_grade'] ?>">Four</option>
-                                                <?php } else { ?>
-                                                    <option value="">Select</option>
-                                                <?php } ?>
-                                                <option value="0">Zero</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                                <option value="4">Four</option>
-                                            </select>
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Grade</label>
+                                                <select name="renal_creatinine_grade" id="renal_creatinine_grade" style="width: 100%;">
+                                                    <?php if ($patient['renal_creatinine_grade'] == "0") { ?>
+                                                        <option value="<?= $patient['renal_creatinine_grade'] ?>">Zero</option>
+                                                    <?php } elseif ($patient['renal_creatinine_grade'] == "1") { ?>
+                                                        <option value="<?= $patient['renal_creatinine_grade'] ?>">One</option>
+                                                    <?php } else if ($patient['renal_creatinine_grade'] == "2") { ?>
+                                                        <option value="<?= $patient['renal_creatinine_grade'] ?>">Two</option>
+                                                    <?php } elseif ($patient['renal_creatinine_grade'] == "3") { ?>
+                                                        <option value="<?= $patient['renal_creatinine_grade'] ?>">Three</option>
+                                                    <?php } else if ($patient['renal_creatinine_grade'] == "4") { ?>
+                                                        <option value="<?= $patient['renal_creatinine_grade'] ?>">Four</option>
+                                                    <?php } else { ?>
+                                                        <option value="">Select</option>
+                                                    <?php } ?>
+                                                    <option value="0">Zero</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                    <option value="4">Four</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
                                 <?php } ?>
 
@@ -6818,718 +6847,718 @@ if ($user->isLoggedIn()) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                </div>
 
 
 
-                            <div class="head clearfix">
-                                <div class="isw-ok"></div>
-                                <h1>2. Liver function test</h1>
-                            </div>
+                                <div class="head clearfix">
+                                    <div class="isw-ok"></div>
+                                    <h1>2. Liver function test</h1>
+                                </div>
 
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>AST levels</label>
-                                            <input value="<?= $patient['liver_ast'] ?>" type="text" name="liver_ast" id="liver_ast" />
-                                            <SPan>XXX ( units/L )</SPan>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>AST levels</label>
+                                                <input value="<?= $patient['liver_ast'] ?>" type="text" name="liver_ast" id="liver_ast" />
+                                                <SPan>XXX ( units/L )</SPan>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Grade</label>
+                                                <select name="liver_ast_grade" id="liver_ast_grade" style="width: 100%;">
+                                                    <?php if ($patient['liver_ast_grade'] == "0") { ?>
+                                                        <option value="<?= $patient['liver_ast_grade'] ?>">Zero</option>
+                                                    <?php } elseif ($patient['liver_ast_grade'] == "1") { ?>
+                                                        <option value="<?= $patient['liver_ast_grade'] ?>">One</option>
+                                                    <?php } else if ($patient['liver_ast_grade'] == "2") { ?>
+                                                        <option value="<?= $patient['liver_ast_grade'] ?>">Two</option>
+                                                    <?php } elseif ($patient['liver_ast_grade'] == "3") { ?>
+                                                        <option value="<?= $patient['liver_ast_grade'] ?>">Three</option>
+                                                    <?php } else if ($patient['liver_ast_grade'] == "4") { ?>
+                                                        <option value="<?= $patient['liver_ast_grade'] ?>">Four</option>
+                                                    <?php } else { ?>
+                                                        <option value="">Select</option>
+                                                    <?php } ?>
+                                                    <option value="0">Zero</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                    <option value="4">Four</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>ALT levels</label>
+                                                <input value="<?= $patient['liver_alt'] ?>" type="text" name="liver_alt" id="liver_alt" />
+                                                <SPan>XXX ( units/L )</SPan>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Grade</label>
+                                                <select name="liver_alt_grade" id="liver_alt_grade" style="width: 100%;">
+                                                    <?php if ($patient['liver_alt_grade'] == "0") { ?>
+                                                        <option value="<?= $patient['liver_alt_grade'] ?>">Zero</option>
+                                                    <?php } elseif ($patient['liver_alt_grade'] == "1") { ?>
+                                                        <option value="<?= $patient['liver_alt_grade'] ?>">One</option>
+                                                    <?php } else if ($patient['liver_alt_grade'] == "2") { ?>
+                                                        <option value="<?= $patient['liver_alt_grade'] ?>">Two</option>
+                                                    <?php } elseif ($patient['liver_alt_grade'] == "3") { ?>
+                                                        <option value="<?= $patient['liver_alt_grade'] ?>">Three</option>
+                                                    <?php } else if ($patient['liver_alt_grade'] == "4") { ?>
+                                                        <option value="<?= $patient['liver_alt_grade'] ?>">Four</option>
+                                                    <?php } else { ?>
+                                                        <option value="">Select</option>
+                                                    <?php } ?>
+                                                    <option value="0">Zero</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                    <option value="4">Four</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>Grade</label>
-                                            <select name="liver_ast_grade" id="liver_ast_grade" style="width: 100%;">
-                                                <?php if ($patient['liver_ast_grade'] == "0") { ?>
-                                                    <option value="<?= $patient['liver_ast_grade'] ?>">Zero</option>
-                                                <?php } elseif ($patient['liver_ast_grade'] == "1") { ?>
-                                                    <option value="<?= $patient['liver_ast_grade'] ?>">One</option>
-                                                <?php } else if ($patient['liver_ast_grade'] == "2") { ?>
-                                                    <option value="<?= $patient['liver_ast_grade'] ?>">Two</option>
-                                                <?php } elseif ($patient['liver_ast_grade'] == "3") { ?>
-                                                    <option value="<?= $patient['liver_ast_grade'] ?>">Three</option>
-                                                <?php } else if ($patient['liver_ast_grade'] == "4") { ?>
-                                                    <option value="<?= $patient['liver_ast_grade'] ?>">Four</option>
-                                                <?php } else { ?>
-                                                    <option value="">Select</option>
-                                                <?php } ?>
-                                                <option value="0">Zero</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                                <option value="4">Four</option>
-                                            </select>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>ALP levels</label>
+                                                <input value="<?= $patient['liver_alp'] ?>" type="text" name="liver_alp" id="liver_alp" />
+                                                <SPan>XXX ( units/L )</SPan>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-sm-4">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>PT</label>
+                                                <input value="<?= $patient['liver_pt'] ?>" type="text" name="liver_pt" id="liver_pt" />
+                                                <SPan>XXX ( units/L )</SPan>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Grade</label>
+                                                <select name="liver_pt_grade" id="liver_pt_grade" style="width: 100%;">
+                                                    <?php if ($patient['liver_pt_grade'] == "0") { ?>
+                                                        <option value="<?= $patient['liver_pt_grade'] ?>">Zero</option>
+                                                    <?php } elseif ($patient['liver_pt_grade'] == "1") { ?>
+                                                        <option value="<?= $patient['liver_pt_grade'] ?>">One</option>
+                                                    <?php } else if ($patient['liver_pt_grade'] == "2") { ?>
+                                                        <option value="<?= $patient['liver_pt_grade'] ?>">Two</option>
+                                                    <?php } elseif ($patient['liver_pt_grade'] == "3") { ?>
+                                                        <option value="<?= $patient['liver_pt_grade'] ?>">Three</option>
+                                                    <?php } else if ($patient['liver_pt_grade'] == "4") { ?>
+                                                        <option value="<?= $patient['liver_pt_grade'] ?>">Four</option>
+                                                    <?php } else { ?>
+                                                        <option value="">Select</option>
+                                                    <?php } ?>
+                                                    <option value="0">Zero</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                    <option value="4">Four</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>ALT levels</label>
-                                            <input value="<?= $patient['liver_alt'] ?>" type="text" name="liver_alt" id="liver_alt" />
-                                            <SPan>XXX ( units/L )</SPan>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>PTT</label>
+                                                <input value="<?= $patient['liver_ptt'] ?>" type="text" name="liver_ptt" id="liver_ptt" />
+                                                <SPan>XXX ( units/L )</SPan>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Grade</label>
+                                                <select name="liver_ptt_grade" id="liver_ptt_grade" style="width: 100%;">
+                                                    <?php if ($patient['liver_ptt_grade'] == "0") { ?>
+                                                        <option value="<?= $patient['liver_ptt_grade'] ?>">Zero</option>
+                                                    <?php } elseif ($patient['liver_ptt_grade'] == "1") { ?>
+                                                        <option value="<?= $patient['liver_ptt_grade'] ?>">One</option>
+                                                    <?php } else if ($patient['liver_ptt_grade'] == "2") { ?>
+                                                        <option value="<?= $patient['liver_ptt_grade'] ?>">Two</option>
+                                                    <?php } elseif ($patient['liver_ptt_grade'] == "3") { ?>
+                                                        <option value="<?= $patient['liver_ptt_grade'] ?>">Three</option>
+                                                    <?php } else if ($patient['liver_ptt_grade'] == "4") { ?>
+                                                        <option value="<?= $patient['liver_ptt_grade'] ?>">Four</option>
+                                                    <?php } else { ?>
+                                                        <option value="">Select</option>
+                                                    <?php } ?>
+                                                    <option value="0">Zero</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                    <option value="4">Four</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>INR</label>
+                                                <input value="<?= $patient['liver_inr'] ?>" type="text" name="liver_inr" id="liver_inr" />
+                                                <SPan>XXX ( units/L )</SPan>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Grade</label>
+                                                <select name="liver_inr_grade" id="liver_inr_grade" style="width: 100%;">
+                                                    <?php if ($patient['liver_inr_grade'] == "0") { ?>
+                                                        <option value="<?= $patient['liver_inr_grade'] ?>">Zero</option>
+                                                    <?php } elseif ($patient['liver_inr_grade'] == "1") { ?>
+                                                        <option value="<?= $patient['liver_inr_grade'] ?>">One</option>
+                                                    <?php } else if ($patient['liver_inr_grade'] == "2") { ?>
+                                                        <option value="<?= $patient['liver_inr_grade'] ?>">Two</option>
+                                                    <?php } elseif ($patient['liver_inr_grade'] == "3") { ?>
+                                                        <option value="<?= $patient['liver_inr_grade'] ?>">Three</option>
+                                                    <?php } else if ($patient['liver_inr_grade'] == "4") { ?>
+                                                        <option value="<?= $patient['liver_inr_grade'] ?>">Four</option>
+                                                    <?php } else { ?>
+                                                        <option value="">Select</option>
+                                                    <?php } ?>
+                                                    <option value="0">Zero</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                    <option value="4">Four</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>Grade</label>
-                                            <select name="liver_alt_grade" id="liver_alt_grade" style="width: 100%;">
-                                                <?php if ($patient['liver_alt_grade'] == "0") { ?>
-                                                    <option value="<?= $patient['liver_alt_grade'] ?>">Zero</option>
-                                                <?php } elseif ($patient['liver_alt_grade'] == "1") { ?>
-                                                    <option value="<?= $patient['liver_alt_grade'] ?>">One</option>
-                                                <?php } else if ($patient['liver_alt_grade'] == "2") { ?>
-                                                    <option value="<?= $patient['liver_alt_grade'] ?>">Two</option>
-                                                <?php } elseif ($patient['liver_alt_grade'] == "3") { ?>
-                                                    <option value="<?= $patient['liver_alt_grade'] ?>">Three</option>
-                                                <?php } else if ($patient['liver_alt_grade'] == "4") { ?>
-                                                    <option value="<?= $patient['liver_alt_grade'] ?>">Four</option>
-                                                <?php } else { ?>
-                                                    <option value="">Select</option>
-                                                <?php } ?>
-                                                <option value="0">Zero</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                                <option value="4">Four</option>
-                                            </select>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>GGT levels</label>
+                                                <input value="<?= $patient['liver_ggt'] ?>" type="text" name="liver_ggt" id="liver_ggt" />
+                                                <SPan>XXX ( units/L )</SPan>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>ALP levels</label>
-                                            <input value="<?= $patient['liver_alp'] ?>" type="text" name="liver_alp" id="liver_alp" />
-                                            <SPan>XXX ( units/L )</SPan>
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Serum albumin levels</label>
+                                                <input value="<?= $patient['liver_albumin'] ?>" type="text" name="liver_albumin" id="liver_albumin" />
+                                                <SPan>XXX ( grams/L )</SPan>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
 
-                                <div class="col-sm-4">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>PT</label>
-                                            <input value="<?= $patient['liver_pt'] ?>" type="text" name="liver_pt" id="liver_pt" />
-                                            <SPan>XXX ( units/L )</SPan>
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Bilirubin total</label>
+                                                <input value="<?= $patient['liver_bilirubin_total'] ?>" type="text" name="liver_bilirubin_total" id="liver_bilirubin_total" />
+                                                <SPan>XXX ( grams/L )</SPan>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="col-sm-4">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>Grade</label>
-                                            <select name="liver_pt_grade" id="liver_pt_grade" style="width: 100%;">
-                                                <?php if ($patient['liver_pt_grade'] == "0") { ?>
-                                                    <option value="<?= $patient['liver_pt_grade'] ?>">Zero</option>
-                                                <?php } elseif ($patient['liver_pt_grade'] == "1") { ?>
-                                                    <option value="<?= $patient['liver_pt_grade'] ?>">One</option>
-                                                <?php } else if ($patient['liver_pt_grade'] == "2") { ?>
-                                                    <option value="<?= $patient['liver_pt_grade'] ?>">Two</option>
-                                                <?php } elseif ($patient['liver_pt_grade'] == "3") { ?>
-                                                    <option value="<?= $patient['liver_pt_grade'] ?>">Three</option>
-                                                <?php } else if ($patient['liver_pt_grade'] == "4") { ?>
-                                                    <option value="<?= $patient['liver_pt_grade'] ?>">Four</option>
-                                                <?php } else { ?>
-                                                    <option value="">Select</option>
-                                                <?php } ?>
-                                                <option value="0">Zero</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                                <option value="4">Four</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>PTT</label>
-                                            <input value="<?= $patient['liver_ptt'] ?>" type="text" name="liver_ptt" id="liver_ptt" />
-                                            <SPan>XXX ( units/L )</SPan>
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Grade</label>
+                                                <select name="bilirubin_total_grade" id="bilirubin_total_grade" style="width: 100%;">
+                                                    <?php if ($patient['bilirubin_total_grade'] == "0") { ?>
+                                                        <option value="<?= $patient['bilirubin_total_grade'] ?>">Zero</option>
+                                                    <?php } elseif ($patient['bilirubin_total_grade'] == "1") { ?>
+                                                        <option value="<?= $patient['bilirubin_total_grade'] ?>">One</option>
+                                                    <?php } else if ($patient['bilirubin_total_grade'] == "2") { ?>
+                                                        <option value="<?= $patient['bilirubin_total_grade'] ?>">Two</option>
+                                                    <?php } elseif ($patient['bilirubin_total_grade'] == "3") { ?>
+                                                        <option value="<?= $patient['bilirubin_total_grade'] ?>">Three</option>
+                                                    <?php } else if ($patient['bilirubin_total_grade'] == "4") { ?>
+                                                        <option value="<?= $patient['bilirubin_total_grade'] ?>">Four</option>
+                                                    <?php } else { ?>
+                                                        <option value="">Select</option>
+                                                    <?php } ?>
+                                                    <option value="0">Zero</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                    <option value="4">Four</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>Grade</label>
-                                            <select name="liver_ptt_grade" id="liver_ptt_grade" style="width: 100%;">
-                                                <?php if ($patient['liver_ptt_grade'] == "0") { ?>
-                                                    <option value="<?= $patient['liver_ptt_grade'] ?>">Zero</option>
-                                                <?php } elseif ($patient['liver_ptt_grade'] == "1") { ?>
-                                                    <option value="<?= $patient['liver_ptt_grade'] ?>">One</option>
-                                                <?php } else if ($patient['liver_ptt_grade'] == "2") { ?>
-                                                    <option value="<?= $patient['liver_ptt_grade'] ?>">Two</option>
-                                                <?php } elseif ($patient['liver_ptt_grade'] == "3") { ?>
-                                                    <option value="<?= $patient['liver_ptt_grade'] ?>">Three</option>
-                                                <?php } else if ($patient['liver_ptt_grade'] == "4") { ?>
-                                                    <option value="<?= $patient['liver_ptt_grade'] ?>">Four</option>
-                                                <?php } else { ?>
-                                                    <option value="">Select</option>
-                                                <?php } ?>
-                                                <option value="0">Zero</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                                <option value="4">Four</option>
-                                            </select>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Bilirubin direct</label>
+                                                <input value="<?= $patient['liver_bilirubin_direct'] ?>" type="text" name="liver_bilirubin_direct" id="liver_bilirubin_direct" />
+                                                <SPan>XXX ( grams/L )</SPan>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Grade</label>
+                                                <select name="bilirubin_direct_grade" id="bilirubin_direct_grade" style="width: 100%;">
+                                                    <?php if ($patient['bilirubin_direct_grade'] == "0") { ?>
+                                                        <option value="<?= $patient['bilirubin_direct_grade'] ?>">Zero</option>
+                                                    <?php } elseif ($patient['bilirubin_direct_grade'] == "1") { ?>
+                                                        <option value="<?= $patient['bilirubin_direct_grade'] ?>">One</option>
+                                                    <?php } else if ($patient['bilirubin_direct_grade'] == "2") { ?>
+                                                        <option value="<?= $patient['bilirubin_direct_grade'] ?>">Two</option>
+                                                    <?php } elseif ($patient['bilirubin_direct_grade'] == "3") { ?>
+                                                        <option value="<?= $patient['bilirubin_direct_grade'] ?>">Three</option>
+                                                    <?php } else if ($patient['bilirubin_direct_grade'] == "4") { ?>
+                                                        <option value="<?= $patient['bilirubin_direct_grade'] ?>">Four</option>
+                                                    <?php } else { ?>
+                                                        <option value="">Select</option>
+                                                    <?php } ?>
+                                                    <option value="0">Zero</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                    <option value="4">Four</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>RBG</label>
+                                                <input value="<?= $patient['rbg'] ?>" type="text" name="rbg" id="rbg" />
+                                                <SPan>XX ( mg/dl )</SPan>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Grade</label>
+                                                <select name="rbg_grade" id="rbg_grade" style="width: 100%;">
+                                                    <?php if ($patient['rbg_grade'] == "0") { ?>
+                                                        <option value="<?= $patient['rbg_grade'] ?>">Zero</option>
+                                                    <?php } elseif ($patient['rbg_grade'] == "1") { ?>
+                                                        <option value="<?= $patient['rbg_grade'] ?>">One</option>
+                                                    <?php } else if ($patient['rbg_grade'] == "2") { ?>
+                                                        <option value="<?= $patient['rbg_grade'] ?>">Two</option>
+                                                    <?php } elseif ($patient['rbg_grade'] == "3") { ?>
+                                                        <option value="<?= $patient['rbg_grade'] ?>">Three</option>
+                                                    <?php } else if ($patient['rbg_grade'] == "4") { ?>
+                                                        <option value="<?= $patient['rbg_grade'] ?>">Four</option>
+                                                    <?php } else { ?>
+                                                        <option value="">Select</option>
+                                                    <?php } ?>
+                                                    <option value="0">Zero</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                    <option value="4">Four</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>INR</label>
-                                            <input value="<?= $patient['liver_inr'] ?>" type="text" name="liver_inr" id="liver_inr" />
-                                            <SPan>XXX ( units/L )</SPan>
+                                <div class="head clearfix">
+                                    <div class="isw-ok"></div>
+                                    <h1>Full blood count</h1>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>AHemoglobin levels (Hb)</label>
+                                                <input value="<?= $patient['hb'] ?>" type="text" name="hb" id="hb" />
+                                                <SPan>XX.X ( mg/dl )</SPan>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Grade</label>
+                                                <select name="hb_grade" id="hb_grade" style="width: 100%;">
+                                                    <?php if ($patient['hb_grade'] == "0") { ?>
+                                                        <option value="<?= $patient['hb_grade'] ?>">Zero</option>
+                                                    <?php } elseif ($patient['hb_grade'] == "1") { ?>
+                                                        <option value="<?= $patient['hb_grade'] ?>">One</option>
+                                                    <?php } else if ($patient['hb_grade'] == "2") { ?>
+                                                        <option value="<?= $patient['hb_grade'] ?>">Two</option>
+                                                    <?php } elseif ($patient['hb_grade'] == "3") { ?>
+                                                        <option value="<?= $patient['hb_grade'] ?>">Three</option>
+                                                    <?php } else if ($patient['hb_grade'] == "4") { ?>
+                                                        <option value="<?= $patient['hb_grade'] ?>">Four</option>
+                                                    <?php } else { ?>
+                                                        <option value="">Select</option>
+                                                    <?php } ?>
+                                                    <option value="0">Zero</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                    <option value="4">Four</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Hematocrit levels (Hct)</label>
+                                                <input value="<?= $patient['hct'] ?>" type="text" name="hct" id="hct" />
+                                                <SPan>XX ( % )</SPan>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Red blood cell count (RBC)</label>
+                                                <input value="<?= $patient['rbc'] ?>" type="text" name="rbc" id="rbc" />
+                                                <SPan>XXXXXXX ( celss/microliter )</SPan>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>Grade</label>
-                                            <select name="liver_inr_grade" id="liver_inr_grade" style="width: 100%;">
-                                                <?php if ($patient['liver_inr_grade'] == "0") { ?>
-                                                    <option value="<?= $patient['liver_inr_grade'] ?>">Zero</option>
-                                                <?php } elseif ($patient['liver_inr_grade'] == "1") { ?>
-                                                    <option value="<?= $patient['liver_inr_grade'] ?>">One</option>
-                                                <?php } else if ($patient['liver_inr_grade'] == "2") { ?>
-                                                    <option value="<?= $patient['liver_inr_grade'] ?>">Two</option>
-                                                <?php } elseif ($patient['liver_inr_grade'] == "3") { ?>
-                                                    <option value="<?= $patient['liver_inr_grade'] ?>">Three</option>
-                                                <?php } else if ($patient['liver_inr_grade'] == "4") { ?>
-                                                    <option value="<?= $patient['liver_inr_grade'] ?>">Four</option>
-                                                <?php } else { ?>
-                                                    <option value="">Select</option>
-                                                <?php } ?>
-                                                <option value="0">Zero</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                                <option value="4">Four</option>
-                                            </select>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>White blood cell count (WBC)</label>
+                                                <input value="<?= $patient['wbc'] ?>" type="text" name="wbc" id="wbc" />
+                                                <SPan>XXXXXXX ( celss/microliter )</SPan>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>GGT levels</label>
-                                            <input value="<?= $patient['liver_ggt'] ?>" type="text" name="liver_ggt" id="liver_ggt" />
-                                            <SPan>XXX ( units/L )</SPan>
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Grade</label>
+                                                <select name="wbc_grade" id="wbc_grade" style="width: 100%;">
+                                                    <?php if ($patient['wbc_grade'] == "0") { ?>
+                                                        <option value="<?= $patient['wbc_grade'] ?>">Zero</option>
+                                                    <?php } elseif ($patient['wbc_grade'] == "1") { ?>
+                                                        <option value="<?= $patient['wbc_grade'] ?>">One</option>
+                                                    <?php } else if ($patient['wbc_grade'] == "2") { ?>
+                                                        <option value="<?= $patient['wbc_grade'] ?>">Two</option>
+                                                    <?php } elseif ($patient['wbc_grade'] == "3") { ?>
+                                                        <option value="<?= $patient['wbc_grade'] ?>">Three</option>
+                                                    <?php } else if ($patient['wbc_grade'] == "4") { ?>
+                                                        <option value="<?= $patient['wbc_grade'] ?>">Four</option>
+                                                    <?php } else { ?>
+                                                        <option value="">Select</option>
+                                                    <?php } ?>
+                                                    <option value="0">Zero</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                    <option value="4">Four</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>Serum albumin levels</label>
-                                            <input value="<?= $patient['liver_albumin'] ?>" type="text" name="liver_albumin" id="liver_albumin" />
-                                            <SPan>XXX ( grams/L )</SPan>
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>ABS Lymphocytes</label>
+                                                <input value="<?= $patient['abs_lymphocytes'] ?>" type="text" name="abs_lymphocytes" id="abs_lymphocytes" />
+                                                <SPan>XXXXX</SPan>
+                                            </div>
+
                                         </div>
                                     </div>
-                                </div>
 
-
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>Bilirubin total</label>
-                                            <input value="<?= $patient['liver_bilirubin_total'] ?>" type="text" name="liver_bilirubin_total" id="liver_bilirubin_total" />
-                                            <SPan>XXX ( grams/L )</SPan>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>Grade</label>
-                                            <select name="bilirubin_total_grade" id="bilirubin_total_grade" style="width: 100%;">
-                                                <?php if ($patient['bilirubin_total_grade'] == "0") { ?>
-                                                    <option value="<?= $patient['bilirubin_total_grade'] ?>">Zero</option>
-                                                <?php } elseif ($patient['bilirubin_total_grade'] == "1") { ?>
-                                                    <option value="<?= $patient['bilirubin_total_grade'] ?>">One</option>
-                                                <?php } else if ($patient['bilirubin_total_grade'] == "2") { ?>
-                                                    <option value="<?= $patient['bilirubin_total_grade'] ?>">Two</option>
-                                                <?php } elseif ($patient['bilirubin_total_grade'] == "3") { ?>
-                                                    <option value="<?= $patient['bilirubin_total_grade'] ?>">Three</option>
-                                                <?php } else if ($patient['bilirubin_total_grade'] == "4") { ?>
-                                                    <option value="<?= $patient['bilirubin_total_grade'] ?>">Four</option>
-                                                <?php } else { ?>
-                                                    <option value="">Select</option>
-                                                <?php } ?>
-                                                <option value="0">Zero</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                                <option value="4">Four</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>Bilirubin direct</label>
-                                            <input value="<?= $patient['liver_bilirubin_direct'] ?>" type="text" name="liver_bilirubin_direct" id="liver_bilirubin_direct" />
-                                            <SPan>XXX ( grams/L )</SPan>
+                                    <div class="col-sm-3">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Grade</label>
+                                                <select name="abs_lymphocytes_grade" id="abs_lymphocytes_grade" style="width: 100%;">
+                                                    <?php if ($patient['abs_lymphocytes_grade'] == "0") { ?>
+                                                        <option value="<?= $patient['abs_lymphocytes_grade'] ?>">Zero</option>
+                                                    <?php } elseif ($patient['abs_lymphocytes_grade'] == "1") { ?>
+                                                        <option value="<?= $patient['abs_lymphocytes_grade'] ?>">One</option>
+                                                    <?php } else if ($patient['abs_lymphocytes_grade'] == "2") { ?>
+                                                        <option value="<?= $patient['abs_lymphocytes_grade'] ?>">Two</option>
+                                                    <?php } elseif ($patient['abs_lymphocytes_grade'] == "3") { ?>
+                                                        <option value="<?= $patient['abs_lymphocytes_grade'] ?>">Three</option>
+                                                    <?php } else if ($patient['abs_lymphocytes_grade'] == "4") { ?>
+                                                        <option value="<?= $patient['abs_lymphocytes_grade'] ?>">Four</option>
+                                                    <?php } else { ?>
+                                                        <option value="">Select</option>
+                                                    <?php } ?>
+                                                    <option value="0">Zero</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                    <option value="4">Four</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>Grade</label>
-                                            <select name="bilirubin_direct_grade" id="bilirubin_direct_grade" style="width: 100%;">
-                                                <?php if ($patient['bilirubin_direct_grade'] == "0") { ?>
-                                                    <option value="<?= $patient['bilirubin_direct_grade'] ?>">Zero</option>
-                                                <?php } elseif ($patient['bilirubin_direct_grade'] == "1") { ?>
-                                                    <option value="<?= $patient['bilirubin_direct_grade'] ?>">One</option>
-                                                <?php } else if ($patient['bilirubin_direct_grade'] == "2") { ?>
-                                                    <option value="<?= $patient['bilirubin_direct_grade'] ?>">Two</option>
-                                                <?php } elseif ($patient['bilirubin_direct_grade'] == "3") { ?>
-                                                    <option value="<?= $patient['bilirubin_direct_grade'] ?>">Three</option>
-                                                <?php } else if ($patient['bilirubin_direct_grade'] == "4") { ?>
-                                                    <option value="<?= $patient['bilirubin_direct_grade'] ?>">Four</option>
-                                                <?php } else { ?>
-                                                    <option value="">Select</option>
-                                                <?php } ?>
-                                                <option value="0">Zero</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                                <option value="4">Four</option>
-                                            </select>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Platelet count (Plt)</label>
+                                                <input value="<?= $patient['plt'] ?>" type="text" name="plt" id="plt" />
+                                                <SPan>XXXXXX ( celss/microliter )</SPan>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Grade</label>
+                                                <select name="plt_grade" id="plt_grade" style="width: 100%;">
+                                                    <?php if ($patient['plt_grade'] == "0") { ?>
+                                                        <option value="<?= $patient['plt_grade'] ?>">Zero</option>
+                                                    <?php } elseif ($patient['plt_grade'] == "1") { ?>
+                                                        <option value="<?= $patient['plt_grade'] ?>">One</option>
+                                                    <?php } else if ($patient['plt_grade'] == "2") { ?>
+                                                        <option value="<?= $patient['plt_grade'] ?>">Two</option>
+                                                    <?php } elseif ($patient['plt_grade'] == "3") { ?>
+                                                        <option value="<?= $patient['plt_grade'] ?>">Three</option>
+                                                    <?php } else if ($patient['plt_grade'] == "4") { ?>
+                                                        <option value="<?= $patient['plt_grade'] ?>">Four</option>
+                                                    <?php } else { ?>
+                                                        <option value="">Select</option>
+                                                    <?php } ?>
+                                                    <option value="0">Zero</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                    <option value="4">Four</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>RBG</label>
-                                            <input value="<?= $patient['rbg'] ?>" type="text" name="rbg" id="rbg" />
-                                            <SPan>XX ( mg/dl )</SPan>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>9. Cancer antigen 15-3</label>
+                                                <input value="<?= $patient['cancer'] ?>" type="text" name="cancer" id="cancer" />
+                                                <SPan>XX ( U/ml )</SPan>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <?php if ($_GET['vcode'] == 'D7' || $_GET['vcode'] == 'D90') { ?>
+
+
+                                        <div class="col-sm-6">
+                                            <div class="row-form clearfix">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>9. PSA (Prostate specific antigen)</label>
+                                                    <input value="<?= $patient['prostate'] ?>" type="text" name="prostate" id="prostate" />
+                                                    <SPan>XX ( ng/ml )</SPan>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    <?php } ?>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-sm-6">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>9. Chest X-ray</label>
+                                                <select name="chest_xray" id="chest_xray" style="width: 100%;">
+                                                    <?php if ($patient['chest_xray'] == "1") { ?>
+                                                        <option value="<?= $patient['chest_xray'] ?>">Normal</option>
+                                                    <?php } elseif ($patient['chest_xray'] == "2") { ?>
+                                                        <option value="<?= $patient['chest_xray'] ?>">Abnormal</option>
+                                                    <?php } else { ?>
+                                                        <option value="">Select</option>
+                                                    <?php } ?>
+                                                    <option value="1">Normal</option>
+                                                    <option value="2">Abnormal</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6" id="chest_specify">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>9. Specify (Report from Radiologist)</label>
+                                                <input value="<?= $patient['chest_specify'] ?>" type="text" name="chest_specify" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>Grade</label>
-                                            <select name="rbg_grade" id="rbg_grade" style="width: 100%;">
-                                                <?php if ($patient['rbg_grade'] == "0") { ?>
-                                                    <option value="<?= $patient['rbg_grade'] ?>">Zero</option>
-                                                <?php } elseif ($patient['rbg_grade'] == "1") { ?>
-                                                    <option value="<?= $patient['rbg_grade'] ?>">One</option>
-                                                <?php } else if ($patient['rbg_grade'] == "2") { ?>
-                                                    <option value="<?= $patient['rbg_grade'] ?>">Two</option>
-                                                <?php } elseif ($patient['rbg_grade'] == "3") { ?>
-                                                    <option value="<?= $patient['rbg_grade'] ?>">Three</option>
-                                                <?php } else if ($patient['rbg_grade'] == "4") { ?>
-                                                    <option value="<?= $patient['rbg_grade'] ?>">Four</option>
-                                                <?php } else { ?>
-                                                    <option value="">Select</option>
-                                                <?php } ?>
-                                                <option value="0">Zero</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                                <option value="4">Four</option>
-                                            </select>
+
+
+                                <div class="row">
+
+                                    <div class="col-sm-6">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>10. CT-Scan chest and abdomen report</label>
+                                                <select name="ct_chest" style="width: 100%;" required>
+                                                    <?php if ($patient['ct_chest'] == "1") { ?>
+                                                        <option value="<?= $patient['ct_chest'] ?>">Normal</option>
+                                                    <?php } elseif ($patient['ct_chest'] == "2") { ?>
+                                                        <option value="<?= $patient['ct_chest'] ?>">Abnormal</option>
+                                                    <?php } else { ?>
+                                                        <option value="">Select</option>
+                                                    <?php } ?>
+                                                    <option value="1">Normal</option>
+                                                    <option value="2">Abnormal</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
 
-                            <div class="head clearfix">
-                                <div class="isw-ok"></div>
-                                <h1>Full blood count</h1>
-                            </div>
-
-
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>AHemoglobin levels (Hb)</label>
-                                            <input value="<?= $patient['hb'] ?>" type="text" name="hb" id="hb" />
-                                            <SPan>XX.X ( mg/dl )</SPan>
+                                    <div class="col-sm-6" id="ct_chest_specify">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>10. Specify (Report from Radiologist)</label>
+                                                <input value="<?= $patient['ct_chest_specify'] ?>" type="text" name="ct_chest_specify" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>Grade</label>
-                                            <select name="hb_grade" id="hb_grade" style="width: 100%;">
-                                                <?php if ($patient['hb_grade'] == "0") { ?>
-                                                    <option value="<?= $patient['hb_grade'] ?>">Zero</option>
-                                                <?php } elseif ($patient['hb_grade'] == "1") { ?>
-                                                    <option value="<?= $patient['hb_grade'] ?>">One</option>
-                                                <?php } else if ($patient['hb_grade'] == "2") { ?>
-                                                    <option value="<?= $patient['hb_grade'] ?>">Two</option>
-                                                <?php } elseif ($patient['hb_grade'] == "3") { ?>
-                                                    <option value="<?= $patient['hb_grade'] ?>">Three</option>
-                                                <?php } else if ($patient['hb_grade'] == "4") { ?>
-                                                    <option value="<?= $patient['hb_grade'] ?>">Four</option>
-                                                <?php } else { ?>
-                                                    <option value="">Select</option>
-                                                <?php } ?>
-                                                <option value="0">Zero</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                                <option value="4">Four</option>
-                                            </select>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>11. Abdominal Ultrasound report</label>
+                                                <select name="ultrasound" id="ultrasound" style="width: 100%;">
+                                                    <?php if ($patient['ultrasound'] == "1") { ?>
+                                                        <option value="<?= $patient['ultrasound'] ?>">Normal</option>
+                                                    <?php } elseif ($patient['ultrasound'] == "2") { ?>
+                                                        <option value="<?= $patient['ultrasound'] ?>">Abnormal</option>
+                                                    <?php } else { ?>
+                                                        <option value="">Select</option>
+                                                    <?php } ?>
+                                                    <option value="1">Normal</option>
+                                                    <option value="2">Abnormal</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6" id="ultrasound_specify">
+                                        <div class="row-form clearfix">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>11. Specify (Report from Radiologist)</label>
+                                                <input value="<?= $patient['ultrasound_specify'] ?>" type="text" name="ultrasound_specify" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>Hematocrit levels (Hct)</label>
-                                            <input value="<?= $patient['hct'] ?>" type="text" name="hct" id="hct" />
-                                            <SPan>XX ( % )</SPan>
-                                        </div>
-                                    </div>
+                                <div class="row-form clearfix" id="crf4_cmpltd_date">
+                                    <div class="col-md-3">Date of Completion</div>
+                                    <input value="<?= $patient['crf4_cmpltd_date'] ?>" type="text" name="crf4_cmpltd_date" id="crf1_cmpltd_date" />
+                                    <span>example : 2023-02-24</span>
                                 </div>
 
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>Red blood cell count (RBC)</label>
-                                            <input value="<?= $patient['rbc'] ?>" type="text" name="rbc" id="rbc" />
-                                            <SPan>XXXXXXX ( celss/microliter )</SPan>
-                                        </div>
-                                    </div>
+                                <div class="footer tar">
+                                    <input type="hidden" name="id" value="<?= $patient['id'] ?>">
+                                    <input type="submit" name="update_crf4" value="Submit" class="btn btn-default">
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>White blood cell count (WBC)</label>
-                                            <input value="<?= $patient['wbc'] ?>" type="text" name="wbc" id="wbc" />
-                                            <SPan>XXXXXXX ( celss/microliter )</SPan>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>Grade</label>
-                                            <select name="wbc_grade" id="wbc_grade" style="width: 100%;">
-                                                <?php if ($patient['wbc_grade'] == "0") { ?>
-                                                    <option value="<?= $patient['wbc_grade'] ?>">Zero</option>
-                                                <?php } elseif ($patient['wbc_grade'] == "1") { ?>
-                                                    <option value="<?= $patient['wbc_grade'] ?>">One</option>
-                                                <?php } else if ($patient['wbc_grade'] == "2") { ?>
-                                                    <option value="<?= $patient['wbc_grade'] ?>">Two</option>
-                                                <?php } elseif ($patient['wbc_grade'] == "3") { ?>
-                                                    <option value="<?= $patient['wbc_grade'] ?>">Three</option>
-                                                <?php } else if ($patient['wbc_grade'] == "4") { ?>
-                                                    <option value="<?= $patient['wbc_grade'] ?>">Four</option>
-                                                <?php } else { ?>
-                                                    <option value="">Select</option>
-                                                <?php } ?>
-                                                <option value="0">Zero</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                                <option value="4">Four</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>ABS Lymphocytes</label>
-                                            <input value="<?= $patient['abs_lymphocytes'] ?>" type="text" name="abs_lymphocytes" id="abs_lymphocytes" />
-                                            <SPan>XXXXX</SPan>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-3">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>Grade</label>
-                                            <select name="abs_lymphocytes_grade" id="abs_lymphocytes_grade" style="width: 100%;">
-                                                <?php if ($patient['abs_lymphocytes_grade'] == "0") { ?>
-                                                    <option value="<?= $patient['abs_lymphocytes_grade'] ?>">Zero</option>
-                                                <?php } elseif ($patient['abs_lymphocytes_grade'] == "1") { ?>
-                                                    <option value="<?= $patient['abs_lymphocytes_grade'] ?>">One</option>
-                                                <?php } else if ($patient['abs_lymphocytes_grade'] == "2") { ?>
-                                                    <option value="<?= $patient['abs_lymphocytes_grade'] ?>">Two</option>
-                                                <?php } elseif ($patient['abs_lymphocytes_grade'] == "3") { ?>
-                                                    <option value="<?= $patient['abs_lymphocytes_grade'] ?>">Three</option>
-                                                <?php } else if ($patient['abs_lymphocytes_grade'] == "4") { ?>
-                                                    <option value="<?= $patient['abs_lymphocytes_grade'] ?>">Four</option>
-                                                <?php } else { ?>
-                                                    <option value="">Select</option>
-                                                <?php } ?>
-                                                <option value="0">Zero</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                                <option value="4">Four</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>Platelet count (Plt)</label>
-                                            <input value="<?= $patient['plt'] ?>" type="text" name="plt" id="plt" />
-                                            <SPan>XXXXXX ( celss/microliter )</SPan>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>Grade</label>
-                                            <select name="plt_grade" id="plt_grade" style="width: 100%;">
-                                                <?php if ($patient['plt_grade'] == "0") { ?>
-                                                    <option value="<?= $patient['plt_grade'] ?>">Zero</option>
-                                                <?php } elseif ($patient['plt_grade'] == "1") { ?>
-                                                    <option value="<?= $patient['plt_grade'] ?>">One</option>
-                                                <?php } else if ($patient['plt_grade'] == "2") { ?>
-                                                    <option value="<?= $patient['plt_grade'] ?>">Two</option>
-                                                <?php } elseif ($patient['plt_grade'] == "3") { ?>
-                                                    <option value="<?= $patient['plt_grade'] ?>">Three</option>
-                                                <?php } else if ($patient['plt_grade'] == "4") { ?>
-                                                    <option value="<?= $patient['plt_grade'] ?>">Four</option>
-                                                <?php } else { ?>
-                                                    <option value="">Select</option>
-                                                <?php } ?>
-                                                <option value="0">Zero</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                                <option value="4">Four</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>9. Cancer antigen 15-3</label>
-                                            <input value="<?= $patient['cancer'] ?>" type="text" name="cancer" id="cancer" />
-                                            <SPan>XX ( U/ml )</SPan>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <?php if ($_GET['vcode'] == 'D7' || $_GET['vcode'] == 'D90') { ?>
-
-
-                                <div class="col-sm-6">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>9. PSA (Prostate specific antigen)</label>
-                                            <input value="<?= $patient['prostate'] ?>" type="text" name="prostate" id="prostate" />
-                                            <SPan>XX ( ng/ml )</SPan>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <?php } ?>
-                            </div>
-
-                            <div class="row">
-
-                                <div class="col-sm-6">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>9. Chest X-ray</label>
-                                            <select name="chest_xray" id="chest_xray" style="width: 100%;">
-                                                <?php if ($patient['chest_xray'] == "1") { ?>
-                                                    <option value="<?= $patient['chest_xray'] ?>">Normal</option>
-                                                <?php } elseif ($patient['chest_xray'] == "2") { ?>
-                                                    <option value="<?= $patient['chest_xray'] ?>">Abnormal</option>
-                                                <?php } else { ?>
-                                                    <option value="">Select</option>
-                                                <?php } ?>
-                                                <option value="1">Normal</option>
-                                                <option value="2">Abnormal</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6" id="chest_specify">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>9. Specify (Report from Radiologist)</label>
-                                            <input value="<?= $patient['chest_specify'] ?>" type="text" name="chest_specify" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="row">
-
-                                <div class="col-sm-6">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>10. CT-Scan chest and abdomen report</label>
-                                            <select name="ct_chest" style="width: 100%;" required>
-                                                <?php if ($patient['ct_chest'] == "1") { ?>
-                                                    <option value="<?= $patient['ct_chest'] ?>">Normal</option>
-                                                <?php } elseif ($patient['ct_chest'] == "2") { ?>
-                                                    <option value="<?= $patient['ct_chest'] ?>">Abnormal</option>
-                                                <?php } else { ?>
-                                                    <option value="">Select</option>
-                                                <?php } ?>
-                                                <option value="1">Normal</option>
-                                                <option value="2">Abnormal</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6" id="ct_chest_specify">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>10. Specify (Report from Radiologist)</label>
-                                            <input value="<?= $patient['ct_chest_specify'] ?>" type="text" name="ct_chest_specify" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>11. Abdominal Ultrasound report</label>
-                                            <select name="ultrasound" id="ultrasound" style="width: 100%;">
-                                                <?php if ($patient['ultrasound'] == "1") { ?>
-                                                    <option value="<?= $patient['ultrasound'] ?>">Normal</option>
-                                                <?php } elseif ($patient['ultrasound'] == "2") { ?>
-                                                    <option value="<?= $patient['ultrasound'] ?>">Abnormal</option>
-                                                <?php } else { ?>
-                                                    <option value="">Select</option>
-                                                <?php } ?>
-                                                <option value="1">Normal</option>
-                                                <option value="2">Abnormal</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6" id="ultrasound_specify">
-                                    <div class="row-form clearfix">
-                                        <!-- select -->
-                                        <div class="form-group">
-                                            <label>11. Specify (Report from Radiologist)</label>
-                                            <input value="<?= $patient['ultrasound_specify'] ?>" type="text" name="ultrasound_specify" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row-form clearfix" id="crf4_cmpltd_date">
-                                <div class="col-md-3">Date of Completion</div>
-                                <input value="<?= $patient['crf4_cmpltd_date'] ?>" type="text" name="crf4_cmpltd_date" id="crf1_cmpltd_date" />
-                                <span>example : 2023-02-24</span>
-                            </div>
-
-                            <div class="footer tar">
-                                <input type="hidden" name="id" value="<?= $patient['id'] ?>">
-                                <input type="submit" name="update_crf4" value="Submit" class="btn btn-default">
-                            </div>
                         </form>
                     </div>
                 </div>

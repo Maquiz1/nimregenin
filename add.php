@@ -720,6 +720,11 @@ if ($user->isLoggedIn()) {
                         'created_on' => date('Y-m-d'),
                         'site_id' => $user->data()->site_id,
                     ));
+
+                    $user->updateRecord('clients', array(
+                        'end_study' => 1,
+                    ), $_GET['cid']);
+
                     $successMessage = 'CRF6 added Successful';
                     Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
                 } catch (Exception $e) {

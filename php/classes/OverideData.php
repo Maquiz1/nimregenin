@@ -176,6 +176,12 @@ class OverideData{
         return $result;
     }
 
+    public function getDataLimit($table,$page,$numRec){
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE 1 limit $page,$numRec");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     function tableHeader($table){
         $query = $this->_pdo->query("DESCRIBE $table");
         $result = $query->fetchAll(PDO::FETCH_COLUMN);
