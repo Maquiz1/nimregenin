@@ -571,9 +571,12 @@ if ($user->isLoggedIn()) {
                         'study_id' => $_GET['sid'],
                         'sample_date' => Input::get('sample_date'),
                         'renal_urea' => Input::get('renal_urea'),
+                        'renal_urea_units' => Input::get('renal_urea_units'),
                         'renal_creatinine' => Input::get('renal_creatinine'),
+                        'renal_creatinine_units' => Input::get('renal_creatinine_units'),
                         'renal_creatinine_grade' => Input::get('renal_creatinine_grade'),
                         'renal_egfr' => Input::get('renal_egfr'),
+                        'renal_egfr_units' => Input::get('renal_egfr_units'),
                         'renal_egfr_grade' => Input::get('renal_egfr_grade'),
                         'liver_ast' => Input::get('liver_ast'),
                         'liver_ast_grade' => Input::get('liver_ast_grade'),
@@ -591,10 +594,13 @@ if ($user->isLoggedIn()) {
                         'liver_albumin' => Input::get('liver_albumin'),
                         'liver_albumin_grade' => Input::get('liver_albumin_grade'),
                         'liver_bilirubin_total' => Input::get('liver_bilirubin_total'),
+                        'liver_bilirubin_total_units' => Input::get('liver_bilirubin_total_units'),
                         'bilirubin_total_grade' => Input::get('bilirubin_total_grade'),
                         'liver_bilirubin_direct' => Input::get('liver_bilirubin_direct'),
+                        'liver_bilirubin_direct_units' => Input::get('liver_bilirubin_direct_units'),
                         'bilirubin_direct_grade' => Input::get('bilirubin_direct_grade'),
                         'rbg' => Input::get('rbg'),
+                        'rbg_units' => Input::get('rbg_units'),
                         'rbg_grade' => Input::get('rbg_grade'),
                         'ldh' => Input::get('ldh'),
                         'crp' => Input::get('crp'),
@@ -3216,7 +3222,7 @@ if ($user->isLoggedIn()) {
                                                         <option value="1"> mg/dl </option>
                                                         <option value="2"> mmol/l </option>
                                                     </select>
-                                                    <SPan>XX.X</SPan>
+                                                    <SPan>XX.X ( mg/dl ) </SPan>
                                                 </div>
                                             </div>
                                         </div>
@@ -3235,7 +3241,8 @@ if ($user->isLoggedIn()) {
                                                         <option value="1"> mg/dl </option>
                                                         <option value="2"> mmol/l </option>
                                                     </select>
-                                                    <SPan>X.X (> 1.1 grade 0)(1.1 to 1.3 grade 1)(>1.3 to 1.8 grade 2)(> 1.8 to < 3.5 grade 3)(>= 3.5 grade 4)</SPan>
+                                                    <SPan>X.X ( mg/dl )</SPan>
+                                                    <SPan>(> 1.1 grade 0)(1.1 to 1.3 grade 1)(>1.3 to 1.8 grade 2)(> 1.8 to < 3.5 grade 3)(>= 3.5 grade 4)</SPan>
 
                                                 </div>
                                             </div>
@@ -3266,10 +3273,10 @@ if ($user->isLoggedIn()) {
                                                     <input value="" type="text" name="renal_egfr" id="renal_egfr" />
                                                     <select name="renal_egfr_units">
                                                         <option value="">Select</option>
-                                                        <option value="1"> mg/dl </option>
-                                                        <option value="2"> mmol/l </option>
+                                                        <option value="1"> ml/min </option>
                                                     </select>
-                                                    <SPan>XXX.X ( ml/min ) (>= 90 grade 0)(< 90 to 60 grade 2)(< 60 to 30 grade 3)(< 30 grade 4)</SPan>
+                                                    <SPan>XXX.X ( ml/min ) </SPan>
+                                                    <SPan>(>= 90 grade 0)(< 90 to 60 grade 2)(< 60 to 30 grade 3)(< 30 grade 4)</SPan>
                                                 </div>
                                             </div>
                                         </div>
@@ -3487,7 +3494,8 @@ if ($user->isLoggedIn()) {
                                                     <select name="liver_bilirubin_total_units">
                                                         <option value="">Select</option>
                                                         <option value="1"> micromol/l </option>
-                                                        <option value="2"> mg/dl </option>
+                                                        <option value="2"> mg/dl </option>/
+                                                        <option value="3"> grams/L  </option>
                                                     </select>
                                                     <SPan>
                                                         XXX ( grams/L )
@@ -3525,9 +3533,14 @@ if ($user->isLoggedIn()) {
                                                         <option value="">Select</option>
                                                         <option value="1"> micromol/l </option>
                                                         <option value="2"> mg/dl </option>
+                                                        <option value="3"> grams/L  </option>
                                                     </select>
                                                     <SPan>XXX 
-                                                        ( grams/L )(any value without hapatotoxicity symptoms = grade 0)(any value with signs and symptoms of heapatotoxicity = grade 3)(1any value with signs and symptoms of liver failure = grade 4)</SPan>
+                                                        ( grams/L ) <br /><br />
+                                                       - (any value without hapatotoxicity symptoms = grade 0) <br /><br />
+                                                       - (any value with signs and symptoms of heapatotoxicity = grade 3) <br /><br />
+                                                       - (1any value with signs and symptoms of liver failure = grade 4)
+                                                    </SPan>
                                                 </div>
                                             </div>
                                         </div>
@@ -3558,8 +3571,13 @@ if ($user->isLoggedIn()) {
                                                     <select name="rbg_units">
                                                         <option value="">Select</option>
                                                         <option value="1"> mmol/l </option>
+                                                        <option value="2"> mg/dl </option> 
                                                     </select>
-                                                    <SPan>XX ( mg/dl ) (< 6.44 grade 0)(6.44 to < 8.89 grade 1)(8.89 to < 13.89 grade 2)(> 13.89 to < 27.75 grade 3)(>= 27.75 grade 4)</SPan>
+                                                    <SPan>XX ( mg/dl ) <br /><br />
+                                                    - (< 6.44 grade 0)(6.44 to < 8.89 grade 1) <br /><br />
+                                                    - (8.89 to < 13.89 grade 2) <br /><br /> 
+                                                    - (> 13.89 to < 27.75 grade 3) <br /><br /> 
+                                                    - (>= 27.75 grade 4)</SPan>
                                                 </div>
                                             </div>
                                         </div>
