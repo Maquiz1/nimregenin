@@ -1977,7 +1977,7 @@ if ($user->isLoggedIn()) {
                                                     <span id="bmi"></span>&nbsp;&nbsp;kg/m2
                                                 </div>
                                             </div>
-                                        </div>                                        
+                                        </div>
                                     </div>
 
 
@@ -3070,38 +3070,38 @@ if ($user->isLoggedIn()) {
 
                                     <?php if (!$_GET['vcode'] == "D0") { ?>
 
-                                    <div class="head clearfix">
-                                        <div class="isw-ok"></div>
-                                        <h1>Drug adherence (To be asked on day 7,14,30,60,90,120) For patients on NIMREGENIN only</h1>
-                                    </div>
+                                        <div class="head clearfix">
+                                            <div class="isw-ok"></div>
+                                            <h1>Drug adherence (To be asked on day 7,14,30,60,90,120) For patients on NIMREGENIN only</h1>
+                                        </div>
 
-                                    <div class="row">
+                                        <div class="row">
 
 
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1. Do you take NIMREGENIN as advised ie daily?:</label>
-                                                    <select name="adherence" id="adherence" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
+                                            <div class="col-sm-6">
+                                                <div class="row-form clearfix">
+                                                    <!-- select -->
+                                                    <div class="form-group">
+                                                        <label>1. Do you take NIMREGENIN as advised ie daily?:</label>
+                                                        <select name="adherence" id="adherence" style="width: 100%;" required>
+                                                            <option value="">Select</option>
+                                                            <option value="1">Yes</option>
+                                                            <option value="2">No</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6" id="adherence_specify">
+                                                <div class="row-form clearfix">
+                                                    <!-- select -->
+                                                    <div class="form-group">
+                                                        <label>1. Specify why:</label>
+                                                        <input value="" type="text" name="adherence_specify" />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="col-sm-6" id="adherence_specify">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1. Specify why:</label>
-                                                    <input value="" type="text" name="adherence_specify" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <?php } ?>
 
 
@@ -3194,8 +3194,8 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Date of Sample Collection</label>
-                                                    <input value="" type="text" name="sample_date" id="sample_date" /> <span>Example: 2023-01-01</span>
-                                                    <SPan>XX.X ( mg/dl )</SPan>
+                                                    <input value="" type="text" name="sample_date" id="sample_date" />
+                                                    <span>Example: 2023-01-01</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -3206,6 +3206,11 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>Serum urea levels</label>
                                                     <input value="" type="text" name="renal_urea" id="renal_urea" />
+                                                    <select name="renal_urea_units">
+                                                        <option value="">Select</option>
+                                                        <option value="1"> mg/dl </option>
+                                                        <option value="2"> mmol/l </option>
+                                                    </select>
                                                     <SPan>XX.X ( mg/dl )</SPan>
                                                 </div>
                                             </div>
@@ -3221,6 +3226,13 @@ if ($user->isLoggedIn()) {
                                                     <label>Serum creatinine levels</label>
                                                     <input value="" type="text" name="renal_creatinine" id="renal_creatinine" />
                                                     <SPan>X.X ( mg/dl )(> 1.1 grade 0)(1.1 to 1.3 grade 1)(>1.3 to 1.8 grade 2)(> 1.8 to < 3.5 grade 3)(>= 3.5 grade 4)</SPan>
+                                                    <SPan>
+                                                        <select name="renal_creatinine_units">
+                                                            <option value="">Select</option>
+                                                            <option value="1"> mg/dl </option>
+                                                            <option value="2"> mmol/l </option>
+                                                        </select>
+                                                    </SPan>
                                                 </div>
                                             </div>
                                         </div>
@@ -3761,7 +3773,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>10. CT-Scan chest and abdomen report</label>
-                                                    <select name="ct_chest" style="width: 100%;">
+                                                    <select name="ct_chest" id="ct_chest" style="width: 100%;">
                                                         <option value="">Select</option>
                                                         <option value="1">Normal</option>
                                                         <option value="2">Abnormal</option>
@@ -4141,7 +4153,8 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>2.a.i Start date</label>
-                                                    <input value="" class="validate[required,custom[date]]" type="text" name="start_date" id="start_date" required /> <span>Example: 2023-01-01</span>
+                                                    <input value="" class="validate[required,custom[date]]" type="text" name="start_date" id="start_date" /> 
+                                                    <span>Example: 2023-01-01</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -4151,7 +4164,8 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>2.a.ii End date:</label>
-                                                    <input value="" class="validate[required,custom[date]]" type="text" name="end_date" id="end_date" required /> <span>Example: 2023-01-01</span>
+                                                    <input value="" class="validate[required,custom[date]]" type="text" name="end_date" id="end_date" />
+                                                     <span>Example: 2023-01-01</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -4165,7 +4179,8 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>2. b.i when was the date of death? </label>
-                                                    <input value="" class="validate[required,custom[date]]" type="text" name="date_death" id="date_death" required /> <span>Example: 2023-01-01</span>
+                                                    <input value="" class="validate[required,custom[date]]" type="text" name="date_death" id="date_death" />
+                                                     <span>Example: 2023-01-01</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -4244,7 +4259,8 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>5. Outcome date</label>
-                                                    <input value="" class="validate[required,custom[date]]" type="text" name="outcome_date" id="outcome_date" required /> <span>Example: 2023-01-01</span>
+                                                    <input value="" class="validate[required,custom[date]]" type="text" name="outcome_date" id="outcome_date" required />
+                                                     <span>Example: 2023-01-01</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -4268,7 +4284,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>7.Responsible Clinician Name</label>
-                                                    <input value="" type="text" name="clinician_name" id="clinician_name" />
+                                                    <input value="" type="text" name="clinician_name" id="clinician_name" required />
                                                 </div>
                                             </div>
                                         </div>
@@ -4278,7 +4294,8 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Date of Completion</label>
-                                                    <input value="" class="validate[required,custom[date]]" type="text" name="crf6_cmpltd_date" id="crf6_cmpltd_date" required /> <span>Example: 2023-01-01</span>
+                                                    <input value="" class="validate[required,custom[date]]" type="text" name="crf6_cmpltd_date" id="crf6_cmpltd_date" required />
+                                                     <span>Example: 2023-01-01</span>
                                                     <span>Example : 2002-08-21</span>
                                                 </div>
                                             </div>
@@ -4536,7 +4553,7 @@ if ($user->isLoggedIn()) {
         <?php } ?>
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
-        }       
+        }
 
 
         $(document).ready(function() {
