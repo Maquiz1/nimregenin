@@ -2164,6 +2164,8 @@ if ($user->isLoggedIn()) {
                                     </thead>
                                     <tbody>
                                         <?php $x = 1;
+                                        print_r($_GET['sid']);
+
                                         foreach ($clients as $client) {
 
                                             $screening1 = $override->getCount('screening', 'client_id', $client['id']);
@@ -3541,18 +3543,18 @@ if ($user->isLoggedIn()) {
                             </div>
                             <div class="pull-right">
                                 <div class="btn-group">
-                                    <a href="info.php?id=3&sid=<?= $_GET['sid'] ?>&page=<?php if (($_GET['page'] - 1) > 0) {
+                                    <a href="info.php?id=3&status=<?= $_GET['sid'] ?>sid=<?= $_GET['sid'] ?>&page=<?php if (($_GET['page'] - 1) > 0) {
                                                                                             echo $_GET['page'] - 1;
                                                                                         } else {
                                                                                             echo 1;
                                                                                         } ?>" class="btn btn-default">
                                         < </a>
                                             <?php for ($i = 1; $i <= $pages; $i++) { ?>
-                                                <a href="info.php?id=3&sid=<?= $_GET['sid'] ?>&page=<?= $i ?>" class="btn btn-default <?php if ($i == $_GET['page']) {
+                                                <a href="info.php?id=3&status=<?= $_GET['sid'] ?>&sid=<?= $_GET['sid'] ?>&page=<?= $i ?>" class="btn btn-default <?php if ($i == $_GET['page']) {
                                                                                                                                             echo 'active';
                                                                                                                                         } ?>"><?= $i ?></a>
                                             <?php } ?>
-                                            <a href="info.php?id=3&sid=<?= $_GET['sid'] ?>&page=<?php if (($_GET['page'] + 1) <= $pages) {
+                                            <a href="info.php?id=3&status=<?= $_GET['sid'] ?>&sid=<?= $_GET['sid'] ?>&page=<?php if (($_GET['page'] + 1) <= $pages) {
                                                                                                     echo $_GET['page'] + 1;
                                                                                                 } else {
                                                                                                     echo $i - 1;
