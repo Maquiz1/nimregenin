@@ -8,7 +8,7 @@ $random = new Random();
 $successMessage = null;
 $pageError = null;
 $errorMessage = null;
-$numRec = 2;
+$numRec = 10;
 if ($user->isLoggedIn()) {
     if (Input::exists('post')) {
         $validate = new validate();

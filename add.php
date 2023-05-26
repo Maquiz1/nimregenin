@@ -567,7 +567,6 @@ if ($user->isLoggedIn()) {
                 'sample_date' => array(
                     'required' => true,
                 ),
-
             ));
             if ($validate->passed()) {
                 try {
@@ -704,41 +703,45 @@ if ($user->isLoggedIn()) {
             ));
             if ($validate->passed()) {
                 try {
-                    $user->createRecord('crf6', array(
-                        'vid' => $_GET["vid"],
-                        'vcode' => $_GET["vcode"],
-                        'study_id' => $_GET['sid'],
-                        'today_date' => Input::get('today_date'),
-                        'terminate_date' => Input::get('terminate_date'),
-                        'completed120days' => Input::get('completed120days'),
-                        'reported_dead' => Input::get('reported_dead'),
-                        'withdrew_consent' => Input::get('withdrew_consent'),
-                        'start_date' => Input::get('start_date'),
-                        'end_date' => Input::get('end_date'),
-                        'date_death' => Input::get('date_death'),
-                        'primary_cause' => Input::get('primary_cause'),
-                        'secondary_cause' => Input::get('secondary_cause'),
-                        'withdrew_reason' => Input::get('withdrew_reason'),
-                        'withdrew_other' => Input::get('withdrew_other'),
-                        'terminated_reason' => Input::get('terminated_reason'),
-                        'outcome' => Input::get('outcome'),
-                        'outcome_date' => Input::get('outcome_date'),
-                        'summary' => Input::get('summary'),
-                        'clinician_name' => Input::get('clinician_name'),
-                        'crf6_cmpltd_date' => Input::get('crf6_cmpltd_date'),
-                        'patient_id' => $_GET['cid'],
-                        'staff_id' => $user->data()->id,
-                        'status' => 1,
-                        'created_on' => date('Y-m-d'),
-                        'site_id' => $user->data()->site_id,
-                    ));
+                    if ((Input::get('completed120days') == 1 && Input::get('reported_dead') == 1 && Input::get('withdrew_consent') == 1) || ((Input::get('completed120days') == 2 && Input::get('reported_dead') == 2 && Input::get('withdrew_consent') == 2))) {
+                        $errorMessage = 'Reason for termination can not all be "NO" and Only one Can be "YES"';
+                    } else {
+                        $user->createRecord('crf6', array(
+                            'vid' => $_GET["vid"],
+                            'vcode' => $_GET["vcode"],
+                            'study_id' => $_GET['sid'],
+                            'today_date' => Input::get('today_date'),
+                            'terminate_date' => Input::get('terminate_date'),
+                            'completed120days' => Input::get('completed120days'),
+                            'reported_dead' => Input::get('reported_dead'),
+                            'withdrew_consent' => Input::get('withdrew_consent'),
+                            'start_date' => Input::get('start_date'),
+                            'end_date' => Input::get('end_date'),
+                            'date_death' => Input::get('date_death'),
+                            'primary_cause' => Input::get('primary_cause'),
+                            'secondary_cause' => Input::get('secondary_cause'),
+                            'withdrew_reason' => Input::get('withdrew_reason'),
+                            'withdrew_other' => Input::get('withdrew_other'),
+                            'terminated_reason' => Input::get('terminated_reason'),
+                            'outcome' => Input::get('outcome'),
+                            'outcome_date' => Input::get('outcome_date'),
+                            'summary' => Input::get('summary'),
+                            'clinician_name' => Input::get('clinician_name'),
+                            'crf6_cmpltd_date' => Input::get('crf6_cmpltd_date'),
+                            'patient_id' => $_GET['cid'],
+                            'staff_id' => $user->data()->id,
+                            'status' => 1,
+                            'created_on' => date('Y-m-d'),
+                            'site_id' => $user->data()->site_id,
+                        ));
 
-                    $user->updateRecord('clients', array(
-                        'end_study' => 1,
-                    ), $_GET['cid']);
+                        $user->updateRecord('clients', array(
+                            'end_study' => 1,
+                        ), $_GET['cid']);
 
-                    $successMessage = 'CRF6 added Successful';
-                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                        $successMessage = 'CRF6 added Successful';
+                        Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                    }
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -3224,7 +3227,7 @@ if ($user->isLoggedIn()) {
                                                     <label>Serum urea levels</label>
                                                     <input value="" type="text" name="renal_urea" id="renal_urea" />
                                                     <select name="renal_urea_units">
-                                                        <option value="">Select</option>
+                                                    <option value="">Select units</option>
                                                         <option value="1"> mg/dl </option>
                                                         <option value="2"> mmol/l </option>
                                                     </select>
@@ -3243,12 +3246,13 @@ if ($user->isLoggedIn()) {
                                                     <label>Serum creatinine levels</label>
                                                     <input value="" type="text" name="renal_creatinine" id="renal_creatinine" />
                                                     <select name="renal_creatinine_units">
-                                                        <option value="">Select</option>
+                                                        <option value="">Select units</option>
                                                         <option value="1"> mg/dl </option>
                                                         <option value="2"> mmol/l </option>
                                                     </select>
-                                                    <SPan>X.X ( mg/dl )</SPan>
-                                                    <SPan>(> 1.1 grade 0)(1.1 to 1.3 grade 1)(>1.3 to 1.8 grade 2)(> 1.8 to < 3.5 grade 3)(>= 3.5 grade 4)</SPan>
+                                                    <san>X.X ( mg/dl ) <br /><br />
+                                                    (> 1.1 grade 0)<br />(1.1 to 1.3 grade 1)<br />(>1.3 to 1.8 grade 2)<br />(> 1.8 to < 3.5 grade 3)<br />(>= 3.5 grade 4)
+                                                    </span>
 
                                                 </div>
                                             </div>
@@ -3278,11 +3282,12 @@ if ($user->isLoggedIn()) {
                                                     <label>eGFR mL/min per 1.73 m2</label>
                                                     <input value="" type="text" name="renal_egfr" id="renal_egfr" />
                                                     <select name="renal_egfr_units">
-                                                        <option value="">Select</option>
+                                                    <option value="">Select units</option>
                                                         <option value="1"> ml/min </option>
                                                     </select>
-                                                    <SPan>XXX.X ( ml/min ) </SPan>
-                                                    <SPan>(>= 90 grade 0)(< 90 to 60 grade 2)(< 60 to 30 grade 3)(< 30 grade 4)</SPan>
+                                                    <span>XXX.X ( ml/min ) <br /><br />
+                                                    (>= 90 grade 0)<br />(< 90 to 60 grade 2)<br />(< 60 to 30 grade 3)<br />(< 30 grade 4)
+                                                </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -3623,8 +3628,8 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>AHemoglobin levels (Hb)</label>
                                                     <input value="" type="text" name="hb" id="hb" />
-                                                    <SPan>XX.X ( mg/dl ) For Males (> 10.9 grade 0)(10 to 10.9 grade 1)(9 to < 10 grade 2)(7 to < 9 grade 3)(< 7 grade 4)</SPan>
-                                                            <SPan>XX.X ( mg/dl ) For Females (> 10.4 grade 0)(9.5 to 10.4 grade 1)(8.5 to < 9.5 grade 2)(6.5 to < 8.5 grade 3)(< 6.5 grade 4)</SPan>
+                                                    <span>XX.X ( mg/dl ) For Males (> 10.9 grade 0)(10 to 10.9 grade 1)(9 to < 10 grade 2)(7 to < 9 grade 3)(< 7 grade 4)</SPan>
+                                                    <SPan>XX.X ( mg/dl ) For Females (> 10.4 grade 0)(9.5 to 10.4 grade 1)(8.5 to < 9.5 grade 2)(6.5 to < 8.5 grade 3)(< 6.5 grade 4)</SPan>
                                                 </div>
                                             </div>
                                         </div>
@@ -4448,7 +4453,9 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <div class="form-group">
                                                     <label>Tarehe ya Leo:</label>
-                                                    <div class="col-md-9"><input value="" class="validate[required,custom[date]]" type="text" name="tdate" id="tdate" /> <span>Example: 2023-01-01</span></div>
+                                                    <div class="col-md-9"><input value="" class="validate[required,custom[date]]" type="text" name="tdate" id="tdate" />
+                                                     <span>Example: 2023-01-01</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -4758,26 +4765,26 @@ if ($user->isLoggedIn()) {
 
         $(document).ready(function() {
 
-            // $("#add_crf7").click(function(e) {
-            //     if ($("#validation")[0].checkValidity()) {
-            //         //   PREVENT PAGE TO REFRESH
-            //         e.preventDefault();
-            //         if($("#FDATE").val() == ''){
-            //             $("#FDATEError").text('* Date is empty');
-            //         };
-            //         if($("#cDATE").val() == ''){
-            //             $("#cDATEError").text('* Date is empty');
-            //         };
-            //         if($("#cpersid").val() == ''){
-            //             $("#cpersidError").text('* NAME is empty');
-            //         };
-            //         // if ($("#password1").val() != $("#password2").val()) {
-            //         //     $("#passError").text('* Passowrd do not match');
-            //         //     //console.log("Not matched"); 
-            //         //     $("#register-btn").val('Sign Up');
-            //         // }
-            //     }
-            // });
+            $("#add_crf7").click(function(e) {
+                if ($("#validation")[0].checkValidity()) {
+                    //   PREVENT PAGE TO REFRESH
+                    // e.preventDefault();
+                    if($("#FDATE").val() == ''){
+                        $("#FDATEError").text('* Date is empty');
+                    };
+                    if($("#cDATE").val() == ''){
+                        $("#cDATEError").text('* Date is empty');
+                    };
+                    if($("#cpersid").val() == ''){
+                        $("#cpersidError").text('* NAME is empty');
+                    };
+                    // if ($("#password1").val() != $("#password2").val()) {
+                    //     $("#passError").text('* Passowrd do not match');
+                    //     //console.log("Not matched"); 
+                    //     $("#register-btn").val('Sign Up');
+                    // }
+                }
+            });
 
             $('#weight, #height').on('input', function() {
                 setTimeout(function() {
