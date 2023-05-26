@@ -8,7 +8,7 @@ $random = new Random();
 $successMessage = null;
 $pageError = null;
 $errorMessage = null;
-$numRec = 50;
+$numRec = 2;
 if ($user->isLoggedIn()) {
     if (Input::exists('post')) {
         $validate = new validate();
@@ -461,7 +461,7 @@ if ($user->isLoggedIn()) {
                 ),
             ));
             if ($validate->passed()) {
-                $url = 'info.php?id=3&sid=' . Input::get('site');
+                $url = 'info.php?id=3&status='.$_GET['status'].'&sid=' . Input::get('site');
                 Redirect::to($url);
                 $pageError = $validate->errors();
             }
@@ -2164,7 +2164,8 @@ if ($user->isLoggedIn()) {
                                     </thead>
                                     <tbody>
                                         <?php $x = 1;
-                                        print_r($_GET['sid']);
+                                        // print_r($_GET['sid']);
+                                        // print_r($pagNum);
 
                                         foreach ($clients as $client) {
 
@@ -3543,18 +3544,18 @@ if ($user->isLoggedIn()) {
                             </div>
                             <div class="pull-right">
                                 <div class="btn-group">
-                                    <a href="info.php?id=3&status=<?= $_GET['sid'] ?>sid=<?= $_GET['sid'] ?>&page=<?php if (($_GET['page'] - 1) > 0) {
+                                    <a href="info.php?id=3&status=<?= $_GET['status'] ?>sid=<?= $_GET['sid'] ?>&page=<?php if (($_GET['page'] - 1) > 0) {
                                                                                             echo $_GET['page'] - 1;
                                                                                         } else {
                                                                                             echo 1;
                                                                                         } ?>" class="btn btn-default">
                                         < </a>
                                             <?php for ($i = 1; $i <= $pages; $i++) { ?>
-                                                <a href="info.php?id=3&status=<?= $_GET['sid'] ?>&sid=<?= $_GET['sid'] ?>&page=<?= $i ?>" class="btn btn-default <?php if ($i == $_GET['page']) {
+                                                <a href="info.php?id=3&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&page=<?= $i ?>" class="btn btn-default <?php if ($i == $_GET['page']) {
                                                                                                                                             echo 'active';
                                                                                                                                         } ?>"><?= $i ?></a>
                                             <?php } ?>
-                                            <a href="info.php?id=3&status=<?= $_GET['sid'] ?>&sid=<?= $_GET['sid'] ?>&page=<?php if (($_GET['page'] + 1) <= $pages) {
+                                            <a href="info.php?id=3&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&page=<?php if (($_GET['page'] + 1) <= $pages) {
                                                                                                     echo $_GET['page'] + 1;
                                                                                                 } else {
                                                                                                     echo $i - 1;
@@ -10077,7 +10078,7 @@ if ($user->isLoggedIn()) {
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="pull-right">
+                            <!-- <div class="pull-right">
                                 <div class="btn-group">
                                     <a href="info.php?id=3&sid=&page=<?php if (($_GET['page'] - 1) > 0) {
                                                                             echo $_GET['page'] - 1;
@@ -10096,7 +10097,7 @@ if ($user->isLoggedIn()) {
                                                                                     echo $i - 1;
                                                                                 } ?>" class="btn btn-default"> > </a>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
 
