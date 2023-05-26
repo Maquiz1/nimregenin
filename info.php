@@ -461,7 +461,7 @@ if ($user->isLoggedIn()) {
                 ),
             ));
             if ($validate->passed()) {
-                $url = 'info.php?id=3&status='.$_GET['status'].'&sid=' . Input::get('site');
+                $url = 'info.php?id=3&status=' . $_GET['status'] . '&sid=' . Input::get('site');
                 Redirect::to($url);
                 $pageError = $validate->errors();
             }
@@ -2159,7 +2159,14 @@ if ($user->isLoggedIn()) {
                                             <th width="10%">Age</th>
                                             <th width="10%">SITE</th>
                                             <th width="10%">STATUS</th>
-                                            <th width="40%">Action</th>
+                                            <?php if ($_GET['status'] == 4) { ?>
+
+                                            <th width="10%">REASON</th>
+                                            <?php }else{ ?> 
+                                                <th width="40%">ACTION</th>
+
+                                            <?php } ?>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -2173,6 +2180,7 @@ if ($user->isLoggedIn()) {
                                             $screening2 = $override->getCount('lab', 'client_id', $client['id']);
                                             $visit = $override->getCount('visit', 'client_id', $client['id']);
                                             $visit_date = $override->firstRow('visit', 'visit_date', 'id', 'client_id', $client['id'])[0];
+                                            $end_study = $override->getNews('crf6', 'status', 1, 'patient_id', $client['id'])[0];
                                             $screened = 0;
                                             $eligible = 0;
                                             $enrolled = 0;
@@ -2276,13 +2284,39 @@ if ($user->isLoggedIn()) {
 
                                                 <?php if ($_GET['status'] == 4) { ?>
 
-                                                    <?php if ($client['status'] == 1) { ?>
-                                                        <td>
-                                                            <a href="#" class="btn btn-success">ACTIVE</a>
-                                                        </td>
-                                                    <?php } else { ?>
+                                                    <?php if ($client['end_study'] == 1) { ?>
                                                         <td>
                                                             <a href="#" class="btn btn-danger">END</a>
+                                                        </td>
+
+                                                        <?php if ($end_study['completed120days'] == 1) { ?>
+                                                            <td>
+                                                                <a href="#" class="btn btn-info">Completed 120 days</a>
+                                                            </td>
+
+                                                        <?php } elseif ($end_study['reported_dead'] == 1) { ?>
+                                                            <td>
+                                                                <a href="#" class="btn btn-info">Reported Dead</a>
+                                                            </td>
+                                                        <?php
+                                                        } elseif ($end_study['withdrew_consent'] == 1) { ?>
+                                                            <td>
+                                                                <a href="#" class="btn btn-info">Withdrew Consent</a>
+                                                            </td>
+                                                        <?php
+                                                        } else { ?>
+                                                            <td>
+                                                                <a href="#" class="btn btn-info">Other</a>
+                                                            </td>
+                                                        <?php
+                                                        } ?>
+
+                                                        <!-- <td>
+                                                            <a href="#" class="btn btn-danger"><?= $end_study['outcome'] ?></a>
+                                                        </td> -->
+                                                    <?php } else { ?>
+                                                        <td>
+                                                            <a href="#" class="btn btn-success">ACTIVE</a>
                                                         </td>
                                                 <?php }
                                                 } ?>
@@ -3545,21 +3579,21 @@ if ($user->isLoggedIn()) {
                             <div class="pull-right">
                                 <div class="btn-group">
                                     <a href="info.php?id=3&status=<?= $_GET['status'] ?>sid=<?= $_GET['sid'] ?>&page=<?php if (($_GET['page'] - 1) > 0) {
-                                                                                            echo $_GET['page'] - 1;
-                                                                                        } else {
-                                                                                            echo 1;
-                                                                                        } ?>" class="btn btn-default">
+                                                                                                                            echo $_GET['page'] - 1;
+                                                                                                                        } else {
+                                                                                                                            echo 1;
+                                                                                                                        } ?>" class="btn btn-default">
                                         < </a>
                                             <?php for ($i = 1; $i <= $pages; $i++) { ?>
                                                 <a href="info.php?id=3&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&page=<?= $i ?>" class="btn btn-default <?php if ($i == $_GET['page']) {
-                                                                                                                                            echo 'active';
-                                                                                                                                        } ?>"><?= $i ?></a>
+                                                                                                                                                                        echo 'active';
+                                                                                                                                                                    } ?>"><?= $i ?></a>
                                             <?php } ?>
                                             <a href="info.php?id=3&status=<?= $_GET['status'] ?>&sid=<?= $_GET['sid'] ?>&page=<?php if (($_GET['page'] + 1) <= $pages) {
-                                                                                                    echo $_GET['page'] + 1;
-                                                                                                } else {
-                                                                                                    echo $i - 1;
-                                                                                                } ?>" class="btn btn-default"> > </a>
+                                                                                                                                    echo $_GET['page'] + 1;
+                                                                                                                                } else {
+                                                                                                                                    echo $i - 1;
+                                                                                                                                } ?>" class="btn btn-default"> > </a>
                                 </div>
                             </div>
                         </div>
