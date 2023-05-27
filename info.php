@@ -441,7 +441,7 @@ if ($user->isLoggedIn()) {
             if ($validate->passed()) {
                 try {
                     $user->updateRecord('visit', array(
-                        'study_id' => $_GET['sid'],
+                        'study_id' => Input::get('study_id'),
                         'visit_date' => Input::get('visit_date'),
                         'created_on' => date('Y-m-d'),
                         'status' => 1,
@@ -600,7 +600,8 @@ if ($user->isLoggedIn()) {
                     if ($eligible == 1) {
                         Redirect::to('info.php?id=3&status=1');
                     } else {
-                        Redirect::to('info.php?id=3');
+                        // Redirect::to('info.php?id=3');
+                        Redirect::to('info.php?id=3&status=1');
                     }
                 } catch (Exception $e) {
                     die($e->getMessage());
@@ -672,7 +673,8 @@ if ($user->isLoggedIn()) {
                     if ($eligible == 1) {
                         Redirect::to('info.php?id=3&status=1');
                     } else {
-                        Redirect::to('info.php?id=3');
+                        // Redirect::to('info.php?id=3');
+                        Redirect::to('info.php?id=3&status=1');
                     }
                 } catch (Exception $e) {
                     die($e->getMessage());
@@ -2161,8 +2163,8 @@ if ($user->isLoggedIn()) {
                                             <th width="10%">STATUS</th>
                                             <?php if ($_GET['status'] == 4) { ?>
 
-                                            <th width="10%">REASON</th>
-                                            <?php }else{ ?> 
+                                                <th width="10%">REASON</th>
+                                            <?php } else { ?>
                                                 <th width="40%">ACTION</th>
 
                                             <?php } ?>
@@ -4321,6 +4323,15 @@ if ($user->isLoggedIn()) {
                                                     $lb = $override->get('lab', 'client_id', $_GET['cid'])[0];
                                                     $cntV = $override->getCount('visit', 'client_id', $visit['client_id']);
                                                     $client = $override->get('clients', 'id', $_GET['cid'])[0];
+                                                    $study_id = $override->get1('clients', 'id', $_GET['cid'], 'status', 1)[0];
+
+                                                    $visit_status = 0;
+                                                    if($visit['visit_status']){
+
+                                                    }
+
+
+                                                    print_r($visit['visit_status']);
                                                     if ($visit['status'] == 0) {
                                                         $btnV = 'Add';
                                                     } elseif ($visit['status'] == 1) {
@@ -4373,41 +4384,58 @@ if ($user->isLoggedIn()) {
                                                                     <?php } ?>
                                                             </td>
                                                             <td>
-                                                                <?php if ($visit['visit_code'] == 'D0') { ?>
+                                                                <?php if ($visit['status'] == 1) { ?>
 
-                                                                    <?php if ($crf1 && $crf2 && $crf3 && $crf4 && $crf7) { ?>
-                                                                        <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-info">Edit Study CRF</a>
-                                                                    <?php } else { ?>
-                                                                        <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-warning">Add Study CRF</a>
-                                                                    <?php } ?>
+                                                                    <?php if ($visit['visit_code'] == 'D0') { ?>
 
-                                                                <?php } elseif ($visit['visit_code'] == 'D7' || $visit['visit_code'] == 'D14' || $visit['visit_code'] == 'D30' || $visit['visit_code'] == 'D60' || $visit['visit_code'] == 'D90' || $visit['visit_code'] == 'D120') { ?>
-
-                                                                    <?php if ($crf2 && $crf3 && $crf4 && $crf7) { ?>
-                                                                        <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-info">Edit Study CRF</a>
-                                                                    <?php } else { ?>
-                                                                        <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-warning">Add Study CRF</a>
-                                                                    <?php } ?>
+                                                                        <?php if ($crf1 && $crf2 && $crf3 && $crf4 && $crf7) { ?>
+                                                                            <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-info">Edit Study CRF</a>
+                                                                        <?php } else { ?>
+                                                                            <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-warning">Add Study CRF</a>
+                                                                    <?php }
+                                                                        } ?>
 
 
-                                                                <?php } elseif ($visit['visit_code'] == 'END') { ?>
 
-                                                                    <?php if ($crf6) { ?>
-                                                                        <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-info">Edit Study CRF</a>
-                                                                    <?php } else { ?>
-                                                                        <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-warning">Add Study CRF</a>
-                                                                    <?php } ?>
+                                                                    <?php if ($visit['status'] == 1 && ($visit['visit_code'] == 'D7' || $visit['visit_code'] == 'D14' || $visit['visit_code'] == 'D30' || $visit['visit_code'] == 'D60' || $visit['visit_code'] == 'D90' || $visit['visit_code'] == 'D120')) { ?>
 
 
-                                                                <?php } elseif ($visit['visit_code'] == 'AE') { ?>
+                                                                    <?php } elseif ($visit['visit_code'] == 'D7' || $visit['visit_code'] == 'D14' || $visit['visit_code'] == 'D30' || $visit['visit_code'] == 'D60' || $visit['visit_code'] == 'D90' || $visit['visit_code'] == 'D120') { ?>
 
-                                                                    <?php if ($crf5) { ?>
-                                                                        <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-info">Edit Study CRF</a>
-                                                                    <?php } else { ?>
-                                                                        <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-warning">Add Study CRF</a>
-                                                                    <?php } ?>
+                                                                        <?php if ($crf2 && $crf3 && $crf4 && $crf7) { ?>
+                                                                            <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-info">Edit Study CRF</a>
+                                                                        <?php } else { ?>
+                                                                            <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-warning">Add Study CRF</a>
+                                                                    <?php }
+                                                                        } ?>
 
-                                                                <?php } ?>
+
+
+
+                                                                    <?php if ($visit['status'] == 1 && $visit['visit_code'] == 'END') { ?>
+
+                                                                    <?php } elseif ($visit['visit_code'] == 'END') { ?>
+
+                                                                        <?php if ($crf6) { ?>
+                                                                            <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-info">Edit Study CRF</a>
+                                                                        <?php } else { ?>
+                                                                            <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-warning">Add Study CRF</a>
+                                                                    <?php }
+                                                                        } ?>
+
+                                                                    <?php if ($visit['status'] == 1 && $visit['visit_code'] == 'AE') { ?>
+
+
+                                                                    <?php } elseif ($visit['visit_code'] == 'AE') { ?>
+
+                                                                        <?php if ($crf5) { ?>
+                                                                            <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-info">Edit Study CRF</a>
+                                                                        <?php } else { ?>
+                                                                            <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>" role="button" class="btn btn-warning">Add Study CRF</a>
+                                                                        <?php } ?>
+
+                                                                <?php }
+                                                                    } ?>
 
 
                                                             </td>
@@ -4476,7 +4504,7 @@ if ($user->isLoggedIn()) {
                                                                         <div class="modal-footer">
                                                                             <input type="hidden" name="id" value="<?= $visit['id'] ?>">
                                                                             <input type="hidden" name="vc" value="<?= $visit['visit_code'] ?>">
-                                                                            <input type="hidden" name="cid" value="<?= $visit['client_id'] ?>">
+                                                                            <input type="hidden" name="study_id" value="<?= $study_id['study_id'] ?>">
                                                                             <input type="submit" name="edit_visit" class="btn btn-warning" value="Save">
                                                                             <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
                                                                         </div>

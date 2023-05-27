@@ -3226,13 +3226,15 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>Serum urea levels</label>
                                                     <input value="" type="text" name="renal_urea" id="renal_urea" />
-                                                    <select name="renal_urea_units">
+                                                    <select name="renal_urea_units" id="renal_urea_units" >
                                                     <option value="">Select units</option>
                                                         <option value="1"> mg/dl </option>
                                                         <option value="2"> mmol/l </option>
                                                     </select>
                                                     <SPan>XX.X ( mg/dl ) </SPan>
                                                 </div>
+                                                <div id="renal_ureaError" class="text text-danger"></div>
+                                                <div id="renal_urea_unitsError" class="text text-danger"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -4277,7 +4279,7 @@ if ($user->isLoggedIn()) {
                                                         <option value="2">Side effects of the herbal preparation (NIMRCAF/ Covidol / Bupiji )</option>
                                                         <option value="3">Side effects of Standard Care</option>
                                                         <option value="4">Moving to another area</option>
-                                                        <option value="5">Other {withdrew_other}</option>
+                                                        <option value="5">Other </option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -4765,25 +4767,38 @@ if ($user->isLoggedIn()) {
 
         $(document).ready(function() {
 
-            $("#add_crf7").click(function(e) {
-                if ($("#validation")[0].checkValidity()) {
+            $("#add_crf6").click(function(e) {
+                // if ($("#validation")[0].checkValidity()) {
                     //   PREVENT PAGE TO REFRESH
                     // e.preventDefault();
-                    if($("#FDATE").val() == ''){
-                        $("#FDATEError").text('* Date is empty');
+
+
+
+                    // if($("#FDATE").val() == ''){
+                    //     $("#FDATEError").text('* Date is empty');
+                    // };
+                    // if($("#cDATE").val() == ''){
+                    //     $("#cDATEError").text('* Date is empty');
+                    // };
+                    // if($("#cpersid").val() == ''){
+                    //     $("#cpersidError").text('* NAME is empty');
+                    // };
+
+
+                    if($("#renal_urea").val() == ''){
+                        $("#renal_ureaError").text('* Renal Urea is empty');
                     };
-                    if($("#cDATE").val() == ''){
-                        $("#cDATEError").text('* Date is empty');
+
+                    if($("#renal_urea_units").val() == ''){
+                        $("#renal_urea_unitsError").text('* Renal Urea Units is empty');
                     };
-                    if($("#cpersid").val() == ''){
-                        $("#cpersidError").text('* NAME is empty');
-                    };
+
                     // if ($("#password1").val() != $("#password2").val()) {
                     //     $("#passError").text('* Passowrd do not match');
                     //     //console.log("Not matched"); 
                     //     $("#register-btn").val('Sign Up');
                     // }
-                }
+                // }
             });
 
             $('#weight, #height').on('input', function() {
