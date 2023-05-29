@@ -3226,12 +3226,12 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>Serum urea levels</label>
                                                     <input value="" type="text" name="renal_urea" id="renal_urea" required />
-                                                    <select name="renal_urea_units" id="renal_urea_units" required >
-                                                    <option value="">Select units</option>
+                                                    <select name="renal_urea_units" id="renal_urea_units" required>
+                                                        <option value="">Select units</option>
                                                         <option value="1"> mg/dl </option>
                                                         <option value="2"> mmol/l </option>
                                                     </select>
-                                                    <SPan>XX.X ( mg/dl ) </SPan>
+                                                    <span>XX.X ( mg/dl ) </span>
                                                 </div>
                                                 <div id="renal_ureaError" class="text text-danger"></div>
                                                 <div id="renal_urea_unitsError" class="text text-danger"></div>
@@ -3247,14 +3247,15 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>Serum creatinine levels</label>
                                                     <input value="" type="text" name="renal_creatinine" id="renal_creatinine" required />
-                                                    <select name="renal_creatinine_units" required >
+                                                    <select name="renal_creatinine_units" required>
                                                         <option value="">Select units</option>
                                                         <option value="1"> mg/dl </option>
                                                         <option value="2"> mmol/l </option>
                                                     </select>
                                                     <san>X.X ( mg/dl ) <br /><br />
-                                                    (> 1.1 grade 0)<br />(1.1 to 1.3 grade 1)<br />(>1.3 to 1.8 grade 2)<br />(> 1.8 to < 3.5 grade 3)<br />(>= 3.5 grade 4)
-                                                    </span>
+                                                        (> 1.1 grade 0)<br />(1.1 to 1.3 grade 1)<br />(>1.3 to 1.8 grade 2)<br />(> 1.8 to
+                                                        < 3.5 grade 3)<br />(>= 3.5 grade 4)
+                                                        </span>
 
                                                 </div>
                                             </div>
@@ -3283,13 +3284,14 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>eGFR mL/min per 1.73 m2</label>
                                                     <input value="" type="text" name="renal_egfr" id="renal_egfr" required />
-                                                    <select name="renal_egfr_units" required >
-                                                    <option value="">Select units</option>
+                                                    <select name="renal_egfr_units" required>
+                                                        <option value="">Select units</option>
                                                         <option value="1"> ml/min </option>
                                                     </select>
                                                     <span>XXX.X ( ml/min ) <br /><br />
-                                                    (>= 90 grade 0)<br />(< 90 to 60 grade 2)<br />(< 60 to 30 grade 3)<br />(< 30 grade 4)
-                                                </span>
+                                                        (>= 90 grade 0)<br />(
+                                                        < 90 to 60 grade 2)<br />(
+                                                        < 60 to 30 grade 3)<br />(< 30 grade 4) </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -3510,6 +3512,8 @@ if ($user->isLoggedIn()) {
                                                         <option value="2"> mg/dl </option>/
                                                         <option value="3"> grams/L </option>
                                                     </select>
+                                                    <div id="liver_bilirubin_totalError" class="text text-danger"></div>
+                                                    <div id="liver_bilirubin_total_unitsError" class="text text-danger"></div>
                                                     <SPan>
                                                         XXX ( grams/L )
                                                         (< 1.1 grade 0)(1.1 to < 1.6 grade 1)(1.6 to < 2.6 grade 2)(> 2.6 to < 5 grade 3)(>= 5 grade 4)</SPan>
@@ -3541,13 +3545,15 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Bilirubin direct</label>
-                                                    <input value="" type="text" name="liver_bilirubin_direct" id="liver_bilirubin_direct" required />                                                    
+                                                    <input value="" type="text" name="liver_bilirubin_direct" id="liver_bilirubin_direct" required />
                                                     <select name="liver_bilirubin_direct_units" required>
                                                         <option value="">Select</option>
                                                         <option value="1"> micromol/l </option>
                                                         <option value="2"> mg/dl </option>
                                                         <option value="3"> grams/L </option>
                                                     </select>
+                                                    <div id="liver_bilirubin_directError" class="text text-danger"></div>
+                                                    <div id="liver_bilirubin_direct_unitsError" class="text text-danger"></div>
                                                     <SPan>XXX
                                                         ( grams/L ) <br /><br />
                                                         - (any value without hapatotoxicity symptoms = grade 0) <br /><br />
@@ -3586,6 +3592,8 @@ if ($user->isLoggedIn()) {
                                                         <option value="1"> mmol/l </option>
                                                         <option value="2"> mg/dl </option>
                                                     </select>
+                                                    <div id="rbgError" class="text text-danger"></div>
+                                                    <div id="rbg_unitsError" class="text text-danger"></div>
                                                     <SPan>XX ( mg/dl ) <br /><br />
                                                         - (
                                                         < 6.44 grade 0)(6.44 to < 8.89 grade 1) <br /><br />
@@ -3631,7 +3639,7 @@ if ($user->isLoggedIn()) {
                                                     <label>AHemoglobin levels (Hb)</label>
                                                     <input value="" type="text" name="hb" id="hb" />
                                                     <span>XX.X ( mg/dl ) For Males (> 10.9 grade 0)(10 to 10.9 grade 1)(9 to < 10 grade 2)(7 to < 9 grade 3)(< 7 grade 4)</SPan>
-                                                    <SPan>XX.X ( mg/dl ) For Females (> 10.4 grade 0)(9.5 to 10.4 grade 1)(8.5 to < 9.5 grade 2)(6.5 to < 8.5 grade 3)(< 6.5 grade 4)</SPan>
+                                                            <SPan>XX.X ( mg/dl ) For Females (> 10.4 grade 0)(9.5 to 10.4 grade 1)(8.5 to < 9.5 grade 2)(6.5 to < 8.5 grade 3)(< 6.5 grade 4)</SPan>
                                                 </div>
                                             </div>
                                         </div>
@@ -4456,7 +4464,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>Tarehe ya Leo:</label>
                                                     <div class="col-md-9"><input value="" class="validate[required,custom[date]]" type="text" name="tdate" id="tdate" />
-                                                     <span>Example: 2023-01-01</span>
+                                                        <span>Example: 2023-01-01</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -4769,35 +4777,35 @@ if ($user->isLoggedIn()) {
 
             $("#add_crf6").click(function(e) {
                 // if ($("#validation")[0].checkValidity()) {
-                    //   PREVENT PAGE TO REFRESH
-                    // e.preventDefault();
+                //   PREVENT PAGE TO REFRESH
+                // e.preventDefault();
 
 
 
-                    // if($("#FDATE").val() == ''){
-                    //     $("#FDATEError").text('* Date is empty');
-                    // };
-                    // if($("#cDATE").val() == ''){
-                    //     $("#cDATEError").text('* Date is empty');
-                    // };
-                    // if($("#cpersid").val() == ''){
-                    //     $("#cpersidError").text('* NAME is empty');
-                    // };
+                // if($("#FDATE").val() == ''){
+                //     $("#FDATEError").text('* Date is empty');
+                // };
+                // if($("#cDATE").val() == ''){
+                //     $("#cDATEError").text('* Date is empty');
+                // };
+                // if($("#cpersid").val() == ''){
+                //     $("#cpersidError").text('* NAME is empty');
+                // };
 
 
-                    if($("#renal_urea").val() == ''){
-                        $("#renal_ureaError").text('* Renal Urea is empty');
-                    };
+                if ($("#renal_urea").val() == '') {
+                    $("#renal_ureaError").text('* Renal Urea is empty');
+                };
 
-                    if($("#renal_urea_units").val() == ''){
-                        $("#renal_urea_unitsError").text('* Renal Urea Units is empty');
-                    };
+                if ($("#renal_urea_units").val() == '') {
+                    $("#renal_urea_unitsError").text('* Renal Urea Units is empty');
+                };
 
-                    // if ($("#password1").val() != $("#password2").val()) {
-                    //     $("#passError").text('* Passowrd do not match');
-                    //     //console.log("Not matched"); 
-                    //     $("#register-btn").val('Sign Up');
-                    // }
+                // if ($("#password1").val() != $("#password2").val()) {
+                //     $("#passError").text('* Passowrd do not match');
+                //     //console.log("Not matched"); 
+                //     $("#register-btn").val('Sign Up');
+                // }
                 // }
             });
 

@@ -1183,9 +1183,12 @@ if ($user->isLoggedIn()) {
                         'vcode' => $_GET["vcode"],
                         'sample_date' => Input::get('sample_date'),
                         'renal_urea' => Input::get('renal_urea'),
+                        'renal_urea_units' => Input::get('renal_urea_units'),
                         'renal_creatinine' => Input::get('renal_creatinine'),
+                        'renal_creatinine_units' => Input::get('renal_creatinine_units'),
                         'renal_creatinine_grade' => Input::get('renal_creatinine_grade'),
                         'renal_egfr' => Input::get('renal_egfr'),
+                        'renal_egfr_units' => Input::get('renal_egfr_units'),
                         'renal_egfr_grade' => Input::get('renal_egfr_grade'),
                         'liver_ast' => Input::get('liver_ast'),
                         'liver_ast_grade' => Input::get('liver_ast_grade'),
@@ -1203,10 +1206,13 @@ if ($user->isLoggedIn()) {
                         'liver_albumin' => Input::get('liver_albumin'),
                         'liver_albumin_grade' => Input::get('liver_albumin_grade'),
                         'liver_bilirubin_total' => Input::get('liver_bilirubin_total'),
+                        'liver_bilirubin_total_units' => Input::get('liver_bilirubin_total_units'),
                         'bilirubin_total_grade' => Input::get('bilirubin_total_grade'),
                         'liver_bilirubin_direct' => Input::get('liver_bilirubin_direct'),
+                        'liver_bilirubin_direct_units' => Input::get('liver_bilirubin_direct_units'),
                         'bilirubin_direct_grade' => Input::get('bilirubin_direct_grade'),
                         'rbg' => Input::get('rbg'),
+                        'rbg_units' => Input::get('rbg_units'),
                         'rbg_grade' => Input::get('rbg_grade'),
                         'ldh' => Input::get('ldh'),
                         'crp' => Input::get('crp'),
@@ -3239,47 +3245,47 @@ if ($user->isLoggedIn()) {
                                                                     <?php if ($client['gender'] == "female") { ?>
 
 
-                                                                    <div class="row-form clearfix">
-                                                                        <div class="col-md-8">Is the participant pregnant?</div>
-                                                                        <div class="col-md-4">
-                                                                            <select name="pregnant" style="width: 100%;" required>
-                                                                                <option value="<?= $lab['pregnant'] ?>"><?php if ($lab) {
-                                                                                                                            if ($lab['pregnant'] == 1) {
-                                                                                                                                echo 'Yes';
-                                                                                                                            } elseif ($lab['pregnant'] == 2) {
-                                                                                                                                echo 'No';
-                                                                                                                            } elseif ($lab['pregnant'] == 3) {
-                                                                                                                                echo 'Not Applicable';
-                                                                                                                            }
-                                                                                                                        } else {
-                                                                                                                            echo 'Select';
-                                                                                                                        } ?></option>
-                                                                                <option value="1">Yes</option>
-                                                                                <option value="2">No</option>
-                                                                            </select>
+                                                                        <div class="row-form clearfix">
+                                                                            <div class="col-md-8">Is the participant pregnant?</div>
+                                                                            <div class="col-md-4">
+                                                                                <select name="pregnant" style="width: 100%;" required>
+                                                                                    <option value="<?= $lab['pregnant'] ?>"><?php if ($lab) {
+                                                                                                                                if ($lab['pregnant'] == 1) {
+                                                                                                                                    echo 'Yes';
+                                                                                                                                } elseif ($lab['pregnant'] == 2) {
+                                                                                                                                    echo 'No';
+                                                                                                                                } elseif ($lab['pregnant'] == 3) {
+                                                                                                                                    echo 'Not Applicable';
+                                                                                                                                }
+                                                                                                                            } else {
+                                                                                                                                echo 'Select';
+                                                                                                                            } ?></option>
+                                                                                    <option value="1">Yes</option>
+                                                                                    <option value="2">No</option>
+                                                                                </select>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
 
-                                                                    <div class="row-form clearfix">
-                                                                        <div class="col-md-8">Is the participant Breast feeding?</div>
-                                                                        <div class="col-md-4">
-                                                                            <select name="breast_feeding" style="width: 100%;" required>
-                                                                                <option value="<?= $lab['breast_feeding'] ?>"><?php if ($lab) {
-                                                                                                                                    if ($lab['breast_feeding'] == 1) {
-                                                                                                                                        echo 'Yes';
-                                                                                                                                    } elseif ($lab['breast_feeding'] == 2) {
-                                                                                                                                        echo 'No';
-                                                                                                                                    } elseif ($lab['breast_feeding'] == 3) {
-                                                                                                                                        echo 'Not Applicable';
-                                                                                                                                    }
-                                                                                                                                } else {
-                                                                                                                                    echo 'Select';
-                                                                                                                                } ?></option>
-                                                                                <option value="1">Yes</option>
-                                                                                <option value="2">No</option>
-                                                                            </select>
+                                                                        <div class="row-form clearfix">
+                                                                            <div class="col-md-8">Is the participant Breast feeding?</div>
+                                                                            <div class="col-md-4">
+                                                                                <select name="breast_feeding" style="width: 100%;" required>
+                                                                                    <option value="<?= $lab['breast_feeding'] ?>"><?php if ($lab) {
+                                                                                                                                        if ($lab['breast_feeding'] == 1) {
+                                                                                                                                            echo 'Yes';
+                                                                                                                                        } elseif ($lab['breast_feeding'] == 2) {
+                                                                                                                                            echo 'No';
+                                                                                                                                        } elseif ($lab['breast_feeding'] == 3) {
+                                                                                                                                            echo 'Not Applicable';
+                                                                                                                                        }
+                                                                                                                                    } else {
+                                                                                                                                        echo 'Select';
+                                                                                                                                    } ?></option>
+                                                                                    <option value="1">Yes</option>
+                                                                                    <option value="2">No</option>
+                                                                                </select>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
 
                                                                     <?php } ?>
 
@@ -7017,7 +7023,8 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Date of Sample Collection:</label>
-                                                    <input value="<?= $patient['sample_date'] ?>" type="text" name="sample_date" id="sample_date" /> <span>Example: 2023-01-01</span>
+                                                    <input value="<?= $patient['sample_date'] ?>" type="text" name="sample_date" id="sample_date" />
+                                                    <span>Example: 2023-01-01</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -7027,13 +7034,21 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Serum urea levels</label>
-                                                    <input value="<?= $patient['renal_urea'] ?>" type="text" name="renal_urea" id="renal_urea" />
-                                                    <select name="renal_urea_units" id="renal_urea_units" required >
-                                                    <option value="">Select units</option>
+                                                    <input value="<?= $patient['renal_urea'] ?>" type="text" name="renal_urea" id="renal_urea" required />
+                                                    <select name="renal_urea_units" id="renal_urea_units" required>
+                                                        <?php if ($patient['renal_urea_units'] == "1") { ?>
+                                                            <option value="<?= $patient['renal_urea_units'] ?>"> mg/dl </option>
+                                                        <?php } elseif ($patient['renal_urea_units'] == "2") { ?>
+                                                            <option value="<?= $patient['renal_urea_units'] ?>"> mmol/l </option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select Units</option>
+                                                        <?php } ?>
                                                         <option value="1"> mg/dl </option>
                                                         <option value="2"> mmol/l </option>
                                                     </select>
-                                                    <span>XX.X ( mg/dl ) </span>
+                                                    <div id="renal_ureaError" class="text text-danger"></div>
+                                                    <div id="renal_urea_unitsError" class="text text-danger"></div>
+                                                    <span>XX.X </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -7049,7 +7064,20 @@ if ($user->isLoggedIn()) {
                                                     <div class="form-group">
                                                         <label>Serum creatinine levels</label>
                                                         <input value="<?= $patient['renal_creatinine'] ?>" type="text" name="renal_creatinine" id="renal_creatinine" />
-                                                        <SPan>X.X ( mg/dl )</SPan>
+                                                        <select name="renal_creatinine_units" required>
+                                                            <?php if ($patient['renal_creatinine_units'] == "1") { ?>
+                                                                <option value="<?= $patient['renal_creatinine_units'] ?>"> mg/dl </option>
+                                                            <?php } elseif ($patient['renal_creatinine_units'] == "2") { ?>
+                                                                <option value="<?= $patient['renal_creatinine_units'] ?>"> mmol/l </option>
+                                                            <?php } else { ?>
+                                                                <option value="">Select Units</option>
+                                                            <?php } ?>
+                                                            <option value="1"> mg/dl </option>
+                                                            <option value="2"> mmol/l </option>
+                                                        </select>
+                                                        <div id="renal_creatinineError" class="text text-danger"></div>
+                                                        <div id="renal_creatinine_unitsError" class="text text-danger"></div>
+                                                        <span> X.X </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -7092,7 +7120,17 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>eGFR mL/min per 1.73 m2</label>
                                                     <input value="<?= $patient['renal_egfr'] ?>" type="text" name="renal_egfr" id="renal_egfr" />
-                                                    <SPan>XXX.X ( ml/min )</SPan>
+                                                    <select name="renal_egfr_units">
+                                                        <?php if ($patient['renal_egfr_units'] == "1") { ?>
+                                                            <option value="<?= $patient['renal_egfr_units'] ?>"> ml/min</option>
+                                                        <?php } else { ?>
+                                                            <option value="">Select Units</option>
+                                                        <?php } ?>
+                                                        <option value="1"> ml/min </option>
+                                                    </select>
+                                                    <div id="renal_egfrError" class="text text-danger"></div>
+                                                    <div id="renal_egfr_unitsError" class="text text-danger"></div>
+                                                    <span> XXX.X </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -7381,8 +7419,24 @@ if ($user->isLoggedIn()) {
                                                     <!-- select -->
                                                     <div class="form-group">
                                                         <label>Bilirubin total</label>
-                                                        <input value="<?= $patient['liver_bilirubin_total'] ?>" type="text" name="liver_bilirubin_total" id="liver_bilirubin_total" />
-                                                        <SPan>XXX ( grams/L )</SPan>
+                                                        <input value="<?= $patient['liver_bilirubin_total'] ?>" type="text" name="liver_bilirubin_total" id="liver_bilirubin_total" required />
+                                                        <select name="liver_bilirubin_total_units" required>
+                                                            <?php if ($patient['liver_bilirubin_total_units'] == "1") { ?>
+                                                                <option value="<?= $patient['liver_bilirubin_total_units'] ?>">micromol/l</option>
+                                                            <?php } elseif ($patient['liver_bilirubin_total_units'] == "2") { ?>
+                                                                <option value="<?= $patient['liver_bilirubin_total_units'] ?>">mg/dl</option>
+                                                            <?php } else if ($patient['liver_bilirubin_total_units'] == "3") { ?>
+                                                                <option value="<?= $patient['liver_bilirubin_total_units'] ?>">grams/L</option>
+                                                            <?php } else { ?>
+                                                                <option value="">Select Units</option>
+                                                            <?php } ?>
+                                                            <option value="1"> micromol/l </option>
+                                                            <option value="2"> mg/dl </option>/
+                                                            <option value="3"> grams/L </option>
+                                                        </select>
+                                                        <div id="liver_bilirubin_totalError" class="text text-danger"></div>
+                                                        <div id="liver_bilirubin_total_unitsError" class="text text-danger"></div>
+                                                        <span> XXX </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -7424,7 +7478,23 @@ if ($user->isLoggedIn()) {
                                                     <div class="form-group">
                                                         <label>Bilirubin direct</label>
                                                         <input value="<?= $patient['liver_bilirubin_direct'] ?>" type="text" name="liver_bilirubin_direct" id="liver_bilirubin_direct" />
-                                                        <SPan>XXX ( grams/L )</SPan>
+                                                        <select name="liver_bilirubin_direct_units" required>
+                                                            <?php if ($patient['liver_bilirubin_direct_units'] == "1") { ?>
+                                                                <option value="<?= $patient['liver_bilirubin_direct_units'] ?>">micromol/l</option>
+                                                            <?php } elseif ($patient['liver_bilirubin_direct_units'] == "2") { ?>
+                                                                <option value="<?= $patient['liver_bilirubin_direct_units'] ?>">mg/dl</option>
+                                                            <?php } else if ($patient['liver_bilirubin_direct_units'] == "3") { ?>
+                                                                <option value="<?= $patient['liver_bilirubin_direct_units'] ?>">grams/L</option>
+                                                            <?php } else { ?>
+                                                                <option value="">Select Units</option>
+                                                            <?php } ?>
+                                                            <option value="1"> micromol/l </option>
+                                                            <option value="2"> mg/dl </option>/
+                                                            <option value="3"> grams/L </option>
+                                                        </select>
+                                                        <div id="liver_bilirubin_directError" class="text text-danger"></div>
+                                                        <div id="liver_bilirubin_direct_unitsError" class="text text-danger"></div>
+                                                        <span> XXX </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -7463,8 +7533,19 @@ if ($user->isLoggedIn()) {
                                                     <!-- select -->
                                                     <div class="form-group">
                                                         <label>RBG</label>
-                                                        <input value="<?= $patient['rbg'] ?>" type="text" name="rbg" id="rbg" />
-                                                        <SPan>XX ( mg/dl )</SPan>
+                                                        <input value="<?= $patient['rbg'] ?>" type="text" name="rbg" id="rbg" required />
+                                                        <select name="rbg_units" required>
+                                                            <?php if ($patient['rbg_units'] == "1") { ?>
+                                                                <option value="<?= $patient['rbg_units'] ?>">mmol/l </option>
+                                                            <?php } elseif ($patient['rbg_units'] == "2") { ?>
+                                                                <option value="<?= $patient['rbg_units'] ?>">mg/dl</option>
+                                                            <?php } else { ?>
+                                                                <option value="">Select</option>
+                                                            <?php } ?>
+                                                            <option value="1"> mmol/l </option>
+                                                            <option value="2"> mg/dl </option>
+                                                        </select>
+                                                        <span>XX </span>
                                                     </div>
                                                 </div>
                                             </div>
