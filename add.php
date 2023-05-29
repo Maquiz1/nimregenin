@@ -3214,7 +3214,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Date of Sample Collection</label>
-                                                    <input value="" type="text" name="sample_date" id="sample_date" />
+                                                    <input value="" type="text" name="sample_date" id="sample_date" required />
                                                     <span>Example: 2023-01-01</span>
                                                 </div>
                                             </div>
@@ -3225,8 +3225,8 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Serum urea levels</label>
-                                                    <input value="" type="text" name="renal_urea" id="renal_urea" />
-                                                    <select name="renal_urea_units" id="renal_urea_units" >
+                                                    <input value="" type="text" name="renal_urea" id="renal_urea" required />
+                                                    <select name="renal_urea_units" id="renal_urea_units" required >
                                                     <option value="">Select units</option>
                                                         <option value="1"> mg/dl </option>
                                                         <option value="2"> mmol/l </option>
@@ -3246,8 +3246,8 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Serum creatinine levels</label>
-                                                    <input value="" type="text" name="renal_creatinine" id="renal_creatinine" />
-                                                    <select name="renal_creatinine_units">
+                                                    <input value="" type="text" name="renal_creatinine" id="renal_creatinine" required />
+                                                    <select name="renal_creatinine_units" required >
                                                         <option value="">Select units</option>
                                                         <option value="1"> mg/dl </option>
                                                         <option value="2"> mmol/l </option>
@@ -3282,8 +3282,8 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>eGFR mL/min per 1.73 m2</label>
-                                                    <input value="" type="text" name="renal_egfr" id="renal_egfr" />
-                                                    <select name="renal_egfr_units">
+                                                    <input value="" type="text" name="renal_egfr" id="renal_egfr" required />
+                                                    <select name="renal_egfr_units" required >
                                                     <option value="">Select units</option>
                                                         <option value="1"> ml/min </option>
                                                     </select>
@@ -3503,8 +3503,8 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Bilirubin total</label>
-                                                    <input value="" type="text" name="liver_bilirubin_total" id="liver_bilirubin_total" />
-                                                    <select name="liver_bilirubin_total_units">
+                                                    <input value="" type="text" name="liver_bilirubin_total" id="liver_bilirubin_total" required />
+                                                    <select name="liver_bilirubin_total_units" required>
                                                         <option value="">Select</option>
                                                         <option value="1"> micromol/l </option>
                                                         <option value="2"> mg/dl </option>/
@@ -3541,8 +3541,8 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Bilirubin direct</label>
-                                                    <input value="" type="text" name="liver_bilirubin_direct" id="liver_bilirubin_direct" />
-                                                    <select name="liver_bilirubin_direct_units">
+                                                    <input value="" type="text" name="liver_bilirubin_direct" id="liver_bilirubin_direct" required />
+                                                    <select name="liver_bilirubin_direct_units" required>
                                                         <option value="">Select</option>
                                                         <option value="1"> micromol/l </option>
                                                         <option value="2"> mg/dl </option>
@@ -3580,8 +3580,8 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>RBG</label>
-                                                    <input value="" type="text" name="rbg" id="rbg" />
-                                                    <select name="rbg_units">
+                                                    <input value="" type="text" name="rbg" id="rbg" required />
+                                                    <select name="rbg_units" required>
                                                         <option value="">Select</option>
                                                         <option value="1"> mmol/l </option>
                                                         <option value="2"> mg/dl </option>

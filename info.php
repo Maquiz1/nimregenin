@@ -3456,7 +3456,7 @@ if ($user->isLoggedIn()) {
                                                         <form id="validation" method="post">
                                                             <?php
                                                             $visit = $override->firstRow('visit', 'visit_date', 'id', 'client_id', $client['id'])[0];
-                                                            $visit_status = $override->firstRow('visit', 'visit_status', 'id', 'client_id', $client['id'])[0];
+                                                            $reasons = $override->firstRow('visit', 'reasons', 'id', 'client_id', $client['id'])[0];
                                                             $client = $override->getNews('clients', 'status', 1, 'id', $client['id'])[0];
                                                             ?>
 
@@ -3519,7 +3519,7 @@ if ($user->isLoggedIn()) {
                                                                         <div class="row-form clearfix">
                                                                             <!-- select -->
                                                                             <div class="form-group">
-                                                                                <label>Date Started Treatment:</label>
+                                                                                <label>Date Started Previous(Past) Treatment:</label>
                                                                                 <input value="<?= $client['previous_date'] ?>" class="validate[required,custom[date]]" type="text" name="previous_date" id="previous_date" required />
                                                                                 <span>Example: 2010-12-01</span>
                                                                             </div>
@@ -3544,7 +3544,7 @@ if ($user->isLoggedIn()) {
                                                                             <!-- select -->
                                                                             <div class="form-group">
                                                                                 <label>Current number of Cycle for Patient Treatment</label>
-                                                                                <input value="<?= $total_cycle['cycle_number'] ?>" type="text" name="cycle_number" id="cycle_number" required />
+                                                                                <input value="<?= $client['cycle_number'] ?>" type="text" name="cycle_number" id="cycle_number" required />
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -3559,7 +3559,8 @@ if ($user->isLoggedIn()) {
                                                                             <div class="form-group">
                                                                                 <label>Notes / Remark</label>
                                                                                 <textarea name="reasons" rows="4">
-                                                                                <?= $visit['reasons'] ?>                                                                                </textarea>
+                                                                                <?= $reasons['reasons'] ?>  
+                                                                                </textarea>
                                                                             </div>
                                                                         </div>
                                                                     </div>
