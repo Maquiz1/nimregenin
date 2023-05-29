@@ -7028,7 +7028,12 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>Serum urea levels</label>
                                                     <input value="<?= $patient['renal_urea'] ?>" type="text" name="renal_urea" id="renal_urea" />
-                                                    <SPan>XX.X ( mg/dl )</SPan>
+                                                    <select name="renal_urea_units" id="renal_urea_units" required >
+                                                    <option value="">Select units</option>
+                                                        <option value="1"> mg/dl </option>
+                                                        <option value="2"> mmol/l </option>
+                                                    </select>
+                                                    <span>XX.X ( mg/dl ) </span>
                                                 </div>
                                             </div>
                                         </div>

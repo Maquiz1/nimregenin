@@ -3541,7 +3541,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Bilirubin direct</label>
-                                                    <input value="" type="text" name="liver_bilirubin_direct" id="liver_bilirubin_direct" required />
+                                                    <input value="" type="text" name="liver_bilirubin_direct" id="liver_bilirubin_direct" required />                                                    
                                                     <select name="liver_bilirubin_direct_units" required>
                                                         <option value="">Select</option>
                                                         <option value="1"> micromol/l </option>
