@@ -3283,8 +3283,8 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>eGFR mL/min per 1.73 m2</label>
-                                                    <input value="" type="text" name="renal_egfr" id="renal_egfr" required />
-                                                    <select name="renal_egfr_units" required>
+                                                    <input value="" type="text" name="renal_egfr" id="renal_egfr" />
+                                                    <select name="renal_egfr_units" required >
                                                         <option value="">Select units</option>
                                                         <option value="1"> ml/min </option>
                                                     </select>

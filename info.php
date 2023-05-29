@@ -445,7 +445,7 @@ if ($user->isLoggedIn()) {
                         'visit_date' => Input::get('visit_date'),
                         'created_on' => date('Y-m-d'),
                         'status' => 1,
-                        'visit_status' => Input::get('visit_status'),
+                        'visit_status' => 1,
                         'reasons' => Input::get('reasons'),
                     ), Input::get('id'));
                 } catch (Exception $e) {
@@ -4677,25 +4677,7 @@ if ($user->isLoggedIn()) {
                                                                                         <div class="col-md-3">Visit Type:</div>
                                                                                         <div class="col-md-9"><input type="text" name="name" value="<?= $v_typ ?>" disabled /></div>
                                                                                     </div>
-                                                                                </div>
-                                                                                <div class="row-form clearfix">
-                                                                                    <div class="col-md-3">Current Status</div>
-                                                                                    <div class="col-md-9">
-                                                                                        <select name="visit_status" style="width: 100%;" required>
-                                                                                            <?php
-                                                                                            if ($visit['visit_status'] == 1) { ?>
-                                                                                                <option value="<?= $visit['visit_status'] ?>">Attended</option>
-                                                                                            <?php } else if ($visit['visit_status'] == 2) { ?>
-                                                                                                <option value="<?= $visit['visit_status'] ?>">Missed Visit</option>
-                                                                                            <?php } else { ?>
-                                                                                                <option value="">Select</option>
-                                                                                            <?php
-                                                                                            } ?>
-                                                                                            <option value="1">Attended</option>
-                                                                                            <option value="2">Missed Visit</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                </div>
+                                                                                </div>                                                                               
 
                                                                                 <div class="row-form clearfix">
                                                                                     <div class="col-md-3">Notes:</div>
@@ -4706,7 +4688,7 @@ if ($user->isLoggedIn()) {
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="row-form clearfix">
-                                                                                    <div class="col-md-3">Date:</div>
+                                                                                    <div class="col-md-3">Date of Follow Up Visit:</div>
                                                                                     <div class="col-md-9">
                                                                                         <input value="<?php if ($visit['status'] != 0) {
                                                                                                             echo $visit['visit_date'];
