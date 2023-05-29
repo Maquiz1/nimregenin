@@ -4680,7 +4680,7 @@ if ($user->isLoggedIn()) {
                                                                                 </div>                                                                               
 
                                                                                 <div class="row-form clearfix">
-                                                                                    <div class="col-md-3">Notes:</div>
+                                                                                    <div class="col-md-3">Notes / Remarks :</div>
                                                                                     <div class="col-md-9">
                                                                                         <textarea name="reasons" rows="4"><?php if ($visit['status'] != 0) {
                                                                                                                                 echo $visit['reasons'];
