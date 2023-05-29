@@ -434,9 +434,6 @@ if ($user->isLoggedIn()) {
                 'visit_date' => array(
                     'required' => true,
                 ),
-                'visit_status' => array(
-                    'required' => true,
-                ),
             ));
             if ($validate->passed()) {
                 try {
