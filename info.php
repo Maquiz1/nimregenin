@@ -588,7 +588,7 @@ if ($user->isLoggedIn()) {
                     $screening1 = $override->getNews('screening', 'client_id', Input::get('id'), 'status', 1)[0]['status'];
                     $screening2 = $override->getNews('lab', 'client_id', Input::get('id'), 'status', 1)[0]['status'];
 
-                    if ($screening1 == 1 && $screening2 == 1) {
+                    if ($screening1 == 1) {
                         $screening = 1;
                     }
 
@@ -659,7 +659,7 @@ if ($user->isLoggedIn()) {
                     $screening1 = $override->getNews('screening', 'client_id', Input::get('id'), 'status', 1)[0]['status'];
                     $screening2 = $override->getNews('lab', 'client_id', Input::get('id'), 'status', 1)[0]['status'];
 
-                    if ($screening1 == 1 && $screening2 == 1) {
+                    if ($screening2 == 1) {
                         $screening = 1;
                     }
 
@@ -6732,6 +6732,8 @@ if ($user->isLoggedIn()) {
                                 </div>
                             </div>
 
+                            <?php if ($_GET['vcode'] == 'D7' || $_GET['vcode'] == 'D90') { ?>
+
 
                             <div class="row">
                                 <div class="col-sm-3">
@@ -6773,6 +6775,8 @@ if ($user->isLoggedIn()) {
                                         </div>
                                     </div>
                                 </div>
+
+                                <?php } ?>
 
 
                                 <div class="col-sm-3">
@@ -7398,6 +7402,9 @@ if ($user->isLoggedIn()) {
                                     </div>
                                 </div>
 
+                                <?php if ($_GET['vcode'] == 'D7' || $_GET['vcode'] == 'D90') { ?>
+
+
                                 <div class="col-sm-6">
                                     <div class="row-form clearfix">
                                         <!-- select -->
@@ -7409,6 +7416,8 @@ if ($user->isLoggedIn()) {
                                         </div>
                                     </div>
                                 </div>
+
+                                <?php } ?>
                             </div>
 
                             <div class="row">

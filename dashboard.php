@@ -13,11 +13,13 @@ $noE = 0;
 $noC = 0;
 $noD = 0;
 $users = $override->getData('user');
+
 if ($user->isLoggedIn()) {
 
 } else {
     Redirect::to('index.php');
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
