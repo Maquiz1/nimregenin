@@ -11,13 +11,13 @@ if ($user->isLoggedIn()) {
         $screened = $override->countData('clients','status', 1, 'screened', 1);
         $eligible = $override->countData('clients','status', 1, 'eligible', 1);
         $enrolled = $override->countData('clients','status', 1, 'enrolled', 1);
-        $end = $override->countData('clients','status', 0, 'enrolled', 1);
+        $end = $override->countData('clients','status', 1, 'end_study', 1);
     } else {
 
         $screened = $override->countData2('clients','status', 1, 'screened', 1,'site_id', $user->data()->site_id);
         $eligible = $override->countData2('clients','status', 1, 'eligible', 1,'site_id', $user->data()->site_id);
         $enrolled = $override->countData2('clients','status', 1, 'enrolled', 1,'site_id', $user->data()->site_id);
-        $end = $override->countData2('clients','status', 0, 'enrolled', 1,'site_id', $user->data()->site_id);
+        $end = $override->countData2('clients','status', 1, 'end_study', 1,'site_id', $user->data()->site_id);
     }
 
 
@@ -72,7 +72,7 @@ if ($user->isLoggedIn()) {
     <div class="col-md-3">
         <div class="wBlock red clearfix">
             <div class="dSpace">
-                <a href="#">
+            <a href="info.php?id=3&status=4">
                     <h3>End of study</h3>
                     <span class="mChartBar" sparkType="bar" sparkBarColor="white">
                         <!--240,234,150,290,310,240,210,400,320,198,250,222,111,240,221,340,250,190-->

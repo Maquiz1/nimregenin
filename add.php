@@ -168,41 +168,47 @@ if ($user->isLoggedIn()) {
                             }
                         }
                         $age = $user->dateDiffYears(date('Y-m-d'), Input::get('dob'));
+                        $check_clients = $override->countData1('clients', 'firstname', Input::get('firstname'), 'middlename', Input::get('middlename'), 'lastname', Input::get('lastname'));
 
-                        $user->createRecord('clients', array(
-                            'participant_id' => $screening_id,
-                            'study_id' => '',
-                            'clinic_date' => Input::get('clinic_date'),
-                            'firstname' => Input::get('firstname'),
-                            'middlename' => Input::get('middlename'),
-                            'lastname' => Input::get('lastname'),
-                            'dob' => Input::get('dob'),
-                            'age' => $age,
-                            'id_number' => Input::get('id_number'),
-                            'gender' => Input::get('gender'),
-                            'marital_status' => Input::get('marital_status'),
-                            'education_level' => Input::get('education_level'),
-                            'workplace' => Input::get('workplace'),
-                            'occupation' => Input::get('occupation'),
-                            'national_id' => Input::get('national_id'),
-                            'phone_number' => Input::get('phone_number'),
-                            'other_phone' => Input::get('other_phone'),
-                            'region' => Input::get('region'),
-                            'district' => Input::get('district'),
-                            'street' => Input::get('street'),
-                            'ward' => Input::get('ward'),
-                            'block_no' => Input::get('block_no'),
-                            'site_id' => $user->data()->site_id,
-                            'staff_id' => $user->data()->id,
-                            'client_image' => $attachment_file,
-                            'comments' => Input::get('comments'),
-                            'initials' => Input::get('initials'),
-                            'status' => 1,
-                            'created_on' => date('Y-m-d'),
-                        ));
+                        if ($check_clients >= 1) {
+                            $errorMessage = 'Client Already Registered';
+                        } else {
 
-                        $successMessage = 'Client Added Successful';
-                        Redirect::to('info.php?id=3');
+                            $user->createRecord('clients', array(
+                                'participant_id' => $screening_id,
+                                'study_id' => '',
+                                'clinic_date' => Input::get('clinic_date'),
+                                'firstname' => Input::get('firstname'),
+                                'middlename' => Input::get('middlename'),
+                                'lastname' => Input::get('lastname'),
+                                'dob' => Input::get('dob'),
+                                'age' => $age,
+                                'id_number' => Input::get('id_number'),
+                                'gender' => Input::get('gender'),
+                                'marital_status' => Input::get('marital_status'),
+                                'education_level' => Input::get('education_level'),
+                                'workplace' => Input::get('workplace'),
+                                'occupation' => Input::get('occupation'),
+                                'national_id' => Input::get('national_id'),
+                                'phone_number' => Input::get('phone_number'),
+                                'other_phone' => Input::get('other_phone'),
+                                'region' => Input::get('region'),
+                                'district' => Input::get('district'),
+                                'street' => Input::get('street'),
+                                'ward' => Input::get('ward'),
+                                'block_no' => Input::get('block_no'),
+                                'site_id' => $user->data()->site_id,
+                                'staff_id' => $user->data()->id,
+                                'client_image' => $attachment_file,
+                                'comments' => Input::get('comments'),
+                                'initials' => Input::get('initials'),
+                                'status' => 1,
+                                'created_on' => date('Y-m-d'),
+                            ));
+
+                            $successMessage = 'Client Added Successful';
+                            Redirect::to('info.php?id=3');
+                        }
                     }
                 } catch (Exception $e) {
                     die($e->getMessage());
@@ -561,7 +567,6 @@ if ($user->isLoggedIn()) {
                 'sample_date' => array(
                     'required' => true,
                 ),
-
             ));
             if ($validate->passed()) {
                 try {
@@ -571,9 +576,12 @@ if ($user->isLoggedIn()) {
                         'study_id' => $_GET['sid'],
                         'sample_date' => Input::get('sample_date'),
                         'renal_urea' => Input::get('renal_urea'),
+                        'renal_urea_units' => Input::get('renal_urea_units'),
                         'renal_creatinine' => Input::get('renal_creatinine'),
+                        'renal_creatinine_units' => Input::get('renal_creatinine_units'),
                         'renal_creatinine_grade' => Input::get('renal_creatinine_grade'),
                         'renal_egfr' => Input::get('renal_egfr'),
+                        'renal_egfr_units' => Input::get('renal_egfr_units'),
                         'renal_egfr_grade' => Input::get('renal_egfr_grade'),
                         'liver_ast' => Input::get('liver_ast'),
                         'liver_ast_grade' => Input::get('liver_ast_grade'),
@@ -591,10 +599,13 @@ if ($user->isLoggedIn()) {
                         'liver_albumin' => Input::get('liver_albumin'),
                         'liver_albumin_grade' => Input::get('liver_albumin_grade'),
                         'liver_bilirubin_total' => Input::get('liver_bilirubin_total'),
+                        'liver_bilirubin_total_units' => Input::get('liver_bilirubin_total_units'),
                         'bilirubin_total_grade' => Input::get('bilirubin_total_grade'),
                         'liver_bilirubin_direct' => Input::get('liver_bilirubin_direct'),
+                        'liver_bilirubin_direct_units' => Input::get('liver_bilirubin_direct_units'),
                         'bilirubin_direct_grade' => Input::get('bilirubin_direct_grade'),
                         'rbg' => Input::get('rbg'),
+                        'rbg_units' => Input::get('rbg_units'),
                         'rbg_grade' => Input::get('rbg_grade'),
                         'ldh' => Input::get('ldh'),
                         'crp' => Input::get('crp'),
@@ -692,36 +703,45 @@ if ($user->isLoggedIn()) {
             ));
             if ($validate->passed()) {
                 try {
-                    $user->createRecord('crf6', array(
-                        'vid' => $_GET["vid"],
-                        'vcode' => $_GET["vcode"],
-                        'study_id' => $_GET['sid'],
-                        'today_date' => Input::get('today_date'),
-                        'terminate_date' => Input::get('terminate_date'),
-                        'completed120days' => Input::get('completed120days'),
-                        'reported_dead' => Input::get('reported_dead'),
-                        'withdrew_consent' => Input::get('withdrew_consent'),
-                        'start_date' => Input::get('start_date'),
-                        'end_date' => Input::get('end_date'),
-                        'date_death' => Input::get('date_death'),
-                        'primary_cause' => Input::get('primary_cause'),
-                        'secondary_cause' => Input::get('secondary_cause'),
-                        'withdrew_reason' => Input::get('withdrew_reason'),
-                        'withdrew_other' => Input::get('withdrew_other'),
-                        'terminated_reason' => Input::get('terminated_reason'),
-                        'outcome' => Input::get('outcome'),
-                        'outcome_date' => Input::get('outcome_date'),
-                        'summary' => Input::get('summary'),
-                        'clinician_name' => Input::get('clinician_name'),
-                        'crf6_cmpltd_date' => Input::get('crf6_cmpltd_date'),
-                        'patient_id' => $_GET['cid'],
-                        'staff_id' => $user->data()->id,
-                        'status' => 1,
-                        'created_on' => date('Y-m-d'),
-                        'site_id' => $user->data()->site_id,
-                    ));
-                    $successMessage = 'CRF6 added Successful';
-                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                    if ((Input::get('completed120days') == 1 && Input::get('reported_dead') == 1 && Input::get('withdrew_consent') == 1) || ((Input::get('completed120days') == 2 && Input::get('reported_dead') == 2 && Input::get('withdrew_consent') == 2))) {
+                        $errorMessage = 'Reason for termination can not all be "NO" and Only one Can be "YES"';
+                    } else {
+                        $user->createRecord('crf6', array(
+                            'vid' => $_GET["vid"],
+                            'vcode' => $_GET["vcode"],
+                            'study_id' => $_GET['sid'],
+                            'today_date' => Input::get('today_date'),
+                            'terminate_date' => Input::get('terminate_date'),
+                            'completed120days' => Input::get('completed120days'),
+                            'reported_dead' => Input::get('reported_dead'),
+                            'withdrew_consent' => Input::get('withdrew_consent'),
+                            'start_date' => Input::get('start_date'),
+                            'end_date' => Input::get('end_date'),
+                            'date_death' => Input::get('date_death'),
+                            'primary_cause' => Input::get('primary_cause'),
+                            'secondary_cause' => Input::get('secondary_cause'),
+                            'withdrew_reason' => Input::get('withdrew_reason'),
+                            'withdrew_other' => Input::get('withdrew_other'),
+                            'terminated_reason' => Input::get('terminated_reason'),
+                            'outcome' => Input::get('outcome'),
+                            'outcome_date' => Input::get('outcome_date'),
+                            'summary' => Input::get('summary'),
+                            'clinician_name' => Input::get('clinician_name'),
+                            'crf6_cmpltd_date' => Input::get('crf6_cmpltd_date'),
+                            'patient_id' => $_GET['cid'],
+                            'staff_id' => $user->data()->id,
+                            'status' => 1,
+                            'created_on' => date('Y-m-d'),
+                            'site_id' => $user->data()->site_id,
+                        ));
+
+                        $user->updateRecord('clients', array(
+                            'end_study' => 1,
+                        ), $_GET['cid']);
+
+                        $successMessage = 'CRF6 added Successful';
+                        Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                    }
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -1185,7 +1205,7 @@ if ($user->isLoggedIn()) {
                                 <h1>Add Client</h1>
                             </div>
                             <div class="block-fluid">
-                                <form id="validation" enctype="multipart/form-data" method="post">
+                                <form id="validation" enctype="multipart/form-data" method="post" autocomplete="off">
 
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">Study</div>
@@ -1206,19 +1226,19 @@ if ($user->isLoggedIn()) {
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">First Name:</div>
                                         <div class="col-md-9">
-                                            <input value="" class="validate[required]" type="text" name="firstname" id="firstname" required />
+                                            <input value="" class="validate[required]" id="firstname" type="text" name="firstname" placeholder="Type firstname..." onkeyup="myFunction()" required />
                                         </div>
                                     </div>
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">Middle Name:</div>
                                         <div class="col-md-9">
-                                            <input value="" class="validate[required]" type="text" name="middlename" id="middlename" required />
+                                            <input value="" class="validate[required]" id="middlename" type="text" name="middlename" placeholder="Type middlename..." onkeyup="myFunction()" required />
                                         </div>
                                     </div>
                                     <div class="row-form clearfix">
                                         <div class="col-md-3">Last Name:</div>
                                         <div class="col-md-9">
-                                            <input value="" class="validate[required]" type="text" name="lastname" id="lastname" required />
+                                            <input value="" class="validate[required]" id="lastname" type="text" name="lastname" placeholder="Type lastname..." onkeyup="myFunction()" required />
                                         </div>
                                     </div>
 
@@ -1977,7 +1997,7 @@ if ($user->isLoggedIn()) {
                                                     <span id="bmi"></span>&nbsp;&nbsp;kg/m2
                                                 </div>
                                             </div>
-                                        </div>                                        
+                                        </div>
                                     </div>
 
 
@@ -3070,38 +3090,38 @@ if ($user->isLoggedIn()) {
 
                                     <?php if (!$_GET['vcode'] == "D0") { ?>
 
-                                    <div class="head clearfix">
-                                        <div class="isw-ok"></div>
-                                        <h1>Drug adherence (To be asked on day 7,14,30,60,90,120) For patients on NIMREGENIN only</h1>
-                                    </div>
+                                        <div class="head clearfix">
+                                            <div class="isw-ok"></div>
+                                            <h1>Drug adherence (To be asked on day 7,14,30,60,90,120) For patients on NIMREGENIN only</h1>
+                                        </div>
 
-                                    <div class="row">
+                                        <div class="row">
 
 
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1. Do you take NIMREGENIN as advised ie daily?:</label>
-                                                    <select name="adherence" id="adherence" style="width: 100%;" required>
-                                                        <option value="">Select</option>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
+                                            <div class="col-sm-6">
+                                                <div class="row-form clearfix">
+                                                    <!-- select -->
+                                                    <div class="form-group">
+                                                        <label>1. Do you take NIMREGENIN as advised ie daily?:</label>
+                                                        <select name="adherence" id="adherence" style="width: 100%;" required>
+                                                            <option value="">Select</option>
+                                                            <option value="1">Yes</option>
+                                                            <option value="2">No</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6" id="adherence_specify">
+                                                <div class="row-form clearfix">
+                                                    <!-- select -->
+                                                    <div class="form-group">
+                                                        <label>1. Specify why:</label>
+                                                        <input value="" type="text" name="adherence_specify" />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="col-sm-6" id="adherence_specify">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>1. Specify why:</label>
-                                                    <input value="" type="text" name="adherence_specify" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <?php } ?>
 
 
@@ -3194,8 +3214,8 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Date of Sample Collection</label>
-                                                    <input value="" type="text" name="sample_date" id="sample_date" /> <span>Example: 2023-01-01</span>
-                                                    <SPan>XX.X ( mg/dl )</SPan>
+                                                    <input value="" type="text" name="sample_date" id="sample_date" required />
+                                                    <span>Example: 2023-01-01</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -3205,9 +3225,16 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Serum urea levels</label>
-                                                    <input value="" type="text" name="renal_urea" id="renal_urea" />
-                                                    <SPan>XX.X ( mg/dl )</SPan>
+                                                    <input value="" type="text" name="renal_urea" id="renal_urea" required />
+                                                    <select name="renal_urea_units" id="renal_urea_units" required>
+                                                        <option value="">Select units</option>
+                                                        <option value="1"> mg/dl </option>
+                                                        <option value="2"> mmol/l </option>
+                                                    </select>
+                                                    <span>XX.X ( mg/dl ) </span>
                                                 </div>
+                                                <div id="renal_ureaError" class="text text-danger"></div>
+                                                <div id="renal_urea_unitsError" class="text text-danger"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -3219,8 +3246,17 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Serum creatinine levels</label>
-                                                    <input value="" type="text" name="renal_creatinine" id="renal_creatinine" />
-                                                    <SPan>X.X ( mg/dl )(> 1.1 grade 0)(1.1 to 1.3 grade 1)(>1.3 to 1.8 grade 2)(> 1.8 to < 3.5 grade 3)(>= 3.5 grade 4)</SPan>
+                                                    <input value="" type="text" name="renal_creatinine" id="renal_creatinine" required />
+                                                    <select name="renal_creatinine_units" required>
+                                                        <option value="">Select units</option>
+                                                        <option value="1"> mg/dl </option>
+                                                        <option value="2"> mmol/l </option>
+                                                    </select>
+                                                    <san>X.X ( mg/dl ) <br /><br />
+                                                        (> 1.1 grade 0)<br />(1.1 to 1.3 grade 1)<br />(>1.3 to 1.8 grade 2)<br />(> 1.8 to
+                                                        < 3.5 grade 3)<br />(>= 3.5 grade 4)
+                                                        </span>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -3248,7 +3284,14 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>eGFR mL/min per 1.73 m2</label>
                                                     <input value="" type="text" name="renal_egfr" id="renal_egfr" />
-                                                    <SPan>XXX.X ( ml/min ) (>= 90 grade 0)(< 90 to 60 grade 2)(< 60 to 30 grade 3)(< 30 grade 4)</SPan>
+                                                    <select name="renal_egfr_units" required >
+                                                        <option value="">Select units</option>
+                                                        <option value="1"> ml/min </option>
+                                                    </select>
+                                                    <span>XXX.X ( ml/min ) <br /><br />
+                                                        (>= 90 grade 0)<br />(
+                                                        < 90 to 60 grade 2)<br />(
+                                                        < 60 to 30 grade 3)<br />(< 30 grade 4) </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -3353,7 +3396,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>PT</label>
                                                     <input value="" type="text" name="liver_pt" id="liver_pt" />
-                                                    <SPan>XXX ( units/L )(< 1.1 grade 0)(1.1 to < 1.25 grade 1)(1.25 to < 1.5 grade 2)(> 1.5 to < 3 grade 3)(>= 3 grade 4)</SPan>
+                                                    <SPan>XXX ( seconds )(< 1.1 grade 0)(1.1 to < 1.25 grade 1)(1.25 to < 1.5 grade 2)(> 1.5 to < 3 grade 3)(>= 3 grade 4)</SPan>
                                                 </div>
                                             </div>
                                         </div>
@@ -3383,7 +3426,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>PTT</label>
                                                     <input value="" type="text" name="liver_ptt" id="liver_ptt" />
-                                                    <SPan>XXX ( units/L )(< 1.1 grade 0)(1.1 to < 1.66 grade 1)(1.66 to < 2.33 grade 2)(> 2.33 to < 3 grade 3)(>= 3 grade 4)</SPan>
+                                                    <SPan>XXX ( seconds )(< 1.1 grade 0)(1.1 to < 1.66 grade 1)(1.66 to < 2.33 grade 2)(> 2.33 to < 3 grade 3)(>= 3 grade 4)</SPan>
                                                 </div>
                                             </div>
                                         </div>
@@ -3411,7 +3454,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>INR</label>
                                                     <input value="" type="text" name="liver_inr" id="liver_inr" />
-                                                    <SPan>XXX ( units/L )(< 1.1 grade 0)(1.1 to < 1.25 grade 1)(1.25 to < 1.5 grade 2)(> 1.5 to < 3 grade 3)(>= 3 grade 4)</SPan>
+                                                    <SPan>XXX (< 1.1 grade 0)(1.1 to < 1.25 grade 1)(1.25 to < 1.5 grade 2)(> 1.5 to < 3 grade 3)(>= 3 grade 4)</SPan>
                                                 </div>
                                             </div>
                                         </div>
@@ -3462,8 +3505,18 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Bilirubin total</label>
-                                                    <input value="" type="text" name="liver_bilirubin_total" id="liver_bilirubin_total" />
-                                                    <SPan>XXX ( grams/L )(< 1.1 grade 0)(1.1 to < 1.6 grade 1)(1.6 to < 2.6 grade 2)(> 2.6 to < 5 grade 3)(>= 5 grade 4)</SPan>
+                                                    <input value="" type="text" name="liver_bilirubin_total" id="liver_bilirubin_total" required />
+                                                    <select name="liver_bilirubin_total_units" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1"> micromol/l </option>
+                                                        <option value="2"> mg/dl </option>/
+                                                        <option value="3"> grams/L </option>
+                                                    </select>
+                                                    <div id="liver_bilirubin_totalError" class="text text-danger"></div>
+                                                    <div id="liver_bilirubin_total_unitsError" class="text text-danger"></div>
+                                                    <SPan>
+                                                        XXX ( grams/L )
+                                                        (< 1.1 grade 0)(1.1 to < 1.6 grade 1)(1.6 to < 2.6 grade 2)(> 2.6 to < 5 grade 3)(>= 5 grade 4)</SPan>
                                                 </div>
                                             </div>
                                         </div>
@@ -3492,8 +3545,21 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Bilirubin direct</label>
-                                                    <input value="" type="text" name="liver_bilirubin_direct" id="liver_bilirubin_direct" />
-                                                    <SPan>XXX ( grams/L )(any value without hapatotoxicity symptoms = grade 0)(any value with signs and symptoms of heapatotoxicity = grade 3)(1any value with signs and symptoms of liver failure = grade 4)</SPan>
+                                                    <input value="" type="text" name="liver_bilirubin_direct" id="liver_bilirubin_direct" required />
+                                                    <select name="liver_bilirubin_direct_units" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1"> micromol/l </option>
+                                                        <option value="2"> mg/dl </option>
+                                                        <option value="3"> grams/L </option>
+                                                    </select>
+                                                    <div id="liver_bilirubin_directError" class="text text-danger"></div>
+                                                    <div id="liver_bilirubin_direct_unitsError" class="text text-danger"></div>
+                                                    <SPan>XXX
+                                                        ( grams/L ) <br /><br />
+                                                        - (any value without hapatotoxicity symptoms = grade 0) <br /><br />
+                                                        - (any value with signs and symptoms of heapatotoxicity = grade 3) <br /><br />
+                                                        - (1any value with signs and symptoms of liver failure = grade 4)
+                                                    </SPan>
                                                 </div>
                                             </div>
                                         </div>
@@ -3520,8 +3586,23 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>RBG</label>
-                                                    <input value="" type="text" name="rbg" id="rbg" />
-                                                    <SPan>XX ( mg/dl ) (< 6.44 grade 0)(6.44 to < 8.89 grade 1)(8.89 to < 13.89 grade 2)(> 13.89 to < 27.75 grade 3)(>= 27.75 grade 4)</SPan>
+                                                    <input value="" type="text" name="rbg" id="rbg" required />
+                                                    <select name="rbg_units" required>
+                                                        <option value="">Select</option>
+                                                        <option value="1"> mmol/l </option>
+                                                        <option value="2"> mg/dl </option>
+                                                    </select>
+                                                    <div id="rbgError" class="text text-danger"></div>
+                                                    <div id="rbg_unitsError" class="text text-danger"></div>
+                                                    <SPan>XX ( mg/dl ) <br /><br />
+                                                        - (
+                                                        < 6.44 grade 0)(6.44 to < 8.89 grade 1) <br /><br />
+                                                        - (8.89 to
+                                                        < 13.89 grade 2) <br /><br />
+                                                        - (> 13.89 to
+                                                        < 27.75 grade 3) <br /><br />
+                                                        - (>= 27.75 grade 4)
+                                                    </SPan>
                                                 </div>
                                             </div>
                                         </div>
@@ -3557,7 +3638,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>AHemoglobin levels (Hb)</label>
                                                     <input value="" type="text" name="hb" id="hb" />
-                                                    <SPan>XX.X ( mg/dl ) For Males (> 10.9 grade 0)(10 to 10.9 grade 1)(9 to < 10 grade 2)(7 to < 9 grade 3)(< 7 grade 4)</SPan>
+                                                    <span>XX.X ( mg/dl ) For Males (> 10.9 grade 0)(10 to 10.9 grade 1)(9 to < 10 grade 2)(7 to < 9 grade 3)(< 7 grade 4)</SPan>
                                                             <SPan>XX.X ( mg/dl ) For Females (> 10.4 grade 0)(9.5 to 10.4 grade 1)(8.5 to < 9.5 grade 2)(6.5 to < 8.5 grade 3)(< 6.5 grade 4)</SPan>
                                                 </div>
                                             </div>
@@ -3761,7 +3842,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>10. CT-Scan chest and abdomen report</label>
-                                                    <select name="ct_chest" style="width: 100%;">
+                                                    <select name="ct_chest" id="ct_chest" style="width: 100%;">
                                                         <option value="">Select</option>
                                                         <option value="1">Normal</option>
                                                         <option value="2">Abnormal</option>
@@ -4048,7 +4129,7 @@ if ($user->isLoggedIn()) {
                                     </div>
 
                                     <div class="footer tar">
-                                        <input type="submit" name="add_crf5" value="Submit" class="btn btn-default">
+                                        <input type="submit" name="add_crf5" id="add_crf5" value="Submit" class="btn btn-default">
                                     </div>
                                 </form>
                             </div>
@@ -4141,7 +4222,8 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>2.a.i Start date</label>
-                                                    <input value="" class="validate[required,custom[date]]" type="text" name="start_date" id="start_date" required /> <span>Example: 2023-01-01</span>
+                                                    <input value="" class="validate[required,custom[date]]" type="text" name="start_date" id="start_date" />
+                                                    <span>Example: 2023-01-01</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -4151,7 +4233,8 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>2.a.ii End date:</label>
-                                                    <input value="" class="validate[required,custom[date]]" type="text" name="end_date" id="end_date" required /> <span>Example: 2023-01-01</span>
+                                                    <input value="" class="validate[required,custom[date]]" type="text" name="end_date" id="end_date" />
+                                                    <span>Example: 2023-01-01</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -4165,7 +4248,8 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>2. b.i when was the date of death? </label>
-                                                    <input value="" class="validate[required,custom[date]]" type="text" name="date_death" id="date_death" required /> <span>Example: 2023-01-01</span>
+                                                    <input value="" class="validate[required,custom[date]]" type="text" name="date_death" id="date_death" />
+                                                    <span>Example: 2023-01-01</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -4203,7 +4287,7 @@ if ($user->isLoggedIn()) {
                                                         <option value="2">Side effects of the herbal preparation (NIMRCAF/ Covidol / Bupiji )</option>
                                                         <option value="3">Side effects of Standard Care</option>
                                                         <option value="4">Moving to another area</option>
-                                                        <option value="5">Other {withdrew_other}</option>
+                                                        <option value="5">Other </option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -4244,7 +4328,8 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>5. Outcome date</label>
-                                                    <input value="" class="validate[required,custom[date]]" type="text" name="outcome_date" id="outcome_date" required /> <span>Example: 2023-01-01</span>
+                                                    <input value="" class="validate[required,custom[date]]" type="text" name="outcome_date" id="outcome_date" required />
+                                                    <span>Example: 2023-01-01</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -4268,7 +4353,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>7.Responsible Clinician Name</label>
-                                                    <input value="" type="text" name="clinician_name" id="clinician_name" />
+                                                    <input value="" type="text" name="clinician_name" id="clinician_name" required />
                                                 </div>
                                             </div>
                                         </div>
@@ -4278,7 +4363,8 @@ if ($user->isLoggedIn()) {
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Date of Completion</label>
-                                                    <input value="" class="validate[required,custom[date]]" type="text" name="crf6_cmpltd_date" id="crf6_cmpltd_date" required /> <span>Example: 2023-01-01</span>
+                                                    <input value="" class="validate[required,custom[date]]" type="text" name="crf6_cmpltd_date" id="crf6_cmpltd_date" required />
+                                                    <span>Example: 2023-01-01</span>
                                                     <span>Example : 2002-08-21</span>
                                                 </div>
                                             </div>
@@ -4377,7 +4463,9 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <div class="form-group">
                                                     <label>Tarehe ya Leo:</label>
-                                                    <div class="col-md-9"><input value="" class="validate[required,custom[date]]" type="text" name="tdate" id="tdate" /> <span>Example: 2023-01-01</span></div>
+                                                    <div class="col-md-9"><input value="" class="validate[required,custom[date]]" type="text" name="tdate" id="tdate" />
+                                                        <span>Example: 2023-01-01</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -4471,7 +4559,9 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <div class="form-group">
                                                     <label>DATE FORM COMPLETED:</label>
-                                                    <input value="" type="text" name="FDATE" id="FDATE" /> <span>Example: 2023-01-01</span>
+                                                    <input value="" type="text" name="FDATE" id="FDATE" />
+                                                    <span>Example: 2023-01-01</span>
+                                                    <!-- <div id="FDATEError" class="text text-danger"></div> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -4480,6 +4570,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="form-group">
                                                     <label>NAME OF PERSON CHECKING FORM:</label>
                                                     <input value="" type="text" name="cpersid" id="cpersid" />
+                                                    <!-- <div id="cpersidError" class="text text-danger"></div> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -4488,13 +4579,15 @@ if ($user->isLoggedIn()) {
                                             <div class="row-form clearfix">
                                                 <div class="form-group">
                                                     <label>DATE FORM CHECKED:</label>
-                                                    <input value="" class="validate[required,custom[date]]" type="text" name="cDATE" id="cDATE" /> <span>Example: 2023-01-01</span>
+                                                    <input value="" class="validate[required,custom[date]]" type="text" name="cDATE" id="cDATE" />
+                                                    <span>Example: 2023-01-01</span>
+                                                    <!-- <div id="cDATEError" class="text text-danger"></div> -->
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="footer tar">
-                                        <input type="submit" name="add_crf7" value="Submit" class="btn btn-default">
+                                        <input type="submit" name="add_crf7" id="add_crf7" value="Submit" class="btn btn-default">
                                     </div>
                                 </form>
                             </div>
@@ -4536,10 +4629,185 @@ if ($user->isLoggedIn()) {
         <?php } ?>
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
-        }       
+        }
+
+        function autocomplete(inp, arr) {
+            /*the autocomplete function takes two arguments,
+            the text field element and an array of possible autocompleted values:*/
+            var currentFocus;
+            /*execute a function when someone writes in the text field:*/
+            inp.addEventListener("input", function(e) {
+                var a, b, i, val = this.value;
+                /*close any already open lists of autocompleted values*/
+                closeAllLists();
+                if (!val) {
+                    return false;
+                }
+                currentFocus = -1;
+                /*create a DIV element that will contain the items (values):*/
+                a = document.createElement("DIV");
+                a.setAttribute("id", this.id + "autocomplete-list");
+                a.setAttribute("class", "autocomplete-items");
+                /*append the DIV element as a child of the autocomplete container:*/
+                this.parentNode.appendChild(a);
+                /*for each item in the array...*/
+                for (i = 0; i < arr.length; i++) {
+                    /*check if the item starts with the same letters as the text field value:*/
+                    if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                        /*create a DIV element for each matching element:*/
+                        b = document.createElement("DIV");
+                        /*make the matching letters bold:*/
+                        b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                        b.innerHTML += arr[i].substr(val.length);
+                        /*insert a input field that will hold the current array item's value:*/
+                        b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                        /*execute a function when someone clicks on the item value (DIV element):*/
+                        b.addEventListener("click", function(e) {
+                            /*insert the value for the autocomplete text field:*/
+                            inp.value = this.getElementsByTagName("input")[0].value;
+                            /*close the list of autocompleted values,
+                            (or any other open lists of autocompleted values:*/
+                            closeAllLists();
+                        });
+                        a.appendChild(b);
+                    }
+                }
+            });
+            /*execute a function presses a key on the keyboard:*/
+            inp.addEventListener("keydown", function(e) {
+                var x = document.getElementById(this.id + "autocomplete-list");
+                if (x) x = x.getElementsByTagName("div");
+                if (e.keyCode == 40) {
+                    /*If the arrow DOWN key is pressed,
+                    increase the currentFocus variable:*/
+                    currentFocus++;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } else if (e.keyCode == 38) { //up
+                    /*If the arrow UP key is pressed,
+                    decrease the currentFocus variable:*/
+                    currentFocus--;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } else if (e.keyCode == 13) {
+                    /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                    e.preventDefault();
+                    if (currentFocus > -1) {
+                        /*and simulate a click on the "active" item:*/
+                        if (x) x[currentFocus].click();
+                    }
+                }
+            });
+
+            function addActive(x) {
+                /*a function to classify an item as "active":*/
+                if (!x) return false;
+                /*start by removing the "active" class on all items:*/
+                removeActive(x);
+                if (currentFocus >= x.length) currentFocus = 0;
+                if (currentFocus < 0) currentFocus = (x.length - 1);
+                /*add class "autocomplete-active":*/
+                x[currentFocus].classList.add("autocomplete-active");
+            }
+
+            function removeActive(x) {
+                /*a function to remove the "active" class from all autocomplete items:*/
+                for (var i = 0; i < x.length; i++) {
+                    x[i].classList.remove("autocomplete-active");
+                }
+            }
+
+            function closeAllLists(elmnt) {
+                /*close all autocomplete lists in the document,
+                except the one passed as an argument:*/
+                var x = document.getElementsByClassName("autocomplete-items");
+                for (var i = 0; i < x.length; i++) {
+                    if (elmnt != x[i] && elmnt != inp) {
+                        x[i].parentNode.removeChild(x[i]);
+                    }
+                }
+            }
+            /*execute a function when someone clicks in the document:*/
+            document.addEventListener("click", function(e) {
+                closeAllLists(e.target);
+            });
+        }
+
+        /*An array containing all the country names in the world:*/
+        // var countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua & Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia & Herzegovina", "Botswana", "Brazil", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central Arfrican Republic", "Chad", "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica", "Cote D Ivoire", "Croatia", "Cuba", "Curacao", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Polynesia", "French West Indies", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauro", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "Saint Pierre & Miquelon", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "St Kitts & Nevis", "St Lucia", "St Vincent", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor L'Este", "Togo", "Tonga", "Trinidad & Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks & Caicos", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Virgin Islands (US)", "Yemen", "Zambia", "Zimbabwe"];
+        // var getUid = $(this).val();
+        fetch('fetch_firstname.php')
+            .then(response => response.json())
+            .then(data => {
+                // Process the data received from the PHP script
+                // console.log(data);
+                autocomplete(document.getElementById("firstname"), data);
+            })
+            .catch(error => {
+                // Handle any errors that occurred during the fetch request
+                console.error('Error:', error);
+            });
+
+        fetch('fetch_middlename.php')
+            .then(response => response.json())
+            .then(data => {
+                // Process the data received from the PHP script
+                // console.log(data);
+                autocomplete(document.getElementById("middlename"), data);
+            })
+            .catch(error => {
+                // Handle any errors that occurred during the fetch request
+                console.error('Error:', error);
+            });
+
+
+        fetch('fetch_lastname.php')
+            .then(response => response.json())
+            .then(data => {
+                // Process the data received from the PHP script
+                autocomplete(document.getElementById("lastname"), data);
+            })
+            .catch(error => {
+                // Handle any errors that occurred during the fetch request
+                console.error('Error:', error);
+            });
 
 
         $(document).ready(function() {
+
+            $("#add_crf6").click(function(e) {
+                // if ($("#validation")[0].checkValidity()) {
+                //   PREVENT PAGE TO REFRESH
+                // e.preventDefault();
+
+
+
+                // if($("#FDATE").val() == ''){
+                //     $("#FDATEError").text('* Date is empty');
+                // };
+                // if($("#cDATE").val() == ''){
+                //     $("#cDATEError").text('* Date is empty');
+                // };
+                // if($("#cpersid").val() == ''){
+                //     $("#cpersidError").text('* NAME is empty');
+                // };
+
+
+                if ($("#renal_urea").val() == '') {
+                    $("#renal_ureaError").text('* Renal Urea is empty');
+                };
+
+                if ($("#renal_urea_units").val() == '') {
+                    $("#renal_urea_unitsError").text('* Renal Urea Units is empty');
+                };
+
+                // if ($("#password1").val() != $("#password2").val()) {
+                //     $("#passError").text('* Passowrd do not match');
+                //     //console.log("Not matched"); 
+                //     $("#register-btn").val('Sign Up');
+                // }
+                // }
+            });
 
             $('#weight, #height').on('input', function() {
                 setTimeout(function() {

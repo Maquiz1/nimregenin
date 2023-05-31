@@ -1,4 +1,3 @@
-
 <?php
 require_once 'php/core/init.php';
 $user = new User();
@@ -15,7 +14,6 @@ $noD = 0;
 $users = $override->getData('user');
 
 if ($user->isLoggedIn()) {
-
 } else {
     Redirect::to('index.php');
 }
@@ -42,7 +40,7 @@ if ($user->isLoggedIn()) {
             </div>
 
             <div class="workplace">
-            <?php include 'header.php' ?>
+                <?php include 'header.php' ?>
 
                 <div class="dr"><span></span></div>
                 <div class="row">
@@ -105,7 +103,10 @@ if ($user->isLoggedIn()) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $x = 1;
+                                        <?php
+                                        // $Report = $override->getReport2('clients')[0];
+                                        // print_r($Report);
+                                        $x = 1;
                                         foreach ($visits as $visit) {
                                             $client = $override->get('clients', 'id', $visit['client_id'])[0] ?>
                                             <tr>
