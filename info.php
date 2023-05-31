@@ -2181,16 +2181,20 @@ if ($user->isLoggedIn()) {
                                 <table cellpadding="0" cellspacing="0" width="100%" class="table">
                                     <thead>
                                         <tr>
-                                            <th><input type="checkbox" name="checkall" /></th>
+                                            <!-- <th><input type="checkbox" name="checkall" /></th> -->
                                             <td width="2">#</td>
                                             <th width="20">Picture</th>
                                             <th width="8%">ParticipantID</th>
                                             <th width="8%">Enrollment Date</th>
-                                            <th width="8%">USING NIMREGENIN ?</th>
+                                            <!-- <th width="6%">AGREE USING NIMREGENIN ?</th> -->
+                                            <th width="6%">USING NIMREGENIN ?</th>
                                             <th width="10%">Name</th>
-                                            <th width="10%">Gender</th>
-                                            <th width="10%">Age</th>
-                                            <th width="10%">SITE</th>
+                                            <th width="8%">Gender</th>
+                                            <th width="8%">Age</th>
+                                            <!-- <th width="3%">PATIENT TYPE</th>
+                                            <th width="3%">TREATMENT TYPE</th>
+                                            <th width="4%">CATEGORY</th> -->
+                                            <th width="8%">SITE</th>
                                             <th width="10%">STATUS</th>
                                             <?php if ($_GET['status'] == 4) { ?>
 
@@ -2230,7 +2234,7 @@ if ($user->isLoggedIn()) {
                                             }
                                         ?>
                                             <tr>
-                                                <td><input type="checkbox" name="checkbox" /></td>
+                                                <!-- <td><input type="checkbox" name="checkbox" /></td> -->
                                                 <td><?= $x ?></td>
                                                 <td width="100">
                                                     <?php if ($client['client_image'] != '' || is_null($client['client_image'])) {
@@ -2242,6 +2246,11 @@ if ($user->isLoggedIn()) {
                                                 </td>
                                                 <td><?= $client['study_id'] ?></td>
                                                 <td><?= $visit_date['visit_date'] ?></td>
+                                                <!-- <?php if ($client['consented_nimregenin'] == 1) { ?>
+                                                    <td>Yes</td>
+                                                <?php } else { ?>
+                                                    <td>No</td>
+                                                <?php } ?> -->
                                                 <?php if ($client['nimregenin'] == 1) { ?>
                                                     <td>
                                                         <a href="#" class="btn btn-info">YES</a>
@@ -2257,6 +2266,18 @@ if ($user->isLoggedIn()) {
                                                 <?php } ?> <td> <?= $client['firstname'] . ' ' . $client['lastname'] ?></td>
                                                 <td><?= $client['gender'] ?></td>
                                                 <td><?= $client['age'] ?></td>
+                                                <!-- <?php if ($client['pt_type'] == 1) { ?>
+                                                    <td>NEW PATIENT</td>
+                                                <?php } else { ?>
+                                                    <td>OLD PATIENT</td>
+                                                <?php } ?>
+                                                <?php if ($client['treatment_type'] == 1) { ?>
+                                                    <td>Radiotherapy</td>
+                                                <?php } elseif ($client['treatment_type'] == 1) { ?>
+                                                    <td>Chemotherapy</td>
+                                                <?php } else { ?>
+                                                    <td>Surgery</td>
+                                                <?php } ?> -->
                                                 <?php if ($client['site_id'] == 1) { ?>
                                                     <td>MNH - UPANGA </td>
                                                 <?php } else { ?>
@@ -2392,6 +2413,7 @@ if ($user->isLoggedIn()) {
                                                             <a href="#addInclusion<?= $client['id'] ?>" role="button" class="btn btn-warning" data-toggle="modal">Add Inclusion</a>
 
                                                         <?php } ?>
+                                                        
                                                         <?php if ($screening2 >= 1) { ?>
                                                             <a href="#addExclusion<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Edit Exclusion</a>
 
@@ -4674,7 +4696,7 @@ if ($user->isLoggedIn()) {
                                                                                         <div class="col-md-3">Visit Type:</div>
                                                                                         <div class="col-md-9"><input type="text" name="name" value="<?= $v_typ ?>" disabled /></div>
                                                                                     </div>
-                                                                                </div>                                                                               
+                                                                                </div>
 
                                                                                 <div class="row-form clearfix">
                                                                                     <div class="col-md-3">Notes / Remarks :</div>
