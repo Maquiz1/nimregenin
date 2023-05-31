@@ -616,10 +616,13 @@ if ($user->isLoggedIn()) {
                 $screening = 0;
                 $eligibility = 0;
                 $eligible = 0;
-                if ((Input::get('pregnant') == 2 || Input::get('pregnant') == 3) && (Input::get('breast_feeding') == 2 || Input::get('breast_feeding') == 3) && Input::get('cdk') == 2 && Input::get('liver_disease') == 2) {
-                    if (Input::get('pregnant') == 2 && (Input::get('breast_feeding') == 2 || Input::get('breast_feeding') == 3) && Input::get('cdk') == 2 && Input::get('liver_disease') == 2) {
+
+                $gender = $override->getNews('clients', 'id', Input::get('id'), 'status', 1)[0]['gender'];
+
+                if (Input::get('cdk') == 2 && Input::get('liver_disease') == 2) {
+                    if ($gender == 'male') {
                         $eligibility = 1;
-                    } elseif ((Input::get('pregnant') == 2 || Input::get('pregnant') == 3) && (Input::get('breast_feeding') == 2 || Input::get('breast_feeding') == 3) && Input::get('cdk') == 2 && Input::get('liver_disease') == 2) {
+                    } elseif ($gender == 'female' && (Input::get('pregnant') == 2 && Input::get('breast_feeding') == 2)) {
                         $eligibility = 1;
                     }
                 }
@@ -2413,7 +2416,7 @@ if ($user->isLoggedIn()) {
                                                             <a href="#addInclusion<?= $client['id'] ?>" role="button" class="btn btn-warning" data-toggle="modal">Add Inclusion</a>
 
                                                         <?php } ?>
-                                                        
+
                                                         <?php if ($screening2 >= 1) { ?>
                                                             <a href="#addExclusion<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Edit Exclusion</a>
 
