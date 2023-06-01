@@ -69,15 +69,12 @@ if ($site_data) {
                     </td>
                 </tr>
 
-                <br />
 
                 <tr>
                     <td colspan="18" align="center" style="font-size: 18px">
                         <b>NIMREGENIN SUMMARY REPORT </b>
                     </td>
                 </tr>
-
-                <br />
 
                 <tr>
                     <td colspan="18" align="center" style="font-size: 18px">
