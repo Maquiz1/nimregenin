@@ -176,7 +176,7 @@ if ($site_data) {
             <br />
             <br />
             <br />
-            <p align="right">----'.$user->data()->firstname. ' '.$user->data()->lastname.'-----<br />Printed By</p>
+            <p align="right">----'.$user->data()->firstname. ' '.$user->data()->lastname.'-----<br />Prepared By</p>
             <br />
             <br />
             <br />
@@ -189,7 +189,7 @@ if ($site_data) {
             <br />
             <br />
             <br />
-            <p align="right">-----'.date('Y-m-d').'-------<br />Date Printed</p>
+            <p align="right">-----'.date('Y-m-d').'-------<br />Date Prepared</p>
             <br />
             <br />
             <br />
