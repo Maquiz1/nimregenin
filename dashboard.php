@@ -110,6 +110,8 @@ if ($user->isLoggedIn()) {
                                         $x = 1;
                                         foreach ($visits as $visit) {
                                             $client = $override->get3('clients', 'id', $visit['client_id'],'enrolled',1,'end_study',0)[0] 
+                                            // $client = $override->get4('clients', 'id', $visit['client_id'],'enrolled',1,'end_study',0,'site_id',$user->data()->site_id)[0] 
+
                                             ?>
                                             <tr>
                                                 <td><input type="checkbox" name="checkbox" /></td>

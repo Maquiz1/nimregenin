@@ -106,6 +106,13 @@ class OverideData
         return $result;
     }
 
+    public function get4($table, $where, $id, $where2, $id2, $where3, $id3,$where4, $id4)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$id2' AND $where3 = '$id3'  AND $where4 = '$id4'");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     public function getSumD($table, $variable)
     {
         $query = $this->_pdo->query("SELECT SUM($variable) FROM $table");
