@@ -47,7 +47,6 @@ if ($_GET['group'] == 1) {
 
 $pdf = new Pdf();
 
-// $title = 'NIMREGENIN SUMMARY REPORT_'. date('Y-m-d');
 $file_name = $title . '.pdf';
 
 $output = ' ';
@@ -59,20 +58,10 @@ if ($site_data) {
             <table width="100%" border="1" cellpadding="5" cellspacing="0">
                 <tr>
                     <td colspan="2" align="center" style="font-size: 18px">
-                        <b>DATE  ' . date('Y-m-d') . '</b>
+                        <b>NIMREGENIN SUMMARY REPORT  ' . date('Y-m-d') . '</b>
                     </td>
                 </tr>
-
                 <br />
-
-                <tr>
-                    <td colspan="2" align="center" style="font-size: 18px">
-                        <b>NIMREGENIN SUMMARY REPORT </b>
-                    </td>
-                </tr>
-
-                <br />
-
                 <tr>
                     <td colspan="18" align="center" style="font-size: 18px">
                         <b>Report FOR ' . $title . ':  Total ( ' . $data_count . ' )</b>
@@ -82,22 +71,17 @@ if ($site_data) {
                     <td colspan="2">                        
                         <br />
                         <table width="100%" border="1" cellpadding="5" cellspacing="0">
-                            <tr>
-                                <th rowspan="2">No.</th>
-                                <th rowspan="2">SITE</th>
-                                <th rowspan="2">REGISTERED</th>
-                                <th rowspan="2">SCREENED.</th>
-                                <th colspan="4"> CANCER ( INCLUSION )</th>
-                                <th rowspan="2">ELIGIBLE</th>
-                                <th rowspan="2">ENROLLED</th>
-                                <th rowspan="2">END</th>
-                            </tr>
-                            <tr>
-                                <th>Breast</th>
-                                <th>Brain</th>
-                                <th>Cervical </th>
-                                <th>Prostate </th>
-                            </tr>
+                        <tr>
+                            <th rowspan="2">No.</th>
+                            <th rowspan="2">SITE</th>
+                            <th rowspan="2">REGISTERED</th>
+                            <th rowspan="2">SCREENED.</th>
+                            <th rowspan="2">ELIGIBLE</th>
+                            <th rowspan="2">ELIGIBLE</th>
+                            <th rowspan="2">ENROLLED</th>
+                            <th rowspan="2">END</th>
+                            <th rowspan="2">END</th>
+                        </tr>
             ';
 
     // Load HTML content into dompdf
@@ -128,15 +112,13 @@ if ($site_data) {
                 <tr>
                     <td>' . $x . '</td>
                     <td>' . $row['name']  . '</td>
-                    <td>' . $registered . '</td>
-                    <td align="right">' . $screened . '</td>
-                    <td align="right">' . $breast_cancer . '</td>
-                    <td align="right">' . $brain_cancer . '</td>
-                    <td align="right">' . $cervical_cancer . '</td>
-                    <td align="right">' . $prostate_cancer . '</td>
-                    <td align="right">' . $eligible . '</td>
-                    <td align="right">' . $enrolled . '</td>
-                    <td align="right">' . $end_study . '</td>
+                    <td align="right">' . $crf1 . '</td>
+                    <td align="right">' . $crf2 . '</td>
+                    <td align="right">' . $crf3 . '</td>
+                    <td align="right">' . $crf4 . '</td>
+                    <td align="right">' . $crf5 . '</td>
+                    <td align="right">' . $crf6 . '</td>
+                    <td align="right">' . $crf7 . '</td>
                 </tr>
             ';
 
@@ -160,6 +142,44 @@ if ($site_data) {
 
     $output .= '
         </table>
+
+        <br />
+        <br />
+
+        <table width="100%" cellpadding="5">
+            <tr>
+                <td width="50%">
+                    <br />
+                        <b>RECEIVER (BILL TO)</b><br />
+                        <tr>
+                        <th rowspan="2">No.</th>
+                        <th rowspan="2">SITE</th>
+                        <th rowspan="2">REGISTERED</th>
+                        <th rowspan="2">SCREENED.</th>
+                        <th colspan="4"> CANCER ( INCLUSION )</th>
+                        <th rowspan="2">ELIGIBLE</th>
+                        <th rowspan="2">ENROLLED</th>
+                        <th rowspan="2">END</th>
+                    </tr>
+                </td>
+                <td width="50%">
+                    <tr>
+                        <td>' . $x . '</td>
+                        <td>' . $row['name']  . '</td>
+                        <td>' . $registered . '</td>
+                        <td align="right">' . $screened . '</td>
+                        <td align="right">' . $breast_cancer . '</td>
+                        <td align="right">' . $brain_cancer . '</td>
+                        <td align="right">' . $cervical_cancer . '</td>
+                        <td align="right">' . $prostate_cancer . '</td>
+                        <td align="right">' . $eligible . '</td>
+                        <td align="right">' . $enrolled . '</td>
+                        <td align="right">' . $end_study . '</td>
+                    </tr>
+                </td>
+            </tr>
+        </table>
+
             <br />
             <br />
             <br />
@@ -174,102 +194,6 @@ if ($site_data) {
     </tr>
 </table>    
 ';
-} else {
-
-    $output .= '
-    <table width="100%" border="1" cellpadding="5" cellspacing="0">
-
-        <tr>
-            <td colspan="15" align="center" style="font-size: 18px">
-                <b>NIMREGENIN SUMMARY REPORT  </b>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="15" align="center" style="font-size: 18px">
-            <b>' . date('Y-m-d') . '</b>
-        </td>
-    </tr>
-        <tr>
-            <td colspan="15" align="center" style="font-size: 18px">
-                <b>Report FOR ' . $title . ':  Total ( ' . $data_count . ' )</b>
-            </td>
-        </tr>
-
-        <tr>
-        <td colspan="15" align="center" style="font-size: 18px">
-            <b>For Period ' . date('Y-m-d') . ' to ' . date('Y-m-d') . '</b>
-        </td>
-        </tr>
-
-        <tr>
-            <th colspan="1">SITE.</th>
-            <th colspan="2">REGISTERED</th>
-            <th colspan="2">USE NIMREGENIN</th>
-            <th colspan="2">SCREENED</th>        
-            <th colspan="2">CANCER ( INCLUSION )</th>
-            <th colspan="2">ELIGIBLE</th>
-            <th colspan="2">ENROLLED</th>
-            <th colspan="2">ENROLLED</th>
-        </tr>
-
-    ';
-
-    // Load HTML content into dompdf
-    $x = 1;
-    foreach ($data as $row) {
-        // $generic_name = $override->getNews('generic', 'id', $row['generic_id'], 'status', 1)[0]['name'];
-        // $brand_name = $override->getNews('brand', 'id', $row['brand_id'], 'status', 1)[0]['name'];
-        // $category_name = $override->get('drug_cat', 'id', $row['category'])[0]['name'];
-        // $staff = $override->get('user', 'id', $row['staff_id'])[0];
-        // $batch_no = $row['batch_no'];
-
-
-        $output .= '
-        <tr>
-            <td colspan="1">' . $x . '</td>
-            <td colspan="2">' . $row['create_on'] . '</td>
-            <td colspan="2">' . $row . '</td>
-            <td colspan="2">' . $row . '</td>
-            <td colspan="2">' . $row . '</td>
-            <td colspan="2">' . $row['id'] . '</td>
-            <td colspan="2">' . $row . '</td>
-            <td colspan="2">' . $row['id'] . '</td>
-        </tr>
-        ';
-
-        $x += 1;
-    }
-
-    $output .= '
-    <tr>
-        <td colspan="7" align="center" style="font-size: 18px">
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <p align="right">----' . $user->data()->site_id . ' ' . $user->data()->site_id . '-----<br />Printed By</p>
-            <br />
-            <br />
-            <br />
-        </td>
-
-        <td colspan="8" align="center" style="font-size: 18px">
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <p align="right">-----' . date('Y-m-d') . '-------<br />Date Printed</p>
-            <br />
-            <br />
-            <br />
-        </td>
-    </tr>
-        </table>  
-    ';
 }
 
 

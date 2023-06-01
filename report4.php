@@ -47,7 +47,6 @@ if ($_GET['group'] == 1) {
 
 $pdf = new Pdf();
 
-// $title = 'NIMREGENIN SUMMARY REPORT_'. date('Y-m-d');
 $file_name = $title . '.pdf';
 
 $output = ' ';
@@ -59,20 +58,10 @@ if ($site_data) {
             <table width="100%" border="1" cellpadding="5" cellspacing="0">
                 <tr>
                     <td colspan="2" align="center" style="font-size: 18px">
-                        <b>DATE  ' . date('Y-m-d') . '</b>
+                        <b>NIMREGENIN SUMMARY REPORT  ' . date('Y-m-d') . '</b>
                     </td>
                 </tr>
-
                 <br />
-
-                <tr>
-                    <td colspan="2" align="center" style="font-size: 18px">
-                        <b>NIMREGENIN SUMMARY REPORT </b>
-                    </td>
-                </tr>
-
-                <br />
-
                 <tr>
                     <td colspan="18" align="center" style="font-size: 18px">
                         <b>Report FOR ' . $title . ':  Total ( ' . $data_count . ' )</b>
@@ -160,6 +149,44 @@ if ($site_data) {
 
     $output .= '
         </table>
+
+        <br />
+        <br />
+
+        <table width="100%" cellpadding="5">
+            <tr>
+                <td width="50%">
+                    <br />
+                        <b>RECEIVER (BILL TO)</b><br />
+                        <tr>
+                        <th rowspan="2">No.</th>
+                        <th rowspan="2">SITE</th>
+                        <th rowspan="2">REGISTERED</th>
+                        <th rowspan="2">SCREENED.</th>
+                        <th colspan="4"> CANCER ( INCLUSION )</th>
+                        <th rowspan="2">ELIGIBLE</th>
+                        <th rowspan="2">ENROLLED</th>
+                        <th rowspan="2">END</th>
+                    </tr>
+                </td>
+                <td width="50%">
+                    <tr>
+                        <td>' . $x . '</td>
+                        <td>' . $row['name']  . '</td>
+                        <td>' . $registered . '</td>
+                        <td align="right">' . $screened . '</td>
+                        <td align="right">' . $breast_cancer . '</td>
+                        <td align="right">' . $brain_cancer . '</td>
+                        <td align="right">' . $cervical_cancer . '</td>
+                        <td align="right">' . $prostate_cancer . '</td>
+                        <td align="right">' . $eligible . '</td>
+                        <td align="right">' . $enrolled . '</td>
+                        <td align="right">' . $end_study . '</td>
+                    </tr>
+                </td>
+            </tr>
+        </table>
+
             <br />
             <br />
             <br />
