@@ -7021,6 +7021,19 @@ if ($user->isLoggedIn()) {
                                         <h1>1. Renal function test</h1>
                                     </div>
 
+<<<<<<< HEAD
+                            <?php if ($_GET['vcode'] == 'D7' || $_GET['vcode'] == 'D90') { ?>
+
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="row-form clearfix">
+                                        <!-- select -->
+                                        <div class="form-group">
+                                            <label>Serum creatinine levels</label>
+                                            <input value="<?= $patient['renal_creatinine'] ?>" type="text" name="renal_creatinine" id="renal_creatinine" />
+                                            <SPan>X.X ( mg/dl )</SPan>
+=======
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="row-form clearfix">
@@ -7031,6 +7044,7 @@ if ($user->isLoggedIn()) {
                                                     <span>Example: 2023-01-01</span>
                                                 </div>
                                             </div>
+>>>>>>> a8e573da30136df1be280fa4d4217e1cfbf8265d
                                         </div>
 
                                         <div class="col-sm-6">
@@ -7058,7 +7072,12 @@ if ($user->isLoggedIn()) {
                                         </div>
                                     </div>
 
+<<<<<<< HEAD
+                                <?php } ?>
+
+=======
                                     <?php if ($_GET['vcode'] == 'D7' || $_GET['vcode'] == 'D90') { ?>
+>>>>>>> a8e573da30136df1be280fa4d4217e1cfbf8265d
 
 
                                         <div class="row">
@@ -7797,6 +7816,18 @@ if ($user->isLoggedIn()) {
                                             <?php if ($_GET['vcode'] == 'D7' || $_GET['vcode'] == 'D90') { ?>
 
 
+<<<<<<< HEAD
+                                <?php if ($_GET['vcode'] == 'D7' || $_GET['vcode'] == 'D90') { ?>
+
+
+                                <div class="col-sm-6">
+                                    <div class="row-form clearfix">
+                                        <!-- select -->
+                                        <div class="form-group">
+                                            <label>9. PSA (Prostate specific antigen)</label>
+                                            <input value="<?= $patient['prostate'] ?>" type="text" name="prostate" id="prostate" />
+                                            <SPan>XX ( ng/ml )</SPan>
+=======
                                                 <div class="col-sm-6">
                                                     <div class="row-form clearfix">
                                                         <!-- select -->
@@ -7808,9 +7839,18 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
+>>>>>>> a8e573da30136df1be280fa4d4217e1cfbf8265d
 
                                             <?php } ?>
                                         </div>
+<<<<<<< HEAD
+                                    </div>
+                                </div>
+
+                                <?php } ?>
+                            </div>
+=======
+>>>>>>> a8e573da30136df1be280fa4d4217e1cfbf8265d
 
                                         <div class="row">
 
