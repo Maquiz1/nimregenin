@@ -150,52 +150,52 @@ if ($site_data) {
     }
 
     $output .= '
-    <tr>
-        <td align="right" colspan="2"><b>Total</b></td>
-        <td align="right"><b>' . $registered_Total . '</b></td>
-        <td align="right"><b>' . $screened_Total . '</b></td>
-        <td align="right"><b>' . $breast_cancer_Total . '</b></td>
-        <td align="right"><b>' . $brain_cancer_Total . '</b></td>
-        <td align="right"><b>' . $cervical_cancer_Total . '</b></td>
-        <td align="right"><b>' . $prostate_cancer_Total . '</b></td>
-        <td align="right"><b>' . $eligible_Total . '</b></td>
-        <td align="right"><b>' . $enrolled_Total . '</b></td>
-        <td align="right"><b>' . $end_study_Total . '</b></td>
-    </tr>
-    
+                <tr>
+                    <td align="right" colspan="2"><b>Total</b></td>
+                    <td align="right"><b>' . $registered_Total . '</b></td>
+                    <td align="right"><b>' . $screened_Total . '</b></td>
+                    <td align="right"><b>' . $breast_cancer_Total . '</b></td>
+                    <td align="right"><b>' . $brain_cancer_Total . '</b></td>
+                    <td align="right"><b>' . $cervical_cancer_Total . '</b></td>
+                    <td align="right"><b>' . $prostate_cancer_Total . '</b></td>
+                    <td align="right"><b>' . $eligible_Total . '</b></td>
+                    <td align="right"><b>' . $enrolled_Total . '</b></td>
+                    <td align="right"><b>' . $end_study_Total . '</b></td>
+                </tr>  
 
     '
     ;
 
     $output .= '
-    <tr>
-        <td colspan="9" align="center" style="font-size: 18px">
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <p align="right">----'.$user->data()->firstname. ' '.$user->data()->lastname.'-----<br />Prepared By</p>
-            <br />
-            <br />
-            <br />
-        </td>
+            </table>    
+                <tr>
+                    <td colspan="9" align="center" style="font-size: 18px">
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <p align="right">----'.$user->data()->firstname. ' '.$user->data()->lastname.'-----<br />Prepared By</p>
+                        <br />
+                        <br />
+                        <br />
+                    </td>
 
-        <td colspan="9" align="center" style="font-size: 18px">
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <p align="right">-----'.date('Y-m-d').'-------<br />Date Prepared</p>
-            <br />
-            <br />
-            <br />
-        </td>
-    </tr>
-</table>    
+                    <td colspan="9" align="center" style="font-size: 18px">
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <p align="right">-----'.date('Y-m-d').'-------<br />Date Prepared</p>
+                        <br />
+                        <br />
+                        <br />
+                    </td>
+                </tr>
+        </table>    
 ';
 }
 
