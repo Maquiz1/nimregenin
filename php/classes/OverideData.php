@@ -257,4 +257,16 @@ class OverideData
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    public function searchBtnDate3($table,$var,$value,$var1,$value1,$var2,$value2){
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $var >= '$value' AND $var1 <= '$value1' AND $var2 = '$value2'");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getCountReport($table,$field,$value,$where2,$id2,$where3,$id3){
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field >= '$value' AND $where2 <= '$id2' AND $where3 = '$id3'");
+        $num = $query->rowCount();
+        return $num;
+    }
 }

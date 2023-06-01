@@ -100,11 +100,11 @@ if ($user->isLoggedIn()) {
                             <span class="isw-download"></span><span class="text">Download Data</span>
                         </a>
                     </li>
-                    <!-- <li class="active">
-                        <a href="info.php?id=3&status=6" target="_blank">
-                            <span class="text">Deleted Clients </span> <span class="badge badge-secondary badge-pill"><?= $deleted ?></span>
+                    <li class="active">
+                        <a href="report.php" target="_blank">
+                            <span class="text">Report 1 </span> 
                         </a>
-                    </li> -->
+                    </li>
                 </ul>
             </li>
 
