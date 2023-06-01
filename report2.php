@@ -57,11 +57,10 @@ if ($site_data) {
     $output .= '
             <table width="100%" border="1" cellpadding="5" cellspacing="0">
                 <tr>
-                    <td colspan="2" align="center" style="font-size: 18px">
+                    <td colspan="18" align="center" style="font-size: 18px">
                         <b>NIMREGENIN SUMMARY REPORT  ' . date('Y-m-d') . '</b>
                     </td>
                 </tr>
-                <br />
                 <tr>
                     <td colspan="18" align="center" style="font-size: 18px">
                         <b>Report FOR ' . $title . ':  Total ( ' . $data_count . ' )</b>
@@ -71,17 +70,17 @@ if ($site_data) {
                     <td colspan="2">                        
                         <br />
                         <table width="100%" border="1" cellpadding="5" cellspacing="0">
-                        <tr>
-                            <th rowspan="2">No.</th>
-                            <th rowspan="2">SITE</th>
-                            <th rowspan="2">REGISTERED</th>
-                            <th rowspan="2">SCREENED.</th>
-                            <th rowspan="2">ELIGIBLE</th>
-                            <th rowspan="2">ELIGIBLE</th>
-                            <th rowspan="2">ENROLLED</th>
-                            <th rowspan="2">END</th>
-                            <th rowspan="2">END</th>
-                        </tr>
+                            <tr>
+                                <th rowspan="2">No.</th>
+                                <th rowspan="2">SITE</th>
+                                <th rowspan="2">CRF 1</th>
+                                <th rowspan="2">CRF 2</th>
+                                <th rowspan="2">CRF 3</th>
+                                <th rowspan="2">CRF 4</th>
+                                <th rowspan="2">CRF 5</th>
+                                <th rowspan="2">CRF 6</th>
+                                <th rowspan="2">CRF 7</th>
+                            </tr>
             ';
 
     // Load HTML content into dompdf
@@ -126,72 +125,47 @@ if ($site_data) {
     }
 
     $output .= '
-    <tr>
-        <td align="right" colspan="2"><b>Total</b></td>
-        <td align="right"><b>' . $registered_Total . '</b></td>
-        <td align="right"><b>' . $screened_Total . '</b></td>
-        <td align="right"><b>' . $breast_cancer_Total . '</b></td>
-        <td align="right"><b>' . $brain_cancer_Total . '</b></td>
-        <td align="right"><b>' . $cervical_cancer_Total . '</b></td>
-        <td align="right"><b>' . $prostate_cancer_Total . '</b></td>
-        <td align="right"><b>' . $eligible_Total . '</b></td>
-        <td align="right"><b>' . $enrolled_Total . '</b></td>
-        <td align="right"><b>' . $end_study_Total . '</b></td>
-    </tr>
-    ';
+                <tr>
+                    <td align="right" colspan="2"><b>Total</b></td>
+                    <td align="right"><b>' . $crf1 . '</b></td>
+                    <td align="right"><b>' . $crf2 . '</b></td>
+                    <td align="right"><b>' . $crf3 . '</b></td>
+                    <td align="right"><b>' . $crf4 . '</b></td>
+                    <td align="right"><b>' . $crf5 . '</b></td>
+                    <td align="right"><b>' . $crf6 . '</b></td>
+                    <td align="right"><b>' . $crf7 . '</b></td>
+                </tr>
+                ';
 
     $output .= '
-        </table>
-
+    </table>    
+    <tr>
+    <td colspan="5" align="center" style="font-size: 18px">
         <br />
         <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <p align="right">----'.$user->data()->firstname. ' '.$user->data()->lastname.'-----<br />Printed By</p>
+        <br />
+        <br />
+        <br />
+    </td>
 
-        <table width="100%" cellpadding="5">
-            <tr>
-                <td width="50%">
-                    <br />
-                        <b>RECEIVER (BILL TO)</b><br />
-                        <tr>
-                        <th rowspan="2">No.</th>
-                        <th rowspan="2">SITE</th>
-                        <th rowspan="2">REGISTERED</th>
-                        <th rowspan="2">SCREENED.</th>
-                        <th colspan="4"> CANCER ( INCLUSION )</th>
-                        <th rowspan="2">ELIGIBLE</th>
-                        <th rowspan="2">ENROLLED</th>
-                        <th rowspan="2">END</th>
-                    </tr>
-                </td>
-                <td width="50%">
-                    <tr>
-                        <td>' . $x . '</td>
-                        <td>' . $row['name']  . '</td>
-                        <td>' . $registered . '</td>
-                        <td align="right">' . $screened . '</td>
-                        <td align="right">' . $breast_cancer . '</td>
-                        <td align="right">' . $brain_cancer . '</td>
-                        <td align="right">' . $cervical_cancer . '</td>
-                        <td align="right">' . $prostate_cancer . '</td>
-                        <td align="right">' . $eligible . '</td>
-                        <td align="right">' . $enrolled . '</td>
-                        <td align="right">' . $end_study . '</td>
-                    </tr>
-                </td>
-            </tr>
-        </table>
-
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <p align="right">---------------------------------------<br />Receiver Signature</p>
-            <br />
-            <br />
-            <br />
-        </td>
-    </tr>
+    <td colspan="6" align="center" style="font-size: 18px">
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <p align="right">-----'.date('Y-m-d').'-------<br />Date Printed</p>
+        <br />
+        <br />
+        <br />
+    </td>
+</tr>
 </table>    
 ';
 }

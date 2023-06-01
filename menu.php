@@ -105,6 +105,11 @@ if ($user->isLoggedIn()) {
                             <span class="text">Report 1 </span> 
                         </a>
                     </li>
+                    <li class="active">
+                        <a href="report2.php" target="_blank">
+                            <span class="text">Report 2 </span> 
+                        </a>
+                    </li>
                 </ul>
             </li>
 

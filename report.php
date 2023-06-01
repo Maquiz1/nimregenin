@@ -64,7 +64,7 @@ if ($site_data) {
     $output .= '
             <table width="100%" border="1" cellpadding="5" cellspacing="0">
                 <tr>
-                    <td colspan="2" align="center" style="font-size: 18px">
+                    <td colspan="18" align="center" style="font-size: 18px">
                         <b>DATE  ' . date('Y-m-d') . '</b>
                     </td>
                 </tr>
@@ -72,7 +72,7 @@ if ($site_data) {
                 <br />
 
                 <tr>
-                    <td colspan="2" align="center" style="font-size: 18px">
+                    <td colspan="18" align="center" style="font-size: 18px">
                         <b>NIMREGENIN SUMMARY REPORT </b>
                     </td>
                 </tr>
@@ -85,7 +85,7 @@ if ($site_data) {
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2">                        
+                    <td colspan="18">                        
                         <br />
                         <table width="100%" border="1" cellpadding="5" cellspacing="0">
                             <tr>
@@ -169,7 +169,7 @@ if ($site_data) {
 
     $output .= '
     <tr>
-        <td colspan="5" align="center" style="font-size: 18px">
+        <td colspan="9" align="center" style="font-size: 18px">
             <br />
             <br />
             <br />
@@ -182,7 +182,7 @@ if ($site_data) {
             <br />
         </td>
 
-        <td colspan="6" align="center" style="font-size: 18px">
+        <td colspan="9" align="center" style="font-size: 18px">
             <br />
             <br />
             <br />
@@ -197,106 +197,7 @@ if ($site_data) {
     </tr>
 </table>    
 ';
-} else {
-
-    $output .= '
-    <table width="100%" border="1" cellpadding="5" cellspacing="0">
-
-        <tr>
-            <td colspan="15" align="center" style="font-size: 18px">
-                <b>NIMREGENIN SUMMARY REPORT  </b>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="15" align="center" style="font-size: 18px">
-            <b>' . date('Y-m-d') . '</b>
-        </td>
-    </tr>
-        <tr>
-            <td colspan="15" align="center" style="font-size: 18px">
-                <b>Report FOR ' . $title . ':  Total ( ' . $data_count . ' )</b>
-            </td>
-        </tr>
-
-        <tr>
-        <td colspan="15" align="center" style="font-size: 18px">
-            <b>For Period ' . date('Y-m-d') . ' to ' . date('Y-m-d') . '</b>
-        </td>
-        </tr>
-
-        <tr>
-            <th colspan="1">SITE.</th>
-            <th colspan="2">REGISTERED</th>
-            <th colspan="2">USE NIMREGENIN</th>
-            <th colspan="2">SCREENED</th>        
-            <th colspan="2">CANCER ( INCLUSION )</th>
-            <th colspan="2">ELIGIBLE</th>
-            <th colspan="2">ENROLLED</th>
-            <th colspan="2">ENROLLED</th>
-        </tr>
-
-    ';
-
-    // Load HTML content into dompdf
-    $x = 1;
-    foreach ($data as $row) {
-        // $generic_name = $override->getNews('generic', 'id', $row['generic_id'], 'status', 1)[0]['name'];
-        // $brand_name = $override->getNews('brand', 'id', $row['brand_id'], 'status', 1)[0]['name'];
-        // $category_name = $override->get('drug_cat', 'id', $row['category'])[0]['name'];
-        // $staff = $override->get('user', 'id', $row['staff_id'])[0];
-        // $batch_no = $row['batch_no'];
-
-
-        $output .= '
-        <tr>
-            <td colspan="1">' . $x . '</td>
-            <td colspan="2">' . $row['create_on'] . '</td>
-            <td colspan="2">' . $row . '</td>
-            <td colspan="2">' . $row . '</td>
-            <td colspan="2">' . $row . '</td>
-            <td colspan="2">' . $row['id'] . '</td>
-            <td colspan="2">' . $row . '</td>
-            <td colspan="2">' . $row['id'] . '</td>
-        </tr>
-        ';
-
-        $x += 1;
-    }
-
-    $output .= '
-    <tr>
-        <td colspan="7" align="center" style="font-size: 18px">
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <p align="right">----' . $user->data()->site_id . ' ' . $user->data()->site_id . '-----<br />Printed By</p>
-            <br />
-            <br />
-            <br />
-        </td>
-
-        <td colspan="8" align="center" style="font-size: 18px">
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <p align="right">-----' . date('Y-m-d') . '-------<br />Date Printed</p>
-            <br />
-            <br />
-            <br />
-        </td>
-    </tr>
-        </table>  
-    ';
 }
-
-
-
 
 // $output = '<html><body><h1>Hello, dompdf!' . $row . '</h1></body></html>';
 $pdf->loadHtml($output);
