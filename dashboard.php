@@ -16,6 +16,8 @@ if ($user->isLoggedIn()) {
 } else {
     Redirect::to('index.php');
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,6 +84,7 @@ if ($user->isLoggedIn()) {
                                 $visits = $override->getNews('visit', 'expected_date', date('Y-m-d'), 'status', 0);
                             } else {
                                 $visits = $override->getNews('visit', 'expected_date', date('Y-m-d'), 'status', 0);
+                                // $visits = $override->get3('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'site_id',$user->data()->site_id);
                             } ?>
                             <div class="block-fluid">
                                 <table cellpadding="0" cellspacing="0" width="100%" class="table">
@@ -106,7 +109,8 @@ if ($user->isLoggedIn()) {
                                         // print_r($Report);
                                         $x = 1;
                                         foreach ($visits as $visit) {
-                                            $client = $override->get('clients', 'id', $visit['client_id'])[0] ?>
+                                            $client = $override->get3('clients', 'id', $visit['client_id'],'enrolled',1,'end_study',0)[0] 
+                                            ?>
                                             <tr>
                                                 <td><input type="checkbox" name="checkbox" /></td>
                                                 <td><?= $x ?></td>
