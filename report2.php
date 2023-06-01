@@ -24,7 +24,9 @@ if ($user->isLoggedIn()) {
         // }
 
         $site_data = $override->getData('site');
+        $Total = $override->getCount('clients', 'status', 1);
         // $data = $override->getNews('clients', 'status', 1, 'screened', 1);
+        // $name = $override->get('user', 'status', 1, 'screened', $user->data()->id);
         // $data_count = $override->getCount2('clients', 'status', 1, 'screened',1, 'site_id', $ussite_dataer->data()->site_id);
 
         $successMessage = 'Report Successful Created';
@@ -45,8 +47,13 @@ if ($_GET['group'] == 1) {
     $title = 'Supplies';
 }
 
+
+
+$title = 'NIMREGENIN SUMMARY REPORT_' . date('Y-m-d');
+
 $pdf = new Pdf();
 
+// $title = 'NIMREGENIN SUMMARY REPORT_'. date('Y-m-d');
 $file_name = $title . '.pdf';
 
 $output = ' ';
@@ -58,12 +65,20 @@ if ($site_data) {
             <table width="100%" border="1" cellpadding="5" cellspacing="0">
                 <tr>
                     <td colspan="18" align="center" style="font-size: 18px">
-                        <b>NIMREGENIN SUMMARY REPORT  ' . date('Y-m-d') . '</b>
+                        <b>DATE  ' . date('Y-m-d') . '</b>
                     </td>
                 </tr>
+
+
                 <tr>
                     <td colspan="18" align="center" style="font-size: 18px">
-                        <b>Report FOR ' . $title . ':  Total ( ' . $data_count . ' )</b>
+                        <b>NIMREGENIN SUMMARY REPORT </b>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="18" align="center" style="font-size: 18px">
+                        <b>Report FOR ' . $title . ':  Total ( ' . $Total . ' )</b>
                     </td>
                 </tr>
                 <tr>
@@ -73,15 +88,20 @@ if ($site_data) {
                             <tr>
                                 <th rowspan="2">No.</th>
                                 <th rowspan="2">SITE</th>
-                                <th rowspan="2">CRF 1</th>
-                                <th rowspan="2">CRF 2</th>
-                                <th rowspan="2">CRF 3</th>
-                                <th rowspan="2">CRF 4</th>
-                                <th rowspan="2">CRF 5</th>
-                                <th rowspan="2">CRF 6</th>
-                                <th rowspan="2">CRF 7</th>
+                                <th rowspan="2">REGISTERED</th>
+                                <th rowspan="2">SCREENED.</th>
+                                <th colspan="4"> CANCER ( INCLUSION )</th>
+                                <th rowspan="2">ELIGIBLE</th>
+                                <th rowspan="2">ENROLLED</th>
+                                <th rowspan="2">END</th>
                             </tr>
-                        ';
+                            <tr>
+                                <th>Breast</th>
+                                <th>Brain</th>
+                                <th>Cervical </th>
+                                <th>Prostate </th>
+                            </tr>
+            ';
 
     // Load HTML content into dompdf
     $x = 1;
@@ -111,15 +131,16 @@ if ($site_data) {
                 <tr>
                     <td>' . $x . '</td>
                     <td>' . $row['name']  . '</td>
-                    <td align="right">' . $crf1 . '</td>
-                    <td align="right">' . $crf2 . '</td>
-                    <td align="right">' . $crf3 . '</td>
-                    <td align="right">' . $crf4 . '</td>
-                    <td align="right">' . $crf5 . '</td>
-                    <td align="right">' . $crf6 . '</td>
-                    <td align="right">' . $crf7 . '</td>
+                    <td>' . $registered . '</td>
+                    <td align="right">' . $screened . '</td>
+                    <td align="right">' . $breast_cancer . '</td>
+                    <td align="right">' . $brain_cancer . '</td>
+                    <td align="right">' . $cervical_cancer . '</td>
+                    <td align="right">' . $prostate_cancer . '</td>
+                    <td align="right">' . $eligible . '</td>
+                    <td align="right">' . $enrolled . '</td>
+                    <td align="right">' . $end_study . '</td>
                 </tr>
-                
             ';
 
         $x += 1;
@@ -128,56 +149,58 @@ if ($site_data) {
     $output .= '
                 <tr>
                     <td align="right" colspan="2"><b>Total</b></td>
-                    <td align="right"><b>' . $crf1 . '</b></td>
-                    <td align="right"><b>' . $crf2 . '</b></td>
-                    <td align="right"><b>' . $crf3 . '</b></td>
-                    <td align="right"><b>' . $crf4 . '</b></td>
-                    <td align="right"><b>' . $crf5 . '</b></td>
-                    <td align="right"><b>' . $crf6 . '</b></td>
-                    <td align="right"><b>' . $crf7 . '</b></td>
-                </tr>
-                ';
+                    <td align="right"><b>' . $registered_Total . '</b></td>
+                    <td align="right"><b>' . $screened_Total . '</b></td>
+                    <td align="right"><b>' . $breast_cancer_Total . '</b></td>
+                    <td align="right"><b>' . $brain_cancer_Total . '</b></td>
+                    <td align="right"><b>' . $cervical_cancer_Total . '</b></td>
+                    <td align="right"><b>' . $prostate_cancer_Total . '</b></td>
+                    <td align="right"><b>' . $eligible_Total . '</b></td>
+                    <td align="right"><b>' . $enrolled_Total . '</b></td>
+                    <td align="right"><b>' . $end_study_Total . '</b></td>
+                </tr>  
+
+    '
+    ;
 
     $output .= '
-                </table>    
-                    <tr>
-                        <td colspan="9" align="center" style="font-size: 18px">
-                            <br />
-                            <br />
-                            <br />
-                            <br />
-                            <br />
-                            <br />
-                            <p align="right">----'.$user->data()->firstname. ' '.$user->data()->lastname.'-----<br />Printed By</p>
-                            <br />
-                            <br />
-                            <br />
-                        </td>
+            </table>    
+                <tr>
+                    <td colspan="9" align="center" style="font-size: 18px">
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <p align="right">----'.$user->data()->firstname. ' '.$user->data()->lastname.'-----<br />Prepared By</p>
+                        <br />
+                        <br />
+                        <br />
+                    </td>
 
-                        <td colspan="9" align="center" style="font-size: 18px">
-                            <br />
-                            <br />
-                            <br />
-                            <br />
-                            <br />
-                            <br />
-                            <p align="right">-----'.date('Y-m-d').'-------<br />Date Printed</p>
-                            <br />
-                            <br />
-                            <br />
-                        </td>
-                    </tr>
-                </table>    
-            ';
-    }
-
-
-
+                    <td colspan="9" align="center" style="font-size: 18px">
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <p align="right">-----'.date('Y-m-d').'-------<br />Date Prepared</p>
+                        <br />
+                        <br />
+                        <br />
+                    </td>
+                </tr>
+        </table>    
+';
+}
 
 // $output = '<html><body><h1>Hello, dompdf!' . $row . '</h1></body></html>';
 $pdf->loadHtml($output);
 
 // SetPaper the HTML as PDF
+// $pdf->setPaper('A4', 'portrait');
 $pdf->setPaper('A4', 'landscape');
 
 // Render the HTML as PDF

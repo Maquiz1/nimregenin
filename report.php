@@ -49,7 +49,7 @@ if ($_GET['group'] == 1) {
 
 
 
-$title = 'NIMREGENIN_' . date('Y-m-d');
+$title = 'NIMREGENIN SUMMARY REPORT_' . date('Y-m-d');
 
 $pdf = new Pdf();
 
@@ -72,13 +72,13 @@ if ($site_data) {
 
                 <tr>
                     <td colspan="18" align="center" style="font-size: 18px">
-                        <b>NIMREGENIN SUMMARY REPORT </b>
+                        <b>SUMMARY </b>
                     </td>
                 </tr>
 
                 <tr>
                     <td colspan="18" align="center" style="font-size: 18px">
-                        <b>Report FOR ' . $title . ':  Total ( ' . $Total . ' )</b>
+                        <b>' . $title . ':  Total ( ' . $Total . ' )</b>
                     </td>
                 </tr>
                 <tr>
