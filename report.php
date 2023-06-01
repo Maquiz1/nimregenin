@@ -26,6 +26,7 @@ if ($user->isLoggedIn()) {
         $site_data = $override->getData('site');
         $Total = $override->getCount('clients', 'status', 1);
         // $data = $override->getNews('clients', 'status', 1, 'screened', 1);
+        // $name = $override->get('user', 'status', 1, 'screened', $user->data()->id);
         // $data_count = $override->getCount2('clients', 'status', 1, 'screened',1, 'site_id', $ussite_dataer->data()->site_id);
 
         $successMessage = 'Report Successful Created';
@@ -45,6 +46,8 @@ if ($_GET['group'] == 1) {
 } elseif ($_GET['group'] == 4) {
     $title = 'Supplies';
 }
+
+
 
 $title = 'NIMREGENIN_' . date('Y-m-d');
 
@@ -159,17 +162,34 @@ if ($site_data) {
         <td align="right"><b>' . $enrolled_Total . '</b></td>
         <td align="right"><b>' . $end_study_Total . '</b></td>
     </tr>
-    ';
+    
+
+    '
+    ;
 
     $output .= '
-        </table>
+    <tr>
+        <td colspan="5" align="center" style="font-size: 18px">
             <br />
             <br />
             <br />
             <br />
             <br />
             <br />
-            <p align="right">---------------------------------------<br />Receiver Signature</p>
+            <p align="right">----'.$user->data()->firstname. ' '.$user->data()->lastname.'-----<br />Printed By</p>
+            <br />
+            <br />
+            <br />
+        </td>
+
+        <td colspan="6" align="center" style="font-size: 18px">
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <p align="right">-----'.date('Y-m-d').'-------<br />Date Printed</p>
             <br />
             <br />
             <br />
