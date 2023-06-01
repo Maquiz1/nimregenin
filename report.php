@@ -24,6 +24,7 @@ if ($user->isLoggedIn()) {
         // }
 
         $site_data = $override->getData('site');
+        $Total = $override->getCount('clients', 'status', 1);
         // $data = $override->getNews('clients', 'status', 1, 'screened', 1);
         // $data_count = $override->getCount2('clients', 'status', 1, 'screened',1, 'site_id', $ussite_dataer->data()->site_id);
 
@@ -44,6 +45,8 @@ if ($_GET['group'] == 1) {
 } elseif ($_GET['group'] == 4) {
     $title = 'Supplies';
 }
+
+$title = 'NIMREGENIN_' . date('Y-m-d');
 
 $pdf = new Pdf();
 
@@ -75,7 +78,7 @@ if ($site_data) {
 
                 <tr>
                     <td colspan="18" align="center" style="font-size: 18px">
-                        <b>Report FOR ' . $title . ':  Total ( ' . $data_count . ' )</b>
+                        <b>Report FOR ' . $title . ':  Total ( ' . $Total . ' )</b>
                     </td>
                 </tr>
                 <tr>
@@ -279,6 +282,7 @@ if ($site_data) {
 $pdf->loadHtml($output);
 
 // SetPaper the HTML as PDF
+// $pdf->setPaper('A4', 'portrait');
 $pdf->setPaper('A4', 'landscape');
 
 // Render the HTML as PDF
