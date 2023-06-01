@@ -67,7 +67,7 @@ if ($site_data) {
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2">                        
+                    <td colspan="18">                        
                         <br />
                         <table width="100%" border="1" cellpadding="5" cellspacing="0">
                             <tr>
@@ -81,7 +81,7 @@ if ($site_data) {
                                 <th rowspan="2">CRF 6</th>
                                 <th rowspan="2">CRF 7</th>
                             </tr>
-            ';
+                        ';
 
     // Load HTML content into dompdf
     $x = 1;
@@ -119,6 +119,7 @@ if ($site_data) {
                     <td align="right">' . $crf6 . '</td>
                     <td align="right">' . $crf7 . '</td>
                 </tr>
+                
             ';
 
         $x += 1;
@@ -138,37 +139,37 @@ if ($site_data) {
                 ';
 
     $output .= '
-    </table>    
-    <tr>
-    <td colspan="5" align="center" style="font-size: 18px">
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <p align="right">----'.$user->data()->firstname. ' '.$user->data()->lastname.'-----<br />Printed By</p>
-        <br />
-        <br />
-        <br />
-    </td>
+                </table>    
+                    <tr>
+                        <td colspan="9" align="center" style="font-size: 18px">
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <p align="right">----'.$user->data()->firstname. ' '.$user->data()->lastname.'-----<br />Printed By</p>
+                            <br />
+                            <br />
+                            <br />
+                        </td>
 
-    <td colspan="6" align="center" style="font-size: 18px">
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <p align="right">-----'.date('Y-m-d').'-------<br />Date Printed</p>
-        <br />
-        <br />
-        <br />
-    </td>
-</tr>
-</table>    
-';
-}
+                        <td colspan="9" align="center" style="font-size: 18px">
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                            <p align="right">-----'.date('Y-m-d').'-------<br />Date Printed</p>
+                            <br />
+                            <br />
+                            <br />
+                        </td>
+                    </tr>
+                </table>    
+            ';
+    }
 
 
 
