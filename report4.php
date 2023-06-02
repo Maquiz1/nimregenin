@@ -24,7 +24,10 @@ if ($user->isLoggedIn()) {
         // }
 
         $site_data = $override->getData('site');
-        // $data = $override->getNews('clients', 'status', 1, 'screened', 1);
+        $registered_Total = $override->getCount('clients', 'status', 1);
+        $enrolled_Total = $override->getCount1('clients', 'status', 1, 'enrolled', 1);
+        // $enrolled = $override->getCount2('clients', 'status', 1, 'enrolled', 1);
+        // $name = $override->get('user', 'status', 1, 'screened', $user->data()->id);
         // $data_count = $override->getCount2('clients', 'status', 1, 'screened',1, 'site_id', $ussite_dataer->data()->site_id);
 
         $successMessage = 'Report Successful Created';
@@ -45,8 +48,13 @@ if ($_GET['group'] == 1) {
     $title = 'Supplies';
 }
 
+
+
+$title = 'NIMREGENIN SUMMARY ( TABLE 3) REPORT_' . date('Y-m-d');
+
 $pdf = new Pdf();
 
+// $title = 'NIMREGENIN SUMMARY REPORT_'. date('Y-m-d');
 $file_name = $title . '.pdf';
 
 $output = ' ';
@@ -57,255 +65,224 @@ if ($site_data) {
     $output .= '
             <table width="100%" border="1" cellpadding="5" cellspacing="0">
                 <tr>
-                    <td colspan="2" align="center" style="font-size: 18px">
-                        <b>NIMREGENIN SUMMARY REPORT  ' . date('Y-m-d') . '</b>
+                    <td colspan="22" align="center" style="font-size: 18px">
+                        <b>SUMMARY - TABLE 3 </b>
                     </td>
                 </tr>
-                <br />
+
+
                 <tr>
-                    <td colspan="18" align="center" style="font-size: 18px">
-                        <b>Report FOR ' . $title . ':  Total ( ' . $data_count . ' )</b>
+                    <td colspan="22" align="center" style="font-size: 18px">
+                        <b> '. $title .' </b>
                     </td>
                 </tr>
+
                 <tr>
-                    <td colspan="2">                        
+                    <td colspan="22" align="center" style="font-size: 18px">
+                        <b>  Total REGISTERED ( ' . $registered_Total . ' )  Total Enrolled ( ' . $enrolled_Total . ' )</b>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="22" align="center" style="font-size: 18px">
+                        <b>  CRF\'s Data Status </b>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="22">                        
                         <br />
                         <table width="100%" border="1" cellpadding="5" cellspacing="0">
                             <tr>
-                                <th rowspan="2">No.</th>
+                                <th rowspan="2">No</th>
                                 <th rowspan="2">SITE</th>
-                                <th rowspan="2">REGISTERED</th>
-                                <th rowspan="2">SCREENED.</th>
-                                <th colspan="4"> CANCER ( INCLUSION )</th>
-                                <th rowspan="2">ELIGIBLE</th>
-                                <th rowspan="2">ENROLLED</th>
-                                <th rowspan="2">END</th>
+                                <th colspan="4">CRFs</th>
+                                <th colspan="2">CRF 1</th>
+                                <th colspan="2">CRF 2</th>
+                                <th colspan="2">CRF 3</th>
+                                <th colspan="2">CRF 4</th>
+                                <th colspan="2">CRF 5</th>
+                                <th colspan="2">CRF 6</th>
+                                <th colspan="2">CRF 7</th>
                             </tr>
                             <tr>
-                                <th>Breast</th>
-                                <th>Brain</th>
-                                <th>Cervical </th>
-                                <th>Prostate </th>
+                                <th>Total Required.</th>
+                                <th>Total Available.</th>
+                                <th>Total Missing.</th>
+                                <th>Per Crf\'s.</th>
+                                <th>Ava.</th>
+                                <th>Mis.</th>
+                                <th>Ava.</th>
+                                <th>Mis.</th>
+                                <th>Ava.</th>
+                                <th>Mis.</th>
+                                <th>Ava.</th>
+                                <th>Mis.</th>
+                                <th>Ava.</th>
+                                <th>Mis.</th>
+                                <th>Ava.</th>
+                                <th>Mis.</th>
+                                <th>Ava.</th>
+                                <th>Mis.</th>
                             </tr>
             ';
 
     // Load HTML content into dompdf
+    $crf1_Missing_Total = 0;
+    $crf2_Missing_Total = 0;
+    $crf3_Missing_Total = 0;
+    $crf4_Missing_Total = 0;
+    $crf5_Missing_Total = 0;
+    $crf6_Missing_Total = 0;
+    $crf7_Missing_Total = 0;
+
+    $required_Total = 0;
+    $available_Total = 0;
+    $missing_Total = 0;
+
     $x = 1;
     foreach ($site_data as $row) {
-        $registered = $override->countData('clients', 'status', 1, 'site_id', $row['id']);
-        $registered_Total = $override->getCount('clients', 'status', 1);
-        $screened = $override->countData2('clients', 'status', 1, 'screened', 1, 'site_id', $row['id']);
-        $screened_Total = $override->countData('clients', 'status', 1, 'screened', 1);
-        $breast_cancer = $override->countData2('screening', 'status', 1, 'breast_cancer', 1, 'site_id', $row['id']);
-        $breast_cancer_Total = $override->countData('screening', 'status', 1, 'breast_cancer', 1);
-        $brain_cancer = $override->countData2('screening', 'status', 1, 'brain_cancer', 1, 'site_id', $row['id']);
-        $brain_cancer_Total = $override->countData('screening', 'status', 1, 'brain_cancer', 1);
-        $cervical_cancer = $override->countData2('screening', 'status', 1, 'cervical_cancer', 1, 'site_id', $row['id']);
-        $cervical_cancer_Total = $override->countData('screening', 'status', 1, 'cervical_cancer', 1);
-        $prostate_cancer = $override->countData2('screening', 'status', 1, 'prostate_cancer', 1, 'site_id', $row['id']);
-        $prostate_cancer_Total = $override->countData('screening', 'status', 1, 'prostate_cancer', 1);
-        $biopsy = $override->countData2('screening', 'status', 1, 'biopsy', 1, 'site_id', $row['id']);
-        $biopsy_Total = $override->countData('screening', 'status', 1, 'biopsy', 1);
-        $eligible = $override->countData2('clients', 'status', 1, 'eligible', 1, 'site_id', $row['id']);
-        $eligible_Total = $override->countData('clients', 'status', 1, 'eligible', 1);
-        $enrolled = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'site_id', $row['id']);
-        $enrolled_Total = $override->countData('clients', 'status', 1, 'enrolled', 1);
-        $end_study = $override->countData2('clients', 'status', 1, 'end_study', 1, 'site_id', $row['id']);
-        $end_study_Total = $override->countData('clients', 'status', 1, 'end_study', 1);
+        $enrolled = $override->countData1('clients', 'status', 1, 'enrolled', 1,'site_id', $row['id']);
+        $crf1 = $override->countData('crf1', 'status', 1, 'site_id', $row['id']);
+        $crf1_Total = $override->getCount('crf1', 'status', 1);        
+        $crf1_Missing = $enrolled - $crf1;
+
+        $crf2 = $override->countData('crf2', 'status', 1, 'site_id', $row['id']);
+        $crf2_Total = $override->getCount('crf2', 'status', 1);
+        $crf2_Missing = $enrolled - $crf2;
+
+        $crf3 = $override->countData('crf3', 'status', 1, 'site_id', $row['id']);
+        $crf3_Total = $override->getCount('crf3', 'status', 1);
+        $crf3_Missing = $enrolled - $crf3;
+
+        $crf4 = $override->countData('crf4', 'status', 1, 'site_id', $row['id']);
+        $crf4_Total = $override->getCount('crf4', 'status', 1);
+        $crf4_Missing = $enrolled - $crf4;
+
+        $crf5 = $override->countData('crf5', 'status', 1, 'site_id', $row['id']);
+        $crf5_Total = $override->getCount('crf5', 'status', 1);
+        $crf5_Missing = $crf5 - $crf5;
+
+        $crf6 = $override->countData('crf6', 'status', 1, 'site_id', $row['id']);
+        $crf6_Total = $override->getCount('crf6', 'status', 1);
+        $crf6_Missing = $crf6 - $crf6;
+
+        $crf7 = $override->countData('crf7', 'status', 1, 'site_id', $row['id']);
+        $crf7_Total = $override->getCount('crf7', 'status', 1);
+        $crf7_Missing = $enrolled - $crf7;
+
+
+        $enrolled_Required = ($enrolled * 5) + $crf5 + $crf6;
+        $enrolled_Available = $crf1 + $crf2 + $crf3 +  $crf4 + $crf5 + $crf6 + $crf7;
+        $enrolled_Missing = $enrolled_Required - $enrolled_Available;
+
 
         $output .= '
                 <tr>
                     <td>' . $x . '</td>
                     <td>' . $row['name']  . '</td>
-                    <td>' . $registered . '</td>
-                    <td align="right">' . $screened . '</td>
-                    <td align="right">' . $breast_cancer . '</td>
-                    <td align="right">' . $brain_cancer . '</td>
-                    <td align="right">' . $cervical_cancer . '</td>
-                    <td align="right">' . $prostate_cancer . '</td>
-                    <td align="right">' . $eligible . '</td>
-                    <td align="right">' . $enrolled . '</td>
-                    <td align="right">' . $end_study . '</td>
+                    <td>' . $enrolled_Required . '</td>
+                    <td>' . $enrolled_Available . '</td>
+                    <td>' . $enrolled_Missing . '</td>
+                    <td>' . $enrolled . '</td>
+                    <td>' . $crf1 . '</td>
+                    <td>' .' - '. $crf1_Missing . '</td>
+                    <td align="right">' . $crf2 . '</td>
+                    <td align="right">' . ' - '. $crf2_Missing . '</td>
+                    <td align="right">' . $crf3 . '</td>
+                    <td align="right">' . ' - '. $crf3_Missing . '</td>
+                    <td align="right">' . $crf4 . '</td>
+                    <td align="right">' . ' - '. $crf4_Missing . '</td>
+                    <td align="right">' . $crf5 . '</td>
+                    <td align="right">' . ' - '. $crf5_Missing . '</td>
+                    <td align="right">' . $crf6 . '</td>
+                    <td align="right">' . ' - '. $crf6_Missing . '</td>
+                    <td align="right">' . $crf7 . '</td>
+                    <td align="right">' . ' - '. $crf7_Missing . '</td>
                 </tr>
             ';
+        
+        $crf1_Missing_Total = $crf1_Missing_Total + $crf1_Missing;
+        $crf2_Missing_Total = $crf2_Missing_Total + $crf2_Missing;
+        $crf3_Missing_Total = $crf3_Missing_Total + $crf3_Missing;
+        $crf4_Missing_Total = $crf4_Missing_Total + $crf4_Missing;
+        $crf5_Missing_Total = $crf5_Missing_Total + $crf5_Missing;
+        $crf6_Missing_Total = $crf6_Missing_Total + $crf6_Missing;
+        $crf7_Missing_Total = $crf7_Missing_Total + $crf7_Missing;
+
+
+        $required_Total = $required_Total + $enrolled_Required;
+        $available_Total = $available_Total + $enrolled_Available;
+        $missing_Total = $missing_Total + $enrolled_Missing;
+
 
         $x += 1;
     }
 
     $output .= '
-    <tr>
-        <td align="right" colspan="2"><b>Total</b></td>
-        <td align="right"><b>' . $registered_Total . '</b></td>
-        <td align="right"><b>' . $screened_Total . '</b></td>
-        <td align="right"><b>' . $breast_cancer_Total . '</b></td>
-        <td align="right"><b>' . $brain_cancer_Total . '</b></td>
-        <td align="right"><b>' . $cervical_cancer_Total . '</b></td>
-        <td align="right"><b>' . $prostate_cancer_Total . '</b></td>
-        <td align="right"><b>' . $eligible_Total . '</b></td>
-        <td align="right"><b>' . $enrolled_Total . '</b></td>
-        <td align="right"><b>' . $end_study_Total . '</b></td>
-    </tr>
-    ';
+                <tr>
+                    <td align="right" colspan="2"><b>Total</b></td>
+                    <td align="right"><b>' . $required_Total . '</b></td>
+                    <td align="right"><b>' . $available_Total . '</b></td>
+                    <td align="right"><b>' . $missing_Total . '</b></td>
+                    <td align="right"><b>' . $enrolled_Total . '</b></td>
+                    <td align="right"><b>' . $crf1_Total . '</b></td>
+                    <td align="right"><b>' .  ' - '. $crf1_Missing_Total . '</b></td>
+                    <td align="right"><b>' . $crf2_Total . '</b></td>
+                    <td align="right"><b>' .  ' - '. $crf2_Missing_Total . '</b></td>
+                    <td align="right"><b>' . $crf3_Total . '</b></td>
+                    <td align="right"><b>' .  ' - '. $crf3_Missing_Total . '</b></td>
+                    <td align="right"><b>' . $crf4_Total . '</b></td>
+                    <td align="right"><b>' .  ' - '. $crf4_Missing_Total . '</b></td>
+                    <td align="right"><b>' . $crf5_Total . '</b></td>
+                    <td align="right"><b>' .  ' - '. $crf5_Missing_Total . '</b></td>
+                    <td align="right"><b>' . $crf6_Total . '</b></td>
+                    <td align="right"><b>' .  ' - '. $crf6_Missing_Total . '</b></td>
+                    <td align="right"><b>' . $crf7_Total . '</b></td>
+                    <td align="right"><b>' .  ' - '. $crf7_Missing_Total . '</b></td>
+                </tr>  
+
+    '
+    ;
 
     $output .= '
-        </table>
+            </table>    
+                <tr>
+                    <td colspan="11" align="center" style="font-size: 18px">
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <p align="right">----'.$user->data()->firstname. ' '.$user->data()->lastname.'-----<br />Prepared By</p>
+                        <br />
+                        <br />
+                        <br />
+                    </td>
 
-        <br />
-        <br />
-
-        <table width="100%" cellpadding="5">
-            <tr>
-                <td width="50%">
-                    <br />
-                        <b>RECEIVER (BILL TO)</b><br />
-                        <tr>
-                        <th rowspan="2">No.</th>
-                        <th rowspan="2">SITE</th>
-                        <th rowspan="2">REGISTERED</th>
-                        <th rowspan="2">SCREENED.</th>
-                        <th colspan="4"> CANCER ( INCLUSION )</th>
-                        <th rowspan="2">ELIGIBLE</th>
-                        <th rowspan="2">ENROLLED</th>
-                        <th rowspan="2">END</th>
-                    </tr>
-                </td>
-                <td width="50%">
-                    <tr>
-                        <td>' . $x . '</td>
-                        <td>' . $row['name']  . '</td>
-                        <td>' . $registered . '</td>
-                        <td align="right">' . $screened . '</td>
-                        <td align="right">' . $breast_cancer . '</td>
-                        <td align="right">' . $brain_cancer . '</td>
-                        <td align="right">' . $cervical_cancer . '</td>
-                        <td align="right">' . $prostate_cancer . '</td>
-                        <td align="right">' . $eligible . '</td>
-                        <td align="right">' . $enrolled . '</td>
-                        <td align="right">' . $end_study . '</td>
-                    </tr>
-                </td>
-            </tr>
-        </table>
-
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <p align="right">---------------------------------------<br />Receiver Signature</p>
-            <br />
-            <br />
-            <br />
-        </td>
-    </tr>
-</table>    
+                    <td colspan="11" align="center" style="font-size: 18px">
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <p align="right">-----'.date('Y-m-d').'-------<br />Date Prepared</p>
+                        <br />
+                        <br />
+                        <br />
+                    </td>
+                </tr>
+        </table>    
 ';
-} else {
-
-    $output .= '
-    <table width="100%" border="1" cellpadding="5" cellspacing="0">
-
-        <tr>
-            <td colspan="15" align="center" style="font-size: 18px">
-                <b>NIMREGENIN SUMMARY REPORT  </b>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="15" align="center" style="font-size: 18px">
-            <b>' . date('Y-m-d') . '</b>
-        </td>
-    </tr>
-        <tr>
-            <td colspan="15" align="center" style="font-size: 18px">
-                <b>Report FOR ' . $title . ':  Total ( ' . $data_count . ' )</b>
-            </td>
-        </tr>
-
-        <tr>
-        <td colspan="15" align="center" style="font-size: 18px">
-            <b>For Period ' . date('Y-m-d') . ' to ' . date('Y-m-d') . '</b>
-        </td>
-        </tr>
-
-        <tr>
-            <th colspan="1">SITE.</th>
-            <th colspan="2">REGISTERED</th>
-            <th colspan="2">USE NIMREGENIN</th>
-            <th colspan="2">SCREENED</th>        
-            <th colspan="2">CANCER ( INCLUSION )</th>
-            <th colspan="2">ELIGIBLE</th>
-            <th colspan="2">ENROLLED</th>
-            <th colspan="2">ENROLLED</th>
-        </tr>
-
-    ';
-
-    // Load HTML content into dompdf
-    $x = 1;
-    foreach ($data as $row) {
-        // $generic_name = $override->getNews('generic', 'id', $row['generic_id'], 'status', 1)[0]['name'];
-        // $brand_name = $override->getNews('brand', 'id', $row['brand_id'], 'status', 1)[0]['name'];
-        // $category_name = $override->get('drug_cat', 'id', $row['category'])[0]['name'];
-        // $staff = $override->get('user', 'id', $row['staff_id'])[0];
-        // $batch_no = $row['batch_no'];
-
-
-        $output .= '
-        <tr>
-            <td colspan="1">' . $x . '</td>
-            <td colspan="2">' . $row['create_on'] . '</td>
-            <td colspan="2">' . $row . '</td>
-            <td colspan="2">' . $row . '</td>
-            <td colspan="2">' . $row . '</td>
-            <td colspan="2">' . $row['id'] . '</td>
-            <td colspan="2">' . $row . '</td>
-            <td colspan="2">' . $row['id'] . '</td>
-        </tr>
-        ';
-
-        $x += 1;
-    }
-
-    $output .= '
-    <tr>
-        <td colspan="7" align="center" style="font-size: 18px">
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <p align="right">----' . $user->data()->site_id . ' ' . $user->data()->site_id . '-----<br />Printed By</p>
-            <br />
-            <br />
-            <br />
-        </td>
-
-        <td colspan="8" align="center" style="font-size: 18px">
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <p align="right">-----' . date('Y-m-d') . '-------<br />Date Printed</p>
-            <br />
-            <br />
-            <br />
-        </td>
-    </tr>
-        </table>  
-    ';
 }
-
-
-
 
 // $output = '<html><body><h1>Hello, dompdf!' . $row . '</h1></body></html>';
 $pdf->loadHtml($output);
 
 // SetPaper the HTML as PDF
+// $pdf->setPaper('A4', 'portrait');
 $pdf->setPaper('A4', 'landscape');
 
 // Render the HTML as PDF
