@@ -66,7 +66,7 @@ if ($site_data) {
             <table width="100%" border="1" cellpadding="5" cellspacing="0">
                 <tr>
                     <td colspan="22" align="center" style="font-size: 18px">
-                        <b>SUMMARY - TABLE 3 </b>
+                        <b>SUMMARY - TABLE 4 </b>
                     </td>
                 </tr>
 
