@@ -25,7 +25,7 @@ if ($user->isLoggedIn()) {
 
         $site_data = $override->getData('site');
         $Total = $override->getCount('clients', 'status', 1);
-        // $data = $override->getNews('clients', 'status', 1, 'screened', 1);
+        $data_enrolled = $override->getCount1('clients', 'status', 1, 'enrolled', 1);
         // $name = $override->get('user', 'status', 1, 'screened', $user->data()->id);
         // $data_count = $override->getCount2('clients', 'status', 1, 'screened',1, 'site_id', $ussite_dataer->data()->site_id);
 
@@ -72,13 +72,18 @@ if ($site_data) {
 
                 <tr>
                     <td colspan="18" align="center" style="font-size: 18px">
-                        <b>TABLE 1 </b>
+                        <b>TABLE 0 </b>
                     </td>
                 </tr>
 
                 <tr>
                     <td colspan="18" align="center" style="font-size: 18px">
-                        <b>' . $title . ':  Total ( ' . $Total . ' )</b>
+                        <b>' . $title . '</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="18" align="center" style="font-size: 18px">
+                        <b>Total Registered ( ' . $Total . ' ):  Total Enrolled( ' . $data_enrolled . ' )</b>
                     </td>
                 </tr>
                 <tr>

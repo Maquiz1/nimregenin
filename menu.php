@@ -170,12 +170,18 @@ if ($user->isLoggedIn()) {
                 </li>
 
                 <?php } ?>
-
-                <!-- <li class="active">
+<!-- 
+               <li class="active">
                     <a href="info.php?id=3&status=7" target="_blank">
                         <span class="isw-download"></span><span class="text">Pending Clients Visits</span>
                     </a>
-                </li> -->
+                </li>  -->
+
+               <li class="active">
+                    <a href="info.php?id=3&status=7" target="_blank">
+                        <span class="isw-download"></span><span class="text">Pending Clients Visits</span>
+                    </a>
+                </li> 
             </ul>
         </li>
 
