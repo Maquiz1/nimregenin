@@ -72,7 +72,7 @@ if ($site_data) {
 
                 <tr>
                     <td colspan="18" align="center" style="font-size: 18px">
-                        <b>SUMMARY </b>
+                        <b>TABLE 1 </b>
                     </td>
                 </tr>
 
