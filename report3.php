@@ -50,7 +50,7 @@ if ($_GET['group'] == 1) {
 
 
 
-$title = 'NIMREGENIN SUMMARY REPORT_' . date('Y-m-d');
+$title = 'NIMREGENIN SUMMARY ( TABLE 3) REPORT_' . date('Y-m-d');
 
 $pdf = new Pdf();
 
@@ -66,7 +66,7 @@ if ($site_data) {
             <table width="100%" border="1" cellpadding="5" cellspacing="0">
                 <tr>
                     <td colspan="22" align="center" style="font-size: 18px">
-                        <b>DATE  ' . date('Y-m-d') . '</b>
+                        <b>SUMMARY - TABLE 3 </b>
                     </td>
                 </tr>
 
@@ -79,13 +79,13 @@ if ($site_data) {
 
                 <tr>
                     <td colspan="22" align="center" style="font-size: 18px">
-                        <b>  Total REGISTERED ( ' . $registered_Total . ' )</b>
+                        <b>  Total REGISTERED ( ' . $registered_Total . ' )  Total Enrolled ( ' . $enrolled_Total . ' )</b>
                     </td>
                 </tr>
 
                 <tr>
                     <td colspan="22" align="center" style="font-size: 18px">
-                        <b>  Total Enrolled ( ' . $enrolled_Total . ' )</b>
+                        <b>  CRF\'s Data Status </b>
                     </td>
                 </tr>
 
@@ -106,9 +106,9 @@ if ($site_data) {
                                 <th colspan="2">CRF 7</th>
                             </tr>
                             <tr>
-                                <th>Total Req.</th>
-                                <th>Total Ava.</th>
-                                <th>Total Mis.</th>
+                                <th>Total Required.</th>
+                                <th>Total Available.</th>
+                                <th>Total Missing.</th>
                                 <th>Per Crf\'s.</th>
                                 <th>Ava.</th>
                                 <th>Mis.</th>
