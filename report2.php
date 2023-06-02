@@ -79,7 +79,7 @@ if ($site_data) {
 
                 <tr>
                     <td colspan="18" align="center" style="font-size: 18px">
-                        <b>  Total REGISTERED ( ' . $registered_Total . ' )</b>
+                        <b>  Total REGISTERED ( ' . $registered_Total . ' )Total REGISTERED ( ' . $registered_Total . ' )</b>
                     </td>
                 </tr>
                 <tr>
