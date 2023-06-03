@@ -73,13 +73,18 @@ if ($site_data) {
 
                 <tr>
                     <td colspan="18" align="center" style="font-size: 18px">
-                        <b> '. $title .' </b>
+                        <b>TABLE 2 </b>
                     </td>
                 </tr>
 
                 <tr>
                     <td colspan="18" align="center" style="font-size: 18px">
-                        <b>  Total REGISTERED ( ' . $registered_Total . ' )Total REGISTERED ( ' . $registered_Total . ' )</b>
+                        <b>' . $title . '</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="18" align="center" style="font-size: 18px">
+                        <b>Total Registered ( ' . $registered_Total . ' ):  Total Enrolled( ' . $enrolled_Total . ' )</b>
                     </td>
                 </tr>
                 <tr>

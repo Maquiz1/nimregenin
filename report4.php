@@ -85,7 +85,7 @@ if ($site_data) {
 
                 <tr>
                     <td colspan="22" align="center" style="font-size: 18px">
-                        <b>  CRF\'s Data Status </b>
+                        <b>  CRF\'s Data Status (DAY 0) </b>
                     </td>
                 </tr>
 

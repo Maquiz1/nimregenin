@@ -102,17 +102,17 @@ if ($user->isLoggedIn()) {
                     </li>
                     <li class="active">
                         <a href="report.php" target="_blank">
-                            <span class="text">Report  </span> 
+                            <span class="text">Report ( TABLE 0) </span> 
                         </a>
                     </li>
                     <li class="active">
                         <a href="report1.php" target="_blank">
-                            <span class="text">Report 1 </span> 
+                            <span class="text">Report 1 ( TABLE 1)</span> 
                         </a>
                     </li>
                     <li class="active">
                         <a href="report2.php" target="_blank">
-                            <span class="text">Report 2 </span> 
+                            <span class="text">Report 2 ( TABLE 2)</span> 
                         </a>
                     </li>
                     <li class="active">
@@ -123,6 +123,18 @@ if ($user->isLoggedIn()) {
                     <li class="active">
                         <a href="report4.php" target="_blank">
                             <span class="text">Report 4 (TABLE 4)</span> 
+                        </a>
+                    </li>
+
+                    <li class="active">
+                        <a href="report4.php" target="_blank">
+                            <span class="text">Report 4 (TABLE 4) ( DAY 0)</span> 
+                        </a>
+                    </li>
+
+                    <li class="active">
+                        <a href="report5.php" target="_blank">
+                            <span class="text">Report 5 (TABLE 5) ( DAY 7)</span> 
                         </a>
                     </li>
                 </ul>
