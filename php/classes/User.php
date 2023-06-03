@@ -101,6 +101,11 @@ class User
         return $os_platform;
     }
 
+    function visit_delete($client_id)
+    {
+        $this->deleteRecord('visit', 'client_id', $client_id);
+    }
+
     function visit($client_id, $seq)
     {
         // $this->deleteRecord('visit', 'client_id', $client_id);

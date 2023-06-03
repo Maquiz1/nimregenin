@@ -127,6 +127,10 @@ if ($user->isLoggedIn()) {
                 'status' => 0,
             ), Input::get('id'));
             $successMessage = 'Client Deleted Successful';
+        } elseif (Input::get('delete_schedule')) {
+            $user->visit_delete(Input::get('id'));
+            // $this->deleteRecord('visit', 'client_id', Input::get('id'));
+            $successMessage = 'Client Schedule Deleted Successful';
         } elseif (Input::get('edit_study')) {
             $validate = $validate->check($_POST, array(
                 'name' => array(
@@ -2397,6 +2401,7 @@ if ($user->isLoggedIn()) {
                                                             <a href="#clientView<?= $client['id'] ?>" role="button" class="btn btn-default" data-toggle="modal">View</a>
                                                             <a href="id.php?cid=<?= $client['id'] ?>" class="btn btn-warning">Patient ID</a>
                                                             <a href="#delete<?= $client['id'] ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete</a>
+                                                            <a href="#deleteSchedule<?= $client['id'] ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete Schedule</a>
                                                             <a href="#screened<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">screened</a>
                                                             <a href="#eligibility1<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">eligibility1</a>
                                                             <a href="#eligibility2<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">eligibility2</a>
@@ -2974,6 +2979,28 @@ if ($user->isLoggedIn()) {
                                                             <div class="modal-footer">
                                                                 <input type="hidden" name="id" value="<?= $client['id'] ?>">
                                                                 <input type="submit" name="delete_client" value="Delete" class="btn btn-danger">
+                                                                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="modal fade" id="deleteSchedule<?= $client['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form method="post">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                <h4>Delete User Schedule</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <strong style="font-weight: bold;color: red">
+                                                                    <p>Are you sure you want to delete this user Schedule</p>
+                                                                </strong>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <input type="hidden" name="id" value="<?= $client['id'] ?>">
+                                                                <input type="submit" name="delete_schedule" value="Delete" class="btn btn-danger">
                                                                 <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
                                                             </div>
                                                         </div>
@@ -10683,7 +10710,7 @@ if ($user->isLoggedIn()) {
                                 if ($_GET['day']) {
                                     if ($_GET['day'] == 'Nxt') {
 
-                                        $schedule = 4;
+                                        $schedule = 1;
                                         $today = date('Y-m-d');
                                         $nxt_visit_date = date('Y-m-d', strtotime($today . ' + ' . $schedule . ' days'));
 
