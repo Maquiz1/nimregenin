@@ -62,18 +62,18 @@ $output = ' ';
     <table width="100%" border="1" cellpadding="5" cellspacing="0">
 
         <tr>
-            <td colspan="18" align="center" style="font-size: 18px">
+            <td colspan="20" align="center" style="font-size: 18px">
                 <b>Date ' . date('Y-m-d') . '</b>
             </td>
         </tr>
     
         <tr>
-            <td colspan="18" align="center" style="font-size: 18px">
+            <td colspan="20" align="center" style="font-size: 18px">
                 <b>NIMREGENIN REPORT( PENDING VISITS)</b>
             </td>
         </tr>
         <tr>
-            <td colspan="18" align="center" style="font-size: 18px">
+            <td colspan="20" align="center" style="font-size: 18px">
                 <b>Report FOR ' . $title . ':  Total Missing Visits ( ' . $data_count2 . ' )</b>
             </td>
         </tr>
@@ -88,6 +88,7 @@ $output = ' ';
             <th colspan="2">Gender</th>
             <th colspan="2">Age</th>
             <th colspan="2">Phnone</th>
+            <th colspan="2">Site</th>
         </tr>
     
      ';
@@ -100,6 +101,8 @@ $output = ' ';
         $gender = $override->getNews('clients', 'id', $row['client_id'], 'status', 1)[0]['gender'];
         $age = $override->getNews('clients', 'id', $row['client_id'], 'status', 1)[0]['age'];
         $phone_number = $override->getNews('clients', 'id', $row['client_id'], 'status', 1)[0]['phone_number'];
+        $site = $override->getNews('clients', 'id', $row['client_id'], 'status', 1)[0]['site_id'];
+        $site_id = $override->get('site', 'id', $site)[0]['name'];
 
         $output .= '
          <tr>
@@ -112,6 +115,7 @@ $output = ' ';
             <td colspan="2">' . $gender . '</td>
             <td colspan="2">' . $age . '</td>
             <td colspan="2">' . $phone_number . '</td>
+            <td colspan="2">' . $site_id . '</td>
         </tr>
         ';
 
@@ -120,7 +124,7 @@ $output = ' ';
 
     $output .= '
     <tr>
-        <td colspan="9" align="center" style="font-size: 18px">
+        <td colspan="10" align="center" style="font-size: 18px">
             <br />
             <br />
             <br />
@@ -133,7 +137,7 @@ $output = ' ';
             <br />
         </td>
 
-        <td colspan="9" align="center" style="font-size: 18px">
+        <td colspan="10" align="center" style="font-size: 18px">
             <br />
             <br />
             <br />

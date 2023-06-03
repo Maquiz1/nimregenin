@@ -100,6 +100,7 @@ if ($user->isLoggedIn()) {
                                             <th width="10%">Name</th>
                                             <th width="10%">Gender</th>
                                             <th width="10%">Age</th>
+                                            <th width="10%">Site</th>
                                             <th width="30%">Action</th>
                                         </tr>
                                     </thead>
@@ -109,7 +110,9 @@ if ($user->isLoggedIn()) {
                                         // print_r($Report);
                                         $x = 1;
                                         foreach ($visits as $visit) {
-                                            $client = $override->get3('clients', 'id', $visit['client_id'],'enrolled',1,'end_study',0)[0] 
+                                            $client = $override->get3('clients', 'id', $visit['client_id'],'enrolled',1,'end_study',0)[0];
+                                            $site = $override->getNews('clients', 'id', $visit['client_id'], 'status', 1)[0]['site_id'];
+                                            $site_id = $override->get('site', 'id', $site)[0]['name'];
                                             // $client = $override->get4('clients', 'id', $visit['client_id'],'enrolled',1,'end_study',0,'site_id',$user->data()->site_id)[0] 
 
                                             ?>
@@ -139,6 +142,7 @@ if ($user->isLoggedIn()) {
                                                 <td> <?= $client['firstname'] . ' ' . $client['lastname'] ?></td>
                                                 <td><?= $client['gender'] ?></td>
                                                 <td><?= $client['age'] ?></td>
+                                                <td><?= $site_id ?></td>
                                                 <td>
                                                     <a href="info.php?id=7&cid=<?= $client['id'] ?>" role="button" class="btn btn-warning">Schedule</a>
                                                 </td>
