@@ -24,6 +24,7 @@ if ($user->isLoggedIn()) {
         // }
         $data = $override->getNews2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', $_GET['day']);
         $data_count = $override->getNo1('visit', 'expected_date', date('Y-m-d'), 'status', 0);
+        $data_count2 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code',$_GET['day']);
         $successMessage = 'Report Successful Created';
     } catch (Exception $e) {
         die($e->getMessage());
@@ -61,24 +62,24 @@ $output = ' ';
     <table width="100%" border="1" cellpadding="5" cellspacing="0">
 
         <tr>
-            <td colspan="15" align="center" style="font-size: 18px">
+            <td colspan="18" align="center" style="font-size: 18px">
                 <b>Date ' . date('Y-m-d') . '</b>
             </td>
         </tr>
     
         <tr>
-            <td colspan="15" align="center" style="font-size: 18px">
+            <td colspan="18" align="center" style="font-size: 18px">
                 <b>NIMREGENIN REPORT( PENDING VISITS)</b>
             </td>
         </tr>
         <tr>
-            <td colspan="15" align="center" style="font-size: 18px">
-                <b>Report FOR ' . $title . ':  Total ( ' . $data_count . ' )</b>
+            <td colspan="18" align="center" style="font-size: 18px">
+                <b>Report FOR ' . $title . ':  Total Missing Visits ( ' . $data_count2 . ' )</b>
             </td>
         </tr>
     
         <tr>
-            <th colspan="1">No.</th>
+            <th colspan="2">No.</th>
             <th colspan="2">Study ID</th>
             <th colspan="2">Visit Name</th>        
             <th colspan="2">Expected Date</th>
@@ -86,6 +87,7 @@ $output = ' ';
             <th colspan="2">Name</th>
             <th colspan="2">Gender</th>
             <th colspan="2">Age</th>
+            <th colspan="2">Phnone</th>
         </tr>
     
      ';
@@ -97,10 +99,11 @@ $output = ' ';
         $study_id = $override->getNews('clients', 'id', $row['client_id'], 'status', 1)[0]['study_id'];
         $gender = $override->getNews('clients', 'id', $row['client_id'], 'status', 1)[0]['gender'];
         $age = $override->getNews('clients', 'id', $row['client_id'], 'status', 1)[0]['age'];
+        $phone_number = $override->getNews('clients', 'id', $row['client_id'], 'status', 1)[0]['phone_number'];
 
         $output .= '
          <tr>
-            <td colspan="1">' . $x . '</td>
+            <td colspan="2">' . $x . '</td>
             <td colspan="2">' . $study_id . '</td>
             <td colspan="2">' . $row['visit_name'] . '</td>
             <td colspan="2">' . $row['expected_date'] . '</td>
@@ -108,6 +111,7 @@ $output = ' ';
             <td colspan="2">' . $client_name['firstname'] . '  -  '. $client_name['lastname'] . '</td>
             <td colspan="2">' . $gender . '</td>
             <td colspan="2">' . $age . '</td>
+            <td colspan="2">' . $phone_number . '</td>
         </tr>
         ';
 
@@ -116,7 +120,7 @@ $output = ' ';
 
     $output .= '
     <tr>
-        <td colspan="7" align="center" style="font-size: 18px">
+        <td colspan="9" align="center" style="font-size: 18px">
             <br />
             <br />
             <br />
@@ -129,7 +133,7 @@ $output = ' ';
             <br />
         </td>
 
-        <td colspan="8" align="center" style="font-size: 18px">
+        <td colspan="9" align="center" style="font-size: 18px">
             <br />
             <br />
             <br />
