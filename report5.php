@@ -142,6 +142,10 @@ if ($site_data) {
 
     $x = 1;
     foreach ($site_data as $row) {
+
+        $visits1 = $override->getNews('visit', 'expected_date', date('Y-m-d'), 'status', 0);
+        // $visits2 = $override->get3('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'site_id',$user->data()->site_id);
+
         $enrolled = $override->countData1('clients', 'status', 1, 'enrolled', 1,'site_id', $row['id']);
         $crf1 = $override->countData('crf1', 'status', 1, 'site_id', $row['id']);
         $crf1_Total = $override->getCount('crf1', 'status', 1);        

@@ -10659,6 +10659,115 @@ if ($user->isLoggedIn()) {
                                 </table>
                             </div>
                         </div>
+
+
+                    <?php } elseif ($_GET['id'] == 21) { ?>
+                        <div class="col-md-12">
+                            <div class="head clearfix">
+                                <div class="isw-grid"></div>
+                                <h1>Today Schedule</h1>
+                                <ul class="buttons">
+                                    <li><a href="pending.php?day=<?= $_GET['day'] ?>" class="isw-download"></a></li>
+                                    <li><a href="#" class="isw-attachment"></a></li>
+                                    <li>
+                                        <a href="#" class="isw-settings"></a>
+                                        <ul class="dd-list">
+                                            <li><a href="#"><span class="isw-plus"></span> New document</a></li>
+                                            <li><a href="#"><span class="isw-edit"></span> Edit</a></li>
+                                            <li><a href="#"><span class="isw-delete"></span> Delete</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <?php if ($user->data()->power == 1) {
+                                    $visits = $override->getNews2('visit', 'expected_date', date('Y-m-d'), 'status', 0,'visit_code',$_GET['day']);                                
+                            } else {
+                                $visits = $override->getNews2('visit', 'expected_date', date('Y-m-d'), 'status', 0,'visit_code',$_GET['day']);                                
+                                // $visits = $override->get3('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'site_id',$user->data()->site_id);
+                            } ?>
+                            <div class="block-fluid">
+                                <table cellpadding="0" cellspacing="0" width="100%" class="table">
+                                    <thead>
+                                        <tr>
+                                            <!-- <th><input type="checkbox" name="checkall" /></th> -->
+                                            <td width="2">#</td>
+                                            <th width="40">Picture</th>
+                                            <th width="20%">Study ID</th>
+                                            <th width="8%">ON NIMREGENIN</th>
+                                            <th width="8%">Visit Name</th>
+                                            <th width="8%">Expected Date</th>
+                                            <th width="10%">Name</th>
+                                            <th width="5%">Gender</th>
+                                            <th width="5%">Age</th>
+                                            <th width="30%">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        // $Report = $override->getReport2('clients')[0];
+                                        // print_r($Report);
+                                        $x = 1;
+                                        foreach ($visits as $visit) {
+                                            $client = $override->get3('clients', 'id', $visit['client_id'], 'enrolled', 1, 'end_study', 0)[0]
+                                            // $client = $override->get4('clients', 'id', $visit['client_id'],'enrolled',1,'end_study',0,'site_id',$user->data()->site_id)[0] 
+
+                                        ?>
+                                            <tr>
+                                                <!-- <td><input type="checkbox" name="checkbox" /></td> -->
+                                                <td><?= $x ?></td>
+                                                <td width="100">
+                                                    <?php if ($client['client_image'] != '' || is_null($client['client_image'])) {
+                                                        $img = $client['client_image'];
+                                                    } else {
+                                                        $img = 'img/users/blank.png';
+                                                    } ?>
+                                                    <a href="#img<?= $client['id'] ?>" data-toggle="modal"><img src="<?= $img ?>" width="90" height="90" class="" /></a>
+                                                </td>
+                                                <td><?= $client['study_id'] ?></td>
+                                                <?php if ($client['nimregenin'] == 1) { ?>
+                                                    <td>
+                                                        <a href="#" class="btn btn-info">YES</a>
+                                                    </td>
+                                                <?php } else { ?>
+                                                    <td>
+                                                        <a href="#" class="btn btn-warning">NO</a>
+                                                    </td>
+                                                <?php } ?>
+                                                <td> <?= $visit['visit_name'] ?></td>
+                                                <td><?= $visit['expected_date'] ?></td>
+                                                <td> <?= $client['firstname'] . ' ' . $client['lastname'] ?></td>
+                                                <td><?= $client['gender'] ?></td>
+                                                <td><?= $client['age'] ?></td>
+                                                <td>
+                                                    <a href="info.php?id=7&cid=<?= $client['id'] ?>" role="button" class="btn btn-warning">Schedule</a>
+                                                </td>
+
+                                            </tr>
+                                            <div class="modal fade" id="img<?= $client['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form method="post">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                <h4>Client Image</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <img src="<?= $img ?>" width="350">
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        <?php $x++;
+                                        } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
                     <?php } ?>
                 </div>
 

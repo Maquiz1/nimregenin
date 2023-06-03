@@ -11,11 +11,32 @@ if ($user->isLoggedIn()) {
         $not_screened = $override->countData('clients', 'status', 1, 'screened', 0);
         $all = $override->getNo('clients');
         $deleted = $override->getCount('clients', 'status', 0);
+        $visits = $override->getNo1('visit', 'expected_date', date('Y-m-d'), 'status', 0);
+        $visits_DAY0 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D0');
+        $visits_DAY7 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D7');
+        $visits_DAY14 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D14');
+        $visits_DAY30 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D30');
+        $visits_DAY60 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D60');
+        $visits_DAY90 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D90');
+        $visits_DAY90 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D90');
+        $visits_DAY120 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D120');
+        // $visits = $override->get3('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'site_id',$user->data()->site_id);
+    
     } else {
         $registered = $override->countData('clients', 'status', 1, 'site_id', $user->data()->site_id);
-        $not_screened = $override->countData2('clients', 'status', 1,'screened', 0, 'site_id', $user->data()->site_id);
-        $all = $override->getCount('clients','site_id', $user->data()->site_id);
+        $not_screened = $override->countData2('clients', 'status', 1, 'screened', 0, 'site_id', $user->data()->site_id);
+        $all = $override->getCount('clients', 'site_id', $user->data()->site_id);
         $deleted = $override->countData('clients', 'status', 0, 'site_id', $user->data()->site_id);
+        $visits = $override->getNo1('visit', 'expected_date', date('Y-m-d'), 'status', 0);
+        $visits = $override->get3('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'site_id',$user->data()->site_id);
+        $visits_DAY0 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D0');
+        $visits_DAY7 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D7');
+        $visits_DAY14 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D14');
+        $visits_DAY30 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D30');
+        $visits_DAY60 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D60');
+        $visits_DAY90 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D90');
+        $visits_DAY90 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D90');
+        $visits_DAY120 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D120');
     }
 } else {
     Redirect::to('index.php');
@@ -95,6 +116,13 @@ if ($user->isLoggedIn()) {
                             <span class="glyphicon glyphicon-share"></span><span class="text">Manage</span>
                         </a>
                     </li>
+                </ul>
+            </li>
+
+
+            <li class="openable">
+                <a href="#"><span class="isw-tag"></span><span class="text">Reports</span></a>
+                <ul>
                     <li class="active">
                         <a href="info.php?id=20" target="_blank">
                             <span class="isw-download"></span><span class="text">Download Data</span>
@@ -102,39 +130,93 @@ if ($user->isLoggedIn()) {
                     </li>
                     <li class="active">
                         <a href="report.php" target="_blank">
-                            <span class="text">Report ( TABLE 0) </span> 
+                            <span class="text">Report ( TABLE 0) </span>
                         </a>
                     </li>
                     <li class="active">
                         <a href="report1.php" target="_blank">
-                            <span class="text">Report 1 ( TABLE 1)</span> 
+                            <span class="text">Report 1 ( TABLE 1)</span>
                         </a>
                     </li>
                     <li class="active">
                         <a href="report2.php" target="_blank">
-                            <span class="text">Report 2 ( TABLE 2)</span> 
+                            <span class="text">Report 2 ( TABLE 2)</span>
                         </a>
                     </li>
                     <li class="active">
                         <a href="report3.php" target="_blank">
-                            <span class="text">Report 3 (TABLE 3) </span> 
+                            <span class="text">Report 3 (TABLE 3) </span>
                         </a>
                     </li>
                     <li class="active">
                         <a href="report4.php" target="_blank">
-                            <span class="text">Report 4 (TABLE 4)</span> 
+                            <span class="text">Report 4 (TABLE 4)</span>
                         </a>
                     </li>
 
                     <li class="active">
                         <a href="report4.php" target="_blank">
-                            <span class="text">Report 4 (TABLE 4) ( DAY 0)</span> 
+                            <span class="text">Report 4 (TABLE 4) ( DAY 0)</span>
                         </a>
                     </li>
 
                     <li class="active">
                         <a href="report5.php" target="_blank">
-                            <span class="text">Report 5 (TABLE 5) ( DAY 7)</span> 
+                            <span class="text">Report 5 (TABLE 5) ( DAY 7)</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="openable">
+                <a href="#"><span class="isw-tag"></span><span class="text">Pending Visits</span></a>
+                <ul>
+                    <li class="active">
+                        <a href="info.php?id=21" target="_blank">
+                            <span class="text">All Visits </span>
+                            <span class="badge badge-secondary badge-pill"><?= $visits ?></span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="info.php?id=21&day=D0" target="_blank">
+                            <span class="text">Day 0 Visits </span>
+                            <span class="badge badge-secondary badge-pill"><?= $visits_DAY0 ?></span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="info.php?id=21&day=D7" target="_blank">
+                            <span class="text">Day 7 Visits </span>
+                            <span class="badge badge-secondary badge-pill"><?= $visits_DAY7 ?></span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="info.php?id=21&day=D14" target="_blank">
+                            <span class="text">Day 14 Visits </span>
+                            <span class="badge badge-secondary badge-pill"><?= $visits_DAY14 ?></span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="info.php?id=21&day=D30" target="_blank">
+                            <span class="text">Day 30 Visits </span>
+                            <span class="badge badge-secondary badge-pill"><?= $visits_DAY30 ?></span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="info.php?id=21&day=D60" target="_blank">
+                            <span class="text">Day 60 Visits </span>
+                            <span class="badge badge-secondary badge-pill"><?= $visits_DAY60 ?></span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="info.php?id=21&day=D90" target="_blank">
+                            <span class="text">Day 90 Visits </span>
+                            <span class="badge badge-secondary badge-pill"><?= $visits_DAY90 ?></span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="info.php?id=21&day=D120" target="_blank">
+                            <span class="text">Day 120 Visits </span>
+                            <span class="badge badge-secondary badge-pill"><?= $visits_DAY120 ?></span>
                         </a>
                     </li>
                 </ul>
@@ -147,7 +229,7 @@ if ($user->isLoggedIn()) {
             <ul>
                 <li>
                     <a href="add.php?id=4">
-                        <span class="glyphicon glyphicon-user"></span><span class="text">Register New  Client</span>
+                        <span class="glyphicon glyphicon-user"></span><span class="text">Register New Client</span>
                     </a>
                 </li>
 
@@ -167,33 +249,33 @@ if ($user->isLoggedIn()) {
 
                 <?php if ($user->data()->accessLevel == 1) { ?>
 
-                <li>
-                    <a href="info.php?id=3&status=7">
-                        <span class="glyphicon glyphicon-registration-mark"></span><span class="text">All Clients</span>
-                        <span class="badge badge-secondary badge-pill"><?= $all ?></span>
-                    </a>
-                </li>
+                    <li>
+                        <a href="info.php?id=3&status=7">
+                            <span class="glyphicon glyphicon-registration-mark"></span><span class="text">All Clients</span>
+                            <span class="badge badge-secondary badge-pill"><?= $all ?></span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="info.php?id=3&status=8">
-                        <span class="glyphicon glyphicon-registration-mark"></span><span class="text">Deleted Clients</span>
-                        <span class="badge badge-secondary badge-pill"><?= $deleted ?></span>
-                    </a>
-                </li>
+                    <li>
+                        <a href="info.php?id=3&status=8">
+                            <span class="glyphicon glyphicon-registration-mark"></span><span class="text">Deleted Clients</span>
+                            <span class="badge badge-secondary badge-pill"><?= $deleted ?></span>
+                        </a>
+                    </li>
 
                 <?php } ?>
-<!-- 
+                <!-- 
                <li class="active">
                     <a href="info.php?id=3&status=7" target="_blank">
                         <span class="isw-download"></span><span class="text">Pending Clients Visits</span>
                     </a>
                 </li>  -->
 
-               <li class="active">
+                <li class="active">
                     <a href="info.php?id=3&status=7" target="_blank">
                         <span class="isw-download"></span><span class="text">Pending Clients Visits</span>
                     </a>
-                </li> 
+                </li>
             </ul>
         </li>
 
