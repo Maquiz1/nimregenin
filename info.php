@@ -10680,10 +10680,35 @@ if ($user->isLoggedIn()) {
                                 </ul>
                             </div>
                             <?php if ($user->data()->power == 1) {
-                                    $visits = $override->getNews2('visit', 'expected_date', date('Y-m-d'), 'status', 0,'visit_code',$_GET['day']);                                
+                                if ($_GET['day']) {
+                                    if ($_GET['day'] == 'Nxt') {
+
+                                        $schedule = 4;
+                                        $today = date('Y-m-d');
+                                        $nxt_visit_date = date('Y-m-d', strtotime($today . ' + ' . $schedule . ' days'));
+
+                                        $visits = $override->getNews3('visit', 'expected_date', $nxt_visit_date, 'status', 0);
+                                    } else {
+                                        $visits = $override->getNews2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', $_GET['day']);
+                                    }
+                                } else {
+                                    $visits = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'status', 0);
+                                }
                             } else {
-                                $visits = $override->getNews2('visit', 'expected_date', date('Y-m-d'), 'status', 0,'visit_code',$_GET['day']);                                
-                                // $visits = $override->get3('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'site_id',$user->data()->site_id);
+                                if ($_GET['day']) {
+                                    if ($_GET['day'] == 'Nxt') {
+
+                                        $schedule = 1;
+                                        $today = date('Y-m-d');
+                                        $nxt_visit_date = date('Y-m-d', strtotime($today . ' + ' . $schedule . ' days'));
+
+                                        $visits = $override->getNews3('visit', 'expected_date', $nxt_visit_date, 'status', 0, 'visit_code', $_GET['day']);
+                                    } else {
+                                        $visits = $override->getNews2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', $_GET['day']);
+                                    }
+                                } else {
+                                }
+                                $visits = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'status', 0);
                             } ?>
                             <div class="block-fluid">
                                 <table cellpadding="0" cellspacing="0" width="100%" class="table">

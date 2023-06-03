@@ -12,31 +12,46 @@ if ($user->isLoggedIn()) {
         $all = $override->getNo('clients');
         $deleted = $override->getCount('clients', 'status', 0);
         $visits = $override->getNo1('visit', 'expected_date', date('Y-m-d'), 'status', 0);
-        $visits_DAY0 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D0');
-        $visits_DAY7 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D7');
-        $visits_DAY14 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D14');
-        $visits_DAY30 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D30');
-        $visits_DAY60 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D60');
-        $visits_DAY90 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D90');
-        $visits_DAY90 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D90');
-        $visits_DAY120 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D120');
+        $visits_DAY0 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', 'D0');
+        $visits_DAY7 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', 'D7');
+        $visits_DAY14 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', 'D14');
+        $visits_DAY30 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', 'D30');
+        $visits_DAY60 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', 'D60');
+        $visits_DAY90 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', 'D90');
+        $visits_DAY90 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', 'D90');
+        $visits_DAY120 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', 'D120');
+
+
+        $schedule = 1;
+        $today = date('Y-m-d');
+        $nxt_visit_date = date('Y-m-d', strtotime($today . ' + ' . $schedule . ' days'));
+        $nxt_visit = $override->getCount1('visit', 'expected_date', $nxt_visit_date, 'status', 0);
+
+
+
         // $visits = $override->get3('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'site_id',$user->data()->site_id);
-    
+
     } else {
         $registered = $override->countData('clients', 'status', 1, 'site_id', $user->data()->site_id);
         $not_screened = $override->countData2('clients', 'status', 1, 'screened', 0, 'site_id', $user->data()->site_id);
         $all = $override->getCount('clients', 'site_id', $user->data()->site_id);
         $deleted = $override->countData('clients', 'status', 0, 'site_id', $user->data()->site_id);
         $visits = $override->getNo1('visit', 'expected_date', date('Y-m-d'), 'status', 0);
-        $visits = $override->get3('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'site_id',$user->data()->site_id);
-        $visits_DAY0 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D0');
-        $visits_DAY7 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D7');
-        $visits_DAY14 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D14');
-        $visits_DAY30 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D30');
-        $visits_DAY60 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D60');
-        $visits_DAY90 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D90');
-        $visits_DAY90 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D90');
-        $visits_DAY120 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code','D120');
+        $visits = $override->get3('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'site_id', $user->data()->site_id);
+        $visits_DAY0 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', 'D0');
+        $visits_DAY7 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', 'D7');
+        $visits_DAY14 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', 'D14');
+        $visits_DAY30 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', 'D30');
+        $visits_DAY60 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', 'D60');
+        $visits_DAY90 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', 'D90');
+        $visits_DAY90 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', 'D90');
+        $visits_DAY120 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', 'D120');
+
+
+        $schedule = 1;
+        $today = date('Y-m-d');
+        $nxt_visit_date = date('Y-m-d', strtotime($today . ' + ' . $schedule . ' days'));
+        $nxt_visit = $override->countData('visit', 'expected_date', $nxt_visit_date, 'status', 0);
     }
 } else {
     Redirect::to('index.php');
@@ -172,7 +187,7 @@ if ($user->isLoggedIn()) {
                 <a href="#"><span class="isw-tag"></span><span class="text">Pending Visits</span></a>
                 <ul>
                     <li class="active">
-                        <a href="info.php?id=21" target="_blank">
+                    <a href="info.php?id=21" target="_blank">
                             <span class="text">All Visits </span>
                             <span class="badge badge-secondary badge-pill"><?= $visits ?></span>
                         </a>
@@ -219,6 +234,19 @@ if ($user->isLoggedIn()) {
                             <span class="badge badge-secondary badge-pill"><?= $visits_DAY120 ?></span>
                         </a>
                     </li>
+                </ul>
+            </li>
+
+            <li class="openable">
+                <a href="#"><span class="isw-tag"></span><span class="text">Tomorrow Visits</span></a>
+                <ul>
+                    <li class="active">
+                    <a href="info.php?id=21&day=Nxt" target="_blank">
+                            <span class="text">All Visits </span>
+                            <span class="badge badge-secondary badge-pill"><?= $nxt_visit ?></span>
+                        </a>
+                    </li>
+
                 </ul>
             </li>
 
