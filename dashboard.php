@@ -93,7 +93,6 @@ if ($user->isLoggedIn()) {
                                             <th><input type="checkbox" name="checkall" /></th>
                                             <td width="20">#</td>
                                             <th width="40">Picture</th>
-                                            <th width="20%">Screening ID</th>
                                             <th width="20%">Study ID</th>
                                             <th width="8%">ON NIMREGENIN</th>
                                             <th width="10%">Visit Name</th>
@@ -127,7 +126,6 @@ if ($user->isLoggedIn()) {
                                                     } ?>
                                                     <a href="#img<?= $client['id'] ?>" data-toggle="modal"><img src="<?= $img ?>" width="90" height="90" class="" /></a>
                                                 </td>
-                                                <td><?= $client['participant_id'] ?></td>
                                                 <td><?= $client['study_id'] ?></td>
                                                 <?php if ($client['nimregenin'] == 1) { ?>
                                                     <td>

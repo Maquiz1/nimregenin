@@ -250,6 +250,19 @@ if ($user->isLoggedIn()) {
                 </ul>
             </li>
 
+            <li class="openable">
+                <a href="#"><span class="isw-tag"></span><span class="text">Missing Crfs</span></a>
+                <ul>
+                    <li class="active">
+                    <a href="info.php?id=22" target="_blank">
+                            <span class="text">All crfs </span>
+                            <span class="badge badge-secondary badge-pill"><?= $nxt_visit ?></span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+
         <?php } ?>
 
         <li class="openable">
