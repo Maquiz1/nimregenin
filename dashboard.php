@@ -13,10 +13,19 @@ $noC = 0;
 $noD = 0;
 $users = $override->getData('user');
 if ($user->isLoggedIn()) {
+    if (Input::exists('post')) {
+        $validate = new validate();
+        $data = null;
+        $filename = null;
+        if (Input::get('today_schedule')) {
+            $data = $override->getNews('visit', 'expected_date', date('Y-m-d'), 'status', 0);
+            $filename = 'Today Schedule Visits';
+        }
+        $user->exportData($data, $filename);
+    }
 } else {
     Redirect::to('index.php');
 }
-
 
 ?>
 <!DOCTYPE html>
@@ -68,7 +77,7 @@ if ($user->isLoggedIn()) {
                                 <div class="isw-grid"></div>
                                 <h1>Today Schedule</h1>
                                 <ul class="buttons">
-                                    <li><a href="#" class="isw-download"></a></li>
+                                    <li><a href="today.php" class="isw-download"></a></li>
                                     <li><a href="#" class="isw-attachment"></a></li>
                                     <li>
                                         <a href="#" class="isw-settings"></a>
@@ -86,6 +95,7 @@ if ($user->isLoggedIn()) {
                                 $visits = $override->getNews('visit', 'expected_date', date('Y-m-d'), 'status', 0);
                                 // $visits = $override->get3('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'site_id',$user->data()->site_id);
                             } ?>
+                            <form method="post"><input type="submit" name="today_schedule" value="Download Excel"></form>
                             <div class="block-fluid">
                                 <table cellpadding="0" cellspacing="0" width="100%" class="table">
                                     <thead>
@@ -109,12 +119,12 @@ if ($user->isLoggedIn()) {
                                         // print_r($Report);
                                         $x = 1;
                                         foreach ($visits as $visit) {
-                                            $client = $override->get3('clients', 'id', $visit['client_id'],'enrolled',1,'end_study',0)[0];
+                                            $client = $override->get3('clients', 'id', $visit['client_id'], 'enrolled', 1, 'end_study', 0)[0];
                                             $site = $override->getNews('clients', 'id', $visit['client_id'], 'status', 1)[0]['site_id'];
                                             $site_id = $override->get('site', 'id', $site)[0]['name'];
                                             // $client = $override->get4('clients', 'id', $visit['client_id'],'enrolled',1,'end_study',0,'site_id',$user->data()->site_id)[0] 
 
-                                            ?>
+                                        ?>
                                             <tr>
                                                 <td><input type="checkbox" name="checkbox" /></td>
                                                 <td><?= $x ?></td>
