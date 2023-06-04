@@ -1459,7 +1459,7 @@ if ($user->isLoggedIn()) {
         if ($_GET['id'] == 21) {
             $data = null;
             $filename = null;
-            if (Input::get('pending')) {
+            if (Input::get('visits_pending')) {
                 if ($_GET['day']) {
                     if ($_GET['day'] == 'Nxt') {
                         $schedule = 0;
@@ -1473,6 +1473,27 @@ if ($user->isLoggedIn()) {
                     $data = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'status', 0);
                 }
                 $filename = 'Pending Visits';
+            }
+            $user->exportData($data, $filename);
+        }
+
+        if ($_GET['id'] == 22) {
+            $data = null;
+            $filename = null;
+            if (Input::get('crfs_pending')) {
+                if ($_GET['day']) {
+                    if ($_GET['day'] == 'Nxt') {
+                        $schedule = 0;
+                        $today = date('Y-m-d');
+                        $nxt_visit_date = date('Y-m-d', strtotime($today . ' + ' . $schedule . ' days'));
+                        $data = $override->getNews3('visit', 'expected_date', $nxt_visit_date, 'status', 0);
+                    } else {
+                        $data = $override->getNews2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', $_GET['day']);
+                    }
+                } else {
+                    $data = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'status', 0);
+                }
+                $filename = 'Missing Crfs';
             }
             $user->exportData($data, $filename);
         }
@@ -10728,8 +10749,7 @@ if ($user->isLoggedIn()) {
                                     </li>
                                 </ul>
                             </div>
-                            <form method="post"><input type="submit" name="pending" value="Download Excel"></form>
-
+                            <form method="post"><input type="submit" name="visits_pending" value="Download Excel"></form>
                             <?php if ($user->data()->power == 1) {
                                 if ($_GET['day']) {
                                     if ($_GET['day'] == 'Nxt') {
@@ -10852,7 +10872,7 @@ if ($user->isLoggedIn()) {
                         <div class="col-md-12">
                             <div class="head clearfix">
                                 <div class="isw-grid"></div>
-                                <h1>Today Schedule</h1>
+                                <h1>Missing Crf's</h1>
                                 <ul class="buttons">
                                     <li><a href="pending.php?day=<?= $_GET['day'] ?>" class="isw-download"></a></li>
                                     <li><a href="#" class="isw-attachment"></a></li>
@@ -10866,10 +10886,10 @@ if ($user->isLoggedIn()) {
                                     </li>
                                 </ul>
                             </div>
+                            <form method="post"><input type="submit" name="crfs_pending" value="Download Excel"></form>
                             <?php if ($user->data()->power == 1) {
                                 if ($_GET['day']) {
                                     if ($_GET['day'] == 'Nxt') {
-
                                         $schedule = 1;
                                         $today = date('Y-m-d');
                                         $nxt_visit_date = date('Y-m-d', strtotime($today . ' + ' . $schedule . ' days'));
