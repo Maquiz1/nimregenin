@@ -1481,18 +1481,20 @@ if ($user->isLoggedIn()) {
             $data = null;
             $filename = null;
             if (Input::get('crfs_pending')) {
-                if ($_GET['day']) {
-                    if ($_GET['day'] == 'Nxt') {
-                        $schedule = 0;
-                        $today = date('Y-m-d');
-                        $nxt_visit_date = date('Y-m-d', strtotime($today . ' + ' . $schedule . ' days'));
-                        $data = $override->getNews3('visit', 'expected_date', $nxt_visit_date, 'status', 0);
-                    } else {
-                        $data = $override->getNews2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', $_GET['day']);
-                    }
-                } else {
-                    $data = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'status', 0);
-                }
+                // if ($_GET['day']) {
+                //     if ($_GET['day'] == 'Nxt') {
+                //         $schedule = 0;
+                //         $today = date('Y-m-d');
+                //         $nxt_visit_date = date('Y-m-d', strtotime($today . ' + ' . $schedule . ' days'));
+                //         $data = $override->getNews3('visit', 'expected_date', $nxt_visit_date, 'status', 0);
+                //     } else {
+                //         $data = $override->getNews2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', $_GET['day']);
+                //     }
+                // } else {
+                    $data = $override->getNews('crf1', 'vcode', 'D0', 'status', 1);
+                    // $data = $override->getNews1('crf1', 'visit_code', $_GET['day'], 'status', 1);
+                    // $data = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'status', 0);
+                // }
                 $filename = 'Missing Crfs';
             }
             $user->exportData($data, $filename);
@@ -10897,9 +10899,12 @@ if ($user->isLoggedIn()) {
                                         $visits = $override->getNews3('visit', 'expected_date', $nxt_visit_date, 'status', 0);
                                     } else {
                                         $visits = $override->getNews2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', $_GET['day']);
+                                        // $visits = $override->getNews2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', $_GET['day']);
                                     }
                                 } else {
-                                    $visits = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'status', 0);
+                                    // $visits = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'status', 0);
+                                    $crfs = $override->getNews1('crf1', 'visit_code', $_GET['day'], 'status', 1);
+
                                 }
                             } else {
                                 if ($_GET['day']) {
@@ -10940,7 +10945,7 @@ if ($user->isLoggedIn()) {
                                         // $Report = $override->getReport2('clients')[0];
                                         // print_r($Report);
                                         $x = 1;
-                                        foreach ($visits as $visit) {
+                                        foreach ($crfs as $visit) {
                                             $client = $override->get3('clients', 'id', $visit['client_id'], 'enrolled', 1, 'end_study', 0)[0];
                                             // $client = $override->get4('clients', 'id', $visit['client_id'],'enrolled',1,'end_study',0,'site_id',$user->data()->site_id)[0] 
                                             $site = $override->getNews('clients', 'id', $visit['client_id'], 'status', 1)[0]['site_id'];
