@@ -10931,8 +10931,8 @@ if ($user->isLoggedIn()) {
                                         // $visits = $override->getNews2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', $_GET['day']);
                                     }
                                 } else {
-                                    // $visits = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'status', 0);
-                                    $crfs = $override->getNews1('crf1', 'visit_code', $_GET['day'], 'status', 1);
+                                    $visits = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'status', 0);
+                                    // $crfs = $override->getNews1('crf1', 'visit_code', $_GET['day'], 'status', 1);
                                 }
                             } else {
                                 if ($_GET['day']) {
