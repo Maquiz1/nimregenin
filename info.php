@@ -69,6 +69,7 @@ if ($user->isLoggedIn()) {
                         'phone_number' => Input::get('phone_number'),
                         'email_address' => Input::get('email_address'),
                         'accessLevel' => $accessLevel,
+                        'power' => Input::get('power'),
                         'user_id' => $user->data()->id,
                     ), Input::get('id'));
 
@@ -1491,9 +1492,9 @@ if ($user->isLoggedIn()) {
                 //         $data = $override->getNews2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', $_GET['day']);
                 //     }
                 // } else {
-                    $data = $override->getNews('crf1', 'vcode', 'D0', 'status', 1);
-                    // $data = $override->getNews1('crf1', 'visit_code', $_GET['day'], 'status', 1);
-                    // $data = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'status', 0);
+                $data = $override->getNews('crf1', 'vcode', 'D0', 'status', 1);
+                // $data = $override->getNews1('crf1', 'visit_code', $_GET['day'], 'status', 1);
+                // $data = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'status', 0);
                 // }
                 $filename = 'Missing Crfs';
             }
@@ -1737,6 +1738,21 @@ if ($user->isLoggedIn()) {
                                                                                 </select>
                                                                             </div>
                                                                         </div>
+
+                                                                        <div class="col-sm-12">
+                                                                            <div class="row-form clearfix">
+                                                                                <!-- select -->
+                                                                                <div class="form-group">
+                                                                                    <label>Power</label>
+                                                                                    <select name="power" id="power" style="width: 100%;" required>
+                                                                                        <option value="0">Zero</option>
+                                                                                        <option value="1">One</option>
+                                                                                        <option value="2">Two</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-3">Phone Number:</div>
                                                                             <div class="col-md-9"><input value="<?= $staff['phone_number'] ?>" class="" type="text" name="phone_number" id="phone" required /> <span>Example: 0700 000 111</span></div>
@@ -8101,11 +8117,11 @@ if ($user->isLoggedIn()) {
                                                         }
                                                     }
                                                     ?>
-                                                    <span>
+                                                    <!-- <span>
                                                         <a href="http://safetyprofiler-ctep.nci.nih.gov/CTC/CTC.aspx" class="btn btn-info">
                                                             **lookup corresponding AE Category at: http://safetyprofiler-ctep.nci.nih.gov/CTC/CTC.aspx
                                                         </a>
-                                                    </span>
+                                                    </span> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -10904,7 +10920,6 @@ if ($user->isLoggedIn()) {
                                 } else {
                                     // $visits = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'status', 0);
                                     $crfs = $override->getNews1('crf1', 'visit_code', $_GET['day'], 'status', 1);
-
                                 }
                             } else {
                                 if ($_GET['day']) {
