@@ -1744,9 +1744,9 @@ if ($user->isLoggedIn()) {
                                                                             <div class="col-md-3">Site</div>
                                                                             <div class="col-md-9">
                                                                                 <select name="site" style="width: 100%;" required>
-                                                                                    <option value="<?= $position['id'] ?>"><?= $position['name'] ?></option>
-                                                                                    <?php foreach ($override->getData('site') as $position) { ?>
-                                                                                        <option value="<?= $position['id'] ?>"><?= $position['name'] ?></option>
+                                                                                    <option value="<?= $site['id'] ?>"><?= $site['name'] ?></option>
+                                                                                    <?php foreach ($override->getData('site') as $site) { ?>
+                                                                                        <option value="<?= $site['id'] ?>"><?= $site['name'] ?></option>
                                                                                     <?php } ?>
                                                                                 </select>
                                                                             </div>
