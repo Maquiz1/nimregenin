@@ -70,6 +70,7 @@ if ($user->isLoggedIn()) {
                         'email_address' => Input::get('email_address'),
                         'accessLevel' => $accessLevel,
                         'power' => Input::get('power'),
+                        'site_id' => Input::get('site'),
                         'user_id' => $user->data()->id,
                     ), Input::get('id'));
 
@@ -1733,6 +1734,18 @@ if ($user->isLoggedIn()) {
                                                                                 <select name="position" style="width: 100%;" required>
                                                                                     <option value="<?= $position['id'] ?>"><?= $position['name'] ?></option>
                                                                                     <?php foreach ($override->getData('position') as $position) { ?>
+                                                                                        <option value="<?= $position['id'] ?>"><?= $position['name'] ?></option>
+                                                                                    <?php } ?>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row-form clearfix">
+                                                                            <div class="col-md-3">Site</div>
+                                                                            <div class="col-md-9">
+                                                                                <select name="site" style="width: 100%;" required>
+                                                                                    <option value="<?= $position['id'] ?>"><?= $position['name'] ?></option>
+                                                                                    <?php foreach ($override->getData('site') as $position) { ?>
                                                                                         <option value="<?= $position['id'] ?>"><?= $position['name'] ?></option>
                                                                                     <?php } ?>
                                                                                 </select>
