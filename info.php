@@ -3591,6 +3591,9 @@ if ($user->isLoggedIn()) {
                                                                                     <option value="1">Radiotherapy Treatment</option>
                                                                                     <option value="2">Chemotherapy Treatment</option>
                                                                                     <option value="3">Surgery Treatment</option>
+                                                                                    <option value="4">Active surveillance</option>
+                                                                                    <option value="5">Hormonal therapy ie ADT</option>
+                                                                                    <option value="96">Other (If Other write in Notes / Remarks )</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
