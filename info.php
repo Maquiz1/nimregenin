@@ -3592,7 +3592,7 @@ if ($user->isLoggedIn()) {
                                                                                     <option value="3">Surgery Treatment</option>
                                                                                     <option value="4">Active surveillance</option>
                                                                                     <option value="5">Hormonal therapy ie ADT</option>
-                                                                                    <option value="96">Other (If Other write in Notes / Remarks )</option>
+                                                                                    <option value="6">Other (If Other write in Notes / Remarks )</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -3724,7 +3724,7 @@ if ($user->isLoggedIn()) {
                                                                                         <option value="<?= $client['treatment_type'] ?>">Active surveillance</option>
                                                                                     <?php } else if ($client['treatment_type'] == 5) { ?>
                                                                                         <option value="<?= $client['treatment_type'] ?>">Hormonal therapy ie ADT</option>
-                                                                                    <?php } else if ($client['treatment_type'] == 96) { ?>
+                                                                                    <?php } else if ($client['treatment_type'] == 6) { ?>
                                                                                         <option value="<?= $client['treatment_type'] ?>">Other (If Other write in Notes / Remarks )</option>
                                                                                     <?php } else { ?>
                                                                                         <option value="">Select</option>
