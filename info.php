@@ -771,9 +771,10 @@ if ($user->isLoggedIn()) {
             ));
             if ($validate->passed()) {
                 $std_id = $override->getNews('study_id', 'site_id', $user->data()->site_id, 'status', 0)[0];
-                $enrollment_date = $override->get('clients', 'id', Input::get('id'))[0];
+                // $enrollment_date = $override->get('clients', 'id', Input::get('id'))[0];
+                $visit_date = $override->firstRow('visit', 'visit_date', 'id', 'client_id', Input::get('id'))[0];
                 if ($override->get('visit', 'client_id', Input::get('id'))) {
-                    if (!Input::get('visit_date') == $enrollment_date['clinic_date']) {
+                    if (Input::get('visit_date') != $visit_date['visit_date']) {
                         $user->deleteRecord('visit', 'client_id', Input::get('id'));
                         $user->createRecord('visit', array(
                             'visit_name' => 'Day 0',
