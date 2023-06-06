@@ -1538,22 +1538,21 @@ if ($user->isLoggedIn()) {
                     // foreach ($data as $show_table_row) {
                     //     $output .= "\n\n" . $show_table_row["Create Table"] . ";\n\n";
                     // }
-                //     $select_query = "SELECT * FROM " . $table . "";
-                //     $statement = $connect->prepare($select_query);
-                //     $statement->execute();
-                //     $total_row = $statement->rowCount();
+                    //     $select_query = "SELECT * FROM " . $table . "";
+                    //     $statement = $connect->prepare($select_query);
+                    //     $statement->execute();
+                    //     $total_row = $statement->rowCount();
 
-                //     for ($count = 0; $count < $total_row; $count++) {
-                //         $single_result = $statement->fetch(PDO::FETCH_ASSOC);
-                //         $table_column_array = array_keys($single_result);
-                //         $table_value_array = array_values($single_result);
-                //         $output .= "\nINSERT INTO $table (";
-                //         $output .= "" . implode(", ", $table_column_array) . ") VALUES (";
-                //         $output .= "'" . implode("','", $table_value_array) . "');\n";
-                //     }
+                    //     for ($count = 0; $count < $total_row; $count++) {
+                    //         $single_result = $statement->fetch(PDO::FETCH_ASSOC);
+                    //         $table_column_array = array_keys($single_result);
+                    //         $table_value_array = array_values($single_result);
+                    //         $output .= "\nINSERT INTO $table (";
+                    //         $output .= "" . implode(", ", $table_column_array) . ") VALUES (";
+                    //         $output .= "'" . implode("','", $table_value_array) . "');\n";
+                    //     }
 
-                print_r($data);
-
+                    print_r($data);
                 }
                 // $file_name = 'database_backup_on_' . date('y-m-d') . '.sql';
                 // $file_handle = fopen($file_name, 'w+');
@@ -3721,6 +3720,12 @@ if ($user->isLoggedIn()) {
                                                                                         <option value="<?= $client['treatment_type'] ?>">Chemotherapy Treatment</option>
                                                                                     <?php } else if ($client['treatment_type'] == 3) { ?>
                                                                                         <option value="<?= $client['treatment_type'] ?>">Surgery Treatment</option>
+                                                                                    <?php } else if ($client['treatment_type'] == 4) { ?>
+                                                                                        <option value="<?= $client['treatment_type'] ?>">Active surveillance</option>
+                                                                                    <?php } else if ($client['treatment_type'] == 5) { ?>
+                                                                                        <option value="<?= $client['treatment_type'] ?>">Hormonal therapy ie ADT</option>
+                                                                                    <?php } else if ($client['treatment_type'] == 96) { ?>
+                                                                                        <option value="<?= $client['treatment_type'] ?>">Other (If Other write in Notes / Remarks )</option>
                                                                                     <?php } else { ?>
                                                                                         <option value="">Select</option>
                                                                                     <?php
@@ -3728,6 +3733,9 @@ if ($user->isLoggedIn()) {
                                                                                     <option value="1">Radiotherapy Treatment</option>
                                                                                     <option value="2">Chemotherapy Treatment</option>
                                                                                     <option value="3">Surgery Treatment</option>
+                                                                                    <option value="4">Active surveillance</option>
+                                                                                    <option value="5">Hormonal therapy ie ADT</option>
+                                                                                    <option value="96">Other (If Other write in Notes / Remarks )</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
