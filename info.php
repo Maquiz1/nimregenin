@@ -771,23 +771,26 @@ if ($user->isLoggedIn()) {
             ));
             if ($validate->passed()) {
                 $std_id = $override->getNews('study_id', 'site_id', $user->data()->site_id, 'status', 0)[0];
+                $enrollment_date = $override->get('clients', 'id', Input::get('id'))[0];
                 if ($override->get('visit', 'client_id', Input::get('id'))) {
-                    $user->deleteRecord('visit', 'client_id', Input::get('id'));
-                    $user->createRecord('visit', array(
-                        'visit_name' => 'Day 0',
-                        'visit_code' => 'D0',
-                        'study_id' => $std_id['study_id'],
-                        'expected_date' => '',
-                        'visit_date' => Input::get('visit_date'),
-                        'visit_window' => 2,
-                        'status' => 1,
-                        'client_id' => Input::get('id'),
-                        'created_on' => date('Y-m-d'),
-                        'seq_no' => 0,
-                        'redcap' => 0,
-                        'reasons' => Input::get('reasons'),
-                        'visit_status' => 1,
-                    ));
+                    if (Input::get('visit_date') == $enrollment_date['clinic_date']) {
+                        $user->deleteRecord('visit', 'client_id', Input::get('id'));
+                        $user->createRecord('visit', array(
+                            'visit_name' => 'Day 0',
+                            'visit_code' => 'D0',
+                            'study_id' => $std_id['study_id'],
+                            'expected_date' => '',
+                            'visit_date' => Input::get('visit_date'),
+                            'visit_window' => 2,
+                            'status' => 1,
+                            'client_id' => Input::get('id'),
+                            'created_on' => date('Y-m-d'),
+                            'seq_no' => 0,
+                            'redcap' => 0,
+                            'reasons' => Input::get('reasons'),
+                            'visit_status' => 1,
+                        ));
+                    }
 
                     $user->updateRecord(
                         'clients',
@@ -3735,7 +3738,7 @@ if ($user->isLoggedIn()) {
                                                                                     <option value="3">Surgery Treatment</option>
                                                                                     <option value="4">Active surveillance</option>
                                                                                     <option value="5">Hormonal therapy ie ADT</option>
-                                                                                    <option value="96">Other (If Other write in Notes / Remarks )</option>
+                                                                                    <option value="6">Other (If Other write in Notes / Remarks )</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
