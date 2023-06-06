@@ -1388,6 +1388,32 @@ if ($user->isLoggedIn()) {
             } else {
                 $pageError = $validate->errors();
             }
+        } elseif (Input::get('clear_data')) {
+
+            $validate = $validate->check($_POST, array(
+                'name' => array(
+                    'required' => true,
+                ),
+            ));
+            if ($validate->passed()) {
+                try {
+                    if (Input::get('name')) {
+                        if (Input::get('name') == 'user' || Input::get('name') == 'schedule' || Input::get('name') == 'study_id') {
+                            $errorMessage = 'Table ' . '"' . Input::get('name') . '"' . '  can not be Cleared';
+                        } else {
+                            $clearData = $override->clearDataTable(Input::get('name'));
+                        }
+                        $successMessage = 'Table ' . '"' . Input::get('name') . '"' . ' Cleared Successfull';
+                    } else {
+                        $errorMessage = 'Table ' . '"' . Input::get('name') . '"' . '  can not be Found!';
+                    }
+                    // die;
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
         }
 
         if ($_GET['id'] == 20) {
@@ -1500,6 +1526,66 @@ if ($user->isLoggedIn()) {
                 $filename = 'Missing Crfs';
             }
             $user->exportData($data, $filename);
+        }
+
+        if ($_GET['id'] == 24) {
+            if (Input::get('export_data_table')) {
+                // $data = $override->DBbackups(Input::get('name'), 'Backup');
+                $data = $override->DBbackups();
+                $output = '';
+                foreach ($data as $table) {
+                    $data = $user->createTable($table);
+                    // foreach ($data as $show_table_row) {
+                    //     $output .= "\n\n" . $show_table_row["Create Table"] . ";\n\n";
+                    // }
+                //     $select_query = "SELECT * FROM " . $table . "";
+                //     $statement = $connect->prepare($select_query);
+                //     $statement->execute();
+                //     $total_row = $statement->rowCount();
+
+                //     for ($count = 0; $count < $total_row; $count++) {
+                //         $single_result = $statement->fetch(PDO::FETCH_ASSOC);
+                //         $table_column_array = array_keys($single_result);
+                //         $table_value_array = array_values($single_result);
+                //         $output .= "\nINSERT INTO $table (";
+                //         $output .= "" . implode(", ", $table_column_array) . ") VALUES (";
+                //         $output .= "'" . implode("','", $table_value_array) . "');\n";
+                //     }
+
+                print_r($data);
+
+                }
+                // $file_name = 'database_backup_on_' . date('y-m-d') . '.sql';
+                // $file_handle = fopen($file_name, 'w+');
+                // fwrite($file_handle, $output);
+                // fclose($file_handle);
+                // header('Content-Description: File Transfer');
+                // header('Content-Type: application/octet-stream');
+                // header('Content-Disposition: attachment; filename=' . basename($file_name));
+                // header('Content-Transfer-Encoding: binary');
+                // header('Expires: 0');
+                // header('Cache-Control: must-revalidate');
+                // header('Pragma: public');
+                // header('Content-Length: ' . filesize($file_name));
+                // ob_clean();
+                // flush();
+                // readfile($file_name);
+                // unlink($file_name);
+
+
+            }
+        }
+
+        if ($_GET['id'] == 25) {
+            if (Input::get('export_data_table')) {
+                $data = $override->Export_Database(Input::get('name'), 'Backup');
+                if ($data === false) {
+                    $successMessage = 'Failed to export database.';
+                } else {
+                    $successMessage = 'Database exported successfully.';
+                    print_r($data);
+                }
+            }
         }
     }
 } else {
@@ -11036,6 +11122,105 @@ if ($user->isLoggedIn()) {
                                 </table>
                             </div>
                         </div>
+
+                    <?php } elseif ($_GET['id'] == 23) { ?>
+                        <?php
+                        $AllTables = $override->AllTables();
+                        ?>
+                        <div class="col-md-offset-1 col-md-8">
+                            <div class="head clearfix">
+                                <div class="isw-ok"></div>
+                                <h1>Clear Data on Table</h1>
+                            </div>
+                            <div class="block-fluid">
+                                <form id="validation" method="post">
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">Table Name:</div>
+                                        <div class="col-md-9">
+                                            <select name="name" id="name" style="width: 100%;" required>
+                                                <option value="">Select Table Name</option>
+                                                <?php foreach ($AllTables as $tables) { ?>
+                                                    <option value="<?= $tables['Tables_in_nimregenin'] ?>"><?= $tables['Tables_in_nimregenin'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="footer tar">
+                                        <input type="submit" name="clear_data" value="Submit" class="btn btn-default">
+                                    </div>
+
+                                </form>
+                            </div>
+
+                        </div>
+                    <?php } elseif ($_GET['id'] == 24) { ?>
+                        <?php
+                        $AllTables = $override->AllTables();
+                        ?>
+                        <div class="col-md-offset-1 col-md-8">
+                            <div class="head clearfix">
+                                <div class="isw-ok"></div>
+                                <h1>Export Data Tables</h1>
+                            </div>
+                            <div class="block-fluid">
+                                <form id="validation" method="post">
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">Table Name:</div>
+                                        <div class="col-md-9">
+                                            <select name="name" id="name" style="width: 100%;" required>
+                                                <option value="">Select Table Name</option>
+                                                <?php foreach ($AllTables as $tables) { ?>
+                                                    <option value="<?= $tables['Tables_in_nimregenin'] ?>"><?= $tables['Tables_in_nimregenin'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="footer tar">
+                                        <input type="submit" name="export_data_table" value="Submit" class="btn btn-default">
+                                    </div>
+
+                                </form>
+                            </div>
+
+                        </div>
+
+                    <?php } elseif ($_GET['id'] == 25) {                    ?>
+                        <?php
+                        $databases = $override->AllDatabases();
+                        ?>
+                        <div class="col-md-offset-1 col-md-8">
+                            <div class="head clearfix">
+                                <div class="isw-ok"></div>
+                                <h1>Export Database</h1>
+                            </div>
+                            <div class="block-fluid">
+                                <form id="validation" method="post">
+                                    <div class="row-form clearfix">
+                                        <div class="col-md-3">Database Name:</div>
+                                        <div class="col-md-9">
+                                            <select name="name" id="name" style="width: 100%;" required>
+                                                <option value="">Select Database Name</option>
+                                                <?php foreach ($databases as $tables) { ?>
+                                                    <option value="<?= $tables['Database'] ?>"><?= $tables['Database'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="footer tar">
+                                        <input type="submit" name="export_database" value="Submit" class="btn btn-default">
+                                    </div>
+
+                                </form>
+                            </div>
+
+                        </div>
+
+
+                    <?php } elseif ($_GET['id'] == 26) { ?>
+
 
                     <?php } ?>
                 </div>

@@ -440,6 +440,15 @@ class User
         return true;
     }
 
+
+    public function createTable($table)
+    {
+        if (!$this->_db->mycreate($table)) {
+            throw new Exception('There is a problem creating Table');
+        }
+        return true;
+    }
+
     public function find($user = null)
     {
         if ($user) {

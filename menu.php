@@ -6,6 +6,9 @@ $email = new Email();
 $random = new Random();
 $users = $override->getData('user');
 if ($user->isLoggedIn()) {
+    $tables = $override->AllTablesCont();
+    $AllDatabasesCount = $override->AllDatabasesCount();
+    
     if ($user->data()->power == 1) {
         $registered = $override->getCount('clients', 'status', 1);
         $not_screened = $override->countData('clients', 'status', 1, 'screened', 0);
@@ -124,6 +127,24 @@ if ($user->isLoggedIn()) {
                     <li>
                         <a href="info.php?id=5">
                             <span class="glyphicon glyphicon-list"></span><span class="text">Study IDs</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="info.php?id=23">
+                            <span class="glyphicon glyphicon-list"></span><span class="text">Clear Data on Table</span>
+                            <span class="badge badge-secondary badge-pill"><?= $tables ?></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="info.php?id=24">
+                            <span class="glyphicon glyphicon-list"></span><span class="text">Export Data Tables</span>
+                            <span class="badge badge-secondary badge-pill"><?= $tables ?></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="info.php?id=25">
+                            <span class="glyphicon glyphicon-list"></span><span class="text">Export Database</span>
+                            <span class="badge badge-secondary badge-pill"><?= $AllDatabasesCount ?></span>
                         </a>
                     </li>
                     <li>
