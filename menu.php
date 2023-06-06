@@ -8,7 +8,7 @@ $users = $override->getData('user');
 if ($user->isLoggedIn()) {
     $tables = $override->AllTablesCont();
     $AllDatabasesCount = $override->AllDatabasesCount();
-    
+
     if ($user->data()->power == 1) {
         $registered = $override->getCount('clients', 'status', 1);
         $not_screened = $override->countData('clients', 'status', 1, 'screened', 0);
@@ -32,7 +32,18 @@ if ($user->isLoggedIn()) {
 
 
 
-        // $visits = $override->get3('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'site_id',$user->data()->site_id);
+        // $DAY0 = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'visit_code', 'D0');
+        // $CRF1 = $override->getNews('crf1', 'patient_id', $DAY0['client_id'], 'vcode', 'D0');
+        // foreach($DAY0 as $day){
+        //     foreach($CRF1 as $crf1){
+        //         if($day['client_id'] != $crf1['patient_id']){
+
+        //         }
+        //     }
+
+        //     $client_id = $day['client_id'];
+        // }
+        // $crf1 = $override->getNo1('crf1', 'patient_id', $DAY0['client_id'], 'vcode', 'D0');
 
     } else {
         $registered = $override->countData('clients', 'status', 1, 'site_id', $user->data()->site_id);
@@ -55,6 +66,11 @@ if ($user->isLoggedIn()) {
         $today = date('Y-m-d');
         $nxt_visit_date = date('Y-m-d', strtotime($today . ' + ' . $schedule . ' days'));
         $nxt_visit = $override->countData('visit', 'expected_date', $nxt_visit_date, 'status', 0);
+
+
+        // $DAY0 = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'visit_code', 'D0')[0];
+        // $crf1 = $override->getNo1('crf1', 'patient_id', $DAY0['client_id'], 'vcode', 'D0');
+
     }
 } else {
     Redirect::to('index.php');
@@ -208,7 +224,7 @@ if ($user->isLoggedIn()) {
                 <a href="#"><span class="isw-tag"></span><span class="text">Pending Visits</span></a>
                 <ul>
                     <li class="active">
-                    <a href="info.php?id=21" target="_blank">
+                        <a href="info.php?id=21" target="_blank">
                             <span class="text">All Visits </span>
                             <span class="badge badge-secondary badge-pill"><?= $visits ?></span>
                         </a>
@@ -262,7 +278,7 @@ if ($user->isLoggedIn()) {
                 <a href="#"><span class="isw-tag"></span><span class="text">Tomorrow Visits</span></a>
                 <ul>
                     <li class="active">
-                    <a href="info.php?id=21&day=Nxt" target="_blank">
+                        <a href="info.php?id=21&day=Nxt" target="_blank">
                             <span class="text">All Visits </span>
                             <span class="badge badge-secondary badge-pill"><?= $nxt_visit ?></span>
                         </a>
@@ -275,11 +291,54 @@ if ($user->isLoggedIn()) {
                 <a href="#"><span class="isw-tag"></span><span class="text">Missing Crfs</span></a>
                 <ul>
                     <li class="active">
-                    <a href="info.php?id=22" target="_blank">
+                        <a href="info.php?id=22" target="_blank">
                             <span class="text">All crfs </span>
                             <span class="badge badge-secondary badge-pill"><?= $nxt_visit ?></span>
                         </a>
                     </li>
+                    <li class="active">
+                        <a href="info.php?id=22" target="_blank">
+                            <span class="text">crfs 1</span>
+                            <span class="badge badge-secondary badge-pill"><?= $client_id ?></span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="info.php?id=22" target="_blank">
+                            <span class="text">crfs 2</span>
+                            <span class="badge badge-secondary badge-pill"><?= $client_id ?></span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="info.php?id=22" target="_blank">
+                            <span class="text">crfs 3</span>
+                            <span class="badge badge-secondary badge-pill"><?= $nxt_visit ?></span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="info.php?id=22" target="_blank">
+                            <span class="text">crfs 4</span>
+                            <span class="badge badge-secondary badge-pill"><?= $nxt_visit ?></span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="info.php?id=22" target="_blank">
+                            <span class="text">crfs 5</span>
+                            <span class="badge badge-secondary badge-pill"><?= $nxt_visit ?></span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="info.php?id=22" target="_blank">
+                            <span class="text">crfs 6</span>
+                            <span class="badge badge-secondary badge-pill"><?= $nxt_visit ?></span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="info.php?id=22" target="_blank">
+                            <span class="text">crfs 7</span>
+                            <span class="badge badge-secondary badge-pill"><?= $nxt_visit ?></span>
+                        </a>
+                    </li>
+                    
 
                 </ul>
             </li>
