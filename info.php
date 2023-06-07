@@ -11020,36 +11020,13 @@ if ($user->isLoggedIn()) {
                             </div>
                             <form method="post"><input type="submit" name="crfs_pending" value="Download Excel"></form>
                             <?php if ($user->data()->power == 1) {
-                                if ($_GET['day']) {
-                                    if ($_GET['day'] == 'Nxt') {
-                                        $schedule = 1;
-                                        $today = date('Y-m-d');
-                                        $nxt_visit_date = date('Y-m-d', strtotime($today . ' + ' . $schedule . ' days'));
-
-                                        $visits = $override->getNews3('visit', 'expected_date', $nxt_visit_date, 'status', 0);
-                                    } else {
-                                        $visits = $override->getNews2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', $_GET['day']);
-                                        // $visits = $override->getNews2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', $_GET['day']);
-                                    }
-                                } else {
-                                    $visits = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'status', 0);
-                                    // $crfs = $override->getNews1('crf1', 'visit_code', $_GET['day'], 'status', 1);
-                                }
+                                $DAY0 = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'visit_code', 'D0')[0];
+                                $CRF1 = $override->getNews('crf1', 'patient_id', $DAY0['client_id'], 'vcode', 'D0')[0]['patient_id'];
+                                $result = array_diff($DAY0, $CRF1);
                             } else {
-                                if ($_GET['day']) {
-                                    if ($_GET['day'] == 'Nxt') {
-
-                                        $schedule = 1;
-                                        $today = date('Y-m-d');
-                                        $nxt_visit_date = date('Y-m-d', strtotime($today . ' + ' . $schedule . ' days'));
-
-                                        $visits = $override->getNews3('visit', 'expected_date', $nxt_visit_date, 'status', 0, 'visit_code', $_GET['day']);
-                                    } else {
-                                        $visits = $override->getNews2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', $_GET['day']);
-                                    }
-                                } else {
-                                }
-                                $visits = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'status', 0);
+                                $DAY0 = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'visit_code', 'D0')[0]['client_id'];
+                                $CRF1 = $override->getNews('crf1', 'patient_id', $DAY0['client_id'], 'vcode', 'D0')[0]['patient_id'];
+                                $result = array_diff($DAY0, $CRF1);
                             } ?>
                             <div class="block-fluid">
                                 <table cellpadding="0" cellspacing="0" width="100%" class="table">
@@ -11072,14 +11049,12 @@ if ($user->isLoggedIn()) {
                                     <tbody>
                                         <?php
                                         // $Report = $override->getReport2('clients')[0];
-                                        // print_r($Report);
+                                        print_r($DAY0);
                                         $x = 1;
-                                        foreach ($crfs as $visit) {
-                                            $client = $override->get3('clients', 'id', $visit['client_id'], 'enrolled', 1, 'end_study', 0)[0];
-                                            // $client = $override->get4('clients', 'id', $visit['client_id'],'enrolled',1,'end_study',0,'site_id',$user->data()->site_id)[0] 
+                                        foreach ($result as $visit) {
+                                            $client = $override->get('clients', 'id', $visit['client_id'])[0];
                                             $site = $override->getNews('clients', 'id', $visit['client_id'], 'status', 1)[0]['site_id'];
                                             $site_id = $override->get('site', 'id', $site)[0]['name'];
-
                                         ?>
                                             <tr>
                                                 <!-- <td><input type="checkbox" name="checkbox" /></td> -->

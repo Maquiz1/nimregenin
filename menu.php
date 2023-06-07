@@ -29,20 +29,53 @@ if ($user->isLoggedIn()) {
         $today = date('Y-m-d');
         $nxt_visit_date = date('Y-m-d', strtotime($today . ' + ' . $schedule . ' days'));
         $nxt_visit = $override->getCount1('visit', 'expected_date', $nxt_visit_date, 'status', 0);
-        
 
-        // $DAY0 = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'visit_code', 'D0');
-        // $CRF1 = $override->getNews('crf1', 'patient_id', $DAY0['client_id'], 'vcode', 'D0');
-        // foreach($DAY0 as $day){
-        //     foreach($CRF1 as $crf1){
-        //         if($day['client_id'] != $crf1['patient_id']){
 
-        //         }
-        //     }
+        $DAY = $override->getNews0('visit', 'expected_date', date('Y-m-d'));
+        $CRF = $override->get('crf1', 'patient_id', $DAY0['client_id']);
+        $resultAll = array_diff($DAY, $CRF);
+        $resultAll = count($resultAll);
 
-        //     $client_id = $day['client_id'];
-        // }
-        // $crf1 = $override->getNo1('crf1', 'patient_id', $DAY0['client_id'], 'vcode', 'D0');
+
+        $DAY0 = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'visit_code', 'D0');
+        $CRF1 = $override->getNews('crf1', 'patient_id', $DAY0['client_id'], 'vcode', 'D0');
+        $resultCrfDay0 = array_diff($DAY0, $CRF1);
+        $resultCrf1Day0 = count($resultCrf1Day0);
+
+        $DAY0 = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'visit_code', 'D0');
+        $CRF2 = $override->getNews('crf2', 'patient_id', $DAY0['client_id'], 'vcode', 'D0');
+        $resultCrf2Day0 = array_diff($DAY0, $CRF2);
+        $resultCrf2Day0 = count($resultCrf2Day0);
+
+
+        $DAY0 = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'visit_code', 'D0');
+        $CRF3 = $override->getNews('crf3', 'patient_id', $DAY0['client_id'], 'vcode', 'D0');
+        $resultCrf3Day0 = array_diff($DAY0, $CRF3);
+        $resultCrf3Day0 = count($resultCrf3Day0);
+
+
+        $DAY0 = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'visit_code', 'D0');
+        $CRF4 = $override->getNews('crf4', 'patient_id', $DAY0['client_id'], 'vcode', 'D0');
+        $resultCrf4Day0 = array_diff($DAY0, $CRF4);
+        $resultCrf4Day0 = count($resultCrf4Day0);
+
+
+        $DAY0 = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'visit_code', 'D0');
+        $CRF5 = $override->getNews('crf5', 'patient_id', $DAY0['client_id'], 'vcode', 'D0');
+        $resultCrf5Day0 = array_diff($DAY0, $CRF5);
+        $resultCrf5Day0 = count($resultCrf5Day0);
+
+
+        $DAY0 = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'visit_code', 'D0');
+        $CRF6 = $override->getNews('crf6', 'patient_id', $DAY0['client_id'], 'vcode', 'D0');
+        $resultCrf6Day0 = array_diff($DAY0, $CRF6);
+        $resultCrf6Day0 = count($resultCrf6Day0);
+
+        $DAY0 = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'visit_code', 'D0');
+        $CRF7 = $override->getNews('crf7', 'patient_id', $DAY0['client_id'], 'vcode', 'D0');
+        $resultCrf7Day0 = array_diff($DAY0, $CRF7);
+        $resultCrf7Day0 = count($resultCrf7Day0);
+
 
     } else {
         $registered = $override->countData('clients', 'status', 1, 'site_id', $user->data()->site_id);
@@ -292,52 +325,52 @@ if ($user->isLoggedIn()) {
                     <li class="active">
                         <a href="info.php?id=22" target="_blank">
                             <span class="text">All crfs </span>
-                            <span class="badge badge-secondary badge-pill"><?= $nxt_visit ?></span>
+                            <span class="badge badge-secondary badge-pill"><?= $resultAll ?></span>
                         </a>
                     </li>
                     <li class="active">
                         <a href="info.php?id=22" target="_blank">
                             <span class="text">crfs 1</span>
-                            <span class="badge badge-secondary badge-pill"><?= $client_id ?></span>
+                            <span class="badge badge-secondary badge-pill"><?= $resultCrf1Day0 ?></span>
                         </a>
                     </li>
                     <li class="active">
                         <a href="info.php?id=22" target="_blank">
                             <span class="text">crfs 2</span>
-                            <span class="badge badge-secondary badge-pill"><?= $client_id ?></span>
+                            <span class="badge badge-secondary badge-pill"><?= $resultCrf2Day0 ?></span>
                         </a>
                     </li>
                     <li class="active">
                         <a href="info.php?id=22" target="_blank">
                             <span class="text">crfs 3</span>
-                            <span class="badge badge-secondary badge-pill"><?= $nxt_visit ?></span>
+                            <span class="badge badge-secondary badge-pill"><?= $resultCrf3Day0 ?></span>
                         </a>
                     </li>
                     <li class="active">
                         <a href="info.php?id=22" target="_blank">
                             <span class="text">crfs 4</span>
-                            <span class="badge badge-secondary badge-pill"><?= $nxt_visit ?></span>
+                            <span class="badge badge-secondary badge-pill"><?= $resultCrf4Day0 ?></span>
                         </a>
                     </li>
                     <li class="active">
                         <a href="info.php?id=22" target="_blank">
                             <span class="text">crfs 5</span>
-                            <span class="badge badge-secondary badge-pill"><?= $nxt_visit ?></span>
+                            <span class="badge badge-secondary badge-pill"><?= $resultCrf5Day0 ?></span>
                         </a>
                     </li>
                     <li class="active">
                         <a href="info.php?id=22" target="_blank">
                             <span class="text">crfs 6</span>
-                            <span class="badge badge-secondary badge-pill"><?= $nxt_visit ?></span>
+                            <span class="badge badge-secondary badge-pill"><?= $resultCrf6Day0 ?></span>
                         </a>
                     </li>
                     <li class="active">
                         <a href="info.php?id=22" target="_blank">
                             <span class="text">crfs 7</span>
-                            <span class="badge badge-secondary badge-pill"><?= $nxt_visit ?></span>
+                            <span class="badge badge-secondary badge-pill"><?= $resultCrf7Day0 ?></span>
                         </a>
                     </li>
-                    
+
 
                 </ul>
             </li>

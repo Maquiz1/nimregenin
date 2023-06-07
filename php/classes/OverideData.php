@@ -108,6 +108,13 @@ class OverideData
         return $result;
     }
 
+    public function getNews0($table, $where, $id)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where < '$id'");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     public function getNews1($table, $where, $id, $where2, $id2)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $where < '$id' AND $where2 = '$id2'");
