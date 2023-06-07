@@ -206,44 +206,45 @@ if ($user->isLoggedIn()) {
                 <a href="#"><span class="isw-tag"></span><span class="text">Reports</span></a>
                 <ul>
                     <li class="active">
-                        <a href="info.php?id=20" target="_blank">
+                        <a href="info.php?id=20">
                             <span class="isw-download"></span><span class="text">Download Data</span>
                         </a>
                     </li>
                     <li class="active">
-                        <a href="report.php" target="_blank">
+                        <a href="report.php">
                             <span class="text">Report ( TABLE 0) </span>
                         </a>
                     </li>
                     <li class="active">
-                        <a href="report1.php" target="_blank">
+                        <a href="report1.php">
                             <span class="text">Report 1 ( TABLE 1)</span>
                         </a>
                     </li>
                     <li class="active">
-                        <a href="report2.php" target="_blank">
+                        <a href="report2.php">
                             <span class="text">Report 2 ( TABLE 2)</span>
                         </a>
                     </li>
                     <li class="active">
-                        <a href="report3.php" target="_blank">
+                        <a href="report3.php">
                             <span class="text">Report 3 (TABLE 3) </span>
                         </a>
                     </li>
                     <li class="active">
-                        <a href="report4.php" target="_blank">
+                        <a href="report4.php">
                             <span class="text">Report 4 (TABLE 4)</span>
                         </a>
                     </li>
 
                     <li class="active">
-                        <a href="report4.php" target="_blank">
+                        <a href="report4.php">
                             <span class="text">Report 4 (TABLE 4) ( DAY 0)</span>
                         </a>
                     </li>
 
                     <li class="active">
-                        <a href="report5.php" target="_blank">
+                        <!-- <a href="report5.php" target="_blank"> -->
+                        <a href="report5.php">
                             <span class="text">Report 5 (TABLE 5) ( DAY 7)</span>
                         </a>
                     </li>
@@ -254,49 +255,50 @@ if ($user->isLoggedIn()) {
                 <a href="#"><span class="isw-tag"></span><span class="text">Pending Visits</span></a>
                 <ul>
                     <li class="active">
-                        <a href="info.php?id=21" target="_blank">
-                            <span class="text">All Visits </span>
-                            <span class="badge badge-secondary badge-pill"><?= $visits ?></span>
-                        </a>
+                        <!-- <a href="info.php?id=21" target="_blank"> -->
+                            <a href="info.php?id=21">
+                                <span class="text">All Visits </span>
+                                <span class="badge badge-secondary badge-pill"><?= $visits ?></span>
+                            </a>
                     </li>
                     <li class="active">
-                        <a href="info.php?id=21&day=D0" target="_blank">
+                        <a href="info.php?id=21&day=D0">
                             <span class="text">Day 0 Visits </span>
                             <span class="badge badge-secondary badge-pill"><?= $visits_DAY0 ?></span>
                         </a>
                     </li>
                     <li class="active">
-                        <a href="info.php?id=21&day=D7" target="_blank">
+                        <a href="info.php?id=21&day=D7">
                             <span class="text">Day 7 Visits </span>
                             <span class="badge badge-secondary badge-pill"><?= $visits_DAY7 ?></span>
                         </a>
                     </li>
                     <li class="active">
-                        <a href="info.php?id=21&day=D14" target="_blank">
+                        <a href="info.php?id=21&day=D14">
                             <span class="text">Day 14 Visits </span>
                             <span class="badge badge-secondary badge-pill"><?= $visits_DAY14 ?></span>
                         </a>
                     </li>
                     <li class="active">
-                        <a href="info.php?id=21&day=D30" target="_blank">
+                        <a href="info.php?id=21&day=D30">
                             <span class="text">Day 30 Visits </span>
                             <span class="badge badge-secondary badge-pill"><?= $visits_DAY30 ?></span>
                         </a>
                     </li>
                     <li class="active">
-                        <a href="info.php?id=21&day=D60" target="_blank">
+                        <a href="info.php?id=21&day=D60">
                             <span class="text">Day 60 Visits </span>
                             <span class="badge badge-secondary badge-pill"><?= $visits_DAY60 ?></span>
                         </a>
                     </li>
                     <li class="active">
-                        <a href="info.php?id=21&day=D90" target="_blank">
+                        <a href="info.php?id=21&day=D90">
                             <span class="text">Day 90 Visits </span>
                             <span class="badge badge-secondary badge-pill"><?= $visits_DAY90 ?></span>
                         </a>
                     </li>
                     <li class="active">
-                        <a href="info.php?id=21&day=D120" target="_blank">
+                        <a href="info.php?id=21&day=D120">
                             <span class="text">Day 120 Visits </span>
                             <span class="badge badge-secondary badge-pill"><?= $visits_DAY120 ?></span>
                         </a>
@@ -308,7 +310,7 @@ if ($user->isLoggedIn()) {
                 <a href="#"><span class="isw-tag"></span><span class="text">Tomorrow Visits</span></a>
                 <ul>
                     <li class="active">
-                        <a href="info.php?id=21&day=Nxt" target="_blank">
+                        <a href="info.php?id=21&day=Nxt">
                             <span class="text">All Visits </span>
                             <span class="badge badge-secondary badge-pill"><?= $nxt_visit ?></span>
                         </a>
