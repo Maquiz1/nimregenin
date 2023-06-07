@@ -29,8 +29,7 @@ if ($user->isLoggedIn()) {
         $today = date('Y-m-d');
         $nxt_visit_date = date('Y-m-d', strtotime($today . ' + ' . $schedule . ' days'));
         $nxt_visit = $override->getCount1('visit', 'expected_date', $nxt_visit_date, 'status', 0);
-
-
+        
 
         // $DAY0 = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'visit_code', 'D0');
         // $CRF1 = $override->getNews('crf1', 'patient_id', $DAY0['client_id'], 'vcode', 'D0');
