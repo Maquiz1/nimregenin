@@ -75,8 +75,6 @@ if ($user->isLoggedIn()) {
         $CRF7 = $override->getNews('crf7', 'patient_id', $DAY0['client_id'], 'vcode', 'D0');
         $resultCrf7Day0 = array_diff($DAY0, $CRF7);
         $resultCrf7Day0 = count($resultCrf7Day0);
-
-
     } else {
         $registered = $override->countData('clients', 'status', 1, 'site_id', $user->data()->site_id);
         $not_screened = $override->countData2('clients', 'status', 1, 'screened', 0, 'site_id', $user->data()->site_id);
@@ -323,49 +321,49 @@ if ($user->isLoggedIn()) {
                 <a href="#"><span class="isw-tag"></span><span class="text">Missing Crfs</span></a>
                 <ul>
                     <li class="active">
-                        <a href="info.php?id=22" target="_blank">
+                        <a href="info.php?id=22">
                             <span class="text">All crfs </span>
                             <span class="badge badge-secondary badge-pill"><?= $resultAll ?></span>
                         </a>
                     </li>
                     <li class="active">
-                        <a href="info.php?id=22" target="_blank">
+                        <a href="info.php?id=22">
                             <span class="text">crfs 1</span>
                             <span class="badge badge-secondary badge-pill"><?= $resultCrf1Day0 ?></span>
                         </a>
                     </li>
                     <li class="active">
-                        <a href="info.php?id=22" target="_blank">
+                        <a href="info.php?id=22">
                             <span class="text">crfs 2</span>
                             <span class="badge badge-secondary badge-pill"><?= $resultCrf2Day0 ?></span>
                         </a>
                     </li>
                     <li class="active">
-                        <a href="info.php?id=22" target="_blank">
+                        <a href="info.php?id=22">
                             <span class="text">crfs 3</span>
                             <span class="badge badge-secondary badge-pill"><?= $resultCrf3Day0 ?></span>
                         </a>
                     </li>
                     <li class="active">
-                        <a href="info.php?id=22" target="_blank">
+                        <a href="info.php?id=22">
                             <span class="text">crfs 4</span>
                             <span class="badge badge-secondary badge-pill"><?= $resultCrf4Day0 ?></span>
                         </a>
                     </li>
                     <li class="active">
-                        <a href="info.php?id=22" target="_blank">
+                        <a href="info.php?id=22">
                             <span class="text">crfs 5</span>
                             <span class="badge badge-secondary badge-pill"><?= $resultCrf5Day0 ?></span>
                         </a>
                     </li>
                     <li class="active">
-                        <a href="info.php?id=22" target="_blank">
+                        <a href="info.php?id=22">
                             <span class="text">crfs 6</span>
                             <span class="badge badge-secondary badge-pill"><?= $resultCrf6Day0 ?></span>
                         </a>
                     </li>
                     <li class="active">
-                        <a href="info.php?id=22" target="_blank">
+                        <a href="info.php?id=22">
                             <span class="text">crfs 7</span>
                             <span class="badge badge-secondary badge-pill"><?= $resultCrf7Day0 ?></span>
                         </a>
