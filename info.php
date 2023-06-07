@@ -11049,7 +11049,7 @@ if ($user->isLoggedIn()) {
                                     <tbody>
                                         <?php
                                         // $Report = $override->getReport2('clients')[0];
-                                        print_r($DAY0);
+                                        // print_r($DAY0);
                                         $x = 1;
                                         foreach ($result as $visit) {
                                             $client = $override->get('clients', 'id', $visit['client_id'])[0];
