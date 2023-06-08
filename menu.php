@@ -248,6 +248,13 @@ if ($user->isLoggedIn()) {
                             <span class="text">Report 5 (TABLE 5) ( DAY 7)</span>
                         </a>
                     </li>
+
+                    <li class="active">
+                        <!-- <a href="report5.php" target="_blank"> -->
+                        <a href="report6.php">
+                            <span class="text">Report 6 (TABLE 6) ( Screening with Control)</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
 
@@ -256,10 +263,10 @@ if ($user->isLoggedIn()) {
                 <ul>
                     <li class="active">
                         <!-- <a href="info.php?id=21" target="_blank"> -->
-                            <a href="info.php?id=21">
-                                <span class="text">All Visits </span>
-                                <span class="badge badge-secondary badge-pill"><?= $visits ?></span>
-                            </a>
+                        <a href="info.php?id=21">
+                            <span class="text">All Visits </span>
+                            <span class="badge badge-secondary badge-pill"><?= $visits ?></span>
+                        </a>
                     </li>
                     <li class="active">
                         <a href="info.php?id=21&day=D0">
