@@ -349,7 +349,7 @@ if ($user->isLoggedIn()) {
                 <ul>
                     <li class="active">
                         <a href="info.php?id=26">
-                            <span class="text">Doenload Missing Crf </span>
+                            <span class="text">Download Missing Crf </span>
                             <span class="badge badge-secondary badge-pill"><?= $MissingCrfNo ?></span>
                         </a>
                     </li>
@@ -359,7 +359,7 @@ if ($user->isLoggedIn()) {
                 <ul>
                     <li class="active">
                         <a href="info.php?id=27">
-                            <span class="text">Doenload Missing Crf Visits </span>
+                            <span class="text">Download Missing Crf Visits </span>
                             <span class="badge badge-secondary badge-pill"><?= $MissingCrfNo1 ?></span>
                         </a>
                     </li>
@@ -369,7 +369,7 @@ if ($user->isLoggedIn()) {
                 <ul>
                     <li class="active">
                         <a href="info.php?id=28">
-                            <span class="text">Doenload Missing Crf All</span>
+                            <span class="text">Download Missing Crf All</span>
                             <span class="badge badge-secondary badge-pill"><?= $MissingCrfNo2 ?></span>
                         </a>
                     </li>
