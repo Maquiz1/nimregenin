@@ -11232,7 +11232,7 @@ if ($user->isLoggedIn()) {
                                 <div class="isw-grid"></div>
                                 <h1>Missing Crf's</h1>
                                 <ul class="buttons">
-                                    <li><a href="pending.php?day=<?= $_GET['day'] ?>" class="isw-download"></a></li>
+                                    <li><a href="missing_crfs.php" class="isw-download"></a></li>
                                     <li><a href="#" class="isw-attachment"></a></li>
                                     <li>
                                         <a href="#" class="isw-settings"></a>

@@ -78,6 +78,7 @@ if ($user->isLoggedIn()) {
 
 
         $MissingCrf = $override->MissingData();
+        $MissingCrfNo = $override->MissingDataNo();
 
     } else {
         $registered = $override->countData('clients', 'status', 1, 'site_id', $user->data()->site_id);
@@ -103,6 +104,8 @@ if ($user->isLoggedIn()) {
 
 
         $MissingCrf = $override->MissingData();
+        $MissingCrfNo = $override->MissingDataNo();
+
 
 
 
@@ -336,7 +339,7 @@ if ($user->isLoggedIn()) {
                     <li class="active">
                         <a href="info.php?id=26">
                             <span class="text">Doenload Missing Crf </span>
-                            <span class="badge badge-secondary badge-pill"></span>
+                            <span class="badge badge-secondary badge-pill"><?= $MissingCrfNo ?></span>
                         </a>
                     </li>
 
