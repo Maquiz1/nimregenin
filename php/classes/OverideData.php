@@ -407,6 +407,56 @@ class OverideData
         return $num;
     }
 
+    public function MissingData1()
+    {
+        $query = $this->_pdo->query("select * from visit where expected_date < CURDATE() and visit_status is null");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function MissingDataNo1()
+    {
+        $query = $this->_pdo->query("select * from visit where expected_date < CURDATE() and visit_status is null");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+
+    public function MissingData2()
+    {
+        $query = $this->_pdo->query("select distinct a.visit_code, g.study_id,
+                (select status from crf1 c1 where c1.study_id = a.study_id and c1.vcode = a.visit_code) as crf1,
+                (select status from crf2 c2 where c2.study_id = a.study_id and c2.vcode = a.visit_code) as crf2,
+                (select status from crf3 c3 where c3.study_id = a.study_id and c3.vcode = a.visit_code) as crf3,
+                (select status from crf4 c4 where c4.study_id = a.study_id and c4.vcode = a.visit_code) as crf4,
+                (select status from crf5 c5 where c5.study_id = a.study_id and c5.vcode = a.visit_code) as crf5,
+                (select status from crf6 c6 where c6.study_id = a.study_id and c6.vcode = a.visit_code) as crf6,
+                (select distinct status from crf7 c7 where c7.study_id = a.study_id and c7.vcode = a.visit_code) as crf7
+                from visit a left join
+                (select distinct (a.study_id) from visit a where a.study_id not in ('') ) g on a.study_id = g.study_id
+                where g.study_id is not null order by study_id");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function MissingDataNo2()
+    {
+        $query = $this->_pdo->query("select distinct a.visit_code, g.study_id,
+                (select status from crf1 c1 where c1.study_id = a.study_id and c1.vcode = a.visit_code) as crf1,
+                (select status from crf2 c2 where c2.study_id = a.study_id and c2.vcode = a.visit_code) as crf2,
+                (select status from crf3 c3 where c3.study_id = a.study_id and c3.vcode = a.visit_code) as crf3,
+                (select status from crf4 c4 where c4.study_id = a.study_id and c4.vcode = a.visit_code) as crf4,
+                (select status from crf5 c5 where c5.study_id = a.study_id and c5.vcode = a.visit_code) as crf5,
+                (select status from crf6 c6 where c6.study_id = a.study_id and c6.vcode = a.visit_code) as crf6,
+                (select distinct status from crf7 c7 where c7.study_id = a.study_id and c7.vcode = a.visit_code) as crf7
+                from visit a left join
+                (select distinct (a.study_id) from visit a where a.study_id not in ('') ) g on a.study_id = g.study_id
+                where g.study_id is not null order by study_id");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+
 
     // $backup_config = array(
     //     'DB_HOST' => '127.0.0.1',////Database hostname

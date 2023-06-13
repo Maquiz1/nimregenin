@@ -80,6 +80,11 @@ if ($user->isLoggedIn()) {
         $MissingCrf = $override->MissingData();
         $MissingCrfNo = $override->MissingDataNo();
 
+        $MissingCrf1 = $override->MissingData1();
+        $MissingCrfNo1 = $override->MissingDataNo1();
+
+        $MissingCrf2 = $override->MissingData2();
+        $MissingCrfNo2 = $override->MissingDataNo2();
     } else {
         $registered = $override->countData('clients', 'status', 1, 'site_id', $user->data()->site_id);
         $not_screened = $override->countData2('clients', 'status', 1, 'screened', 0, 'site_id', $user->data()->site_id);
@@ -105,6 +110,12 @@ if ($user->isLoggedIn()) {
 
         $MissingCrf = $override->MissingData();
         $MissingCrfNo = $override->MissingDataNo();
+
+        $MissingCrf1 = $override->MissingData1();
+        $MissingCrfNo1 = $override->MissingDataNo1();
+
+        $MissingCrf2 = $override->MissingData2();
+        $MissingCrfNo2 = $override->MissingDataNo2();
 
 
 
@@ -340,6 +351,26 @@ if ($user->isLoggedIn()) {
                         <a href="info.php?id=26">
                             <span class="text">Doenload Missing Crf </span>
                             <span class="badge badge-secondary badge-pill"><?= $MissingCrfNo ?></span>
+                        </a>
+                    </li>
+
+                </ul>
+
+                <ul>
+                    <li class="active">
+                        <a href="info.php?id=27">
+                            <span class="text">Doenload Missing Crf Visits </span>
+                            <span class="badge badge-secondary badge-pill"><?= $MissingCrfNo1 ?></span>
+                        </a>
+                    </li>
+
+                </ul>
+
+                <ul>
+                    <li class="active">
+                        <a href="info.php?id=28">
+                            <span class="text">Doenload Missing Crf All</span>
+                            <span class="badge badge-secondary badge-pill"><?= $MissingCrfNo2 ?></span>
                         </a>
                     </li>
 

@@ -1607,6 +1607,41 @@ if ($user->isLoggedIn()) {
                 $user->exportData($data, $filename);
             }
         }
+
+                if ($_GET['id'] == 27) {
+            
+            $data = null;
+            $filename = null;
+            if (Input::get('dowmload_missing_crfs_visits')) {
+                if ($data === false) {
+                    $successMessage = 'Failed to export database.';
+                    $filename = 'Mssing Crfs';
+                } else {
+                    $filename = 'Mssing Crfs';
+                    $successMessage = 'Database exported successfully.';
+                }
+                $data = $override->MissingData1();
+                // $data = $override->exportData($MissingCrf, $filename);
+                $user->exportData($data, $filename);
+            }
+        }
+
+                if ($_GET['id'] == 28) {            
+            $data = null;
+            $filename = null;
+            if (Input::get('dowmload_missing_crfs_all')) {
+                if ($data === false) {
+                    $successMessage = 'Failed to export database.';
+                    $filename = 'Mssing Crfs';
+                } else {
+                    $filename = 'Mssing Crfs';
+                    $successMessage = 'Database exported successfully.';
+                }
+                $data = $override->MissingData2();
+                // $data = $override->exportData($MissingCrf, $filename);
+                $user->exportData($data, $filename);
+            }
+        }
     }
 } else {
     Redirect::to('index.php');
@@ -11337,6 +11372,229 @@ if ($user->isLoggedIn()) {
 
 
                     <?php } elseif ($_GET['id'] == 27) { ?>
+
+                        <div class="col-md-12">
+                            <div class="head clearfix">
+                                <div class="isw-grid"></div>
+                                <h1>Missing Crf's Visits</h1>
+                                <ul class="buttons">
+                                    <li><a href="missing_crfs1.php" class="isw-download"></a></li>
+                                    <li><a href="#" class="isw-attachment"></a></li>
+                                    <li>
+                                        <a href="#" class="isw-settings"></a>
+                                        <ul class="dd-list">
+                                            <li><a href="#"><span class="isw-plus"></span> New document</a></li>
+                                            <li><a href="#"><span class="isw-edit"></span> Edit</a></li>
+                                            <li><a href="#"><span class="isw-delete"></span> Delete</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <form method="post"><input type="submit" name="dowmload_missing_crfs_visits" value="Download Missing Crf Data in Excel"></form>
+                            <?php if ($user->data()->power == 1) {
+                                $data = $override->MissingData1();
+                            } else {
+                                $data = $override->MissingData1();
+                            } ?>
+                            <div class="block-fluid">
+                                <table cellpadding="0" cellspacing="0" width="100%" class="table">
+                                    <thead>
+                                        <tr>
+                                            <!-- <th><input type="checkbox" name="checkall" /></th> -->
+                                            <td width="2">#</td>
+                                            <th width="2">Visit Code</th>
+                                            <th width="5%">Study ID</th>
+                                            <th width="8%">Expected Date</th>
+                                            <th width="8%">CRF 1</th>
+                                            <th width="8%">CRF 2</th>
+                                            <th width="8%">CRF 3</th>
+                                            <th width="8%">CRF 4</th>
+                                            <th width="8%">CRF 5</th>
+                                            <th width="8%">CRF 6</th>
+                                            <th width="8%">CRF 7</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        // $Report = $override->getReport2('clients')[0];
+                                        // print_r($DAY0);
+                                        $x = 1;
+                                        foreach ($data as $results) {
+                                            // $client = $override->get('clients', 'id', $results['client_id'])[0];
+                                            // $site = $override->getNews('clients', 'id', $results['client_id'], 'status', 1)[0]['site_id'];
+                                            // $site_id = $override->get('site', 'id', $results)[0]['name'];
+                                        ?>
+                                            <tr>
+                                                <!-- <td><input type="checkbox" name="checkbox" /></td> -->
+                                                <td><?= $x ?></td>
+                                                <td><?= $results['visit_code'] ?></td>
+                                                <td><?= $results['study_id'] ?></td>
+                                                <td><?= $results['expected_date'] ?></td>
+                                                <?php if ($results['visit_status'] == 1) { ?>
+                                                    <td>
+                                                        <a href="#" class="btn btn-info">YES</a>
+                                                    </td>
+                                                <?php } else { ?>
+                                                    <td>
+                                                        <a href="#" class="btn btn-warning">NO</a>
+                                                    </td>
+                                                <?php } ?>
+                                                <td><?= $results['expected_date'] ?></td>
+                                                <td><?= $results['expected_date'] ?></td>
+                                                <td><?= $results['expected_date'] ?></td>
+                                                <td><?= $results['expected_date'] ?></td>
+                                                <td><?= $results['expected_date'] ?></td>
+                                                <td><?= $results['expected_date'] ?></td>
+                                                <!-- <td> <?= $client['firstname'] . ' ' . $client['lastname'] ?></td>
+                                                <td><?= $client['gender'] ?></td>
+                                                <td><?= $client['age'] ?></td>
+                                                <td><?= $site_id ?></td> -->
+                                                <!-- <td>
+                                                    <a href="info.php?id=7&cid=<?= $client['id'] ?>" role="button" class="btn btn-warning">Schedule</a>
+                                                </td> -->
+
+                                            </tr>
+                                            <div class="modal fade" id="img<?= $client['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form method="post">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                <h4>Client Image</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <img src="<?= $img ?>" width="350">
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        <?php $x++;
+                                        } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                    <?php } elseif ($_GET['id'] == 28) { ?>
+
+                        <div class="col-md-12">
+                            <div class="head clearfix">
+                                <div class="isw-grid"></div>
+                                <h1>Missing Crf's All</h1>
+                                <ul class="buttons">
+                                    <li><a href="missing_crfs2.php" class="isw-download"></a></li>
+                                    <li><a href="#" class="isw-attachment"></a></li>
+                                    <li>
+                                        <a href="#" class="isw-settings"></a>
+                                        <ul class="dd-list">
+                                            <li><a href="#"><span class="isw-plus"></span> New document</a></li>
+                                            <li><a href="#"><span class="isw-edit"></span> Edit</a></li>
+                                            <li><a href="#"><span class="isw-delete"></span> Delete</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <form method="post"><input type="submit" name="dowmload_missing_crfs_all" value="Download Missing Crf Data in Excel"></form>
+                            <?php if ($user->data()->power == 1) {
+                                $data = $override->MissingData2();
+                            } else {
+                                $data = $override->MissingData2();
+                            } ?>
+                            <div class="block-fluid">
+                                <table cellpadding="0" cellspacing="0" width="100%" class="table">
+                                    <thead>
+                                        <tr>
+                                            <!-- <th><input type="checkbox" name="checkall" /></th> -->
+                                            <td width="2">#</td>
+                                            <th width="2">Visit Code</th>
+                                            <th width="5%">Study ID</th>
+                                            <th width="8%">Expected Date</th>
+                                            <th width="8%">CRF 1</th>
+                                            <th width="8%">CRF 2</th>
+                                            <th width="8%">CRF 3</th>
+                                            <th width="8%">CRF 4</th>
+                                            <th width="8%">CRF 5</th>
+                                            <th width="8%">CRF 6</th>
+                                            <th width="8%">CRF 7</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        // $Report = $override->getReport2('clients')[0];
+                                        // print_r($DAY0);
+                                        $x = 1;
+                                        foreach ($data as $results) {
+                                            // $client = $override->get('clients', 'id', $results['client_id'])[0];
+                                            // $site = $override->getNews('clients', 'id', $results['client_id'], 'status', 1)[0]['site_id'];
+                                            // $site_id = $override->get('site', 'id', $results)[0]['name'];
+                                        ?>
+                                            <tr>
+                                                <!-- <td><input type="checkbox" name="checkbox" /></td> -->
+                                                <td><?= $x ?></td>
+                                                <td><?= $results['visit_code'] ?></td>
+                                                <td><?= $results['study_id'] ?></td>
+                                                <td><?= $results['expected_date'] ?></td>
+                                                <?php if ($results['visit_status'] == 1) { ?>
+                                                    <td>
+                                                        <a href="#" class="btn btn-info">YES</a>
+                                                    </td>
+                                                <?php } else { ?>
+                                                    <td>
+                                                        <a href="#" class="btn btn-warning">NO</a>
+                                                    </td>
+                                                <?php } ?>
+                                                <td><?= $results['expected_date'] ?></td>
+                                                <td><?= $results['expected_date'] ?></td>
+                                                <td><?= $results['expected_date'] ?></td>
+                                                <td><?= $results['expected_date'] ?></td>
+                                                <td><?= $results['expected_date'] ?></td>
+                                                <td><?= $results['expected_date'] ?></td>
+                                                <!-- <td> <?= $client['firstname'] . ' ' . $client['lastname'] ?></td>
+                                                <td><?= $client['gender'] ?></td>
+                                                <td><?= $client['age'] ?></td>
+                                                <td><?= $site_id ?></td> -->
+                                                <!-- <td>
+                                                    <a href="info.php?id=7&cid=<?= $client['id'] ?>" role="button" class="btn btn-warning">Schedule</a>
+                                                </td> -->
+
+                                            </tr>
+                                            <div class="modal fade" id="img<?= $client['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <form method="post">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                <h4>Client Image</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <img src="<?= $img ?>" width="350">
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        <?php $x++;
+                                        } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                    <?php } elseif ($_GET['id'] == 29) { ?>
+
+
+
+
+                    <?php } elseif ($_GET['id'] == 30) { ?>
 
 
 
