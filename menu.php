@@ -75,6 +75,10 @@ if ($user->isLoggedIn()) {
         $CRF7 = $override->getNews('crf7', 'patient_id', $DAY0['client_id'], 'vcode', 'D0');
         $resultCrf7Day0 = array_diff($DAY0, $CRF7);
         $resultCrf7Day0 = count($resultCrf7Day0);
+
+
+        $MissingCrf = $override->MissingData();
+
     } else {
         $registered = $override->countData('clients', 'status', 1, 'site_id', $user->data()->site_id);
         $not_screened = $override->countData2('clients', 'status', 1, 'screened', 0, 'site_id', $user->data()->site_id);
@@ -96,6 +100,10 @@ if ($user->isLoggedIn()) {
         $today = date('Y-m-d');
         $nxt_visit_date = date('Y-m-d', strtotime($today . ' + ' . $schedule . ' days'));
         $nxt_visit = $override->countData('visit', 'expected_date', $nxt_visit_date, 'status', 0);
+
+
+        $MissingCrf = $override->MissingData();
+
 
 
         // $DAY0 = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'visit_code', 'D0')[0];
@@ -200,7 +208,6 @@ if ($user->isLoggedIn()) {
                     </li>
                 </ul>
             </li>
-
 
             <li class="openable">
                 <a href="#"><span class="isw-tag"></span><span class="text">Reports</span></a>
@@ -320,6 +327,16 @@ if ($user->isLoggedIn()) {
                         <a href="info.php?id=21&day=Nxt">
                             <span class="text">All Visits </span>
                             <span class="badge badge-secondary badge-pill"><?= $nxt_visit ?></span>
+                        </a>
+                    </li>
+
+                </ul>
+
+                <ul>
+                    <li class="active">
+                        <a href="info.php?id=26">
+                            <span class="text">Doenload Missing Crf </span>
+                            <span class="badge badge-secondary badge-pill"></span>
                         </a>
                     </li>
 

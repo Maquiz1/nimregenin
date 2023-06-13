@@ -123,7 +123,7 @@ if ($site_data) {
     // Load HTML content into dompdf
     $x = 1;
     foreach ($site_data as $row) {
-        $enrolled = $override->countData1('clients', 'status', 1, 'enrolled', 1,'site_id', $row['id']);
+        $enrolled = $override->countData1('clients', 'status', 1, 'enrolled', 1, 'site_id', $row['id']);
         $crf1 = $override->countData('crf1', 'status', 1, 'site_id', $row['id']);
         $crf1_Total = $override->getCount('crf1', 'status', 1);
         $crf2 = $override->countData('crf2', 'status', 1, 'site_id', $row['id']);
@@ -182,8 +182,7 @@ if ($site_data) {
                     <td align="right"><b>' . $crf7_Total . '</b></td>
                 </tr>  
 
-    '
-    ;
+    ';
 
     $output .= '
             </table>    
@@ -195,7 +194,7 @@ if ($site_data) {
                         <br />
                         <br />
                         <br />
-                        <p align="right">----'.$user->data()->firstname. ' '.$user->data()->lastname.'-----<br />Prepared By</p>
+                        <p align="right">----' . $user->data()->firstname . ' ' . $user->data()->lastname . '-----<br />Prepared By</p>
                         <br />
                         <br />
                         <br />
@@ -208,7 +207,7 @@ if ($site_data) {
                         <br />
                         <br />
                         <br />
-                        <p align="right">-----'.date('Y-m-d').'-------<br />Date Prepared</p>
+                        <p align="right">-----' . date('Y-m-d') . '-------<br />Date Prepared</p>
                         <br />
                         <br />
                         <br />
