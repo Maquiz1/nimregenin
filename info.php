@@ -133,6 +133,30 @@ if ($user->isLoggedIn()) {
             $user->visit_delete(Input::get('id'));
             // $this->deleteRecord('visit', 'client_id', Input::get('id'));
             $successMessage = 'Client Schedule Deleted Successful';
+        } elseif (Input::get('asign_id')) {
+            $client_study = $override->getNews('clients', 'id', Input::get('id'), 'status', 1)[0];
+            $std_id = $override->getNews('study_id', 'site_id', $user->data()->site_id, 'status', 0)[0];
+            $screening_id = $override->get('screening', 'client_id', Input::get('id'))[0];
+            $lab_id = $override->get('lab', 'client_id', Input::get('id'))[0];
+            $visit_id = $override->get('visit', 'client_id', Input::get('id'))[0];
+
+            if (!$client_study['study_id']) {
+                $study_id = $std_id['study_id'];
+            } else {
+                $study_id = $client_study['study_id'];
+            }
+
+
+            $user->updateRecord('study_id', array('status' => 1, 'client_id' => Input::get('id')), $std_id['id']);
+            $user->updateRecord('screening', array('study_id' => $std_id['study_id']), $screening_id['id']);
+            $user->updateRecord('lab', array('study_id' => $std_id['study_id']), $lab_id['id']);
+            $user->updateRecord('clients', array('study_id' => $std_id['study_id'], 'enrolled' => 1), Input::get('id'));
+
+            // print_r($lab_id);
+
+            // $user->visit_delete(Input::get('id'));
+            // $this->deleteRecord('visit', 'client_id', Input::get('id'));
+            $successMessage = 'Client Schedule Deleted Successful';
         } elseif (Input::get('edit_study')) {
             $validate = $validate->check($_POST, array(
                 'name' => array(
@@ -2624,6 +2648,8 @@ if ($user->isLoggedIn()) {
                                                             <a href="#enrolled<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">enrolled</a>
                                                         <?php } ?>
                                                         <a href="#client<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Edit</a>
+                                                        <a href="#asignID<?= $client['id'] ?>" role="button" class="btn btn-success" data-toggle="modal">asign ID</a>
+
 
                                                         <?php
                                                         //  if ($screened == 1) {
@@ -4067,6 +4093,23 @@ if ($user->isLoggedIn()) {
                                                             <div class="modal-footer">
                                                                 <input type="hidden" name="id" value="<?= $client['id'] ?>">
                                                                 <input type="submit" name="change_enrolled_status" class="btn btn-warning" value="Save">
+                                                                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal fade" id="asignID<?= $client['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <form method="post">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                <h4>Assign enrolled ID</h4>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <input type="hidden" name="id" value="<?= $client['id'] ?>">
+                                                                <input type="submit" name="asign_id" class="btn btn-warning" value="Update Stud ID">
                                                                 <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
                                                             </div>
                                                         </form>
