@@ -77,14 +77,14 @@ if ($user->isLoggedIn()) {
         $resultCrf7Day0 = count($resultCrf7Day0);
 
 
-        $MissingCrf = $override->MissingData();
-        $MissingCrfNo = $override->MissingDataNo();
+        // $MissingCrf = $override->MissingData();
+        // $MissingCrfNo = $override->MissingDataNo();
 
-        $MissingCrf1 = $override->MissingData1();
-        $MissingCrfNo1 = $override->MissingDataNo1();
+        // $MissingCrf1 = $override->MissingData1();
+        // $MissingCrfNo1 = $override->MissingDataNo1();
 
-        $MissingCrf2 = $override->MissingData2();
-        $MissingCrfNo2 = $override->MissingDataNo2();
+        // $MissingCrf2 = $override->MissingData2();
+        // $MissingCrfNo2 = $override->MissingDataNo2();
     } else {
         $registered = $override->countData('clients', 'status', 1, 'site_id', $user->data()->site_id);
         $not_screened = $override->countData2('clients', 'status', 1, 'screened', 0, 'site_id', $user->data()->site_id);
@@ -108,14 +108,14 @@ if ($user->isLoggedIn()) {
         $nxt_visit = $override->countData('visit', 'expected_date', $nxt_visit_date, 'status', 0);
 
 
-        $MissingCrf = $override->MissingData();
-        $MissingCrfNo = $override->MissingDataNo();
+        // $MissingCrf = $override->MissingData();
+        // $MissingCrfNo = $override->MissingDataNo();
 
-        $MissingCrf1 = $override->MissingData1();
-        $MissingCrfNo1 = $override->MissingDataNo1();
+        // $MissingCrf1 = $override->MissingData1();
+        // $MissingCrfNo1 = $override->MissingDataNo1();
 
-        $MissingCrf2 = $override->MissingData2();
-        $MissingCrfNo2 = $override->MissingDataNo2();
+        // $MissingCrf2 = $override->MissingData2();
+        // $MissingCrfNo2 = $override->MissingDataNo2();
 
 
 
@@ -346,7 +346,7 @@ if ($user->isLoggedIn()) {
 
                 </ul>
 
-                <ul>
+                <!-- <ul>
                     <li class="active">
                         <a href="info.php?id=26">
                             <span class="text">Download Missing Crf </span>
@@ -374,7 +374,7 @@ if ($user->isLoggedIn()) {
                         </a>
                     </li>
 
-                </ul>
+                </ul> -->
             </li>
 
             <li class="openable">
