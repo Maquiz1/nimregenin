@@ -11324,9 +11324,9 @@ if ($user->isLoggedIn()) {
                             </div>
                             <form method="post"><input type="submit" name="dowmload_missing_datae" value="Download Missing Crf Data in Excel"></form>
                             <?php if ($user->data()->power == 1) {
-                                // $data = $override->MissingData();
+                                $data = $override->MissingData();
                             } else {
-                                // $data = $override->MissingData();
+                                $data = $override->MissingData();
                             } ?>
                             <div class="block-fluid">
                                 <table cellpadding="0" cellspacing="0" width="100%" class="table">
@@ -11435,9 +11435,9 @@ if ($user->isLoggedIn()) {
                             </div>
                             <form method="post"><input type="submit" name="dowmload_missing_crfs_visits" value="Download Missing Crf Data in Excel"></form>
                             <?php if ($user->data()->power == 1) {
-                                // $data = $override->MissingData1();
+                                $data = $override->MissingData1();
                             } else {
-                                // $data = $override->MissingData1();
+                                $data = $override->MissingData1();
                             } ?>
                             <div class="block-fluid">
                                 <table cellpadding="0" cellspacing="0" width="100%" class="table">
@@ -11544,9 +11544,9 @@ if ($user->isLoggedIn()) {
                             </div>
                             <form method="post"><input type="submit" name="dowmload_missing_crfs_all" value="Download Missing Crf Data in Excel"></form>
                             <?php if ($user->data()->power == 1) {
-                                // $data = $override->MissingData2();
+                                $data = $override->MissingData2();
                             } else {
-                                // $data = $override->MissingData2();
+                                $data = $override->MissingData2();
                             } ?>
                             <div class="block-fluid">
                                 <table cellpadding="0" cellspacing="0" width="100%" class="table">

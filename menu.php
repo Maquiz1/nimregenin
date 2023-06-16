@@ -346,7 +346,7 @@ if ($user->isLoggedIn()) {
 
                 </ul>
 
-                <!-- <ul>
+                <ul>
                     <li class="active">
                         <a href="info.php?id=26">
                             <span class="text">Download Missing Crf </span>
@@ -374,7 +374,7 @@ if ($user->isLoggedIn()) {
                         </a>
                     </li>
 
-                </ul> -->
+                </ul>
             </li>
 
             <li class="openable">
