@@ -152,7 +152,7 @@ if ($user->isLoggedIn()) {
             $user->updateRecord('lab', array('study_id' => $std_id['study_id']), $lab_id['id']);
             $user->updateRecord('clients', array('study_id' => $std_id['study_id'], 'enrolled' => 1), Input::get('id'));
 
-            // print_r($lab_id);
+            // print_r($visit_id);
 
             // $user->visit_delete(Input::get('id'));
             // $this->deleteRecord('visit', 'client_id', Input::get('id'));
