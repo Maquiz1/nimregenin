@@ -197,7 +197,7 @@ if ($user->isLoggedIn()) {
                             <span class="glyphicon glyphicon-list"></span><span class="text">Study IDs</span>
                         </a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="info.php?id=23">
                             <span class="glyphicon glyphicon-list"></span><span class="text">Clear Data on Table</span>
                             <span class="badge badge-secondary badge-pill"><?= $tables ?></span>
@@ -214,7 +214,7 @@ if ($user->isLoggedIn()) {
                             <span class="glyphicon glyphicon-list"></span><span class="text">Export Database</span>
                             <span class="badge badge-secondary badge-pill"><?= $AllDatabasesCount ?></span>
                         </a>
-                    </li>
+                    </li> -->
                     <li>
                         <a href="info.php?id=2">
                             <span class="glyphicon glyphicon-share"></span><span class="text">Manage</span>
