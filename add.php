@@ -4773,7 +4773,9 @@ if ($user->isLoggedIn()) {
             });
 
 
-        $(document).ready(function() {
+     
+     
+            $(document).ready(function() {
 
             $("#add_crf6").click(function(e) {
                 // if ($("#validation")[0].checkValidity()) {

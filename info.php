@@ -8,7 +8,7 @@ $random = new Random();
 $successMessage = null;
 $pageError = null;
 $errorMessage = null;
-$numRec = 10;
+$numRec = 15;
 if ($user->isLoggedIn()) {
     if (Input::exists('post')) {
         $validate = new validate();
@@ -471,8 +471,8 @@ if ($user->isLoggedIn()) {
                         'study_id' => Input::get('study_id'),
                         'visit_date' => Input::get('visit_date'),
                         'created_on' => date('Y-m-d'),
-                        'status' => 1,
-                        'visit_status' => 1,
+                        'status' => Input::get('visit_status'),
+                        'visit_status' => Input::get('visit_status'),
                         'reasons' => Input::get('reasons'),
                     ), Input::get('id'));
                 } catch (Exception $e) {
@@ -1887,7 +1887,9 @@ if ($user->isLoggedIn()) {
                                                                     <div class="block-fluid">
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-3">First name:</div>
-                                                                            <div class="col-md-9"><input type="text" name="firstname" value="<?= $staff['firstname'] ?>" required /></div>
+                                                                            <div class="col-md-9">
+                                                                                <input type="text" name="firstname" value="<?= $staff['firstname'] ?>" required />
+                                                                            </div>
                                                                         </div>
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-3">Last name:</div>
@@ -1933,12 +1935,18 @@ if ($user->isLoggedIn()) {
 
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-3">Phone Number:</div>
-                                                                            <div class="col-md-9"><input value="<?= $staff['phone_number'] ?>" class="" type="text" name="phone_number" id="phone" required /> <span>Example: 0700 000 111</span></div>
+                                                                            <div class="col-md-9">
+                                                                                <input value="<?= $staff['phone_number'] ?>" class="" type="text" name="phone_number" id="phone" required />
+                                                                                <span>Example: 0700 000 111</span>
+                                                                            </div>
                                                                         </div>
 
                                                                         <div class="row-form clearfix">
                                                                             <div class="col-md-3">E-mail Address:</div>
-                                                                            <div class="col-md-9"><input value="<?= $staff['email_address'] ?>" class="validate[required,custom[email]]" type="text" name="email_address" id="email" /> <span>Example: someone@nowhere.com</span></div>
+                                                                            <div class="col-md-9">
+                                                                                <input value="<?= $staff['email_address'] ?>" class="validate[required,custom[email]]" type="text" name="email_address" id="email" />
+                                                                                <span>Example: someone@nowhere.com</span>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="dr"><span></span></div>
@@ -2275,6 +2283,10 @@ if ($user->isLoggedIn()) {
                                     </form>
                                 </div>
                             <?php } ?>
+                            <input class="form-control" id="myInput11" type="text" placeholder="Search..">
+
+                            <br />
+
                             <div class="head clearfix">
                                 <div class="isw-grid"></div>
                                 <h1>List of Clients</h1>
@@ -2424,7 +2436,7 @@ if ($user->isLoggedIn()) {
                                 }
                             } ?>
                             <div class="block-fluid">
-                                <table cellpadding="0" cellspacing="0" width="100%" class="table">
+                                <table id='inventory_report1' cellpadding="0" cellspacing="0" width="100%" class="table">
                                     <thead>
                                         <tr>
                                             <!-- <th><input type="checkbox" name="checkall" /></th> -->
@@ -4917,6 +4929,10 @@ if ($user->isLoggedIn()) {
                                                                     <a href="#" role="button" class="btn btn-success">Done</a>
                                                                 <?php } elseif ($visit['status'] == 0) { ?>
                                                                     <a href="#" role="button" class="btn btn-warning">Pending</a>
+                                                                <?php } elseif ($visit['status'] == 2) { ?>
+                                                                    <a href="#" role="button" class="btn btn-default">Missed</a>
+                                                                <?php } elseif ($visit['status'] == 3) { ?>
+                                                                    <a href="#" role="button" class="btn btn-danger">Terminated</a>
                                                                 <?php } ?>
                                                             </td>
                                                             <td>
@@ -4985,37 +5001,77 @@ if ($user->isLoggedIn()) {
                                                                         </div>
                                                                         <div class="modal-body modal-body-np">
                                                                             <div class="row">
-                                                                                <div class="block-fluid">
+                                                                                <div class="col-sm-6">
                                                                                     <div class="row-form clearfix">
-                                                                                        <div class="col-md-3">Visit Name:</div>
-                                                                                        <div class="col-md-9"><input type="text" name="name" value="<?= $visit['visit_name'] . ' (' . $visit['visit_code'] . ')' ?>" disabled /></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="block-fluid">
-                                                                                    <div class="row-form clearfix">
-                                                                                        <div class="col-md-3">Visit Type:</div>
-                                                                                        <div class="col-md-9"><input type="text" name="name" value="<?= $v_typ ?>" disabled /></div>
-                                                                                    </div>
-                                                                                </div>
+                                                                                        <!-- select -->
+                                                                                        <div class="form-group">
+                                                                                            <label>Visit Name:</label>
+                                                                                            <input type="text" name="name" value="<?= $visit['visit_name'] . ' (' . $visit['visit_code'] . ')' ?>" disabled />
 
-                                                                                <div class="row-form clearfix">
-                                                                                    <div class="col-md-3">Notes / Remarks :</div>
-                                                                                    <div class="col-md-9">
-                                                                                        <textarea name="reasons" rows="4"><?php if ($visit['status'] != 0) {
-                                                                                                                                echo $visit['reasons'];
-                                                                                                                            } ?></textarea>
+                                                                                        </div>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="row-form clearfix">
-                                                                                    <div class="col-md-3">Date of Follow Up Visit:</div>
-                                                                                    <div class="col-md-9">
-                                                                                        <input value="<?php if ($visit['status'] != 0) {
-                                                                                                            echo $visit['visit_date'];
-                                                                                                        } ?>" class="validate[required,custom[date]]" type="text" name="visit_date" id="visit_date" /> <span>Example: 2010-12-01</span>
+                                                                                <div class="col-sm-6">
+                                                                                    <div class="row-form clearfix">
+                                                                                        <!-- select -->
+                                                                                        <div class="form-group">
+                                                                                            <label>Visit Type:</label>
+                                                                                            <input type="text" name="name" value="<?= $v_typ ?>" disabled />
+
+                                                                                        </div>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="dr"><span></span></div>
                                                                             </div>
+
+                                                                            <div class="row">
+
+                                                                                <div class="col-sm-4">
+                                                                                    <div class="row-form clearfix">
+                                                                                        <!-- select -->
+                                                                                        <div class="form-group">
+                                                                                            <label>Visit Status</label>
+                                                                                            <select name="visit_status" id="visit_status" style="width: 100%;">
+                                                                                                <?php if ($visit['status'] == "1") { ?>
+                                                                                                    <option value="<?= $visit['status'] ?>">Atended</option>
+                                                                                                <?php } elseif ($visit['status'] == "2") { ?>
+                                                                                                    <option value="<?= $visit['status'] ?>">Missed</option>
+                                                                                                <?php } elseif ($visit['status'] == "3") { ?>
+                                                                                                    <option value="<?= $visit['status'] ?>">Terminated</option>
+                                                                                                <?php } else { ?>
+                                                                                                    <option value="">Select</option>
+                                                                                                <?php } ?>
+                                                                                                <option value="1">Atended</option>
+                                                                                                <option value="2">Missed</option>
+                                                                                                <option value="3">Terminated</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                    <div class="row-form clearfix">
+                                                                                        <!-- select -->
+                                                                                        <div class="form-group">
+                                                                                            <label>Notes / Remarks :</label>
+                                                                                            <textarea name="reasons" rows="4"><?php if ($visit['status'] != 0) {
+                                                                                                                                    echo $visit['reasons'];
+                                                                                                                                } ?></textarea>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                    <div class="row-form clearfix">
+                                                                                        <!-- select -->
+                                                                                        <div class="form-group">
+                                                                                            <label>Date of Follow Up Visit:</label>
+                                                                                            <input value="<?php if ($visit['status'] != 0) {
+                                                                                                                echo $visit['visit_date'];
+                                                                                                            } ?>" class="validate[required,custom[date]]" type="text" name="visit_date" id="visit_date" />
+                                                                                            <span>Example: 2010-12-01</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="dr"><span></span></div>
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <input type="hidden" name="id" value="<?= $visit['id'] ?>">
@@ -11271,7 +11327,7 @@ if ($user->isLoggedIn()) {
 
                         </div>
 
-                    <?php } elseif ($_GET['id'] == 25) {                    ?>
+                    <?php } elseif ($_GET['id'] == 25) { ?>
                         <?php
                         $databases = $override->AllDatabases();
                         ?>
@@ -11633,15 +11689,7 @@ if ($user->isLoggedIn()) {
 
 
                     <?php } elseif ($_GET['id'] == 29) { ?>
-
-
-
-
                     <?php } elseif ($_GET['id'] == 30) { ?>
-
-
-
-
                     <?php } ?>
                 </div>
 
@@ -11662,6 +11710,15 @@ if ($user->isLoggedIn()) {
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
+
+    $(document).ready(function() {
+        $("#myInput11").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#inventory_report1 tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
 
     $('#weight, #height').on('input', function() {
         setTimeout(function() {

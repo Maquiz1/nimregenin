@@ -10,6 +10,7 @@ class OverideData
             $e->getMessage();
         }
     }
+    
     public function unique($table, $field, $value)
     {
         if ($this->get($table, $field, $value)) {
@@ -85,6 +86,13 @@ class OverideData
     public function countData3($table, $field, $value, $field1, $value1, $field2, $value2, $field3, $value3)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 = '$value1' AND $field2 = '$value2' OR $field3 = '$value3'");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+    public function countData4($table, $field, $value, $field1, $value1, $field2, $value2, $field3, $value3)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 = '$value1' AND $field2 = '$value2' AND $field3 = '$value3'");
         $num = $query->rowCount();
         return $num;
     }

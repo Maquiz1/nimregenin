@@ -26,8 +26,25 @@ if ($user->isLoggedIn()) {
         $site_data = $override->getData('site');
         $Total = $override->getCount('clients', 'status', 1);
         $data_enrolled = $override->getCount1('clients', 'status', 1, 'enrolled', 1);
-        // $name = $override->get('user', 'status', 1, 'screened', $user->data()->id);
-        // $data_count = $override->getCount2('clients', 'status', 1, 'screened',1, 'site_id', $ussite_dataer->data()->site_id);
+
+        // PHP code
+        $data = [1, 2, 3, 4, 5];  // Sample data
+
+        // Convert the data to a JSON string
+        $dataJson = json_encode($data);
+
+
+        // Execute the Python script and pass the data
+        $pythonScript = "python reports.py '{$dataJson}'";
+        $result = shell_exec($pythonScript);
+        
+
+        // Process the result
+        $resultArray = json_decode($result, true);
+
+        // Use the processed data in PHP
+        print_r($resultArray);
+
 
         $successMessage = 'Report Successful Created';
     } catch (Exception $e) {
