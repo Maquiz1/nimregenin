@@ -5051,7 +5051,7 @@ if ($user->isLoggedIn()) {
                                                                                     <div class="row-form clearfix">
                                                                                         <!-- select -->
                                                                                         <div class="form-group">
-                                                                                            <label>Notes / Remarks :</label>
+                                                                                            <label>Notes / Remarks /Reason:</label>
                                                                                             <textarea name="reasons" rows="4"><?php if ($visit['status'] != 0) {
                                                                                                                                     echo $visit['reasons'];
                                                                                                                                 } ?></textarea>
