@@ -1448,10 +1448,10 @@ if ($user->isLoggedIn()) {
             $data = null;
             $filename = null;
             if (Input::get('clients')) {
-                $data = $override->getData('clients');
+                $data = $override->get('clients','status',1);
                 $filename = 'Clients';
             } elseif (Input::get('visits')) {
-                $data = $override->getData('visit');
+                $data = $override->get('visit','status',1);
                 $filename = 'Visits';
             } elseif (Input::get('lab')) {
                 $data = $override->getData('lab');
