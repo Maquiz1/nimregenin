@@ -794,16 +794,22 @@ if ($user->isLoggedIn()) {
                 ),
             ));
             if ($validate->passed()) {
+                $client_study = $override->getNews('clients', 'id', Input::get('id'), 'status', 1)[0];
                 $std_id = $override->getNews('study_id', 'site_id', $user->data()->site_id, 'status', 0)[0];
                 // $enrollment_date = $override->get('clients', 'id', Input::get('id'))[0];
                 $visit_date = $override->firstRow('visit', 'visit_date', 'id', 'client_id', Input::get('id'))[0];
+                if (!$client_study['study_id']) {
+                    $study_id = $std_id['study_id'];
+                } else {
+                    $study_id = $client_study['study_id'];
+                }
                 if ($override->get('visit', 'client_id', Input::get('id'))) {
                     if (Input::get('visit_date') != $visit_date['visit_date']) {
                         $user->deleteRecord('visit', 'client_id', Input::get('id'));
                         $user->createRecord('visit', array(
                             'visit_name' => 'Day 0',
                             'visit_code' => 'D0',
-                            'study_id' => $std_id['study_id'],
+                            'study_id' => $study_id,
                             'expected_date' => '',
                             'visit_date' => Input::get('visit_date'),
                             'visit_window' => 2,
@@ -831,8 +837,11 @@ if ($user->isLoggedIn()) {
                 }
                 if ($override->getCount('visit', 'client_id', Input::get('id')) == 1) {
                     try {
-                        // $user->visit(Input::get('id'), 0);
-                        $user->visit2(Input::get('id'), 0, $std_id['study_id']);
+                        if (!$client_study['study_id']) {
+                            $user->visit2(Input::get('id'), 0, $std_id['study_id']);
+                        } else {
+                            $user->visit2(Input::get('id'), 0, $client_study['study_id']);
+                        }
                     } catch (Exception $e) {
                         die($e->getMessage());
                     }
