@@ -294,6 +294,13 @@ class OverideData
         return $result;
     }
 
+    public function searchClient($firstname, $middlename, $lastname, $client_id)
+    {
+        $query = $this->_pdo->query("SELECT * FROM clients WHERE firstname LIKE '%$firstname%' OR middlename LIKE '%$middlename%' OR lastname LIKE '%$lastname%' OR id LIKE '%$client_id%'");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
 
     public function getReport($table1, $table2, $id1, $id2)
     {

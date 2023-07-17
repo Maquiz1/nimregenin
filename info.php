@@ -1457,10 +1457,10 @@ if ($user->isLoggedIn()) {
             $data = null;
             $filename = null;
             if (Input::get('clients')) {
-                $data = $override->get('clients','status',1);
+                $data = $override->get('clients', 'status', 1);
                 $filename = 'Clients';
             } elseif (Input::get('visits')) {
-                $data = $override->get('visit','status',1);
+                $data = $override->get('visit', 'status', 1);
                 $filename = 'Visits';
             } elseif (Input::get('lab')) {
                 $data = $override->getData('lab');
@@ -2293,6 +2293,8 @@ if ($user->isLoggedIn()) {
                                 </div>
                             <?php } ?>
                             <input class="form-control" id="myInput11" type="text" placeholder="Search..">
+                            <!-- <input class="form-control" id="searchClient" type="text" placeholder="Search Name, ID..">
+                            <input id="firstname" type="text" name="firstname" placeholder="Type firstname..." onkeyup="myFunction()" required /> -->
 
                             <br />
 
