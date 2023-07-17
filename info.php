@@ -2267,6 +2267,14 @@ if ($user->isLoggedIn()) {
                             </div>
                         </div>
                     <?php } elseif ($_GET['id'] == 3) { ?>
+                        <!-- <div class="post-search-panel">
+                            <input type="text" id="searchInput" placeholder="Type keywords..." />
+                            <select id="sortBy">
+                                <option value="">Sort by</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div> -->
                         <div class="col-md-12">
                             <?php if ($user->data()->power == 1) { ?>
                                 <div class="head clearfix">
@@ -2670,8 +2678,9 @@ if ($user->isLoggedIn()) {
                                                             <a href="#eligible<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">eligible</a>
                                                             <a href="#enrolled<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">enrolled</a>
                                                         <?php } ?>
-                                                        <a href="#client<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Edit</a>
                                                         <a href="#asignID<?= $client['id'] ?>" role="button" class="btn btn-success" data-toggle="modal">asign ID</a>
+
+                                                        <a href="#client<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Edit</a>
 
 
                                                         <?php
@@ -11709,6 +11718,15 @@ if ($user->isLoggedIn()) {
         </div>
     </div>
 </body>
+
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- DataTables CSS and JS library -->
+<link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css" />
+<script type="text/javascript" src="DataTables/datatables.min.js"></script>
+
 <script>
     <?php if ($user->data()->pswd == 0) { ?>
         $(window).on('load', function() {
@@ -11821,6 +11839,35 @@ if ($user->isLoggedIn()) {
             row.parentNode.removeChild(row);
         }
     });
+
+
+
+    // Initialize DataTables API object and configure table
+    var table = $('#inventory_report1').DataTable({
+        "searching": false,
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "fetchData.php",
+            "data": function(d) {
+                return $.extend({}, d, {
+                    "search_keywords": $("#searchInput").val().toLowerCase(),
+                    "filter_option": $("#sortBy").val().toLowerCase()
+                });
+            }
+        }
+    });
+
+    $(document).ready(function() {
+        // Redraw the table
+        table.draw();
+
+        // Redraw the table based on the custom input
+        $('#searchInput,#sortBy').bind("keyup change", function() {
+            table.draw();
+        });
+    });
 </script>
+
 
 </html>
