@@ -177,6 +177,24 @@ if ($site_data) {
     }
 
     $output .= '
+                <tr>
+                    <td align="right" colspan="2"><b>Sub Total</b></td>
+                    <td align="right"><b>' . $registered_Total . '</b></td>
+                    <td align="right"><b>' . $screened_Total . '</b></td>
+                    <td align="right"><b>' . $breast_cancer_Total . '</b></td>
+                    <td align="right"><b>' . $brain_cancer_Total . '</b></td>
+                    <td align="right"><b>' . $cervical_cancer_Total . '</b></td>
+                    <td align="right"><b>' . $prostate_cancer_Total . '</b></td>
+                    <td align="right"><b>' . $eligible_Total . '</b></td>
+                    <td align="right"><b>' . $enrolled_Total . '</b></td>
+                    <td align="right"><b>' . $enrolled_Total1 . '</b></td>
+                    <td align="right"><b>' . $enrolled_Total2 . '</b></td>
+                    <td align="right"><b>' . $enrolled_Total3 . '</b></td>
+                    <td align="right"><b>' . $enrolled_Total4 . '</b></td>
+                    <td align="right"><b>' . $enrolled_Total5 . '</b></td>
+                    <td align="right"><b>' . $enrolled_Total6 . '</b></td>
+                    <td align="right"><b>' . $end_study_Total . '</b></td>
+                </tr>  
 
                 <tr>
                     <td align="right" colspan="2"><b>Total</b></td>

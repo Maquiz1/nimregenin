@@ -492,6 +492,17 @@ if ($user->isLoggedIn()) {
                 Redirect::to($url);
                 $pageError = $validate->errors();
             }
+        } elseif (Input::get('search_by_pid')) {
+            $validate = $validate->check($_POST, array(
+                'names' => array(
+                    'required' => true,
+                ),
+            ));
+            if ($validate->passed()) {
+                $url = 'info.php?id=3&status=' . $_GET['status'] . '&pid=' . Input::get('names');
+                Redirect::to($url);
+                $pageError = $validate->errors();
+            }
         } elseif (Input::get('add_Visit')) {
 
             $validate = $validate->check($_POST, array());
@@ -821,31 +832,33 @@ if ($user->isLoggedIn()) {
                             'reasons' => Input::get('reasons'),
                             'visit_status' => 1,
                         ));
-                    }
 
-                    $user->updateRecord(
-                        'clients',
-                        array(
-                            'pt_type' => Input::get('pt_type'),
-                            'treatment_type' => Input::get('treatment_type'),
-                            'previous_date' => Input::get('previous_date'),
-                            'total_cycle' => Input::get('total_cycle'),
-                            'cycle_number' => Input::get('cycle_number')
-                        ),
-                        Input::get('id')
-                    );
-                }
-                if ($override->getCount('visit', 'client_id', Input::get('id')) == 1) {
-                    try {
-                        if (!$client_study['study_id']) {
-                            $user->visit2(Input::get('id'), 0, $std_id['study_id']);
-                        } else {
-                            $user->visit2(Input::get('id'), 0, $client_study['study_id']);
+                        if ($override->getCount('visit', 'client_id', Input::get('id')) == 1) {
+                            try {
+                                if (!$client_study['study_id']) {
+                                    $user->visit2(Input::get('id'), 0, $std_id['study_id']);
+                                } else {
+                                    $user->visit2(Input::get('id'), 0, $client_study['study_id']);
+                                }
+                            } catch (Exception $e) {
+                                die($e->getMessage());
+                            }
                         }
-                    } catch (Exception $e) {
-                        die($e->getMessage());
                     }
                 }
+
+                $user->updateRecord(
+                    'clients',
+                    array(
+                        'pt_type' => Input::get('pt_type'),
+                        'treatment_type' => Input::get('treatment_type'),
+                        'previous_date' => Input::get('previous_date'),
+                        'total_cycle' => Input::get('total_cycle'),
+                        'cycle_number' => Input::get('cycle_number')
+                    ),
+                    Input::get('id')
+                );
+
                 $user->updateRecord('clients', array('enrolled' => 1), Input::get('id'));
                 $successMessage = 'Enrollment  Updated Successful';
                 Redirect::to('info.php?id=3&status=2');
@@ -2276,30 +2289,59 @@ if ($user->isLoggedIn()) {
                             </select>
                         </div> -->
                         <div class="col-md-12">
-                            <?php if ($user->data()->power == 1) { ?>
-                                <div class="head clearfix">
-                                    <div class="isw-ok"></div>
-                                    <h1>Search by Site</h1>
-                                </div>
-                                <div class="block-fluid">
-                                    <form id="validation" method="post">
-                                        <div class="row-form clearfix">
-                                            <div class="col-md-1">Site:</div>
-                                            <div class="col-md-4">
-                                                <select name="site" required>
-                                                    <option value="">Select Site</option>
-                                                    <?php foreach ($override->getData('site') as $site) { ?>
-                                                        <option value="<?= $site['id'] ?>"><?= $site['name'] ?></option>
-                                                    <?php } ?>
-                                                </select>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <?php if ($user->data()->power == 1) { ?>
+                                        <div class="row-md-6">
+                                            <div class="head clearfix">
+                                                <div class="isw-ok"></div>
+                                                <h1>Search by Site</h1>
                                             </div>
-                                            <div class="col-md-2">
-                                                <input type="submit" name="search_by_site" value="Search" class="btn btn-info">
+                                            <div class="block-fluid">
+                                                <form id="validation" method="post">
+                                                    <div class="row-form clearfix">
+                                                        <div class="col-md-1">Site:</div>
+                                                        <div class="col-md-4">
+                                                            <select name="site" required>
+                                                                <option value="">Select Site</option>
+                                                                <?php foreach ($override->getData('site') as $site) { ?>
+                                                                    <option value="<?= $site['id'] ?>"><?= $site['name'] ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <input type="submit" name="search_by_site" value="Search" class="btn btn-info">
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
-                                    </form>
+
+                                    <?php } ?>
                                 </div>
-                            <?php } ?>
+
+                                <div class="col-sm-6">
+                                    <div class="head clearfix">
+                                        <div class="isw-ok"></div>
+                                        <h1>Search by Name...</h1>
+                                    </div>
+                                    <div class="block-fluid">
+                                        <form id="validation" method="post" autocomplete="off">
+                                            <div class="row-form clearfix">
+                                                <div class="col-md-1"> Name:</div>
+                                                <div class="col-md-4">
+                                                    <input value="" id="names" type="text" name="names" placeholder="Type firstname..." onkeyup="MyFunction()" required />
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input type="submit" name="search_by_pid" value="Search" class="btn btn-info">
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <input class="form-control" id="myInput11" type="text" placeholder="Search..">
                             <!-- <input class="form-control" id="searchClient" type="text" placeholder="Search Name, ID..">
                             <input id="firstname" type="text" name="firstname" placeholder="Type firstname..." onkeyup="myFunction()" required /> -->
@@ -2365,6 +2407,49 @@ if ($user->isLoggedIn()) {
                                         $clients = $override->getWithLimit('clients', 'site_id', $_GET['sid'], $page, $numRec);
                                     } elseif ($_GET['status'] == 8) {
                                         $clients = $override->getWithLimit1('clients', 'status', 0, 'site_id', $_GET['sid'], $page, $numRec);
+                                    }
+                                } elseif ($_GET['pid'] != null) {
+                                    $pagNum = 0;
+                                    if ($_GET['status'] == 1) {
+                                        $pagNum = $override->countData2('clients', 'status', 1, 'screened', 1, 'id', $_GET['pid']);
+                                    } elseif ($_GET['status'] == 2) {
+                                        $pagNum = $override->countData2('clients', 'status', 1, 'eligible', 1, 'id', $_GET['pid']);
+                                    } elseif ($_GET['status'] == 3) {
+                                        $pagNum = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'id', $_GET['pid']);
+                                    } elseif ($_GET['status'] == 4) {
+                                        $pagNum = $override->countData2('clients', 'status', 1, 'end_study', 1, 'id', $_GET['pid']);
+                                    } elseif ($_GET['status'] == 5) {
+                                        $pagNum = $override->countData('clients', 'status', 1, 'id', $_GET['pid']);
+                                    } elseif ($_GET['status'] == 6) {
+                                        $pagNum = $override->countData2('clients', 'status', 1, 'screened', 0, 'id', $_GET['pid']);
+                                    } elseif ($_GET['status'] == 7) {
+                                        $pagNum = $override->getCount('clients', 'id', $_GET['pid']);
+                                    } elseif ($_GET['status'] == 8) {
+                                        $pagNum = $override->countData('clients', 'status', 0, 'id', $_GET['pid']);
+                                    }
+                                    $pages = ceil($pagNum / $numRec);
+                                    if (!$_GET['page'] || $_GET['page'] == 1) {
+                                        $page = 0;
+                                    } else {
+                                        $page = ($_GET['page'] * $numRec) - $numRec;
+                                    }
+
+                                    if ($_GET['status'] == 1) {
+                                        $clients = $override->getWithLimit3('clients', 'status', 1, 'screened', 1, 'id', $_GET['pid'], $page, $numRec);
+                                    } elseif ($_GET['status'] == 2) {
+                                        $clients = $override->getWithLimit3('clients', 'status', 1, 'eligible', 1, 'id', $_GET['pid'], $page, $numRec);
+                                    } elseif ($_GET['status'] == 3) {
+                                        $clients = $override->getWithLimit3('clients', 'status', 1, 'enrolled', 1, 'id', $_GET['pid'], $page, $numRec);
+                                    } elseif ($_GET['status'] == 4) {
+                                        $clients = $override->getWithLimit3('clients', 'status', 1, 'end_study', 1, 'id', $_GET['pid'], $page, $numRec);
+                                    } elseif ($_GET['status'] == 5) {
+                                        $clients = $override->getWithLimit1('clients', 'status', 1, 'id', $_GET['pid'], $page, $numRec);
+                                    } elseif ($_GET['status'] == 6) {
+                                        $clients = $override->getWithLimit3('clients', 'status', 1, 'screened', 0, 'id', $_GET['pid'], $page, $numRec);
+                                    } elseif ($_GET['status'] == 7) {
+                                        $clients = $override->getWithLimit('clients', 'id', $_GET['sid'], $page, $numRec);
+                                    } elseif ($_GET['status'] == 8) {
+                                        $clients = $override->getWithLimit1('clients', 'status', 0, 'id', $_GET['pid'], $page, $numRec);
                                     }
                                 } else {
                                     $pagNum = 0;
@@ -11740,6 +11825,8 @@ if ($user->isLoggedIn()) {
         window.history.replaceState(null, null, window.location.href);
     }
 
+
+
     $(document).ready(function() {
         $("#myInput11").on("keyup", function() {
             var value = $(this).val().toLowerCase();
@@ -11867,6 +11954,123 @@ if ($user->isLoggedIn()) {
             table.draw();
         });
     });
+
+    function autocomplete(inp, arr) {
+        /*the autocomplete function takes two arguments,
+        the text field element and an array of possible autocompleted values:*/
+        var currentFocus;
+        /*execute a function when someone writes in the text field:*/
+        inp.addEventListener("input", function(e) {
+            var a, b, i, val = this.value;
+            /*close any already open lists of autocompleted values*/
+            closeAllLists();
+            if (!val) {
+                return false;
+            }
+            currentFocus = -1;
+            /*create a DIV element that will contain the items (values):*/
+            a = document.createElement("DIV");
+            a.setAttribute("id", this.id + "autocomplete-list");
+            a.setAttribute("class", "autocomplete-items");
+            /*append the DIV element as a child of the autocomplete container:*/
+            this.parentNode.appendChild(a);
+            /*for each item in the array...*/
+            for (i = 0; i < arr.length; i++) {
+                /*check if the item starts with the same letters as the text field value:*/
+                if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                    /*create a DIV element for each matching element:*/
+                    b = document.createElement("DIV");
+                    /*make the matching letters bold:*/
+                    b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                    b.innerHTML += arr[i].substr(val.length);
+                    /*insert a input field that will hold the current array item's value:*/
+                    b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                    /*execute a function when someone clicks on the item value (DIV element):*/
+                    b.addEventListener("click", function(e) {
+                        /*insert the value for the autocomplete text field:*/
+                        inp.value = this.getElementsByTagName("input")[0].value;
+                        /*close the list of autocompleted values,
+                        (or any other open lists of autocompleted values:*/
+                        closeAllLists();
+                    });
+                    a.appendChild(b);
+                }
+            }
+        });
+        /*execute a function presses a key on the keyboard:*/
+        inp.addEventListener("keydown", function(e) {
+            var x = document.getElementById(this.id + "autocomplete-list");
+            if (x) x = x.getElementsByTagName("div");
+            if (e.keyCode == 40) {
+                /*If the arrow DOWN key is pressed,
+                increase the currentFocus variable:*/
+                currentFocus++;
+                /*and and make the current item more visible:*/
+                addActive(x);
+            } else if (e.keyCode == 38) { //up
+                /*If the arrow UP key is pressed,
+                decrease the currentFocus variable:*/
+                currentFocus--;
+                /*and and make the current item more visible:*/
+                addActive(x);
+            } else if (e.keyCode == 13) {
+                /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                e.preventDefault();
+                if (currentFocus > -1) {
+                    /*and simulate a click on the "active" item:*/
+                    if (x) x[currentFocus].click();
+                }
+            }
+        });
+
+        function addActive(x) {
+            /*a function to classify an item as "active":*/
+            if (!x) return false;
+            /*start by removing the "active" class on all items:*/
+            removeActive(x);
+            if (currentFocus >= x.length) currentFocus = 0;
+            if (currentFocus < 0) currentFocus = (x.length - 1);
+            /*add class "autocomplete-active":*/
+            x[currentFocus].classList.add("autocomplete-active");
+        }
+
+        function removeActive(x) {
+            /*a function to remove the "active" class from all autocomplete items:*/
+            for (var i = 0; i < x.length; i++) {
+                x[i].classList.remove("autocomplete-active");
+            }
+        }
+
+        function closeAllLists(elmnt) {
+            /*close all autocomplete lists in the document,
+            except the one passed as an argument:*/
+            var x = document.getElementsByClassName("autocomplete-items");
+            for (var i = 0; i < x.length; i++) {
+                if (elmnt != x[i] && elmnt != inp) {
+                    x[i].parentNode.removeChild(x[i]);
+                }
+            }
+        }
+        /*execute a function when someone clicks in the document:*/
+        document.addEventListener("click", function(e) {
+            closeAllLists(e.target);
+        });
+    }
+
+
+    function MyFunction() {
+        fetch('fetch_names.php')
+            .then(response => response)
+            .then(data => {
+                // Process the data received from the PHP script
+                console.log(data);
+                autocomplete(document.getElementById("names"), data);
+            })
+            .catch(error => {
+                // Handle any errors that occurred during the fetch request
+                console.error('Error:', error);
+            });
+    }
 </script>
 
 
