@@ -119,7 +119,7 @@ $output .= '
 $output .=
 '
     <table width="100%" border="1" cellpadding="5" cellspacing="0">
-                <tr>
+ <tr>
                     <td colspan="' . $span0 . '" align="center" style="font-size: 18px">
                             <b>DATE  ' . date('Y-m-d') . '</b>
                         </td>
@@ -159,98 +159,171 @@ $output .=
     
      ';
 
+if ($_GET['group'] == 1 || $_GET['group'] == 3 || $_GET['group'] == 4) {
+
+    $output .= '
+                    <th colspan="2">Expiry Date</th>
+                                ';
+}
+$output .= '
+                        <th colspan="2">Status</th>
+                        <th colspan="2">Remarks</th>
+                    </tr>
+                ';
+
 // Load HTML content into dompdf
 $x = 1;
-foreach ($clients as $client) {
-    if ($client['eligible'] == 1) {
-        $eligible = 'ELIGIBLE';
+$status = '';
+$balance_status = '';
+
+// print_r($data[0]['next_check']);
+
+foreach ($data as $row) {
+    $generic_name = $override->getNews('generic', 'id', $row['generic_id'], 'status', 1)[0]['name'];
+    $notify_quantity = $override->getNews('generic', 'id', $row['generic_id'], 'status', 1)[0]['notify_quantity'];
+    $generic_balance = $override->getNews('generic', 'id', $row['generic_id'], 'status', 1)[0]['balance'];
+    $maintainance = $override->getNews('generic', 'id', $row['generic_id'], 'status', 1)[0]['maintainance'];
+    $category_name = $override->get('drug_cat', 'id', $row['category'])[0]['name'];
+    $batch_balance = $override->getNews('batch', 'id', $row['batch_id'], 'status', 1)[0]['balance'];
+    $batch_no = $row['batch_no'];
+    $last_check = $row['last_check'];
+    $next_check = $row['next_check'];
+    $expire_date = $row['expire_date'];
+
+
+    // $desiredValue = date('Y-m-d');
+    // $batch = $override->getNews('batch', 'generic_id', $row['id'], 'status', 1);
+
+    // $found = false;
+    // foreach ($batch as $value) {
+    //     if ($value < $desiredValue) {
+    //         $found = true;
+    //         break;
+    //     }
+    // }
+
+    // if ($found) {
+    //     echo "There is a value in the array that is less than $desiredValue.";
+    // } else {
+    //     echo "No values in the array are less than $desiredValue.";
+    // }
+
+
+
+    if ($row['expire_date'] <= date('Y-m-d')) {
+        $ExpireClass = 'ExpiredStock';
+        $expire = 'Expired';
     } else {
-        $eligible = 'NOT ELIGIBLE';
+        $ExpireClass = 'NotExpiredStock';
+        $expire = 'Valid';
     }
 
-    if ($client['site_id'] == 1) {
-        $site = 'MNH';
-    } elseif ($client['site_id'] == 2) {
-        $site = 'ORCI';
+    if ($row['balance'] <= 0) {
+        $balance = 'Out of Stock';
+        $StockClass = 'outStock';
+    } elseif ($row['balance'] > 0 && $row['balance'] < $row['notify_quantity']) {
+        $balance = 'Running Low';
+        $StockClass = 'lowStock';
     } else {
-        $site = 'Not Answered';
+        $balance = 'Sufficient';
+        $StockClass = 'sufficientStock';
     }
 
-
-    $screening = $override->get('screening', 'client_id', $client['id'])[0];
-
-
-    if ($screening['consented'] == 1) {
-        $consent = 'Yes';
-    } elseif ($screening['consented'] == 2) {
-        $consent = 'No';
+    if ($row['last_check'] == '') {
+        $LastcheckClass = 'NotCheckedStock';
+        $Lastcheck = 'Not Checked!';
     } else {
-        $consent = 'Not Answered';
+        if ($row['next_check'] <= date('Y-m-d')) {
+            $NextcheckClass = 'NotCheckedStock';
+            $Nextcheck = 'Not Checked!';
+        } else {
+            $NextcheckClass = 'CheckedStock';
+            $Nextcheck = 'Checked!';
+        }
     }
 
+    // if ($row['next_check'] <= date('Y-m-d')){
+    //     $checkClass = 'NotCheckedStock';
+    //     $check = 'Not Checked!';
+    // } else {
+    //     $checkClass = 'CheckedStock';
+    //     $check = 'Checked!';
+    // }
 
-    if ($screening['consented_nimregenin'] == 1) {
-        $consented_nimregenin = 'Yes';
-    } elseif ($screening['consented_nimregenin'] == 2) {
-        $consented_nimregenin = 'No';
+    if ($_GET['group'] == 1 || $_GET['group'] == 3 || $_GET['group'] == 4) {
+        $status = $Nextcheck . ' - ' . $balance . ' - ' . $expire;
     } else {
-        $consented_nimregenin = 'Not Answered';
+        $status = $Nextcheck . ' - ' . $balance;
     }
+
+    if ($ExpireClass == 'ExpiredStock' || $StockClass == 'outStock' || $StockClass == 'lowStock' || $LastcheckClass == 'NotCheckedStock' || $NextcheckClass == 'NotCheckedStock') {
+        $classStatus = 'outStock';
+    }
+
     $output .= '
          <tr>
             <td colspan="1">' . $x . '</td>
-            <td colspan="3">' . $client['clinic_date'] . '</td>
-            <td colspan="2">' . $client['study_id'] . '</td>
-            <td colspan="2">' . $client['pt_type'] . '</td>
-            <td colspan="2">' . $client['treatment_type'] . '</td>
-            <td colspan="2">' . $client['previous_date'] . '</td>
-            <td colspan="2">' . $client['total_cycle'] . '</td>
-            <td colspan="2"  class="' . $classStatus . '">' . $consented_nimregenin . '</td>
-            <td colspan="3">' . $eligible . '</td>
-            <td colspan="2">' . $consent . '</td>
-            <td colspan="2">' . $site . '</td>
+            <td colspan="2">' . $generic_name . '</td>
+            <td colspan="2">' . $notify_quantity . '</td>
+            <td colspan="2" class="' . $StockClass . '">' . $row['balance'] . '</td>
+            <td colspan="2">' . $row['batch_no'] . '</td>
+            <td colspan="2" class="' . $LastcheckClass . '">' . $last_check . '</td>
+            <td colspan="2" class="' . $NextcheckClass . '">' . $next_check . '</td>
+            ';
+
+    if ($_GET['group'] == 1 || $_GET['group'] == 3 || $_GET['group'] == 4) {
+        $output .= '
+            <td colspan="2" class="' . $ExpireClass . '">' . $expire_date . '</td>
+
+            ';
+    }
+    $output .= '
+            <td colspan="2" class="' . $classStatus . '">' . $status . '</td>
+            <td colspan="2">' . $row['remarks'] . '</td>
         </tr>
         ';
-
     $x += 1;
 }
+
 $output .= '
     <tr>
-        <td colspan="' . $span1 . '" align="center" style="font-size: 18px">
+        <td colspan="' . $span0 . '" align="left" style="font-size: 18px">
             <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <p align="right">----' . $user->data()->firstname . ' ' . $user->data()->lastname . '-----<br />Printed By</p>
-            <br />
-            <br />
-            <br />
-        </td>
-
-        <td colspan="' . $span2 . '" align="center" style="font-size: 18px">
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <p align="right">-----' . date('Y-m-d') . '-------<br />Date Printed</p>
-            <br />
-            <br />
+            <p align="left">General Comments</p>
             <br />
         </td>
     </tr>
-        </table>  
+</table>  
     ';
 
 
+// Include the menu
+ob_start();
+include 'menu_title.php';
+$menuHtml = ob_get_clean();
+
+// Combine the menu HTML and main content HTML
+// $output = $menuHtml . $output;
 
 
-
-// $output = '<html><body><h1>Hello, dompdf!' . $row . '</h1></body></html>';
 $pdf->loadHtml($output);
+
+// // Include the CSS file
+// $pdf->set_option('isRemoteEnabled', true);
+// $pdf->set_option('isHtml5ParserEnabled', true);
+// $pdf->set_option('isPhpEnabled', true);
+// $pdf->set_option('defaultMediaType', 'print');
+// $pdf->set_option('defaultPaperSize', 'A4');
+// $pdf->set_option('isFontSubsettingEnabled', true);
+// $pdf->set_option('isJavascriptEnabled', true);
+// $pdf->set_option('dpi', 300);
+// $pdf->set_option('fontHeightRatio', 1.1);
+// $pdf->set_option('isFontSubsettingEnabled', true);
+// $pdf->set_option('isFontSubsettingFixEnabled', true);
+
+// // Load the external CSS file
+// $pdf->add_stylesheet('styles.css');
+
 
 // SetPaper the HTML as PDF
 $pdf->setPaper('A4', 'landscape');
@@ -258,9 +331,10 @@ $pdf->setPaper('A4', 'landscape');
 // Render the HTML as PDF
 $pdf->render();
 
+
 $canvas = $pdf->getCanvas();
 $canvas->page_text(700, 560, "Page {PAGE_NUM} of {PAGE_COUNT}", null, 10, array(0, 0, 0));
 
+
 // Output the generated PDF
 $pdf->stream($file_name, array("Attachment" => false));
-

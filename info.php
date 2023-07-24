@@ -2341,7 +2341,6 @@ if ($user->isLoggedIn()) {
                                 </div>
                             </div>
 
-
                             <input class="form-control" id="myInput11" type="text" placeholder="Search..">
                             <!-- <input class="form-control" id="searchClient" type="text" placeholder="Search Name, ID..">
                             <input id="firstname" type="text" name="firstname" placeholder="Type firstname..." onkeyup="myFunction()" required /> -->
@@ -3791,7 +3790,7 @@ if ($user->isLoggedIn()) {
                                                                                     <option value="3">Surgery Treatment</option>
                                                                                     <option value="4">Active surveillance</option>
                                                                                     <option value="5">Hormonal therapy ie ADT</option>
-                                                                                    <option value="6">Other (If Other write in Notes / Remarks )</option>
+                                                                                    <option value="96">Other (If Other write in Notes / Remarks )</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>

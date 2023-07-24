@@ -124,13 +124,7 @@ $output .=
                             <b>DATE  ' . date('Y-m-d') . '</b>
                         </td>
                     </tr>
-
-
                 <tr>
-                <td colspan="' . $span0 . '" align="center" style="font-size: 18px">
-                        <b>TABLE 2 </b>
-                    </td>
-                </tr>
 
                 <tr>
                 <td colspan="' . $span0 . '" align="center" style="font-size: 18px">
@@ -155,8 +149,7 @@ $output .=
                     <th colspan="3">ELIGIBILTY</th>        
                     <th colspan="2">Consented To Be Part Of Study</th>
                     <th colspan="2">SITE</th>
-                </tr>
-    
+                </tr>    
      ';
 
 // Load HTML content into dompdf
@@ -182,32 +175,92 @@ foreach ($clients as $client) {
 
     if ($screening['consented'] == 1) {
         $consent = 'Yes';
+        $consentTypeClass = 'CheckedStock';
     } elseif ($screening['consented'] == 2) {
         $consent = 'No';
+        $consentTypeClass = 'CheckedStock';
     } else {
         $consent = 'Not Answered';
+        $consentTypeClass = 'NotCheckedStock';
     }
 
 
     if ($screening['consented_nimregenin'] == 1) {
         $consented_nimregenin = 'Yes';
+        $consented_nimregeninTypeClass = 'CheckedStock';
     } elseif ($screening['consented_nimregenin'] == 2) {
         $consented_nimregenin = 'No';
+        $consented_nimregeninTypeClass = 'CheckedStock';
     } else {
         $consented_nimregenin = 'Not Answered';
+        $consented_nimregeninTypeClass = 'NotCheckedStock';
     }
+
+    if ($client['pt_type'] == 1) {
+        $pt_type = 'New';
+        $ptTypeClass = 'CheckedStock';
+    } elseif ($client['pt_type'] == 2) {
+        $pt_type = 'Old';
+        $ptTypeClass = 'CheckedStock';
+    } else {
+        $pt_type = 'Not Answered';
+        $ptTypeClass = 'NotCheckedStock';
+    }
+
+    if ($client['previous_date'] != '') {
+        $previous_date = $client['previous_date'];
+        $prvClass = 'CheckedStock';
+    }  else {
+        $previous_date = 'Not Answered';
+        $prvClass = 'NotCheckedStock';
+    }
+
+
+    if ($client['total_cycle'] != '') {
+        $total_cycle = $client['total_cycle'];
+        $cycClass = 'CheckedStock';
+    } else {
+        $total_cycle = 'Not Answered';
+        $cycClass = 'NotCheckedStock';
+    }
+
+
+    if ($client['treatment_type'] == 1) {
+        $treatment_type = 'Radiotherapy Treatment';
+        $tmntTypeClass = 'CheckedStock';
+    } elseif ($client['treatment_type'] == 2) {
+        $treatment_type = 'Chemotherapy Treatment';
+        $tmntTypeClass = 'CheckedStock';
+    } elseif ($client['treatment_type'] == 3) {
+        $treatment_type = 'Surgery Treatment';
+        $tmntTypeClass = 'CheckedStock';
+    } elseif ($client['treatment_type'] == 4) {
+        $treatment_type = 'Active surveillance';
+        $tmntTypeClass = 'CheckedStock';
+    } elseif ($client['treatment_type'] == 5) {
+        $treatment_type = 'Hormonal therapy ie ADT';
+        $tmntTypeClass = 'CheckedStock';
+    } elseif ($client['treatment_type'] == 6 || $client['treatment_type'] == 96) {
+        $treatment_type = 'Other';
+        $tmntTypeClass = 'CheckedStock';
+    } else {
+        $treatment_type = 'Not Answered';
+        $tmntTypeClass = 'NotCheckedStock';
+    }
+
+
     $output .= '
          <tr>
             <td colspan="1">' . $x . '</td>
             <td colspan="3">' . $client['clinic_date'] . '</td>
             <td colspan="2">' . $client['study_id'] . '</td>
-            <td colspan="2">' . $client['pt_type'] . '</td>
-            <td colspan="2">' . $client['treatment_type'] . '</td>
-            <td colspan="2">' . $client['previous_date'] . '</td>
-            <td colspan="2">' . $client['total_cycle'] . '</td>
-            <td colspan="2"  class="' . $classStatus . '">' . $consented_nimregenin . '</td>
+            <td colspan="2"  class="' . $ptTypeClass . '">' . $pt_type . '</td>
+            <td colspan="2"  class="' . $tmntTypeClass . '">' . $treatment_type . '</td>
+            <td colspan="2"  class="' . $prvClass . '">' . $previous_date . '</td>
+            <td colspan="2"  class="' . $cycClass . '">' . $total_cycle . '</td>
+            <td colspan="2"  class="' . $consented_nimregeninTypeClass . '">' . $consented_nimregenin . '</td>
             <td colspan="3">' . $eligible . '</td>
-            <td colspan="2">' . $consent . '</td>
+            <td colspan="2"  class="' . $consentTypeClass . '">' . $consent . '</td>
             <td colspan="2">' . $site . '</td>
         </tr>
         ';
