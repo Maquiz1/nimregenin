@@ -10,7 +10,7 @@ class OverideData
             $e->getMessage();
         }
     }
-    
+
     public function unique($table, $field, $value)
     {
         if ($this->get($table, $field, $value)) {
@@ -27,7 +27,7 @@ class OverideData
         return $num;
     }
 
-    public function getNo0($table, $field, $value, $field1,$value1, $field2, $value2)
+    public function getNo0($table, $field, $value, $field1, $value1, $field2, $value2)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND ($field1 = '$value1' OR $field2 = '$value2')");
         $num = $query->rowCount();
@@ -44,6 +44,13 @@ class OverideData
     public function getNo2($table, $field, $value, $field1, $value1, $field2, $value2)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $field < '$value' AND $field1 = '$value1' AND $field2 = '$value2'");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+    public function getNoType($table, $field, $value, $field1, $value1, $field1_1, $value1_1, $field2, $value2, $field3, $value3, $field4, $value4, $field5, $value5, $field6, $value6, $field96, $value96)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 = '$value1' AND ($field1_1 = '$value1_1' OR $field2 = '$value2' OR $field3 = '$value3' OR $field4 = '$value4' OR $field5 = '$value5' OR $field6 = '$value6' OR $field96 = '$value96')");
         $num = $query->rowCount();
         return $num;
     }

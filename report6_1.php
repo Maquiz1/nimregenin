@@ -158,6 +158,7 @@ if ($site_data) {
         $enrolled_Total5 = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'treatment_type', 5,);
         $enrolled6 = $override->countData4('clients', 'status', 1, 'enrolled', 1, 'treatment_type', 6, 'site_id', $row['id']);
         $enrolled_Total6 = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'treatment_type', 6,);
+        $typeTotal = $override->getNoType('clients', 'status', 1, 'enrolled', 1,'treatment_type',1, 'treatment_type',2, 'treatment_type',3, 'treatment_type',4, 'treatment_type',5, 'treatment_type',6, 'treatment_type', 96);
         $enrolled = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'site_id', $row['id']);
         $enrolled_Total = $override->countData('clients', 'status', 1, 'enrolled', 1);
         $nimregenin3 = $override->countData4('clients', 'status', 1, 'enrolled', 1, 'consented_nimregenin', 1, 'site_id', $row['id']);
@@ -234,12 +235,7 @@ if ($site_data) {
                     <td align="right"><b>' . $eligible_Total . '</b></td>
                     <td align="right"><b>' . $enrolled_Total . '</b></td>
                     <td align="center" colspan="2"><b>' . $nimregenin_Total3_4 . '</b></td>
-                    <td align="right"><b>' . $enrolled_Total1 . '</b></td>
-                    <td align="right"><b>' . $enrolled_Total2 . '</b></td>
-                    <td align="right"><b>' . $enrolled_Total3 . '</b></td>
-                    <td align="right"><b>' . $enrolled_Total4 . '</b></td>
-                    <td align="right"><b>' . $enrolled_Total5 . '</b></td>
-                    <td align="right"><b>' . $enrolled_Total6 . '</b></td>
+                    <td align="center" colspan="6"><b>' . $typeTotal . '</b></td>
                     <td align="right"><b>' . $end_study_Total . '</b></td>
                 </tr>  
 
