@@ -99,8 +99,9 @@ if ($site_data) {
                                 <th colspan="4"> CANCER ( INCLUSION )</th>
                                 <th rowspan="2">ELIG IBLE</th>
                                 <th rowspan="2">ENRO LLED </th>
+                                <th colspan="2">PATI ENT TYPE ( NEW ?)</th>
                                 <th colspan="2">USE NIMRE GENIN</th>
-                                <th colspan="6">ENROLLED</th>
+                                <th colspan="6">ENROLLED ( TREATMENT TYPE )</th>
                                 <th rowspan="2">END</th>
                             </tr>
 
@@ -113,9 +114,11 @@ if ($site_data) {
                                 <th>Pro state </th>
                                 <th>Y</th>
                                 <th>N</th>
-                                <th>Radio therapy</th>
-                                <th>Chemo therapy</th>
-                                <th>Surgery</th>
+                                <th>Y</th>
+                                <th>N</th>
+                                <th>Radi other apy</th>
+                                <th>Chem other apy</th>
+                                <th>Sur gery</th>
                                 <th>Active Surve illance</th>
                                 <th>Hormonal Therapy i.e ADT</th>
                                 <th>Other</th>
@@ -161,6 +164,11 @@ if ($site_data) {
         $typeTotal = $override->getNoType('clients', 'status', 1, 'enrolled', 1,'treatment_type',1, 'treatment_type',2, 'treatment_type',3, 'treatment_type',4, 'treatment_type',5, 'treatment_type',6, 'treatment_type', 96);
         $enrolled = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'site_id', $row['id']);
         $enrolled_Total = $override->countData('clients', 'status', 1, 'enrolled', 1);
+        $new1 = $override->countData4('clients', 'status', 1, 'enrolled', 1, 'pt_type', 1, 'site_id', $row['id']);
+        $new_Total1 = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'pt_type', 1,);
+        $new2 = $override->countData4('clients', 'status', 1, 'enrolled', 1, 'pt_type', 2, 'site_id', $row['id']);
+        $new_Total2 = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'pt_type', 2);
+        $new_Total = $override->countData3('clients', 'status', 1, 'enrolled', 1, 'pt_type', 1, 'pt_type', 2);
         $nimregenin3 = $override->countData4('clients', 'status', 1, 'enrolled', 1, 'consented_nimregenin', 1, 'site_id', $row['id']);
         $nimregenin_Total3 = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'consented_nimregenin', 1);
         $nimregenin4 = $override->countData4('clients', 'status', 1, 'enrolled', 1, 'consented_nimregenin', 2, 'site_id', $row['id']);
@@ -185,6 +193,8 @@ if ($site_data) {
                     <td align="right">' . $enrolled . '</td>
                     <td align="right">' . $nimregenin3 . '</td>
                     <td align="right">' . $nimregenin4 . '</td>
+                    <td align="right">' . $new1 . '</td>
+                    <td align="right">' . $new2 . '</td>
                     <td align="right">' . $enrolled1 . '</td>
                     <td align="right">' . $enrolled2 . '</td>
                     <td align="right">' . $enrolled3 . '</td>
@@ -212,6 +222,8 @@ if ($site_data) {
                     <td align="right"><b>' . $prostate_cancer_Total . '</b></td>
                     <td align="right"><b>' . $eligible_Total . '</b></td>
                     <td align="right"><b>' . $enrolled_Total . '</b></td>
+                    <td align="right"><b>' . $new_Total1 . '</b></td>
+                    <td align="right"><b>' . $new_Total2 . '</b></td>
                     <td align="right"><b>' . $nimregenin_Total3 . '</b></td>
                     <td align="right"><b>' . $nimregenin_Total4 . '</b></td>
                     <td align="right"><b>' . $enrolled_Total1 . '</b></td>
@@ -234,6 +246,7 @@ if ($site_data) {
                     <td align="right"><b>' . $prostate_cancer_Total . '</b></td>
                     <td align="right"><b>' . $eligible_Total . '</b></td>
                     <td align="right"><b>' . $enrolled_Total . '</b></td>
+                    <td align="center" colspan="2"><b>' . $new_Total . '</b></td>
                     <td align="center" colspan="2"><b>' . $nimregenin_Total3_4 . '</b></td>
                     <td align="center" colspan="6"><b>' . $typeTotal . '</b></td>
                     <td align="right"><b>' . $end_study_Total . '</b></td>
