@@ -48,6 +48,13 @@ class OverideData
         return $num;
     }
 
+    public function getCountNULL1($table, $field, $value, $field2, $value2, $field1)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field2 = '$value2' AND $field1 IS NULL");
+        $num = $query->rowCount();
+        return $num;
+    }
+
     public function getCount($table, $field, $value)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value'");
@@ -120,6 +127,13 @@ class OverideData
     public function getNewsNULL($table, $where, $id, $where2)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 IS NULL");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getNewsNULL1($table, $where, $id, $where2, $where3, $where1)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$where3' AND $where1 IS NULL");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }

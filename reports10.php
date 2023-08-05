@@ -8,8 +8,8 @@ $random = new Random();
 
 if ($user->isLoggedIn()) {
     try {
-        $clients = $override->getNewsNULL('clients', 'status', 1, 'pt_type');
-        $Total = $override->getCountNULL('clients', 'status', 1, 'pt_type');
+        $clients = $override->getNewsNULL1('clients', 'status', 1,'enrolled', 1, 'pt_type');
+        $Total = $override->getCountNULL1('clients', 'status', 1,'enrolled', 1, 'pt_type');
         // $clients = $override->getNews('clients', 'status', 1, 'pt_type',0);
         // $Total = $override->getCount1('clients', 'status', 1, 'pt_type',0);
         // $clients = $override->getNewsNULL('clients', 'status', 1, 'treatment_type');
@@ -138,8 +138,8 @@ $output .=
                 </tr>
     
                 <tr>
-                    <th colspan="1">No.</th>
-                    <th colspan="3">Date</th>
+                    <th colspan="2">Date</th>
+                    <th colspan="2">Name</th>
                     <th colspan="2">Study ID</th>
                     <th colspan="2">Patient Type</th>
                     <th colspan="2">Treatment Type</th>
@@ -251,8 +251,8 @@ foreach ($clients as $client) {
 
     $output .= '
          <tr>
-            <td colspan="1">' . $x . '</td>
-            <td colspan="3">' . $client['clinic_date'] . '</td>
+            <td colspan="2">' . $client['clinic_date'] . '</td>
+            <td colspan="2">' . $client['firstname'] . '-' . $client['lastname'] . '</td>
             <td colspan="2">' . $client['study_id'] . '</td>
             <td colspan="2"  class="' . $ptTypeClass . '">' . $pt_type . '</td>
             <td colspan="2"  class="' . $tmntTypeClass . '">' . $treatment_type . '</td>

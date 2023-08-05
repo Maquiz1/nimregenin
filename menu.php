@@ -75,23 +75,14 @@ if ($user->isLoggedIn()) {
         $CRF7 = $override->getNews('crf7', 'patient_id', $DAY0['client_id'], 'vcode', 'D0');
         $resultCrf7Day0 = array_diff($DAY0, $CRF7);
         $resultCrf7Day0 = count($resultCrf7Day0);
-
-
-        // $MissingCrf = $override->MissingData();
-        // $MissingCrfNo = $override->MissingDataNo();
-
-        // $MissingCrf1 = $override->MissingData1();
-        // $MissingCrfNo1 = $override->MissingDataNo1();
-
-        // $MissingCrf2 = $override->MissingData2();
-        // $MissingCrfNo2 = $override->MissingDataNo2();
     } else {
         $registered = $override->countData('clients', 'status', 1, 'site_id', $user->data()->site_id);
         $not_screened = $override->countData2('clients', 'status', 1, 'screened', 0, 'site_id', $user->data()->site_id);
         $all = $override->getCount('clients', 'site_id', $user->data()->site_id);
         $deleted = $override->countData('clients', 'status', 0, 'site_id', $user->data()->site_id);
         $visits = $override->getNo1('visit', 'expected_date', date('Y-m-d'), 'status', 0);
-        $visits = $override->get3('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'site_id', $user->data()->site_id);
+        // NO SITE_ID COLUMN ON VISIT TABLE
+        // $visits = $override->get3('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'site_id', $user->data()->site_id);
         $visits_DAY0 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', 'D0');
         $visits_DAY7 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', 'D7');
         $visits_DAY14 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', 'D14');
@@ -106,23 +97,6 @@ if ($user->isLoggedIn()) {
         $today = date('Y-m-d');
         $nxt_visit_date = date('Y-m-d', strtotime($today . ' + ' . $schedule . ' days'));
         $nxt_visit = $override->countData('visit', 'expected_date', $nxt_visit_date, 'status', 0);
-
-
-        // $MissingCrf = $override->MissingData();
-        // $MissingCrfNo = $override->MissingDataNo();
-
-        // $MissingCrf1 = $override->MissingData1();
-        // $MissingCrfNo1 = $override->MissingDataNo1();
-
-        // $MissingCrf2 = $override->MissingData2();
-        // $MissingCrfNo2 = $override->MissingDataNo2();
-
-
-
-
-        // $DAY0 = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'visit_code', 'D0')[0];
-        // $crf1 = $override->getNo1('crf1', 'patient_id', $DAY0['client_id'], 'vcode', 'D0');
-
     }
 } else {
     Redirect::to('index.php');
