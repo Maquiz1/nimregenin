@@ -253,8 +253,51 @@ if ($user->isLoggedIn()) {
 
                     <li class="active">
                         <!-- <a href="report5.php" target="_blank"> -->
+                        <a href="report6_1.php">
+                            <span class="text">Report 6_1 (TABLE 6_1) ( Screening with Control)</span>
+                        </a>
+                    </li>
+
+                    <li class="active">
+                        <!-- <a href="report5.php" target="_blank"> -->
                         <a href="report6_2.php">
                             <span class="text">Report 6_2(TABLE 6_2) ( Screening with Control)</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <!-- <a href="report5.php" target="_blank"> -->
+                        <a href="report7.php">
+                            <span class="text">Report 7(TABLE 7) ( Screening with Control)</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <!-- <a href="report5.php" target="_blank"> -->
+                        <a href="report8.php">
+                            <span class="text">Report 8(TABLE 8) ( Screening with Control)</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <!-- <a href="report5.php" target="_blank"> -->
+                        <a href="reports9.php">
+                            <span class="text">Report 9(TABLE 9) ( Screening with Control)</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <!-- <a href="report5.php" target="_blank"> -->
+                        <a href="reports10.php">
+                            <span class="text">Report 10(TABLE 10) ( Screening with Control)</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <!-- <a href="report5.php" target="_blank"> -->
+                        <a href="reports11.php">
+                            <span class="text">Report 11(TABLE 11) ( Screening with Control)</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <!-- <a href="report5.php" target="_blank"> -->
+                        <a href="reports12.php">
+                            <span class="text">Report 12(TABLE 12) ( Screening with Control)</span>
                         </a>
                     </li>
                 </ul>

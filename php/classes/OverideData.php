@@ -27,6 +27,13 @@ class OverideData
         return $num;
     }
 
+    public function getNo0($table, $field, $value, $field1,$value1, $field2, $value2)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND ($field1 = '$value1' OR $field2 = '$value2')");
+        $num = $query->rowCount();
+        return $num;
+    }
+
     public function getNo1($table, $field, $value, $field1, $value1)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $field < '$value' AND $field1 = '$value1'");
@@ -99,7 +106,7 @@ class OverideData
 
     public function countData3($table, $field, $value, $field1, $value1, $field2, $value2, $field3, $value3)
     {
-        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 = '$value1' AND $field2 = '$value2' OR $field3 = '$value3'");
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 = '$value1' AND ($field2 = '$value2' OR $field3 = '$value3')");
         $num = $query->rowCount();
         return $num;
     }
