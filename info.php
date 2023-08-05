@@ -1947,6 +1947,7 @@ if ($user->isLoggedIn()) {
                                                                                 <div class="form-group">
                                                                                     <label>Power</label>
                                                                                     <select name="power" id="power" style="width: 100%;" required>
+                                                                                        <option value="<?= $staff['power'] ?>"><?= $staff['power'] ?></option>
                                                                                         <option value="0">Zero</option>
                                                                                         <option value="1">One</option>
                                                                                         <option value="2">Two</option>
