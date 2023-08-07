@@ -3999,7 +3999,7 @@ if ($user->isLoggedIn()) {
                                                                                 <label>Treatment Type 2</label>
                                                                                 <select name="treatment_type2" id="treatment_type2" style="width: 100%;" required>
                                                                                     <?php
-                                                                                    if ($client['treatment_type'] == 1) { ?>
+                                                                                    if ($client['treatment_type2'] == 1) { ?>
                                                                                         <option value="<?= $client['treatment_type2'] ?>">Radiotherapy Treatment</option>
                                                                                     <?php } else if ($client['treatment_type2'] == 2) { ?>
                                                                                         <option value="<?= $client['treatment_type2'] ?>">Chemotherapy Treatment</option>
