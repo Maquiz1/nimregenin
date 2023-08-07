@@ -8,20 +8,6 @@ $random = new Random();
 
 if ($user->isLoggedIn()) {
     try {
-        // switch (Input::get('report')) {
-        //     case 1:
-        //         $data = $override->searchBtnDate3('batch', 'create_on', $_GET['start'], 'create_on', $_GET['end'], 'use_group', $_GET['group']);
-        //         $data_count = $override->getCountReport('batch', 'create_on', $_GET['start'], 'create_on', $_GET['end'], 'use_group', $_GET['group']);
-        //         break;
-        //     case 2:
-        //         $data = $override->searchBtnDate3('check_records', 'create_on', $_GET['start'], 'create_on', $_GET['end'], 'use_group', $_GET['group']);
-        //         $data_count = $override->getCountReport('check_records', 'create_on', $_GET['start'], 'create_on', $_GET['end'], 'use_group', $_GET['group']);
-        //         break;
-        //     case 3:
-        //         $data = $override->searchBtnDate3('batch_records', 'create_on', $_GET['start'], 'create_on', $_GET['end'], 'use_group', $_GET['group']);
-        //         $data_count = $override->getCountReport('batch_records', 'create_on', $_GET['start'], 'create_on', $_GET['end'], 'use_group', $_GET['group']);
-        //         break;
-        // }
         $data = $override->getNews2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', $_GET['day']);
         $data_count = $override->getNo1('visit', 'expected_date', date('Y-m-d'), 'status', 0);
         $data_count2 = $override->getNo2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code',$_GET['day']);
@@ -123,33 +109,7 @@ $output = ' ';
     }
 
     $output .= '
-    <tr>
-        <td colspan="10" align="center" style="font-size: 18px">
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <p align="right">----' . $user->data()->firstname . ' ' . $user->data()->lastname . '-----<br />Printed By</p>
-            <br />
-            <br />
-            <br />
-        </td>
-
-        <td colspan="10" align="center" style="font-size: 18px">
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <p align="right">-----' . date('Y-m-d') . '-------<br />Date Printed</p>
-            <br />
-            <br />
-            <br />
-        </td>
-    </tr>
+    
         </table>  
     ';
 // } 

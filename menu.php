@@ -285,7 +285,7 @@ if ($user->isLoggedIn()) {
                     <li class="active">
                         <!-- <a href="report5.php" target="_blank"> -->
                         <a href="reports10.php">
-                            <span class="text">Report 10(TABLE 10) ( Screening with Control)</span>
+                            <span class="text">Report 10(TABLE 10) ( Missing Treatment Type)</span>
                         </a>
                     </li>
                     <li class="active">

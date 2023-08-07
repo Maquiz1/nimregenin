@@ -72,7 +72,7 @@ if ($site_data) {
 
                 <tr>
                     <td colspan="18" align="center" style="font-size: 18px">
-                        <b>TABLE 0 (Screened With Controll)</b>
+                        <b>TABLE 6.1 (Screened With Controll)</b>
                     </td>
                 </tr>
 
@@ -147,6 +147,7 @@ if ($site_data) {
         $prostate_cancer_Total = $override->countData('screening', 'status', 1, 'prostate_cancer', 1);
         $biopsy = $override->countData2('screening', 'status', 1, 'biopsy', 1, 'site_id', $row['id']);
         $biopsy_Total = $override->countData('screening', 'status', 1, 'biopsy', 1);
+        $inclusion_Total = $override->getNoType0('screening', 'status', 1, 'breast_cancer', 1, 'brain_cancer', 1, 'cervical_cancer', 1, 'prostate_cancer', 1, 'biopsy', 1);
         $eligible = $override->countData2('clients', 'status', 1, 'eligible', 1, 'site_id', $row['id']);
         $eligible_Total = $override->countData('clients', 'status', 1, 'eligible', 1);
         $enrolled1 = $override->countData4('clients', 'status', 1, 'enrolled', 1, 'treatment_type', 1, 'site_id', $row['id']);
@@ -161,7 +162,7 @@ if ($site_data) {
         $enrolled_Total5 = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'treatment_type', 5,);
         $enrolled6 = $override->countData4('clients', 'status', 1, 'enrolled', 1, 'treatment_type', 6, 'site_id', $row['id']);
         $enrolled_Total6 = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'treatment_type', 6,);
-        $typeTotal = $override->getNoType('clients', 'status', 1, 'enrolled', 1,'treatment_type',1, 'treatment_type',2, 'treatment_type',3, 'treatment_type',4, 'treatment_type',5, 'treatment_type',6, 'treatment_type', 96);
+        $typeTotal = $override->getNoType('clients', 'status', 1, 'enrolled', 1, 'treatment_type', 1, 'treatment_type', 2, 'treatment_type', 3, 'treatment_type', 4, 'treatment_type', 5, 'treatment_type', 6, 'treatment_type', 96);
         $enrolled = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'site_id', $row['id']);
         $enrolled_Total = $override->countData('clients', 'status', 1, 'enrolled', 1);
         $new1 = $override->countData4('clients', 'status', 1, 'enrolled', 1, 'pt_type', 1, 'site_id', $row['id']);
@@ -240,50 +241,14 @@ if ($site_data) {
                     <td align="right"><b>' . $registered_Total . '</b></td>
                     <td align="right"><b>' . $screened_Total . '</b></td>
                     <td align="center" colspan="2"><b>' . $nimregenin_Total1_2 . '</b></td>
-                    <td align="right"><b>' . $breast_cancer_Total . '</b></td>
-                    <td align="right"><b>' . $brain_cancer_Total . '</b></td>
-                    <td align="right"><b>' . $cervical_cancer_Total . '</b></td>
-                    <td align="right"><b>' . $prostate_cancer_Total . '</b></td>
+                    <td align="center" colspan="4"><b>' . $inclusion_Total . '</b></td>
                     <td align="right"><b>' . $eligible_Total . '</b></td>
                     <td align="right"><b>' . $enrolled_Total . '</b></td>
                     <td align="center" colspan="2"><b>' . $new_Total . '</b></td>
                     <td align="center" colspan="2"><b>' . $nimregenin_Total3_4 . '</b></td>
                     <td align="center" colspan="6"><b>' . $typeTotal . '</b></td>
                     <td align="right"><b>' . $end_study_Total . '</b></td>
-                </tr>  
-
-    ';
-
-    $output .= '
-            </table>    
-                <tr>
-                    <td colspan="9" align="center" style="font-size: 18px">
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <p align="right">----' . $user->data()->firstname . ' ' . $user->data()->lastname . '-----<br />Prepared By</p>
-                        <br />
-                        <br />
-                        <br />
-                    </td>
-
-                    <td colspan="9" align="center" style="font-size: 18px">
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <p align="right">-----' . date('Y-m-d') . '-------<br />Date Prepared</p>
-                        <br />
-                        <br />
-                        <br />
-                    </td>
-                </tr>
-        </table>    
+                </tr>   
 ';
 }
 

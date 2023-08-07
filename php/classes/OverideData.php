@@ -48,6 +48,13 @@ class OverideData
         return $num;
     }
 
+    public function getNoType0($table, $field, $value, $field1, $value1, $field2, $value2, $field3, $value3, $field4, $value4, $field5, $value5)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND ($field1 = '$value1' OR $field2 = '$value2' OR $field3 = '$value3' OR $field4 = '$value4' OR $field5 = '$value5')");
+        $num = $query->rowCount();
+        return $num;
+    }
+
     public function getNoType($table, $field, $value, $field1, $value1, $field1_1, $value1_1, $field2, $value2, $field3, $value3, $field4, $value4, $field5, $value5, $field6, $value6, $field96, $value96)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 = '$value1' AND ($field1_1 = '$value1_1' OR $field2 = '$value2' OR $field3 = '$value3' OR $field4 = '$value4' OR $field5 = '$value5' OR $field6 = '$value6' OR $field96 = '$value96')");
@@ -176,6 +183,13 @@ class OverideData
     public function getNews2($table, $where, $id, $where2, $id2, $where3, $id3)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $where < '$id' AND $where2 = '$id2' AND $where3 = '$id3'");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getNews4($table, $where, $id, $where2, $id2, $where3, $id3, $where4, $id4)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where < '$id' AND $where2 = '$id2' AND $where3 = '$id3' AND $where4 = '$id4'");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }

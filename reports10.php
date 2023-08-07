@@ -268,33 +268,6 @@ foreach ($clients as $client) {
     $x += 1;
 }
 $output .= '
-    <tr>
-        <td colspan="' . $span1 . '" align="center" style="font-size: 18px">
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <p align="right">----' . $user->data()->firstname . ' ' . $user->data()->lastname . '-----<br />Printed By</p>
-            <br />
-            <br />
-            <br />
-        </td>
-
-        <td colspan="' . $span2 . '" align="center" style="font-size: 18px">
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <p align="right">-----' . date('Y-m-d') . '-------<br />Date Printed</p>
-            <br />
-            <br />
-            <br />
-        </td>
-    </tr>
         </table>  
     ';
 

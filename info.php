@@ -8,7 +8,7 @@ $random = new Random();
 $successMessage = null;
 $pageError = null;
 $errorMessage = null;
-$numRec = 15;
+$numRec = 30;
 if ($user->isLoggedIn()) {
     if (Input::exists('post')) {
         $validate = new validate();
@@ -760,32 +760,35 @@ if ($user->isLoggedIn()) {
                         'visit_status' => 1
                     ));
 
-                    $user->updateRecord(
-                        'clients',
-                        array(
-                            'pt_type' => Input::get('pt_type'),
-                            'treatment_type' => Input::get('treatment_type'),
-                            'previous_date' => Input::get('previous_date'),
-                            'total_cycle' => Input::get('total_cycle'),
-                            'cycle_number' => Input::get('cycle_number')
-                        ),
-                        Input::get('id')
-                    );
-                }
-
-                if ($override->getCount('visit', 'client_id', Input::get('id')) == 1) {
-                    try {
-                        if (!$client_study['study_id']) {
-                            $user->visit2(Input::get('id'), 0, $std_id['study_id']);
-                            $user->updateRecord('study_id', array('status' => 1, 'client_id' => Input::get('id')), $std_id['id']);
-                            $user->updateRecord('clients', array('study_id' => $std_id['study_id'], 'enrolled' => 1), Input::get('id'));
-                        } else {
-                            $user->visit2(Input::get('id'), 0, $client_study['study_id']);
+                    if ($override->getCount('visit', 'client_id', Input::get('id')) == 1) {
+                        try {
+                            if (!$client_study['study_id']) {
+                                $user->visit2(Input::get('id'), 0, $std_id['study_id']);
+                                $user->updateRecord('study_id', array('status' => 1, 'client_id' => Input::get('id')), $std_id['id']);
+                                $user->updateRecord('clients', array('study_id' => $std_id['study_id'], 'enrolled' => 1), Input::get('id'));
+                            } else {
+                                $user->visit2(Input::get('id'), 0, $client_study['study_id']);
+                            }
+                        } catch (Exception $e) {
+                            die($e->getMessage());
                         }
-                    } catch (Exception $e) {
-                        die($e->getMessage());
                     }
                 }
+
+                $user->updateRecord(
+                    'clients',
+                    array(
+                        'pt_type' => Input::get('pt_type'),
+                        'treatment_type' => Input::get('treatment_type'),
+                        'previous_date' => Input::get('previous_date'),
+                        'treatment_type2' => Input::get('treatment_type2'),
+                        'previous_date2' => Input::get('previous_date2'),
+                        'total_cycle' => Input::get('total_cycle'),
+                        'cycle_number' => Input::get('cycle_number')
+                    ),
+                    Input::get('id')
+                );
+
                 if (!$client_study['study_id']) {
                     $user->updateRecord('screening', array('study_id' => $std_id['study_id']), $screening_id['id']);
                     $user->updateRecord('lab', array('study_id' => $std_id['study_id']), $lab_id['id']);
@@ -853,6 +856,8 @@ if ($user->isLoggedIn()) {
                         'pt_type' => Input::get('pt_type'),
                         'treatment_type' => Input::get('treatment_type'),
                         'previous_date' => Input::get('previous_date'),
+                        'treatment_type2' => Input::get('treatment_type2'),
+                        'previous_date2' => Input::get('previous_date2'),
                         'total_cycle' => Input::get('total_cycle'),
                         'cycle_number' => Input::get('cycle_number')
                     ),
@@ -3809,6 +3814,39 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                 </div>
 
+                                                                <div class="row">
+
+                                                                    <div class="col-sm-6">
+                                                                        <div class="row-form clearfix">
+                                                                            <!-- select -->
+                                                                            <div class="form-group">
+                                                                                <label>Treatment Type 2</label>
+                                                                                <select name="treatment_type2" id="treatment_type2" style="width: 100%;" required>
+                                                                                    <option value="">Select</option>
+                                                                                    <option value="1">Radiotherapy Treatment</option>
+                                                                                    <option value="2">Chemotherapy Treatment</option>
+                                                                                    <option value="3">Surgery Treatment</option>
+                                                                                    <option value="4">Active surveillance</option>
+                                                                                    <option value="5">Hormonal therapy ie ADT</option>
+                                                                                    <option value="96">Other (If Other write in Notes / Remarks )</option>
+                                                                                    <option value="99">NA</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-sm-6">
+                                                                        <div class="row-form clearfix">
+                                                                            <!-- select -->
+                                                                            <div class="form-group">
+                                                                                <label>Date Started Previous Treatment 2:</label>
+                                                                                <input value="" type="text" name="previous_date2" id="previous_date2" />
+                                                                                <span>Example: 2010-12-01</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
 
                                                                 <div class="row">
                                                                     <div class="col-sm-6">
@@ -3934,7 +3972,7 @@ if ($user->isLoggedIn()) {
                                                                                     <option value="3">Surgery Treatment</option>
                                                                                     <option value="4">Active surveillance</option>
                                                                                     <option value="5">Hormonal therapy ie ADT</option>
-                                                                                    <option value="6">Other (If Other write in Notes / Remarks )</option>
+                                                                                    <option value="96">Other (If Other write in Notes / Remarks )</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -3946,6 +3984,57 @@ if ($user->isLoggedIn()) {
                                                                             <div class="form-group">
                                                                                 <label>Date Started Previous(Past) Treatment:</label>
                                                                                 <input value="<?= $client['previous_date'] ?>" class="validate[required,custom[date]]" type="text" name="previous_date" id="previous_date" required />
+                                                                                <span>Example: 2010-12-01</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row">
+
+                                                                    <div class="col-sm-6">
+                                                                        <div class="row-form clearfix">
+                                                                            <!-- select -->
+                                                                            <div class="form-group">
+                                                                                <label>Treatment Type 2</label>
+                                                                                <select name="treatment_type2" id="treatment_type2" style="width: 100%;" required>
+                                                                                    <?php
+                                                                                    if ($client['treatment_type'] == 1) { ?>
+                                                                                        <option value="<?= $client['treatment_type2'] ?>">Radiotherapy Treatment</option>
+                                                                                    <?php } else if ($client['treatment_type2'] == 2) { ?>
+                                                                                        <option value="<?= $client['treatment_type2'] ?>">Chemotherapy Treatment</option>
+                                                                                    <?php } else if ($client['treatment_type2'] == 3) { ?>
+                                                                                        <option value="<?= $client['treatment_type2'] ?>">Surgery Treatment</option>
+                                                                                    <?php } else if ($client['treatment_type2'] == 4) { ?>
+                                                                                        <option value="<?= $client['treatment_type2'] ?>">Active surveillance</option>
+                                                                                    <?php } else if ($client['treatment_type2'] == 5) { ?>
+                                                                                        <option value="<?= $client['treatment_type2'] ?>">Hormonal therapy ie ADT</option>
+                                                                                    <?php } else if ($client['treatment_type2'] == 96) { ?>
+                                                                                        <option value="<?= $client['treatment_type2'] ?>">Other (If Other write in Notes / Remarks )</option>
+                                                                                    <?php } else if ($client['treatment_type2'] == 99) { ?>
+                                                                                        <option value="<?= $client['treatment_type2'] ?>">NA</option>
+                                                                                    <?php } else { ?>
+                                                                                        <option value="">Select</option>
+                                                                                    <?php
+                                                                                    } ?>
+                                                                                    <option value="1">Radiotherapy Treatment</option>
+                                                                                    <option value="2">Chemotherapy Treatment</option>
+                                                                                    <option value="3">Surgery Treatment</option>
+                                                                                    <option value="4">Active surveillance</option>
+                                                                                    <option value="5">Hormonal therapy ie ADT</option>
+                                                                                    <option value="96">Other (If Other write in Notes / Remarks )</option>
+                                                                                    <option value="99">NA</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-sm-6">
+                                                                        <div class="row-form clearfix">
+                                                                            <!-- select -->
+                                                                            <div class="form-group">
+                                                                                <label>Date Started Previous Treatment 2:</label>
+                                                                                <input value="<?= $client['previous_date2'] ?>" type="text" name="previous_date2" id="previous_date2" />
                                                                                 <span>Example: 2010-12-01</span>
                                                                             </div>
                                                                         </div>
