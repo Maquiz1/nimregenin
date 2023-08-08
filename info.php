@@ -796,6 +796,7 @@ if ($user->isLoggedIn()) {
                     $user->updateRecord('screening', array('study_id' => $client_study['study_id']), $screening_id['id']);
                     $user->updateRecord('lab', array('study_id' => $client_study['study_id']), $lab_id['id']);
                 }
+                $user->updateRecord('clients', array('enrolled' => 1), Input::get('id'));
                 $successMessage = 'Enrollment  Added Successful';
                 Redirect::to('info.php?id=3&status=2');
             } else {
