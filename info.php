@@ -588,7 +588,7 @@ if ($user->isLoggedIn()) {
                             'screening_date' => Input::get('screening_date'),
                             'age_18' => Input::get('age_18'),
                             'biopsy' => Input::get('biopsy'),
-                            // 'study_id' => '',
+                            'patient_category' => Input::get('patient_category'),
                             'breast_cancer' => Input::get('breast_cancer'),
                             'brain_cancer' => Input::get('brain_cancer'),
                             'cervical_cancer' => Input::get('cervical_cancer'),
@@ -608,6 +608,7 @@ if ($user->isLoggedIn()) {
                             'screening_date' => Input::get('screening_date'),
                             'age_18' => Input::get('age_18'),
                             'biopsy' => Input::get('biopsy'),
+                            'patient_category' => Input::get('patient_category'),
                             'study_id' => '',
                             'breast_cancer' => Input::get('breast_cancer'),
                             'brain_cancer' => Input::get('brain_cancer'),
@@ -637,7 +638,14 @@ if ($user->isLoggedIn()) {
                     if ($eligible1 == 1 && $eligible2 == 1) {
                         $eligible = 1;
                     }
-                    $user->updateRecord('clients', array('consented' => Input::get('consented'), 'consented_nimregenin' => Input::get('consented_nimregenin'), 'screened' => $screening, 'eligible' => $eligible, 'eligibility1' => $eligibility), Input::get('id'));
+                    $user->updateRecord('clients', array(
+                        'consented' => Input::get('consented'),
+                        'consented_nimregenin' => Input::get('consented_nimregenin'),
+                        'screened' => $screening,
+                        'eligible' => $eligible,
+                        'eligibility1' => $eligibility,
+                        'patient_category' => Input::get('patient_category'),
+                    ), Input::get('id'));
                     $successMessage = 'Inclusion Successful Added';
                     if ($eligible == 1) {
                         Redirect::to('info.php?id=3&status=1');
@@ -3564,7 +3572,28 @@ if ($user->isLoggedIn()) {
 
                                                                 <div class="row">
 
-                                                                    <div class="col-sm-6">
+                                                                    <div class="col-sm-4">
+                                                                        <div class="row-form clearfix">
+                                                                            <!-- select -->
+                                                                            <div class="form-group">
+                                                                                <label>Participant Category</label>
+                                                                                <select name="patient_category" style="width: 100%;" required>
+                                                                                    <option value="<?= $screening['patient_category'] ?>"><?php if ($screening) {
+                                                                                                                                                if ($screening['patient_category'] == 1) {
+                                                                                                                                                    echo 'Intervention';
+                                                                                                                                                } elseif ($screening['patient_category'] == 2) {
+                                                                                                                                                    echo 'Control';
+                                                                                                                                                }
+                                                                                                                                            } else {
+                                                                                                                                                echo 'Select';
+                                                                                                                                            } ?></option>
+                                                                                    <option value="1">Intervention</option>
+                                                                                    <option value="2">Control</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-4">
                                                                         <div class="row-form clearfix">
                                                                             <!-- select -->
                                                                             <div class="form-group">
@@ -3586,7 +3615,7 @@ if ($user->isLoggedIn()) {
                                                                         </div>
                                                                     </div>
 
-                                                                    <div class="col-sm-6">
+                                                                    <div class="col-sm-4">
                                                                         <div class="row-form clearfix">
                                                                             <!-- select -->
                                                                             <div class="form-group">
