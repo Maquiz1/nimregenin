@@ -250,6 +250,12 @@ if ($user->isLoggedIn()) {
                             <span class="text">Report 6 (TABLE 6) ( Screening with Control)</span>
                         </a>
                     </li>
+                    <li class="active">
+                        <!-- <a href="report5.php" target="_blank"> -->
+                        <a href="report6_0.php">
+                            <span class="text">Report 6_0 (TABLE 6_0) ( Screening with Control)</span>
+                        </a>
+                    </li>
 
                     <li class="active">
                         <!-- <a href="report5.php" target="_blank"> -->

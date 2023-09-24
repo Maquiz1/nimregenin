@@ -2306,6 +2306,36 @@ if ($user->isLoggedIn()) {
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-sm-6">
+
+                                    <?php
+                                    $patient = $override->get('clients', 'id', $_GET['cid'])[0];
+
+                                    // $visits_status = $override->firstRow1('visit', 'status', 'id', 'client_id', $_GET['cid'], 'visit_code', 'EV')[0]['status'];
+
+                                    // $patient = $override->get('clients', 'id', $_GET['cid'])[0];
+                                    $category = $override->get('clients', 'id', $_GET['cid'])[0];
+                                    $cat = '';
+
+                                    if ($category['patient_category'] == 1) {
+                                        $cat = 'Intervention';
+                                    } elseif ($category['patient_category'] == 2) {
+                                        $cat = 'Control';
+                                    } elseif ($category['patient_category'] == 0) {
+                                        $cat = 'Not Filled';
+                                    } else {
+                                        $cat = 'Not Filled';
+                                    }
+
+
+                                    if ($patient['gender'] == 'male') {
+                                        $gender = 'Male';
+                                    } elseif ($patient['gender'] == 'female') {
+                                        $gender = 'Female';
+                                    }
+
+                                    $name = 'Name: ' . $patient['firstname'] . ' ' . $patient['lastname'] . ' Age: ' . $patient['age'] . ' Gender: ' . $gender . ' Type: ' . $cat;
+
+                                    ?>
                                     <?php if ($user->data()->power == 1) { ?>
                                         <div class="row-md-6">
                                             <div class="head clearfix">
@@ -2567,9 +2597,9 @@ if ($user->isLoggedIn()) {
                                             <th width="10%">Name</th>
                                             <th width="8%">Gender</th>
                                             <th width="8%">Age</th>
-                                            <!-- <th width="3%">PATIENT TYPE</th>
-                                            <th width="3%">TREATMENT TYPE</th>
-                                            <th width="4%">CATEGORY</th> -->
+                                            <th width="3%">PATIENT TYPE</th>
+                                            <!-- <th width="3%">TREATMENT TYPE</th> -->
+                                            <!-- <th width="4%">CATEGORY</th>  -->
                                             <th width="8%">SITE</th>
                                             <th width="10%">STATUS</th>
                                             <?php if ($_GET['status'] == 4) { ?>
@@ -2584,8 +2614,6 @@ if ($user->isLoggedIn()) {
                                     </thead>
                                     <tbody>
                                         <?php $x = 1;
-                                        // print_r($_GET['sid']);
-                                        // print_r($pagNum);
 
                                         foreach ($clients as $client) {
 
@@ -2642,11 +2670,21 @@ if ($user->isLoggedIn()) {
                                                 <?php } ?> <td> <?= $client['firstname'] . ' ' . $client['lastname'] ?></td>
                                                 <td><?= $client['gender'] ?></td>
                                                 <td><?= $client['age'] ?></td>
-                                                <!-- <?php if ($client['pt_type'] == 1) { ?>
+                                                <td><?= $cat ?></td>
+
+                                                <?php if ($category['patient_category'] == 1) { ?>
+                                                    <td>Intervention</td>
+                                                <?php } elseif ($category['patient_category'] == 2) { ?>
+                                                    <td>Control</td>
+                                                <?php } else { ?>
+                                                    <td>Not Done</td>
+                                                <?php } ?>
+                                                <!-- <?php if ($category['patient_category'] == 1) { ?>
                                                     <td>NEW PATIENT</td>
                                                 <?php } else { ?>
                                                     <td>OLD PATIENT</td>
                                                 <?php } ?>
+
                                                 <?php if ($client['treatment_type'] == 1) { ?>
                                                     <td>Radiotherapy</td>
                                                 <?php } elseif ($client['treatment_type'] == 1) { ?>
@@ -4380,7 +4418,36 @@ if ($user->isLoggedIn()) {
                         </div>
                     <?php } elseif ($_GET['id'] == 4) { ?>
                         <div class="col-md-12">
-                            <?php $patient = $override->get('clients', 'id', $_GET['cid'])[0] ?>
+                            <?php
+                            $patient = $override->get('clients', 'id', $_GET['cid'])[0];
+
+                            // $visits_status = $override->firstRow1('visit', 'status', 'id', 'client_id', $_GET['cid'], 'visit_code', 'EV')[0]['status'];
+
+                            // $patient = $override->get('clients', 'id', $_GET['cid'])[0];
+                            $category = $override->get('clients', 'id', $_GET['cid'])[0];
+                            $cat = '';
+
+                            if ($category['patient_category'] == 1) {
+                                $cat = 'Intervention';
+                            } elseif ($category['patient_category'] == 2) {
+                                $cat = 'Control';
+                            } elseif ($category['patient_category'] == 0) {
+                                $cat = 'Not Filled';
+                            } else {
+                                $cat = 'Not Filled';
+                            }
+
+
+                            if ($patient['gender'] == 1) {
+                                $gender = 'Male';
+                            } elseif ($patient['gender'] == 2) {
+                                $gender = 'Female';
+                            }
+
+                            $name = 'Name: ' . $patient['firstname'] . ' ' . $patient['lastname'] . ' Age: ' . $patient['age'] . ' Gender: ' . $gender . ' Type: ' . $cat;
+
+
+                            ?>
                             <div class="row">
                                 <div class="col-md-2">
                                     <div class="ucard clearfix">
@@ -4394,8 +4461,9 @@ if ($user->isLoggedIn()) {
                                                 <a href="#"><img src="<?= $img ?>" width="300" class="img-thumbnail"></a>
                                             </div>
                                             <h5><?= 'Name: ' . $patient['firstname'] . ' ' . $patient['lastname'] . ' Age: ' . $patient['age'] ?></h5>
-                                            <h4><strong style="font-size: medium">Screening ID: <?= $patient['participant_id'] ?></strong></h4>
+                                            <h4><strong style="font-size: medium">Category: <?= $cat ?></strong></h4>
                                             <h4><strong style="font-size: larger">Study ID: <?= $patient['study_id'] ?></strong></h4>
+                                            <h4><strong style="font-size: larger">Sex: <?= $gender ?></strong></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -4903,7 +4971,35 @@ if ($user->isLoggedIn()) {
                         </div>
                     <?php } elseif ($_GET['id'] == 6) { ?>
                         <div class="col-md-2">
-                            <?php $patient = $override->get('clients', 'id', $_GET['cid'])[0] ?>
+                            <?php
+                            $patient = $override->get('clients', 'id', $_GET['cid'])[0];
+
+                            // $visits_status = $override->firstRow1('visit', 'status', 'id', 'client_id', $_GET['cid'], 'visit_code', 'EV')[0]['status'];
+
+                            // $patient = $override->get('clients', 'id', $_GET['cid'])[0];
+                            $category = $override->get('clients', 'id', $_GET['cid'])[0];
+                            $cat = '';
+
+                            if ($category['patient_category'] == 1) {
+                                $cat = 'Intervention';
+                            } elseif ($category['patient_category'] == 2) {
+                                $cat = 'Control';
+                            } elseif ($category['patient_category'] == 0) {
+                                $cat = 'Not Filled';
+                            } else {
+                                $cat = 'Not Filled';
+                            }
+
+
+                            if ($patient['gender'] == 'male') {
+                                $gender = 'Male';
+                            } elseif ($patient['gender'] == 'female') {
+                                $gender = 'Female';
+                            }
+
+                            $name = 'Name: ' . $patient['firstname'] . ' ' . $patient['lastname'] . ' Age: ' . $patient['age'] . ' Gender: ' . $gender . ' Type: ' . $cat;
+
+                            ?>
                             <div class="ucard clearfix">
                                 <div class="right">
                                     <div class="image">
@@ -4915,15 +5011,16 @@ if ($user->isLoggedIn()) {
                                         <a href="#"><img src="<?= $img ?>" width="300" class="img-thumbnail"></a>
                                     </div>
                                     <h5><?= 'Name: ' . $patient['firstname'] . ' ' . $patient['lastname'] . ' Age: ' . $patient['age'] ?></h5>
-                                    <h4><strong style="font-size: medium">Screening ID: <?= $patient['participant_id'] ?></strong></h4>
+                                    <h4><strong style="font-size: medium">Category: <?= $cat ?></strong></h4>
                                     <h4><strong style="font-size: larger">Study ID: <?= $patient['study_id'] ?></strong></h4>
+                                    <h4><strong style="font-size: larger">Sex: <?= $gender ?></strong></h4>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-8">
                             <div class="head clearfix">
                                 <div class="isw-grid"></div>
-                                <h1>Study CRF (Enrollment)</h1>
+                                <h1>Study CRF (Enrollment) Category : <?= $cat ?></h1>
                                 <ul class="buttons">
                                     <li><a href="#" class="isw-download"></a></li>
                                     <li><a href="#" class="isw-attachment"></a></li>
@@ -5037,7 +5134,36 @@ if ($user->isLoggedIn()) {
                         </div>
                     <?php } elseif ($_GET['id'] == 7) { ?>
                         <div class="col-md-12">
-                            <?php $patient = $override->get('clients', 'id', $_GET['cid'])[0] ?>
+                            <?php
+                            $patient = $override->get('clients', 'id', $_GET['cid'])[0];
+
+                            // $visits_status = $override->firstRow1('visit', 'status', 'id', 'client_id', $_GET['cid'], 'visit_code', 'EV')[0]['status'];
+
+                            // $patient = $override->get('clients', 'id', $_GET['cid'])[0];
+                            $category = $override->get('clients', 'id', $_GET['cid'])[0];
+                            $cat = '';
+
+                            if ($category['patient_category'] == 1) {
+                                $cat = 'Intervention';
+                            } elseif ($category['patient_category'] == 2) {
+                                $cat = 'Control';
+                            } elseif ($category['patient_category'] == 0) {
+                                $cat = 'Not Filled';
+                            } else {
+                                $cat = 'Not Filled';
+                            }
+
+
+                            if ($patient['gender'] == 'male') {
+                                $gender = 'Male';
+                            } elseif ($patient['gender'] == 'female') {
+                                $gender = 'Female';
+                            }
+
+                            $name = 'Name: ' . $patient['firstname'] . ' ' . $patient['lastname'] . ' Age: ' . $patient['age'] . ' Gender: ' . $gender . ' Type: ' . $cat;
+
+
+                            ?>
                             <div class="row">
                                 <div class="col-md-2">
                                     <div class="ucard clearfix">
@@ -5051,8 +5177,9 @@ if ($user->isLoggedIn()) {
                                                 <a href="#"><img src="<?= $img ?>" width="300" class="img-thumbnail"></a>
                                             </div>
                                             <h5><?= 'Name: ' . $patient['firstname'] . ' ' . $patient['lastname'] . ' Age: ' . $patient['age'] ?></h5>
-                                            <h4><strong style="font-size: medium">Screening ID: <?= $patient['participant_id'] ?></strong></h4>
+                                            <h4><strong style="font-size: medium">Category: <?= $cat ?></strong></h4>
                                             <h4><strong style="font-size: larger">Study ID: <?= $patient['study_id'] ?></strong></h4>
+                                            <h4><strong style="font-size: larger">Sex: <?= $gender ?></strong></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -5060,6 +5187,7 @@ if ($user->isLoggedIn()) {
                                     <div class="head clearfix">
                                         <div class="isw-grid"></div>
                                         <h1>Schedule</h1>
+                                        <h1> Category : <?= $cat ?></h1>
                                         <ul class="buttons">
                                             <li><a href="#" class="isw-download"></a></li>
                                             <li><a href="#" class="isw-attachment"></a></li>
