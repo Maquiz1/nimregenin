@@ -49,7 +49,7 @@ if ($user->isLoggedIn()) {
 
 
 
-$title = 'NIMREGENIN SUMMARY REPORT_' . date('Y-m-d');
+$title = 'NIMREGENIN SUMMARY REPORT AS OF ' . date('Y-m-d');
 
 $pdf = new Pdf();
 
@@ -64,51 +64,39 @@ if ($site_data) {
     $output .= '
             <table width="100%" border="1" cellpadding="5" cellspacing="0">
                 <tr>
-                    <td colspan="18" align="center" style="font-size: 18px">
-                        <b>DATE  ' . date('Y-m-d') . '</b>
-                    </td>
-                </tr>
-
-
-                <tr>
-                    <td colspan="18" align="center" style="font-size: 18px">
-                        <b>TABLE 0 (Screened With Controll)</b>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td colspan="18" align="center" style="font-size: 18px">
+                    <td colspan="24" align="center" style="font-size: 18px">
                         <b>' . $title . '</b>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="18" align="center" style="font-size: 18px">
+                    <td colspan="24" align="center" style="font-size: 18px">
                         <b>Total Registered ( ' . $Total . ' ):  Total Enrolled( ' . $data_enrolled . ' )</b>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="18">                        
+                    <td colspan="24">                        
                         <br />
                         <table width="100%" border="1" cellpadding="5" cellspacing="0">
                             <tr>
                                 <th rowspan="2"> No. </th>
                                 <th rowspan="2"> SITE </th>
-                                <th rowspan="2"> REGIS TERED </th>
+                                <th rowspan="2"> REG IST ERED </th>
                                 <th rowspan="2"> SCRE ENED </th>
                                 <th colspan="4"> CANCER ( INCLUSION )</th>
                                 <th rowspan="2">ELIG IBLE</th>
-                                <th rowspan="2">ENRO LLED</th>
-                                <th colspan="6">ENROLLED</th>
+                                <th rowspan="2">ENRO LLED </th>
+                                <th colspan="6">ENROLLED ( TREATMENT TYPE )</th>
                                 <th rowspan="2">END</th>
                             </tr>
+
                             <tr>
-                                <th>Breast</th>
-                                <th>Brain</th>
-                                <th>Cervical </th>
-                                <th>Prostate </th>
-                                <th>Radio therapy</th>
-                                <th>Chemo therapy</th>
-                                <th>Surgery</th>
+                                <th>Bre ast</th>
+                                <th>Bra in</th>
+                                <th>Cer vical </th>
+                                <th>Pro state </th>
+                                <th>Radi other apy</th>
+                                <th>Chem other apy</th>
+                                <th>Sur gery</th>
                                 <th>Active Surve illance</th>
                                 <th>Hormonal Therapy i.e ADT</th>
                                 <th>Other</th>
@@ -122,6 +110,11 @@ if ($site_data) {
         $registered_Total = $override->getCount('clients', 'status', 1);
         $screened = $override->countData2('clients', 'status', 1, 'screened', 1, 'site_id', $row['id']);
         $screened_Total = $override->countData('clients', 'status', 1, 'screened', 1);
+        $nimregenin1 = $override->countData2('clients', 'status', 1, 'consented_nimregenin', 1, 'site_id', $row['id']);
+        $nimregenin_Total1 = $override->countData('clients', 'status', 1, 'consented_nimregenin', 1);
+        $nimregenin2 = $override->countData2('clients', 'status', 1, 'consented_nimregenin', 2, 'site_id', $row['id']);
+        $nimregenin_Total2 = $override->countData('clients', 'status', 1, 'consented_nimregenin', 2);
+        $nimregenin_Total1_2 = $override->getNo0('clients', 'status', 1, 'consented_nimregenin', 1, 'consented_nimregenin', 2);
         $breast_cancer = $override->countData2('screening', 'status', 1, 'breast_cancer', 1, 'site_id', $row['id']);
         $breast_cancer_Total = $override->countData('screening', 'status', 1, 'breast_cancer', 1);
         $brain_cancer = $override->countData2('screening', 'status', 1, 'brain_cancer', 1, 'site_id', $row['id']);
@@ -132,6 +125,7 @@ if ($site_data) {
         $prostate_cancer_Total = $override->countData('screening', 'status', 1, 'prostate_cancer', 1);
         $biopsy = $override->countData2('screening', 'status', 1, 'biopsy', 1, 'site_id', $row['id']);
         $biopsy_Total = $override->countData('screening', 'status', 1, 'biopsy', 1);
+        $inclusion_Total = $override->getNoType0('screening', 'status', 1, 'breast_cancer', 1, 'brain_cancer', 1, 'cervical_cancer', 1, 'prostate_cancer', 1, 'biopsy', 1);
         $eligible = $override->countData2('clients', 'status', 1, 'eligible', 1, 'site_id', $row['id']);
         $eligible_Total = $override->countData('clients', 'status', 1, 'eligible', 1);
         $enrolled1 = $override->countData4('clients', 'status', 1, 'enrolled', 1, 'treatment_type', 1, 'site_id', $row['id']);
@@ -146,8 +140,19 @@ if ($site_data) {
         $enrolled_Total5 = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'treatment_type', 5,);
         $enrolled6 = $override->countData4('clients', 'status', 1, 'enrolled', 1, 'treatment_type', 6, 'site_id', $row['id']);
         $enrolled_Total6 = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'treatment_type', 6,);
+        $typeTotal = $override->getNoType('clients', 'status', 1, 'enrolled', 1, 'treatment_type', 1, 'treatment_type', 2, 'treatment_type', 3, 'treatment_type', 4, 'treatment_type', 5, 'treatment_type', 6, 'treatment_type', 96);
         $enrolled = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'site_id', $row['id']);
         $enrolled_Total = $override->countData('clients', 'status', 1, 'enrolled', 1);
+        $new1 = $override->countData4('clients', 'status', 1, 'enrolled', 1, 'pt_type', 1, 'site_id', $row['id']);
+        $new_Total1 = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'pt_type', 1,);
+        $new2 = $override->countData4('clients', 'status', 1, 'enrolled', 1, 'pt_type', 2, 'site_id', $row['id']);
+        $new_Total2 = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'pt_type', 2);
+        $new_Total = $override->countData3('clients', 'status', 1, 'enrolled', 1, 'pt_type', 1, 'pt_type', 2);
+        $nimregenin3 = $override->countData4('clients', 'status', 1, 'enrolled', 1, 'consented_nimregenin', 1, 'site_id', $row['id']);
+        $nimregenin_Total3 = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'consented_nimregenin', 1);
+        $nimregenin4 = $override->countData4('clients', 'status', 1, 'enrolled', 1, 'consented_nimregenin', 2, 'site_id', $row['id']);
+        $nimregenin_Total4 = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'consented_nimregenin', 2);
+        $nimregenin_Total3_4 = $override->countData3('clients', 'status', 1, 'enrolled', 1, 'consented_nimregenin', 1, 'consented_nimregenin', 2);
         $end_study = $override->countData2('clients', 'status', 1, 'end_study', 1, 'site_id', $row['id']);
         $end_study_Total = $override->countData('clients', 'status', 1, 'end_study', 1);
 
@@ -177,6 +182,7 @@ if ($site_data) {
     }
 
     $output .= '
+
                 <tr>
                     <td align="right" colspan="2"><b>Sub Total</b></td>
                     <td align="right"><b>' . $registered_Total . '</b></td>
@@ -194,26 +200,7 @@ if ($site_data) {
                     <td align="right"><b>' . $enrolled_Total5 . '</b></td>
                     <td align="right"><b>' . $enrolled_Total6 . '</b></td>
                     <td align="right"><b>' . $end_study_Total . '</b></td>
-                </tr>  
-
-                <tr>
-                    <td align="right" colspan="2"><b>Total</b></td>
-                    <td align="right"><b>' . $registered_Total . '</b></td>
-                    <td align="right"><b>' . $screened_Total . '</b></td>
-                    <td align="right"><b>' . $breast_cancer_Total . '</b></td>
-                    <td align="right"><b>' . $brain_cancer_Total . '</b></td>
-                    <td align="right"><b>' . $cervical_cancer_Total . '</b></td>
-                    <td align="right"><b>' . $prostate_cancer_Total . '</b></td>
-                    <td align="right"><b>' . $eligible_Total . '</b></td>
-                    <td align="right"><b>' . $enrolled_Total . '</b></td>
-                    <td align="right"><b>' . $enrolled_Total1 . '</b></td>
-                    <td align="right"><b>' . $enrolled_Total2 . '</b></td>
-                    <td align="right"><b>' . $enrolled_Total3 . '</b></td>
-                    <td align="right"><b>' . $enrolled_Total4 . '</b></td>
-                    <td align="right"><b>' . $enrolled_Total5 . '</b></td>
-                    <td align="right"><b>' . $enrolled_Total6 . '</b></td>
-                    <td align="right"><b>' . $end_study_Total . '</b></td>
-                </tr>  
+                </tr>    
 ';
 }
 
