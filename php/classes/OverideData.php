@@ -1314,4 +1314,18 @@ WHERE t1.status = '1' AND t1.site_id = '$site'  AND t2.expected_date <= '$date' 
         $num = $query->rowCount();
         return $num;
     }
+
+    public function getCount0($table, $field, $value, $field1, $value1)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 >= '$value1'");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+    public function getCountNot($table, $field,$value, $field1, $value1, $value2)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1  NOT IN ('$value1','$value2')");
+        $num = $query->rowCount();
+        return $num;
+    }
 }
