@@ -2613,8 +2613,17 @@ if ($user->isLoggedIn()) {
                                     </thead>
                                     <tbody>
                                         <?php $x = 1;
+                                        // $client_data = $override->getData('clients');
 
                                         foreach ($clients as $client) {
+
+                                            $visit_site_id = $override->get('visit', 'client_id', $client['id']);
+
+                                            foreach ($visit_site_id as $visit_ids) {
+                                                var_dump($user->updateRecord('visit', array(
+                                                    'site_id' => 1,
+                                                ), 1));             
+                                            }
 
                                             $screening1 = $override->getCount('screening', 'client_id', $client['id']);
                                             $screening2 = $override->getCount('lab', 'client_id', $client['id']);
@@ -2914,6 +2923,11 @@ if ($user->isLoggedIn()) {
                                                                     <hr>
                                                                     <span class="badge badge-primary right">
                                                                         <?= $client_progress ?>%
+                                                                        <?php
+                                                                        $user->updateRecord('clients', array(
+                                                                            'progress' => $client_progress,
+                                                                        ), $client['id']);
+                                                                        ?>
                                                                     </span>
                                                                 <?php } elseif ($client_progress > 100) { ?>
                                                                     <span class="badge badge-warning right">
@@ -2922,7 +2936,11 @@ if ($user->isLoggedIn()) {
                                                                     <hr>
                                                                     <span class="badge badge-warning right">
                                                                         <?= $client_progress ?>%
-                                                                    </span>
+                                                                        <?php
+                                                                        $user->updateRecord('clients', array(
+                                                                            'progress' => $client_progress,
+                                                                        ), $client['id']);
+                                                                        ?> </span>
                                                                 <?php } elseif ($client_progress >= 80 && $client_progress < 100) { ?>
                                                                     <span class="badge badge-info right">
                                                                         <?= $Total_CRF_available ?> out of <?= $Total_CRF_required ?>
@@ -2930,7 +2948,11 @@ if ($user->isLoggedIn()) {
                                                                     <hr>
                                                                     <span class="badge badge-info right">
                                                                         <?= $client_progress ?>%
-                                                                    </span>
+                                                                        <?php
+                                                                        $user->updateRecord('clients', array(
+                                                                            'progress' => $client_progress,
+                                                                        ), $client['id']);
+                                                                        ?> </span>
                                                                 <?php } elseif ($client_progress >= 50 && $client_progress < 80) { ?>
                                                                     <span class="badge badge-secondary right">
                                                                         <?= $Total_CRF_available ?> out of <?= $Total_CRF_required ?>
@@ -2938,7 +2960,11 @@ if ($user->isLoggedIn()) {
                                                                     <hr>
                                                                     <span class="badge badge-secondary right">
                                                                         <?= $client_progress ?>%
-                                                                    </span>
+                                                                        <?php
+                                                                        $user->updateRecord('clients', array(
+                                                                            'progress' => $client_progress,
+                                                                        ), $client['id']);
+                                                                        ?> </span>
                                                                 <?php } elseif ($client_progress < 50) { ?>
                                                                     <span class="badge badge-danger right">
                                                                         <?= $Total_CRF_available ?> out of <?= $Total_CRF_required ?>
@@ -2946,7 +2972,12 @@ if ($user->isLoggedIn()) {
                                                                     <hr>
                                                                     <span class="badge badge-danger right">
                                                                         <?= $client_progress ?>%
-                                                                    </span>
+                                                                        <?php
+                                                                        $user->updateRecord('clients', array(
+                                                                            'progress' => $client_progress,
+                                                                        ), $client['id']);
+                                                                        ?> 
+                                                                        </span>
                                                                 <?php } ?>
                                                     <?php }
                                                         }

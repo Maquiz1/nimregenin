@@ -391,7 +391,7 @@ class User
     function exportData($data, $file)
     {
         $timestamp = time();
-        $filename = $file . '_' . $timestamp . '.xls';
+        $filename = $file . '_' . $timestamp . '.xlsx';
 
         header("Content-Type: application/vnd.ms-excel");
         header("Content-Disposition: attachment; filename=\"$filename\"");
@@ -411,6 +411,25 @@ class User
     {
         $timestamp = time();
         $filename = $file . '_' . $timestamp . '.xlsx';
+
+        header("Content-Type: application/vnd.ms-excel");
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+
+        $isPrintHeader = false;
+        foreach ($data as $row) {
+            if (!$isPrintHeader) {
+                echo implode("\t", array_keys($row)) . "\n";
+                $isPrintHeader = true;
+            }
+            echo implode("\t", array_values($row)) . "\n";
+        }
+        exit();
+    }
+
+    function exportDataXls($data, $file)
+    {
+        $timestamp = time();
+        $filename = $file . '_' . $timestamp . '.xls';
 
         header("Content-Type: application/vnd.ms-excel");
         header("Content-Disposition: attachment; filename=\"$filename\"");
