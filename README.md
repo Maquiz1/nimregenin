@@ -1,3 +1,0 @@
-# NIMREGENIN 
-NIMREGENIN DATABASE
-# nimregenin
