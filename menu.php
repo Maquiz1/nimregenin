@@ -411,6 +411,25 @@ if ($user->isLoggedIn()) {
                     </li>
 
                 </ul>
+
+                <ul>
+                    <li class="active">
+                        <a href="info.php?id=29">
+                            <span class="text">Download All Client Visits</span>
+                            <span class="badge badge-secondary badge-pill"><?= $MissingCrfNo2 ?></span>
+                        </a>
+                    </li>
+
+                </ul>
+                <ul>
+                    <li class="active">
+                        <a href="info.php?id=30">
+                            <span class="text">Download All Data With All visit</span>
+                            <span class="badge badge-secondary badge-pill"><?= $getDataStatusCount ?></span>
+                        </a>
+                    </li>
+
+                </ul>
             </li>
 
             <li class="openable">

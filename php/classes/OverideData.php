@@ -27,6 +27,50 @@ class OverideData
         return $num;
     }
 
+    public function get2($table, $where, $id, $where2, $id2)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$id2'");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+
+
+    // public function get1($table, $where, $id, $where1, $id1, $where2, $id2, $where3, $id3)
+    // {
+    //     $query = $this->_pdo->query("SELECT * FROM $table WHERE ($where = '$id' OR $where1 = '$id1') AND $where2 = '$id2' AND $where3 = '$id3'");
+    //     $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    //     return $result;
+    // }
+
+    public function get6($table, $where, $id, $where2, $id2, $where3, $id3, $where4, $id4)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$id2' AND $where3 = '$id3' AND $where4 = '$id4'");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    // public function get3($table, $where, $id, $where2, $id2, $where3, $id3)
+    // {
+    //     $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$id2' AND $where3 = '$id3'");
+    //     $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    //     return $result;
+    // }
+
+    // public function get4($table, $where, $id, $where2)
+    // {
+    //     $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 >= 20");
+    //     $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    //     return $result;
+    // }
+
+    public function get5($table, $where, $id, $id2, $where2)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $id2 >= '$where2'");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     public function getNo0($table, $field, $value, $field1, $value1, $field2, $value2)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND ($field1 = '$value1' OR $field2 = '$value2')");
@@ -34,11 +78,27 @@ class OverideData
         return $num;
     }
 
+
+
     public function getNo1All($table, $field, $value)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $field < '$value'");
         $num = $query->rowCount();
         return $num;
+    }
+
+    public function get0($table, $where, $id, $where1, $id1)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where1 >= '$id1'");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getAsc($table, $where, $id)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' ORDER BY 'medication_id' ASC");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
 
     public function getNo1($table, $field, $value, $field1, $value1)
@@ -156,6 +216,63 @@ class OverideData
         return $num;
     }
 
+    public function getCountStatus($table, $field, $value, $field1, $value1, $field2, $value2)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 >= '$value1' AND  $field2 = '$value2'");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+    public function getCountStatus1($table, $field, $value, $field1, $value1, $field2, $value2, $field3, $value3)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 >= '$value1' AND  $field2 = '$value2' AND  $field3 <= '$value3'");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+    public function setSiteId($table, $site_id, $value1, $value2)
+    {
+        $query = $this->_pdo->query("UPDATE $table SET $site_id='$value1' WHERE $value2");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+    public function setStudyId($table, $study_id, $value1, $value2)
+    {
+        $query = $this->_pdo->query("UPDATE $table SET $study_id='$value1' WHERE $value2");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+    public function UnsetStudyId($table, $study_id, $value1, $value2)
+    {
+        $query = $this->_pdo->query("UPDATE $table SET $study_id='$value1' WHERE $value2");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+
+    public function DoctorConfirm($table, $site_id, $value1, $value2)
+    {
+        $query = $this->_pdo->query("UPDATE $table SET $site_id='$value1' WHERE $value2");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+    public function countData2Active($table, $field, $value, $field1, $value1, $field2, $value2)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 = '$value1' AND $field2 < '$value2'");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+    public function countData2Locked($table, $field, $value, $field1, $value1, $field2, $value2)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 = '$value1' AND $field2 >= '$value2'");
+        $num = $query->rowCount();
+        return $num;
+    }
+
     public function countData($table, $field, $value, $field1, $value1)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 = '$value1'");
@@ -189,6 +306,48 @@ class OverideData
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1 = '$value1' AND $field2 = '$value2' AND $field3 = '$value3'");
         $num = $query->rowCount();
         return $num;
+    }
+
+    public function getDataAsc($table, $where, $id, $name)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' ORDER BY $name ASC");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getDataAsc1($table, $where, $id, $where1, $id1, $name)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where1 = '$id1' ORDER BY $name ASC");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getDataDesc($table, $name)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE 1 ORDER BY $name DESC");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getDataDesc1($table, $where, $id, $name)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' ORDER BY $name DESC");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getDataDesc2($table, $where, $id, $where1, $id1, $name)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where1 = '$id1' ORDER BY $name DESC");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getDataDesc3($table, $where, $id, $where1, $id1, $where2, $id2, $name)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where1 = '$id1' AND $where2 = '$id2' ORDER BY $name DESC");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
 
     public function getData($table)
@@ -266,6 +425,28 @@ class OverideData
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    public function getNewsAsc0($table, $where, $id, $where2, $id2)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$id2' ORDER BY $where2 ASC");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    // public function getNewsAsc($table, $where, $id, $where2, $id2, $id3)
+    // {
+    //     $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$id2' ORDER BY $id3 ASC");
+    //     $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    //     return $result;
+    // }
+
+    public function getNewsAsc1($table, $where, $id, $where2, $id2, $where3, $id3, $id4)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$id2' AND $where3 = '$id3' ORDER BY $id4");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     public function get3($table, $where, $id, $where2, $id2, $where3, $id3)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$id2' AND $where3 = '$id3'");
@@ -290,6 +471,21 @@ class OverideData
     public function getSumD1($table, $variable, $field, $value)
     {
         $query = $this->_pdo->query("SELECT SUM($variable) FROM $table WHERE $field = '$value' ");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+
+    // public function getSumD1($table, $variable, $field, $value)
+    // {
+    //     $query = $this->_pdo->query("SELECT SUM($variable) FROM $table WHERE $field = '$value' ");
+    //     $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    //     return $result;
+    // }
+
+    public function getSumD2($table, $variable, $field, $value, $field1, $value1)
+    {
+        $query = $this->_pdo->query("SELECT SUM($variable) FROM $table WHERE $field = '$value' AND $field1 = '$value1'");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
@@ -344,6 +540,20 @@ class OverideData
     public function getlastRow1($table, $where, $value, $where1, $value1, $id)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE  $where='$value' AND $where1='$value1' ORDER BY $id DESC LIMIT 1");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getWithLimit3Active($table, $where, $id, $where2, $id2, $where3, $id3, $page, $numRec)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$id2' AND $where3 < '$id3' limit $page,$numRec");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getWithLimit3Locked($table, $where, $id, $where2, $id2, $where3, $id3, $page, $numRec)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where2 = '$id2' AND $where3 >= '$id3' limit $page,$numRec");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
@@ -406,6 +616,27 @@ class OverideData
     public function firstRow($table, $param, $id, $where, $client_id)
     {
         $query = $this->_pdo->query("SELECT DISTINCT $param FROM $table WHERE $where = '$client_id' ORDER BY '$id' ASC");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    // public function firstRow($table, $param, $id, $where, $client_id)
+    // {
+    //     $query = $this->_pdo->query("SELECT DISTINCT $param FROM $table WHERE $where = '$client_id' ORDER BY '$id' ASC");
+    //     $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    //     return $result;
+    // }
+
+    public function firstRow1($table, $param, $id, $where, $client_id, $where1, $id1)
+    {
+        $query = $this->_pdo->query("SELECT DISTINCT $param FROM $table WHERE $where = '$client_id' AND $where1 = '$id1' ORDER BY '$id' ASC");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function firstRow2($table, $param, $id, $where, $client_id, $where1, $id1, $where2, $id2)
+    {
+        $query = $this->_pdo->query("SELECT DISTINCT $param FROM $table WHERE $where = '$client_id' AND $where1 = '$id1'  AND $where2 = '$id2' ORDER BY '$id' ASC");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
@@ -599,6 +830,48 @@ class OverideData
                 where g.study_id is not null order by study_id");
         $num = $query->rowCount();
         return $num;
+    }
+
+
+    public function AvailableDataNoAll()
+    {
+        $query = $this->_pdo->query("select a.*,
+        (select status from crf1 c1 where c1.study_id = a.study_id and c1.vcode = a.visit_code) as crf1,
+        (select status from crf2 c2 where c2.study_id = a.study_id and c2.vcode = a.visit_code) as crf2,
+        (select status from crf3 c3 where c3.study_id = a.study_id and c3.vcode = a.visit_code) as crf3,
+        (select status from crf4 c4 where c4.study_id = a.study_id and c4.vcode = a.visit_code) as crf4,
+        (select status from crf5 c5 where c5.study_id = a.study_id and c5.vcode = a.visit_code) as crf5,
+        (select status from crf6 c6 where c6.study_id = a.study_id and c6.vcode = a.visit_code) as crf6,
+        (select distinct status from crf7 c7 where c7.study_id = a.study_id and c7.vcode = a.visit_code) as crf7
+        from
+        (select distinct a.visit_code, g.study_id, a.expected_date, a.visit_status, a.visit_date
+        from visit a left join
+        (select distinct (a.study_id) from visit a where a.study_id not in ('') ) g on a.study_id = g.study_id
+        where
+        g.study_id is not null) a where (case when a.visit_code = 'D0' then a.expected_date in ('') else a.expected_date < CURDATE() end) and a.visit_status is null order by a.study_id");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+
+    public function AvailableDataAll()
+    {
+        $query = $this->_pdo->query("select a.*,
+        (select status from crf1 c1 where c1.study_id = a.study_id and c1.vcode = a.visit_code) as crf1,
+        (select status from crf2 c2 where c2.study_id = a.study_id and c2.vcode = a.visit_code) as crf2,
+        (select status from crf3 c3 where c3.study_id = a.study_id and c3.vcode = a.visit_code) as crf3,
+        (select status from crf4 c4 where c4.study_id = a.study_id and c4.vcode = a.visit_code) as crf4,
+        (select status from crf5 c5 where c5.study_id = a.study_id and c5.vcode = a.visit_code) as crf5,
+        (select status from crf6 c6 where c6.study_id = a.study_id and c6.vcode = a.visit_code) as crf6,
+        (select distinct status from crf7 c7 where c7.study_id = a.study_id and c7.vcode = a.visit_code) as crf7
+        from
+        (select distinct a.visit_code, g.study_id, a.expected_date, a.visit_status, a.visit_date
+        from visit a left join
+        (select distinct (a.study_id) from visit a where a.study_id not in ('') ) g on a.study_id = g.study_id
+        where
+        g.study_id is not null) a where (case when a.visit_code = 'D0' then a.expected_date in ('') else a.expected_date < CURDATE() end) and a.visit_status is null order by a.study_id");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
 
 
@@ -1322,10 +1595,100 @@ WHERE t1.status = '1' AND t1.site_id = '$site'  AND t2.expected_date <= '$date' 
         return $num;
     }
 
-    public function getCountNot($table, $field,$value, $field1, $value1, $value2)
+    public function getCountNot($table, $field, $value, $field1, $value1, $value2)
     {
         $query = $this->_pdo->query("SELECT * FROM $table WHERE $field = '$value' AND $field1  NOT IN ('$value1','$value2')");
         $num = $query->rowCount();
         return $num;
+    }
+
+    public function getDataStatus()
+    {
+    $query = $this->_pdo->query("select a.*,
+    (select status from crf1 c1 where c1.study_id = a.study_id and c1.vcode = a.visit_code limit 1) as crf1,
+    (select status from crf2 c2 where c2.study_id = a.study_id and c2.vcode = a.visit_code limit 1) as crf2,
+    (select status from crf3 c3 where c3.study_id = a.study_id and c3.vcode = a.visit_code limit 1) as crf3,
+    (select status from crf4 c4 where c4.study_id = a.study_id and c4.vcode = a.visit_code limit 1) as crf4,
+    (select status from crf5 c5 where c5.study_id = a.study_id and c5.vcode = a.visit_code limit 1) as crf5,
+    (select status from crf6 c6 where c6.study_id = a.study_id and c6.vcode = a.visit_code limit 1) as crf6,
+    (select distinct status from crf7 c7 where c7.study_id = a.study_id and c7.vcode = a.visit_code limit 1) as crf7
+    from
+    (select distinct a.visit_code, g.study_id, a.expected_date, a.visit_status, a.visit_date, a.site_id, a.client_id
+                    from visit a left join
+    (select distinct (a.study_id) from visit a where a.study_id not in ('') ) g on a.study_id = g.study_id
+    where g.study_id is not null) a order by a.study_id;");
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+    }
+
+    public function getDataStatusCount()
+    {
+    $query = $this->_pdo->query("select a.*,
+    (select status from crf1 c1 where c1.study_id = a.study_id and c1.vcode = a.visit_code limit 1) as crf1,
+    (select status from crf2 c2 where c2.study_id = a.study_id and c2.vcode = a.visit_code limit 1) as crf2,
+    (select status from crf3 c3 where c3.study_id = a.study_id and c3.vcode = a.visit_code limit 1) as crf3,
+    (select status from crf4 c4 where c4.study_id = a.study_id and c4.vcode = a.visit_code limit 1) as crf4,
+    (select status from crf5 c5 where c5.study_id = a.study_id and c5.vcode = a.visit_code limit 1) as crf5,
+    (select status from crf6 c6 where c6.study_id = a.study_id and c6.vcode = a.visit_code limit 1) as crf6,
+    (select distinct status from crf7 c7 where c7.study_id = a.study_id and c7.vcode = a.visit_code limit 1) as crf7
+    from
+    (select distinct a.visit_code, g.study_id, a.expected_date, a.visit_status, a.visit_date, a.site_id, a.client_id
+                    from visit a left join
+    (select distinct (a.study_id) from visit a where a.study_id not in ('') ) g on a.study_id = g.study_id
+    where g.study_id is not null) a order by a.study_id;");
+    $num = $query->rowCount();
+    return $num;
+    }
+
+    public function getWithLimit1SearchCount($table, $where, $id, $where1, $id1, $searchTerm, $where3, $where4, $where5, $where6)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE ($where3 LIKE '%$searchTerm%' OR $where4 LIKE '%$searchTerm%' OR $where5 LIKE '%$searchTerm%' OR $where6 LIKE '%$searchTerm%') AND ($where = '$id' AND $where1 = '$id1')");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+    public function getWithLimit1Search($table, $where, $id, $where1, $id1, $page, $numRec, $searchTerm, $where3, $where4, $where5, $where6)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE ($where3 LIKE '%$searchTerm%' OR $where4 LIKE '%$searchTerm%' OR $where5 LIKE '%$searchTerm%' OR $where6 LIKE '%$searchTerm%') AND ($where = '$id' AND $where1 = '$id1') limit $page,$numRec");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getWithLimit3Search($table, $where, $id, $where1, $id1, $where2, $id2, $page, $numRec, $searchTerm, $where3, $where4, $where5, $where6)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE ($where3 LIKE '%$searchTerm%' OR $where4 LIKE '%$searchTerm%' OR $where5 LIKE '%$searchTerm%' OR $where6 LIKE '%$searchTerm%') AND ($where = '$id' AND $where1 = '$id1' AND $where2 = '$id2') limit $page,$numRec");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+
+    public function getWithLimit3SearchCount($table, $where, $id, $where1, $id1, $where2, $id2, $searchTerm, $where3, $where4, $where5, $where6)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE ($where3 LIKE '%$searchTerm%' OR $where4 LIKE '%$searchTerm%' OR $where5 LIKE '%$searchTerm%' OR $where6 LIKE '%$searchTerm%') AND ($where = '$id' AND $where1 = '$id1' AND $where2 = '$id2')");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+    public function getWithLimitSearch($table, $where, $id, $page, $numRec, $searchTerm, $where3, $where4, $where5, $where6)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE ($where3 LIKE '%$searchTerm%' OR $where4 LIKE '%$searchTerm%' OR $where5 LIKE '%$searchTerm%' OR $where6 LIKE '%$searchTerm%') AND ($where = '$id') limit $page,$numRec");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getWithLimitSearchCount($table, $where, $id, $searchTerm, $where3, $where4, $where5, $where6)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE ($where3 LIKE '%$searchTerm%' OR $where4 LIKE '%$searchTerm%' OR $where5 LIKE '%$searchTerm%' OR $where6 LIKE '%$searchTerm%') AND ($where = '$id')");
+        $num = $query->rowCount();
+        return $num;
+    }
+
+
+
+    public function getDataLimitSearch($table, $page, $numRec, $searchTerm, $where3, $where4, $where5, $where6)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE ($where3 LIKE '%$searchTerm%' OR $where4 LIKE '%$searchTerm%' OR $where5 LIKE '%$searchTerm%' OR $where6 LIKE '%$searchTerm%') limit $page,$numRec");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
 }
