@@ -224,364 +224,355 @@ if ($user->isLoggedIn()) {
             ));
             if ($validate->passed()) {
                 try {
-                    $user->createRecord('crf1', array(
-                        'vid' => $_GET["vid"],
-                        'vcode' => $_GET["vcode"],
-                        'study_id' => $_GET['sid'],
-                        'diagnosis_date' => Input::get('diagnosis_date'),
-                        'diabetic' => Input::get('diabetic'),
-                        'diabetic_medicatn' => Input::get('diabetic_medicatn'),
-                        'diabetic_medicatn_name' => Input::get('diabetic_medicatn_name'),
-                        'hypertension' => Input::get('hypertension'),
-                        'hypertension_medicatn' => Input::get('hypertension_medicatn'),
-                        'hypertension_medicatn_name' => Input::get('hypertension_medicatn_name'),
-                        'heart' => Input::get('heart'),
-                        'heart_medicatn' => Input::get('heart_medicatn'),
-                        'heart_medicatn_name' => Input::get('heart_medicatn_name'),
-                        'asthma' => Input::get('asthma'),
-                        'asthma_medicatn' => Input::get('asthma_medicatn'),
-                        'asthma_medicatn_name' => Input::get('asthma_medicatn_name'),
-                        'hiv_aids' => Input::get('hiv_aids'),
-                        'hiv_aids_medicatn' => Input::get('hiv_aids_medicatn'),
-                        'hiv_aids_medicatn_name' => Input::get('hiv_aids_medicatn_name'),
-                        'other_medical' => Input::get('other_medical'),
-                        'nimregenin_herbal' => Input::get('nimregenin_herbal'),
-                        'other_herbal' => Input::get('other_herbal'),
-                        'radiotherapy_performed' => Input::get('radiotherapy_performed'),
-                        'chemotherapy_performed' => Input::get('chemotherapy_performed'),
-                        'surgery_performed' => Input::get('surgery_performed'),
-                        'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                        'patient_id' => $_GET['cid'],
-                        'staff_id' => $user->data()->id,
-                        'status' => 1,
-                        'created_on' => date('Y-m-d'),
-                        'site_id' => $user->data()->site_id,
-                    ));
 
-                    $user->updateRecord('clients', array(
-                        'nimregenin' => Input::get('nimregenin_herbal'),
-                    ), $_GET['cid']);
+                    $data = $override->getNews5('crf1', 'status', 1, 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                    if ($data) {
 
+                        $user->updateRecord('crf1', array(
+                            'vid' => $_GET["vid"],
+                            'vcode' => $_GET["vcode"],
+                            'study_id' => $_GET['sid'],
+                            'diagnosis_date' => Input::get('diagnosis_date'),
+                            'diabetic' => Input::get('diabetic'),
+                            'diabetic_medicatn' => Input::get('diabetic_medicatn'),
+                            'diabetic_medicatn_name' => Input::get('diabetic_medicatn_name'),
+                            'hypertension' => Input::get('hypertension'),
+                            'hypertension_medicatn' => Input::get('hypertension_medicatn'),
+                            'hypertension_medicatn_name' => Input::get('hypertension_medicatn_name'),
+                            'heart' => Input::get('heart'),
+                            'heart_medicatn' => Input::get('heart_medicatn'),
+                            'heart_medicatn_name' => Input::get('heart_medicatn_name'),
+                            'asthma' => Input::get('asthma'),
+                            'asthma_medicatn' => Input::get('asthma_medicatn'),
+                            'asthma_medicatn_name' => Input::get('asthma_medicatn_name'),
+                            'hiv_aids' => Input::get('hiv_aids'),
+                            'hiv_aids_medicatn' => Input::get('hiv_aids_medicatn'),
+                            'hiv_aids_medicatn_name' => Input::get('hiv_aids_medicatn_name'),
+                            'other_medical' => Input::get('other_medical'),
+                            'nimregenin_herbal' => Input::get('nimregenin_herbal'),
+                            'other_herbal' => Input::get('other_herbal'),
+                            'radiotherapy_performed' => Input::get('radiotherapy_performed'),
+                            'chemotherapy_performed' => Input::get('chemotherapy_performed'),
+                            'surgery_performed' => Input::get('surgery_performed'),
+                            'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                            'patient_id' => $_GET['cid'],
+                            'staff_id' => $user->data()->id,
+                            'status' => 1,
+                            'created_on' => date('Y-m-d'),
+                            'site_id' => $user->data()->site_id,
+                        ), Input::get('id'));
 
-                    if (Input::get('other_medical')) {
-                        for ($i = 0; $i < count(Input::get('other_specify')); $i++) {
-                            $user->createRecord('other_medication', array(
-                                'vid' => $_GET["vid"],
-                                'vcode' => $_GET["vcode"],
-                                'study_id' => $_GET['sid'],
-                                'other_medical' => Input::get('other_medical'),
-                                'other_specify' => Input::get('other_specify')[$i],
-                                'other_medical_medicatn' => Input::get('other_medical_medicatn')[$i],
-                                'other_medicatn_name' => Input::get('other_medicatn_name')[$i],
-                                'medication_remarks' => Input::get('other_medication_remarks')[$i],
-                                'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                                'patient_id' => $_GET['cid'],
-                                'staff_id' => $user->data()->id,
-                                'status' => 1,
-                                'created_on' => date('Y-m-d'),
-                                'site_id' => $user->data()->site_id,
-                            ));
+                        if (Input::get('other_medical') == 1) {
+                            for ($i = 0; $i < count(Input::get('other_specify')); $i++) {
+                                $user->updateRecord('other_medication', array(
+                                    'vid' => $_GET["vid"],
+                                    'vcode' => $_GET["vcode"],
+                                    'study_id' => $_GET['sid'],
+                                    'other_medical' => Input::get('other_medical'),
+                                    'other_specify' => Input::get('other_specify')[$i],
+                                    'other_medical_medicatn' => Input::get('other_medical_medicatn')[$i],
+                                    'other_medicatn_name' => Input::get('other_medicatn_name')[$i],
+                                    'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                                    'patient_id' => $_GET['cid'],
+                                    'staff_id' => $user->data()->id,
+                                    'status' => 1,
+                                    'created_on' => date('Y-m-d'),
+                                    'site_id' => $user->data()->site_id,
+                                ), Input::get('medication_id')[$i]);
+                            }
                         }
-                    }
 
-                    if (Input::get('nimregenin_herbal')) {
-
-                        for ($i = 0; $i < count(Input::get('nimregenin_preparation')); $i++) {
-                            $user->createRecord('nimregenin', array(
-                                'vid' => $_GET["vid"],
-                                'vcode' => $_GET["vcode"],
-                                'study_id' => $_GET['sid'],
-                                'nimregenin_herbal' => Input::get('nimregenin_herbal'),
-                                'nimregenin_preparation' => Input::get('nimregenin_preparation')[$i],
-                                'nimregenin_start' => Input::get('nimregenin_start')[$i],
-                                'nimregenin_ongoing' => Input::get('nimregenin_ongoing')[$i],
-                                'nimregenin_end' => Input::get('nimregenin_end')[$i],
-                                'nimregenin_dose' => Input::get('nimregenin_dose')[$i],
-                                'nimregenin_frequency' => Input::get('nimregenin_frequency')[$i],
-                                'nimregenin_remarks' => Input::get('nimregenin_remarks')[$i],
-                                'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                                'patient_id' => $_GET['cid'],
-                                'staff_id' => $user->data()->id,
-                                'status' => 1,
-                                'created_on' => date('Y-m-d'),
-                                'site_id' => $user->data()->site_id,
-                            ));
+                        if (Input::get('nimregenin_herbal') == 1) {
+                            for ($i = 0; $i < count(Input::get('nimregenin_preparation')); $i++) {
+                                $user->updateRecord('nimregenin', array(
+                                    'vid' => $_GET["vid"],
+                                    'vcode' => $_GET["vcode"],
+                                    'study_id' => $_GET['sid'],
+                                    'nimregenin_herbal' => Input::get('nimregenin_herbal'),
+                                    'nimregenin_preparation' => Input::get('nimregenin_preparation')[$i],
+                                    'nimregenin_start' => Input::get('nimregenin_start')[$i],
+                                    'nimregenin_ongoing' => Input::get('nimregenin_ongoing')[$i],
+                                    'nimregenin_end' => Input::get('nimregenin_end')[$i],
+                                    'nimregenin_dose' => Input::get('nimregenin_dose')[$i],
+                                    'nimregenin_frequency' => Input::get('nimregenin_frequency')[$i],
+                                    'nimregenin_remarks' => Input::get('nimregenin_remarks')[$i],
+                                    'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                                    'patient_id' => $_GET['cid'],
+                                    'staff_id' => $user->data()->id,
+                                    'status' => 1,
+                                    'created_on' => date('Y-m-d'),
+                                    'site_id' => $user->data()->site_id,
+                                ), Input::get('nimregenin_id')[$i]);
+                            }
                         }
-                    }
 
-                    if (Input::get('radiotherapy_performed')) {
 
-                        for ($i = 0; $i < count(Input::get('radiotherapy')); $i++) {
-                            $user->createRecord('radiotherapy', array(
-                                'vid' => $_GET["vid"],
-                                'vcode' => $_GET["vcode"],
-                                'study_id' => $_GET['sid'],
-                                'other_herbal' => Input::get('other_herbal'),
-                                'radiotherapy_performed' => Input::get('radiotherapy_performed'),
-                                'radiotherapy' => Input::get('radiotherapy')[$i],
-                                'radiotherapy_start' => Input::get('radiotherapy_start')[$i],
-                                'radiotherapy_ongoing' => Input::get('radiotherapy_ongoing')[$i],
-                                'radiotherapy_end' => Input::get('radiotherapy_end')[$i],
-                                'radiotherapy_dose' => Input::get('radiotherapy_dose')[$i],
-                                'radiotherapy_frequecy' => Input::get('radiotherapy_frequecy')[$i],
-                                'radiotherapy_remarks' => Input::get('radiotherapy_remarks')[$i],
-                                'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                                'patient_id' => $_GET['cid'],
-                                'staff_id' => $user->data()->id,
-                                'status' => 1,
-                                'created_on' => date('Y-m-d'),
-                                'site_id' => $user->data()->site_id,
-                            ));
+                        if (Input::get('radiotherapy_performed') == 1) {
+                            for ($i = 0; $i < count(Input::get('radiotherapy')); $i++) {
+                                $user->updateRecord('radiotherapy', array(
+                                    'vid' => $_GET["vid"],
+                                    'vcode' => $_GET["vcode"],
+                                    'study_id' => $_GET['sid'],
+                                    'other_herbal' => Input::get('other_herbal'),
+                                    'radiotherapy_performed' => Input::get('radiotherapy_performed'),
+                                    'radiotherapy' => Input::get('radiotherapy')[$i],
+                                    'radiotherapy_start' => Input::get('radiotherapy_start')[$i],
+                                    'radiotherapy_ongoing' => Input::get('radiotherapy_ongoing')[$i],
+                                    'radiotherapy_end' => Input::get('radiotherapy_end')[$i],
+                                    'radiotherapy_dose' => Input::get('radiotherapy_dose')[$i],
+                                    'radiotherapy_frequecy' => Input::get('radiotherapy_frequecy')[$i],
+                                    'radiotherapy_remarks' => Input::get('radiotherapy_remarks')[$i],
+                                    'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                                    'patient_id' => $_GET['cid'],
+                                    'staff_id' => $user->data()->id,
+                                    'status' => 1,
+                                    'created_on' => date('Y-m-d'),
+                                    'site_id' => $user->data()->site_id,
+                                ), Input::get('radiotherapy_id')[$i]);
+                            }
                         }
-                    }
 
-
-                    if (Input::get('other_herbal')) {
-
-                        for ($i = 0; $i < count(Input::get('herbal_preparation')); $i++) {
-                            $user->createRecord('herbal_treatment', array(
-                                'vid' => $_GET["vid"],
-                                'vcode' => $_GET["vcode"],
-                                'study_id' => $_GET['sid'],
-                                'other_herbal' => Input::get('other_herbal'),
-                                'herbal_preparation' => Input::get('herbal_preparation')[$i],
-                                'herbal_start' => Input::get('herbal_start')[$i],
-                                'herbal_ongoing' => Input::get('herbal_ongoing')[$i],
-                                'herbal_end' => Input::get('herbal_end')[$i],
-                                'herbal_dose' => Input::get('herbal_dose')[$i],
-                                'herbal_frequency' => Input::get('herbal_frequency')[$i],
-                                'herbal_remarks' => Input::get('herbal_remarks')[$i],
-                                'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                                'patient_id' => $_GET['cid'],
-                                'staff_id' => $user->data()->id,
-                                'status' => 1,
-                                'created_on' => date('Y-m-d'),
-                                'site_id' => $user->data()->site_id,
-                            ));
+                        if (Input::get('other_herbal') == 1) {
+                            for ($i = 0; $i < count(Input::get('herbal_preparation')); $i++) {
+                                $user->updateRecord('herbal_treatment', array(
+                                    'vid' => $_GET["vid"],
+                                    'vcode' => $_GET["vcode"],
+                                    'other_herbal' => Input::get('other_herbal'),
+                                    'herbal_preparation' => Input::get('herbal_preparation')[$i],
+                                    'herbal_start' => Input::get('herbal_start')[$i],
+                                    'herbal_ongoing' => Input::get('herbal_ongoing')[$i],
+                                    'herbal_end' => Input::get('herbal_end')[$i],
+                                    'herbal_dose' => Input::get('herbal_dose')[$i],
+                                    'herbal_frequency' => Input::get('herbal_frequency')[$i],
+                                    'herbal_remarks' => Input::get('herbal_remarks')[$i],
+                                    'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                                    'patient_id' => $_GET['cid'],
+                                    'staff_id' => $user->data()->id,
+                                    'status' => 1,
+                                    'created_on' => date('Y-m-d'),
+                                    'site_id' => $user->data()->site_id,
+                                ), Input::get('herbal_id')[$i]);
+                            }
                         }
-                    }
 
-                    if (Input::get('chemotherapy_performed')) {
 
-                        for ($i = 0; $i < count(Input::get('chemotherapy')); $i++) {
-                            $user->createRecord('chemotherapy', array(
-                                'vid' => $_GET["vid"],
-                                'vcode' => $_GET["vcode"],
-                                'study_id' => $_GET['sid'],
-                                'other_herbal' => Input::get('other_herbal'),
-                                'chemotherapy_performed' => Input::get('chemotherapy_performed'),
-                                'chemotherapy' => Input::get('chemotherapy')[$i],
-                                'chemotherapy_start' => Input::get('chemotherapy_start')[$i],
-                                'chemotherapy_ongoing' => Input::get('chemotherapy_ongoing')[$i],
-                                'chemotherapy_end' => Input::get('chemotherapy_end')[$i],
-                                'chemotherapy_dose' => Input::get('chemotherapy_dose')[$i],
-                                'chemotherapy_frequecy' => Input::get('chemotherapy_frequecy')[$i],
-                                'chemotherapy_remarks' => Input::get('chemotherapy_remarks')[$i],
-                                'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                                'patient_id' => $_GET['cid'],
-                                'staff_id' => $user->data()->id,
-                                'status' => 1,
-                                'created_on' => date('Y-m-d'),
-                                'site_id' => $user->data()->site_id,
-                            ));
+                        if (Input::get('chemotherapy_performed') == 1) {
+                            for ($i = 0; $i < count(Input::get('chemotherapy')); $i++) {
+                                $user->updateRecord('chemotherapy', array(
+                                    'vid' => $_GET["vid"],
+                                    'vcode' => $_GET["vcode"],
+                                    'other_herbal' => Input::get('other_herbal'),
+                                    'chemotherapy_performed' => Input::get('chemotherapy_performed'),
+                                    'chemotherapy' => Input::get('chemotherapy')[$i],
+                                    'chemotherapy_start' => Input::get('chemotherapy_start')[$i],
+                                    'chemotherapy_ongoing' => Input::get('chemotherapy_ongoing')[$i],
+                                    'chemotherapy_end' => Input::get('chemotherapy_end')[$i],
+                                    'chemotherapy_dose' => Input::get('chemotherapy_dose')[$i],
+                                    'chemotherapy_frequecy' => Input::get('chemotherapy_frequecy')[$i],
+                                    'chemotherapy_remarks' => Input::get('chemotherapy_remarks')[$i],
+                                    'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                                    'patient_id' => $_GET['cid'],
+                                    'staff_id' => $user->data()->id,
+                                    'status' => 1,
+                                    'created_on' => date('Y-m-d'),
+                                    'site_id' => $user->data()->site_id,
+                                ), Input::get('chemotherapy_id')[$i]);
+                            }
                         }
-                    }
 
-                    if (Input::get('surgery_performed') == 1) {
-
-                        for ($i = 0; $i < count(Input::get('surgery')); $i++) {
-                            $user->createRecord('surgery', array(
-                                'vid' => $_GET["vid"],
-                                'vcode' => $_GET["vcode"],
-                                'study_id' => $_GET['sid'],
-                                'other_herbal' => Input::get('other_herbal'),
-                                'surgery_performed' => Input::get('surgery_performed'),
-                                'surgery' => Input::get('surgery')[$i],
-                                'surgery_start' => Input::get('surgery_start')[$i],
-                                'surgery_number' => Input::get('surgery_number')[$i],
-                                'surgery_remarks' => Input::get('surgery_remarks')[$i],
-                                'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                                'patient_id' => $_GET['cid'],
-                                'staff_id' => $user->data()->id,
-                                'status' => 1,
-                                'created_on' => date('Y-m-d'),
-                                'site_id' => $user->data()->site_id,
-                            ));
+                        if (Input::get('surgery_performed') == 1) {
+                            if (count(Input::get('surgery_id')) == count(Input::get('surgery'))) {
+                                for ($i = 0; $i < count(Input::get('surgery')); $i++) {
+                                    $user->updateRecord('surgery', array(
+                                        'vid' => $_GET["vid"],
+                                        'vcode' => $_GET["vcode"],
+                                        'study_id' => $_GET['sid'],
+                                        'other_herbal' => Input::get('other_herbal'),
+                                        'surgery_performed' => Input::get('surgery_performed'),
+                                        'surgery' => Input::get('surgery')[$i],
+                                        'surgery_start' => Input::get('surgery_start')[$i],
+                                        'surgery_number' => Input::get('surgery_number')[$i],
+                                        'surgery_remarks' => Input::get('surgery_remarks')[$i],
+                                        'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                                        'patient_id' => $_GET['cid'],
+                                        'staff_id' => $user->data()->id,
+                                        'status' => 1,
+                                        'created_on' => date('Y-m-d'),
+                                        'site_id' => $user->data()->site_id,
+                                    ), Input::get('surgery_id')[$i]);
+                                }
+                            }
                         }
-                    }
 
-                    $successMessage = 'CRF1 added Successful';
-                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
-                } catch (Exception $e) {
-                    die($e->getMessage());
-                }
-            } else {
-                $pageError = $validate->errors();
-            }
-        } elseif (Input::get('update_crf1')) {
-            $validate = $validate->check($_POST, array(
-                //     'diagnosis_date' => array(
-                //         'required' => true,
-                //     ),
-            ));
-            if ($validate->passed()) {
-                try {
-                    $user->updateRecord('crf1', array(
-                        'vid' => $_GET["vid"],
-                        'vcode' => $_GET["vcode"],
-                        'study_id' => $_GET['sid'],
-                        'diagnosis_date' => Input::get('diagnosis_date'),
-                        'diabetic' => Input::get('diabetic'),
-                        'diabetic_medicatn' => Input::get('diabetic_medicatn'),
-                        'diabetic_medicatn_name' => Input::get('diabetic_medicatn_name'),
-                        'hypertension' => Input::get('hypertension'),
-                        'hypertension_medicatn' => Input::get('hypertension_medicatn'),
-                        'hypertension_medicatn_name' => Input::get('hypertension_medicatn_name'),
-                        'heart' => Input::get('heart'),
-                        'heart_medicatn' => Input::get('heart_medicatn'),
-                        'heart_medicatn_name' => Input::get('heart_medicatn_name'),
-                        'asthma' => Input::get('asthma'),
-                        'asthma_medicatn' => Input::get('asthma_medicatn'),
-                        'asthma_medicatn_name' => Input::get('asthma_medicatn_name'),
-                        'hiv_aids' => Input::get('hiv_aids'),
-                        'hiv_aids_medicatn' => Input::get('hiv_aids_medicatn'),
-                        'hiv_aids_medicatn_name' => Input::get('hiv_aids_medicatn_name'),
-                        'other_medical' => Input::get('other_medical'),
-                        'nimregenin_herbal' => Input::get('nimregenin_herbal'),
-                        'other_herbal' => Input::get('other_herbal'),
-                        'radiotherapy_performed' => Input::get('radiotherapy_performed'),
-                        'chemotherapy_performed' => Input::get('chemotherapy_performed'),
-                        'surgery_performed' => Input::get('surgery_performed'),
-                        'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                        'patient_id' => $_GET['cid'],
-                        'staff_id' => $user->data()->id,
-                        'status' => 1,
-                        'created_on' => date('Y-m-d'),
-                        'site_id' => $user->data()->site_id,
-                    ), Input::get('id'));
+                        $successMessage = 'CRF1 Updated Successful';
+                    } else {
+                        $user->createRecord('crf1', array(
+                            'vid' => $_GET["vid"],
+                            'vcode' => $_GET["vcode"],
+                            'study_id' => $_GET['sid'],
+                            'diagnosis_date' => Input::get('diagnosis_date'),
+                            'diabetic' => Input::get('diabetic'),
+                            'diabetic_medicatn' => Input::get('diabetic_medicatn'),
+                            'diabetic_medicatn_name' => Input::get('diabetic_medicatn_name'),
+                            'hypertension' => Input::get('hypertension'),
+                            'hypertension_medicatn' => Input::get('hypertension_medicatn'),
+                            'hypertension_medicatn_name' => Input::get('hypertension_medicatn_name'),
+                            'heart' => Input::get('heart'),
+                            'heart_medicatn' => Input::get('heart_medicatn'),
+                            'heart_medicatn_name' => Input::get('heart_medicatn_name'),
+                            'asthma' => Input::get('asthma'),
+                            'asthma_medicatn' => Input::get('asthma_medicatn'),
+                            'asthma_medicatn_name' => Input::get('asthma_medicatn_name'),
+                            'hiv_aids' => Input::get('hiv_aids'),
+                            'hiv_aids_medicatn' => Input::get('hiv_aids_medicatn'),
+                            'hiv_aids_medicatn_name' => Input::get('hiv_aids_medicatn_name'),
+                            'other_medical' => Input::get('other_medical'),
+                            'nimregenin_herbal' => Input::get('nimregenin_herbal'),
+                            'other_herbal' => Input::get('other_herbal'),
+                            'radiotherapy_performed' => Input::get('radiotherapy_performed'),
+                            'chemotherapy_performed' => Input::get('chemotherapy_performed'),
+                            'surgery_performed' => Input::get('surgery_performed'),
+                            'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                            'patient_id' => $_GET['cid'],
+                            'staff_id' => $user->data()->id,
+                            'status' => 1,
+                            'created_on' => date('Y-m-d'),
+                            'site_id' => $user->data()->site_id,
+                        ));
 
-                    if (Input::get('other_medical') == 1) {
-                        for ($i = 0; $i < count(Input::get('other_specify')); $i++) {
-                            $user->updateRecord('other_medication', array(
-                                'vid' => $_GET["vid"],
-                                'vcode' => $_GET["vcode"],
-                                'study_id' => $_GET['sid'],
-                                'other_medical' => Input::get('other_medical'),
-                                'other_specify' => Input::get('other_specify')[$i],
-                                'other_medical_medicatn' => Input::get('other_medical_medicatn')[$i],
-                                'other_medicatn_name' => Input::get('other_medicatn_name')[$i],
-                                'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                                'patient_id' => $_GET['cid'],
-                                'staff_id' => $user->data()->id,
-                                'status' => 1,
-                                'created_on' => date('Y-m-d'),
-                                'site_id' => $user->data()->site_id,
-                            ), Input::get('medication_id')[$i]);
+                        $user->updateRecord('clients', array(
+                            'nimregenin' => Input::get('nimregenin_herbal'),
+                        ), $_GET['cid']);
+
+
+                        if (Input::get('other_medical')) {
+                            for ($i = 0; $i < count(Input::get('other_specify')); $i++) {
+                                $user->createRecord('other_medication', array(
+                                    'vid' => $_GET["vid"],
+                                    'vcode' => $_GET["vcode"],
+                                    'study_id' => $_GET['sid'],
+                                    'other_medical' => Input::get('other_medical'),
+                                    'other_specify' => Input::get('other_specify')[$i],
+                                    'other_medical_medicatn' => Input::get('other_medical_medicatn')[$i],
+                                    'other_medicatn_name' => Input::get('other_medicatn_name')[$i],
+                                    'medication_remarks' => Input::get('other_medication_remarks')[$i],
+                                    'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                                    'patient_id' => $_GET['cid'],
+                                    'staff_id' => $user->data()->id,
+                                    'status' => 1,
+                                    'created_on' => date('Y-m-d'),
+                                    'site_id' => $user->data()->site_id,
+                                ));
+                            }
                         }
-                    }
 
-                    if (Input::get('nimregenin_herbal') == 1) {
-                        for ($i = 0; $i < count(Input::get('nimregenin_preparation')); $i++) {
-                            $user->updateRecord('nimregenin', array(
-                                'vid' => $_GET["vid"],
-                                'vcode' => $_GET["vcode"],
-                                'study_id' => $_GET['sid'],
-                                'nimregenin_herbal' => Input::get('nimregenin_herbal'),
-                                'nimregenin_preparation' => Input::get('nimregenin_preparation')[$i],
-                                'nimregenin_start' => Input::get('nimregenin_start')[$i],
-                                'nimregenin_ongoing' => Input::get('nimregenin_ongoing')[$i],
-                                'nimregenin_end' => Input::get('nimregenin_end')[$i],
-                                'nimregenin_dose' => Input::get('nimregenin_dose')[$i],
-                                'nimregenin_frequency' => Input::get('nimregenin_frequency')[$i],
-                                'nimregenin_remarks' => Input::get('nimregenin_remarks')[$i],
-                                'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                                'patient_id' => $_GET['cid'],
-                                'staff_id' => $user->data()->id,
-                                'status' => 1,
-                                'created_on' => date('Y-m-d'),
-                                'site_id' => $user->data()->site_id,
-                            ), Input::get('nimregenin_id')[$i]);
+                        if (Input::get('nimregenin_herbal')) {
+
+                            for ($i = 0; $i < count(Input::get('nimregenin_preparation')); $i++) {
+                                $user->createRecord('nimregenin', array(
+                                    'vid' => $_GET["vid"],
+                                    'vcode' => $_GET["vcode"],
+                                    'study_id' => $_GET['sid'],
+                                    'nimregenin_herbal' => Input::get('nimregenin_herbal'),
+                                    'nimregenin_preparation' => Input::get('nimregenin_preparation')[$i],
+                                    'nimregenin_start' => Input::get('nimregenin_start')[$i],
+                                    'nimregenin_ongoing' => Input::get('nimregenin_ongoing')[$i],
+                                    'nimregenin_end' => Input::get('nimregenin_end')[$i],
+                                    'nimregenin_dose' => Input::get('nimregenin_dose')[$i],
+                                    'nimregenin_frequency' => Input::get('nimregenin_frequency')[$i],
+                                    'nimregenin_remarks' => Input::get('nimregenin_remarks')[$i],
+                                    'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                                    'patient_id' => $_GET['cid'],
+                                    'staff_id' => $user->data()->id,
+                                    'status' => 1,
+                                    'created_on' => date('Y-m-d'),
+                                    'site_id' => $user->data()->site_id,
+                                ));
+                            }
                         }
-                    }
 
+                        if (Input::get('radiotherapy_performed')) {
 
-                    if (Input::get('radiotherapy_performed') == 1) {
-                        for ($i = 0; $i < count(Input::get('radiotherapy')); $i++) {
-                            $user->updateRecord('radiotherapy', array(
-                                'vid' => $_GET["vid"],
-                                'vcode' => $_GET["vcode"],
-                                'study_id' => $_GET['sid'],
-                                'other_herbal' => Input::get('other_herbal'),
-                                'radiotherapy_performed' => Input::get('radiotherapy_performed'),
-                                'radiotherapy' => Input::get('radiotherapy')[$i],
-                                'radiotherapy_start' => Input::get('radiotherapy_start')[$i],
-                                'radiotherapy_ongoing' => Input::get('radiotherapy_ongoing')[$i],
-                                'radiotherapy_end' => Input::get('radiotherapy_end')[$i],
-                                'radiotherapy_dose' => Input::get('radiotherapy_dose')[$i],
-                                'radiotherapy_frequecy' => Input::get('radiotherapy_frequecy')[$i],
-                                'radiotherapy_remarks' => Input::get('radiotherapy_remarks')[$i],
-                                'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                                'patient_id' => $_GET['cid'],
-                                'staff_id' => $user->data()->id,
-                                'status' => 1,
-                                'created_on' => date('Y-m-d'),
-                                'site_id' => $user->data()->site_id,
-                            ), Input::get('radiotherapy_id')[$i]);
+                            for ($i = 0; $i < count(Input::get('radiotherapy')); $i++) {
+                                $user->createRecord('radiotherapy', array(
+                                    'vid' => $_GET["vid"],
+                                    'vcode' => $_GET["vcode"],
+                                    'study_id' => $_GET['sid'],
+                                    'other_herbal' => Input::get('other_herbal'),
+                                    'radiotherapy_performed' => Input::get('radiotherapy_performed'),
+                                    'radiotherapy' => Input::get('radiotherapy')[$i],
+                                    'radiotherapy_start' => Input::get('radiotherapy_start')[$i],
+                                    'radiotherapy_ongoing' => Input::get('radiotherapy_ongoing')[$i],
+                                    'radiotherapy_end' => Input::get('radiotherapy_end')[$i],
+                                    'radiotherapy_dose' => Input::get('radiotherapy_dose')[$i],
+                                    'radiotherapy_frequecy' => Input::get('radiotherapy_frequecy')[$i],
+                                    'radiotherapy_remarks' => Input::get('radiotherapy_remarks')[$i],
+                                    'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                                    'patient_id' => $_GET['cid'],
+                                    'staff_id' => $user->data()->id,
+                                    'status' => 1,
+                                    'created_on' => date('Y-m-d'),
+                                    'site_id' => $user->data()->site_id,
+                                ));
+                            }
                         }
-                    }
 
-                    if (Input::get('other_herbal') == 1) {
-                        for ($i = 0; $i < count(Input::get('herbal_preparation')); $i++) {
-                            $user->updateRecord('herbal_treatment', array(
-                                'vid' => $_GET["vid"],
-                                'vcode' => $_GET["vcode"],
-                                'other_herbal' => Input::get('other_herbal'),
-                                'herbal_preparation' => Input::get('herbal_preparation')[$i],
-                                'herbal_start' => Input::get('herbal_start')[$i],
-                                'herbal_ongoing' => Input::get('herbal_ongoing')[$i],
-                                'herbal_end' => Input::get('herbal_end')[$i],
-                                'herbal_dose' => Input::get('herbal_dose')[$i],
-                                'herbal_frequency' => Input::get('herbal_frequency')[$i],
-                                'herbal_remarks' => Input::get('herbal_remarks')[$i],
-                                'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                                'patient_id' => $_GET['cid'],
-                                'staff_id' => $user->data()->id,
-                                'status' => 1,
-                                'created_on' => date('Y-m-d'),
-                                'site_id' => $user->data()->site_id,
-                            ), Input::get('herbal_id')[$i]);
+
+                        if (Input::get('other_herbal')) {
+
+                            for ($i = 0; $i < count(Input::get('herbal_preparation')); $i++) {
+                                $user->createRecord('herbal_treatment', array(
+                                    'vid' => $_GET["vid"],
+                                    'vcode' => $_GET["vcode"],
+                                    'study_id' => $_GET['sid'],
+                                    'other_herbal' => Input::get('other_herbal'),
+                                    'herbal_preparation' => Input::get('herbal_preparation')[$i],
+                                    'herbal_start' => Input::get('herbal_start')[$i],
+                                    'herbal_ongoing' => Input::get('herbal_ongoing')[$i],
+                                    'herbal_end' => Input::get('herbal_end')[$i],
+                                    'herbal_dose' => Input::get('herbal_dose')[$i],
+                                    'herbal_frequency' => Input::get('herbal_frequency')[$i],
+                                    'herbal_remarks' => Input::get('herbal_remarks')[$i],
+                                    'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                                    'patient_id' => $_GET['cid'],
+                                    'staff_id' => $user->data()->id,
+                                    'status' => 1,
+                                    'created_on' => date('Y-m-d'),
+                                    'site_id' => $user->data()->site_id,
+                                ));
+                            }
                         }
-                    }
 
+                        if (Input::get('chemotherapy_performed')) {
 
-                    if (Input::get('chemotherapy_performed') == 1) {
-                        for ($i = 0; $i < count(Input::get('chemotherapy')); $i++) {
-                            $user->updateRecord('chemotherapy', array(
-                                'vid' => $_GET["vid"],
-                                'vcode' => $_GET["vcode"],
-                                'other_herbal' => Input::get('other_herbal'),
-                                'chemotherapy_performed' => Input::get('chemotherapy_performed'),
-                                'chemotherapy' => Input::get('chemotherapy')[$i],
-                                'chemotherapy_start' => Input::get('chemotherapy_start')[$i],
-                                'chemotherapy_ongoing' => Input::get('chemotherapy_ongoing')[$i],
-                                'chemotherapy_end' => Input::get('chemotherapy_end')[$i],
-                                'chemotherapy_dose' => Input::get('chemotherapy_dose')[$i],
-                                'chemotherapy_frequecy' => Input::get('chemotherapy_frequecy')[$i],
-                                'chemotherapy_remarks' => Input::get('chemotherapy_remarks')[$i],
-                                'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                                'patient_id' => $_GET['cid'],
-                                'staff_id' => $user->data()->id,
-                                'status' => 1,
-                                'created_on' => date('Y-m-d'),
-                                'site_id' => $user->data()->site_id,
-                            ), Input::get('chemotherapy_id')[$i]);
+                            for ($i = 0; $i < count(Input::get('chemotherapy')); $i++) {
+                                $user->createRecord('chemotherapy', array(
+                                    'vid' => $_GET["vid"],
+                                    'vcode' => $_GET["vcode"],
+                                    'study_id' => $_GET['sid'],
+                                    'other_herbal' => Input::get('other_herbal'),
+                                    'chemotherapy_performed' => Input::get('chemotherapy_performed'),
+                                    'chemotherapy' => Input::get('chemotherapy')[$i],
+                                    'chemotherapy_start' => Input::get('chemotherapy_start')[$i],
+                                    'chemotherapy_ongoing' => Input::get('chemotherapy_ongoing')[$i],
+                                    'chemotherapy_end' => Input::get('chemotherapy_end')[$i],
+                                    'chemotherapy_dose' => Input::get('chemotherapy_dose')[$i],
+                                    'chemotherapy_frequecy' => Input::get('chemotherapy_frequecy')[$i],
+                                    'chemotherapy_remarks' => Input::get('chemotherapy_remarks')[$i],
+                                    'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                                    'patient_id' => $_GET['cid'],
+                                    'staff_id' => $user->data()->id,
+                                    'status' => 1,
+                                    'created_on' => date('Y-m-d'),
+                                    'site_id' => $user->data()->site_id,
+                                ));
+                            }
                         }
-                    }
 
-                    if (Input::get('surgery_performed') == 1) {
-                        if (count(Input::get('surgery_id')) == count(Input::get('surgery'))) {
+                        if (Input::get('surgery_performed') == 1) {
+
                             for ($i = 0; $i < count(Input::get('surgery')); $i++) {
-                                $user->updateRecord('surgery', array(
+                                $user->createRecord('surgery', array(
                                     'vid' => $_GET["vid"],
                                     'vcode' => $_GET["vcode"],
                                     'study_id' => $_GET['sid'],
@@ -597,38 +588,17 @@ if ($user->isLoggedIn()) {
                                     'status' => 1,
                                     'created_on' => date('Y-m-d'),
                                     'site_id' => $user->data()->site_id,
-                                ), Input::get('surgery_id')[$i]);
+                                ));
                             }
                         }
-                    }
-                    // else{
-                    //     for ($i = count(Input::get('surgery')) + 1; $i < count(Input::get('surgery_id')); $i++) {
-                    //         $user->createRecord('surgery', array(
-                    //             'vid' => $_GET["vid"],
-                    //             'vcode' => $_GET["vcode"],
-                    //             'study_id' => $_GET['sid'],
-                    //             'other_herbal' => Input::get('other_herbal'),
-                    //             'surgery_performed' => Input::get('surgery_performed'),
-                    //             'surgery' => Input::get('surgery')[$i],
-                    //             'surgery_start' => Input::get('surgery_start')[$i],
-                    //             'surgery_number' => Input::get('surgery_number')[$i],
-                    //             'surgery_remarks' => Input::get('surgery_remarks')[$i],
-                    //             'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                    //             'patient_id' => $_GET['cid'],
-                    //             'staff_id' => $user->data()->id,
-                    //             'status' => 1,
-                    //             'created_on' => date('Y-m-d'),
-                    //             'site_id' => $user->data()->site_id,
-                    //         ));
-                    //     }
-                    // }
 
+                        $successMessage = 'CRF1 added Successful';
+                    }
 
                     $user->updateRecord('clients', array(
                         'nimregenin' => Input::get('nimregenin_herbal'),
                     ), $_GET['cid']);
 
-                    $successMessage = 'CRF1 Updated Successful';
                     Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
                 } catch (Exception $e) {
                     die($e->getMessage());

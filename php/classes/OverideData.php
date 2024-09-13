@@ -504,6 +504,13 @@ class OverideData
         return $result;
     }
 
+    public function getNews5($table, $where, $id, $where1, $id1, $where2, $id2)
+    {
+        $query = $this->_pdo->query("SELECT * FROM $table WHERE $where = '$id' AND $where1 = '$id1' AND $where2 = '$id2'");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     public function getRQ1($table)
     {
         $query = $this->_pdo->query("SELECT * FROM $table");
@@ -1604,7 +1611,7 @@ WHERE t1.status = '1' AND t1.site_id = '$site'  AND t2.expected_date <= '$date' 
 
     public function getDataStatus()
     {
-    $query = $this->_pdo->query("select a.*,
+        $query = $this->_pdo->query("select a.*,
     (select status from crf1 c1 where c1.study_id = a.study_id and c1.vcode = a.visit_code limit 1) as crf1,
     (select status from crf2 c2 where c2.study_id = a.study_id and c2.vcode = a.visit_code limit 1) as crf2,
     (select status from crf3 c3 where c3.study_id = a.study_id and c3.vcode = a.visit_code limit 1) as crf3,
@@ -1617,13 +1624,13 @@ WHERE t1.status = '1' AND t1.site_id = '$site'  AND t2.expected_date <= '$date' 
                     from visit a left join
     (select distinct (a.study_id) from visit a where a.study_id not in ('') ) g on a.study_id = g.study_id
     where g.study_id is not null) a order by a.study_id;");
-    $result = $query->fetchAll(PDO::FETCH_ASSOC);
-    return $result;
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
 
     public function getDataStatusCount()
     {
-    $query = $this->_pdo->query("select a.*,
+        $query = $this->_pdo->query("select a.*,
     (select status from crf1 c1 where c1.study_id = a.study_id and c1.vcode = a.visit_code limit 1) as crf1,
     (select status from crf2 c2 where c2.study_id = a.study_id and c2.vcode = a.visit_code limit 1) as crf2,
     (select status from crf3 c3 where c3.study_id = a.study_id and c3.vcode = a.visit_code limit 1) as crf3,
@@ -1636,8 +1643,8 @@ WHERE t1.status = '1' AND t1.site_id = '$site'  AND t2.expected_date <= '$date' 
                     from visit a left join
     (select distinct (a.study_id) from visit a where a.study_id not in ('') ) g on a.study_id = g.study_id
     where g.study_id is not null) a order by a.study_id;");
-    $num = $query->rowCount();
-    return $num;
+        $num = $query->rowCount();
+        return $num;
     }
 
     public function getWithLimit1SearchCount($table, $where, $id, $where1, $id1, $searchTerm, $where3, $where4, $where5, $where6)
