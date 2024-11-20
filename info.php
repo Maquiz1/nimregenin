@@ -2557,6 +2557,8 @@ if ($user->isLoggedIn()) {
                                 <div class="isw-grid"></div>
                                 <h1>List of Clients</h1>
                                 <ul class="buttons">
+                                                                         <li><a href="add.php?id=4&status=5.php" class="isw-plus"></a>Register New Client
+                                    <li><a href="info.php?id=3&status=5.php" class="isw-edit"></a>Registred Clients</li>
                                     <li><a href="summary.php" class="isw-download"></a></li>
                                     <li><a href="#" class="isw-attachment"></a></li>
                                     <li>

@@ -77,6 +77,9 @@ if ($user->isLoggedIn()) {
                                 <div class="isw-grid"></div>
                                 <h1>Today Schedule</h1>
                                 <ul class="buttons">
+                                    <li><a href="add.php?id=4&status=5.php" class="isw-plus"></a>Register New Client
+                                    <li><a href="info.php?id=3&status=5.php" class="isw-edit"></a>Registred Clients</li>
+                                    </li>
                                     <li><a href="today.php" class="isw-download"></a></li>
                                     <li><a href="#" class="isw-attachment"></a></li>
                                     <li>
@@ -95,7 +98,8 @@ if ($user->isLoggedIn()) {
                                 $visits = $override->getNews('visit', 'expected_date', date('Y-m-d'), 'status', 0);
                                 // $visits = $override->get3('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'site_id',$user->data()->site_id);
                             } ?>
-                            <form method="post"><input type="submit" name="today_schedule" value="Download Excel"></form>
+                            <form method="post"><input type="submit" name="today_schedule" value="Download Excel">
+                            </form>
                             <div class="block-fluid">
                                 <table cellpadding="0" cellspacing="0" width="100%" class="table">
                                     <thead>
@@ -123,8 +127,8 @@ if ($user->isLoggedIn()) {
                                             $site = $override->getNews('clients', 'id', $visit['client_id'], 'status', 1)[0]['site_id'];
                                             $site_id = $override->get('site', 'id', $site)[0]['name'];
                                             // $client = $override->get4('clients', 'id', $visit['client_id'],'enrolled',1,'end_study',0,'site_id',$user->data()->site_id)[0] 
-
-                                        ?>
+                                        
+                                            ?>
                                             <tr>
                                                 <td><input type="checkbox" name="checkbox" /></td>
                                                 <td><?= $x ?></td>
@@ -134,7 +138,8 @@ if ($user->isLoggedIn()) {
                                                     } else {
                                                         $img = 'img/users/blank.png';
                                                     } ?>
-                                                    <a href="#img<?= $client['id'] ?>" data-toggle="modal"><img src="<?= $img ?>" width="90" height="90" class="" /></a>
+                                                    <a href="#img<?= $client['id'] ?>" data-toggle="modal"><img
+                                                            src="<?= $img ?>" width="90" height="90" class="" /></a>
                                                 </td>
                                                 <td><?= $client['study_id'] ?></td>
                                                 <?php if ($client['nimregenin'] == 1) { ?>
@@ -152,29 +157,35 @@ if ($user->isLoggedIn()) {
                                                 <td><?= $client['age'] ?></td>
                                                 <td><?= $site_id ?></td>
                                                 <td>
-                                                    <a href="info.php?id=7&cid=<?= $client['id'] ?>" role="button" class="btn btn-warning">Schedule</a>
+                                                    <a href="info.php?id=7&cid=<?= $client['id'] ?>" role="button"
+                                                        class="btn btn-warning">Schedule</a>
                                                 </td>
 
                                             </tr>
-                                            <div class="modal fade" id="img<?= $client['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal fade" id="img<?= $client['id'] ?>" tabindex="-1" role="dialog"
+                                                aria-labelledby="myModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <form method="post">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                                <button type="button" class="close"
+                                                                    data-dismiss="modal"><span
+                                                                        aria-hidden="true">&times;</span><span
+                                                                        class="sr-only">Close</span></button>
                                                                 <h4>Client Image</h4>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <img src="<?= $img ?>" width="350">
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                <button class="btn btn-default" data-dismiss="modal"
+                                                                    aria-hidden="true">Close</button>
                                                             </div>
                                                         </div>
                                                     </form>
                                                 </div>
                                             </div>
-                                        <?php $x++;
+                                            <?php $x++;
                                         } ?>
                                     </tbody>
                                 </table>
@@ -193,7 +204,7 @@ if ($user->isLoggedIn()) {
     </div>
     <script>
         <?php if ($user->data()->pswd == 0) { ?>
-            $(window).on('load', function() {
+            $(window).on('load', function () {
                 $("#change_password_n").modal({
                     backdrop: 'static',
                     keyboard: false
