@@ -2751,7 +2751,57 @@ if ($user->isLoggedIn()) {
 
                                             if ($client['enrolled'] == 1) {
                                                 $enrolled = 1;
-                                            }                                           
+                                            }
+
+
+
+                                            // $category = 0;
+                                    
+                                            // if ($type['cardiac'] == 1) {
+                                            //     $category =  $override->countData('cardiac', 'patient_id', $client['id'], 'status', 1);
+                                            // } elseif ($type['diabetes'] == 1) {
+                                            //     $category =  $override->countData('diabetic', 'patient_id', $client['id'], 'status', 1);
+                                            // } elseif ($type['sickle_cell'] == 1) {
+                                            //     $category =  $override->countData('sickle_cell', 'patient_id', $client['id'], 'status', 1);
+                                            // } else {
+                                            //     $category = 0;
+                                            // }
+                                    
+
+                                            $crf1 = $override->countData('crf1', 'patient_id', $client['id'], 'status', 1);
+                                            $crf2 = $override->countData('crf2', 'patient_id', $client['id'], 'status', 1);
+                                            $crf3 = $override->countData('crf3', 'patient_id', $client['id'], 'status', 1);
+                                            $crf4 = $override->countData('crf4', 'patient_id', $client['id'], 'status', 1);
+                                            $crf5 = $override->countData('crf5', 'patient_id', $client['id'], 'status', 1);
+                                            $crf6 = $override->countData('crf6', 'patient_id', $client['id'], 'status', 1);
+                                            $crf7 = $override->countData('crf7', 'patient_id', $client['id'], 'status', 1);
+
+                                            $Total_visit_available = 0;
+                                            $Total_CRF_available = 0;
+                                            $Total_CRF_required = 0;
+                                            $progress = 0;
+
+                                            $Total_visit_available = intval($override->getCountNot('visit', 'client_id', $client['id'], 'visit_code', 'AE', 'END'));
+                                            if ($Total_visit_available < 1) {
+                                                $Total_visit_available = 0;
+                                                $Total_CRF_available = 0;
+                                                $Total_CRF_required = 0;
+                                            } elseif ($Total_visit_available == 1) {
+                                                $Total_visit_available = intval($Total_visit_available);
+
+                                                $Total_CRF_available = intval(intval($crf1) + intval($crf2) + intval($crf3) + intval($crf4) + intval($crf5) + intval($crf6) + intval($crf7));
+
+                                                $Total_CRF_required = intval(intval($Total_visit_available) * 5);
+                                            } elseif ($Total_visit_available > 1) {
+                                                $Total_visit_available = intval(intval($Total_visit_available) - 1);
+
+                                                $Total_CRF_available = intval(intval($crf2) + intval($crf3) + intval($crf4) + intval($crf7));
+
+
+                                                $Total_CRF_required = intval((intval($Total_visit_available) * 4) + 6);
+                                            }
+
+                                            $client_progress = intval(intval($Total_CRF_available) / intval($Total_CRF_required) * 100);
                                             ?>
                                             <tr>
                                                 <!-- <td><input type="checkbox" name="checkbox" /></td> -->
@@ -2993,7 +3043,70 @@ if ($user->isLoggedIn()) {
                                                             <?php if ($enrolled == 1) { ?>
                                                                 <a href="info.php?id=7&cid=<?= $client['id'] ?>" role="button"
                                                                     class="btn btn-success">schedule</a>
-                                                                <hr>                                                                
+                                                                <hr>
+                                                                <!-- <?php if ($client_progress == 100) { ?>
+                                                                    <span class="badge badge-primary right">
+                                                                        <?= $Total_CRF_available ?> out of <?= $Total_CRF_required ?>
+                                                                    </span>
+                                                                    <hr>
+                                                                    <span class="badge badge-primary right">
+                                                                        <?= $client_progress ?>%
+                                                                        <?php
+                                                                        $user->updateRecord('clients', array(
+                                                                            'progress' => $client_progress,
+                                                                        ), $client['id']);
+                                                                        ?>
+                                                                    </span>
+                                                                <?php } elseif ($client_progress > 100) { ?>
+                                                                    <span class="badge badge-warning right">
+                                                                        <?= $Total_CRF_available ?> out of <?= $Total_CRF_required ?>
+                                                                    </span>
+                                                                    <hr>
+                                                                    <span class="badge badge-warning right">
+                                                                        <?= $client_progress ?>%
+                                                                        <?php
+                                                                        $user->updateRecord('clients', array(
+                                                                            'progress' => $client_progress,
+                                                                        ), $client['id']);
+                                                                        ?> </span>
+                                                                <?php } elseif ($client_progress >= 80 && $client_progress < 100) { ?>
+                                                                    <span class="badge badge-info right">
+                                                                        <?= $Total_CRF_available ?> out of <?= $Total_CRF_required ?>
+                                                                    </span>
+                                                                    <hr>
+                                                                    <span class="badge badge-info right">
+                                                                        <?= $client_progress ?>%
+                                                                        <?php
+                                                                        $user->updateRecord('clients', array(
+                                                                            'progress' => $client_progress,
+                                                                        ), $client['id']);
+                                                                        ?> </span>
+                                                                <?php } elseif ($client_progress >= 50 && $client_progress < 80) { ?>
+                                                                    <span class="badge badge-secondary right">
+                                                                        <?= $Total_CRF_available ?> out of <?= $Total_CRF_required ?>
+                                                                    </span>
+                                                                    <hr>
+                                                                    <span class="badge badge-secondary right">
+                                                                        <?= $client_progress ?>%
+                                                                        <?php
+                                                                        $user->updateRecord('clients', array(
+                                                                            'progress' => $client_progress,
+                                                                        ), $client['id']);
+                                                                        ?> </span>
+                                                                <?php } elseif ($client_progress < 50) { ?>
+                                                                    <span class="badge badge-danger right">
+                                                                        <?= $Total_CRF_available ?> out of <?= $Total_CRF_required ?>
+                                                                    </span>
+                                                                    <hr>
+                                                                    <span class="badge badge-danger right">
+                                                                        <?= $client_progress ?>%
+                                                                        <?php
+                                                                        $user->updateRecord('clients', array(
+                                                                            'progress' => $client_progress,
+                                                                        ), $client['id']);
+                                                                        ?>
+                                                                    </span>
+                                                                <?php } ?> -->
                                                             <?php }
                                                         }
                                                     } ?>
