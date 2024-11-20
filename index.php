@@ -76,7 +76,7 @@ if (!$user->isLoggedIn()) {
         }
     }
 } else {
-    Redirect::to('index.php');
+    Redirect::to('dashboard.php');
 }
 ?>
 
