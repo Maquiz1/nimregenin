@@ -805,6 +805,37 @@ if ($user->isLoggedIn()) {
                     $user->updateRecord('lab', array('study_id' => $client_study['study_id']), $lab_id['id']);
                 }
                 $user->updateRecord('clients', array('enrolled' => 1), Input::get('id'));
+
+                $enrollments = $override->getNews('enrollments', 'patient_id', Input::get('id'), 'status', 1);
+
+                if ($enrollments) {
+                    $user->updateRecord('enrollments', array(
+                        'pid' => $study_id,
+                        'enrollment_date' => Input::get('visit_date'),
+                        'status' => 1,
+                        'patient_id' => Input::get('id'),
+                        'remarks' => Input::get('reasons'),
+                        'create_on' => date('Y-m-d H:i:s'),
+                        'staff_id' => $user->data()->id,
+                        'update_on' => date('Y-m-d H:i:s'),
+                        'update_id' => $user->data()->id,
+                        'site_id' => $user->data()->site_id,
+                    ), $enrollments[0]['id']);
+                } else {
+                    $user->createRecord('enrollments', array(
+                        'pid' => $study_id,
+                        'enrollment_date' => Input::get('visit_date'),
+                        'status' => 1,
+                        'patient_id' => Input::get('id'),
+                        'remarks' => Input::get('reasons'),
+                        'create_on' => date('Y-m-d H:i:s'),
+                        'staff_id' => $user->data()->id,
+                        'update_on' => date('Y-m-d H:i:s'),
+                        'update_id' => $user->data()->id,
+                        'site_id' => $user->data()->site_id,
+                    ));
+                }
+
                 $successMessage = 'Enrollment  Added Successful';
                 Redirect::to('info.php?id=3&status=2');
             } else {
@@ -874,6 +905,36 @@ if ($user->isLoggedIn()) {
                 );
 
                 $user->updateRecord('clients', array('enrolled' => 1), Input::get('id'));
+
+                $enrollments = $override->getNews('enrollments', 'patient_id', Input::get('id'), 'status', 1);
+
+                if ($enrollments) {
+                    $user->updateRecord('enrollments', array(
+                        'pid' => $study_id,
+                        'enrollment_date' => Input::get('visit_date'),
+                        'status' => 1,
+                        'patient_id' => Input::get('id'),
+                        'remarks' => Input::get('reasons'),
+                        'create_on' => date('Y-m-d H:i:s'),
+                        'staff_id' => $user->data()->id,
+                        'update_on' => date('Y-m-d H:i:s'),
+                        'update_id' => $user->data()->id,
+                        'site_id' => $user->data()->site_id,
+                    ), $enrollments[0]['id']);
+                } else {
+                    $user->createRecord('enrollments', array(
+                        'pid' => $study_id,
+                        'enrollment_date' => Input::get('visit_date'),
+                        'status' => 1,
+                        'patient_id' => Input::get('id'),
+                        'remarks' => Input::get('reasons'),
+                        'create_on' => date('Y-m-d H:i:s'),
+                        'staff_id' => $user->data()->id,
+                        'update_on' => date('Y-m-d H:i:s'),
+                        'update_id' => $user->data()->id,
+                        'site_id' => $user->data()->site_id,
+                    ));
+                }
                 $successMessage = 'Enrollment  Updated Successful';
                 Redirect::to('info.php?id=3&status=2');
             } else {
@@ -2751,7 +2812,7 @@ if ($user->isLoggedIn()) {
 
                                             if ($client['enrolled'] == 1) {
                                                 $enrolled = 1;
-                                            }                                           
+                                            }
                                             ?>
                                             <tr>
                                                 <!-- <td><input type="checkbox" name="checkbox" /></td> -->
@@ -2993,7 +3054,7 @@ if ($user->isLoggedIn()) {
                                                             <?php if ($enrolled == 1) { ?>
                                                                 <a href="info.php?id=7&cid=<?= $client['id'] ?>" role="button"
                                                                     class="btn btn-success">schedule</a>
-                                                                <hr>                                                                
+                                                                <hr>
                                                             <?php }
                                                         }
                                                     } ?>
@@ -3597,10 +3658,10 @@ if ($user->isLoggedIn()) {
                                                                     <div class="col-md-3">Comments:</div>
                                                                     <div class="col-md-9">
                                                                         <textarea name="comments" rows="4">
-                                                                                                            <?php if ($client['comments']) {
-                                                                                                                print_r($client['comments']);
-                                                                                                            } ?>
-                                                                                                            </textarea>
+                                                                                                                                            <?php if ($client['comments']) {
+                                                                                                                                                print_r($client['comments']);
+                                                                                                                                            } ?>
+                                                                                                                                            </textarea>
                                                                     </div>
                                                                 </div>
 
@@ -3985,7 +4046,7 @@ if ($user->isLoggedIn()) {
                                                                             <div class="form-group">
                                                                                 <label>Notes / Remark / Reason (Option)</label>
                                                                                 <textarea name="reasons" rows="4">
-                                                                                                                        <?= $screening['reasons'] ?>                                                                                </textarea>
+                                                                                                                                                        <?= $screening['reasons'] ?>                                                                                </textarea>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -4563,8 +4624,8 @@ if ($user->isLoggedIn()) {
                                                                             <div class="form-group">
                                                                                 <label>Notes / Remark</label>
                                                                                 <textarea name="reasons" rows="4">
-                                                                                                                        <?= $reasons['reasons'] ?>  
-                                                                                                                        </textarea>
+                                                                                                                                                        <?= $reasons['reasons'] ?>  
+                                                                                                                                                        </textarea>
                                                                             </div>
                                                                         </div>
                                                                     </div>
