@@ -127,8 +127,17 @@ if ($user->isLoggedIn()) {
 
     <ul class="navigation">
         <li class="active">
-            <a href="index1.php">
+            <a href="dashboard.php">
                 <span class="isw-grid"></span><span class="text">Dashboard</span>
+            </a>
+            <a href="info.php?id=3&status=5.php">
+                <span class="isw-grid"></span><span class="text">Registred Clients</span>
+            </a>
+            <a href="add.php?id=4&status=5.php">
+                <span class="isw-grid"></span><span class="text">Register New Client</span>
+            </a>
+            <a href="logout.php">
+                <span class="isw-grid"></span><span class="text">Logout</span>
             </a>
         </li>
         <?php if ($user->data()->accessLevel == 1) { ?>
@@ -142,7 +151,8 @@ if ($user->isLoggedIn()) {
                     </li>
                     <li>
                         <a href="info.php?id=1">
-                            <span class="glyphicon glyphicon-registration-mark"></span><span class="text">Manage staff</span>
+                            <span class="glyphicon glyphicon-registration-mark"></span><span class="text">Manage
+                                staff</span>
                         </a>
                     </li>
                 </ul>
@@ -501,14 +511,16 @@ if ($user->isLoggedIn()) {
 
                 <li>
                     <a href="info.php?id=3&status=5">
-                        <span class="glyphicon glyphicon-registration-mark"></span><span class="text">Registred Clients</span>
+                        <span class="glyphicon glyphicon-registration-mark"></span><span class="text">Registred
+                            Clients</span>
                         <span class="badge badge-secondary badge-pill"><?= $registered ?></span>
                     </a>
                 </li>
 
                 <li>
                     <a href="info.php?id=3&status=6">
-                        <span class="glyphicon glyphicon-registration-mark"></span><span class="text">Clients Not Screened</span>
+                        <span class="glyphicon glyphicon-registration-mark"></span><span class="text">Clients Not
+                            Screened</span>
                         <span class="badge badge-secondary badge-pill"><?= $not_screened ?></span>
                     </a>
                 </li>
@@ -524,7 +536,8 @@ if ($user->isLoggedIn()) {
 
                     <li>
                         <a href="info.php?id=3&status=8">
-                            <span class="glyphicon glyphicon-registration-mark"></span><span class="text">Deleted Clients</span>
+                            <span class="glyphicon glyphicon-registration-mark"></span><span class="text">Deleted
+                                Clients</span>
                             <span class="badge badge-secondary badge-pill"><?= $deleted ?></span>
                         </a>
                     </li>
@@ -545,7 +558,7 @@ if ($user->isLoggedIn()) {
             </ul>
         </li>
 
-        <?php if ($user->data()->accessLevel == 1  && $user->data()->power == 1) { ?>
+        <?php if ($user->data()->accessLevel == 1 && $user->data()->power == 1) { ?>
             <li class="active">
                 <a href="zebra.php" target="_blank">
                     <span class="isw-print"></span><span class="text">Zebra Print</span>
@@ -593,7 +606,8 @@ if ($user->isLoggedIn()) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <h4>Search Report</h4>
                 </div>
                 <form method="post">
@@ -603,14 +617,16 @@ if ($user->isLoggedIn()) {
                                 <div class="row-form clearfix">
                                     <div class="col-md-3">Start Date:</div>
                                     <div class="col-md-9">
-                                        <input value="" class="validate[required,custom[date]]" type="text" name="start" id="date" />
+                                        <input value="" class="validate[required,custom[date]]" type="text" name="start"
+                                            id="date" />
                                         <span>Example: 2010-12-01</span>
                                     </div>
                                 </div>
                                 <div class="row-form clearfix">
                                     <div class="col-md-3">End Date:</div>
                                     <div class="col-md-9">
-                                        <input value="" class="validate[required,custom[date]]" type="text" name="start" id="date" />
+                                        <input value="" class="validate[required,custom[date]]" type="text" name="start"
+                                            id="date" />
                                         <span>Example: 2010-12-01</span>
                                     </div>
                                 </div>
