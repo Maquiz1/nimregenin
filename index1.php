@@ -102,15 +102,15 @@ if ($user->isLoggedIn()) {
       <!-- Content Header (Page header) -->
       <div class="content-header">
         <?php
-        // $Site = '';
-        // if ($user->data()->accessLevel == 1 || $user->data()->accessLevel == 3) {
-        //   $Site = ' ALL SITES';
-        //   if ($_GET['site_id']) {
-        //     $Site = ' ' . ' '. $override->getNews('site', 'status', 1, 'id', $_GET['site_id'])[0]['name'];
-        //   }
-        // } else {
-        //   $Site =' ' . ' ' . $override->getNews('site', 'status', 1, 'id', $user->data()->site_id)[0]['name'];
-        // }
+        $Site = '';
+        if ($user->data()->accessLevel == 1 || $user->data()->accessLevel == 3) {
+          $Site = ' ALL SITES';
+          if ($_GET['site_id']) {
+            $Site = ' ' . ' '. $override->getNews('site', 'status', 1, 'id', $_GET['site_id'])[0]['name'];
+          }
+        } else {
+          $Site =' ' . ' ' . $override->getNews('site', 'status', 1, 'id', $user->data()->site_id)[0]['name'];
+        }
         ?>
         <div class="container-fluid">
           <div class="row mb-2">
