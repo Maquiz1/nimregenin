@@ -2562,7 +2562,8 @@ if ($user->isLoggedIn()) {
                                     <li>
                                         <a href="#" class="isw-settings"></a>
                                         <ul class="dd-list">
-                                            <li><a href="#"><span class="isw-plus"></span> New document</a></li>
+                                            <li><a href="add.php?id=4&status=5"><span class="isw-plus"></span> Add New Client</a></li>
+                                            <li><a href="info.php?id=3&status=5"><span class="isw-plus"></span> List of Registered Clients</a></li>
                                             <li><a href="#"><span class="isw-edit"></span> Edit</a></li>
                                             <li><a href="#"><span class="isw-delete"></span> Delete</a></li>
                                         </ul>
@@ -3654,10 +3655,10 @@ if ($user->isLoggedIn()) {
                                                                     <div class="col-md-3">Comments:</div>
                                                                     <div class="col-md-9">
                                                                         <textarea name="comments" rows="4">
-                                                                                                                                            <?php if ($client['comments']) {
-                                                                                                                                                print_r($client['comments']);
-                                                                                                                                            } ?>
-                                                                                                                                            </textarea>
+                                                                                                                                                    <?php if ($client['comments']) {
+                                                                                                                                                        print_r($client['comments']);
+                                                                                                                                                    } ?>
+                                                                                                                                                    </textarea>
                                                                     </div>
                                                                 </div>
 
@@ -4042,7 +4043,7 @@ if ($user->isLoggedIn()) {
                                                                             <div class="form-group">
                                                                                 <label>Notes / Remark / Reason (Option)</label>
                                                                                 <textarea name="reasons" rows="4">
-                                                                                                                                                        <?= $screening['reasons'] ?>                                                                                </textarea>
+                                                                                                                                                                <?= $screening['reasons'] ?>                                                                                </textarea>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -4620,8 +4621,8 @@ if ($user->isLoggedIn()) {
                                                                             <div class="form-group">
                                                                                 <label>Notes / Remark</label>
                                                                                 <textarea name="reasons" rows="4">
-                                                                                                                                                        <?= $reasons['reasons'] ?>  
-                                                                                                                                                        </textarea>
+                                                                                                                                                                <?= $reasons['reasons'] ?>  
+                                                                                                                                                                </textarea>
                                                                             </div>
                                                                         </div>
                                                                     </div>
