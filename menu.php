@@ -127,7 +127,7 @@ if ($user->isLoggedIn()) {
 
     <ul class="navigation">
         <li class="active">
-            <a href="dashboard.php">
+            <a href="index1.php">
                 <span class="isw-grid"></span><span class="text">Dashboard</span>
             </a>
         </li>
@@ -494,7 +494,7 @@ if ($user->isLoggedIn()) {
             <a href="#"><span class="isw-users"></span><span class="text">Clients Registration</span></a>
             <ul>
                 <li>
-                    <a href="add.php?id=4">
+                    <a href="add.php?id=4&status=5">
                         <span class="glyphicon glyphicon-user"></span><span class="text">Register New Client</span>
                     </a>
                 </li>

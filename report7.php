@@ -37,7 +37,7 @@ if ($user->isLoggedIn()) {
         // Execute the Python script and pass the data
         $pythonScript = "python reports.py '{$dataJson}'";
         $result = shell_exec($pythonScript);
-        
+
 
         // Process the result
         $resultArray = json_decode($result, true);
