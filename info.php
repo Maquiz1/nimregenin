@@ -1475,9 +1475,9 @@ if ($user->isLoggedIn()) {
             }
         } elseif (Input::get('update_crf7')) {
             $validate = $validate->check($_POST, array(
-                'tdate' => array(
-                    'required' => true,
-                ),
+                // 'tdate' => array(
+                //     'required' => true,
+                // ),
 
             ));
             if ($validate->passed()) {
