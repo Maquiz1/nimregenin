@@ -44,7 +44,7 @@ if (!$user->isLoggedIn()) {
                             } catch (Exception $e) {
                             }
 
-                            Redirect::to('dashboard.php');
+                            Redirect::to('index1.php');
                         } else {
                             $usr = $override->get('user', 'username', Input::get('username'));
                             if ($usr && $usr[0]['count'] < 3) {
@@ -76,7 +76,7 @@ if (!$user->isLoggedIn()) {
         }
     }
 } else {
-    Redirect::to('dashboard.php');
+    Redirect::to('index1.php');
 }
 ?>
 

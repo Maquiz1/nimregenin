@@ -35,13 +35,39 @@ class OverideData
     }
 
 
+    public function getUniqueYears($table1, $date_col1, $table2, $date_col2)
+    {
+        $query = $this->_pdo->query("
+        SELECT DISTINCT YEAR($date_col1) as year FROM $table1
+        UNION
+        SELECT DISTINCT YEAR($date_col2) as year FROM $table2
+    ");
 
-    // public function get1($table, $where, $id, $where1, $id1, $where2, $id2, $where3, $id3)
-    // {
-    //     $query = $this->_pdo->query("SELECT * FROM $table WHERE ($where = '$id' OR $where1 = '$id1') AND $where2 = '$id2' AND $where3 = '$id3'");
-    //     $result = $query->fetchAll(PDO::FETCH_ASSOC);
-    //     return $result;
-    // }
+        return $query->fetchAll(PDO::FETCH_COLUMN);
+    }
+
+    public function countDataByYear($table, $date_col, $year, $field, $value, $site_field, $site_id)
+    {
+        $query = $this->_pdo->prepare("
+        SELECT COUNT(*) as count FROM $table
+        WHERE $field = ? AND YEAR($date_col) = ? AND $site_field = ?
+    ");
+        $query->execute([$value, $year, $site_id]);
+        return $query->fetch(PDO::FETCH_ASSOC)['count'];
+    }
+
+    public function countDataByMonthYear($table, $date_col, $year, $field, $value, $site_field, $site_id)
+    {
+        $query = $this->_pdo->prepare("
+        SELECT COUNT(*) as count FROM $table
+        WHERE $field = ? AND YEAR($date_col) = ? AND $site_field = ?
+    ");
+        $query->execute([$value, $year, $site_id]);
+        return $query->fetch(PDO::FETCH_ASSOC)['count'];
+    }
+
+
+
 
     public function get6($table, $where, $id, $where2, $id2, $where3, $id3, $where4, $id4)
     {
@@ -1026,13 +1052,13 @@ class OverideData
 
         foreach ($result as $table) {
 
-            $result         =   $this->_pdo->query('SELECT * FROM ' . $tables);
-            $fields_amount  =   $result->columnCount();
-            $rows_num       =   $result->rowCount();
-            $res            =   $this->_pdo->query('SHOW CREATE TABLE ' . $tables);
-            $TableMLine     =   $res->fetchAll(PDO::FETCH_ASSOC);
+            $result = $this->_pdo->query('SELECT * FROM ' . $tables);
+            $fields_amount = $result->columnCount();
+            $rows_num = $result->rowCount();
+            $res = $this->_pdo->query('SHOW CREATE TABLE ' . $tables);
+            $TableMLine = $res->fetchAll(PDO::FETCH_ASSOC);
 
-            $content        = (!isset($content) ?  '' : $content) . "\n\n" . $TableMLine[1] . ";\n\n";
+            $content = (!isset($content) ? '' : $content) . "\n\n" . $TableMLine[1] . ";\n\n";
 
             for ($i = 0, $st_counter = 0; $i < $fields_amount; $i++, $st_counter = 0) {
                 while ($row = $result->fetchAll(PDO::FETCH_ASSOC)) {
@@ -1094,7 +1120,7 @@ class OverideData
         $mysqli = new mysqli($host, $user, $pass, $name);
         $mysqli->select_db($name);
         $mysqli->query("SET NAMES 'utf8'");
-        $queryTables    = $mysqli->query("SHOW TABLES");
+        $queryTables = $mysqli->query("SHOW TABLES");
         while ($row = $queryTables->fetch_row()) {
             $target_tables[] = $row['0']; //put each table name into array
         }
@@ -1102,12 +1128,12 @@ class OverideData
             $target_tables = array_intersect($target_tables, $tables);
         }
         foreach ($target_tables as $table) {
-            $result         =   $mysqli->query('SELECT * FROM ' . $table);
-            $fields_amount  =   $result->field_count;
-            $rows_num       =   $mysqli->affected_rows;
-            $res            =   $mysqli->query('SHOW CREATE TABLE ' . $table);
-            $TableMLine     =   $res->fetch_row();
-            $content        = (!isset($content) ?  '' : $content) . "\n\n" . $TableMLine[1] . ";\n\n";
+            $result = $mysqli->query('SELECT * FROM ' . $table);
+            $fields_amount = $result->field_count;
+            $rows_num = $mysqli->affected_rows;
+            $res = $mysqli->query('SHOW CREATE TABLE ' . $table);
+            $TableMLine = $res->fetch_row();
+            $content = (!isset($content) ? '' : $content) . "\n\n" . $TableMLine[1] . ";\n\n";
 
             for ($i = 0, $st_counter = 0; $i < $fields_amount; $i++, $st_counter = 0) {
                 while ($row = $result->fetch_row()) {
@@ -1698,4 +1724,19 @@ WHERE t1.status = '1' AND t1.site_id = '$site'  AND t2.expected_date <= '$date' 
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    public function getCountByMonthYear($table, $col1, $val1, $month, $year, $col2 = null, $val2 = null)
+    {
+        $query = "SELECT COUNT(*) AS count FROM $table WHERE $col1 = ? AND MONTH(created_on) = ? AND YEAR(created_on) = ?";
+        $params = [$val1, $month, $year];
+
+        if ($col2 !== null && $val2 !== null) {
+            $query .= " AND $col2 = ?";
+            $params[] = $val2;
+        }
+
+        $result = $this->db->query($query, $params);
+        return $result ? $result[0]['count'] : 0;
+    }
+
 }
