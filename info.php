@@ -2278,7 +2278,7 @@ if ($user->isLoggedIn()) {
                                                             <hr>
                                                             <a href="#asignID<?= $client['id'] ?>" role="button" class="btn btn-success" data-toggle="modal">asign ID</a>
 <hr>
-                                                            <a href="#client<?= $client['id'] ?>" role="button" class="btn btn-info" data-toggle="modal">Edit</a>
+                                                            <a href="add.php?id=2&cid=<?= $client['id'] ?>" class="btn btn-info">Edit</a>
 
 <hr>
                                                             <?php

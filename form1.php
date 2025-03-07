@@ -1963,7 +1963,7 @@ if ($user->isLoggedIn()) {
                                             <!-- Comments -->
                                             <div class="form-group">
                                                 <label for="comments">Comments</label>
-                                                <textarea name="comments" class="form-control" rows="4"></textarea>
+                                                <textarea name="comments" class="form-control" rows="3"></textarea>
                                             </div>
                                         </div>
                                         <!-- Submit Button -->

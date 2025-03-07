@@ -135,81 +135,71 @@ if ($user->isLoggedIn()) {
                 ),
             ));
             if ($validate->passed()) {
-                $errorM = false;
                 try {
-                    $attachment_file = Input::get('image');
-                    if (!empty($_FILES['image']["tmp_name"])) {
-                        $attach_file = $_FILES['image']['type'];
-                        if ($attach_file == "image/jpeg" || $attach_file == "image/jpg" || $attach_file == "image/png" || $attach_file == "image/gif") {
-                            $folderName = 'clients/';
-                            $attachment_file = $folderName . basename($_FILES['image']['name']);
-                            if (@move_uploaded_file($_FILES['image']["tmp_name"], $attachment_file)) {
-                                $file = true;
-                            } else { {
-                                    $errorM = true;
-                                    $errorMessage = 'Your profile Picture Not Uploaded ,';
-                                }
-                            }
-                        } else {
-                            $errorM = true;
-                            $errorMessage = 'None supported file format';
-                        } //not supported format
+                    $age = $user->dateDiffYears(date('Y-m-d'), Input::get('dob'));
+                    $client = $override->get('clients', 'id', $_GET['cid']);
+                    if ($client) {
+                        $user->updateRecord('clients', array(
+                            'study_id' => '',
+                            'clinic_date' => Input::get('clinic_date'),
+                            'firstname' => Input::get('firstname'),
+                            'middlename' => Input::get('middlename'),
+                            'lastname' => Input::get('lastname'),
+                            'dob' => Input::get('dob'),
+                            'age' => $age,
+                            'id_number' => Input::get('id_number'),
+                            'gender' => Input::get('gender'),
+                            'marital_status' => Input::get('marital_status'),
+                            'education_level' => Input::get('education_level'),
+                            'workplace' => Input::get('workplace'),
+                            'occupation' => Input::get('occupation'),
+                            'national_id' => Input::get('national_id'),
+                            'phone_number' => Input::get('phone_number'),
+                            'other_phone' => Input::get('other_phone'),
+                            'region' => Input::get('region'),
+                            'district' => Input::get('district'),
+                            'street' => Input::get('street'),
+                            'ward' => Input::get('ward'),
+                            'block_no' => Input::get('block_no'),
+                            'site_id' => $user->data()->site_id,
+                            'staff_id' => $user->data()->id,
+                            'comments' => Input::get('comments'),
+                            'initials' => Input::get('initials'),
+                            'status' => 1,
+                        ));
                     } else {
-                        $attachment_file = '';
+                        $user->createRecord('clients', array(
+                            'study_id' => '',
+                            'clinic_date' => Input::get('clinic_date'),
+                            'firstname' => Input::get('firstname'),
+                            'middlename' => Input::get('middlename'),
+                            'lastname' => Input::get('lastname'),
+                            'dob' => Input::get('dob'),
+                            'age' => $age,
+                            'id_number' => Input::get('id_number'),
+                            'gender' => Input::get('gender'),
+                            'marital_status' => Input::get('marital_status'),
+                            'education_level' => Input::get('education_level'),
+                            'workplace' => Input::get('workplace'),
+                            'occupation' => Input::get('occupation'),
+                            'national_id' => Input::get('national_id'),
+                            'phone_number' => Input::get('phone_number'),
+                            'other_phone' => Input::get('other_phone'),
+                            'region' => Input::get('region'),
+                            'district' => Input::get('district'),
+                            'street' => Input::get('street'),
+                            'ward' => Input::get('ward'),
+                            'block_no' => Input::get('block_no'),
+                            'site_id' => $user->data()->site_id,
+                            'staff_id' => $user->data()->id,
+                            'comments' => Input::get('comments'),
+                            'initials' => Input::get('initials'),
+                            'status' => 1,
+                            'created_on' => date('Y-m-d'),
+                        ));
+                        $successMessage = 'Client Added Successful';
                     }
-                    if ($errorM == false) {
-                        $chk = true;
-                        $screening_id = $random->get_rand_alphanumeric(8);
-                        $check_screening = $override->get('clients', 'participant_id', $screening_id)[0];
-                        while ($chk) {
-                            $screening_id = strtoupper($random->get_rand_alphanumeric(8));
-                            if (!$check_screening = $override->get('clients', 'participant_id', $screening_id)) {
-                                $chk = false;
-                            }
-                        }
-                        $age = $user->dateDiffYears(date('Y-m-d'), Input::get('dob'));
-                        $check_clients = $override->countData1('clients', 'firstname', Input::get('firstname'), 'middlename', Input::get('middlename'), 'lastname', Input::get('lastname'));
-
-                        if ($check_clients >= 1) {
-                            $errorMessage = 'Client Already Registered';
-                        } else {
-
-                            $user->createRecord('clients', array(
-                                'participant_id' => $screening_id,
-                                'study_id' => '',
-                                'clinic_date' => Input::get('clinic_date'),
-                                'firstname' => Input::get('firstname'),
-                                'middlename' => Input::get('middlename'),
-                                'lastname' => Input::get('lastname'),
-                                'dob' => Input::get('dob'),
-                                'age' => $age,
-                                'id_number' => Input::get('id_number'),
-                                'gender' => Input::get('gender'),
-                                'marital_status' => Input::get('marital_status'),
-                                'education_level' => Input::get('education_level'),
-                                'workplace' => Input::get('workplace'),
-                                'occupation' => Input::get('occupation'),
-                                'national_id' => Input::get('national_id'),
-                                'phone_number' => Input::get('phone_number'),
-                                'other_phone' => Input::get('other_phone'),
-                                'region' => Input::get('region'),
-                                'district' => Input::get('district'),
-                                'street' => Input::get('street'),
-                                'ward' => Input::get('ward'),
-                                'block_no' => Input::get('block_no'),
-                                'site_id' => $user->data()->site_id,
-                                'staff_id' => $user->data()->id,
-                                'client_image' => $attachment_file,
-                                'comments' => Input::get('comments'),
-                                'initials' => Input::get('initials'),
-                                'status' => 1,
-                                'created_on' => date('Y-m-d'),
-                            ));
-
-                            $successMessage = 'Client Added Successful';
-                            Redirect::to('info.php?id=3');
-                        }
-                    }
+                    Redirect::to('info.php?id=2&cid=' . $_GET['cid'] . '&msg=' . $successMessage);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -361,6 +351,7 @@ if ($user->isLoggedIn()) {
                                 $user->updateRecord('chemotherapy', array(
                                     'vid' => $_GET["vid"],
                                     'vcode' => $_GET["vcode"],
+                                    'study_id' => $_GET['sid'],
                                     'other_herbal' => Input::get('other_herbal'),
                                     'chemotherapy_performed' => Input::get('chemotherapy_performed'),
                                     'chemotherapy' => Input::get('chemotherapy')[$i],
@@ -1365,6 +1356,9 @@ if ($user->isLoggedIn()) {
         <?php if ($_GET['id'] == 1 && ($user->data()->position == 1 || $user->data()->position == 2)) { ?>
 
         <?php } elseif ($_GET['id'] == 2) { ?>
+            <?php
+            $client = $override->get('clients', 'id', $_GET['cid'])[0];
+            ?>
             <form id="clients" enctype="multipart/form-data" method="post" autocomplete="off">
                 <div class="card-body">
                     <div class="row">
@@ -1386,7 +1380,9 @@ if ($user->isLoggedIn()) {
                             <!-- Date -->
                             <div class="form-group">
                                 <label for="clinic_date">Date:</label>
-                                <input type="date" class="form-control" name="clinic_date" id="clinic_date" required />
+                                <input type="date" class="form-control" name="clinic_date" id="clinic_date" value="<?php if ($client['clinic_date']) {
+                                    print_r($client['clinic_date']);
+                                } ?>" required />
                             </div>
                         </div>
                     </div>
@@ -1397,7 +1393,9 @@ if ($user->isLoggedIn()) {
                             <!-- First Name -->
                             <div class="form-group">
                                 <label for="firstname">First Name</label>
-                                <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Type firstname..." onkeyup="myFunction()" required>
+                                <input type="text" class="form-control" name="firstname" id="firstname" value="<?php if ($client['firstname']) {
+                                    print_r($client['firstname']);
+                                } ?>" placeholder="Type firstname..." onkeyup="myFunction()" required>
                             </div>
                         </div>
 
@@ -1406,7 +1404,9 @@ if ($user->isLoggedIn()) {
                             <!-- Middle Name -->
                             <div class="form-group">
                                 <label for="middlename">Middle Name</label>
-                                <input type="text" class="form-control" name="middlename" id="middlename" placeholder="Type middlename..." onkeyup="myFunction()" required>
+                                <input type="text" class="form-control" name="middlename" id="middlename" value="<?php if ($client['middlename']) {
+                                    print_r($client['middlename']);
+                                } ?>" placeholder="Type middlename..." onkeyup="myFunction()" required>
                             </div>
                         </div>
 
@@ -1415,7 +1415,9 @@ if ($user->isLoggedIn()) {
                             <!-- Last Name -->
                             <div class="form-group">
                                 <label for="lastname">Last Name</label>
-                                <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Type lastname..." onkeyup="myFunction()" required>
+                                <input type="text" class="form-control" name="lastname" id="lastname" value="<?php if ($client['lastname']) {
+                                    print_r($client['lastname']);
+                                } ?>" placeholder="Type lastname..." onkeyup="myFunction()" required>
                             </div>
                         </div>
                     </div>
@@ -1426,7 +1428,9 @@ if ($user->isLoggedIn()) {
                             <!-- Date of Birth -->
                             <div class="form-group">
                                 <label for="dob">Date of Birth:</label>
-                                <input type="date" class="form-control" name="dob" id="dob" required />
+                                <input type="date" class="form-control" name="dob" id="dob" value="<?php if ($client['dob']) {
+                                    print_r($client['dob']);
+                                } ?>" required />
                             </div>
                         </div>
 
@@ -1435,7 +1439,9 @@ if ($user->isLoggedIn()) {
                             <!-- Age -->
                             <div class="form-group">
                                 <label for="age">Age</label>
-                                <input type="number" class="form-control" name="age" id="age" required>
+                                <input type="number" class="form-control" name="age" id="age" value="<?php if ($client['age']) {
+                                    print_r($client['age']);
+                                } ?>" required>
                             </div>
                         </div>
 
@@ -1444,7 +1450,9 @@ if ($user->isLoggedIn()) {
                             <!-- Initials -->
                             <div class="form-group">
                                 <label for="initials">Initials</label>
-                                <input type="text" class="form-control" name="initials" id="initials" required>
+                                <input type="text" class="form-control" name="initials" id="initials" value="<?php if ($client['initials']) {
+                                    print_r($client['initials']);
+                                } ?>" required>
                             </div>
                         </div>
                     </div>
@@ -1456,7 +1464,11 @@ if ($user->isLoggedIn()) {
                             <div class="form-group">
                                 <label for="gender">Gender</label>
                                 <select name="gender" class="form-control" required>
-                                    <option value="">Select</option>
+                                    <option value="<?php if ($client['gender']) {
+                                        print_r($client['gender']);
+                                    } ?>"><?php if ($client['gender']) {
+                                         print_r($client['gender']);
+                                     } ?></option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
                                 </select>
@@ -1468,7 +1480,9 @@ if ($user->isLoggedIn()) {
                             <!-- Hospital ID Number -->
                             <div class="form-group">
                                 <label for="id_number">Hospital ID Number</label>
-                                <input type="text" class="form-control" name="id_number" id="id_number">
+                                <input type="text" class="form-control" name="id_number" id="id_number" value="<?php if ($client['id_number']) {
+                                    print_r($client['id_number']);
+                                } ?>">
                             </div>
                         </div>
 
@@ -1478,7 +1492,11 @@ if ($user->isLoggedIn()) {
                             <div class="form-group">
                                 <label for="marital_status">Marital Status</label>
                                 <select name="marital_status" class="form-control" required>
-                                    <option value="">Select</option>
+                                    <option value="<?php if ($client['marital_status']) {
+                                        print_r($client['marital_status']);
+                                    } ?>"><?php if ($client['marital_status']) {
+                                         print_r($client['marital_status']);
+                                     } ?></option>
                                     <option value="Single">Single</option>
                                     <option value="Married">Married</option>
                                     <option value="Divorced">Divorced</option>
@@ -1497,7 +1515,11 @@ if ($user->isLoggedIn()) {
                             <div class="form-group">
                                 <label for="education_level">Education Level</label>
                                 <select name="education_level" class="form-control" required>
-                                    <option value="">Select</option>
+                                    <option value="<?php if ($client['education_level']) {
+                                        print_r($client['education_level']);
+                                    } ?>"><?php if ($client['education_level']) {
+                                         print_r($client['education_level']);
+                                     } ?></option>
                                     <option value="Not attended school">Not attended school</option>
                                     <option value="Primary">Primary</option>
                                     <option value="Secondary">Secondary</option>
@@ -1514,7 +1536,9 @@ if ($user->isLoggedIn()) {
                             <!-- Occupation -->
                             <div class="form-group">
                                 <label for="occupation">Occupation</label>
-                                <input type="text" class="form-control" name="occupation" id="occupation" required>
+                                <input type="text" class="form-control" name="occupation" id="occupation" value="<?php if ($client['occupation']) {
+                                    print_r($client['occupation']);
+                                } ?>" required>
                             </div>
                         </div>
 
@@ -1523,7 +1547,9 @@ if ($user->isLoggedIn()) {
                             <!-- National ID -->
                             <div class="form-group">
                                 <label for="national_id">National ID</label>
-                                <input type="text" class="form-control" name="national_id" id="national_id">
+                                <input type="text" class="form-control" name="national_id" id="national_id" value="<?php if ($client['national_id']) {
+                                    print_r($client['national_id']);
+                                } ?>">
                             </div>
                         </div>
                     </div>
@@ -1534,7 +1560,9 @@ if ($user->isLoggedIn()) {
                             <!-- Phone Number -->
                             <div class="form-group">
                                 <label for="phone">Phone Number</label>
-                                <input type="text" class="form-control" name="phone_number" id="phone" placeholder="Example: 0700 000 111" required>
+                                <input type="text" class="form-control" name="phone_number" id="phone" value="<?php if ($client['phone_number']) {
+                                    print_r($client['phone_number']);
+                                } ?>" placeholder="Example: 0700 000 111" required>
                             </div>
                         </div>
 
@@ -1543,7 +1571,9 @@ if ($user->isLoggedIn()) {
                             <!-- Relative's Phone Number -->
                             <div class="form-group">
                                 <label for="other_phone">Relative's Phone Number</label>
-                                <input type="text" class="form-control" name="other_phone" id="other_phone" placeholder="Example: 0700 000 111">
+                                <input type="text" class="form-control" name="other_phone" id="other_phone" value="<?php if ($client['other_phone']) {
+                                    print_r($client['other_phone']);
+                                } ?>" placeholder="Example: 0700 000 111">
                             </div>
                         </div>
 
@@ -1552,7 +1582,9 @@ if ($user->isLoggedIn()) {
                             <!-- Residence Street -->
                             <div class="form-group">
                                 <label for="street">Residence Street</label>
-                                <input type="text" class="form-control" name="street" id="street" required>
+                                <input type="text" class="form-control" name="street" id="street" value="<?php if ($client['street']) {
+                                    print_r($client['street']);
+                                } ?>" required>
                             </div>
                         </div>
                     </div>
@@ -1563,7 +1595,9 @@ if ($user->isLoggedIn()) {
                             <!-- Region -->
                             <div class="form-group">
                                 <label for="region">Region</label>
-                                <input type="text" class="form-control" name="region" id="region" required>
+                                <input type="text" class="form-control" name="region" id="region" value="<?php if ($client['region']) {
+                                    print_r($client['region']);
+                                } ?>" required>
                             </div>
                         </div>
 
@@ -1572,7 +1606,9 @@ if ($user->isLoggedIn()) {
                             <!-- District -->
                             <div class="form-group">
                                 <label for="district">District</label>
-                                <input type="text" class="form-control" name="district" id="district" required>
+                                <input type="text" class="form-control" name="district" id="district" value="<?php if ($client['district']) {
+                                    print_r($client['district']);
+                                } ?>" required>
                             </div>
                         </div>
 
@@ -1581,20 +1617,19 @@ if ($user->isLoggedIn()) {
                             <!-- Ward -->
                             <div class="form-group">
                                 <label for="ward">Ward</label>
-                                <input type="text" class="form-control" name="ward" id="ward" required>
+                                <input type="text" class="form-control" name="ward" id="ward" value="<?php if ($client['ward']) {
+                                    print_r($client['ward']);
+                                } ?>" required>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <!-- Column 1 -->
-                        <div class="col-md-4">
-                            <!-- Comments -->
-                            <div class="form-group">
-                                <label for="comments">Comments</label>
-                                <textarea name="comments" class="form-control" rows="4"></textarea>
-                            </div>
-                        </div>
+                    <!-- Comments -->
+                    <div class="form-group">
+                        <label for="comments">Comments</label>
+                        <textarea name="comments" class="form-control" rows="3"><?php if ($client['comments']) {
+                            print_r($client['comments']);
+                        } ?></textarea>
                     </div>
                 </div>
                 <!-- Submit Button -->
