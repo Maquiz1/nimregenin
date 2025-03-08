@@ -8,8 +8,7 @@ $random = new Random();
 $successMessage = null;
 $pageError = null;
 $errorMessage = null;
-
-$numRec = 15;
+$numRec = 10;
 if ($user->isLoggedIn()) {
     if (Input::exists('post')) {
         $validate = new validate();
@@ -31,6 +30,57 @@ if ($user->isLoggedIn()) {
             } else {
                 $pageError = $validate->errors();
             }
+        } elseif (Input::get('edit_staff')) {
+            $validate = new validate();
+            $validate = $validate->check($_POST, array(
+                'firstname' => array(
+                    'required' => true,
+                ),
+                'lastname' => array(
+                    'required' => true,
+                ),
+                'position' => array(
+                    'required' => true,
+                ),
+                'phone_number' => array(
+                    'required' => true,
+                ),
+                'email_address' => array(),
+            ));
+            if ($validate->passed()) {
+                $salt = $random->get_rand_alphanumeric(32);
+                $password = '12345678';
+                switch (Input::get('position')) {
+                    case 1:
+                        $accessLevel = 1;
+                        break;
+                    case 2:
+                        $accessLevel = 2;
+                        break;
+                    case 3:
+                        $accessLevel = 3;
+                        break;
+                }
+                try {
+                    $user->updateRecord('user', array(
+                        'firstname' => Input::get('firstname'),
+                        'lastname' => Input::get('lastname'),
+                        'position' => Input::get('position'),
+                        'phone_number' => Input::get('phone_number'),
+                        'email_address' => Input::get('email_address'),
+                        'accessLevel' => $accessLevel,
+                        'power' => Input::get('power'),
+                        'site_id' => Input::get('site'),
+                        'user_id' => $user->data()->id,
+                    ), Input::get('id'));
+
+                    $successMessage = 'Account Updated Successful';
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
         } elseif (Input::get('reset_pass')) {
             $salt = $random->get_rand_alphanumeric(32);
             $password = '12345678';
@@ -39,24 +89,39 @@ if ($user->isLoggedIn()) {
                 'salt' => $salt,
             ), Input::get('id'));
             $successMessage = 'Password Reset Successful';
-        } elseif (Input::get('lock_account')) {
-            $user->updateRecord('user', array(
-                'count' => 4,
-            ), Input::get('id'));
-            $successMessage = 'Account locked Successful';
         } elseif (Input::get('unlock_account')) {
             $user->updateRecord('user', array(
                 'count' => 0,
             ), Input::get('id'));
             $successMessage = 'Account Unlock Successful';
+        } elseif (Input::get('change_screening_status')) {
+            $user->updateRecord('clients', array(
+                'screened' => Input::get('screened'),
+            ), Input::get('id'));
+            $successMessage = 'Screening status Updated Successful';
+        } elseif (Input::get('change_eligibility1_status')) {
+            $user->updateRecord('clients', array(
+                'eligibility1' => Input::get('eligibility1'),
+            ), Input::get('id'));
+            $successMessage = 'Eligibility1 status Updated Successful';
+        } elseif (Input::get('change_eligibility2_status')) {
+            $user->updateRecord('clients', array(
+                'eligibility2' => Input::get('eligibility2'),
+            ), Input::get('id'));
+            $successMessage = 'Eligibility2 status Updated Successful';
+        } elseif (Input::get('change_eligible_status')) {
+            $user->updateRecord('clients', array(
+                'eligible' => Input::get('eligible'),
+            ), Input::get('id'));
+            $successMessage = 'Eligible status Updated Successful';
+        } elseif (Input::get('change_enrolled_status')) {
+            $user->updateRecord('clients', array(
+                'enrolled' => Input::get('enrolled'),
+            ), Input::get('id'));
+            $successMessage = 'Enrolled status Updated Successful';
         } elseif (Input::get('delete_staff')) {
             $user->updateRecord('user', array(
                 'status' => 0,
-            ), Input::get('id'));
-            $successMessage = 'User Deleted Successful';
-        } elseif (Input::get('restore_staff')) {
-            $user->updateRecord('user', array(
-                'status' => 1,
             ), Input::get('id'));
             $successMessage = 'User Deleted Successful';
         } elseif (Input::get('delete_client')) {
@@ -64,6 +129,34 @@ if ($user->isLoggedIn()) {
                 'status' => 0,
             ), Input::get('id'));
             $successMessage = 'Client Deleted Successful';
+        } elseif (Input::get('delete_schedule')) {
+            $user->visit_delete(Input::get('id'));
+            // $this->deleteRecord('visit', 'client_id', Input::get('id'));
+            $successMessage = 'Client Schedule Deleted Successful';
+        } elseif (Input::get('asign_id')) {
+            $client_study = $override->getNews('clients', 'id', Input::get('id'), 'status', 1)[0];
+            $std_id = $override->getNews('study_id', 'site_id', $user->data()->site_id, 'status', 0)[0];
+            $screening_id = $override->get('screening', 'client_id', Input::get('id'))[0];
+            $lab_id = $override->get('lab', 'client_id', Input::get('id'))[0];
+            $visit_id = $override->get('visit', 'client_id', Input::get('id'))[0];
+
+            if (!$client_study['study_id']) {
+                $study_id = $std_id['study_id'];
+            } else {
+                $study_id = $client_study['study_id'];
+            }
+
+
+            $user->updateRecord('study_id', array('status' => 1, 'client_id' => Input::get('id')), $std_id['id']);
+            $user->updateRecord('screening', array('study_id' => $std_id['study_id']), $screening_id['id']);
+            $user->updateRecord('lab', array('study_id' => $std_id['study_id']), $lab_id['id']);
+            $user->updateRecord('clients', array('study_id' => $std_id['study_id'], 'enrolled' => 1), Input::get('id'));
+
+            // print_r($visit_id);
+
+            // $user->visit_delete(Input::get('id'));
+            // $this->deleteRecord('visit', 'client_id', Input::get('id'));
+            $successMessage = 'Client Schedule Deleted Successful';
         } elseif (Input::get('edit_study')) {
             $validate = $validate->check($_POST, array(
                 'name' => array(
@@ -116,118 +209,525 @@ if ($user->isLoggedIn()) {
             } else {
                 $pageError = $validate->errors();
             }
-        } elseif (Input::get('add_screening')) {
+        } elseif (Input::get('edit_client')) {
             $validate = $validate->check($_POST, array(
-                'screening_date' => array(
+                'clinic_date' => array(
                     'required' => true,
                 ),
-                'lab_request' => array(
+                'firstname' => array(
                     'required' => true,
                 ),
-                'ncd' => array(
+                'lastname' => array(
                     'required' => true,
                 ),
-                'consent' => array(
+                'dob' => array(
                     'required' => true,
                 ),
-                'residence' => array(
+                'street' => array(
+                    'required' => true,
+                ),
+                'phone_number' => array(
                     'required' => true,
                 ),
             ));
             if ($validate->passed()) {
                 try {
-                    $eligibility = 0;
-                    if ((Input::get('consent') == 1 && Input::get('residence') == 1) && (Input::get('ncd') == 1)) {
-                        $eligibility = 1;
+                    $attachment_file = Input::get('image');
+                    if (!empty($_FILES['image']["tmp_name"])) {
+                        $attach_file = $_FILES['image']['type'];
+                        if ($attach_file == "image/jpeg" || $attach_file == "image/jpg" || $attach_file == "image/png" || $attach_file == "image/gif") {
+                            $folderName = 'clients/';
+                            $attachment_file = $folderName . basename($_FILES['image']['name']);
+                            if (@move_uploaded_file($_FILES['image']["tmp_name"], $attachment_file)) {
+                                $file = true;
+                            } else { {
+                                    $errorM = true;
+                                    $errorMessage = 'Your profile Picture Not Uploaded ,';
+                                }
+                            }
+                        } else {
+                            $errorM = true;
+                            $errorMessage = 'None supported file format';
+                        } //not supported format
+                    } else {
+                        $attachment_file = '';
                     }
-
-                    $doctor_confirm = 0;
-                    if ((Input::get('consent') == 1 && Input::get('residence') == 1)) {
-                        if (Input::get('ncd') == 1) {
-                            $doctor_confirm = 2;
-                        }
+                    if (!empty($_FILES['image']["tmp_name"])) {
+                        $image = $attachment_file;
+                    } else {
+                        $image = Input::get('client_image');
                     }
-
-                    if ($override->getNews('screening', 'status', 1, 'patient_id', Input::get('cid'))) {
-                        $user->updateRecord('screening', array(
-                            'study_id' => Input::get('study_id'),
-                            'screening_date' => Input::get('screening_date'),
-                            'conset_date' => Input::get('conset_date'),
-                            'ncd' => Input::get('ncd'),
-                            'lab_request' => Input::get('lab_request'),
-                            'lab_request_date' => Input::get('lab_request_date'),
-                            'screening_type' => Input::get('screening_type'),
-                            'consent' => Input::get('consent'),
-                            'residence' => Input::get('residence'),
-                            'created_on' => date('Y-m-d'),
-                            'patient_id' => Input::get('cid'),
-                            'staff_id' => $user->data()->id,
-                            'eligibility' => $eligibility,
-                            'doctor_confirm' => $doctor_confirm,
-                            'status' => 1,
+                    if ($errorM == false) {
+                        $age = $user->dateDiffYears(date('Y-m-d'), Input::get('dob'));
+                        $user->updateRecord('clients', array(
+                            'clinic_date' => Input::get('clinic_date'),
+                            'firstname' => Input::get('firstname'),
+                            'middlename' => Input::get('middlename'),
+                            'lastname' => Input::get('lastname'),
+                            'dob' => Input::get('dob'),
+                            'age' => $age,
+                            'id_number' => Input::get('id_number'),
+                            'gender' => Input::get('gender'),
+                            'marital_status' => Input::get('marital_status'),
+                            'education_level' => Input::get('education_level'),
+                            'workplace' => Input::get('workplace'),
+                            'occupation' => Input::get('occupation'),
+                            'national_id' => Input::get('national_id'),
+                            'phone_number' => Input::get('phone_number'),
+                            'other_phone' => Input::get('other_phone'),
+                            'region' => Input::get('region'),
+                            'district' => Input::get('district'),
+                            'street' => Input::get('street'),
+                            'ward' => Input::get('ward'),
+                            'block_no' => Input::get('block_no'),
                             'site_id' => $user->data()->site_id,
+                            'staff_id' => $user->data()->id,
+                            'client_image' => $image,
+                            'comments' => Input::get('comments'),
+                            'initials' => Input::get('initials'),
+                            'status' => 1,
                         ), Input::get('id'));
 
-                        $visit = $override->getNews('visit', 'client_id', Input::get('cid'), 'seq_no', 0, 'visit_name', 'Screening')[0];
+                        $successMessage = 'Client Updated Successful';
+                    }
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('edit_visit2')) {
+            $validate = $validate->check($_POST, array(
+                'visit_date' => array(
+                    'required' => true,
+                ),
+                'visit_status' => array(
+                    'required' => true,
+                ),
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->updateRecord('visit', array(
+                        'visit_date' => Input::get('visit_date'),
+                        'created_on' => date('Y-m-d'),
+                        'status' => 1,
+                        'visit_status' => Input::get('visit_status'),
+                    ), Input::get('id'));
 
-                        $user->updateRecord('visit', array(
-                            'expected_date' => Input::get('screening_date'),
-                            'visit_date' => Input::get('screening_date'),
-                        ), $visit['id']);
+                    if (Input::get('seq') == 2) {
+                        $user->createRecord('visit', array(
+                            'study_id' => $_GET['sid'],
+                            'visit_name' => 'Visit 3',
+                            'visit_code' => 'V3',
+                            'visit_window' => 14,
+                            'status' => 0,
+                            'seq_no' => 3,
+                            'client_id' => Input::get('cid'),
+                        ));
+                    }
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('add_screening')) {
+            $validate = $validate->check($_POST, array());
+            if ($validate->passed()) {
+                $eligibility = 0;
+                if (
+                    Input::get('age_18') == 1 && Input::get('tr_pcr') == 1 && Input::get('hospitalized') == 1 &&
+                    Input::get('moderate_severe') == 1 && Input::get('peptic_ulcers') == 2 && Input::get('consented') == 1 && (Input::get('pregnant') == 2 || Input::get('pregnant') == 3)
+                ) {
+                    $eligibility = 1;
+                }
+                try {
+                    if ($override->get('screening', 'client_id', Input::get('cid'))) {
+                        $cl_id = $override->get('screening', 'client_id', Input::get('cid'))[0]['id'];
+                        $user->updateRecord('screening', array(
+                            'sample_date' => Input::get('sample_date'),
+                            'results_date' => Input::get('results_date'),
+                            'covid_result' => Input::get('covid_result'),
+                            'age_18' => Input::get('age_18'),
+                            'tr_pcr' => Input::get('tr_pcr'),
+                            'hospitalized' => Input::get('hospitalized'),
+                            'moderate_severe' => Input::get('moderate_severe'),
+                            'peptic_ulcers' => Input::get('peptic_ulcers'),
+                            'pregnant' => Input::get('pregnant'),
+                            'eligibility' => $eligibility,
+                            'consented' => Input::get('consented'),
+                            'created_on' => date('Y-m-d'),
+                            'staff_id' => $user->data()->id,
+                            'site_id' => $user->data()->site_id,
+                            'status' => 1,
+                            'client_id' => Input::get('cid'),
+                        ), $cl_id);
+                    } else {
+                        $user->createRecord('screening', array(
+                            'sample_date' => Input::get('sample_date'),
+                            'results_date' => Input::get('results_date'),
+                            'covid_result' => Input::get('covid_result'),
+                            'age_18' => Input::get('age_18'),
+                            'tr_pcr' => Input::get('tr_pcr'),
+                            'hospitalized' => Input::get('hospitalized'),
+                            'moderate_severe' => Input::get('moderate_severe'),
+                            'peptic_ulcers' => Input::get('peptic_ulcers'),
+                            'pregnant' => Input::get('pregnant'),
+                            'eligibility' => $eligibility,
+                            'consented' => Input::get('consented'),
+                            'created_on' => date('Y-m-d'),
+                            'staff_id' => $user->data()->id,
+                            'site_id' => $user->data()->site_id,
+                            'status' => 1,
+                            'client_id' => Input::get('cid'),
+                        ));
+                    }
+                    $user->updateRecord('clients', array('consented' => Input::get('consented')), Input::get('cid'));
+                    $successMessage = 'Screening Successful Added';
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('add_lab')) {
+            $validate = $validate->check($_POST, array());
+            if ($validate->passed()) {
+                $eligibility = 0;
+                $clnt = $override->get('clients', 'id', Input::get('cid'))[0];
+                $sc_e = $override->get('screening', 'client_id', Input::get('cid'))[0];
+                $std_id = $override->getNews('study_id', 'site_id', $user->data()->site_id, 'status', 0)[0];
+                if (
+                    (Input::get('wbc') >= 1.5 && Input::get('wbc') <= 11.0) && (Input::get('hb') >= 8.5 && Input::get('hb') <= 16.5)
+                    && (Input::get('plt') >= 50 && Input::get('plt') <= 1000) && (Input::get('alt') >= 2.0 && Input::get('alt') <= 195.0)
+                    && (Input::get('ast') >= 2.0 && Input::get('ast') <= 195.0)
+                ) {
+                    if ($clnt['gender'] == 'male' && (Input::get('sc') >= 44.0 && Input::get('sc') <= 158.4) && $sc_e['eligibility'] == 1) {
+                        $eligibility = 1;
+                        if ($override->getCount('visit', 'client_id', Input::get('cid')) == 1) {
+                            $user->visit(Input::get('cid'), 0);
+                            $user->updateRecord('study_id', array('status' => 1, 'client_id' => Input::get('cid')), $std_id['id']);
+                            $user->updateRecord('clients', array('study_id' => $std_id['study_id'], 'enrolled' => 1), Input::get('cid'));
+                        }
+                    } elseif ($clnt['gender'] == 'female' && (Input::get('sc') >= 62.0 && Input::get('sc') <= 190.8) && $sc_e['eligibility'] == 1) {
+                        $eligibility = 1;
+                        if ($override->getCount('visit', 'client_id', Input::get('cid')) == 1) {
+                            $user->visit(Input::get('cid'), 0);
+                            $user->updateRecord('study_id', array('status' => 1, 'client_id' => Input::get('cid')), $std_id['id']);
+                            $user->updateRecord('clients', array('study_id' => $std_id['study_id'], 'enrolled' => 1), Input::get('cid'));
+                        }
+                    }
+                }
+                try {
+                    if ($override->get('lab', 'client_id', Input::get('cid'))) {
+                        $l_id = $override->get('lab', 'client_id', Input::get('cid'))[0]['id'];
+                        $user->updateRecord('lab', array(
+                            'wbc' => Input::get('wbc'),
+                            'hb' => Input::get('hb'),
+                            'plt' => Input::get('plt'),
+                            'alt' => Input::get('alt'),
+                            'ast' => Input::get('ast'),
+                            'sc' => Input::get('sc'),
+                            'eligibility' => $eligibility,
+                            'created_on' => date('Y-m-d'),
+                            'staff_id' => $user->data()->id,
+                            'site_id' => $user->data()->site_id,
+                            'status' => 1,
+                            'client_id' => Input::get('cid'),
+                        ), $l_id);
+                    } else {
+                        $user->createRecord('lab', array(
+                            'wbc' => Input::get('wbc'),
+                            'hb' => Input::get('hb'),
+                            'plt' => Input::get('plt'),
+                            'alt' => Input::get('alt'),
+                            'ast' => Input::get('ast'),
+                            'sc' => Input::get('sc'),
+                            'eligibility' => $eligibility,
+                            'created_on' => date('Y-m-d'),
+                            'staff_id' => $user->data()->id,
+                            'site_id' => $user->data()->site_id,
+                            'status' => 1,
+                            'client_id' => Input::get('cid'),
+                        ));
+                    }
 
-                        $successMessage = 'Screening Successful Updated';
+                    $successMessage = 'Screening Successful Added';
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('edit_visit')) {
+            $validate = $validate->check($_POST, array(
+                'visit_date' => array(
+                    'required' => true,
+                ),
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->updateRecord('visit', array(
+                        'study_id' => Input::get('study_id'),
+                        'visit_date' => Input::get('visit_date'),
+                        'created_on' => date('Y-m-d'),
+                        'status' => Input::get('visit_status'),
+                        'visit_status' => Input::get('visit_status'),
+                        'reasons' => Input::get('reasons'),
+                    ), Input::get('id'));
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('search_by_site')) {
+            $validate = $validate->check($_POST, array(
+                'site' => array(
+                    'required' => true,
+                ),
+            ));
+            if ($validate->passed()) {
+                $url = 'info.php?id=3&status=' . $_GET['status'] . '&sid=' . Input::get('site');
+                Redirect::to($url);
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('search_by_pid')) {
+            $validate = $validate->check($_POST, array(
+                'names' => array(
+                    'required' => true,
+                ),
+            ));
+            if ($validate->passed()) {
+                $url = 'info.php?id=3&status=' . $_GET['status'] . '&pid=' . Input::get('names');
+                Redirect::to($url);
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('add_Visit')) {
+
+            $validate = $validate->check($_POST, array());
+            if ($validate->passed()) {
+                $eligibility = 0;
+                $clnt = $override->get('clients', 'id', Input::get('cid'))[0];
+                $sc_e = $override->get('screening', 'client_id', Input::get('cid'))[0];
+                $std_id = $override->getNews('study_id', 'site_id', $user->data()->site_id, 'status', 0)[0];
+                if (
+                    Input::get('age_18') == 1 && Input::get('biopsy') == 1 && Input::get('consented') == 1
+                ) {
+                    // $eligibility = 1;
+                    if ($clnt['gender'] == 'male' && (Input::get('breast_cancer') == 1 || Input::get('brain_cancer') == 1 || Input::get('prostate_cancer') == 1) && $sc_e['eligibility'] == 1) {
+                        $eligibility = 1;
+                        // if ($override->getCount('visit', 'client_id', Input::get('cid')) == 1) {
+                        //     $user->visit(Input::get('cid'), 0);
+                        //     $user->updateRecord('study_id', array('status' => 1, 'client_id' => Input::get('cid')), $std_id['id']);
+                        //     $user->updateRecord('clients', array('study_id' => $std_id['study_id'], 'enrolled' => 1), Input::get('cid'));
+                        // }
+                    } elseif ($clnt['gender'] == 'female' && (Input::get('breast_cancer') == 1 || Input::get('brain_cancer') == 1 || Input::get('cervical_cancer') == 1) && $sc_e['eligibility'] == 1) {
+                        $eligibility = 1;
+                        // if ($override->getCount('visit', 'client_id', Input::get('cid')) == 1) {
+                        //     $user->visit(Input::get('cid'), 0);
+                        //     $user->updateRecord('study_id', array('status' => 1, 'client_id' => Input::get('cid')), $std_id['id']);
+                        //     $user->updateRecord('clients', array('study_id' => $std_id['study_id'], 'enrolled' => 1), Input::get('cid'));
+                        // }
+                    }
+                }
+                try {
+                    if ($override->get('screening', 'client_id', Input::get('cid'))) {
+                        $cl_id = $override->get('screening', 'client_id', Input::get('cid'))[0]['id'];
+                        $client = $override->lastRow('clients', 'id')[0];
+
+                        $user->createRecord('visit', array(
+                            'visit_name' => 'Day 0',
+                            'visit_code' => 'D0',
+                            'visit_date' => date('Y-m-d'),
+                            'visit_window' => 2,
+                            'status' => 1,
+                            'seq_no' => 0,
+                            'client_id' => $client['id'],
+                        ));
+                    } else {
+                        $client = $override->lastRow('clients', 'id')[0];
+
+                        $user->createRecord('visit', array(
+                            'visit_name' => 'Day 0',
+                            'visit_code' => 'D0',
+                            'visit_date' => date('Y-m-d'),
+                            'visit_window' => 2,
+                            'status' => 1,
+                            'seq_no' => 0,
+                            'client_id' => $client['id'],
+                        ));
+                    }
+                    $user->updateRecord('clients', array('consented' => Input::get('consented')), Input::get('cid'));
+                    $successMessage = 'Inclusion Successful Added';
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('add_Inclusion')) {
+
+            $validate = $validate->check($_POST, array());
+            if ($validate->passed()) {
+                $screening = 0;
+                $eligibility = 0;
+                $eligible = 0;
+                if (
+                    Input::get('age_18') == 1 && Input::get('biopsy') == 1 && Input::get('consented') == 1
+                ) {
+                    if (Input::get('gender') == 'male' && (Input::get('breast_cancer') == 1 || Input::get('brain_cancer') == 1 || Input::get('prostate_cancer') == 1)) {
+                        $eligibility = 1;
+                    } elseif (Input::get('gender') == 'female' && (Input::get('breast_cancer') == 1 || Input::get('brain_cancer') == 1 || Input::get('cervical_cancer') == 1)) {
+                        $eligibility = 1;
+                    }
+                }
+                try {
+                    if ($override->get('screening', 'client_id', Input::get('id'))) {
+                        $user->updateRecord('screening', array(
+                            'screening_date' => Input::get('screening_date'),
+                            'age_18' => Input::get('age_18'),
+                            'biopsy' => Input::get('biopsy'),
+                            'patient_category' => Input::get('patient_category'),
+                            'breast_cancer' => Input::get('breast_cancer'),
+                            'brain_cancer' => Input::get('brain_cancer'),
+                            'cervical_cancer' => Input::get('cervical_cancer'),
+                            'prostate_cancer' => Input::get('prostate_cancer'),
+                            'eligibility' => $eligibility,
+                            'consented' => Input::get('consented'),
+                            'consented_nimregenin' => Input::get('consented_nimregenin'),
+                            'reasons' => Input::get('reasons'),
+                            'created_on' => date('Y-m-d'),
+                            'staff_id' => $user->data()->id,
+                            'site_id' => $user->data()->site_id,
+                            'status' => 1,
+                            'client_id' => Input::get('id'),
+                        ), Input::get('screening_id'));
                     } else {
                         $user->createRecord('screening', array(
                             'screening_date' => Input::get('screening_date'),
-                            'conset_date' => Input::get('conset_date'),
-                            'consent' => Input::get('consent'),
-                            'ncd' => Input::get('ncd'),
-                            'lab_request' => Input::get('lab_request'),
-                            'lab_request_date' => Input::get('lab_request_date'),
-                            'screening_type' => Input::get('screening_type'),
-                            'study_id' => Input::get('study_id'),
-                            'residence' => Input::get('residence'),
-                            'created_on' => date('Y-m-d'),
-                            'patient_id' => Input::get('cid'),
-                            'staff_id' => $user->data()->id,
+                            'age_18' => Input::get('age_18'),
+                            'biopsy' => Input::get('biopsy'),
+                            'patient_category' => Input::get('patient_category'),
+                            'study_id' => '',
+                            'breast_cancer' => Input::get('breast_cancer'),
+                            'brain_cancer' => Input::get('brain_cancer'),
+                            'cervical_cancer' => Input::get('cervical_cancer'),
+                            'prostate_cancer' => Input::get('prostate_cancer'),
                             'eligibility' => $eligibility,
-                            'status' => 1,
-                            'doctor_confirm' => $doctor_confirm,
-                            'site_id' => $user->data()->site_id,
-                        ));
-
-                        $user->createRecord('visit', array(
-                            'study_id' => Input::get('study_id'),
-                            'visit_name' => 'Screening',
-                            'visit_code' => 'SV',
-                            'visit_day' => 'Day 0',
-                            'expected_date' => Input::get('screening_date'),
-                            'visit_date' => Input::get('screening_date'),
-                            'visit_window' => 0,
-                            'status' => 1,
-                            'seq_no' => 0,
-                            'client_id' => Input::get('cid'),
+                            'consented' => Input::get('consented'),
+                            'consented_nimregenin' => Input::get('consented_nimregenin'),
+                            'reasons' => Input::get('reasons'),
                             'created_on' => date('Y-m-d'),
-                            'reasons' => '',
-                            'visit_status' => 1,
+                            'staff_id' => $user->data()->id,
                             'site_id' => $user->data()->site_id,
+                            'status' => 1,
+                            'client_id' => Input::get('id'),
                         ));
                     }
+                    $eligible1 = $override->getNews('screening', 'client_id', Input::get('id'), 'status', 1)[0]['eligibility'];
+                    $eligible2 = $override->getNews('lab', 'client_id', Input::get('id'), 'status', 1)[0]['eligibility'];
 
+                    $screening1 = $override->getNews('screening', 'client_id', Input::get('id'), 'status', 1)[0]['status'];
+                    $screening2 = $override->getNews('lab', 'client_id', Input::get('id'), 'status', 1)[0]['status'];
+
+                    if ($screening1 == 1) {
+                        $screening = 1;
+                    }
+
+                    if ($eligible1 == 1 && $eligible2 == 1) {
+                        $eligible = 1;
+                    }
                     $user->updateRecord('clients', array(
-                        'eligible' => $eligibility,
-                        // 'enrolled' => $eligibility,
-                        'screened' => 1,
-                    ), Input::get('cid'));
-
-                    $successMessage = 'Screening Successful Added';
-
-                    if ($eligibility) {
-                        Redirect::to('info.php?id=3&status=2');
-                    } else {
+                        'consented' => Input::get('consented'),
+                        'consented_nimregenin' => Input::get('consented_nimregenin'),
+                        'screened' => $screening,
+                        'eligible' => $eligible,
+                        'eligibility1' => $eligibility,
+                        'patient_category' => Input::get('patient_category'),
+                    ), Input::get('id'));
+                    $successMessage = 'Inclusion Successful Added';
+                    if ($eligible == 1) {
                         Redirect::to('info.php?id=3&status=1');
-                        // Redirect::to('info.php?id=3&status=' . $_GET['status']);
-                        // Redirect::to('add_lab.php?cid=' . Input::get('id') . '&status=1&msg=' . $successMessage);
+                    } else {
+                        // Redirect::to('info.php?id=3');
+                        Redirect::to('info.php?id=3&status=1');
+                    }
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('add_Exclusion')) {
+            $validate = $validate->check($_POST, array());
+            if ($validate->passed()) {
+                $screening = 0;
+                $eligibility = 0;
+                $eligible = 0;
+
+                $gender = $override->getNews('clients', 'id', Input::get('id'), 'status', 1)[0]['gender'];
+
+                if (Input::get('cdk') == 2 && Input::get('liver_disease') == 2) {
+                    if ($gender == 'male') {
+                        $eligibility = 1;
+                    } elseif ($gender == 'female' && (Input::get('pregnant') == 2 && Input::get('breast_feeding') == 2)) {
+                        $eligibility = 1;
+                    }
+                }
+                try {
+                    if ($override->get('lab', 'client_id', Input::get('id'))) {
+                        $user->updateRecord('lab', array(
+                            'screening_date' => Input::get('screening_date'),
+                            // 'study_id' => '',
+                            'pregnant' => Input::get('pregnant'),
+                            'breast_feeding' => Input::get('breast_feeding'),
+                            'cdk' => Input::get('cdk'),
+                            'liver_disease' => Input::get('liver_disease'),
+                            'eligibility' => $eligibility,
+                            'created_on' => date('Y-m-d'),
+                            'staff_id' => $user->data()->id,
+                            'site_id' => $user->data()->site_id,
+                            'status' => 1,
+                            'client_id' => Input::get('id'),
+                        ), Input::get('screening_id'));
+                    } else {
+                        $user->createRecord('lab', array(
+                            'screening_date' => Input::get('screening_date'),
+                            'study_id' => '',
+                            'pregnant' => Input::get('pregnant'),
+                            'breast_feeding' => Input::get('breast_feeding'),
+                            'cdk' => Input::get('cdk'),
+                            'liver_disease' => Input::get('liver_disease'),
+                            'eligibility' => $eligibility,
+                            'created_on' => date('Y-m-d'),
+                            'staff_id' => $user->data()->id,
+                            'site_id' => $user->data()->site_id,
+                            'status' => 1,
+                            'client_id' => Input::get('id'),
+                        ));
+                    }
+                    $eligible1 = $override->getNews('screening', 'client_id', Input::get('id'), 'status', 1)[0]['eligibility'];
+                    $eligible2 = $override->getNews('lab', 'client_id', Input::get('id'), 'status', 1)[0]['eligibility'];
+
+                    $screening1 = $override->getNews('screening', 'client_id', Input::get('id'), 'status', 1)[0]['status'];
+                    $screening2 = $override->getNews('lab', 'client_id', Input::get('id'), 'status', 1)[0]['status'];
+
+                    if ($screening2 == 1) {
+                        $screening = 1;
+                    }
+
+                    if ($eligible1 == 1 && $eligible2 == 1) {
+                        $eligible = 1;
+                    }
+
+                    $user->updateRecord('clients', array('eligible' => $eligible, 'screened' => $screening, 'eligibility2' => $eligibility), Input::get('id'));
+                    $successMessage = 'Exclusion Successful Added';
+                    if ($eligible == 1) {
+                        Redirect::to('info.php?id=3&status=1');
+                    } else {
+                        // Redirect::to('info.php?id=3');
+                        Redirect::to('info.php?id=3&status=1');
                     }
                 } catch (Exception $e) {
                     die($e->getMessage());
@@ -242,119 +742,714 @@ if ($user->isLoggedIn()) {
                 ),
             ));
             if ($validate->passed()) {
-                $visit = $override->getNews('visit', 'client_id', Input::get('id'), 'seq_no', 1);
-
-                if ($visit) {
-                    $user->updateRecord('visit', array('expected_date' => Input::get('visit_date'), 'reasons' => Input::get('reasons')), $visit[0]['id']);
-
-                    foreach ($override->get('visit', 'client_id', Input::get('id')) as $visit_client) {
-                        $user->updateRecord('visit', array('study_id' => Input::get('study_id'), 'site_id' => Input::get('site_id')), $visit_client['id']);
-                    }
-
-                    $successMessage = 'Enrollment  Updated Successful';
+                $client_study = $override->getNews('clients', 'id', Input::get('id'), 'status', 1)[0];
+                $std_id = $override->getNews('study_id', 'site_id', $user->data()->site_id, 'status', 0)[0];
+                $screening_id = $override->getNews('screening', 'client_id', Input::get('id'), 'status', 1)[0];
+                $lab_id = $override->getNews('lab', 'client_id', Input::get('id'), 'status', 1)[0];
+                if (!$client_study['study_id']) {
+                    $study_id = $std_id['study_id'];
                 } else {
-
+                    $study_id = $client_study['study_id'];
+                }
+                if (!$override->get('visit', 'client_id', Input::get('id'))) {
                     $user->createRecord('visit', array(
-                        'summary_id' => 0,
-                        'study_id' => Input::get('study_id'),
-                        'visit_name' => 'Enrollment Visit',
-                        'visit_code' => 'EV',
-                        'visit_day' => 'Day 1',
-                        'expected_date' => Input::get('visit_date'),
-                        'visit_date' => '',
-                        'visit_window' => 0,
+                        'visit_name' => 'Day 0',
+                        'visit_code' => 'D0',
+                        'study_id' => $study_id,
+                        'expected_date' => '',
+                        'visit_date' => Input::get('visit_date'),
+                        'visit_window' => 2,
                         'status' => 1,
                         'client_id' => Input::get('id'),
                         'created_on' => date('Y-m-d'),
-                        'seq_no' => 1,
+                        'seq_no' => 0,
+                        'redcap' => 0,
                         'reasons' => Input::get('reasons'),
-                        'visit_status' => 0,
-                        'site_id' => Input::get('site_id'),
+                        'visit_status' => 1
                     ));
 
-                    foreach ($override->get('visit', 'client_id', Input::get('id')) as $visit_client) {
-                        $user->updateRecord('visit', array('study_id' => Input::get('study_id'), 'site_id' => Input::get('site_id')), $visit_client['id']);
+                    if ($override->getCount('visit', 'client_id', Input::get('id')) == 1) {
+                        try {
+                            if (!$client_study['study_id']) {
+                                $user->visit2(Input::get('id'), 0, $std_id['study_id']);
+                                $user->updateRecord('study_id', array('status' => 1, 'client_id' => Input::get('id')), $std_id['id']);
+                                $user->updateRecord('clients', array('study_id' => $std_id['study_id'], 'enrolled' => 1), Input::get('id'));
+                            } else {
+                                $user->visit2(Input::get('id'), 0, $client_study['study_id']);
+                            }
+                        } catch (Exception $e) {
+                            die($e->getMessage());
+                        }
                     }
-
-                    $user->updateRecord('clients', array('enrolled' => 1), Input::get('id'));
-
-
-                    $successMessage = 'Enrollment  Added Successful';
                 }
-                Redirect::to('info.php?id=3&status=3&msg=' . $successMessage);
+
+                $user->updateRecord(
+                    'clients',
+                    array(
+                        'pt_type' => Input::get('pt_type'),
+                        'treatment_type' => Input::get('treatment_type'),
+                        'previous_date' => Input::get('previous_date'),
+                        'treatment_type2' => Input::get('treatment_type2'),
+                        'previous_date2' => Input::get('previous_date2'),
+                        'total_cycle' => Input::get('total_cycle'),
+                        'cycle_number' => Input::get('cycle_number')
+                    ),
+                    Input::get('id')
+                );
+
+                if (!$client_study['study_id']) {
+                    $user->updateRecord('screening', array('study_id' => $std_id['study_id']), $screening_id['id']);
+                    $user->updateRecord('lab', array('study_id' => $std_id['study_id']), $lab_id['id']);
+                } else {
+                    $user->updateRecord('screening', array('study_id' => $client_study['study_id']), $screening_id['id']);
+                    $user->updateRecord('lab', array('study_id' => $client_study['study_id']), $lab_id['id']);
+                }
+                $user->updateRecord('clients', array('enrolled' => 1), Input::get('id'));
+                $successMessage = 'Enrollment  Added Successful';
+                Redirect::to('info.php?id=3&status=2');
             } else {
                 $pageError = $validate->errors();
             }
-        } elseif (Input::get('add_visit')) {
+        } elseif (Input::get('edit_Enrollment')) {
             $validate = $validate->check($_POST, array(
                 'visit_date' => array(
                     'required' => true,
                 ),
-                // 'visit_status' => array(
-                //     'required' => true,
-                // ),
+            ));
+            if ($validate->passed()) {
+                $client_study = $override->getNews('clients', 'id', Input::get('id'), 'status', 1)[0];
+                $std_id = $override->getNews('study_id', 'site_id', $user->data()->site_id, 'status', 0)[0];
+                // $enrollment_date = $override->get('clients', 'id', Input::get('id'))[0];
+                $visit_date = $override->firstRow('visit', 'visit_date', 'id', 'client_id', Input::get('id'))[0];
+                if (!$client_study['study_id']) {
+                    $study_id = $std_id['study_id'];
+                } else {
+                    $study_id = $client_study['study_id'];
+                }
+                if ($override->get('visit', 'client_id', Input::get('id'))) {
+                    if (Input::get('visit_date') != $visit_date['visit_date']) {
+                        $user->deleteRecord('visit', 'client_id', Input::get('id'));
+                        $user->createRecord('visit', array(
+                            'visit_name' => 'Day 0',
+                            'visit_code' => 'D0',
+                            'study_id' => $study_id,
+                            'expected_date' => '',
+                            'visit_date' => Input::get('visit_date'),
+                            'visit_window' => 2,
+                            'status' => 1,
+                            'client_id' => Input::get('id'),
+                            'created_on' => date('Y-m-d'),
+                            'seq_no' => 0,
+                            'redcap' => 0,
+                            'reasons' => Input::get('reasons'),
+                            'visit_status' => 1,
+                        ));
+
+                        if ($override->getCount('visit', 'client_id', Input::get('id')) == 1) {
+                            try {
+                                if (!$client_study['study_id']) {
+                                    $user->visit2(Input::get('id'), 0, $std_id['study_id']);
+                                } else {
+                                    $user->visit2(Input::get('id'), 0, $client_study['study_id']);
+                                }
+                            } catch (Exception $e) {
+                                die($e->getMessage());
+                            }
+                        }
+                    }
+                }
+
+                $user->updateRecord(
+                    'clients',
+                    array(
+                        'pt_type' => Input::get('pt_type'),
+                        'treatment_type' => Input::get('treatment_type'),
+                        'previous_date' => Input::get('previous_date'),
+                        'treatment_type2' => Input::get('treatment_type2'),
+                        'previous_date2' => Input::get('previous_date2'),
+                        'total_cycle' => Input::get('total_cycle'),
+                        'cycle_number' => Input::get('cycle_number')
+                    ),
+                    Input::get('id')
+                );
+
+                $user->updateRecord('clients', array('enrolled' => 1), Input::get('id'));
+                $successMessage = 'Enrollment  Updated Successful';
+                Redirect::to('info.php?id=3&status=2');
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('update_crf1')) {
+            $validate = $validate->check($_POST, array(
+                //     'diagnosis_date' => array(
+                //         'required' => true,
+                //     ),
             ));
             if ($validate->passed()) {
                 try {
-                    $user->updateRecord('visit', array(
-                        'visit_date' => Input::get('visit_date'),
-                        'visit_status' => Input::get('visit_status'),
-                        'reasons' => Input::get('reasons'),
+                    $user->updateRecord('crf1', array(
+                        'vid' => $_GET["vid"],
+                        'vcode' => $_GET["vcode"],
+                        'study_id' => $_GET['sid'],
+                        'diagnosis_date' => Input::get('diagnosis_date'),
+                        'diabetic' => Input::get('diabetic'),
+                        'diabetic_medicatn' => Input::get('diabetic_medicatn'),
+                        'diabetic_medicatn_name' => Input::get('diabetic_medicatn_name'),
+                        'hypertension' => Input::get('hypertension'),
+                        'hypertension_medicatn' => Input::get('hypertension_medicatn'),
+                        'hypertension_medicatn_name' => Input::get('hypertension_medicatn_name'),
+                        'heart' => Input::get('heart'),
+                        'heart_medicatn' => Input::get('heart_medicatn'),
+                        'heart_medicatn_name' => Input::get('heart_medicatn_name'),
+                        'asthma' => Input::get('asthma'),
+                        'asthma_medicatn' => Input::get('asthma_medicatn'),
+                        'asthma_medicatn_name' => Input::get('asthma_medicatn_name'),
+                        'hiv_aids' => Input::get('hiv_aids'),
+                        'hiv_aids_medicatn' => Input::get('hiv_aids_medicatn'),
+                        'hiv_aids_medicatn_name' => Input::get('hiv_aids_medicatn_name'),
+                        'other_medical' => Input::get('other_medical'),
+                        'nimregenin_herbal' => Input::get('nimregenin_herbal'),
+                        'other_herbal' => Input::get('other_herbal'),
+                        'radiotherapy_performed' => Input::get('radiotherapy_performed'),
+                        'chemotherapy_performed' => Input::get('chemotherapy_performed'),
+                        'surgery_performed' => Input::get('surgery_performed'),
+                        'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
                     ), Input::get('id'));
 
-                    $client_id = $override->getNews('clients', 'id', Input::get('cid'), 'status', 1)[0];
-
-
-                    if (Input::get('visit_name') == 'Study Termination Visit') {
-                        $user->updateRecord('clients', array(
-                            'end_study' => 1,
-                        ), Input::get('cid'));
-                    } else {
-                        $user->updateRecord('clients', array(
-                            'end_study' => 0,
-                        ), Input::get('cid'));
+                    if (Input::get('other_medical') == 1) {
+                        for ($i = 0; $i < count(Input::get('other_specify')); $i++) {
+                            $user->updateRecord('other_medication', array(
+                                'vid' => $_GET["vid"],
+                                'vcode' => $_GET["vcode"],
+                                'study_id' => $_GET['sid'],
+                                'other_medical' => Input::get('other_medical'),
+                                'other_specify' => Input::get('other_specify')[$i],
+                                'other_medical_medicatn' => Input::get('other_medical_medicatn')[$i],
+                                'other_medicatn_name' => Input::get('other_medicatn_name')[$i],
+                                'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                                'patient_id' => $_GET['cid'],
+                                'staff_id' => $user->data()->id,
+                                'status' => 1,
+                                'created_on' => date('Y-m-d'),
+                                'site_id' => $user->data()->site_id,
+                            ), Input::get('medication_id')[$i]);
+                        }
                     }
 
-                    $successMessage = 'Visit  Added Successful';
+                    if (Input::get('nimregenin_herbal') == 1) {
+                        for ($i = 0; $i < count(Input::get('nimregenin_preparation')); $i++) {
+                            $user->updateRecord('nimregenin', array(
+                                'vid' => $_GET["vid"],
+                                'vcode' => $_GET["vcode"],
+                                'study_id' => $_GET['sid'],
+                                'nimregenin_herbal' => Input::get('nimregenin_herbal'),
+                                'nimregenin_preparation' => Input::get('nimregenin_preparation')[$i],
+                                'nimregenin_start' => Input::get('nimregenin_start')[$i],
+                                'nimregenin_ongoing' => Input::get('nimregenin_ongoing')[$i],
+                                'nimregenin_end' => Input::get('nimregenin_end')[$i],
+                                'nimregenin_dose' => Input::get('nimregenin_dose')[$i],
+                                'nimregenin_frequency' => Input::get('nimregenin_frequency')[$i],
+                                'nimregenin_remarks' => Input::get('nimregenin_remarks')[$i],
+                                'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                                'patient_id' => $_GET['cid'],
+                                'staff_id' => $user->data()->id,
+                                'status' => 1,
+                                'created_on' => date('Y-m-d'),
+                                'site_id' => $user->data()->site_id,
+                            ), Input::get('nimregenin_id')[$i]);
+                        }
+                    }
+
+
+                    if (Input::get('radiotherapy_performed') == 1) {
+                        for ($i = 0; $i < count(Input::get('radiotherapy')); $i++) {
+                            $user->updateRecord('radiotherapy', array(
+                                'vid' => $_GET["vid"],
+                                'vcode' => $_GET["vcode"],
+                                'study_id' => $_GET['sid'],
+                                'other_herbal' => Input::get('other_herbal'),
+                                'radiotherapy_performed' => Input::get('radiotherapy_performed'),
+                                'radiotherapy' => Input::get('radiotherapy')[$i],
+                                'radiotherapy_start' => Input::get('radiotherapy_start')[$i],
+                                'radiotherapy_ongoing' => Input::get('radiotherapy_ongoing')[$i],
+                                'radiotherapy_end' => Input::get('radiotherapy_end')[$i],
+                                'radiotherapy_dose' => Input::get('radiotherapy_dose')[$i],
+                                'radiotherapy_frequecy' => Input::get('radiotherapy_frequecy')[$i],
+                                'radiotherapy_remarks' => Input::get('radiotherapy_remarks')[$i],
+                                'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                                'patient_id' => $_GET['cid'],
+                                'staff_id' => $user->data()->id,
+                                'status' => 1,
+                                'created_on' => date('Y-m-d'),
+                                'site_id' => $user->data()->site_id,
+                            ), Input::get('radiotherapy_id')[$i]);
+                        }
+                    }
+
+                    if (Input::get('other_herbal') == 1) {
+                        for ($i = 0; $i < count(Input::get('herbal_preparation')); $i++) {
+                            $user->updateRecord('herbal_treatment', array(
+                                'vid' => $_GET["vid"],
+                                'vcode' => $_GET["vcode"],
+                                'other_herbal' => Input::get('other_herbal'),
+                                'herbal_preparation' => Input::get('herbal_preparation')[$i],
+                                'herbal_start' => Input::get('herbal_start')[$i],
+                                'herbal_ongoing' => Input::get('herbal_ongoing')[$i],
+                                'herbal_end' => Input::get('herbal_end')[$i],
+                                'herbal_dose' => Input::get('herbal_dose')[$i],
+                                'herbal_frequency' => Input::get('herbal_frequency')[$i],
+                                'herbal_remarks' => Input::get('herbal_remarks')[$i],
+                                'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                                'patient_id' => $_GET['cid'],
+                                'staff_id' => $user->data()->id,
+                                'status' => 1,
+                                'created_on' => date('Y-m-d'),
+                                'site_id' => $user->data()->site_id,
+                            ), Input::get('herbal_id')[$i]);
+                        }
+                    }
+
+
+                    if (Input::get('chemotherapy_performed') == 1) {
+                        for ($i = 0; $i < count(Input::get('chemotherapy')); $i++) {
+                            $user->updateRecord('chemotherapy', array(
+                                'vid' => $_GET["vid"],
+                                'vcode' => $_GET["vcode"],
+                                'other_herbal' => Input::get('other_herbal'),
+                                'chemotherapy_performed' => Input::get('chemotherapy_performed'),
+                                'chemotherapy' => Input::get('chemotherapy')[$i],
+                                'chemotherapy_start' => Input::get('chemotherapy_start')[$i],
+                                'chemotherapy_ongoing' => Input::get('chemotherapy_ongoing')[$i],
+                                'chemotherapy_end' => Input::get('chemotherapy_end')[$i],
+                                'chemotherapy_dose' => Input::get('chemotherapy_dose')[$i],
+                                'chemotherapy_frequecy' => Input::get('chemotherapy_frequecy')[$i],
+                                'chemotherapy_remarks' => Input::get('chemotherapy_remarks')[$i],
+                                'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                                'patient_id' => $_GET['cid'],
+                                'staff_id' => $user->data()->id,
+                                'status' => 1,
+                                'created_on' => date('Y-m-d'),
+                                'site_id' => $user->data()->site_id,
+                            ), Input::get('chemotherapy_id')[$i]);
+                        }
+                    }
+
+                    if (Input::get('surgery_performed') == 1) {
+                        if (count(Input::get('surgery_id')) == count(Input::get('surgery'))) {
+                            for ($i = 0; $i < count(Input::get('surgery')); $i++) {
+                                $user->updateRecord('surgery', array(
+                                    'vid' => $_GET["vid"],
+                                    'vcode' => $_GET["vcode"],
+                                    'study_id' => $_GET['sid'],
+                                    'other_herbal' => Input::get('other_herbal'),
+                                    'surgery_performed' => Input::get('surgery_performed'),
+                                    'surgery' => Input::get('surgery')[$i],
+                                    'surgery_start' => Input::get('surgery_start')[$i],
+                                    'surgery_number' => Input::get('surgery_number')[$i],
+                                    'surgery_remarks' => Input::get('surgery_remarks')[$i],
+                                    'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                                    'patient_id' => $_GET['cid'],
+                                    'staff_id' => $user->data()->id,
+                                    'status' => 1,
+                                    'created_on' => date('Y-m-d'),
+                                    'site_id' => $user->data()->site_id,
+                                ), Input::get('surgery_id')[$i]);
+                            }
+                        }
+                    }
+                    // else{
+                    //     for ($i = count(Input::get('surgery')) + 1; $i < count(Input::get('surgery_id')); $i++) {
+                    //         $user->createRecord('surgery', array(
+                    //             'vid' => $_GET["vid"],
+                    //             'vcode' => $_GET["vcode"],
+                    //             'study_id' => $_GET['sid'],
+                    //             'other_herbal' => Input::get('other_herbal'),
+                    //             'surgery_performed' => Input::get('surgery_performed'),
+                    //             'surgery' => Input::get('surgery')[$i],
+                    //             'surgery_start' => Input::get('surgery_start')[$i],
+                    //             'surgery_number' => Input::get('surgery_number')[$i],
+                    //             'surgery_remarks' => Input::get('surgery_remarks')[$i],
+                    //             'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                    //             'patient_id' => $_GET['cid'],
+                    //             'staff_id' => $user->data()->id,
+                    //             'status' => 1,
+                    //             'created_on' => date('Y-m-d'),
+                    //             'site_id' => $user->data()->site_id,
+                    //         ));
+                    //     }
+                    // }
+
+
+                    $user->updateRecord('clients', array(
+                        'nimregenin' => Input::get('nimregenin_herbal'),
+                    ), $_GET['cid']);
+
+                    $successMessage = 'CRF1 Updated Successful';
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
             } else {
                 $pageError = $validate->errors();
             }
-        } elseif (Input::get('update_visit')) {
+        } elseif (Input::get('update_crf2')) {
             $validate = $validate->check($_POST, array(
-                'expected_date' => array(
+                'crf2_date' => array(
+                    'required' => true,
+                ),
+
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->updateRecord('crf2', array(
+                        'study_id' => $_GET['sid'],
+                        'vid' => $_GET['vid'],
+                        'vcode' => $_GET['vcode'],
+                        'crf2_date' => Input::get('crf2_date'),
+                        'height' => Input::get('height'),
+                        'weight' => Input::get('weight'),
+                        'bmi' => Input::get('bmi'),
+                        'time' => Input::get('time'),
+                        'temperature' => Input::get('temperature'),
+                        'method' => Input::get('method'),
+                        'respiratory_rate' => Input::get('respiratory_rate'),
+                        'heart_rate' => Input::get('heart_rate'),
+                        'systolic' => Input::get('systolic'),
+                        'diastolic' => Input::get('diastolic'),
+                        'time2' => Input::get('time2'),
+                        'appearance' => Input::get('appearance'),
+                        'appearance_comments' => Input::get('appearance_comments'),
+                        'appearance_signifcnt' => Input::get('appearance_signifcnt'),
+                        'heent' => Input::get('heent'),
+                        'heent_comments' => Input::get('heent_comments'),
+                        'heent_signifcnt' => Input::get('heent_signifcnt'),
+                        'respiratory' => Input::get('respiratory'),
+                        'respiratory_comments' => Input::get('respiratory_comments'),
+                        'respiratory_signifcnt' => Input::get('respiratory_signifcnt'),
+                        'cardiovascular' => Input::get('cardiovascular'),
+                        'cardiovascular_comments' => Input::get('cardiovascular_comments'),
+                        'cardiovascular_signifcnt' => Input::get('cardiovascular_signifcnt'),
+                        'abdnominal' => Input::get('abdnominal'),
+                        'abdnominal_comments' => Input::get('abdnominal_comments'),
+                        'abdnominal_signifcnt' => Input::get('abdnominal_signifcnt'),
+                        'urogenital' => Input::get('urogenital'),
+                        'urogenital_comments' => Input::get('urogenital_comments'),
+                        'urogenital_signifcnt' => Input::get('urogenital_signifcnt'),
+                        'musculoskeletal' => Input::get('musculoskeletal'),
+                        'musculoskeletal_comments' => Input::get('musculoskeletal_comments'),
+                        'musculoskeletal_signifcnt' => Input::get('musculoskeletal_signifcnt'),
+                        'neurological' => Input::get('neurological'),
+                        'neurological_comments' => Input::get('neurological_comments'),
+                        'neurological_signifcnt' => Input::get('neurological_signifcnt'),
+                        'psychological' => Input::get('psychological'),
+                        'psychological_comments' => Input::get('psychological_comments'),
+                        'psychological_signifcnt' => Input::get('psychological_signifcnt'),
+                        'endocrime' => Input::get('endocrime'),
+                        'endocrime_comments' => Input::get('endocrime_comments'),
+                        'endocrime_signifcnt' => Input::get('endocrime_signifcnt'),
+                        'lymphatic' => Input::get('lymphatic'),
+                        'lymphatic_comments' => Input::get('lymphatic_comments'),
+                        'lymphatic_signifcnt' => Input::get('lymphatic_signifcnt'),
+                        'skin' => Input::get('skin'),
+                        'skin_comments' => Input::get('skin_comments'),
+                        'skin_signifcnt' => Input::get('skin_signifcnt'),
+                        'local_examination' => Input::get('local_examination'),
+                        'local_examination_comments' => Input::get('local_examination_comments'),
+                        'local_examination_signifcnt' => Input::get('local_examination_signifcnt'),
+                        'physical_exams_other' => Input::get('physical_exams_other'),
+                        'physical_other_specify' => Input::get('physical_other_specify'),
+                        'physical_other_system' => Input::get('physical_other_system'),
+                        'physical_other_comments' => Input::get('physical_other_comments'),
+                        'physical_other_signifcnt' => Input::get('physical_other_signifcnt'),
+                        'additional_notes' => Input::get('additional_notes'),
+                        'physical_performed' => Input::get('physical_performed'),
+                        'crf2_cmpltd_date' => Input::get('crf2_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ), Input::get('id'));
+                    $successMessage = 'CRF2 Updated Successful';
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('update_crf3')) {
+            $validate = $validate->check($_POST, array(
+                'crf3_date' => array(
+                    'required' => true,
+                ),
+
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->updateRecord('crf3', array(
+                        'study_id' => $_GET['sid'],
+                        'vid' => $_GET["vid"],
+                        'vcode' => $_GET["vcode"],
+                        'crf3_date' => Input::get('crf3_date'),
+                        'fever' => Input::get('fever'),
+                        'vomiting' => Input::get('vomiting'),
+                        'diarrhoea' => Input::get('diarrhoea'),
+                        'headaches' => Input::get('headaches'),
+                        'loss_appetite' => Input::get('loss_appetite'),
+                        'nausea' => Input::get('nausea'),
+                        'difficult_breathing' => Input::get('difficult_breathing'),
+                        'sore_throat' => Input::get('sore_throat'),
+                        'fatigue' => Input::get('fatigue'),
+                        'muscle_pain' => Input::get('muscle_pain'),
+                        'loss_consciousness' => Input::get('loss_consciousness'),
+                        'backpain' => Input::get('backpain'),
+                        'weight_loss' => Input::get('weight_loss'),
+                        'heartburn_indigestion' => Input::get('heartburn_indigestion'),
+                        'swelling' => Input::get('swelling'),
+                        'pv_bleeding' => Input::get('pv_bleeding'),
+                        'pv_discharge' => Input::get('pv_discharge'),
+                        'micitrition' => Input::get('micitrition'),
+                        'convulsions' => Input::get('convulsions'),
+                        'blood_urine' => Input::get('blood_urine'),
+                        'symptoms_other' => Input::get('symptoms_other'),
+                        'symptoms_other_specify' => Input::get('symptoms_other_specify'),
+                        'other_comments' => Input::get('other_comments'),
+                        'adherence' => Input::get('adherence'),
+                        'adherence_specify' => Input::get('adherence_specify'),
+                        'herbal_medication' => Input::get('herbal_medication'),
+                        'herbal_ingredients' => Input::get('herbal_ingredients'),
+                        'crf3_cmpltd_date' => Input::get('crf3_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ), Input::get('id'));
+                    $successMessage = 'CRF3 updated Successful';
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('update_crf4')) {
+            $validate = $validate->check($_POST, array(
+                'sample_date' => array(
                     'required' => true,
                 ),
             ));
             if ($validate->passed()) {
                 try {
-                    $user->updateRecord('visit', array(
-                        'expected_date' => Input::get('expected_date'),
+                    $user->updateRecord('crf4', array(
+                        'study_id' => $_GET['sid'],
+                        'vid' => $_GET["vid"],
+                        'vcode' => $_GET["vcode"],
+                        'sample_date' => Input::get('sample_date'),
+                        'renal_urea' => Input::get('renal_urea'),
+                        'renal_urea_units' => Input::get('renal_urea_units'),
+                        'renal_creatinine' => Input::get('renal_creatinine'),
+                        'renal_creatinine_units' => Input::get('renal_creatinine_units'),
+                        'renal_creatinine_grade' => Input::get('renal_creatinine_grade'),
+                        'renal_egfr' => Input::get('renal_egfr'),
+                        'renal_egfr_units' => Input::get('renal_egfr_units'),
+                        'renal_egfr_grade' => Input::get('renal_egfr_grade'),
+                        'liver_ast' => Input::get('liver_ast'),
+                        'liver_ast_grade' => Input::get('liver_ast_grade'),
+                        'liver_alt' => Input::get('liver_alt'),
+                        'liver_alt_grade' => Input::get('liver_alt_grade'),
+                        'liver_alp' => Input::get('liver_alp'),
+                        'liver_alp_grade' => Input::get('liver_alp_grade'),
+                        'liver_pt' => Input::get('liver_pt'),
+                        'liver_pt_grade' => Input::get('liver_pt_grade'),
+                        'liver_ptt' => Input::get('liver_ptt'),
+                        'liver_ptt_grade' => Input::get('liver_ptt_grade'),
+                        'liver_inr' => Input::get('liver_inr'),
+                        'liver_inr_grade' => Input::get('liver_inr_grade'),
+                        'liver_ggt' => Input::get('liver_ggt'),
+                        'liver_albumin' => Input::get('liver_albumin'),
+                        'liver_albumin_grade' => Input::get('liver_albumin_grade'),
+                        'liver_bilirubin_total' => Input::get('liver_bilirubin_total'),
+                        'liver_bilirubin_total_units' => Input::get('liver_bilirubin_total_units'),
+                        'bilirubin_total_grade' => Input::get('bilirubin_total_grade'),
+                        'liver_bilirubin_direct' => Input::get('liver_bilirubin_direct'),
+                        'liver_bilirubin_direct_units' => Input::get('liver_bilirubin_direct_units'),
+                        'bilirubin_direct_grade' => Input::get('bilirubin_direct_grade'),
+                        'rbg' => Input::get('rbg'),
+                        'rbg_units' => Input::get('rbg_units'),
+                        'rbg_grade' => Input::get('rbg_grade'),
+                        'ldh' => Input::get('ldh'),
+                        'crp' => Input::get('crp'),
+                        'd_dimer' => Input::get('d_dimer'),
+                        'ferritin' => Input::get('ferritin'),
+                        'wbc' => Input::get('wbc'),
+                        'wbc_grade' => Input::get('wbc_grade'),
+                        'abs_neutrophil' => Input::get('abs_neutrophil'),
+                        'abs_neutrophil_grade' => Input::get('abs_neutrophil_grade'),
+                        'abs_lymphocytes' => Input::get('abs_lymphocytes'),
+                        'abs_lymphocytes_grade' => Input::get('abs_lymphocytes_grade'),
+                        'abs_eosinophils' => Input::get('abs_eosinophils'),
+                        'abs_monocytes' => Input::get('abs_monocytes'),
+                        'abs_basophils' => Input::get('abs_basophils'),
+                        'hb' => Input::get('hb'),
+                        'hb_grade' => Input::get('hb_grade'),
+                        'mcv' => Input::get('mcv'),
+                        'mch' => Input::get('mch'),
+                        'hct' => Input::get('hct'),
+                        'rbc' => Input::get('rbc'),
+                        'plt' => Input::get('plt'),
+                        'plt_grade' => Input::get('plt_grade'),
+                        'cancer' => Input::get('cancer'),
+                        'prostate' => Input::get('prostate'),
+                        'chest_xray' => Input::get('chest_xray'),
+                        'chest_specify' => Input::get('chest_specify'),
+                        'ct_chest' => Input::get('ct_chest'),
+                        'ct_chest_specify' => Input::get('ct_chest_specify'),
+                        'ultrasound' => Input::get('ultrasound'),
+                        'ultrasound_specify' => Input::get('ultrasound_specify'),
+                        'crf4_cmpltd_date' => Input::get('crf4_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
                     ), Input::get('id'));
-
-                    $user->updateRecord('summary', array(
-                        'next_appointment_date' => Input::get('expected_date'),
-                    ), Input::get('summary_id'));
-
-                    $successMessage = 'Visit  Updated Successful';
+                    $successMessage = 'CRF4 updated Successful';
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
             } else {
                 $pageError = $validate->errors();
             }
-        } elseif (Input::get('search_by_site')) {
-
+        } elseif (Input::get('update_crf5')) {
             $validate = $validate->check($_POST, array(
-                'site' => array(
+                'date_reported' => array(
                     'required' => true,
                 ),
+
             ));
             if ($validate->passed()) {
-                $url = 'info.php?id=3&sid=' . Input::get('site');
-                Redirect::to($url);
+                try {
+                    $user->updateRecord('crf5', array(
+                        'study_id' => $_GET['sid'],
+                        'vid' => $_GET["vid"],
+                        'vcode' => $_GET["vcode"],
+                        'date_reported' => Input::get('date_reported'),
+                        'ae_description' => Input::get('ae_description'),
+                        'ae_category' => Input::get('ae_category'),
+                        'ae_start_date' => Input::get('ae_start_date'),
+                        'ae_ongoing' => Input::get('ae_ongoing'),
+                        'ae_end_date' => Input::get('ae_end_date'),
+                        'ae_outcome' => Input::get('ae_outcome'),
+                        'ae_severity' => Input::get('ae_severity'),
+                        'ae_serious' => Input::get('ae_serious'),
+                        'ae_expected' => Input::get('ae_expected'),
+                        'ae_treatment' => Input::get('ae_treatment'),
+                        'ae_taken' => Input::get('ae_taken'),
+                        'ae_relationship' => Input::get('ae_relationship'),
+                        'ae_staff_initial' => Input::get('ae_staff_initial'),
+                        'ae_date' => Input::get('ae_date'),
+                        'crf5_cmpltd_date' => Input::get('crf5_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ), Input::get('id'));
+                    $successMessage = 'CRF5 updated Successful';
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('update_crf6')) {
+            $validate = $validate->check($_POST, array(
+                'today_date' => array(
+                    'required' => true,
+                ),
+
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->updateRecord('crf6', array(
+                        'study_id' => $_GET['sid'],
+                        'vid' => $_GET["vid"],
+                        'vcode' => $_GET["vcode"],
+                        'today_date' => Input::get('today_date'),
+                        'terminate_date' => Input::get('terminate_date'),
+                        'completed120days' => Input::get('completed120days'),
+                        'reported_dead' => Input::get('reported_dead'),
+                        'withdrew_consent' => Input::get('withdrew_consent'),
+                        'start_date' => Input::get('start_date'),
+                        'end_date' => Input::get('end_date'),
+                        'date_death' => Input::get('date_death'),
+                        'primary_cause' => Input::get('primary_cause'),
+                        'secondary_cause' => Input::get('secondary_cause'),
+                        'withdrew_reason' => Input::get('withdrew_reason'),
+                        'withdrew_other' => Input::get('withdrew_other'),
+                        'terminated_reason' => Input::get('terminated_reason'),
+                        'outcome' => Input::get('outcome'),
+                        'outcome_date' => Input::get('outcome_date'),
+                        'summary' => Input::get('summary'),
+                        'clinician_name' => Input::get('clinician_name'),
+                        'crf6_cmpltd_date' => Input::get('crf6_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ), Input::get('id'));
+                    $successMessage = 'CRF6 updated Successful';
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('update_crf7')) {
+            $validate = $validate->check($_POST, array(
+                'tdate' => array(
+                    'required' => true,
+                ),
+
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->updateRecord('crf7', array(
+                        'study_id' => $_GET['sid'],
+                        'vid' => $_GET['vid'],
+                        'vcode' => $_GET['vcode'],
+                        'tdate' => Input::get('tdate'),
+                        'mobility' => Input::get('mobility'),
+                        'self_care' => Input::get('self_care'),
+                        'usual_active' => Input::get('usual_active'),
+                        'pain' => Input::get('pain'),
+                        'anxiety' => Input::get('anxiety'),
+                        'FDATE' => Input::get('FDATE'),
+                        'cpersid' => Input::get('cpersid'),
+                        'cDATE' => Input::get('cDATE'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ), Input::get('id'));
+                    $successMessage = 'CRF7 Updated Successful';
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
                 $pageError = $validate->errors();
             }
         } elseif (Input::get('clear_data')) {
@@ -367,7 +1462,7 @@ if ($user->isLoggedIn()) {
             if ($validate->passed()) {
                 try {
                     if (Input::get('name')) {
-                        if (Input::get('name') == 'user' || Input::get('name') == 'sub_category' || Input::get('name') == 'test_list' || Input::get('name') == 'category' || Input::get('name') == 'medications' || Input::get('name') == 'site' || Input::get('name') == 'schedule' || Input::get('name') == 'study_id') {
+                        if (Input::get('name') == 'user' || Input::get('name') == 'schedule' || Input::get('name') == 'study_id') {
                             $errorMessage = 'Table ' . '"' . Input::get('name') . '"' . '  can not be Cleared';
                         } else {
                             $clearData = $override->clearDataTable(Input::get('name'));
@@ -383,644 +1478,253 @@ if ($user->isLoggedIn()) {
             } else {
                 $pageError = $validate->errors();
             }
-        } elseif (Input::get('setSiteId')) {
+        }
 
-            $validate = $validate->check($_POST, array(
-                'name' => array(
-                    'required' => true,
-                ),
-            ));
-            if ($validate->passed()) {
-                try {
-                    $setSiteId = $override->setSiteId('visit', 'site_id', Input::get('name'), 1);
-                    $successMessage = 'Site ID Successfull';
-                } catch (Exception $e) {
-                    die($e->getMessage());
-                }
-            } else {
-                $pageError = $validate->errors();
+        if ($_GET['id'] == 20) {
+            $data = null;
+            $filename = null;
+            if (Input::get('clients')) {
+                $data = $override->get('clients', 'status', 1);
+                $filename = 'Clients';
+            } elseif (Input::get('visits')) {
+                $data = $override->get('visit', 'status', 1);
+                $filename = 'Visits';
+            } elseif (Input::get('lab')) {
+                $data = $override->getData('lab');
+                $filename = 'Exclusion Criteria';
+            } elseif (Input::get('study_id')) {
+                $data = $override->getData('study_id');
+                $filename = 'Study IDs';
+            } elseif (Input::get('sites')) {
+                $data = $override->getData('site');
+                $filename = 'Sites';
+            } elseif (Input::get('screening')) {
+                $data = $override->getData('screening');
+                $filename = 'Inclusion criteria';
+            } elseif (Input::get('crf1')) {
+                $data = $override->getData('crf1');
+                $filename = 'CRF 1';
+            } elseif (Input::get('crf2')) {
+                $data = $override->getData('crf2');
+                $filename = 'CRF 2';
+            } elseif (Input::get('crf3')) {
+                $data = $override->getData('crf3');
+                $filename = 'CRF 3';
+            } elseif (Input::get('crf4')) {
+                $data = $override->getData('crf4');
+                $filename = 'CRF 4';
+            } elseif (Input::get('crf5')) {
+                $data = $override->getData('crf5');
+                $filename = 'CRF 5';
+            } elseif (Input::get('crf5')) {
+                $data = $override->getData('crf5');
+                $filename = 'CRF 5';
+            } elseif (Input::get('crf6')) {
+                $data = $override->getData('crf6');
+                $filename = 'CRF 6';
+            } elseif (Input::get('crf7')) {
+                $data = $override->getData('crf7');
+                $filename = 'CRF 7';
+            } elseif (Input::get('herbal')) {
+                $data = $override->getData('herbal_treatment');
+                $filename = 'Other Herbal Treatment';
+            } elseif (Input::get('medication')) {
+                $data = $override->getData('other_medication');
+                $filename = 'other_medication';
+            } elseif (Input::get('nimregenin')) {
+                $data = $override->getData('nimregenin');
+                $filename = 'nimregenin';
+            } elseif (Input::get('radiotherapy')) {
+                $data = $override->getData('radiotherapy');
+                $filename = 'radiotherapy';
+            } elseif (Input::get('chemotherapy')) {
+                $data = $override->getData('chemotherapy');
+                $filename = 'chemotherapy';
+            } elseif (Input::get('surgery')) {
+                $data = $override->getData('surgery');
+                $filename = 'surgery';
             }
-        } elseif (Input::get('set_study_id')) {
+            $user->exportData($data, $filename);
+        }
 
-            $validate = $validate->check($_POST, array(
-                'client_id' => array(
-                    'required' => true,
-                ),
-            ));
-            if ($validate->passed()) {
-                try {
-                    $std_id = $override->getNews('study_id', 'site_id', $user->data()->site_id, 'status', 0)[0];
 
-                    $user->updateRecord('clients', array(
-                        'study_id' => $std_id['study_id'],
-                    ), Input::get('client_id'));
-
-                    $user->updateRecord('study_id', array(
-                        'status' => 1,
-                        'client_id' => Input::get('client_id'),
-                    ), $std_id['id']);
-
-                    $successMessage = 'STUDY ID ADDED Successfull';
-                } catch (Exception $e) {
-                    die($e->getMessage());
-                }
-            } else {
-                $pageError = $validate->errors();
-            }
-        } elseif (Input::get('update_study_id')) {
-
-            $validate = $validate->check($_POST, array(
-                'client_id' => array(
-                    'required' => true,
-                ),
-                'table_name' => array(
-                    'required' => true,
-                ),
-            ));
-            if ($validate->passed()) {
-                try {
-                    if (Input::get('client_id')) {
-
-                        $client_id = '';
-
-                        if (Input::get('table_name') == 'visit') {
-                            $client_id = 'client_id';
-                        } else {
-                            $client_id = 'patient_id';
-                        }
-
-                        $clients = $override->get('clients', 'id', Input::get('client_id'));
-                        $tables = $override->get(Input::get('table_name'), $client_id, Input::get('client_id'));
-
-                        foreach ($tables as $table) {
-                            $user->updateRecord(Input::get('table_name'), array(
-                                'study_id' => $clients[0]['study_id'],
-                                'site_id' => $clients[0]['site_id'],
-                            ), $table['id']);
-                        }
-
-                        $successMessage = 'STUDY ID Updated Successfull';
+        if ($_GET['id'] == 21) {
+            $data = null;
+            $filename = null;
+            if (Input::get('visits_pending')) {
+                if ($_GET['day']) {
+                    if ($_GET['day'] == 'Nxt') {
+                        $schedule = 0;
+                        $today = date('Y-m-d');
+                        $nxt_visit_date = date('Y-m-d', strtotime($today . ' + ' . $schedule . ' days'));
+                        $data = $override->getNews3('visit', 'expected_date', $nxt_visit_date, 'status', 0);
                     } else {
-                        $errorMessage = 'Error on updating Table  ' . Input::get('table_name');
+                        $data = $override->getNews2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', $_GET['day']);
                     }
-                } catch (Exception $e) {
-                    die($e->getMessage());
-                }
-            } else {
-                $pageError = $validate->errors();
-            }
-        } elseif (Input::get('update_study_id_all_tables')) {
-            $validate = $validate->check($_POST, array(
-                'patient_id' => array(
-                    'required' => true,
-                ),
-            ));
-            if ($validate->passed()) {
-                try {
-                    $patient_id = '';
-                    if (Input::get('patient_id')) {
-                        $patient_id = 'patient_id';
-                        $clients = $override->get('clients', 'id', Input::get('patient_id'))[0];
-
-                        foreach ($override->AllTables() as $tables) {
-
-                            // print_r($tables);
-
-                            if ($tables['Tables_in_penplus'] == 'screening') {
-                                $table = $override->get('screening', $patient_id, Input::get('patient_id'));
-                                foreach ($table as $value) {
-                                    $user->updateRecord('screening', array(
-                                        'study_id' => $clients['study_id'],
-                                        'site_id' => $clients['site_id'],
-                                    ), $value['id']);
-                                }
-                            }
-                            if ($tables['Tables_in_penplus'] == 'demographic') {
-                                $table = $override->get('demographic', $patient_id, Input::get('patient_id'));
-                                foreach ($table as $value) {
-                                    $user->updateRecord('demographic', array(
-                                        'study_id' => $clients['study_id'],
-                                        'site_id' => $clients['site_id'],
-                                    ), $value['id']);
-                                }
-                            }
-                            if ($tables['Tables_in_penplus'] == 'vitals') {
-                                $table = $override->get('vitals', $patient_id, Input::get('patient_id'));
-                                foreach ($table as $value) {
-                                    $user->updateRecord('vitals', array(
-                                        'study_id' => $clients['study_id'],
-                                        'site_id' => $clients['site_id'],
-                                    ), $value['id']);
-                                }
-                            }
-
-                            if ($tables['Tables_in_penplus'] == 'main_diagnosis') {
-                                $table = $override->get('main_diagnosis', $patient_id, Input::get('patient_id'));
-                                foreach ($table as $value) {
-                                    $user->updateRecord('main_diagnosis', array(
-                                        'study_id' => $clients['study_id'],
-                                        'site_id' => $clients['site_id'],
-                                    ), $value['id']);
-                                }
-                            }
-
-                            if ($tables['Tables_in_penplus'] == 'history') {
-                                $table = $override->get('history', $patient_id, Input::get('patient_id'));
-                                foreach ($table as $value) {
-                                    $user->updateRecord('history', array(
-                                        'study_id' => $clients['study_id'],
-                                        'site_id' => $clients['site_id'],
-                                    ), $value['id']);
-                                }
-                            }
-
-                            if ($tables['Tables_in_penplus'] == 'symptoms') {
-                                $table = $override->get('symptoms', $patient_id, Input::get('patient_id'));
-                                foreach ($table as $value) {
-                                    $user->updateRecord('symptoms', array(
-                                        'study_id' => $clients['study_id'],
-                                        'site_id' => $clients['site_id'],
-                                    ), $value['id']);
-                                }
-                            }
-
-                            if ($tables['Tables_in_penplus'] == 'cardiac') {
-                                $table = $override->get('cardiac', $patient_id, Input::get('patient_id'));
-                                foreach ($table as $value) {
-                                    $user->updateRecord('cardiac', array(
-                                        'study_id' => $clients['study_id'],
-                                        'site_id' => $clients['site_id'],
-                                    ), $value['id']);
-                                }
-                            }
-
-                            if ($tables['Tables_in_penplus'] == 'diabetic') {
-                                $table = $override->get('diabetic', $patient_id, Input::get('patient_id'));
-                                foreach ($table as $value) {
-                                    $user->updateRecord('diabetic', array(
-                                        'study_id' => $clients['study_id'],
-                                        'site_id' => $clients['site_id'],
-                                    ), $value['id']);
-                                }
-                            }
-
-                            if ($tables['Tables_in_penplus'] == 'sickle_cell') {
-                                $table = $override->get('sickle_cell', $patient_id, Input::get('patient_id'));
-                                foreach ($table as $value) {
-                                    $user->updateRecord('sickle_cell', array(
-                                        'study_id' => $clients['study_id'],
-                                        'site_id' => $clients['site_id'],
-                                    ), $value['id']);
-                                }
-                            }
-
-                            if ($tables['Tables_in_penplus'] == 'results') {
-                                $table = $override->get('results', $patient_id, Input::get('patient_id'));
-                                foreach ($table as $value) {
-                                    $user->updateRecord('results', array(
-                                        'study_id' => $clients['study_id'],
-                                        'site_id' => $clients['site_id'],
-                                    ), $value['id']);
-                                }
-                            }
-
-                            if ($tables['Tables_in_penplus'] == 'hospitalization') {
-                                $table = $override->get('hospitalization', $patient_id, Input::get('patient_id'));
-                                foreach ($table as $value) {
-                                    $user->updateRecord('hospitalization', array(
-                                        'study_id' => $clients['study_id'],
-                                        'site_id' => $clients['site_id'],
-                                    ), $value['id']);
-                                }
-                            }
-
-                            if ($tables['Tables_in_penplus'] == 'hospitalization_details') {
-                                $table = $override->get('hospitalization_details', $patient_id, Input::get('patient_id'));
-                                foreach ($table as $value) {
-                                    $user->updateRecord('hospitalization_details', array(
-                                        'study_id' => $clients['study_id'],
-                                        'site_id' => $clients['site_id'],
-                                    ), $value['id']);
-                                }
-                            }
-
-                            if ($tables['Tables_in_penplus'] == 'treatment_plan') {
-                                $table = $override->get('treatment_plan', $patient_id, Input::get('patient_id'));
-                                foreach ($table as $value) {
-                                    $user->updateRecord('treatment_plan', array(
-                                        'study_id' => $clients['study_id'],
-                                        'site_id' => $clients['site_id'],
-                                    ), $value['id']);
-                                }
-                            }
-
-                            if ($tables['Tables_in_penplus'] == 'dgns_complctns_comorbdts') {
-                                $table = $override->get('dgns_complctns_comorbdts', $patient_id, Input::get('patient_id'));
-                                foreach ($table as $value) {
-                                    $user->updateRecord('dgns_complctns_comorbdts', array(
-                                        'study_id' => $clients['study_id'],
-                                        'site_id' => $clients['site_id'],
-                                    ), $value['id']);
-                                }
-                            }
-
-                            if ($tables['Tables_in_penplus'] == 'risks') {
-                                $table = $override->get('risks', $patient_id, Input::get('patient_id'));
-                                foreach ($table as $value) {
-                                    $user->updateRecord('risks', array(
-                                        'study_id' => $clients['study_id'],
-                                        'site_id' => $clients['site_id'],
-                                    ), $value['id']);
-                                }
-                            }
-
-                            if ($tables['Tables_in_penplus'] == 'lab_details') {
-                                $table = $override->get('lab_details', $patient_id, Input::get('patient_id'));
-                                foreach ($table as $value) {
-                                    $user->updateRecord('lab_details', array(
-                                        'study_id' => $clients['study_id'],
-                                        'site_id' => $clients['site_id'],
-                                    ), $value['id']);
-                                }
-                            }
-
-                            if ($tables['Tables_in_penplus'] == 'social_economic') {
-                                $table = $override->get('social_economic', $patient_id, Input::get('patient_id'));
-                                foreach ($table as $value) {
-                                    $user->updateRecord('social_economic', array(
-                                        'study_id' => $clients['study_id'],
-                                        'site_id' => $clients['site_id'],
-                                    ), $value['id']);
-                                }
-                            }
-
-                            if ($tables['Tables_in_penplus'] == 'summary') {
-                                $table = $override->get('summary', $patient_id, Input::get('patient_id'));
-                                foreach ($table as $value) {
-                                    $user->updateRecord('summary', array(
-                                        'study_id' => $clients['study_id'],
-                                        'site_id' => $clients['site_id'],
-                                    ), $value['id']);
-                                }
-                            }
-
-                            if ($tables['Tables_in_penplus'] == 'medication_treatments') {
-                                $table = $override->get('medication_treatments', $patient_id, Input::get('patient_id'));
-                                foreach ($table as $value) {
-                                    $user->updateRecord('medication_treatments', array(
-                                        'study_id' => $clients['study_id'],
-                                        'site_id' => $clients['site_id'],
-                                    ), $value['id']);
-                                }
-                            }
-
-                            if ($tables['Tables_in_penplus'] == 'hospitalization_detail_id') {
-                                $table = $override->get('hospitalization_detail_id', $patient_id, Input::get('patient_id'));
-                                foreach ($table as $value) {
-                                    $user->updateRecord('hospitalization_detail_id', array(
-                                        'study_id' => $clients['study_id'],
-                                        'site_id' => $clients['site_id'],
-                                    ), $value['id']);
-                                }
-                            }
-
-                            if ($tables['Tables_in_penplus'] == 'sickle_cell_status_table') {
-                                $table = $override->get('sickle_cell_status_table', $patient_id, Input::get('patient_id'));
-                                foreach ($table as $value) {
-                                    $user->updateRecord('sickle_cell_status_table', array(
-                                        'study_id' => $clients['study_id'],
-                                        'site_id' => $clients['site_id'],
-                                    ), $value['id']);
-                                }
-                            }
-
-                            if ($tables['Tables_in_penplus'] == 'visit') {
-                                $table = $override->get('visit', 'client_id', Input::get('patient_id'));
-                                foreach ($table as $value) {
-                                    $user->updateRecord('visit', array(
-                                        'study_id' => $clients['study_id'],
-                                        'site_id' => $clients['site_id'],
-                                    ), $value['id']);
-                                }
-                            }
-
-                            $successMessage = 'STUDY ID Updated Successfull On All Tables';
-                            Redirect::to('info.php?id=' . $_GET['id'] . '&msg=' . $successMessage);
-                        }
-                    } else {
-                        $errorMessage = 'Please select Patient Study ID';
-                    }
-                } catch (Exception $e) {
-                    die($e->getMessage());
-                }
-            } else {
-                $pageError = $validate->errors();
-            }
-        } elseif (Input::get('unset_study_id')) {
-
-            $validate = $validate->check($_POST, array(
-                'client_id' => array(
-                    'required' => true,
-                ),
-            ));
-            if ($validate->passed()) {
-                try {
-                    $user->updateRecord('clients', array(
-                        'study_id' => '',
-                    ), Input::get('client_id'));
-
-                    $successMessage = 'STUDY ID DELETED Successfull';
-                } catch (Exception $e) {
-                    die($e->getMessage());
-                }
-            } else {
-                $pageError = $validate->errors();
-            }
-        } elseif (Input::get('delete_data')) {
-
-            $validate = $validate->check($_POST, array(
-                'name' => array(
-                    'required' => true,
-                ),
-                'site' => array(
-                    'required' => true,
-                ),
-            ));
-            if ($validate->passed()) {
-                try {
-                    if (Input::get('name')) {
-                        $site_id = '';
-                        if (Input::get('site') == '1') {
-                            $site_id = 'KNODOA';
-                        } elseif (Input::get('site') == '2') {
-                            $site_id = 'KARATU';
-                        }
-
-                        if (Input::get('name') == 'user' || Input::get('name') == 'sub_category' || Input::get('name') == 'test_list' || Input::get('name') == 'category' || Input::get('name') == 'medications' || Input::get('name') == 'site' || Input::get('name') == 'schedule' || Input::get('name') == 'study_id') {
-                            $errorMessage = 'Table ' . '"' . Input::get('name') . '"' . '  can not be Deleted';
-                        } else {
-                            // $clearData = $override->deleteDataTable(Input::get('name'), Input::get('site'));
-                            $deleteData = $user->deleteRecord(Input::get('name'), 'site_id', Input::get('site'));
-                            $successMessage = 'Data on Table ' . '"' . Input::get('name') . 'On site "' . '"' . $site_id . '"' . ' Deleted Successfull';
-                        }
-                    } else {
-                        $errorMessage = 'Data on Table ' . '"' . Input::get('name') . '"' . '  can not be Found!';
-                    }
-                    // die;
-                } catch (Exception $e) {
-                    die($e->getMessage());
-                }
-            } else {
-                $pageError = $validate->errors();
-            }
-        } elseif (Input::get('delete_data2')) {
-
-            $validate = $validate->check($_POST, array(
-                'name' => array(
-                    'required' => true,
-                ),
-                'date2' => array(
-                    'required' => true,
-                ),
-            ));
-            if ($validate->passed()) {
-                try {
-                    if (Input::get('name')) {
-                        $site_id = '';
-                        if (Input::get('site') == '1') {
-                            $site_id = 'KNODOA';
-                        } elseif (Input::get('site') == '2') {
-                            $site_id = 'KARATU';
-                        }
-
-                        if (Input::get('name') == 'user' || Input::get('name') == 'sub_category' || Input::get('name') == 'test_list' || Input::get('name') == 'category' || Input::get('name') == 'medications' || Input::get('name') == 'site' || Input::get('name') == 'schedule' || Input::get('name') == 'study_id') {
-                            $errorMessage = 'Table ' . '"' . Input::get('name') . '"' . '  can not be Deleted';
-                        } else {
-                            // $clearData = $override->deleteDataTable(Input::get('name'), Input::get('site'));
-                            $deleteData = $user->deleteRecord(Input::get('name'), 'created_on', Input::get('date2'));
-                            $successMessage = 'Data on Table ' . '"' . Input::get('name') . ' On site "' . '"' . $site_id . '"' . ' On date "' . '"' . Input::get('date2') . '"' . ' Deleted Successfull';
-                        }
-                    } else {
-                        $errorMessage = 'Data on Table ' . '"' . Input::get('name') . '"' . '  can not be Found!';
-                    }
-                    // die;
-                } catch (Exception $e) {
-                    die($e->getMessage());
-                }
-            } else {
-                $pageError = $validate->errors();
-            }
-        } elseif (Input::get('add_medications')) {
-            $validate = $validate->check($_POST, array(
-                'name' => array(
-                    'required' => true,
-                ),
-                'cardiac' => array(
-                    'required' => true,
-                ),
-                'diabetes' => array(
-                    'required' => true,
-                ),
-                'sickle_cell' => array(
-                    'required' => true,
-                ),
-            ));
-            if ($validate->passed()) {
-                try {
-                    if (Input::get('action') == 'edit') {
-                        $user->updateRecord('medications', array(
-                            'name' => Input::get('name'),
-                            'cardiac' => Input::get('cardiac'),
-                            'diabetes' => Input::get('diabetes'),
-                            'sickle_cell' => Input::get('sickle_cell'),
-                            'status' => 1,
-                        ), Input::get('id'));
-                        $successMessage = 'Medications Successful Updated';
-                    } elseif (Input::get('action') == 'add') {
-
-                        $medications = $override->get('medications', 'name', Input::get('name'));
-                        if ($medications) {
-                            $errorMessage = 'Medications Already  Available Please Update instead!';
-                        } else {
-                            $user->createRecord('medications', array(
-                                'name' => Input::get('name'),
-                                'cardiac' => Input::get('cardiac'),
-                                'diabetes' => Input::get('diabetes'),
-                                'sickle_cell' => Input::get('sickle_cell'),
-                                'status' => 1,
-                            ));
-                            $successMessage = 'Medications Successful Added';
-                        }
-                    }
-                } catch (Exception $e) {
-                    die($e->getMessage());
-                }
-            } else {
-                $pageError = $validate->errors();
-            }
-        } elseif (Input::get('DoctorConfirm')) {
-
-            $validate = $validate->check($_POST, array(
-                // 'name' => array(
-                //     'required' => true,
-                // ),
-            ));
-            if ($validate->passed()) {
-                try {
-                    $setSiteId = $override->DoctorConfirm('screening', 'doctor_confirm', Input::get('name'), 1);
-                    $successMessage = 'Doctor Confirm Successfull Updated';
-                } catch (Exception $e) {
-                    die($e->getMessage());
-                }
-            } else {
-                $pageError = $validate->errors();
-            }
-        } elseif (Input::get('delete_medication')) {
-            $user->updateRecord('medications', array(
-                'status' => 0,
-            ), Input::get('id'));
-            $successMessage = Input::get('name') . ' - ' . 'Medications Deleted Successful';
-        } elseif (Input::get('delete_batch')) {
-            $user->updateRecord('batch', array(
-                'status' => 0,
-            ), Input::get('id'));
-            $successMessage = Input::get('name') . ' - ' . 'Medications Deleted Successful';
-        } elseif (Input::get('search_by_site1')) {
-            $validate = $validate->check($_POST, array(
-                'site_id' => array(
-                    'required' => true,
-                ),
-            ));
-            if ($validate->passed()) {
-                if (Input::get('status')) {
-                    $url = 'info.php?id=3&status=' . Input::get('status') . '&site_id=' . Input::get('site_id');
                 } else {
-                    $url = 'info.php?id=' . $_GET['id'] . '&site_id=' . Input::get('site_id');
+                    $data = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'status', 0);
                 }
-                Redirect::to($url);
-                $pageError = $validate->errors();
+                $filename = 'Pending Visits';
             }
-        } elseif (Input::get('increase_batch')) {
-            $validate = $validate->check($_POST, array(
-                'date' => array(
-                    'required' => true,
-                ),
-                'cost' => array(
-                    'required' => true,
-                ),
-                'price' => array(
-                    'required' => true,
-                ),
-            ));
-            if ($validate->passed()) {
-                try {
-                    $batch = $override->getNews('batch', 'status', 1, 'id', Input::get('id'))[0];
-                    $amount = $batch['amount'] + Input::get('received');
-                    $price = $batch['price'] + Input::get('cost');
+            $user->exportData($data, $filename);
+        }
 
-                    $user->updateRecord('batch', array(
-                        'amount' => $amount,
-                        'price' => $price,
-                    ), Input::get('id'));
-
-                    $user->createRecord('batch_records', array(
-                        'date' => Input::get('date'),
-                        'batch_id' => $batch['id'],
-                        'medication_id' => $batch['medication_id'],
-                        'serial_name' => $batch['serial_name'],
-                        'received' => Input::get('received'),
-                        'removed' => 0,
-                        'amount' => $amount,
-                        'expire_date' => $batch['expire_date'],
-                        'remarks' => Input::get('remarks'),
-                        'cost' => Input::get('cost'),
-                        'price' => $price,
-                        'status' => 1,
-                        'create_on' => date('Y-m-d H:i:s'),
-                        'site_id' => $user->data()->site_id,
-                        'staff_id' => $user->data()->id,
-                    ));
-
-                    $successMessage = 'Medication name : ' . Input::get('name') . ' : Batch : ' . Input::get('serial_name') . ' - ' . Input::get('removed') . ' Increased Successful';
-                } catch (Exception $e) {
-                    die($e->getMessage());
-                }
-            } else {
-                $pageError = $validate->errors();
+        if ($_GET['id'] == 22) {
+            $data = null;
+            $filename = null;
+            if (Input::get('crfs_pending')) {
+                // if ($_GET['day']) {
+                //     if ($_GET['day'] == 'Nxt') {
+                //         $schedule = 0;
+                //         $today = date('Y-m-d');
+                //         $nxt_visit_date = date('Y-m-d', strtotime($today . ' + ' . $schedule . ' days'));
+                //         $data = $override->getNews3('visit', 'expected_date', $nxt_visit_date, 'status', 0);
+                //     } else {
+                //         $data = $override->getNews2('visit', 'expected_date', date('Y-m-d'), 'status', 0, 'visit_code', $_GET['day']);
+                //     }
+                // } else {
+                $data = $override->getNews('crf1', 'vcode', 'D0', 'status', 1);
+                // $data = $override->getNews1('crf1', 'visit_code', $_GET['day'], 'status', 1);
+                // $data = $override->getNews1('visit', 'expected_date', date('Y-m-d'), 'status', 0);
+                // }
+                $filename = 'Missing Crfs';
             }
-        } elseif (Input::get('decrease_batch')) {
-            $validate = $validate->check($_POST, array(
-                'date' => array(
-                    'required' => true,
-                ),
-                'removed' => array(
-                    'required' => true,
-                ),
-            ));
-            if ($validate->passed()) {
-                try {
-                    $batch = $override->getNews('batch', 'status', 1, 'id', Input::get('id'))[0];
-                    if (Input::get('removed') <= $batch['amount']) {
-                        $amount = $batch['amount'] - Input::get('removed');
+            $user->exportData($data, $filename);
+        }
 
-                        $user->updateRecord('batch', array(
-                            'amount' => $amount,
-                        ), Input::get('id'));
+        if ($_GET['id'] == 24) {
+            if (Input::get('export_data_table')) {
+                // $data = $override->DBbackups(Input::get('name'), 'Backup');
+                $data = $override->DBbackups();
+                $output = '';
+                foreach ($data as $table) {
+                    $data = $user->createTable($table);
+                    // foreach ($data as $show_table_row) {
+                    //     $output .= "\n\n" . $show_table_row["Create Table"] . ";\n\n";
+                    // }
+                    //     $select_query = "SELECT * FROM " . $table . "";
+                    //     $statement = $connect->prepare($select_query);
+                    //     $statement->execute();
+                    //     $total_row = $statement->rowCount();
 
-                        $user->createRecord('batch_records', array(
-                            'date' => Input::get('date'),
-                            'batch_id' => $batch['id'],
-                            'medication_id' => $batch['medication_id'],
-                            'serial_name' => $batch['serial_name'],
-                            'received' => 0,
-                            'removed' => Input::get('removed'),
-                            'amount' => $amount,
-                            'expire_date' => $batch['expire_date'],
-                            'remarks' => Input::get('remarks'),
-                            'cost' => 0,
-                            'price' => $batch['price'],
-                            'status' => 1,
-                            'create_on' => date('Y-m-d H:i:s'),
-                            'site_id' => $user->data()->site_id,
-                            'staff_id' => $user->data()->id,
-                        ));
+                    //     for ($count = 0; $count < $total_row; $count++) {
+                    //         $single_result = $statement->fetch(PDO::FETCH_ASSOC);
+                    //         $table_column_array = array_keys($single_result);
+                    //         $table_value_array = array_values($single_result);
+                    //         $output .= "\nINSERT INTO $table (";
+                    //         $output .= "" . implode(", ", $table_column_array) . ") VALUES (";
+                    //         $output .= "'" . implode("','", $table_value_array) . "');\n";
+                    //     }
 
-                        $successMessage = 'Medication name : ' . Input::get('name') . ' : Batch : ' . Input::get('serial_name') . ' - ' . Input::get('removed') . ' Decreased Successful';
-                    } else {
-                        $errorMessage = 'Batch to remove exceeds the available Amount';
-                    }
-                } catch (Exception $e) {
-                    die($e->getMessage());
+                    print_r($data);
                 }
-            } else {
-                $pageError = $validate->errors();
+                // $file_name = 'database_backup_on_' . date('y-m-d') . '.sql';
+                // $file_handle = fopen($file_name, 'w+');
+                // fwrite($file_handle, $output);
+                // fclose($file_handle);
+                // header('Content-Description: File Transfer');
+                // header('Content-Type: application/octet-stream');
+                // header('Content-Disposition: attachment; filename=' . basename($file_name));
+                // header('Content-Transfer-Encoding: binary');
+                // header('Expires: 0');
+                // header('Cache-Control: must-revalidate');
+                // header('Pragma: public');
+                // header('Content-Length: ' . filesize($file_name));
+                // ob_clean();
+                // flush();
+                // readfile($file_name);
+                // unlink($file_name);
+
+
             }
         }
-    }
 
-
-    if ($user->data()->power == 1 || $user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) {
-        if ($_GET['site_id'] != null) {
-            $screened = $override->countData2('clients', 'status', 1, 'screened', 1, 'site_id', $_GET['site_id']);
-            $eligible = $override->countData2('clients', 'status', 1, 'eligible', 1, 'site_id', $_GET['site_id']);
-            $enrolled = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'site_id', $_GET['site_id']);
-            $end = $override->countData2('clients', 'status', 1, 'end_study', 1, 'site_id', $_GET['site_id']);
-        } else {
-            $screened = $override->countData('clients', 'status', 1, 'screened', 1);
-            $eligible = $override->countData('clients', 'status', 1, 'eligible', 1);
-            $enrolled = $override->countData('clients', 'status', 1, 'enrolled', 1);
-            $end = $override->countData('clients', 'status', 1, 'end_study', 1);
+        if ($_GET['id'] == 25) {
+            if (Input::get('export_data_table')) {
+                $data = $override->Export_Database(Input::get('name'), 'Backup');
+                if ($data === false) {
+                    $successMessage = 'Failed to export database.';
+                } else {
+                    $successMessage = 'Database exported successfully.';
+                    // print_r($data);
+                }
+            }
         }
-    } else {
-        $screened = $override->countData2('clients', 'status', 1, 'screened', 1, 'site_id', $user->data()->site_id);
-        $eligible = $override->countData2('clients', 'status', 1, 'eligible', 1, 'site_id', $user->data()->site_id);
-        $enrolled = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'site_id', $user->data()->site_id);
-        $end = $override->countData2('clients', 'status', 1, 'end_study', 1, 'site_id', $user->data()->site_id);
+
+        if ($_GET['id'] == 26) {
+            $data = null;
+            $filename = null;
+            if (Input::get('dowmload_missing_datae')) {
+                if ($data === false) {
+                    $successMessage = 'Failed to export database.';
+                    $filename = 'Mssing Crfs';
+                } else {
+                    $filename = 'Mssing Crfs';
+                    $successMessage = 'Database exported successfully.';
+                }
+                $data = $override->MissingData();
+                // $data = $override->exportData($MissingCrf, $filename);
+                $user->exportData($data, $filename);
+            }
+        }
+
+        if ($_GET['id'] == 27) {
+
+            $data = null;
+            $filename = null;
+            if (Input::get('dowmload_missing_crfs_visits')) {
+                if ($data === false) {
+                    $successMessage = 'Failed to export database.';
+                    $filename = 'Mssing Crfs';
+                } else {
+                    $filename = 'Mssing Crfs';
+                    $successMessage = 'Database exported successfully.';
+                }
+                $data = $override->MissingData1();
+                // $data = $override->exportData($MissingCrf, $filename);
+                $user->exportData($data, $filename);
+            }
+        }
+
+        if ($_GET['id'] == 28) {
+            $data = null;
+            $filename = null;
+            if (Input::get('dowmload_missing_crfs_all')) {
+                if ($data === false) {
+                    $successMessage = 'Failed to export database.';
+                    $filename = 'Mssing Crfs';
+                } else {
+                    $filename = 'Mssing Crfs';
+                    $successMessage = 'Database exported successfully.';
+                }
+                $data = $override->MissingData2();
+                // $data = $override->exportData($MissingCrf, $filename);
+                $user->exportData($data, $filename);
+            }
+        }
+
+        if ($_GET['id'] == 30) {
+
+            $data = null;
+            $filename = null;
+            if (Input::get('dowmload_all_crfs_visits_with')) {
+                if ($data === false) {
+                    $successMessage = 'Failed to export database.';
+                    $filename = 'All Clints Visits with Crfs';
+                } else {
+                    $filename = 'All Clints Visits with Crfs';
+                    $successMessage = 'Database exported successfully.';
+                }
+                $data = $override->getDataStatus();
+                // $data = $override->exportData($MissingCrf, $filename);
+                $user->exportData($data, $filename);
+                // $user->exportDataCsv($data, $filename);
+            }
+        }
     }
 } else {
     Redirect::to('index.php');
 }
-
 ?>
 
 
@@ -2733,11 +3437,11 @@ if ($user->isLoggedIn()) {
                                                                                     <label>Notes / Remarks / Comments</label>
                                                                                     <textarea class="form-control"
                                                                                         name="reasons" rows="3">
-                                                                                                                         <?php
-                                                                                                                         if ($enrollment['reasons']) {
-                                                                                                                             print_r($enrollment['reasons']);
-                                                                                                                         } ?>
-                                                                                                                        </textarea>
+                                                                                                                                 <?php
+                                                                                                                                 if ($enrollment['reasons']) {
+                                                                                                                                     print_r($enrollment['reasons']);
+                                                                                                                                 } ?>
+                                                                                                                                </textarea>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -4194,7 +4898,7 @@ if ($user->isLoggedIn()) {
                                                                         ?>
 
 
-                                                                    <?php } elseif ($visit['status'] == 1 && $visit['visit_code'] == 'END') { ?>
+                                                                    <?php } elseif ($visit['visit_code'] == 'END') { ?>
 
                                                                         <?php if ($crf6) { ?>
                                                                             <a href="info.php?id=6&cid=<?= $_GET['cid'] ?>&vid=<?= $visit['id'] ?>&vcode=<?= $visit['visit_code'] ?>&sid=<?= $client['study_id'] ?>"
