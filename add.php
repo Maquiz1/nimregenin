@@ -139,8 +139,8 @@ if ($user->isLoggedIn()) {
                     $age = $user->dateDiffYears(date('Y-m-d'), Input::get('dob'));
                     $client = $override->get('clients', 'id', $_GET['cid']);
                     if ($client) {
+                        $age = $user->dateDiffYears(date('Y-m-d'), Input::get('dob'));
                         $user->updateRecord('clients', array(
-                            'study_id' => '',
                             'clinic_date' => Input::get('clinic_date'),
                             'firstname' => Input::get('firstname'),
                             'middlename' => Input::get('middlename'),
@@ -163,6 +163,7 @@ if ($user->isLoggedIn()) {
                             'block_no' => Input::get('block_no'),
                             'site_id' => $user->data()->site_id,
                             'staff_id' => $user->data()->id,
+                            'client_image' => $image,
                             'comments' => Input::get('comments'),
                             'initials' => Input::get('initials'),
                             'status' => 1,
