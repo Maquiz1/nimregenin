@@ -2733,11 +2733,11 @@ if ($user->isLoggedIn()) {
                                                                                     <label>Notes / Remarks / Comments</label>
                                                                                     <textarea class="form-control"
                                                                                         name="reasons" rows="3">
-                                                                                                 <?php
-                                                                                                 if ($enrollment['reasons']) {
-                                                                                                     print_r($enrollment['reasons']);
-                                                                                                 } ?>
-                                                                                                </textarea>
+                                                                                                         <?php
+                                                                                                         if ($enrollment['reasons']) {
+                                                                                                             print_r($enrollment['reasons']);
+                                                                                                         } ?>
+                                                                                                        </textarea>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -3345,75 +3345,64 @@ if ($user->isLoggedIn()) {
                                                                             aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button>
-                                                                        <?php $screening = $override->get('screening', 'patient_id', $client['id'])[0];
-                                                                        ?>
+                                                                        <?php $screening = $override->get('screening', 'patient_id', $client['id'])[0]; ?>
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <div class="row">
                                                                             <div class="col-sm-6">
-                                                                                <div class="row-form clearfix">
-                                                                                    <!-- select -->
-                                                                                    <div class="form-group">
-                                                                                        <label>Visit Date</label>
-                                                                                        <input class="form-control"
-                                                                                            max="<?= date('Y-m-d'); ?>"
-                                                                                            type="date" name="visit_date"
-                                                                                            id="visit_date" style="width: 100%;"
-                                                                                            value="<?php if ($visit['visit_date']) {
-                                                                                                print_r($visit['visit_date']);
-                                                                                            } ?>" required />
-                                                                                    </div>
+                                                                                <div class="form-group">
+                                                                                    <label>Visit Date</label>
+                                                                                    <input class="form-control"
+                                                                                        max="<?= date('Y-m-d'); ?>" type="date"
+                                                                                        name="visit_date" id="visit_date"
+                                                                                        style="width: 100%;"
+                                                                                        value="<?php if ($visit['visit_date']) {
+                                                                                            print_r($visit['visit_date']);
+                                                                                        } ?>"
+                                                                                        required />
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-sm-6">
-                                                                                <div class="row-form clearfix">
-                                                                                    <div class="form-group">
-                                                                                        <label>Status</label>
-                                                                                        <select id="visit_status"
-                                                                                            name="visit_status"
-                                                                                            class="form-control" required>
-                                                                                            <option value="<?= $visit['id'] ?>">
-                                                                                                <?php if ($visit['visit_status']) {
-                                                                                                    if ($visit['visit_status'] == 1) {
-                                                                                                        echo 'Attended';
-                                                                                                    } else if ($visit['visit_status'] == 2) {
-                                                                                                        echo 'Missed';
-                                                                                                    } else if ($visit['visit_status'] == 0) {
-                                                                                                        echo 'Pending';
-                                                                                                    }
-                                                                                                } else {
-                                                                                                    echo 'Select';
-                                                                                                } ?>
-                                                                                            </option>
-                                                                                            <option value="1">Attended</option>
-                                                                                            <option value="2">Missed</option>
-                                                                                            <option value="0">Pending</option>
-                                                                                        </select>
-                                                                                    </div>
+                                                                                <div class="form-group">
+                                                                                    <label>Status</label>
+                                                                                    <select id="visit_status"
+                                                                                        name="visit_status" class="form-control"
+                                                                                        required>
+                                                                                        <option value="<?= $visit['id'] ?>">
+                                                                                            <?php if ($visit['visit_status']) {
+                                                                                                if ($visit['visit_status'] == 1) {
+                                                                                                    echo 'Attended';
+                                                                                                } else if ($visit['visit_status'] == 2) {
+                                                                                                    echo 'Missed';
+                                                                                                } else if ($visit['visit_status'] == 0) {
+                                                                                                    echo 'Pending';
+                                                                                                }
+                                                                                            } else {
+                                                                                                echo 'Select';
+                                                                                            } ?>
+                                                                                        </option>
+                                                                                        <option value="1">Attended</option>
+                                                                                        <option value="2">Missed</option>
+                                                                                        <option value="0">Pending</option>
+                                                                                    </select>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <hr>
                                                                         <div class="row">
                                                                             <div class="col-sm-12">
-                                                                                <div class="row-form clearfix">
-                                                                                    <!-- select -->
-                                                                                    <div class="form-group">
-                                                                                        <label>comments / remarks:</label>
-                                                                                        <textarea class="form-control"
-                                                                                            name="reasons" rows="3"
-                                                                                            placeholder="Type reason / comments here..."
-                                                                                            required>
-                                                                                                            <?php if ($visit['reasons']) {
-                                                                                                                print_r($visit['reasons']);
-                                                                                                            } ?>
-                                                                                                        </textarea>
-                                                                                    </div>
+                                                                                <div class="form-group">
+                                                                                    <label>Comments / Remarks:</label>
+                                                                                    <textarea class="form-control"
+                                                                                        name="reasons" rows="3"
+                                                                                        placeholder="Type reason / comments here..."
+                                                                                        required><?php if ($visit['reasons']) {
+                                                                                            print_r($visit['reasons']);
+                                                                                        } ?></textarea>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="dr"><span></span></div>
                                                                     <div class="modal-footer justify-content-between">
                                                                         <input type="hidden" name="id"
                                                                             value="<?= $visit['id'] ?>">
