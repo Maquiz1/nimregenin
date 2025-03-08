@@ -18,7 +18,7 @@ $errorMessage = null;
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Add New Staff</h1>
+                    <h1><?= $_GET['action'] ?> New <?= $_GET['table'] ?></h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -32,7 +32,7 @@ $errorMessage = null;
                                 Go to staff list >
                             </a>
                         </li>&nbsp;&nbsp;
-                        <li class="breadcrumb-item active">Add New Staff</li>
+                        <li class="breadcrumb-item active"><?= $_GET['action'] ?> New <?= $_GET['table'] ?></li>
                     </ol>
                 </div>
             </div>
@@ -85,5 +85,5 @@ $errorMessage = null;
                     <!-- general form elements disabled -->
                     <div class="card card-warning">
                         <div class="card-header">
-                            <h3 class="card-title">Client Details</h3>
+                            <h3 class="card-title"><?= $_GET['table'] ?> Details</h3>
                         </div>

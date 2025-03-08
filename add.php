@@ -136,6 +136,7 @@ if ($user->isLoggedIn()) {
             ));
             if ($validate->passed()) {
                 try {
+                    print_r(Input::get('dob'));
                     $age = $user->dateDiffYears(date('Y-m-d'), Input::get('dob'));
                     $client = $override->get('clients', 'id', $_GET['cid']);
                     if ($client) {
@@ -166,7 +167,8 @@ if ($user->isLoggedIn()) {
                             'comments' => Input::get('comments'),
                             'initials' => Input::get('initials'),
                             'status' => 1,
-                        ));
+                        ), $client[0]['id']);
+                        $successMessage = 'Client Updated Successful';
                     } else {
                         $user->createRecord('clients', array(
                             'study_id' => '',
@@ -199,7 +201,7 @@ if ($user->isLoggedIn()) {
                         ));
                         $successMessage = 'Client Added Successful';
                     }
-                    Redirect::to('info.php?id=2&cid=' . $_GET['cid'] . '&msg=' . $successMessage);
+                    Redirect::to('info.php?id=3&cid=' . $_GET['cid'] . '&msg=' . $successMessage);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -1638,197 +1640,7 @@ if ($user->isLoggedIn()) {
                 </div>
             </form>
         <?php } elseif ($_GET['id'] == 8) { ?>
-            <!-- /.card-header -->
 
-            <form id="clients" enctype="multipart/form-data" method="post" autocomplete="off">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <div class="row-form clearfix">
-                                <div class="form-group">
-                                    <label>First Name</label>
-                                    <input class="form-control" type="text" name="firstname" id="firstname" value="<?php if ($staff['firstname']) {
-                                        print_r($staff['firstname']);
-                                    } ?>" required />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="row-form clearfix">
-                                <div class="form-group">
-                                    <label>Middle Name</label>
-                                    <input class="form-control" type="text" name="middlename" id="middlename" value="<?php if ($staff['middlename']) {
-                                        print_r($staff['middlename']);
-                                    } ?>" required />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="row-form clearfix">
-                                <div class="form-group">
-                                    <label>Last Name</label>
-                                    <input class="form-control" type="text" name="lastname" id="lastname" value="<?php if ($staff['lastname']) {
-                                        print_r($staff['lastname']);
-                                    } ?>" required />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="row-form clearfix">
-                                <div class="form-group">
-                                    <label>User Name</label>
-                                    <input class="form-control" type="text" name="username" id="username" value="<?php if ($staff['username']) {
-                                        print_r($staff['username']);
-                                    } ?>" required />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card card-warning">
-                        <div class="card-header">
-                            <h3 class="card-title">Staff Contacts</h3>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <div class="row-form clearfix">
-                                <!-- select -->
-                                <div class="form-group">
-                                    <label>Phone Number</label>
-                                    <input class="form-control" type="tel" pattern=[0]{1}[0-9]{9} minlength="10"
-                                        maxlength="10" name="phone_number" id="phone_number" value="<?php if ($staff['phone_number']) {
-                                            print_r($staff['phone_number']);
-                                        } ?>" required /> <span>Example: 0700 000
-                                        111</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3">
-                            <div class="row-form clearfix">
-                                <!-- select -->
-                                <div class="form-group">
-                                    <label>Phone Number 2</label>
-                                    <input class="form-control" type="tel" pattern=[0]{1}[0-9]{9} minlength="10"
-                                        maxlength="10" name="phone_number2" id="phone_number2" value="<?php if ($staff['phone_number2']) {
-                                            print_r($staff['phone_number2']);
-                                        } ?>" />
-                                    <span>Example: 0700 000 111</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3">
-                            <div class="row-form clearfix">
-                                <!-- select -->
-                                <div class="form-group">
-                                    <label>E-mail Address</label>
-                                    <input class="form-control" type="email" name="email_address" id="email_address" value="<?php if ($staff['email_address']) {
-                                        print_r($staff['email_address']);
-                                    } ?>" required />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-3">
-                            <div class="row-form clearfix">
-                                <div class="form-group">
-                                    <label>SEX</label>
-                                    <select class="form-control" name="sex" style="width: 100%;" required>
-                                        <option value="<?= $staff['sex'] ?>"><?php if ($staff['sex']) {
-                                              if ($staff['sex'] == 1) {
-                                                  echo 'Male';
-                                              } elseif ($staff['sex'] == 2) {
-                                                  echo 'Female';
-                                              }
-                                          } else {
-                                              echo 'Select';
-                                          } ?></option>
-                                        <option value="1">Male</option>
-                                        <option value="2">Female</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="card card-warning">
-                        <div class="card-header">
-                            <h3 class="card-title">Staff Location And Access Levels</h3>
-                        </div>
-                    </div>
-                    <div class="row">
-
-                        <div class="col-sm-3">
-                            <div class="row-form clearfix">
-                                <div class="form-group">
-                                    <label>Site</label>
-                                    <select class="form-control" name="site_id" style="width: 100%;" required>
-                                        <option value="<?= $site['id'] ?>"><?php if ($staff['site_id']) {
-                                              print_r($site['name']);
-                                          } else {
-                                              echo 'Select';
-                                          } ?>
-                                        </option>
-                                        <?php foreach ($override->getData('sites') as $site) { ?>
-                                            <option value="<?= $site['id'] ?>"><?= $site['name'] ?>
-                                            </option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="row-form clearfix">
-                                <div class="form-group">
-                                    <label>Position</label>
-                                    <select class="form-control" name="position" style="width: 100%;" required>
-                                        <option value="<?= $position['id'] ?>"><?php if ($staff['position']) {
-                                              print_r($position['name']);
-                                          } else {
-                                              echo 'Select';
-                                          } ?>
-                                        </option>
-                                        <?php foreach ($override->get('position', 'status', 1) as $position) { ?>
-                                            <option value="<?= $position['id'] ?>">
-                                                <?= $position['name'] ?>
-                                            </option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="row-form clearfix">
-                                <div class="form-group">
-                                    <label>Access Level</label>
-                                    <input class="form-control" type="number" min="0" max="3" name="accessLevel"
-                                        id="accessLevel" value="<?php if ($staff['accessLevel']) {
-                                            print_r($staff['accessLevel']);
-                                        } ?>" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="row-form clearfix">
-                                <div class="form-group">
-                                    <label>Power</label>
-                                    <input class="form-control" type="number" min="0" max="2" name="power" id="power"
-                                        value="0" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                    <a href="info.php?id=1" class="btn btn-default">Back</a>
-                    <input type="submit" name="add_user" value="Submit" class="btn btn-primary">
-                </div>
-            </form>
         <?php } ?>
         <?php include 'form_footer.php'; ?>
 
