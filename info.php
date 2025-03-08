@@ -2135,16 +2135,16 @@ if ($user->isLoggedIn()) {
                                                 $crf6 = $override->countData('crf6', 'patient_id', $client['id'], 'status', 1);
                                                 $crf7 = $override->countData('crf7', 'patient_id', $client['id'], 'status', 1);
 
-                                                $Total_visit_available = 0;
-                                                $Total_CRF_available = 0;
-                                                $Total_CRF_required = 0;
-                                                $progress = 0;
+                                                $Total_visit_available = 1;
+                                                $Total_CRF_available = 1;
+                                                $Total_CRF_required = 1;
+                                                $progress = 1;
 
                                                 $Total_visit_available = intval($override->getCountNot('visit', 'client_id', $client['id'], 'visit_code', 'AE', 'END'));
                                                 if ($Total_visit_available < 1) {
-                                                    $Total_visit_available = 0;
-                                                    $Total_CRF_available = 0;
-                                                    $Total_CRF_required = 0;
+                                                    $Total_visit_available = 1;
+                                                    $Total_CRF_available = 1;
+                                                    $Total_CRF_required = 1;
                                                 } elseif ($Total_visit_available == 1) {
                                                     $Total_visit_available = intval($Total_visit_available);
 
@@ -2412,9 +2412,9 @@ if ($user->isLoggedIn()) {
                                                                         <span class="badge badge-primary right">
                                                                             <?= $client_progress ?>%
                                                                             <?php
-                                                                            $user->updateRecord('clients', array(
-                                                                                'progress' => $client_progress,
-                                                                            ), $client['id']);
+                                                                            // $user->updateRecord('clients', array(
+                                                                            //     'progress' => $client_progress,
+                                                                            // ), $client['id']);
                                                                             ?>
                                                                         </span>
                                                                     <?php } elseif ($client_progress > 100) { ?>
@@ -2425,9 +2425,9 @@ if ($user->isLoggedIn()) {
                                                                         <span class="badge badge-warning right">
                                                                             <?= $client_progress ?>%
                                                                             <?php
-                                                                            $user->updateRecord('clients', array(
-                                                                                'progress' => $client_progress,
-                                                                            ), $client['id']);
+                                                                            // $user->updateRecord('clients', array(
+                                                                            //     'progress' => $client_progress,
+                                                                            // ), $client['id']);
                                                                             ?> </span>
                                                                     <?php } elseif ($client_progress >= 80 && $client_progress < 100) { ?>
                                                                         <span class="badge badge-info right">
@@ -2437,9 +2437,9 @@ if ($user->isLoggedIn()) {
                                                                         <span class="badge badge-info right">
                                                                             <?= $client_progress ?>%
                                                                             <?php
-                                                                            $user->updateRecord('clients', array(
-                                                                                'progress' => $client_progress,
-                                                                            ), $client['id']);
+                                                                            // $user->updateRecord('clients', array(
+                                                                            //     'progress' => $client_progress,
+                                                                            // ), $client['id']);
                                                                             ?> </span>
                                                                     <?php } elseif ($client_progress >= 50 && $client_progress < 80) { ?>
                                                                         <span class="badge badge-secondary right">
@@ -2449,9 +2449,9 @@ if ($user->isLoggedIn()) {
                                                                         <span class="badge badge-secondary right">
                                                                             <?= $client_progress ?>%
                                                                             <?php
-                                                                            $user->updateRecord('clients', array(
-                                                                                'progress' => $client_progress,
-                                                                            ), $client['id']);
+                                                                            // $user->updateRecord('clients', array(
+                                                                            //     'progress' => $client_progress,
+                                                                            // ), $client['id']);
                                                                             ?> </span>
                                                                     <?php } elseif ($client_progress < 50) { ?>
                                                                         <span class="badge badge-danger right">
@@ -2461,9 +2461,9 @@ if ($user->isLoggedIn()) {
                                                                         <span class="badge badge-danger right">
                                                                             <?= $client_progress ?>%
                                                                             <?php
-                                                                            $user->updateRecord('clients', array(
-                                                                                'progress' => $client_progress,
-                                                                            ), $client['id']);
+                                                                            // $user->updateRecord('clients', array(
+                                                                            //     'progress' => $client_progress,
+                                                                            // ), $client['id']);
                                                                             ?>
                                                                         </span>
                                                                     <?php } ?>
@@ -2733,11 +2733,11 @@ if ($user->isLoggedIn()) {
                                                                                     <label>Notes / Remarks / Comments</label>
                                                                                     <textarea class="form-control"
                                                                                         name="reasons" rows="3">
-                                                                                                         <?php
-                                                                                                         if ($enrollment['reasons']) {
-                                                                                                             print_r($enrollment['reasons']);
-                                                                                                         } ?>
-                                                                                                        </textarea>
+                                                                                                                 <?php
+                                                                                                                 if ($enrollment['reasons']) {
+                                                                                                                     print_r($enrollment['reasons']);
+                                                                                                                 } ?>
+                                                                                                                </textarea>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -3355,11 +3355,9 @@ if ($user->isLoggedIn()) {
                                                                                     <input class="form-control"
                                                                                         max="<?= date('Y-m-d'); ?>" type="date"
                                                                                         name="visit_date" id="visit_date"
-                                                                                        style="width: 100%;"
-                                                                                        value="<?php if ($visit['visit_date']) {
+                                                                                        style="width: 100%;" value="<?php if ($visit['visit_date']) {
                                                                                             print_r($visit['visit_date']);
-                                                                                        } ?>"
-                                                                                        required />
+                                                                                        } ?>" required />
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-sm-6">
