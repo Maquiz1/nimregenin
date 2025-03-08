@@ -394,7 +394,7 @@ if ($user->isLoggedIn()) {
                              ?>
 
                             <li class="nav-item">
-                                <a href="add.php?id=2&table=clients&title=Clients&action=Add" class="nav-link">
+                                <a href="add.php?id=4&table=clients&title=Clients&action=Add" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Register
@@ -408,7 +408,7 @@ if ($user->isLoggedIn()) {
 
                         <li class="nav-item">
                             <!-- <a href="info.php?id=3&site_id=<?= $user->data()->site_id; ?>&status=5" class="nav-link"> -->
-                            <a href="info.php?id=2&status=5&table=clients&title=Clients&action=Update" class="nav-link">
+                            <a href="info.php?id=3&status=5&table=clients&title=Clients&action=Update" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <span class="badge badge-info right"><?= $registered; ?></span>
                                 <p>Registered</p>
