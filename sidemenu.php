@@ -265,10 +265,10 @@ if ($user->isLoggedIn()) {
                 if ($user->data()->accessLevel == 1 || $user->data()->accessLevel == 3) {
                     $Site = ' ALL SITES';
                     if ($_GET['site_id']) {
-                        $Site = ' ' . ' ' . $override->getNews('site1', 'status', 1, 'id', $_GET['site_id'])[0]['name'];
+                        $Site = ' ' . ' ' . $override->getNews('site', 'status', 1, 'id', $_GET['site_id'])[0]['name'];
                     }
                 } else {
-                    $Site = ' ' . ' ' . $override->getNews('site1', 'status', 1, 'id', $user->data()->site_id)[0]['name'];
+                    $Site = ' ' . ' ' . $override->getNews('site', 'status', 1, 'id', $user->data()->site_id)[0]['name'];
                 }
                 ?>
                 <li class="nav-item menu-open">
