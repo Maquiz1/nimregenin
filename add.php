@@ -201,7 +201,7 @@ if ($user->isLoggedIn()) {
                         ));
                         $successMessage = 'Client Added Successful';
                     }
-                    Redirect::to('info.php?id=3&cid=' . $_GET['cid'] . '&msg=' . $successMessage);
+                    Redirect::to('info.php?id=3&status=' . $_GET['status'] . '&msg=' . $successMessage);
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -2100,8 +2100,12 @@ if ($user->isLoggedIn()) {
                                             </div>
                                         </div>
                                         <!-- Submit Button -->
-                                        <div class="card-footer">
-                                            <button type="submit" name="add_client" class="btn btn-primary">Submit</button>
+                                         <div class="card-footer">
+                                            <div class="form-group">
+                                                <input type="hidden" name="id" value="<?= $patient['id'] ?>">
+                                                <input type="submit" name="add_client" value="Submit" class="btn btn-info">
+                                                <a href="index1.php" class="btn btn-default">Cancel</a>
+                                            </div>
                                         </div>
                                     </form>
                                     <!-- Form End -->

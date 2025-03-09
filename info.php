@@ -567,6 +567,7 @@ if ($user->isLoggedIn()) {
                 $pageError = $validate->errors();
             }
         } elseif (Input::get('add_Inclusion')) {
+            print_r($_POST);
 
             $validate = $validate->check($_POST, array());
             if ($validate->passed()) {
@@ -666,7 +667,7 @@ if ($user->isLoggedIn()) {
                 $eligibility = 0;
                 $eligible = 0;
 
-                $gender = $override->getNews('clients', 'id', Input::get('id'), 'status', 1)[0]['gender'];
+                $gender = $override->get('clients', 'id', Input::get('id'))[0]['gender'];
 
                 if (Input::get('cdk') == 2 && Input::get('liver_disease') == 2) {
                     if ($gender == 'male') {
@@ -676,7 +677,8 @@ if ($user->isLoggedIn()) {
                     }
                 }
                 try {
-                    if ($override->get('lab', 'client_id', Input::get('id'))) {
+                    if ($override->get('lab', 'id', Input::get('lab_id'))) {
+                        print_r('HI');
                         $user->updateRecord('lab', array(
                             'screening_date' => Input::get('screening_date'),
                             // 'study_id' => '',
@@ -690,7 +692,7 @@ if ($user->isLoggedIn()) {
                             'site_id' => $user->data()->site_id,
                             'status' => 1,
                             'client_id' => Input::get('id'),
-                        ), Input::get('screening_id'));
+                        ), Input::get('lab_id'));
                     } else {
                         $user->createRecord('lab', array(
                             'screening_date' => Input::get('screening_date'),
@@ -724,10 +726,10 @@ if ($user->isLoggedIn()) {
                     $user->updateRecord('clients', array('eligible' => $eligible, 'screened' => $screening, 'eligibility2' => $eligibility), Input::get('id'));
                     $successMessage = 'Exclusion Successful Added';
                     if ($eligible == 1) {
-                        Redirect::to('info.php?id=3&status=1');
+                        Redirect::to('info.php?id=3&status=1&msg=' . $successMessage . '&msg1' . $errorMessage);
                     } else {
                         // Redirect::to('info.php?id=3');
-                        Redirect::to('info.php?id=3&status=1');
+                        Redirect::to('info.php?id=3&status=1&msg=' . $successMessage . '&msg1' . $errorMessage);
                     }
                 } catch (Exception $e) {
                     die($e->getMessage());
@@ -1758,21 +1760,24 @@ if ($user->isLoggedIn()) {
         <!-- Main Sidebar Container -->
         <?php include 'sidemenu.php'; ?>
 
-        <?php if ($errorMessage) { ?>
-            <div class="alert alert-danger text-center">
-                <h4>Error!</h4>
-                <?= $errorMessage ?>
+        <?php if ($errorMessage || $_GET['msg1']) { ?>
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                <?= $errorMessage || $_GET['msg1'] ?>
             </div>
         <?php } elseif ($pageError) { ?>
-            <div class="alert alert-danger text-center">
-                <h4>Error!</h4>
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-ban"></i> Error!</h4>
                 <?php foreach ($pageError as $error) {
                     echo $error . ' , ';
                 } ?>
             </div>
         <?php } elseif ($_GET['msg']) { ?>
-            <div class="alert alert-success text-center">
-                <h4>Success!</h4>
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-check"></i> Success!</h4>
                 <?= $_GET['msg'] ?>
             </div>
         <?php } ?>
@@ -2804,6 +2809,7 @@ if ($user->isLoggedIn()) {
                                                 $screened = 0;
                                                 $eligible = 0;
                                                 $enrolled = 0;
+
                                                 if ($client['screened'] == 1) {
                                                     $screened = 1;
                                                 }
@@ -3059,7 +3065,7 @@ if ($user->isLoggedIn()) {
                                                             <a href="#asignID<?= $client['id'] ?>" role="button"
                                                                 class="btn btn-success" data-toggle="modal">asign ID</a>
                                                             <hr>
-                                                            <a href="add.php?id=4&cid=<?= $client['id'] ?>"
+                                                            <a href="add.php?id=4&cid=<?= $client['id'] ?>&status=<?= $_GET['status'] ?>"
                                                                 class="btn btn-info">Edit</a>
 
                                                             <hr>
@@ -3176,303 +3182,7 @@ if ($user->isLoggedIn()) {
                                                         } ?>
                                                     </td>
                                                 </tr>
-                                                <div class="modal fade" id="addScreening<?= $client['id'] ?>">
-                                                    <div class="modal-dialog">
-                                                        <form method="post">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h4 class="modal-title">SCREENING FORM</h4>
-                                                                    <button type="button" class="close" data-dismiss="modal"
-                                                                        aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <hr>
-                                                                    <div class="row">
-                                                                        <div class="col-sm-6">
-                                                                            <div class="row-form clearfix">
-                                                                                <!-- select -->
-                                                                                <div class="form-group">
-                                                                                    <label>Date of Screening</label>
-                                                                                    <input class="form-control" type="date"
-                                                                                        max="<?= date('Y-m-d'); ?>"
-                                                                                        type="screening_date"
-                                                                                        name="screening_date"
-                                                                                        id="screening_date" style="width: 100%;"
-                                                                                        value="<?php if ($screening['screening_date']) {
-                                                                                            print_r($screening['screening_date']);
-                                                                                        } ?>" required />
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-sm-6">
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="form-group">
-                                                                                    <label>Consenting individuals?</label>
-                                                                                    <select class="form-control" name="consent"
-                                                                                        id="consent" style="width: 100%;"
-                                                                                        onchange="checkQuestionValue1('consent','conset_date')"
-                                                                                        required>
-                                                                                        <option
-                                                                                            value="<?= $screening['consent'] ?>">
-                                                                                            <?php if ($screening['consent']) {
-                                                                                                if ($screening['consent'] == 1) {
-                                                                                                    echo 'Yes';
-                                                                                                } elseif ($screening['consent'] == 2) {
-                                                                                                    echo 'No';
-                                                                                                }
-                                                                                            } else {
-                                                                                                echo 'Select';
-                                                                                            } ?>
-                                                                                        </option>
-                                                                                        <option value="1">Yes</option>
-                                                                                        <option value="2">No</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <hr>
-                                                                    <div class="row">
-                                                                        <div class="col-sm-6">
-                                                                            <div class="row-form clearfix">
-                                                                                <!-- select -->
-                                                                                <div class="form-group">
-                                                                                    <label>Date of Conset</label>
-                                                                                    <input class="form-control" type="date"
-                                                                                        max="<?= date('Y-m-d'); ?>"
-                                                                                        type="conset_date" name="conset_date"
-                                                                                        id="conset_date" style="width: 100%;"
-                                                                                        value="<?php if ($screening['conset_date']) {
-                                                                                            print_r($screening['conset_date']);
-                                                                                        } ?>" required />
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col-sm-6">
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="form-group">
-                                                                                    <label>Permanent resident?</label>
-                                                                                    <select class="form-control"
-                                                                                        name="residence" style="width: 100%;"
-                                                                                        required>
-                                                                                        <option
-                                                                                            value="<?= $screening['residence'] ?>">
-                                                                                            <?php if ($screening['residence']) {
-                                                                                                if ($screening['residence'] == 1) {
-                                                                                                    echo 'Yes';
-                                                                                                } elseif ($screening['residence'] == 2) {
-                                                                                                    echo 'No';
-                                                                                                }
-                                                                                            } else {
-                                                                                                echo 'Select';
-                                                                                            } ?>
-                                                                                        </option>
-                                                                                        <option value="1">Yes</option>
-                                                                                        <option value="2">No</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <hr>
-                                                                    <div class="row">
-                                                                        <div class="col-sm-6">
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="form-group">
-                                                                                    <label>Known NCD?</label>
-                                                                                    <select class="form-control" name="ncd"
-                                                                                        style="width: 100%;" required>
-                                                                                        <option
-                                                                                            value="<?= $screening['ncd'] ?>">
-                                                                                            <?php if ($screening['ncd']) {
-                                                                                                if ($screening['ncd'] == 1) {
-                                                                                                    echo 'Yes';
-                                                                                                } elseif ($screening['ncd'] == 2) {
-                                                                                                    echo 'No';
-                                                                                                }
-                                                                                            } else {
-                                                                                                echo 'Select';
-                                                                                            } ?>
-                                                                                        </option>
-                                                                                        <option value="1">Yes</option>
-                                                                                        <option value="2">No</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-sm-6">
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="form-group">
-                                                                                    <label>Request Lab Test ?</label>
-                                                                                    <select class="form-control"
-                                                                                        name="lab_request" style="width: 100%;"
-                                                                                        required>
-                                                                                        <option
-                                                                                            value="<?= $screening['lab_request'] ?>">
-                                                                                            <?php if ($screening['lab_request']) {
-                                                                                                if ($screening['lab_request'] == 1) {
-                                                                                                    echo 'Yes';
-                                                                                                } elseif ($screening['ncd'] == 2) {
-                                                                                                    echo 'No';
-                                                                                                }
-                                                                                            } else {
-                                                                                                echo 'Select';
-                                                                                            } ?>
-                                                                                        </option>
-                                                                                        <option value="1">Yes</option>
-                                                                                        <option value="2">No</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <hr>
-                                                                    <div class="row">
-                                                                        <div class="col-sm-6">
-                                                                            <div class="row-form clearfix">
-                                                                                <!-- select -->
-                                                                                <div class="form-group">
-                                                                                    <label>Date of Request</label>
-                                                                                    <input class="form-control" type="date"
-                                                                                        max="<?= date('Y-m-d'); ?>"
-                                                                                        type="lab_request_date"
-                                                                                        name="lab_request_date"
-                                                                                        id="lab_request_date"
-                                                                                        style="width: 100%;" value="<?php if ($screening['lab_request_date']) {
-                                                                                            print_r($screening['lab_request_date']);
-                                                                                        } ?>" />
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-sm-6">
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="form-group">
-                                                                                    <label>Type of Screening</label>
-                                                                                    <select class="form-control"
-                                                                                        name="screening_type"
-                                                                                        style="width: 100%;" required>
-                                                                                        <option
-                                                                                            value="<?= $screening['screening_type'] ?>">
-                                                                                            <?php if ($screening['screening_type']) {
-                                                                                                if ($screening['screening_type'] == 1) {
-                                                                                                    echo 'Facility';
-                                                                                                } elseif ($screening['ncd'] == 2) {
-                                                                                                    echo 'Community';
-                                                                                                }
-                                                                                            } else {
-                                                                                                echo 'Select';
-                                                                                            } ?>
-                                                                                        </option>
-                                                                                        <option value="1">Facility</option>
-                                                                                        <option value="2">Community</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <hr>
-                                                                </div>
-                                                                <div class="modal-footer justify-content-between">
-                                                                    <input type="hidden" name="id"
-                                                                        value="<?= $screening['id'] ?>">
-                                                                    <input type="hidden" name="cid"
-                                                                        value="<?= $client['id'] ?>">
-                                                                    <input type="hidden" name="gender"
-                                                                        value="<?= $client['gender'] ?>">
-                                                                    <input type="hidden" name="study_id"
-                                                                        value="<?= $client['study_id'] ?>">
-                                                                    <button type="button" class="btn btn-default"
-                                                                        data-dismiss="modal">Close</button>
-                                                                    <?php if ($user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) { ?>
-                                                                        <input type="submit" name="add_screening"
-                                                                            class="btn btn-primary" value="Submit">
-                                                                    <?php } ?>
-                                                                </div>
-                                                            </div>
-                                                            <!-- /.modal-content -->
-                                                        </form>
-                                                    </div>
-                                                    <!-- /.modal-dialog -->
-                                                </div>
-                                                <!-- /.modal -->
-
-                                                <div class="modal fade" id="addEnrollment<?= $client['id'] ?>">
-                                                    <div class="modal-dialog">
-                                                        <form method="post">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h4 class="modal-title">Visit</h4>
-                                                                    <button type="button" class="close" data-dismiss="modal"
-                                                                        aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <?php
-                                                                $enrollment = $override->getNews('visit', 'client_id', $client['id'], 'seq_no', 1)[0];
-                                                                ?>
-                                                                <div class="modal-body">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-4">
-                                                                            <div class="row-form clearfix">
-                                                                                <!-- select -->
-                                                                                <div class="form-group">
-                                                                                    <label>Date of Enrollment</label>
-                                                                                    <input class="form-control" type="date"
-                                                                                        max="<?= date('Y-m-d'); ?>"
-                                                                                        type="visit_date" name="visit_date"
-                                                                                        id="visit_date" style="width: 100%;"
-                                                                                        value="<?php if ($enrollment['visit_date']) {
-                                                                                            print_r($enrollment['visit_date']);
-                                                                                        } ?>" required />
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col-sm-8">
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="form-group">
-                                                                                    <label>Notes / Remarks / Comments</label>
-                                                                                    <textarea class="form-control"
-                                                                                        name="reasons" rows="3">
-                                                                                                                                 <?php
-                                                                                                                                 if ($enrollment['reasons']) {
-                                                                                                                                     print_r($enrollment['reasons']);
-                                                                                                                                 } ?>
-                                                                                                                                </textarea>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="dr"><span></span></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-footer justify-content-between">
-                                                                    <input type="hidden" name="id" value="<?= $client['id'] ?>">
-                                                                    <input type="hidden" name="visit_name"
-                                                                        value="Enrollment Visit">
-                                                                    <input type="hidden" name="study_id"
-                                                                        value="<?= $client['study_id'] ?>">
-                                                                    <input type="hidden" name="site_id"
-                                                                        value="<?= $client['site_id'] ?>">
-                                                                    <button type="button" class="btn btn-default"
-                                                                        data-dismiss="modal">Close</button>
-                                                                    <?php if ($user->data()->accessLevel == 1 || $user->data()->accessLevel == 2) { ?>
-                                                                        <input type="submit" name="add_Enrollment"
-                                                                            class="btn btn-primary" value="Submit">
-                                                                    <?php } ?>
-                                                                </div>
-                                                            </div>
-                                                            <!-- /.modal-content -->
-                                                        </form>
-                                                    </div>
-                                                    <!-- /.modal-dialog -->
-                                                </div>
-                                                <!-- /.modal -->
-
-                                                <div class="modal fade" id="delete_client<?= $client['id'] ?>" tabindex="-1"
+                                                <div class="modal fade" id="clientView<?= $client['id'] ?>" tabindex="-1"
                                                     role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <form method="post">
@@ -3482,24 +3192,1724 @@ if ($user->isLoggedIn()) {
                                                                         data-dismiss="modal"><span
                                                                             aria-hidden="true">&times;</span><span
                                                                             class="sr-only">Close</span></button>
-                                                                    <h4>Delete Client</h4>
+                                                                    <h4>Edit Client View</h4>
                                                                 </div>
-                                                                <div class="modal-body">
-                                                                    <strong style="font-weight: bold;color: red">
-                                                                        <p>Are you sure you want to delete this Client ?</p>
-                                                                    </strong>
+                                                                <div class="modal-body modal-body-np">
+                                                                    <div class="row">
+                                                                        <div class="block-fluid">
+                                                                            <div class="row-form clearfix">
+                                                                                <div class="col-md-2">Study</div>
+                                                                                <div class="col-md-6">
+                                                                                    <select name="position" style="width: 100%;"
+                                                                                        disabled>
+                                                                                        <?php foreach ($override->getData('study') as $study) { ?>
+                                                                                            <option value="<?= $study['id'] ?>">
+                                                                                                <?= $study['name'] ?>
+                                                                                            </option>
+                                                                                        <?php } ?>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="col-md-4 pull-right">
+                                                                                    <img src="<?= $img ?>" class="img-thumbnail"
+                                                                                        width="50%" height="50%" />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row-form clearfix">
+                                                                                <div class="col-md-3">ParticipantID:</div>
+                                                                                <div class="col-md-9">
+                                                                                    <input
+                                                                                        value="<?= $client['participant_id'] ?>"
+                                                                                        class="validate[required]" type="text"
+                                                                                        name="participant_id"
+                                                                                        id="participant_id" disabled />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row-form clearfix">
+                                                                                <div class="col-md-3">Date:</div>
+                                                                                <div class="col-md-9">
+                                                                                    <input value="<?= $client['clinic_date'] ?>"
+                                                                                        class="validate[required,custom[date]]"
+                                                                                        type="text" name="clinic_date"
+                                                                                        id="clinic_date" disabled />
+                                                                                    <span>Example:
+                                                                                        2010-12-01</span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row-form clearfix">
+                                                                                <div class="col-md-3">First Name:</div>
+                                                                                <div class="col-md-9">
+                                                                                    <input value="<?= $client['firstname'] ?>"
+                                                                                        class="validate[required]" type="text"
+                                                                                        name="firstname" id="firstname"
+                                                                                        disabled />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row-form clearfix">
+                                                                                <div class="col-md-3">Middle Name:</div>
+                                                                                <div class="col-md-9">
+                                                                                    <input value="<?= $client['middlename'] ?>"
+                                                                                        class="validate[required]" type="text"
+                                                                                        name="middlename" id="middlename"
+                                                                                        disabled />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row-form clearfix">
+                                                                                <div class="col-md-3">Last Name:</div>
+                                                                                <div class="col-md-9">
+                                                                                    <input value="<?= $client['lastname'] ?>"
+                                                                                        class="validate[required]" type="text"
+                                                                                        name="lastname" id="lastname"
+                                                                                        disabled />
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row-form clearfix">
+                                                                                <div class="col-md-3">Date of Birth:</div>
+                                                                                <div class="col-md-9">
+                                                                                    <input value="<?= $client['dob'] ?>"
+                                                                                        class="validate[required,custom[date]]"
+                                                                                        type="text" name="dob" id="dob"
+                                                                                        disabled />
+                                                                                    <span>Example: 2010-12-01</span>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row-form clearfix">
+                                                                                <div class="col-md-3">Age:</div>
+                                                                                <div class="col-md-9">
+                                                                                    <input value="<?= $client['age'] ?>"
+                                                                                        class="validate[required]" type="text"
+                                                                                        name="age" id="age" disabled />
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row-form clearfix">
+                                                                                <div class="col-md-3">Initials:</div>
+                                                                                <div class="col-md-9">
+                                                                                    <input value="<?= $client['initials'] ?>"
+                                                                                        class="validate[required]" type="text"
+                                                                                        name="initials" id="initials"
+                                                                                        disabled />
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row-form clearfix">
+                                                                                <div class="col-md-3">Gender</div>
+                                                                                <div class="col-md-9">
+                                                                                    <select name="gender" style="width: 100%;"
+                                                                                        disabled>
+                                                                                        <option
+                                                                                            value="<?= $client['gender'] ?>">
+                                                                                            <?= $client['gender'] ?>
+                                                                                        </option>
+                                                                                        <option value="male">Male</option>
+                                                                                        <option value="female">Female</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row-form clearfix">
+                                                                                <div class="col-md-3">Hospital ID:</div>
+                                                                                <div class="col-md-9">
+                                                                                    <input value="<?= $client['id_number'] ?>"
+                                                                                        class="validate[required]" type="text"
+                                                                                        name="id_number" id="id_number"
+                                                                                        disabled />
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row-form clearfix">
+                                                                                <div class="col-md-3">Marital Status</div>
+                                                                                <div class="col-md-9">
+                                                                                    <select name="marital_status"
+                                                                                        style="width: 100%;" disabled>
+                                                                                        <option
+                                                                                            value="<?= $client['marital_status'] ?>">
+                                                                                            <?= $client['marital_status'] ?>
+                                                                                        </option>
+                                                                                        <option value="Single">Single</option>
+                                                                                        <option value="Married">Married</option>
+                                                                                        <option value="Divorced">Divorced
+                                                                                        </option>
+                                                                                        <option value="Separated">Separated
+                                                                                        </option>
+                                                                                        <option value="Widower">Widower/Widow
+                                                                                        </option>
+                                                                                        <option value="Cohabit">Cohabit</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row-form clearfix">
+                                                                                <div class="col-md-3">Education Level</div>
+                                                                                <div class="col-md-9">
+                                                                                    <select name="education_level"
+                                                                                        style="width: 100%;" disabled>
+                                                                                        <option
+                                                                                            value="<?= $client['education_level'] ?>">
+                                                                                            <?= $client['education_level'] ?>
+                                                                                        </option>
+                                                                                        <option value="Not attended school">Not
+                                                                                            attended school</option>
+                                                                                        <option value="Primary">Primary</option>
+                                                                                        <option value="Secondary">Secondary
+                                                                                        </option>
+                                                                                        <option value="Certificate">Certificate
+                                                                                        </option>
+                                                                                        <option value="Diploma">Diploma</option>
+                                                                                        <option value="Undergraduate degree">
+                                                                                            Undergraduate degree</option>
+                                                                                        <option value="Postgraduate degree">
+                                                                                            Postgraduate degree</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row-form clearfix">
+                                                                                <div class="col-md-3">Workplace/station site:
+                                                                                </div>
+                                                                                <div class="col-md-9"><input
+                                                                                        value="<?= $client['workplace'] ?>"
+                                                                                        class="" type="text" name="workplace"
+                                                                                        id="workplace" disabled /></div>
+                                                                            </div>
+                                                                            <div class="row-form clearfix">
+                                                                                <div class="col-md-3">Occupation:</div>
+                                                                                <div class="col-md-9"><input
+                                                                                        value="<?= $client['occupation'] ?>"
+                                                                                        class="" type="text" name="occupation"
+                                                                                        id="occupation" disabled /></div>
+                                                                            </div>
+                                                                            <div class="row-form clearfix">
+                                                                                <div class="col-md-3">Phone Number:</div>
+                                                                                <div class="col-md-9"><input
+                                                                                        value="<?= $client['phone_number'] ?>"
+                                                                                        class="" type="text" name="phone_number"
+                                                                                        id="phone" disabled /> <span>Example:
+                                                                                        0700
+                                                                                        000 111</span></div>
+                                                                            </div>
+                                                                            <div class="row-form clearfix">
+                                                                                <div class="col-md-3">Relative's Phone Number:
+                                                                                </div>
+                                                                                <div class="col-md-9"><input
+                                                                                        value="<?= $client['other_phone'] ?>"
+                                                                                        class="" type="text" name="other_phone"
+                                                                                        id="phone" disabled /> <span>Example:
+                                                                                        0700
+                                                                                        000 111</span></div>
+                                                                            </div>
+                                                                            <div class="row-form clearfix">
+                                                                                <div class="col-md-3">Residence Street:</div>
+                                                                                <div class="col-md-9"><input
+                                                                                        value="<?= $client['street'] ?>"
+                                                                                        class="" type="text" name="street"
+                                                                                        id="street" disabled /></div>
+                                                                            </div>
+                                                                            <div class="row-form clearfix">
+                                                                                <div class="col-md-3">Ward:</div>
+                                                                                <div class="col-md-9"><input
+                                                                                        value="<?= $client['ward'] ?>" class=""
+                                                                                        type="text" name="ward" id="ward"
+                                                                                        disabled /></div>
+                                                                            </div>
+
+                                                                            <div class="row-form clearfix">
+                                                                                <div class="col-md-3">House Number:</div>
+                                                                                <div class="col-md-9"><input
+                                                                                        value="<?= $client['block_no'] ?>"
+                                                                                        class="" type="text" name="block_no"
+                                                                                        id="block_no" disabled /></div>
+                                                                            </div>
+                                                                            <div class="row-form clearfix">
+                                                                                <div class="col-md-3">Comments:</div>
+                                                                                <div class="col-md-9"><textarea name="comments"
+                                                                                        rows="4"
+                                                                                        disabled><?= $client['comments'] ?></textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="dr"><span></span></div>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <input type="hidden" name="id" value="<?= $client['id'] ?>">
-                                                                    <?php if ($user->data()->accessLevel == 1) { ?>
-                                                                        <input type="submit" name="delete_client" value="Delete"
-                                                                            class="btn btn-danger">
-                                                                    <?php } ?>
                                                                     <button class="btn btn-default" data-dismiss="modal"
                                                                         aria-hidden="true">Close</button>
                                                                 </div>
                                                             </div>
                                                         </form>
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade" id="client<?= $client['id'] ?>" tabindex="-1"
+                                                    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <form id="validation" enctype="multipart/form-data" method="post">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal"><span
+                                                                            aria-hidden="true">&times;</span><span
+                                                                            class="sr-only">Close</span></button>
+                                                                    <h4>Edit Client Info</h4>
+                                                                </div>
+                                                                <div class="modal-body modal-body-np">
+
+                                                                    <div class="row">
+                                                                        <div class="col-sm-3">
+                                                                            <div class="row-form clearfix">
+                                                                                <!-- select -->
+                                                                                <div class="form-group">
+                                                                                    <label>Registration Date</label>
+                                                                                    <input
+                                                                                        class="validate[required,custom[date]]"
+                                                                                        type="text" name="clinic_date"
+                                                                                        id="clinic_date" value="<?php if ($client['clinic_date']) {
+                                                                                            print_r($client['clinic_date']);
+                                                                                        } ?>" />
+                                                                                    <span>Example: 2010-12-01</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            <div class="row-form clearfix">
+                                                                                <!-- select -->
+                                                                                <div class="form-group">
+                                                                                    <label>First Name</label>
+                                                                                    <input type="text" name="firstname"
+                                                                                        id="firstname" value="<?php if ($client['firstname']) {
+                                                                                            print_r($client['firstname']);
+                                                                                        } ?>" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            <div class="row-form clearfix">
+                                                                                <!-- select -->
+                                                                                <div class="form-group">
+                                                                                    <label>Middle Name</label>
+                                                                                    <input type="text" name="middlename"
+                                                                                        id="middlename" value="<?php if ($client['middlename']) {
+                                                                                            print_r($client['middlename']);
+                                                                                        } ?>" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            <div class="row-form clearfix">
+                                                                                <!-- select -->
+                                                                                <div class="form-group">
+                                                                                    <label>Last Name</label>
+                                                                                    <input type="text" name="lastname"
+                                                                                        id="lastname" value="<?php if ($client['lastname']) {
+                                                                                            print_r($client['lastname']);
+                                                                                        } ?>" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+                                                                        <div class="col-sm-3">
+                                                                            <div class="row-form clearfix">
+                                                                                <!-- select -->
+                                                                                <div class="form-group">
+                                                                                    <label>Date of Birth</label>
+                                                                                    <input
+                                                                                        class="validate[required,custom[date]]"
+                                                                                        type="text" name="dob" id="dob" value="<?php if ($client['dob']) {
+                                                                                            print_r($client['dob']);
+                                                                                        } ?>" />
+                                                                                    <span>Example: 2010-12-01</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            <div class="row-form clearfix">
+                                                                                <!-- select -->
+                                                                                <div class="form-group">
+                                                                                    <label>Age</label>
+                                                                                    <input type="text" name="Age" id="Age"
+                                                                                        value="<?php if ($client['age']) {
+                                                                                            print_r($client['age']);
+                                                                                        } ?>" disabled />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            <div class="row-form clearfix">
+                                                                                <!-- select -->
+                                                                                <div class="form-group">
+                                                                                    <label>Initials</label>
+                                                                                    <input type="text" name="initials"
+                                                                                        id="initials" value="<?php if ($client['initials']) {
+                                                                                            print_r($client['initials']);
+                                                                                        } ?>" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            <div class="row-form clearfix">
+                                                                                <!-- select -->
+                                                                                <div class="form-group">
+                                                                                    <label>Gender</label>
+                                                                                    <select name="gender" id="gender"
+                                                                                        style="width: 100%;">
+                                                                                        <option
+                                                                                            value="<?= $client['gender'] ?>">
+                                                                                            <?php if ($client) {
+                                                                                                if ($client['gender'] == 'male') {
+                                                                                                    echo 'Male';
+                                                                                                } elseif ($client['gender'] == 'female') {
+                                                                                                    echo 'Female';
+                                                                                                }
+                                                                                            } else {
+                                                                                                echo 'Select';
+                                                                                            } ?>
+                                                                                        </option>
+                                                                                        <option value="male">Male</option>
+                                                                                        <option value="female">Female</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+
+                                                                        <div class="col-sm-3">
+                                                                            <div class="row-form clearfix">
+                                                                                <!-- select -->
+                                                                                <div class="form-group">
+                                                                                    <label>Hospital ID Number</label>
+                                                                                    <input type="text" name="id_number"
+                                                                                        id="id_number" value="<?php if ($client['id_number']) {
+                                                                                            print_r($client['id_number']);
+                                                                                        } ?>" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-sm-3">
+                                                                            <div class="row-form clearfix">
+                                                                                <!-- select -->
+                                                                                <div class="form-group">
+                                                                                    <label>Marital Status</label>
+                                                                                    <select name="marital_status"
+                                                                                        id="marital_status"
+                                                                                        style="width: 100%;">
+                                                                                        <option
+                                                                                            value="<?= $client['marital_status'] ?>">
+                                                                                            <?php if ($client) {
+                                                                                                if ($client['marital_status'] == 'Single') {
+                                                                                                    echo 'Single';
+                                                                                                } elseif ($client['marital_status'] == 'Married') {
+                                                                                                    echo 'Married';
+                                                                                                } elseif ($client['marital_status'] == 'Divorced') {
+                                                                                                    echo 'Divorced';
+                                                                                                } elseif ($client['marital_status'] == 'Separated') {
+                                                                                                    echo 'Separated';
+                                                                                                } elseif ($client['marital_status'] == 'Widower') {
+                                                                                                    echo 'Widower';
+                                                                                                } elseif ($client['marital_status'] == 'Cohabit') {
+                                                                                                    echo 'Cohabit';
+                                                                                                }
+                                                                                            } else {
+                                                                                                echo 'Select';
+                                                                                            } ?>
+                                                                                        </option>
+                                                                                        <option value="Single">Single</option>
+                                                                                        <option value="Married">Married</option>
+                                                                                        <option value="Divorced">Divorced
+                                                                                        </option>
+                                                                                        <option value="Separated">Separated
+                                                                                        </option>
+                                                                                        <option value="Widower">Widower/Widow
+                                                                                        </option>
+                                                                                        <option value="Cohabit">Cohabit</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-sm-3">
+                                                                            <div class="row-form clearfix">
+                                                                                <!-- select -->
+                                                                                <div class="form-group">
+                                                                                    <label>Education Level</label>
+                                                                                    <select name="education_level"
+                                                                                        id="education_level"
+                                                                                        style="width: 100%;">
+                                                                                        <option
+                                                                                            value="<?= $client['education_level'] ?>">
+                                                                                            <?php if ($client) {
+                                                                                                if ($client['education_level'] == 'Not attended school') {
+                                                                                                    echo 'Not attended school';
+                                                                                                } elseif ($client['education_level'] == 'Primary') {
+                                                                                                    echo 'Primary';
+                                                                                                } elseif ($client['education_level'] == 'Secondary') {
+                                                                                                    echo 'Secondary';
+                                                                                                } elseif ($client['education_level'] == 'Certificate') {
+                                                                                                    echo 'Certificate';
+                                                                                                } elseif ($client['education_level'] == 'Diploma') {
+                                                                                                    echo 'Diploma';
+                                                                                                } elseif ($client['education_level'] == 'Undergraduate degree') {
+                                                                                                    echo 'Undergraduate degree';
+                                                                                                } elseif ($client['education_level'] == 'Postgraduate degree') {
+                                                                                                    echo 'Postgraduate degree';
+                                                                                                }
+                                                                                            } else {
+                                                                                                echo 'Select';
+                                                                                            } ?>
+                                                                                        </option>
+                                                                                        <option value="Not attended school">Not
+                                                                                            attended school</option>
+                                                                                        <option value="Primary">Primary</option>
+                                                                                        <option value="Secondary">Secondary
+                                                                                        </option>
+                                                                                        <option value="Certificate">Certificate
+                                                                                        </option>
+                                                                                        <option value="Diploma">Diploma</option>
+                                                                                        <option value="Undergraduate degree">
+                                                                                            Undergraduate degree</option>
+                                                                                        <option value="Postgraduate degree">
+                                                                                            Postgraduate degree</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-sm-3">
+                                                                            <div class="row-form clearfix">
+                                                                                <!-- select -->
+                                                                                <div class="form-group">
+                                                                                    <label>Occupation</label>
+                                                                                    <input type="text" name="occupation"
+                                                                                        id="occupation" value="<?php if ($client['occupation']) {
+                                                                                            print_r($client['occupation']);
+                                                                                        } ?>" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+
+                                                                        <div class="col-sm-3">
+                                                                            <div class="row-form clearfix">
+                                                                                <!-- select -->
+                                                                                <div class="form-group">
+                                                                                    <label>Occupation</label>
+                                                                                    <input type="text" name="occupation"
+                                                                                        id="occupation" value="<?php if ($client['occupation']) {
+                                                                                            print_r($client['occupation']);
+                                                                                        } ?>" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-sm-3">
+                                                                            <div class="row-form clearfix">
+                                                                                <!-- select -->
+                                                                                <div class="form-group">
+                                                                                    <label>National ID</label>
+                                                                                    <input type="text" name="national_id"
+                                                                                        id="national_id" value="<?php if ($client['national_id']) {
+                                                                                            print_r($client['national_id']);
+                                                                                        } ?>" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-sm-3">
+                                                                            <div class="row-form clearfix">
+                                                                                <!-- select -->
+                                                                                <div class="form-group">
+                                                                                    <label>Phone Number</label>
+                                                                                    <input type="text" name="phone_number"
+                                                                                        id="phone_number" value="<?php if ($client['phone_number']) {
+                                                                                            print_r($client['phone_number']);
+                                                                                        } ?>" />
+                                                                                </div>
+                                                                                <span>Example: 0700 000 111</span>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-sm-3">
+                                                                            <div class="row-form clearfix">
+                                                                                <!-- select -->
+                                                                                <div class="form-group">
+                                                                                    <label>Relative's Phone Number</label>
+                                                                                    <input type="text" name="other_phone"
+                                                                                        id="other_phone" value="<?php if ($client['other_phone']) {
+                                                                                            print_r($client['other_phone']);
+                                                                                        } ?>" />
+                                                                                </div>
+                                                                                <span>Example: 0700 000 111</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+
+                                                                        <div class="col-sm-3">
+                                                                            <div class="row-form clearfix">
+                                                                                <!-- select -->
+                                                                                <div class="form-group">
+                                                                                    <label>Residence Street:</label>
+                                                                                    <input type="text" name="street" id="street"
+                                                                                        value="<?php if ($client['street']) {
+                                                                                            print_r($client['street']);
+                                                                                        } ?>" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-sm-3">
+                                                                            <div class="row-form clearfix">
+                                                                                <!-- select -->
+                                                                                <div class="form-group">
+                                                                                    <label>Region</label>
+                                                                                    <input type="text" name="region" id="region"
+                                                                                        value="<?php if ($client['region']) {
+                                                                                            print_r($client['region']);
+                                                                                        } ?>" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-sm-3">
+                                                                            <div class="row-form clearfix">
+                                                                                <!-- select -->
+                                                                                <div class="form-group">
+                                                                                    <label>District</label>
+                                                                                    <input type="text" name="district"
+                                                                                        id="district" value="<?php if ($client['district']) {
+                                                                                            print_r($client['district']);
+                                                                                        } ?>" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-sm-3">
+                                                                            <div class="row-form clearfix">
+                                                                                <!-- select -->
+                                                                                <div class="form-group">
+                                                                                    <label>Ward</label>
+                                                                                    <input type="text" name="ward" id="ward"
+                                                                                        value="<?php if ($client['ward']) {
+                                                                                            print_r($client['ward']);
+                                                                                        } ?>" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row-form clearfix">
+                                                                        <div class="col-md-3">Comments:</div>
+                                                                        <div class="col-md-9">
+                                                                            <textarea name="comments" rows="4">
+                                                                                                                                                            <?php if ($client['comments']) {
+                                                                                                                                                                print_r($client['comments']);
+                                                                                                                                                            } ?>
+                                                                                                                                                            </textarea>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="dr"><span></span></div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <input type="hidden" name="client_image"
+                                                                        value="<?= $client['client_image'] ?>" />
+                                                                    <input type="hidden" name="id" value="<?= $client['id'] ?>">
+                                                                    <input type="submit" name="edit_client" value="Save updates"
+                                                                        class="btn btn-warning">
+                                                                    <button class="btn btn-default" data-dismiss="modal"
+                                                                        aria-hidden="true">Close</button>
+                                                                </div>
+                                                            </div>
+
+                                                    </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal fade" id="delete<?= $client['id'] ?>" tabindex="-1"
+                                                    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <form method="post">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal"><span
+                                                                            aria-hidden="true">&times;</span><span
+                                                                            class="sr-only">Close</span></button>
+                                                                    <h4>Delete User</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <strong style="font-weight: bold;color: red">
+                                                                        <p>Are you sure you want to delete this user</p>
+                                                                    </strong>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <input type="hidden" name="id" value="<?= $client['id'] ?>">
+                                                                    <input type="submit" name="delete_client" value="Delete"
+                                                                        class="btn btn-danger">
+                                                                    <button class="btn btn-default" data-dismiss="modal"
+                                                                        aria-hidden="true">Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade" id="deleteSchedule<?= $client['id'] ?>" tabindex="-1"
+                                                    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <form method="post">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal"><span
+                                                                            aria-hidden="true">&times;</span><span
+                                                                            class="sr-only">Close</span></button>
+                                                                    <h4>Delete User Schedule</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <strong style="font-weight: bold;color: red">
+                                                                        <p>Are you sure you want to delete this user Schedule
+                                                                        </p>
+                                                                    </strong>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <input type="hidden" name="id" value="<?= $client['id'] ?>">
+                                                                    <input type="submit" name="delete_schedule" value="Delete"
+                                                                        class="btn btn-danger">
+                                                                    <button class="btn btn-default" data-dismiss="modal"
+                                                                        aria-hidden="true">Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade" id="img<?= $client['id'] ?>" tabindex="-1" role="dialog"
+                                                    aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <form method="post">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal"><span
+                                                                            aria-hidden="true">&times;</span><span
+                                                                            class="sr-only">Close</span></button>
+                                                                    <h4>Client Image</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <img src="<?= $img ?>" width="350">
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button class="btn btn-default" data-dismiss="modal"
+                                                                        aria-hidden="true">Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade" id="addInclusion<?= $client['id'] ?>" tabindex="-1"
+                                                    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header bg-warning">
+                                                                <h4 class="modal-title">Add Inclusion Criteria</h4>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <form method="post">
+                                                                <?php $screening = $override->get('screening', 'client_id', $client['id'])[0]; ?>
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-4">
+                                                                            <div class="form-group">
+                                                                                <label>Date of Screening</label>
+                                                                                <input
+                                                                                    class="form-control validate[required,custom[date]]"
+                                                                                    type="date" name="screening_date"
+                                                                                    id="screening_date" value="<?php if ($screening['screening_date']) {
+                                                                                        print_r($screening['screening_date']);
+                                                                                    } ?>" required />
+                                                                                <span>Example: 2010-12-01</span>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-sm-4">
+                                                                            <div class="form-group">
+                                                                                <label>Aged eighteen years and above</label>
+                                                                                <select class="form-control" name="age_18"
+                                                                                    style="width: 100%;" required>
+                                                                                    <option value="<?= $screening['age_18'] ?>">
+                                                                                        <?php if ($screening) {
+                                                                                            if ($screening['age_18'] == 1) {
+                                                                                                echo 'Yes';
+                                                                                            } elseif ($screening['age_18'] == 2) {
+                                                                                                echo 'No';
+                                                                                            }
+                                                                                        } else {
+                                                                                            echo 'Select';
+                                                                                        } ?>
+                                                                                    </option>
+                                                                                    <option value="1">Yes</option>
+                                                                                    <option value="2">No</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-sm-4">
+                                                                            <div class="form-group">
+                                                                                <label>Confirmed cancer with biopsy?</label>
+                                                                                <select class="form-control" name="biopsy"
+                                                                                    style="width: 100%;" required>
+                                                                                    <option value="<?= $screening['biopsy'] ?>">
+                                                                                        <?php if ($screening) {
+                                                                                            if ($screening['biopsy'] == 1) {
+                                                                                                echo 'Yes';
+                                                                                            } elseif ($screening['biopsy'] == 2) {
+                                                                                                echo 'No';
+                                                                                            } elseif ($screening['biopsy'] == 3) {
+                                                                                                echo 'Not Applicable';
+                                                                                            }
+                                                                                        } else {
+                                                                                            echo 'Select';
+                                                                                        } ?>
+                                                                                    </option>
+                                                                                    <option value="1">Yes</option>
+                                                                                    <option value="2">No</option>
+                                                                                    <option value="3">Not Applicable</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="row">
+
+                                                                        <div class="col-sm-4">
+                                                                            <div class="form-group">
+                                                                                <label>Brain cancer</label>
+                                                                                <select class="form-control" name="brain_cancer"
+                                                                                    style="width: 100%;" required>
+                                                                                    <option
+                                                                                        value="<?= $screening['brain_cancer'] ?>">
+                                                                                        <?php if ($screening) {
+                                                                                            if ($screening['brain_cancer'] == 1) {
+                                                                                                echo 'Yes';
+                                                                                            } elseif ($screening['brain_cancer'] == 2) {
+                                                                                                echo 'No';
+                                                                                            }
+                                                                                        } else {
+                                                                                            echo 'Select';
+                                                                                        } ?>
+                                                                                    </option>
+                                                                                    <option value="1">Yes</option>
+                                                                                    <option value="2">No</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-sm-4">
+                                                                            <div class="form-group">
+                                                                                <label>Breast cancer</label>
+                                                                                <select class="form-control"
+                                                                                    name="breast_cancer" style="width: 100%;"
+                                                                                    required>
+                                                                                    <option
+                                                                                        value="<?= $screening['breast_cancer'] ?>">
+                                                                                        <?php if ($screening) {
+                                                                                            if ($screening['breast_cancer'] == 1) {
+                                                                                                echo 'Yes';
+                                                                                            } elseif ($screening['breast_cancer'] == 2) {
+                                                                                                echo 'No';
+                                                                                            }
+                                                                                        } else {
+                                                                                            echo 'Select';
+                                                                                        } ?>
+                                                                                    </option>
+                                                                                    <option value="1">Yes</option>
+                                                                                    <option value="2">No</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <?php if ($client['gender'] == "female") { ?>
+
+                                                                            <div class="col-sm-4">
+                                                                                <div class="form-group">
+                                                                                    <label>Cervical cancer</label>
+                                                                                    <select class="form-control"
+                                                                                        name="cervical_cancer" style="width: 100%;"
+                                                                                        required>
+                                                                                        <option
+                                                                                            value="<?= $screening['cervical_cancer'] ?>">
+                                                                                            <?php if ($screening) {
+                                                                                                if ($screening['cervical_cancer'] == 1) {
+                                                                                                    echo 'Yes';
+                                                                                                } elseif ($screening['cervical_cancer'] == 2) {
+                                                                                                    echo 'No';
+                                                                                                }
+                                                                                            } else {
+                                                                                                echo 'Select';
+                                                                                            } ?>
+                                                                                        </option>
+                                                                                        <option value="1">Yes</option>
+                                                                                        <option value="2">No</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        <?php } elseif ($client['gender'] == "male") { ?>
+
+                                                                            <div class="col-sm-4">
+                                                                                <div class="form-group">
+                                                                                    <label>Prostate cancer</label>
+                                                                                    <select class="form-control"
+                                                                                        name="prostate_cancer" style="width: 100%;"
+                                                                                        required>
+                                                                                        <option
+                                                                                            value="<?= $screening['prostate_cancer'] ?>">
+                                                                                            <?php if ($screening) {
+                                                                                                if ($screening['prostate_cancer'] == 1) {
+                                                                                                    echo 'Yes';
+                                                                                                } elseif ($screening['prostate_cancer'] == 2) {
+                                                                                                    echo 'No';
+                                                                                                }
+                                                                                            } else {
+                                                                                                echo 'Select';
+                                                                                            } ?>
+                                                                                        </option>
+                                                                                        <option value="1">Yes</option>
+                                                                                        <option value="2">No</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        <?php } ?>
+
+                                                                    </div>
+
+                                                                    <div class="row">
+
+                                                                        <div class="col-sm-4">
+                                                                            <div class="form-group">
+                                                                                <label>Participant Category</label>
+                                                                                <select class="form-control"
+                                                                                    name="patient_category" style="width: 100%;"
+                                                                                    required>
+                                                                                    <option
+                                                                                        value="<?= $screening['patient_category'] ?>">
+                                                                                        <?php if ($screening) {
+                                                                                            if ($screening['patient_category'] == 1) {
+                                                                                                echo 'Intervention';
+                                                                                            } elseif ($screening['patient_category'] == 2) {
+                                                                                                echo 'Control';
+                                                                                            }
+                                                                                        } else {
+                                                                                            echo 'Select';
+                                                                                        } ?>
+                                                                                    </option>
+                                                                                    <option value="1">Intervention</option>
+                                                                                    <option value="2">Control</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-4">
+                                                                            <div class="form-group">
+                                                                                <label>Did the participant consent to be part of
+                                                                                    the study?</label>
+                                                                                <select class="form-control" name="consented"
+                                                                                    style="width: 100%;" required>
+                                                                                    <option
+                                                                                        value="<?= $screening['consented'] ?>">
+                                                                                        <?php if ($screening) {
+                                                                                            if ($screening['consented'] == 1) {
+                                                                                                echo 'Yes';
+                                                                                            } elseif ($screening['consented'] == 2) {
+                                                                                                echo 'No';
+                                                                                            }
+                                                                                        } else {
+                                                                                            echo 'Select';
+                                                                                        } ?>
+                                                                                    </option>
+                                                                                    <option value="1">Yes</option>
+                                                                                    <option value="2">No</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-sm-4">
+                                                                            <div class="form-group">
+                                                                                <label>Did the participant consent to use
+                                                                                    NIMREGENIN preparation?</label>
+                                                                                <select class="form-control"
+                                                                                    name="consented_nimregenin"
+                                                                                    style="width: 100%;" required>
+                                                                                    <option
+                                                                                        value="<?= $screening['consented_nimregenin'] ?>">
+                                                                                        <?php if ($screening) {
+                                                                                            if ($screening['consented_nimregenin'] == 1) {
+                                                                                                echo 'Yes';
+                                                                                            } elseif ($screening['consented_nimregenin'] == 2) {
+                                                                                                echo 'No';
+                                                                                            }
+                                                                                        } else {
+                                                                                            echo 'Select';
+                                                                                        } ?>
+                                                                                    </option>
+                                                                                    <option value="1">Yes</option>
+                                                                                    <option value="2">No</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                        <div class="col-sm-12">
+                                                                            <div class="form-group">
+                                                                                <label>Notes / Remark / Reason (Option)</label>
+                                                                                <textarea class="form-control" name="reasons"
+                                                                                    rows="4"><?= $screening['reasons'] ?></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer justify-content-between">
+                                                                    <input type="hidden" name="id" value="<?= $client['id'] ?>">
+                                                                    <input type="hidden" name="screening_id"
+                                                                        value="<?= $screening['id'] ?>">
+                                                                    <input type="hidden" name="gender"
+                                                                        value="<?= $client['gender'] ?>">
+                                                                    <button type="button" class="btn btn-default"
+                                                                        data-dismiss="modal">Close</button>
+                                                                    <input type="submit" name="add_Inclusion"
+                                                                        class="btn btn-warning" value="Save">
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade" id="addExclusion<?= $client['id'] ?>" tabindex="-1"
+                                                    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header bg-warning">
+                                                                <h4 class="modal-title">Add Exclusion Criteria</h4>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <form method="post">
+                                                                <?php $lab = $override->get('lab', 'client_id', $client['id'])[0];
+                                                                print_r($_POST);
+                                                                ?>
+                                                                <div class="modal-body">
+                                                                    <div class="form-group">
+                                                                        <label>Date of Screening:</label>
+                                                                        <input type="date" class="form-control"
+                                                                            name="screening_date" id="screening_date" value="<?php if ($lab['screening_date']) {
+                                                                                print_r($lab['screening_date']);
+                                                                            } ?>" required>
+                                                                        <small class="form-text text-muted">Example:
+                                                                            2010-12-01</small>
+                                                                    </div>
+                                                                    <?php if ($client['gender'] == "female") { ?>
+                                                                        <div class="form-group">
+                                                                            <label>Is the participant pregnant?</label>
+                                                                            <select name="pregnant" class="form-control" required>
+                                                                                <option value="<?= $lab['pregnant'] ?>">
+                                                                                    <?php echo ($lab['pregnant'] == 1) ? 'Yes' : (($lab['pregnant'] == 2) ? 'No' : 'Not Applicable'); ?>
+                                                                                </option>
+                                                                                <option value="1">Yes</option>
+                                                                                <option value="2">No</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label>Is the participant breastfeeding?</label>
+                                                                            <select name="breast_feeding" class="form-control"
+                                                                                required>
+                                                                                <option value="<?= $lab['breast_feeding'] ?>">
+                                                                                    <?php echo ($lab['breast_feeding'] == 1) ? 'Yes' : (($lab['breast_feeding'] == 2) ? 'No' : 'Not Applicable'); ?>
+                                                                                </option>
+                                                                                <option value="1">Yes</option>
+                                                                                <option value="2">No</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    <?php } ?>
+                                                                    <div class="form-group">
+                                                                        <label>CKD?</label>
+                                                                        <select name="cdk" class="form-control" required>
+                                                                            <option value="<?= $lab['cdk'] ?>">
+                                                                                <?php echo ($lab['cdk'] == 1) ? 'Yes' : (($lab['cdk'] == 2) ? 'No' : 'Not Applicable'); ?>
+                                                                            </option>
+                                                                            <option value="1">Yes</option>
+                                                                            <option value="2">No</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Liver Disease?</label>
+                                                                        <select name="liver_disease" class="form-control"
+                                                                            required>
+                                                                            <option value="<?= $lab['liver_disease'] ?>">
+                                                                                <?php echo ($lab['liver_disease'] == 1) ? 'Yes' : (($lab['liver_disease'] == 2) ? 'No' : 'Not Applicable'); ?>
+                                                                            </option>
+                                                                            <option value="1">Yes</option>
+                                                                            <option value="2">No</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer justify-content-between">
+                                                                    <input type="hidden" name="id" value="<?= $client['id'] ?>">
+                                                                    <input type="hidden" name="lab_id"
+                                                                        value="<?= $lab['id'] ?>">
+                                                                    <input type="hidden" name="gender"
+                                                                        value="<?= $client['gender'] ?>">
+                                                                    <input type="submit" name="add_Exclusion"
+                                                                        class="btn btn-warning" value="Save">
+                                                                    <!-- <button type="submit" name="add_Exclusion"
+                                                                        class="btn btn-warning">Save</button> -->
+                                                                    <button type="button" class="btn btn-default"
+                                                                        data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="modal fade" id="addEnrollment<?= $client['id'] ?>" tabindex="-1"
+                                                    aria-labelledby="modalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header bg-primary">
+                                                                <h4 class="modal-title">Add Visit</h4>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <form id="validation" method="post">
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
+                                                                            <div class="form-group">
+                                                                                <label>Patient Type</label>
+                                                                                <select name="pt_type" id="pt_type"
+                                                                                    class="form-control" required>
+                                                                                    <option value="">Select</option>
+                                                                                    <option value="1">New Patient</option>
+                                                                                    <option value="2">Already Enrolled</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <div class="form-group">
+                                                                                <label>Treatment Type</label>
+                                                                                <select name="treatment_type"
+                                                                                    id="treatment_type" class="form-control"
+                                                                                    required>
+                                                                                    <option value="">Select</option>
+                                                                                    <option value="1">Radiotherapy Treatment
+                                                                                    </option>
+                                                                                    <option value="2">Chemotherapy Treatment
+                                                                                    </option>
+                                                                                    <option value="3">Surgery Treatment</option>
+                                                                                    <option value="4">Active surveillance
+                                                                                    </option>
+                                                                                    <option value="5">Hormonal therapy ie ADT
+                                                                                    </option>
+                                                                                    <option value="96">Other (If Other write in
+                                                                                        Notes / Remarks )</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <div class="form-group">
+                                                                                <label>Date Started Previous Treatment</label>
+                                                                                <input type="text" name="previous_date"
+                                                                                    id="previous_date" class="form-control"
+                                                                                    required />
+                                                                                <small>Example: 2010-12-01</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label>Treatment Type 2</label>
+                                                                                <select name="treatment_type2"
+                                                                                    id="treatment_type2" class="form-control"
+                                                                                    required>
+                                                                                    <option value="">Select</option>
+                                                                                    <option value="1">Radiotherapy Treatment
+                                                                                    </option>
+                                                                                    <option value="2">Chemotherapy Treatment
+                                                                                    </option>
+                                                                                    <option value="3">Surgery Treatment</option>
+                                                                                    <option value="4">Active surveillance
+                                                                                    </option>
+                                                                                    <option value="5">Hormonal therapy ie ADT
+                                                                                    </option>
+                                                                                    <option value="96">Other (If Other write in
+                                                                                        Notes / Remarks )</option>
+                                                                                    <option value="99">NA</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label>Date Started Previous Treatment 2</label>
+                                                                                <input type="text" name="previous_date2"
+                                                                                    id="previous_date2" class="form-control" />
+                                                                                <small>Example: 2010-12-01</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label>Total number of Cycles for That
+                                                                                    Treatment</label>
+                                                                                <input type="text" name="total_cycle"
+                                                                                    id="total_cycle" class="form-control"
+                                                                                    required />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label>Current number of Cycle for Patient
+                                                                                    Treatment</label>
+                                                                                <input type="text" name="cycle_number"
+                                                                                    id="cycle_number" class="form-control"
+                                                                                    required />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label>Notes / Remark</label>
+                                                                                <textarea name="reasons" class="form-control"
+                                                                                    rows="4"></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label>Date of Enrollment for This Study (Day
+                                                                                    Started Treatment)</label>
+                                                                                <input type="text" name="visit_date"
+                                                                                    id="visit_date" class="form-control"
+                                                                                    required />
+                                                                                <small>Example: 2010-12-01</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <input type="hidden" name="id" value="<?= $client['id'] ?>">
+                                                                    <button type="submit" name="add_Enrollment"
+                                                                        class="btn btn-warning">Save</button>
+                                                                    <button type="button" class="btn btn-default"
+                                                                        data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="modal fade" id="editEnrollment<?= $client['id'] ?>" tabindex="-1"
+                                                    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <form id="validation" method="post">
+                                                                <?php
+                                                                $visit = $override->firstRow('visit', 'visit_date', 'id', 'client_id', $client['id'])[0];
+                                                                $reasons = $override->firstRow('visit', 'reasons', 'id', 'client_id', $client['id'])[0];
+                                                                $client = $override->getNews('clients', 'status', 1, 'id', $client['id'])[0];
+                                                                ?>
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal"
+                                                                        aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                    <h4 class="modal-title">Edit Visit</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-4">
+                                                                            <div class="form-group">
+                                                                                <label>Patient Type</label>
+                                                                                <select name="pt_type" id="pt_type"
+                                                                                    class="form-control" required>
+                                                                                    <?php if ($client['pt_type'] == 1) { ?>
+                                                                                        <option value="<?= $client['pt_type'] ?>">
+                                                                                            New Patient</option>
+                                                                                    <?php } else if ($client['pt_type'] == 2) { ?>
+                                                                                            <option value="<?= $client['pt_type'] ?>">
+                                                                                                Already Enrolled</option>
+                                                                                    <?php } else { ?>
+                                                                                            <option value="">Select</option>
+                                                                                    <?php } ?>
+                                                                                    <option value="1">New Patient</option>
+                                                                                    <option value="2">Already Enrolled</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-4">
+                                                                            <div class="form-group">
+                                                                                <label>Treatment Type</label>
+                                                                                <select name="treatment_type"
+                                                                                    id="treatment_type" class="form-control"
+                                                                                    required>
+                                                                                    <?php if ($client['treatment_type'] == 1) { ?>
+                                                                                        <option
+                                                                                            value="<?= $client['treatment_type'] ?>">
+                                                                                            Radiotherapy Treatment</option>
+                                                                                    <?php } else if ($client['treatment_type'] == 2) { ?>
+                                                                                            <option
+                                                                                                value="<?= $client['treatment_type'] ?>">
+                                                                                                Chemotherapy Treatment</option>
+                                                                                    <?php } else if ($client['treatment_type'] == 3) { ?>
+                                                                                                <option
+                                                                                                    value="<?= $client['treatment_type'] ?>">
+                                                                                                    Surgery Treatment</option>
+                                                                                    <?php } else if ($client['treatment_type'] == 4) { ?>
+                                                                                                    <option
+                                                                                                        value="<?= $client['treatment_type'] ?>">
+                                                                                                        Active surveillance</option>
+                                                                                    <?php } else if ($client['treatment_type'] == 5) { ?>
+                                                                                                        <option
+                                                                                                            value="<?= $client['treatment_type'] ?>">
+                                                                                                            Hormonal therapy ie ADT</option>
+                                                                                    <?php } else if ($client['treatment_type'] == 6) { ?>
+                                                                                                            <option
+                                                                                                                value="<?= $client['treatment_type'] ?>">
+                                                                                                                Other (If Other write in Notes /
+                                                                                                                Remarks)</option>
+                                                                                    <?php } else { ?>
+                                                                                                            <option value="">Select</option>
+                                                                                    <?php } ?>
+                                                                                    <option value="1">Radiotherapy Treatment
+                                                                                    </option>
+                                                                                    <option value="2">Chemotherapy Treatment
+                                                                                    </option>
+                                                                                    <option value="3">Surgery Treatment</option>
+                                                                                    <option value="4">Active surveillance
+                                                                                    </option>
+                                                                                    <option value="5">Hormonal therapy ie ADT
+                                                                                    </option>
+                                                                                    <option value="96">Other (If Other write in
+                                                                                        Notes / Remarks)</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-4">
+                                                                            <div class="form-group">
+                                                                                <label>Date Started Previous(Past)
+                                                                                    Treatment:</label>
+                                                                                <input value="<?= $client['previous_date'] ?>"
+                                                                                    class="form-control" type="text"
+                                                                                    name="previous_date" id="previous_date"
+                                                                                    required />
+                                                                                <small>Example: 2010-12-01</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-sm-6">
+                                                                            <div class="form-group">
+                                                                                <label>Treatment Type 2</label>
+                                                                                <select name="treatment_type2"
+                                                                                    id="treatment_type2" class="form-control"
+                                                                                    required>
+                                                                                    <?php if ($client['treatment_type2'] == 1) { ?>
+                                                                                        <option
+                                                                                            value="<?= $client['treatment_type2'] ?>">
+                                                                                            Radiotherapy Treatment</option>
+                                                                                    <?php } else if ($client['treatment_type2'] == 2) { ?>
+                                                                                            <option
+                                                                                                value="<?= $client['treatment_type2'] ?>">
+                                                                                                Chemotherapy Treatment</option>
+                                                                                    <?php } else if ($client['treatment_type2'] == 3) { ?>
+                                                                                                <option
+                                                                                                    value="<?= $client['treatment_type2'] ?>">
+                                                                                                    Surgery Treatment</option>
+                                                                                    <?php } else if ($client['treatment_type2'] == 4) { ?>
+                                                                                                    <option
+                                                                                                        value="<?= $client['treatment_type2'] ?>">
+                                                                                                        Active surveillance</option>
+                                                                                    <?php } else if ($client['treatment_type2'] == 5) { ?>
+                                                                                                        <option
+                                                                                                            value="<?= $client['treatment_type2'] ?>">
+                                                                                                            Hormonal therapy ie ADT</option>
+                                                                                    <?php } else if ($client['treatment_type2'] == 96) { ?>
+                                                                                                            <option
+                                                                                                                value="<?= $client['treatment_type2'] ?>">
+                                                                                                                Other (If Other write in Notes /
+                                                                                                                Remarks)</option>
+                                                                                    <?php } else if ($client['treatment_type2'] == 99) { ?>
+                                                                                                                <option
+                                                                                                                    value="<?= $client['treatment_type2'] ?>">
+                                                                                                                    NA</option>
+                                                                                    <?php } else { ?>
+                                                                                                                <option value="">Select</option>
+                                                                                    <?php } ?>
+                                                                                    <option value="1">Radiotherapy Treatment
+                                                                                    </option>
+                                                                                    <option value="2">Chemotherapy Treatment
+                                                                                    </option>
+                                                                                    <option value="3">Surgery Treatment</option>
+                                                                                    <option value="4">Active surveillance
+                                                                                    </option>
+                                                                                    <option value="5">Hormonal therapy ie ADT
+                                                                                    </option>
+                                                                                    <option value="96">Other (If Other write in
+                                                                                        Notes / Remarks)</option>
+                                                                                    <option value="99">NA</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-6">
+                                                                            <div class="form-group">
+                                                                                <label>Date Started Previous Treatment
+                                                                                    2:</label>
+                                                                                <input value="<?= $client['previous_date2'] ?>"
+                                                                                    class="form-control" type="text"
+                                                                                    name="previous_date2" id="previous_date2" />
+                                                                                <small>Example: 2010-12-01</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-sm-6">
+                                                                            <div class="form-group">
+                                                                                <label>Total number of Cycles for That
+                                                                                    Treatment:</label>
+                                                                                <input value="<?= $client['total_cycle'] ?>"
+                                                                                    class="form-control" type="text"
+                                                                                    name="total_cycle" id="total_cycle"
+                                                                                    required />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-6">
+                                                                            <div class="form-group">
+                                                                                <label>Current number of Cycle for Patient
+                                                                                    Treatment</label>
+                                                                                <input value="<?= $client['cycle_number'] ?>"
+                                                                                    class="form-control" type="text"
+                                                                                    name="cycle_number" id="cycle_number"
+                                                                                    required />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-sm-6">
+                                                                            <div class="form-group">
+                                                                                <label>Notes / Remark</label>
+                                                                                <textarea name="reasons" class="form-control"
+                                                                                    rows="4"><?= $reasons['reasons'] ?></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-6">
+                                                                            <div class="form-group">
+                                                                                <label>Date of Enrollment for This Study(Day
+                                                                                    Started Treatment):</label>
+                                                                                <input value="<?= $visit['visit_date'] ?>"
+                                                                                    class="form-control" type="text"
+                                                                                    name="visit_date" id="visit_date"
+                                                                                    required />
+                                                                                <small>Example: 2010-12-01</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <input type="hidden" name="id" value="<?= $client['id'] ?>">
+                                                                    <input type="submit" name="edit_Enrollment"
+                                                                        class="btn btn-warning" value="Save">
+                                                                    <button class="btn btn-default" data-dismiss="modal"
+                                                                        aria-hidden="true">Close</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade" id="screened<?= $client['id'] ?>" tabindex="-1"
+                                                    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <form method="post">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal"><span
+                                                                            aria-hidden="true">&times;</span><span
+                                                                            class="sr-only">Close</span></button>
+                                                                    <h4>Change screened Status</h4>
+                                                                </div>
+                                                                <div class="modal-body modal-body-np">
+                                                                    <div class="row">
+                                                                        <div class="row-form clearfix">
+                                                                            <div class="col-md-8">Screening?</div>
+                                                                            <div class="col-md-4">
+                                                                                <select name="screened" style="width: 100%;"
+                                                                                    required>
+                                                                                    <option value="<?= $client['screened'] ?>">
+                                                                                        <?php if ($client) {
+                                                                                            if ($client['screened'] == 1) {
+                                                                                                echo 'Yes';
+                                                                                            } else {
+                                                                                                echo 'No';
+                                                                                            }
+                                                                                        } else {
+                                                                                            echo 'Select';
+                                                                                        } ?>
+                                                                                    </option>
+                                                                                    <option value="1">Yes</option>
+                                                                                    <option value="0">No</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="dr"><span></span></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <input type="hidden" name="id" value="<?= $client['id'] ?>">
+                                                                    <input type="submit" name="change_screening_status"
+                                                                        class="btn btn-warning" value="Save">
+                                                                    <button class="btn btn-default" data-dismiss="modal"
+                                                                        aria-hidden="true">Close</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade" id="eligibility1<?= $client['id'] ?>" tabindex="-1"
+                                                    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <form method="post">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal"><span
+                                                                            aria-hidden="true">&times;</span><span
+                                                                            class="sr-only">Close</span></button>
+                                                                    <h4>Change Eligibility1 Status</h4>
+                                                                </div>
+                                                                <div class="modal-body modal-body-np">
+                                                                    <div class="row">
+                                                                        <div class="row-form clearfix">
+                                                                            <div class="col-md-8">Eligibility1?</div>
+                                                                            <div class="col-md-4">
+                                                                                <select name="eligibility1" style="width: 100%;"
+                                                                                    required>
+                                                                                    <option
+                                                                                        value="<?= $client['eligibility1'] ?>">
+                                                                                        <?php if ($client) {
+                                                                                            if ($client['eligibility1'] == 1) {
+                                                                                                echo 'Yes';
+                                                                                            } else {
+                                                                                                echo 'No';
+                                                                                            }
+                                                                                        } else {
+                                                                                            echo 'Select';
+                                                                                        } ?>
+                                                                                    </option>
+                                                                                    <option value="1">Yes</option>
+                                                                                    <option value="0">No</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="dr"><span></span></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <input type="hidden" name="id" value="<?= $client['id'] ?>">
+                                                                    <input type="submit" name="change_eligibility1_status"
+                                                                        class="btn btn-warning" value="Save">
+                                                                    <button class="btn btn-default" data-dismiss="modal"
+                                                                        aria-hidden="true">Close</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade" id="eligibility2<?= $client['id'] ?>" tabindex="-1"
+                                                    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <form method="post">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal"><span
+                                                                            aria-hidden="true">&times;</span><span
+                                                                            class="sr-only">Close</span></button>
+                                                                    <h4>Change Eligibility2 Status</h4>
+                                                                </div>
+                                                                <div class="modal-body modal-body-np">
+                                                                    <div class="row">
+                                                                        <div class="row-form clearfix">
+                                                                            <div class="col-md-8">Eligibility2?</div>
+                                                                            <div class="col-md-4">
+                                                                                <select name="eligibility2" style="width: 100%;"
+                                                                                    required>
+                                                                                    <option
+                                                                                        value="<?= $client['eligibility2'] ?>">
+                                                                                        <?php if ($client) {
+                                                                                            if ($client['eligibility2'] == 1) {
+                                                                                                echo 'Yes';
+                                                                                            } else {
+                                                                                                echo 'No';
+                                                                                            }
+                                                                                        } else {
+                                                                                            echo 'Select';
+                                                                                        } ?>
+                                                                                    </option>
+                                                                                    <option value="1">Yes</option>
+                                                                                    <option value="0">No</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="dr"><span></span></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <input type="hidden" name="id" value="<?= $client['id'] ?>">
+                                                                    <input type="submit" name="change_eligibility2_status"
+                                                                        class="btn btn-warning" value="Save">
+                                                                    <button class="btn btn-default" data-dismiss="modal"
+                                                                        aria-hidden="true">Close</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade" id="eligible<?= $client['id'] ?>" tabindex="-1"
+                                                    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <form method="post">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal"><span
+                                                                            aria-hidden="true">&times;</span><span
+                                                                            class="sr-only">Close</span></button>
+                                                                    <h4>Change Eligible Status</h4>
+                                                                </div>
+                                                                <div class="modal-body modal-body-np">
+                                                                    <div class="row">
+                                                                        <div class="row-form clearfix">
+                                                                            <div class="col-md-8">Eligible?</div>
+                                                                            <div class="col-md-4">
+                                                                                <select name="eligible" style="width: 100%;"
+                                                                                    required>
+                                                                                    <option value="<?= $client['eligible'] ?>">
+                                                                                        <?php if ($client) {
+                                                                                            if ($client['eligible'] == 1) {
+                                                                                                echo 'Yes';
+                                                                                            } else {
+                                                                                                echo 'No';
+                                                                                            }
+                                                                                        } else {
+                                                                                            echo 'Select';
+                                                                                        } ?>
+                                                                                    </option>
+                                                                                    <option value="1">Yes</option>
+                                                                                    <option value="0">No</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="dr"><span></span></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <input type="hidden" name="id" value="<?= $client['id'] ?>">
+                                                                    <input type="submit" name="change_eligible_status"
+                                                                        class="btn btn-warning" value="Save">
+                                                                    <button class="btn btn-default" data-dismiss="modal"
+                                                                        aria-hidden="true">Close</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade" id="enrolled<?= $client['id'] ?>" tabindex="-1"
+                                                    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <form method="post">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal"><span
+                                                                            aria-hidden="true">&times;</span><span
+                                                                            class="sr-only">Close</span></button>
+                                                                    <h4>Change enrolled Status</h4>
+                                                                </div>
+                                                                <div class="modal-body modal-body-np">
+                                                                    <div class="row">
+                                                                        <div class="row-form clearfix">
+                                                                            <div class="col-md-8">Enrolled?</div>
+                                                                            <div class="col-md-4">
+                                                                                <select name="enrolled" style="width: 100%;"
+                                                                                    required>
+                                                                                    <option value="<?= $client['enrolled'] ?>">
+                                                                                        <?php if ($client) {
+                                                                                            if ($client['enrolled'] == 1) {
+                                                                                                echo 'Yes';
+                                                                                            } else {
+                                                                                                echo 'No';
+                                                                                            }
+                                                                                        } else {
+                                                                                            echo 'Select';
+                                                                                        } ?>
+                                                                                    </option>
+                                                                                    <option value="1">Yes</option>
+                                                                                    <option value="0">No</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="dr"><span></span></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <input type="hidden" name="id" value="<?= $client['id'] ?>">
+                                                                    <input type="submit" name="change_enrolled_status"
+                                                                        class="btn btn-warning" value="Save">
+                                                                    <button class="btn btn-default" data-dismiss="modal"
+                                                                        aria-hidden="true">Close</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade" id="asignID<?= $client['id'] ?>" tabindex="-1"
+                                                    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <form method="post">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal"><span
+                                                                            aria-hidden="true">&times;</span><span
+                                                                            class="sr-only">Close</span></button>
+                                                                    <h4>Assign enrolled ID</h4>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <input type="hidden" name="id" value="<?= $client['id'] ?>">
+                                                                    <input type="submit" name="asign_id" class="btn btn-warning"
+                                                                        value="Update Stud ID">
+                                                                    <button class="btn btn-default" data-dismiss="modal"
+                                                                        aria-hidden="true">Close</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <?php $x++;
