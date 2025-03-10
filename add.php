@@ -3136,15 +3136,14 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                                                                </div>
-                                                <div class="card-footer">
-                                                    <div class="form-group">
-                                                        <input type="hidden" name="id" value="<?= $patient['id'] ?>">
-                                                        <input type="submit" name="add_crf1" value="Submit"
-                                                            class="btn btn-info">
-                                                        <a href="index1.php" class="btn btn-default">Cancel</a>
-                                                    </div>
-                                                </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="form-group">
+                                                <input type="hidden" name="id" value="<?= $patient['id'] ?>">
+                                                <input type="submit" name="add_crf1" value="Submit" class="btn btn-info">
+                                                <a href="index1.php" class="btn btn-default">Cancel</a>
+                                            </div>
+                                        </div>
                                     </form>
                                     <!-- Form End -->
                                 </div>
@@ -4113,7 +4112,8 @@ if ($user->isLoggedIn()) {
                                                     <div class="col-sm-4 border">
                                                         <div class="form-group row align-items-center">
                                                             <label for="local_examination"
-                                                                class="col-sm-4 col-form-label">Local examination:</label>
+                                                                class="col-sm-4 col-form-label">Local
+                                                                examination:</label>
                                                             <div class="col-sm-8">
                                                                 <select class="form-control" name="local_examination"
                                                                     id="local_examination">
@@ -4176,7 +4176,8 @@ if ($user->isLoggedIn()) {
                                                     <div class="col-sm-4 border">
                                                         <div class="form-group row align-items-center">
                                                             <label for="physical_exams_other"
-                                                                class="col-sm-4 col-form-label">Is there any Other physical
+                                                                class="col-sm-4 col-form-label">Is
+                                                                there any Other physical
                                                                 System?:</label>
                                                             <div class="col-sm-8">
                                                                 <select class="form-control" name="physical_exams_other"
@@ -5621,7 +5622,8 @@ if ($user->isLoggedIn()) {
                                                             <div id="liver_bilirubin_totalError" class="text text-danger">
                                                             </div>
                                                             <div id="liver_bilirubin_total_unitsError"
-                                                                class="text text-danger"></div>
+                                                                class="text text-danger">
+                                                            </div>
                                                             <span> XXX </span>
                                                         </div>
                                                     </div>
