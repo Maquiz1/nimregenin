@@ -598,6 +598,107 @@ if ($user->isLoggedIn()) {
             } else {
                 $pageError = $validate->errors();
             }
+        } elseif (Input::get('add_nimregenin')) {
+            $validate = $validate->check($_POST, array(
+                // 'diagnosis_date' => array(
+                //     'required' => true,
+                // ),
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->createRecord('nimregenin', array(
+                        'vid' => $_GET["vid"],
+                        'vcode' => $_GET["vcode"],
+                        'study_id' => $_GET['sid'],
+                        'nimregenin_herbal' => Input::get('nimregenin_herbal'),
+                        'nimregenin_preparation' => Input::get('nimregenin_preparation'),
+                        'nimregenin_start' => Input::get('nimregenin_start'),
+                        'nimregenin_ongoing' => Input::get('nimregenin_ongoing'),
+                        'nimregenin_end' => Input::get('nimregenin_end'),
+                        'nimregenin_dose' => Input::get('nimregenin_dose'),
+                        'nimregenin_frequency' => Input::get('nimregenin_frequency'),
+                        'nimregenin_remarks' => Input::get('nimregenin_remarks'),
+                        'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ));
+
+                    $user->updateRecord('clients', array(
+                        'nimregenin' => Input::get('nimregenin_herbal'),
+                    ), $_GET['cid']);
+
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('update_nimregenin')) {
+            $validate = $validate->check($_POST, array(
+                // 'diagnosis_date' => array(
+                //     'required' => true,
+                // ),
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->updateRecord('nimregenin', array(
+                        'vid' => $_GET["vid"],
+                        'vcode' => $_GET["vcode"],
+                        'study_id' => $_GET['sid'],
+                        'nimregenin_herbal' => Input::get('nimregenin_herbal'),
+                        'nimregenin_preparation' => Input::get('nimregenin_preparation'),
+                        'nimregenin_start' => Input::get('nimregenin_start'),
+                        'nimregenin_ongoing' => Input::get('nimregenin_ongoing'),
+                        'nimregenin_end' => Input::get('nimregenin_end'),
+                        'nimregenin_dose' => Input::get('nimregenin_dose'),
+                        'nimregenin_frequency' => Input::get('nimregenin_frequency'),
+                        'nimregenin_remarks' => Input::get('nimregenin_remarks'),
+                        'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ), Input::get('nimregenin_id'));
+
+                    $user->updateRecord('clients', array(
+                        'nimregenin' => Input::get('nimregenin_herbal'),
+                    ), $_GET['cid']);
+
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('delete_nimregenin')) {
+            $validate = $validate->check($_POST, array(
+                // 'diagnosis_date' => array(
+                //     'required' => true,
+                // ),
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->updateRecord('nimregenin', array(
+                        'status' => 0,
+                    ), Input::get('nimregenin_id'));
+
+                    $user->updateRecord('clients', array(
+                        'nimregenin' => 0,
+                    ), $_GET['cid']);
+
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
         } elseif (Input::get('add_crf2')) {
             $validate = $validate->check($_POST, array(
                 'crf2_date' => array(
@@ -2498,40 +2599,135 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
 
-                                            <h4>USE OF HERBAL MEDICINES</h4>
-
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 col-form-label">8. Are you using NIMREGENIN herbal
-                                                    preparation?:</label>
-                                                <div class="col-sm-9">
-                                                    <select name="nimregenin_herbal" id="nimregenin_herbal"
-                                                        class="form-control" required>
-                                                        <?php if ($patient['nimregenin_herbal'] == "1") { ?>
-                                                            <option value="<?= $patient['nimregenin_herbal'] ?>">Yes</option>
-                                                        <?php } elseif ($patient['nimregenin_herbal'] == "2") { ?>
-                                                            <option value="<?= $patient['nimregenin_herbal'] ?>">No</option>
-                                                        <?php } else { ?>
-                                                            <option value="">Select</option>
-                                                        <?php } ?>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <hr>
-
                                             <div class="card card-primary">
                                                 <div class="card-header">
+                                                    <h4>USE OF HERBAL MEDICINES</h4>
                                                     <h3 class="card-title">NIMREGENIN Herbal preparation</h3>
-                                                    <div class="card-tools">
-                                                        <button type="button" class="btn btn-success btn-sm"
-                                                            onclick="addRow()">
-                                                            <i class="fas fa-plus"></i> Add New
-                                                        </button>
+                                                </div>
+                                                <hr>
+
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">8. Are you using NIMREGENIN
+                                                        herbal
+                                                        preparation?:</label>
+                                                    <div class="col-sm-9">
+                                                        <select name="nimregenin_herbal" id="nimregenin_herbal"
+                                                            class="form-control" required>
+                                                            <?php if ($patient['nimregenin_herbal'] == "1") { ?>
+                                                                <option value="<?= $patient['nimregenin_herbal'] ?>">Yes
+                                                                </option>
+                                                            <?php } elseif ($patient['nimregenin_herbal'] == "2") { ?>
+                                                                <option value="<?= $patient['nimregenin_herbal'] ?>">No</option>
+                                                            <?php } else { ?>
+                                                                <option value="">Select</option>
+                                                            <?php } ?>
+                                                            <option value="1">Yes</option>
+                                                            <option value="2">No</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <hr>
+                                                <!-- Add Modal -->
+                                                <div class="modal fade" id="addNimregenin" tabindex="-1" role="dialog">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Add New Record</h5>
+                                                                <button type="button" class="close"
+                                                                    data-dismiss="modal">&times;</button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form method="post">
+                                                                    <div class="form-group row">
+                                                                        <label class="col-sm-3 col-form-label">Type of
+                                                                            NIMREGENIN</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="text" name="nimregenin_preparation"
+                                                                                value="<?= $patient['nimregenin_preparation'] ?>"
+                                                                                class="form-control"
+                                                                                placeholder="Type of NIMREGENIN">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label class="col-sm-3 col-form-label">Start
+                                                                            Date</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="date" name="nimregenin_start"
+                                                                                value="<?= $patient['nimregenin_start'] ?>"
+                                                                                class="form-control"
+                                                                                placeholder="Start Date">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label
+                                                                            class="col-sm-3 col-form-label">Ongoing?</label>
+                                                                        <div class="col-sm-9">
+                                                                            <select name="nimregenin_ongoing"
+                                                                                class="form-control">
+                                                                                <option value="">Select</option>
+                                                                                <option value="1">Yes</option>
+                                                                                <option value="2">No</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label class="col-sm-3 col-form-label">End
+                                                                            Date</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="date" name="nimregenin_end"
+                                                                                value="<?= $patient['nimregenin_end'] ?>"
+                                                                                class="form-control" placeholder="End Date">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label class="col-sm-3 col-form-label">Dose
+                                                                            (mls)</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="text" name="nimregenin_dose"
+                                                                                value="<?= $patient['nimregenin_dose'] ?>"
+                                                                                class="form-control"
+                                                                                placeholder="Dose (mls)">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label class="col-sm-3 col-form-label">Frequency
+                                                                            (per day)</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="text" name="nimregenin_frequency"
+                                                                                value="<?= $patient['nimregenin_frequency'] ?>"
+                                                                                class="form-control"
+                                                                                placeholder="Frequency (per day)">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label
+                                                                            class="col-sm-3 col-form-label">Remarks</label>
+                                                                        <div class="col-sm-9">
+                                                                            <input type="text" name="nimregenin_remarks"
+                                                                                value="<?= $patient['nimregenin_remarks'] ?>"
+                                                                                class="form-control" placeholder="Remarks">
+                                                                        </div>
+                                                                    </div>
+                                                                    <input type="hidden" name="nimregenin_herbal"
+                                                                        value="<?= $patient['nimregenin_herbal'] ?>">
+                                                                    <input type="hidden" name="crf1_cmpltd_date"
+                                                                        value="<?= $patient['crf1_cmpltd_date'] ?>">
+                                                                    <input type="submit" name="add_nimregenin"
+                                                                        class="btn btn-success mt-2l" value="Save">
+                                                                    <button type="button" class="btn btn-secondary mt-2"
+                                                                        data-dismiss="modal">Cancel</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="card-body">
+                                                    <button type="button" class="btn btn-info mb-3" data-toggle="modal"
+                                                        data-target="#addNimregenin">
+                                                        <i class="fas fa-plus"></i> Add New Nimregenin
+                                                    </button>
+                                                    <hr>
                                                     <table class="table table-bordered" id="nimregenin_table">
                                                         <thead>
                                                             <tr>
@@ -2548,101 +2744,35 @@ if ($user->isLoggedIn()) {
                                                         <tbody>
                                                             <?php
                                                             $x = 1;
-                                                            foreach ($override->get1('nimregenin', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']) as $nimregenin) {
+                                                            foreach ($override->getNews('nimregenin', 'patient_id', $_GET['cid'], 'status', 1) as $nimregenin) {
                                                                 ?>
                                                                 <tr>
-                                                                    <td><input
-                                                                            value='<?= $nimregenin['nimregenin_preparation'] ?>'
-                                                                            type="text" name="nimregenin_preparation[]"
-                                                                            class="form-control"></td>
-                                                                    <td><input value='<?= $nimregenin['nimregenin_start'] ?>'
-                                                                            type="date" name="nimregenin_start[]"
-                                                                            class="form-control"></td>
+                                                                    <td><?= $nimregenin['nimregenin_preparation'] ?></td>
+                                                                    <td><?= $nimregenin['nimregenin_start'] ?></td>
                                                                     <td>
-                                                                        <select name="nimregenin_ongoing[]"
-                                                                            class="form-control">
-                                                                            <option
-                                                                                value="<?= $nimregenin['nimregenin_ongoing'] ?>">
-                                                                                <?= $nimregenin['nimregenin_ongoing'] == "1" ? "Yes" : "No" ?>
-                                                                            </option>
-                                                                            <option value="1">Yes</option>
-                                                                            <option value="2">No</option>
-                                                                        </select>
+                                                                        <?php if($nimregenin['nimregenin_ongoing'] == 1){ echo "Yes"; }elseif($nimregenin['nimregenin_ongoing'] == 2){  echo "No"; }else{  echo " "; } ?>
                                                                     </td>
-                                                                    <td><input value='<?= $nimregenin['nimregenin_end'] ?>'
-                                                                            type="date" name="nimregenin_end[]"
-                                                                            class="form-control"></td>
-                                                                    <td><input value='<?= $nimregenin['nimregenin_dose'] ?>'
-                                                                            type="text" name="nimregenin_dose[]"
-                                                                            class="form-control"></td>
-                                                                    <td><input
-                                                                            value='<?= $nimregenin['nimregenin_frequency'] ?>'
-                                                                            type="text" name="nimregenin_frequency[]"
-                                                                            class="form-control"></td>
-                                                                    <td><input value='<?= $nimregenin['nimregenin_remarks'] ?>'
-                                                                            type="text" name="nimregenin_remarks[]"
-                                                                            class="form-control"></td>
+                                                                    <td><?= $nimregenin['nimregenin_end'] ?></td>
+                                                                    <td><?= $nimregenin['nimregenin_dose'] ?></td>
+                                                                    <td><?= $nimregenin['nimregenin_frequency'] ?></td>
+                                                                    <td><?= $nimregenin['nimregenin_remarks'] ?></td>
                                                                     <td>
-                                                                        <button class="btn btn-primary btn-sm"
-                                                                            data-toggle="modal" data-target="#updateModal"
-                                                                            onclick="fillUpdateModal(<?= htmlspecialchars(json_encode($nimregenin)) ?>)">Update</button>
-                                                                        <button class="btn btn-danger btn-sm"
-                                                                            data-toggle="modal" data-target="#deleteModal"
-                                                                            onclick="setDeleteId(<?= $nimregenin['id'] ?>)">Delete</button>
+                                                                        <button type="button" class="btn btn-success mb-3"
+                                                                            data-toggle="modal" data-target="#updateNimregenin<?= $nimregenin['id'] ?>">
+                                                                            <i class="fas fa-edit"></i> Update
+                                                                        </button>
+                                                                        <hr>
+                                                                        <button type="button" class="btn btn-danger mb-3"
+                                                                            data-toggle="modal" data-target="#deleteNimregenin<?= $nimregenin['id'] ?>">
+                                                                            <i class="fas fa-trash"></i> Delete
+                                                                        </button>
                                                                     </td>
-                                                                    <td><input value='<?= $nimregenin['id'] ?>' type="hidden"
-                                                                            name="nimregenin_id[]"></td>
                                                                 </tr>
-                                                                <!-- Add Modal -->
-                                                                <div class="modal fade" id="addModal" tabindex="-1"
-                                                                    role="dialog">
-                                                                    <div class="modal-dialog" role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title">Add New Record</h5>
-                                                                                <button type="button" class="close"
-                                                                                    data-dismiss="modal">&times;</button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                <form>
-                                                                                    <input type="text"
-                                                                                        name="nimregenin_preparation"
-                                                                                        class="form-control"
-                                                                                        placeholder="Type of NIMREGENIN">
-                                                                                    <input type="date" name="nimregenin_start"
-                                                                                        class="form-control"
-                                                                                        placeholder="Start Date">
-                                                                                    <select name="nimregenin_ongoing"
-                                                                                        class="form-control">
-                                                                                        <option value="">Select</option>
-                                                                                        <option value="1">Yes</option>
-                                                                                        <option value="2">No</option>
-                                                                                    </select>
-                                                                                    <input type="date" name="nimregenin_end"
-                                                                                        class="form-control"
-                                                                                        placeholder="End Date">
-                                                                                    <input type="text" name="nimregenin_dose"
-                                                                                        class="form-control"
-                                                                                        placeholder="Dose (mls)">
-                                                                                    <input type="text"
-                                                                                        name="nimregenin_frequency"
-                                                                                        class="form-control"
-                                                                                        placeholder="Frequency (per day)">
-                                                                                    <input type="text" name="nimregenin_remarks"
-                                                                                        class="form-control"
-                                                                                        placeholder="Remarks">
-                                                                                    <button type="submit"
-                                                                                        class="btn btn-success mt-2">Save</button>
-                                                                                </form>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
 
                                                                 <!-- Update Modal -->
-                                                                <div class="modal fade" id="updateModal" tabindex="-1"
+                                                                <div class="modal fade" id="updateNimregenin<?= $nimregenin['id'] ?>" tabindex="-1"
                                                                     role="dialog">
-                                                                    <div class="modal-dialog" role="document">
+                                                                    <div class="modal-dialog modal-lg" role="document">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
                                                                                 <h5 class="modal-title">Update Record</h5>
@@ -2650,29 +2780,109 @@ if ($user->isLoggedIn()) {
                                                                                     data-dismiss="modal">&times;</button>
                                                                             </div>
                                                                             <div class="modal-body">
-                                                                                <form id="updateForm">
-                                                                                    <input type="hidden" name="id">
-                                                                                    <input type="text"
-                                                                                        name="nimregenin_preparation"
-                                                                                        class="form-control">
-                                                                                    <input type="date" name="nimregenin_start"
-                                                                                        class="form-control">
-                                                                                    <select name="nimregenin_ongoing"
-                                                                                        class="form-control">
-                                                                                        <option value="1">Yes</option>
-                                                                                        <option value="2">No</option>
-                                                                                    </select>
-                                                                                    <input type="date" name="nimregenin_end"
-                                                                                        class="form-control">
-                                                                                    <input type="text" name="nimregenin_dose"
-                                                                                        class="form-control">
-                                                                                    <input type="text"
-                                                                                        name="nimregenin_frequency"
-                                                                                        class="form-control">
-                                                                                    <input type="text" name="nimregenin_remarks"
-                                                                                        class="form-control">
-                                                                                    <button type="submit"
-                                                                                        class="btn btn-primary mt-2">Update</button>
+                                                                                <form method="post">
+                                                                                    <div class="form-group row">
+                                                                                        <label
+                                                                                            class="col-sm-3 col-form-label">Type
+                                                                                            of
+                                                                                            NIMREGENIN</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <input type="text"
+                                                                                                name="nimregenin_preparation" value="<?= $nimregenin['nimregenin_preparation'] ?>"
+                                                                                                class="form-control"
+                                                                                                placeholder="Type of NIMREGENIN">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <label
+                                                                                            class="col-sm-3 col-form-label">Start
+                                                                                            Date</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <input type="date"
+                                                                                                name="nimregenin_start" value="<?= $nimregenin['nimregenin_start'] ?>"
+                                                                                                class="form-control"
+                                                                                                placeholder="Start Date">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <label
+                                                                                            class="col-sm-3 col-form-label">Ongoing?</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <select name="nimregenin_ongoing"
+                                                                                                class="form-control">
+                                                                                                <option value="">Select</option>
+                                                                                                <option
+                                                                                                    value="<?= $nimregenin['nimregenin_ongoing'] ?>">
+                                                                                                     <?php if ($nimregenin['nimregenin_ongoing'] == 1) {
+                                                                                                         echo "Yes";
+                                                                                                     } elseif ($nimregenin['nimregenin_ongoing'] == 2) {
+                                                                                                         echo "No";
+                                                                                                     } else {
+                                                                                                         echo " ";
+                                                                                                     } ?>
+                                                                                                </option>
+                                                                                                <option value="1">Yes</option>
+                                                                                                <option value="2">No</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <label
+                                                                                            class="col-sm-3 col-form-label">End
+                                                                                            Date</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <input type="date"
+                                                                                                name="nimregenin_end" value="<?= $nimregenin['nimregenin_end'] ?>"
+                                                                                                class="form-control"
+                                                                                                placeholder="End Date">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <label
+                                                                                            class="col-sm-3 col-form-label">Dose
+                                                                                            (mls)</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <input type="text"
+                                                                                                name="nimregenin_dose" value="<?= $nimregenin['nimregenin_dose'] ?>"
+                                                                                                class="form-control"
+                                                                                                placeholder="Dose (mls)">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <label
+                                                                                            class="col-sm-3 col-form-label">Frequency
+                                                                                            (per day)</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <input type="text"
+                                                                                                name="nimregenin_frequency" value="<?= $nimregenin['nimregenin_frequency'] ?>"
+                                                                                                class="form-control"
+                                                                                                placeholder="Frequency (per day)">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <label
+                                                                                            class="col-sm-3 col-form-label">Remarks</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <input type="text"
+                                                                                                name="nimregenin_remarks" value="<?= $nimregenin['nimregenin_remarks'] ?>"
+                                                                                                class="form-control"
+                                                                                                placeholder="Remarks">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <input type="hidden" name="nimregenin_id"
+                                                                                        value="<?= $nimregenin['id'] ?>">
+                                                                                    <input type="hidden"
+                                                                                        name="nimregenin_herbal"
+                                                                                        value="<?= $patient['nimregenin_herbal'] ?>">
+                                                                                    <input type="hidden" name="crf1_cmpltd_date"
+                                                                                        value="<?= $patient['crf1_cmpltd_date'] ?>">
+                                                                                    <input type="submit"
+                                                                                        name="update_nimregenin"
+                                                                                        class="btn btn-success mt-2l"
+                                                                                        value="Save">
+                                                                                    <button type="button"
+                                                                                        class="btn btn-secondary mt-2"
+                                                                                        data-dismiss="modal">Cancel</button>
                                                                                 </form>
                                                                             </div>
                                                                         </div>
@@ -2680,7 +2890,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
 
                                                                 <!-- Delete Modal -->
-                                                                <div class="modal fade" id="deleteModal" tabindex="-1"
+                                                                <div class="modal fade" id="deleteNimregenin<?= $nimregenin['id'] ?>" tabindex="-1"
                                                                     role="dialog">
                                                                     <div class="modal-dialog" role="document">
                                                                         <div class="modal-content">
@@ -2692,10 +2902,19 @@ if ($user->isLoggedIn()) {
                                                                             <div class="modal-body">
                                                                                 <p>Are you sure you want to delete this record?
                                                                                 </p>
-                                                                                <form id="deleteForm">
-                                                                                    <input type="hidden" name="id">
-                                                                                    <button type="submit"
-                                                                                        class="btn btn-danger">Delete</button>
+                                                                                <form method="post">
+                                                                                    <input type="hidden" name="nimregenin_id"
+                                                                                        value="<?= $nimregenin['id'] ?>">
+                                                                                    <input type="hidden"
+                                                                                        name="nimregenin_herbal"
+                                                                                        value="<?= $patient['nimregenin_herbal'] ?>">
+                                                                                    <input type="submit"
+                                                                                        name="delete_nimregenin"
+                                                                                        class="btn btn-danger mt-2l"
+                                                                                        value="Delete">
+                                                                                    <button type="button"
+                                                                                        class="btn btn-secondary mt-2"
+                                                                                        data-dismiss="modal">Cancel</button>
                                                                                 </form>
                                                                             </div>
                                                                         </div>
