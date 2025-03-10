@@ -274,31 +274,6 @@ if ($user->isLoggedIn()) {
                             }
                         }
 
-                        if (Input::get('nimregenin_herbal') == 1) {
-                            for ($i = 0; $i < count(Input::get('nimregenin_preparation')); $i++) {
-                                $user->updateRecord('nimregenin', array(
-                                    'vid' => $_GET["vid"],
-                                    'vcode' => $_GET["vcode"],
-                                    'study_id' => $_GET['sid'],
-                                    'nimregenin_herbal' => Input::get('nimregenin_herbal'),
-                                    'nimregenin_preparation' => Input::get('nimregenin_preparation')[$i],
-                                    'nimregenin_start' => Input::get('nimregenin_start')[$i],
-                                    'nimregenin_ongoing' => Input::get('nimregenin_ongoing')[$i],
-                                    'nimregenin_end' => Input::get('nimregenin_end')[$i],
-                                    'nimregenin_dose' => Input::get('nimregenin_dose')[$i],
-                                    'nimregenin_frequency' => Input::get('nimregenin_frequency')[$i],
-                                    'nimregenin_remarks' => Input::get('nimregenin_remarks')[$i],
-                                    'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                                    'patient_id' => $_GET['cid'],
-                                    'staff_id' => $user->data()->id,
-                                    'status' => 1,
-                                    'created_on' => date('Y-m-d'),
-                                    'site_id' => $user->data()->site_id,
-                                ), Input::get('nimregenin_id')[$i]);
-                            }
-                        }
-
-
                         if (Input::get('radiotherapy_performed') == 1) {
                             for ($i = 0; $i < count(Input::get('radiotherapy')); $i++) {
                                 $user->updateRecord('radiotherapy', array(
@@ -321,29 +296,6 @@ if ($user->isLoggedIn()) {
                                     'created_on' => date('Y-m-d'),
                                     'site_id' => $user->data()->site_id,
                                 ), Input::get('radiotherapy_id')[$i]);
-                            }
-                        }
-
-                        if (Input::get('other_herbal') == 1) {
-                            for ($i = 0; $i < count(Input::get('herbal_preparation')); $i++) {
-                                $user->updateRecord('herbal_treatment', array(
-                                    'vid' => $_GET["vid"],
-                                    'vcode' => $_GET["vcode"],
-                                    'other_herbal' => Input::get('other_herbal'),
-                                    'herbal_preparation' => Input::get('herbal_preparation')[$i],
-                                    'herbal_start' => Input::get('herbal_start')[$i],
-                                    'herbal_ongoing' => Input::get('herbal_ongoing')[$i],
-                                    'herbal_end' => Input::get('herbal_end')[$i],
-                                    'herbal_dose' => Input::get('herbal_dose')[$i],
-                                    'herbal_frequency' => Input::get('herbal_frequency')[$i],
-                                    'herbal_remarks' => Input::get('herbal_remarks')[$i],
-                                    'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                                    'patient_id' => $_GET['cid'],
-                                    'staff_id' => $user->data()->id,
-                                    'status' => 1,
-                                    'created_on' => date('Y-m-d'),
-                                    'site_id' => $user->data()->site_id,
-                                ), Input::get('herbal_id')[$i]);
                             }
                         }
 
@@ -458,31 +410,6 @@ if ($user->isLoggedIn()) {
                             }
                         }
 
-                        if (Input::get('nimregenin_herbal')) {
-
-                            for ($i = 0; $i < count(Input::get('nimregenin_preparation')); $i++) {
-                                $user->createRecord('nimregenin', array(
-                                    'vid' => $_GET["vid"],
-                                    'vcode' => $_GET["vcode"],
-                                    'study_id' => $_GET['sid'],
-                                    'nimregenin_herbal' => Input::get('nimregenin_herbal'),
-                                    'nimregenin_preparation' => Input::get('nimregenin_preparation')[$i],
-                                    'nimregenin_start' => Input::get('nimregenin_start')[$i],
-                                    'nimregenin_ongoing' => Input::get('nimregenin_ongoing')[$i],
-                                    'nimregenin_end' => Input::get('nimregenin_end')[$i],
-                                    'nimregenin_dose' => Input::get('nimregenin_dose')[$i],
-                                    'nimregenin_frequency' => Input::get('nimregenin_frequency')[$i],
-                                    'nimregenin_remarks' => Input::get('nimregenin_remarks')[$i],
-                                    'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                                    'patient_id' => $_GET['cid'],
-                                    'staff_id' => $user->data()->id,
-                                    'status' => 1,
-                                    'created_on' => date('Y-m-d'),
-                                    'site_id' => $user->data()->site_id,
-                                ));
-                            }
-                        }
-
                         if (Input::get('radiotherapy_performed')) {
 
                             for ($i = 0; $i < count(Input::get('radiotherapy')); $i++) {
@@ -509,31 +436,6 @@ if ($user->isLoggedIn()) {
                             }
                         }
 
-
-                        if (Input::get('other_herbal')) {
-
-                            for ($i = 0; $i < count(Input::get('herbal_preparation')); $i++) {
-                                $user->createRecord('herbal_treatment', array(
-                                    'vid' => $_GET["vid"],
-                                    'vcode' => $_GET["vcode"],
-                                    'study_id' => $_GET['sid'],
-                                    'other_herbal' => Input::get('other_herbal'),
-                                    'herbal_preparation' => Input::get('herbal_preparation')[$i],
-                                    'herbal_start' => Input::get('herbal_start')[$i],
-                                    'herbal_ongoing' => Input::get('herbal_ongoing')[$i],
-                                    'herbal_end' => Input::get('herbal_end')[$i],
-                                    'herbal_dose' => Input::get('herbal_dose')[$i],
-                                    'herbal_frequency' => Input::get('herbal_frequency')[$i],
-                                    'herbal_remarks' => Input::get('herbal_remarks')[$i],
-                                    'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                                    'patient_id' => $_GET['cid'],
-                                    'staff_id' => $user->data()->id,
-                                    'status' => 1,
-                                    'created_on' => date('Y-m-d'),
-                                    'site_id' => $user->data()->site_id,
-                                ));
-                            }
-                        }
 
                         if (Input::get('chemotherapy_performed')) {
 
@@ -677,6 +579,98 @@ if ($user->isLoggedIn()) {
                 $pageError = $validate->errors();
             }
         } elseif (Input::get('delete_nimregenin')) {
+            $validate = $validate->check($_POST, array(
+                // 'diagnosis_date' => array(
+                //     'required' => true,
+                // ),
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->updateRecord('nimregenin', array(
+                        'status' => 0,
+                    ), Input::get('nimregenin_id'));
+
+                    $user->updateRecord('clients', array(
+                        'nimregenin' => 0,
+                    ), $_GET['cid']);
+
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('add_other_herbal')) {
+            $validate = $validate->check($_POST, array(
+                // 'diagnosis_date' => array(
+                //     'required' => true,
+                // ),
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->updateRecord('herbal_treatment', array(
+                        'vid' => $_GET["vid"],
+                        'vcode' => $_GET["vcode"],
+                        'other_herbal' => Input::get('other_herbal'),
+                        'herbal_preparation' => Input::get('herbal_preparation')[$i],
+                        'herbal_start' => Input::get('herbal_start')[$i],
+                        'herbal_ongoing' => Input::get('herbal_ongoing')[$i],
+                        'herbal_end' => Input::get('herbal_end')[$i],
+                        'herbal_dose' => Input::get('herbal_dose')[$i],
+                        'herbal_frequency' => Input::get('herbal_frequency')[$i],
+                        'herbal_remarks' => Input::get('herbal_remarks')[$i],
+                        'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ), Input::get('herbal_id')[$i]);
+
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('update_other_herbal')) {
+            $validate = $validate->check($_POST, array(
+                // 'diagnosis_date' => array(
+                //     'required' => true,
+                // ),
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->updateRecord('herbal_treatment', array(
+                        'vid' => $_GET["vid"],
+                        'vcode' => $_GET["vcode"],
+                        'study_id' => $_GET['sid'],
+                        'other_herbal' => Input::get('other_herbal'),
+                        'herbal_preparation' => Input::get('herbal_preparation')[$i],
+                        'herbal_start' => Input::get('herbal_start')[$i],
+                        'herbal_ongoing' => Input::get('herbal_ongoing')[$i],
+                        'herbal_end' => Input::get('herbal_end')[$i],
+                        'herbal_dose' => Input::get('herbal_dose')[$i],
+                        'herbal_frequency' => Input::get('herbal_frequency')[$i],
+                        'herbal_remarks' => Input::get('herbal_remarks')[$i],
+                        'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ));
+
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('delete_other_herbal')) {
             $validate = $validate->check($_POST, array(
                 // 'diagnosis_date' => array(
                 //     'required' => true,
@@ -2750,7 +2744,13 @@ if ($user->isLoggedIn()) {
                                                                     <td><?= $nimregenin['nimregenin_preparation'] ?></td>
                                                                     <td><?= $nimregenin['nimregenin_start'] ?></td>
                                                                     <td>
-                                                                        <?php if($nimregenin['nimregenin_ongoing'] == 1){ echo "Yes"; }elseif($nimregenin['nimregenin_ongoing'] == 2){  echo "No"; }else{  echo " "; } ?>
+                                                                        <?php if ($nimregenin['nimregenin_ongoing'] == 1) {
+                                                                            echo "Yes";
+                                                                        } elseif ($nimregenin['nimregenin_ongoing'] == 2) {
+                                                                            echo "No";
+                                                                        } else {
+                                                                            echo " ";
+                                                                        } ?>
                                                                     </td>
                                                                     <td><?= $nimregenin['nimregenin_end'] ?></td>
                                                                     <td><?= $nimregenin['nimregenin_dose'] ?></td>
@@ -2758,19 +2758,22 @@ if ($user->isLoggedIn()) {
                                                                     <td><?= $nimregenin['nimregenin_remarks'] ?></td>
                                                                     <td>
                                                                         <button type="button" class="btn btn-success mb-3"
-                                                                            data-toggle="modal" data-target="#updateNimregenin<?= $nimregenin['id'] ?>">
+                                                                            data-toggle="modal"
+                                                                            data-target="#updateNimregenin<?= $nimregenin['id'] ?>">
                                                                             <i class="fas fa-edit"></i> Update
                                                                         </button>
                                                                         <hr>
                                                                         <button type="button" class="btn btn-danger mb-3"
-                                                                            data-toggle="modal" data-target="#deleteNimregenin<?= $nimregenin['id'] ?>">
+                                                                            data-toggle="modal"
+                                                                            data-target="#deleteNimregenin<?= $nimregenin['id'] ?>">
                                                                             <i class="fas fa-trash"></i> Delete
                                                                         </button>
                                                                     </td>
                                                                 </tr>
 
                                                                 <!-- Update Modal -->
-                                                                <div class="modal fade" id="updateNimregenin<?= $nimregenin['id'] ?>" tabindex="-1"
+                                                                <div class="modal fade"
+                                                                    id="updateNimregenin<?= $nimregenin['id'] ?>" tabindex="-1"
                                                                     role="dialog">
                                                                     <div class="modal-dialog modal-lg" role="document">
                                                                         <div class="modal-content">
@@ -2783,11 +2786,13 @@ if ($user->isLoggedIn()) {
                                                                                 <form method="post">
                                                                                     <div class="form-group row">
                                                                                         <label
-                                                                                            class="col-sm-3 col-form-label">Type of
+                                                                                            class="col-sm-3 col-form-label">Type
+                                                                                            of
                                                                                             NIMREGENIN</label>
                                                                                         <div class="col-sm-9">
                                                                                             <input type="text"
-                                                                                                name="nimregenin_preparation" value="<?= $nimregenin['nimregenin_preparation'] ?>"
+                                                                                                name="nimregenin_preparation"
+                                                                                                value="<?= $nimregenin['nimregenin_preparation'] ?>"
                                                                                                 class="form-control"
                                                                                                 placeholder="Type of NIMREGENIN">
                                                                                         </div>
@@ -2798,7 +2803,8 @@ if ($user->isLoggedIn()) {
                                                                                             Date</label>
                                                                                         <div class="col-sm-9">
                                                                                             <input type="date"
-                                                                                                name="nimregenin_start" value="<?= $nimregenin['nimregenin_start'] ?>"
+                                                                                                name="nimregenin_start"
+                                                                                                value="<?= $nimregenin['nimregenin_start'] ?>"
                                                                                                 class="form-control"
                                                                                                 placeholder="Start Date">
                                                                                         </div>
@@ -2812,13 +2818,13 @@ if ($user->isLoggedIn()) {
                                                                                                 <option value="">Select</option>
                                                                                                 <option
                                                                                                     value="<?= $nimregenin['nimregenin_ongoing'] ?>">
-                                                                                                     <?php if ($nimregenin['nimregenin_ongoing'] == 1) {
-                                                                                                         echo "Yes";
-                                                                                                     } elseif ($nimregenin['nimregenin_ongoing'] == 2) {
-                                                                                                         echo "No";
-                                                                                                     } else {
-                                                                                                         echo " ";
-                                                                                                     } ?>
+                                                                                                    <?php if ($nimregenin['nimregenin_ongoing'] == 1) {
+                                                                                                        echo "Yes";
+                                                                                                    } elseif ($nimregenin['nimregenin_ongoing'] == 2) {
+                                                                                                        echo "No";
+                                                                                                    } else {
+                                                                                                        echo " ";
+                                                                                                    } ?>
                                                                                                 </option>
                                                                                                 <option value="1">Yes</option>
                                                                                                 <option value="2">No</option>
@@ -2831,7 +2837,8 @@ if ($user->isLoggedIn()) {
                                                                                             Date</label>
                                                                                         <div class="col-sm-9">
                                                                                             <input type="date"
-                                                                                                name="nimregenin_end" value="<?= $nimregenin['nimregenin_end'] ?>"
+                                                                                                name="nimregenin_end"
+                                                                                                value="<?= $nimregenin['nimregenin_end'] ?>"
                                                                                                 class="form-control"
                                                                                                 placeholder="End Date">
                                                                                         </div>
@@ -2842,7 +2849,8 @@ if ($user->isLoggedIn()) {
                                                                                             (mls)</label>
                                                                                         <div class="col-sm-9">
                                                                                             <input type="text"
-                                                                                                name="nimregenin_dose" value="<?= $nimregenin['nimregenin_dose'] ?>"
+                                                                                                name="nimregenin_dose"
+                                                                                                value="<?= $nimregenin['nimregenin_dose'] ?>"
                                                                                                 class="form-control"
                                                                                                 placeholder="Dose (mls)">
                                                                                         </div>
@@ -2853,7 +2861,8 @@ if ($user->isLoggedIn()) {
                                                                                             (per day)</label>
                                                                                         <div class="col-sm-9">
                                                                                             <input type="text"
-                                                                                                name="nimregenin_frequency" value="<?= $nimregenin['nimregenin_frequency'] ?>"
+                                                                                                name="nimregenin_frequency"
+                                                                                                value="<?= $nimregenin['nimregenin_frequency'] ?>"
                                                                                                 class="form-control"
                                                                                                 placeholder="Frequency (per day)">
                                                                                         </div>
@@ -2863,7 +2872,8 @@ if ($user->isLoggedIn()) {
                                                                                             class="col-sm-3 col-form-label">Remarks</label>
                                                                                         <div class="col-sm-9">
                                                                                             <input type="text"
-                                                                                                name="nimregenin_remarks" value="<?= $nimregenin['nimregenin_remarks'] ?>"
+                                                                                                name="nimregenin_remarks"
+                                                                                                value="<?= $nimregenin['nimregenin_remarks'] ?>"
                                                                                                 class="form-control"
                                                                                                 placeholder="Remarks">
                                                                                         </div>
@@ -2889,7 +2899,8 @@ if ($user->isLoggedIn()) {
                                                                 </div>
 
                                                                 <!-- Delete Modal -->
-                                                                <div class="modal fade" id="deleteNimregenin<?= $nimregenin['id'] ?>" tabindex="-1"
+                                                                <div class="modal fade"
+                                                                    id="deleteNimregenin<?= $nimregenin['id'] ?>" tabindex="-1"
                                                                     role="dialog">
                                                                     <div class="modal-dialog" role="document">
                                                                         <div class="modal-content">
@@ -2953,77 +2964,300 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
 
-                                                    <table class="table table-bordered" id="herbal_preparation_table">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Type of Herbal</th>
-                                                                <th>Start Date</th>
-                                                                <th>Ongoing ?</th>
-                                                                <th>End Date</th>
-                                                                <th>Dose</th>
-                                                                <th>Frequency</th>
-                                                                <th>Remarks</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <?php
-                                                            $x = 1;
-                                                            foreach ($override->get1('herbal_treatment', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']) as $herbal_treatment) {
-                                                                ?>
+                                                    <div class="modal fade" id="addOtherHerbal" tabindex="-1" role="dialog">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">Add New Other Herbal
+                                                                        Preparation</h5>
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal">&times;</button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form method="post">
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">Type
+                                                                                of Herbal Preparation</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input type="text" name="herbal_preparation"
+                                                                                    class="form-control"
+                                                                                    placeholder="Type of Herbal Preparation">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">Start
+                                                                                Date</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input type="date" name="herbal_start"
+                                                                                    class="form-control"
+                                                                                    placeholder="Start Date">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label
+                                                                                class="col-sm-3 col-form-label">Ongoing?</label>
+                                                                            <div class="col-sm-9">
+                                                                                <select name="herbal_ongoing"
+                                                                                    class="form-control">
+                                                                                    <option value="">Select</option>
+                                                                                    <option value="1">Yes</option>
+                                                                                    <option value="2">No</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">End
+                                                                                Date</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input type="date" name="herbal_end"
+                                                                                    class="form-control"
+                                                                                    placeholder="End Date">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">Dose
+                                                                                (mls)</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input type="text" name="herbal_dose"
+                                                                                    class="form-control"
+                                                                                    placeholder="Dose (mls)">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">Frequency
+                                                                                (per day)</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input type="text" name="herbal_frequency"
+                                                                                    class="form-control"
+                                                                                    placeholder="Frequency (per day)">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label
+                                                                                class="col-sm-3 col-form-label">Remarks</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input type="text" name="herbal_remarks"
+                                                                                    class="form-control"
+                                                                                    placeholder="Remarks">
+                                                                            </div>
+                                                                        </div>
+                                                                        <input type="submit" name="add_other_herbal"
+                                                                            class="btn btn-success mt-2" value="Save" />
+                                                                        <button type="button" class="btn btn-secondary mt-2"
+                                                                            data-dismiss="modal">Cancel</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="card-body">
+                                                        <button type="button" class="btn btn-info mb-3" data-toggle="modal"
+                                                            data-target="#addOtherHerbal">
+                                                            <i class="fas fa-plus"></i> Add New Other Herbal Preparation
+                                                        </button>
+                                                        <hr>
+                                                        <table class="table table-bordered" id="other_herbal_table">
+                                                            <thead>
                                                                 <tr>
-                                                                    <td><input
-                                                                            value='<?= $herbal_treatment['herbal_preparation'] ?>'
-                                                                            type="text" name="herbal_preparation[]"
-                                                                            class="form-control"></td>
-                                                                    <td><input value='<?= $herbal_treatment['herbal_start'] ?>'
-                                                                            type="text" name="herbal_start[]"
-                                                                            class="form-control"><br><span>Example:
-                                                                            2010-12-01</span></td>
-                                                                    <td>
-                                                                        <select name="herbal_ongoing[]" class="form-control">
-                                                                            <?php if ($herbal_treatment['herbal_ongoing'] == "1") { ?>
-                                                                                <option
-                                                                                    value="<?= $herbal_treatment['herbal_ongoing'] ?>">
-                                                                                    Yes
-                                                                                </option>
-                                                                            <?php } elseif ($herbal_treatment['herbal_ongoing'] == "2") { ?>
-                                                                                <option
-                                                                                    value="<?= $herbal_treatment['herbal_ongoing'] ?>">
-                                                                                    No
-                                                                                </option>
-                                                                            <?php } else { ?>
-                                                                                <option value="">Select</option>
-                                                                            <?php } ?>
-                                                                            <option value="1">Yes</option>
-                                                                            <option value="2">No</option>
-                                                                        </select>
-                                                                    </td>
-                                                                    <td><input value='<?= $herbal_treatment['herbal_end'] ?>'
-                                                                            type="text" name="herbal_end[]"
-                                                                            class="form-control"><br><span>Example:
-                                                                            2010-12-01</span></td>
-                                                                    <td><input value='<?= $herbal_treatment['herbal_dose'] ?>'
-                                                                            type="text" name="herbal_dose[]"
-                                                                            class="form-control"><br><span>(per day)</span>
-                                                                    </td>
-                                                                    <td><input
-                                                                            value='<?= $herbal_treatment['herbal_frequency'] ?>'
-                                                                            type="text" name="herbal_frequency[]"
-                                                                            class="form-control"><br><span>(per
-                                                                            day)</span></td>
-                                                                    <td><input
-                                                                            value='<?= $herbal_treatment['herbal_remarks'] ?>'
-                                                                            type="text" name="herbal_remarks[]"
-                                                                            class="form-control"></td>
-                                                                    <td><input value='<?= $herbal_treatment['id'] ?>'
-                                                                            type="hidden" name="herbal_id[]"></td>
+                                                                    <th>Type of Herbal Preparation</th>
+                                                                    <th>Start Date</th>
+                                                                    <th>Ongoing ?</th>
+                                                                    <th>End Date</th>
+                                                                    <th>Dose</th>
+                                                                    <th>Frequency</th>
+                                                                    <th>Remarks</th>
+                                                                    <th>Actions</th>
                                                                 </tr>
+                                                            </thead>
+                                                            <tbody>
                                                                 <?php
-                                                                $x++;
-                                                            }
-                                                            ?>
-                                                        </tbody>
-                                                    </table>
+                                                                $x = 1;
+                                                                foreach ($override->getNews('herbal_treatment', 'patient_id', $_GET['cid'], 'status', 1) as $herbal) {
+                                                                    ?>
+                                                                    <tr>
+                                                                        <td><?= $herbal['herbal_preparation'] ?></td>
+                                                                        <td><?= $herbal['herbal_start'] ?></td>
+                                                                        <td>
+                                                                            <?php if ($herbal['herbal_ongoing'] == 1) {
+                                                                                echo "Yes";
+                                                                            } elseif ($herbal['herbal_ongoing'] == 2) {
+                                                                                echo "No";
+                                                                            } else {
+                                                                                echo " ";
+                                                                            } ?>
+                                                                        </td>
+                                                                        <td><?= $herbal['herbal_end'] ?></td>
+                                                                        <td><?= $herbal['herbal_dose'] ?></td>
+                                                                        <td><?= $herbal['herbal_frequency'] ?></td>
+                                                                        <td><?= $herbal['herbal_remarks'] ?></td>
+                                                                        <td>
+                                                                            <button type="button" class="btn btn-success mb-3"
+                                                                                data-toggle="modal"
+                                                                                data-target="#updateOtherHerbal<?= $herbal['id'] ?>">
+                                                                                <i class="fas fa-edit"></i> Update
+                                                                            </button>
+                                                                            <hr>
+                                                                            <button type="button" class="btn btn-danger mb-3"
+                                                                                data-toggle="modal"
+                                                                                data-target="#deleteOtherHerbal<?= $herbal['id'] ?>">
+                                                                                <i class="fas fa-trash"></i> Delete
+                                                                            </button>
+                                                                        </td>
+                                                                    </tr>
+
+                                                                    <!-- Update Modal -->
+                                                                    <div class="modal fade"
+                                                                        id="updateOtherHerbal<?= $herbal['id'] ?>" tabindex="-1"
+                                                                        role="dialog">
+                                                                        <div class="modal-dialog modal-lg" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title">Update Other
+                                                                                        Herbal Preparation</h5>
+                                                                                    <button type="button" class="close"
+                                                                                        data-dismiss="modal">&times;</button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <form method="post">
+                                                                                        <div class="form-group row">
+                                                                                            <label
+                                                                                                class="col-sm-3 col-form-label">Type
+                                                                                                of Herbal
+                                                                                                Preparation</label>
+                                                                                            <div class="col-sm-9">
+                                                                                                <input type="text"
+                                                                                                    name="herbal_preparation"
+                                                                                                    value="<?= $herbal['herbal_preparation'] ?>"
+                                                                                                    class="form-control">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group row">
+                                                                                            <label
+                                                                                                class="col-sm-3 col-form-label">Start
+                                                                                                Date</label>
+                                                                                            <div class="col-sm-9">
+                                                                                                <input type="date"
+                                                                                                    name="herbal_start"
+                                                                                                    value="<?= $herbal['herbal_start'] ?>"
+                                                                                                    class="form-control">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group row">
+                                                                                            <label
+                                                                                                class="col-sm-3 col-form-label">Ongoing?</label>
+                                                                                            <div class="col-sm-9">
+                                                                                                <select name="herbal_ongoing"
+                                                                                                    class="form-control">
+                                                                                                    <option value="">Select
+                                                                                                    </option>
+                                                                                                    <option value="1"
+                                                                                                        <?= $herbal['herbal_ongoing'] == 1 ? 'selected' : '' ?>>Yes
+                                                                                                    </option>
+                                                                                                    <option value="2"
+                                                                                                        <?= $herbal['herbal_ongoing'] == 2 ? 'selected' : '' ?>>No
+                                                                                                    </option>
+                                                                                                </select>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group row">
+                                                                                            <label
+                                                                                                class="col-sm-3 col-form-label">End
+                                                                                                Date</label>
+                                                                                            <div class="col-sm-9">
+                                                                                                <input type="date"
+                                                                                                    name="herbal_end"
+                                                                                                    value="<?= $herbal['herbal_end'] ?>"
+                                                                                                    class="form-control">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group row">
+                                                                                            <label
+                                                                                                class="col-sm-3 col-form-label">Dose
+                                                                                                (mls)</label>
+                                                                                            <div class="col-sm-9">
+                                                                                                <input type="text"
+                                                                                                    name="herbal_dose"
+                                                                                                    value="<?= $herbal['herbal_dose'] ?>"
+                                                                                                    class="form-control">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group row">
+                                                                                            <label
+                                                                                                class="col-sm-3 col-form-label">Frequency
+                                                                                                (per day)</label>
+                                                                                            <div class="col-sm-9">
+                                                                                                <input type="text"
+                                                                                                    name="herbal_frequency"
+                                                                                                    value="<?= $herbal['herbal_frequency'] ?>"
+                                                                                                    class="form-control">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group row">
+                                                                                            <label
+                                                                                                class="col-sm-3 col-form-label">Remarks</label>
+                                                                                            <div class="col-sm-9">
+                                                                                                <input type="text"
+                                                                                                    name="herbal_remarks"
+                                                                                                    value="<?= $herbal['herbal_remarks'] ?>"
+                                                                                                    class="form-control">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <input type="hidden" name="herbal_id"
+                                                                                            value="<?= $herbal['id'] ?>">
+                                                                                        <input type="hidden"
+                                                                                            name="crf1_cmpltd_date"
+                                                                                            value="<?= $patient['crf1_cmpltd_date'] ?>">
+                                                                                        <input type="submit"
+                                                                                            name="update_other_herbal"
+                                                                                            class="btn btn-success mt-2"
+                                                                                            value="Save" />
+                                                                                        <button type="button"
+                                                                                            class="btn btn-secondary mt-2"
+                                                                                            data-dismiss="modal">Cancel</button>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!-- Delete Modal -->
+                                                                    <div class="modal fade"
+                                                                        id="deleteOtherHerbal<?= $herbal['id'] ?>" tabindex="-1"
+                                                                        role="dialog">
+                                                                        <div class="modal-dialog" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title">Delete Other
+                                                                                        Herbal Preparation</h5>
+                                                                                    <button type="button" class="close"
+                                                                                        data-dismiss="modal">&times;</button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <p>Are you sure you want to delete this
+                                                                                        record?</p>
+                                                                                    <form method="post">
+                                                                                        <input type="hidden" name="herbal_id"
+                                                                                            value="<?= $herbal['id'] ?>">
+                                                                                        <input type="submit"
+                                                                                            name="delete_other_herbal"
+                                                                                            class="btn btn-danger mt-2"
+                                                                                            value="Save" />
+                                                                                        <button type="button"
+                                                                                            class="btn btn-secondary"
+                                                                                            data-dismiss="modal">Cancel</button>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <?php
+                                                                    $x++;
+                                                                }
+                                                                ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <hr>
@@ -3137,6 +3371,7 @@ if ($user->isLoggedIn()) {
                                                                             <td><input value="<?= $radiotherapy['id'] ?>"
                                                                                     type="hidden" name="radiotherapy_id[]"></td>
                                                                         </tr>
+
                                                                         <?php
                                                                         $x++;
                                                                     }
