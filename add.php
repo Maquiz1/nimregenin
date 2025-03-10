@@ -3015,82 +3015,6 @@ if ($user->isLoggedIn()) {
                                                         <button type="button" id="add-row3" class="btn btn-primary">Add
                                                             Row</button>
                                                     </div>
-
-                                                    <div class="form-group">
-                                                        <label for="surgery_performed">3. Is there any Surgery
-                                                            performed?</label>
-                                                        <select name="surgery_performed" id="surgery_performed"
-                                                            class="form-control" required>
-                                                            <?php if ($patient['surgery_performed'] == "1") { ?>
-                                                                <option value="<?= $patient['surgery_performed'] ?>">Yes
-                                                                </option>
-                                                            <?php } elseif ($patient['surgery_performed'] == "2") { ?>
-                                                                <option value="<?= $patient['surgery_performed'] ?>">No</option>
-                                                            <?php } else { ?>
-                                                                <option value="">Select</option>
-                                                            <?php } ?>
-                                                            <option value="1">Yes</option>
-                                                            <option value="2">No</option>
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label>Surgery Details</label>
-                                                        <table class="table table-bordered" id="surgery_table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Type of Surgery</th>
-                                                                    <th>Start Date</th>
-                                                                    <th>Frequency</th>
-                                                                    <th>Remarks</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <?php
-                                                                $x = 1;
-                                                                foreach ($override->get1('surgery', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']) as $surgery) {
-                                                                    ?>
-                                                                    <tr>
-                                                                        <td><input value="<?= $surgery['surgery'] ?>"
-                                                                                type="text" name="surgery[]"
-                                                                                class="form-control">
-                                                                        </td>
-                                                                        <td><input value="<?= $surgery['surgery_start'] ?>"
-                                                                                type="text" name="surgery_start[]"
-                                                                                class="form-control"><br><span>Example:
-                                                                                2010-12-01</span></td>
-                                                                        <td><input value="<?= $surgery['surgery_number'] ?>"
-                                                                                type="text" name="surgery_number[]"
-                                                                                class="form-control"><br><span>(numbers)</span>
-                                                                        </td>
-                                                                        <td><input value="<?= $surgery['surgery_remarks'] ?>"
-                                                                                type="text" name="surgery_remarks[]"
-                                                                                class="form-control"></td>
-                                                                        <td><input value="<?= $surgery['id'] ?>" type="hidden"
-                                                                                name="surgery_id[]"></td>
-                                                                    </tr>
-                                                                    <?php
-                                                                    $x++;
-                                                                }
-                                                                ?>
-                                                            </tbody>
-                                                        </table>
-                                                        <button type="button" id="add-row4" class="btn btn-primary">Add
-                                                            Row</button>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="crf1_cmpltd_date">Date of Completion:</label>
-                                                        <input value="<?= $patient['crf1_cmpltd_date'] ?>" type="text"
-                                                            name="crf1_cmpltd_date" id="crf1_cmpltd_date"
-                                                            class="form-control">
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <input type="hidden" name="id" value="<?= $patient['id'] ?>">
-                                                        <input type="submit" name="add_crf1" value="Submit"
-                                                            class="btn btn-default">
-                                                    </div>
                                                 </div>
                                             </div>
 
@@ -3168,7 +3092,7 @@ if ($user->isLoggedIn()) {
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Date of Completion:</label>
                                                         <div class="col-sm-9">
-                                                            <input value="<?= $patient['crf1_cmpltd_date'] ?>" type="text"
+                                                            <input value="<?= $patient['crf1_cmpltd_date'] ?>" type="date"
                                                                 name="crf1_cmpltd_date" id="crf1_cmpltd_date"
                                                                 class="form-control">
                                                         </div>
