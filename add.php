@@ -2213,8 +2213,12 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
 
-                                            <h4>Medical History</h4>
-                                            <h5>Do the patients have any of the following medical conditions</h5>
+                                            <div class="card card-primary">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Medical History</h3>
+                                                </div>
+                                                <h5>Do the patients have any of the following medical conditions</h5>
+                                            </div>
 
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">1. Diabetic Mellitus:</label>
