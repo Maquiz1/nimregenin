@@ -2783,8 +2783,7 @@ if ($user->isLoggedIn()) {
                                                                                 <form method="post">
                                                                                     <div class="form-group row">
                                                                                         <label
-                                                                                            class="col-sm-3 col-form-label">Type
-                                                                                            of
+                                                                                            class="col-sm-3 col-form-label">Type of
                                                                                             NIMREGENIN</label>
                                                                                         <div class="col-sm-9">
                                                                                             <input type="text"
