@@ -8291,6 +8291,22 @@ if ($user->isLoggedIn()) {
         // });
     </script>
 
+    <script>
+    function fillUpdateModal(data) {
+        document.querySelector('#updateModal [name="id"]').value = data.id;
+        document.querySelector('#updateModal [name="nimregenin_preparation"]').value = data.nimregenin_preparation;
+        document.querySelector('#updateModal [name="nimregenin_start"]').value = data.nimregenin_start;
+        document.querySelector('#updateModal [name="nimregenin_ongoing"]').value = data.nimregenin_ongoing;
+        document.querySelector('#updateModal [name="nimregenin_end"]').value = data.nimregenin_end;
+        document.querySelector('#updateModal [name="nimregenin_dose"]').value = data.nimregenin_dose;
+        document.querySelector('#updateModal [name="nimregenin_frequency"]').value = data.nimregenin_frequency;
+        document.querySelector('#updateModal [name="nimregenin_remarks"]').value = data.nimregenin_remarks;
+    }
+    function setDeleteId(id) {
+        document.querySelector('#deleteModal [name="id"]').value = id;
+    }
+</script>
+
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
