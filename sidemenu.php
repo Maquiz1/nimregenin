@@ -394,7 +394,7 @@ if ($user->isLoggedIn()) {
                              ?>
 
                             <li class="nav-item">
-                                <a href="add.php?id=4&table=clients&title=Clients&action=Add" class="nav-link">
+                                <a href="add.php?id=4&status=5&table=clients&title=Clients&action=Add" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Register

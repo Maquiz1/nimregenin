@@ -4329,7 +4329,7 @@ if ($user->isLoggedIn()) {
                                                                         <div class="col-md-4">
                                                                             <div class="form-group">
                                                                                 <label>Date Started Previous Treatment</label>
-                                                                                <input type="text" name="previous_date"
+                                                                                <input type="date" name="previous_date"
                                                                                     id="previous_date" class="form-control"
                                                                                     required />
                                                                                 <small>Example: 2010-12-01</small>
@@ -4362,7 +4362,7 @@ if ($user->isLoggedIn()) {
                                                                         <div class="col-md-6">
                                                                             <div class="form-group">
                                                                                 <label>Date Started Previous Treatment 2</label>
-                                                                                <input type="text" name="previous_date2"
+                                                                                <input type="date" name="previous_date2"
                                                                                     id="previous_date2" class="form-control" />
                                                                                 <small>Example: 2010-12-01</small>
                                                                             </div>
@@ -4400,7 +4400,7 @@ if ($user->isLoggedIn()) {
                                                                             <div class="form-group">
                                                                                 <label>Date of Enrollment for This Study (Day
                                                                                     Started Treatment)</label>
-                                                                                <input type="text" name="visit_date"
+                                                                                <input type="date" name="visit_date"
                                                                                     id="visit_date" class="form-control"
                                                                                     required />
                                                                                 <small>Example: 2010-12-01</small>
@@ -4410,8 +4410,10 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <input type="hidden" name="id" value="<?= $client['id'] ?>">
-                                                                    <button type="submit" name="add_Enrollment"
-                                                                        class="btn btn-warning">Save</button>
+                                                                    <input type="submit" name="add_Enrollment"
+                                                                        class="btn btn-warning" value="Save">
+                                                                    <!-- <button type="submit" name="add_Enrollment"
+                                                                        class="btn btn-warning">Save</button> -->
                                                                     <button type="button" class="btn btn-default"
                                                                         data-dismiss="modal">Close</button>
                                                                 </div>
@@ -4511,7 +4513,7 @@ if ($user->isLoggedIn()) {
                                                                                 <label>Date Started Previous(Past)
                                                                                     Treatment:</label>
                                                                                 <input value="<?= $client['previous_date'] ?>"
-                                                                                    class="form-control" type="text"
+                                                                                    class="form-control" type="date"
                                                                                     name="previous_date" id="previous_date"
                                                                                     required />
                                                                                 <small>Example: 2010-12-01</small>
@@ -4577,7 +4579,7 @@ if ($user->isLoggedIn()) {
                                                                                 <label>Date Started Previous Treatment
                                                                                     2:</label>
                                                                                 <input value="<?= $client['previous_date2'] ?>"
-                                                                                    class="form-control" type="text"
+                                                                                    class="form-control" type="date"
                                                                                     name="previous_date2" id="previous_date2" />
                                                                                 <small>Example: 2010-12-01</small>
                                                                             </div>
@@ -4618,7 +4620,7 @@ if ($user->isLoggedIn()) {
                                                                                 <label>Date of Enrollment for This Study(Day
                                                                                     Started Treatment):</label>
                                                                                 <input value="<?= $visit['visit_date'] ?>"
-                                                                                    class="form-control" type="text"
+                                                                                    class="form-control" type="date"
                                                                                     name="visit_date" id="visit_date"
                                                                                     required />
                                                                                 <small>Example: 2010-12-01</small>
@@ -4630,6 +4632,8 @@ if ($user->isLoggedIn()) {
                                                                     <input type="hidden" name="id" value="<?= $client['id'] ?>">
                                                                     <input type="submit" name="edit_Enrollment"
                                                                         class="btn btn-warning" value="Save">
+                                                                    <!-- <input type="submit" name="edit_Enrollment"
+                                                                        class="btn btn-warning" value="Save"> -->
                                                                     <button class="btn btn-default" data-dismiss="modal"
                                                                         aria-hidden="true">Close</button>
                                                                 </div>

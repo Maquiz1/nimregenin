@@ -2578,87 +2578,124 @@ if ($user->isLoggedIn()) {
                                                                             type="text" name="nimregenin_remarks[]"
                                                                             class="form-control"></td>
                                                                     <td>
-                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#updateModal" onclick="fillUpdateModal(<?= htmlspecialchars(json_encode($nimregenin)) ?>)">Update</button>
-                                                                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal"
+                                                                        <button class="btn btn-primary btn-sm"
+                                                                            data-toggle="modal" data-target="#updateModal"
+                                                                            onclick="fillUpdateModal(<?= htmlspecialchars(json_encode($nimregenin)) ?>)">Update</button>
+                                                                        <button class="btn btn-danger btn-sm"
+                                                                            data-toggle="modal" data-target="#deleteModal"
                                                                             onclick="setDeleteId(<?= $nimregenin['id'] ?>)">Delete</button>
                                                                     </td>
                                                                     <td><input value='<?= $nimregenin['id'] ?>' type="hidden"
                                                                             name="nimregenin_id[]"></td>
                                                                 </tr>
                                                                 <!-- Add Modal -->
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Add New Record</h5>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <input type="text" name="nimregenin_preparation" class="form-control" placeholder="Type of NIMREGENIN">
-                    <input type="date" name="nimregenin_start" class="form-control" placeholder="Start Date">
-                    <select name="nimregenin_ongoing" class="form-control">
-                        <option value="">Select</option>
-                        <option value="1">Yes</option>
-                        <option value="2">No</option>
-                    </select>
-                    <input type="date" name="nimregenin_end" class="form-control" placeholder="End Date">
-                    <input type="text" name="nimregenin_dose" class="form-control" placeholder="Dose (mls)">
-                    <input type="text" name="nimregenin_frequency" class="form-control" placeholder="Frequency (per day)">
-                    <input type="text" name="nimregenin_remarks" class="form-control" placeholder="Remarks">
-                    <button type="submit" class="btn btn-success mt-2">Save</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+                                                                <div class="modal fade" id="addModal" tabindex="-1"
+                                                                    role="dialog">
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title">Add New Record</h5>
+                                                                                <button type="button" class="close"
+                                                                                    data-dismiss="modal">&times;</button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <form>
+                                                                                    <input type="text"
+                                                                                        name="nimregenin_preparation"
+                                                                                        class="form-control"
+                                                                                        placeholder="Type of NIMREGENIN">
+                                                                                    <input type="date" name="nimregenin_start"
+                                                                                        class="form-control"
+                                                                                        placeholder="Start Date">
+                                                                                    <select name="nimregenin_ongoing"
+                                                                                        class="form-control">
+                                                                                        <option value="">Select</option>
+                                                                                        <option value="1">Yes</option>
+                                                                                        <option value="2">No</option>
+                                                                                    </select>
+                                                                                    <input type="date" name="nimregenin_end"
+                                                                                        class="form-control"
+                                                                                        placeholder="End Date">
+                                                                                    <input type="text" name="nimregenin_dose"
+                                                                                        class="form-control"
+                                                                                        placeholder="Dose (mls)">
+                                                                                    <input type="text"
+                                                                                        name="nimregenin_frequency"
+                                                                                        class="form-control"
+                                                                                        placeholder="Frequency (per day)">
+                                                                                    <input type="text" name="nimregenin_remarks"
+                                                                                        class="form-control"
+                                                                                        placeholder="Remarks">
+                                                                                    <button type="submit"
+                                                                                        class="btn btn-success mt-2">Save</button>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
-<!-- Update Modal -->
-<div class="modal fade" id="updateModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Update Record</h5>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="updateForm">
-                    <input type="hidden" name="id">
-                    <input type="text" name="nimregenin_preparation" class="form-control">
-                    <input type="date" name="nimregenin_start" class="form-control">
-                    <select name="nimregenin_ongoing" class="form-control">
-                        <option value="1">Yes</option>
-                        <option value="2">No</option>
-                    </select>
-                    <input type="date" name="nimregenin_end" class="form-control">
-                    <input type="text" name="nimregenin_dose" class="form-control">
-                    <input type="text" name="nimregenin_frequency" class="form-control">
-                    <input type="text" name="nimregenin_remarks" class="form-control">
-                    <button type="submit" class="btn btn-primary mt-2">Update</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+                                                                <!-- Update Modal -->
+                                                                <div class="modal fade" id="updateModal" tabindex="-1"
+                                                                    role="dialog">
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title">Update Record</h5>
+                                                                                <button type="button" class="close"
+                                                                                    data-dismiss="modal">&times;</button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <form id="updateForm">
+                                                                                    <input type="hidden" name="id">
+                                                                                    <input type="text"
+                                                                                        name="nimregenin_preparation"
+                                                                                        class="form-control">
+                                                                                    <input type="date" name="nimregenin_start"
+                                                                                        class="form-control">
+                                                                                    <select name="nimregenin_ongoing"
+                                                                                        class="form-control">
+                                                                                        <option value="1">Yes</option>
+                                                                                        <option value="2">No</option>
+                                                                                    </select>
+                                                                                    <input type="date" name="nimregenin_end"
+                                                                                        class="form-control">
+                                                                                    <input type="text" name="nimregenin_dose"
+                                                                                        class="form-control">
+                                                                                    <input type="text"
+                                                                                        name="nimregenin_frequency"
+                                                                                        class="form-control">
+                                                                                    <input type="text" name="nimregenin_remarks"
+                                                                                        class="form-control">
+                                                                                    <button type="submit"
+                                                                                        class="btn btn-primary mt-2">Update</button>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
-<!-- Delete Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Delete Record</h5>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>Are you sure you want to delete this record?</p>
-                <form id="deleteForm">
-                    <input type="hidden" name="id">
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+                                                                <!-- Delete Modal -->
+                                                                <div class="modal fade" id="deleteModal" tabindex="-1"
+                                                                    role="dialog">
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title">Delete Record</h5>
+                                                                                <button type="button" class="close"
+                                                                                    data-dismiss="modal">&times;</button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <p>Are you sure you want to delete this record?
+                                                                                </p>
+                                                                                <form id="deleteForm">
+                                                                                    <input type="hidden" name="id">
+                                                                                    <button type="submit"
+                                                                                        class="btn btn-danger">Delete</button>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                                 <?php
                                                                 $x++;
                                                             }
@@ -8292,20 +8329,20 @@ if ($user->isLoggedIn()) {
     </script>
 
     <script>
-    function fillUpdateModal(data) {
-        document.querySelector('#updateModal [name="id"]').value = data.id;
-        document.querySelector('#updateModal [name="nimregenin_preparation"]').value = data.nimregenin_preparation;
-        document.querySelector('#updateModal [name="nimregenin_start"]').value = data.nimregenin_start;
-        document.querySelector('#updateModal [name="nimregenin_ongoing"]').value = data.nimregenin_ongoing;
-        document.querySelector('#updateModal [name="nimregenin_end"]').value = data.nimregenin_end;
-        document.querySelector('#updateModal [name="nimregenin_dose"]').value = data.nimregenin_dose;
-        document.querySelector('#updateModal [name="nimregenin_frequency"]').value = data.nimregenin_frequency;
-        document.querySelector('#updateModal [name="nimregenin_remarks"]').value = data.nimregenin_remarks;
-    }
-    function setDeleteId(id) {
-        document.querySelector('#deleteModal [name="id"]').value = id;
-    }
-</script>
+        function fillUpdateModal(data) {
+            document.querySelector('#updateModal [name="id"]').value = data.id;
+            document.querySelector('#updateModal [name="nimregenin_preparation"]').value = data.nimregenin_preparation;
+            document.querySelector('#updateModal [name="nimregenin_start"]').value = data.nimregenin_start;
+            document.querySelector('#updateModal [name="nimregenin_ongoing"]').value = data.nimregenin_ongoing;
+            document.querySelector('#updateModal [name="nimregenin_end"]').value = data.nimregenin_end;
+            document.querySelector('#updateModal [name="nimregenin_dose"]').value = data.nimregenin_dose;
+            document.querySelector('#updateModal [name="nimregenin_frequency"]').value = data.nimregenin_frequency;
+            document.querySelector('#updateModal [name="nimregenin_remarks"]').value = data.nimregenin_remarks;
+        }
+        function setDeleteId(id) {
+            document.querySelector('#deleteModal [name="id"]').value = id;
+        }
+    </script>
 
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
