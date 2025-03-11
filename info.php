@@ -3037,26 +3037,26 @@ if ($user->isLoggedIn()) {
                                                                     class="btn btn-warning">Patient ID</a>
                                                                 <a href="#delete<?= $client['id'] ?>" role="button"
                                                                     class="btn btn-danger" data-toggle="modal">Delete</a>
-                                                                <a href="#deleteSchedule<?= $client['id'] ?>" role="button"
-                                                                    class="btn btn-danger" data-toggle="modal">Delete Schedule</a>
+
+                                                                    <hr>
                                                                 <a href="#screened<?= $client['id'] ?>" role="button"
                                                                     class="btn btn-info" data-toggle="modal">screened</a>
                                                                 <a href="#eligibility1<?= $client['id'] ?>" role="button"
-                                                                    class="btn btn-info" data-toggle="modal">eligibility1</a><br>
+                                                                    class="btn btn-info" data-toggle="modal">eligibility1</a>
                                                                 <a href="#eligibility2<?= $client['id'] ?>" role="button"
-                                                                    class="btn btn-info" data-toggle="modal">eligibility2</a>
+                                                                    class="btn btn-info" data-toggle="modal">eligibility2</a><hr>
                                                                 <a href="#eligible<?= $client['id'] ?>" role="button"
                                                                     class="btn btn-info" data-toggle="modal">eligible</a>
                                                                 <a href="#enrolled<?= $client['id'] ?>" role="button"
                                                                     class="btn btn-info" data-toggle="modal">enrolled</a>
+                                                                                                                                    <a href="#deleteSchedule<?= $client['id'] ?>" role="button" class="btn btn-danger" data-toggle="modal">Delete
+                                                                                                                                        Schedule</a>
                                                             <?php } ?>
                                                             <hr>
                                                             <a href="#asignID<?= $client['id'] ?>" role="button"
                                                                 class="btn btn-success" data-toggle="modal">asign ID</a>
-                                                            <hr>
                                                             <a href="add.php?id=4&cid=<?= $client['id'] ?>&status=<?= $_GET['status'] ?>"
                                                                 class="btn btn-info">Edit</a>
-
                                                             <hr>
                                                             <?php
                                                             //  if ($screened == 1) {
