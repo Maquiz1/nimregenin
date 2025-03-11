@@ -254,75 +254,6 @@ if ($user->isLoggedIn()) {
                             'site_id' => $user->data()->site_id,
                         ), Input::get('id'));
 
-                        if (Input::get('other_medical') == 1) {
-                            for ($i = 0; $i < count(Input::get('other_specify')); $i++) {
-                                $user->updateRecord('other_medication', array(
-                                    'vid' => $_GET["vid"],
-                                    'vcode' => $_GET["vcode"],
-                                    'study_id' => $_GET['sid'],
-                                    'other_medical' => Input::get('other_medical'),
-                                    'other_specify' => Input::get('other_specify')[$i],
-                                    'other_medical_medicatn' => Input::get('other_medical_medicatn')[$i],
-                                    'other_medicatn_name' => Input::get('other_medicatn_name')[$i],
-                                    'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                                    'patient_id' => $_GET['cid'],
-                                    'staff_id' => $user->data()->id,
-                                    'status' => 1,
-                                    'created_on' => date('Y-m-d'),
-                                    'site_id' => $user->data()->site_id,
-                                ), Input::get('medication_id')[$i]);
-                            }
-                        }
-
-
-                        if (Input::get('chemotherapy_performed') == 1) {
-                            for ($i = 0; $i < count(Input::get('chemotherapy')); $i++) {
-                                $user->updateRecord('chemotherapy', array(
-                                    'vid' => $_GET["vid"],
-                                    'vcode' => $_GET["vcode"],
-                                    'other_herbal' => Input::get('other_herbal'),
-                                    'chemotherapy_performed' => Input::get('chemotherapy_performed'),
-                                    'chemotherapy' => Input::get('chemotherapy')[$i],
-                                    'chemotherapy_start' => Input::get('chemotherapy_start')[$i],
-                                    'chemotherapy_ongoing' => Input::get('chemotherapy_ongoing')[$i],
-                                    'chemotherapy_end' => Input::get('chemotherapy_end')[$i],
-                                    'chemotherapy_dose' => Input::get('chemotherapy_dose')[$i],
-                                    'chemotherapy_frequecy' => Input::get('chemotherapy_frequecy')[$i],
-                                    'chemotherapy_remarks' => Input::get('chemotherapy_remarks')[$i],
-                                    'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                                    'patient_id' => $_GET['cid'],
-                                    'staff_id' => $user->data()->id,
-                                    'status' => 1,
-                                    'created_on' => date('Y-m-d'),
-                                    'site_id' => $user->data()->site_id,
-                                ), Input::get('chemotherapy_id')[$i]);
-                            }
-                        }
-
-                        if (Input::get('surgery_performed') == 1) {
-                            if (count(Input::get('surgery_id')) == count(Input::get('surgery'))) {
-                                for ($i = 0; $i < count(Input::get('surgery')); $i++) {
-                                    $user->updateRecord('surgery', array(
-                                        'vid' => $_GET["vid"],
-                                        'vcode' => $_GET["vcode"],
-                                        'study_id' => $_GET['sid'],
-                                        'other_herbal' => Input::get('other_herbal'),
-                                        'surgery_performed' => Input::get('surgery_performed'),
-                                        'surgery' => Input::get('surgery')[$i],
-                                        'surgery_start' => Input::get('surgery_start')[$i],
-                                        'surgery_number' => Input::get('surgery_number')[$i],
-                                        'surgery_remarks' => Input::get('surgery_remarks')[$i],
-                                        'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                                        'patient_id' => $_GET['cid'],
-                                        'staff_id' => $user->data()->id,
-                                        'status' => 1,
-                                        'created_on' => date('Y-m-d'),
-                                        'site_id' => $user->data()->site_id,
-                                    ), Input::get('surgery_id')[$i]);
-                                }
-                            }
-                        }
-
                         $successMessage = 'CRF1 Updated Successful';
                     } else {
                         $user->createRecord('crf1', array(
@@ -358,81 +289,6 @@ if ($user->isLoggedIn()) {
                             'created_on' => date('Y-m-d'),
                             'site_id' => $user->data()->site_id,
                         ));
-
-                        $user->updateRecord('clients', array(
-                            'nimregenin' => Input::get('nimregenin_herbal'),
-                        ), $_GET['cid']);
-
-
-                        if (Input::get('other_medical')) {
-                            for ($i = 0; $i < count(Input::get('other_specify')); $i++) {
-                                $user->createRecord('other_medication', array(
-                                    'vid' => $_GET["vid"],
-                                    'vcode' => $_GET["vcode"],
-                                    'study_id' => $_GET['sid'],
-                                    'other_medical' => Input::get('other_medical'),
-                                    'other_specify' => Input::get('other_specify')[$i],
-                                    'other_medical_medicatn' => Input::get('other_medical_medicatn')[$i],
-                                    'other_medicatn_name' => Input::get('other_medicatn_name')[$i],
-                                    'medication_remarks' => Input::get('other_medication_remarks')[$i],
-                                    'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                                    'patient_id' => $_GET['cid'],
-                                    'staff_id' => $user->data()->id,
-                                    'status' => 1,
-                                    'created_on' => date('Y-m-d'),
-                                    'site_id' => $user->data()->site_id,
-                                ));
-                            }
-                        }
-
-                        if (Input::get('chemotherapy_performed')) {
-
-                            for ($i = 0; $i < count(Input::get('chemotherapy')); $i++) {
-                                $user->createRecord('chemotherapy', array(
-                                    'vid' => $_GET["vid"],
-                                    'vcode' => $_GET["vcode"],
-                                    'study_id' => $_GET['sid'],
-                                    'other_herbal' => Input::get('other_herbal'),
-                                    'chemotherapy_performed' => Input::get('chemotherapy_performed'),
-                                    'chemotherapy' => Input::get('chemotherapy')[$i],
-                                    'chemotherapy_start' => Input::get('chemotherapy_start')[$i],
-                                    'chemotherapy_ongoing' => Input::get('chemotherapy_ongoing')[$i],
-                                    'chemotherapy_end' => Input::get('chemotherapy_end')[$i],
-                                    'chemotherapy_dose' => Input::get('chemotherapy_dose')[$i],
-                                    'chemotherapy_frequecy' => Input::get('chemotherapy_frequecy')[$i],
-                                    'chemotherapy_remarks' => Input::get('chemotherapy_remarks')[$i],
-                                    'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                                    'patient_id' => $_GET['cid'],
-                                    'staff_id' => $user->data()->id,
-                                    'status' => 1,
-                                    'created_on' => date('Y-m-d'),
-                                    'site_id' => $user->data()->site_id,
-                                ));
-                            }
-                        }
-
-                        if (Input::get('surgery_performed') == 1) {
-
-                            for ($i = 0; $i < count(Input::get('surgery')); $i++) {
-                                $user->createRecord('surgery', array(
-                                    'vid' => $_GET["vid"],
-                                    'vcode' => $_GET["vcode"],
-                                    'study_id' => $_GET['sid'],
-                                    'other_herbal' => Input::get('other_herbal'),
-                                    'surgery_performed' => Input::get('surgery_performed'),
-                                    'surgery' => Input::get('surgery')[$i],
-                                    'surgery_start' => Input::get('surgery_start')[$i],
-                                    'surgery_number' => Input::get('surgery_number')[$i],
-                                    'surgery_remarks' => Input::get('surgery_remarks')[$i],
-                                    'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                                    'patient_id' => $_GET['cid'],
-                                    'staff_id' => $user->data()->id,
-                                    'status' => 1,
-                                    'created_on' => date('Y-m-d'),
-                                    'site_id' => $user->data()->site_id,
-                                ));
-                            }
-                        }
 
                         $successMessage = 'CRF1 added Successful';
                     }
@@ -720,6 +576,262 @@ if ($user->isLoggedIn()) {
                     $user->updateRecord('radiotherapy', array(
                         'status' => 0,
                     ), Input::get('radiotherapy_id'));
+
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('add_chemotherapy')) {
+            $validate = $validate->check($_POST, array(
+                // 'diagnosis_date' => array(
+                //     'required' => true,
+                // ),
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->createRecord('chemotherapy', array(
+                        'vid' => $_GET["vid"],
+                        'vcode' => $_GET["vcode"],
+                        'other_herbal' => Input::get('other_herbal'),
+                        'chemotherapy_performed' => Input::get('chemotherapy_performed'),
+                        'chemotherapy' => Input::get('chemotherapy'),
+                        'chemotherapy_start' => Input::get('chemotherapy_start'),
+                        'chemotherapy_ongoing' => Input::get('chemotherapy_ongoing'),
+                        'chemotherapy_end' => Input::get('chemotherapy_end'),
+                        'chemotherapy_dose' => Input::get('chemotherapy_dose'),
+                        'chemotherapy_frequecy' => Input::get('chemotherapy_frequecy'),
+                        'chemotherapy_remarks' => Input::get('chemotherapy_remarks'),
+                        'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ));
+
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('update_chemotherapy')) {
+            $validate = $validate->check($_POST, array(
+                // 'diagnosis_date' => array(
+                //     'required' => true,
+                // ),
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->updateRecord('chemotherapy', array(
+                        'vid' => $_GET["vid"],
+                        'vcode' => $_GET["vcode"],
+                        'other_herbal' => Input::get('other_herbal'),
+                        'chemotherapy_performed' => Input::get('chemotherapy_performed'),
+                        'chemotherapy' => Input::get('chemotherapy'),
+                        'chemotherapy_start' => Input::get('chemotherapy_start'),
+                        'chemotherapy_ongoing' => Input::get('chemotherapy_ongoing'),
+                        'chemotherapy_end' => Input::get('chemotherapy_end'),
+                        'chemotherapy_dose' => Input::get('chemotherapy_dose'),
+                        'chemotherapy_frequecy' => Input::get('chemotherapy_frequecy'),
+                        'chemotherapy_remarks' => Input::get('chemotherapy_remarks'),
+                        'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ), Input::get('chemotherapy_id'));
+
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('delete_chemotherapy')) {
+            $validate = $validate->check($_POST, array(
+                // 'diagnosis_date' => array(
+                //     'required' => true,
+                // ),
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->updateRecord('chemotherapy', array(
+                        'status' => 0,
+                    ), Input::get('chemotherapy_id'));
+
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('add_surgery')) {
+            $validate = $validate->check($_POST, array(
+                // 'diagnosis_date' => array(
+                //     'required' => true,
+                // ),
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->createRecord('surgery', array(
+                        'vid' => $_GET["vid"],
+                        'vcode' => $_GET["vcode"],
+                        'study_id' => $_GET['sid'],
+                        'other_herbal' => Input::get('other_herbal'),
+                        'surgery_performed' => Input::get('surgery_performed'),
+                        'surgery' => Input::get('surgery'),
+                        'surgery_start' => Input::get('surgery_start'),
+                        'surgery_number' => Input::get('surgery_number'),
+                        'surgery_remarks' => Input::get('surgery_remarks'),
+                        'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ));
+
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('update_surgery')) {
+            $validate = $validate->check($_POST, array(
+                // 'diagnosis_date' => array(
+                //     'required' => true,
+                // ),
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->updateRecord('surgery', array(
+                        'vid' => $_GET["vid"],
+                        'vcode' => $_GET["vcode"],
+                        'study_id' => $_GET['sid'],
+                        'other_herbal' => Input::get('other_herbal'),
+                        'surgery_performed' => Input::get('surgery_performed'),
+                        'surgery' => Input::get('surgery'),
+                        'surgery_start' => Input::get('surgery_start'),
+                        'surgery_number' => Input::get('surgery_number'),
+                        'surgery_remarks' => Input::get('surgery_remarks'),
+                        'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ), Input::get('surgery_id'));
+
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('delete_surgery')) {
+            $validate = $validate->check($_POST, array(
+                // 'diagnosis_date' => array(
+                //     'required' => true,
+                // ),
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->updateRecord('surgery', array(
+                        'status' => 0,
+                    ), Input::get('surgery_id'));
+
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('add_other_medication')) {
+            $validate = $validate->check($_POST, array(
+                // 'diagnosis_date' => array(
+                //     'required' => true,
+                // ),
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->createRecord('other_medication', array(
+                        'vid' => $_GET["vid"],
+                        'vcode' => $_GET["vcode"],
+                        'study_id' => $_GET['sid'],
+                        'other_medical' => Input::get('other_medical'),
+                        'other_specify' => Input::get('other_specify')[$i],
+                        'other_medical_medicatn' => Input::get('other_medical_medicatn')[$i],
+                        'other_medicatn_name' => Input::get('other_medicatn_name')[$i],
+                        'medication_remarks' => Input::get('other_medication_remarks')[$i],
+                        'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ));
+
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('update_other_medication')) {
+            $validate = $validate->check($_POST, array(
+                // 'diagnosis_date' => array(
+                //     'required' => true,
+                // ),
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->updateRecord('other_medication', array(
+                        'vid' => $_GET["vid"],
+                        'vcode' => $_GET["vcode"],
+                        'study_id' => $_GET['sid'],
+                        'other_medical' => Input::get('other_medical'),
+                        'other_specify' => Input::get('other_specify')[$i],
+                        'other_medical_medicatn' => Input::get('other_medical_medicatn')[$i],
+                        'other_medicatn_name' => Input::get('other_medicatn_name')[$i],
+                        'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ), Input::get('other_medication_id')[$i]);
+
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('delete_other_medication')) {
+            $validate = $validate->check($_POST, array(
+                // 'diagnosis_date' => array(
+                //     'required' => true,
+                // ),
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->updateRecord('other_medication', array(
+                        'status' => 0,
+                    ), Input::get('other_medication_id'));
 
                     Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
                 } catch (Exception $e) {
@@ -3300,7 +3412,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
                                             <hr>
-                                            <di class="card card-primary">
+                                            <div class="card card-primary">
                                                 <div class="card-header">
                                                     <hr>
                                                     <h2 class="card-title">STANDARD OF CARE TREATMENT</h2>
@@ -3657,35 +3769,111 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                     <hr>
 
+                                                    <!-- Add Modal -->
+                                                    <div class="modal fade" id="addChemotherapy" tabindex="-1"
+                                                        role="dialog">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">Add New Chemotherapy</h5>
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal">&times;</button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form method="post">
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">Type of
+                                                                                Chemotherapy</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input type="text" name="chemotherapy"
+                                                                                    class="form-control"
+                                                                                    placeholder="Type of Chemotherapy">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">Start
+                                                                                Date</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input type="date" name="chemotherapy_start"
+                                                                                    class="form-control"
+                                                                                    placeholder="Start Date">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label
+                                                                                class="col-sm-3 col-form-label">Ongoing?</label>
+                                                                            <div class="col-sm-9">
+                                                                                <select name="chemotherapy_ongoing"
+                                                                                    class="form-control">
+                                                                                    <option value="">Select</option>
+                                                                                    <option value="1">Yes</option>
+                                                                                    <option value="2">No</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">End
+                                                                                Date</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input type="date" name="chemotherapy_end"
+                                                                                    class="form-control"
+                                                                                    placeholder="End Date">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">Dose
+                                                                                (mg)</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input type="text" name="chemotherapy_dose"
+                                                                                    class="form-control"
+                                                                                    placeholder="Dose (mg)">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">Frequency
+                                                                                (numbers)</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input type="text"
+                                                                                    name="chemotherapy_frequecy"
+                                                                                    class="form-control"
+                                                                                    placeholder="Frequency (numbers)">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label
+                                                                                class="col-sm-3 col-form-label">Remarks</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input type="text"
+                                                                                    name="chemotherapy_remarks"
+                                                                                    class="form-control"
+                                                                                    placeholder="Remarks">
+                                                                            </div>
+                                                                        </div>
+                                                                        <input type="hidden" name="other_herbal"
+                                                                            value="<?= $patient['other_herbal'] ?>">
+                                                                        <input type="hidden" name="chemotherapy_performed"
+                                                                            value="<?= $patient['chemotherapy_performed'] ?>">
+                                                                        <input type="submit" name="add_chemotherapy"
+                                                                            class="btn btn-success mt-2" value="Save">
+                                                                        <button type="button" class="btn btn-secondary mt-2"
+                                                                            data-dismiss="modal">Cancel</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                     <div class="card card-primary">
                                                         <div class="card-header">
-                                                            <h3 class="card-title">2. Chemotherapy</h3>
+                                                            <h3 class="card-title">Chemotherapy</h3>
+                                                            <div class="card-tools">
+                                                                <button type="button" class="btn btn-success btn-sm"
+                                                                    data-toggle="modal" data-target="#addChemotherapy">
+                                                                    <i class="fas fa-plus"></i> Add New
+                                                                </button>
+                                                            </div>
                                                         </div>
-                                                        <hr>
-
-                                                        <div class="form-group">
-                                                            <label for="chemotherapy_performed">2. Is there any Chemotherapy
-                                                                performed?</label>
-                                                            <select name="chemotherapy_performed"
-                                                                id="chemotherapy_performed" class="form-control" required>
-                                                                <?php if ($patient['chemotherapy_performed'] == "1") { ?>
-                                                                    <option value="<?= $patient['chemotherapy_performed'] ?>">
-                                                                        Yes
-                                                                    </option>
-                                                                <?php } elseif ($patient['chemotherapy_performed'] == "2") { ?>
-                                                                    <option value="<?= $patient['chemotherapy_performed'] ?>">No
-                                                                    </option>
-                                                                <?php } else { ?>
-                                                                    <option value="">Select</option>
-                                                                <?php } ?>
-                                                                <option value="1">Yes</option>
-                                                                <option value="2">No</option>
-                                                            </select>
-                                                        </div>
-                                                        <hr>
-
-                                                        <div class="form-group">
-                                                            <label>Chemotherapy Details</label>
+                                                        <div class="card-body">
                                                             <table class="table table-bordered" id="chemotherapy_table">
                                                                 <thead>
                                                                     <tr>
@@ -3696,75 +3884,194 @@ if ($user->isLoggedIn()) {
                                                                         <th>Dose</th>
                                                                         <th>Frequency</th>
                                                                         <th>Remarks</th>
+                                                                        <th>Actions</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     <?php
                                                                     $x = 1;
-                                                                    foreach ($override->get1('chemotherapy', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']) as $chemotherapy) {
+                                                                    foreach ($override->get1('chemotherapy', 'patient_id', $_GET['cid'], 'status', 1) as $chemotherapy) {
                                                                         ?>
                                                                         <tr>
-                                                                            <td><input
-                                                                                    value="<?= $chemotherapy['chemotherapy'] ?>"
-                                                                                    type="text" name="chemotherapy[]"
-                                                                                    class="form-control"></td>
-                                                                            <td><input
-                                                                                    value="<?= $chemotherapy['chemotherapy_start'] ?>"
-                                                                                    type="text" name="chemotherapy_start[]"
-                                                                                    class="form-control"><br><span>Example:
-                                                                                    2010-12-01</span>
+                                                                            <td><?= $chemotherapy['chemotherapy'] ?></td>
+                                                                            <td><?= $chemotherapy['chemotherapy_start'] ?></td>
+                                                                            <td>
+                                                                                <?= $chemotherapy['chemotherapy_ongoing'] == 1 ? "Yes" : "No" ?>
+                                                                            </td>
+                                                                            <td><?= $chemotherapy['chemotherapy_end'] ?></td>
+                                                                            <td><?= $chemotherapy['chemotherapy_dose'] ?></td>
+                                                                            <td><?= $chemotherapy['chemotherapy_frequecy'] ?>
+                                                                            </td>
+                                                                            <td><?= $chemotherapy['chemotherapy_remarks'] ?>
                                                                             </td>
                                                                             <td>
-                                                                                <select name="chemotherapy_ongoing[]"
-                                                                                    class="form-control">
-                                                                                    <?php if ($chemotherapy['chemotherapy_ongoing'] == "1") { ?>
-                                                                                        <option
-                                                                                            value="<?= $chemotherapy['chemotherapy_ongoing'] ?>">
-                                                                                            Yes
-                                                                                        </option>
-                                                                                    <?php } elseif ($chemotherapy['chemotherapy_ongoing'] == "2") { ?>
-                                                                                        <option
-                                                                                            value="<?= $chemotherapy['chemotherapy_ongoing'] ?>">
-                                                                                            No
-                                                                                        </option>
-                                                                                    <?php } else { ?>
-                                                                                        <option value="">Select</option>
-                                                                                    <?php } ?>
-                                                                                    <option value="1">Yes</option>
-                                                                                    <option value="2">No</option>
-                                                                                </select>
+                                                                                <button type="button"
+                                                                                    class="btn btn-success btn-sm"
+                                                                                    data-toggle="modal"
+                                                                                    data-target="#updateChemotherapy<?= $chemotherapy['id'] ?>">
+                                                                                    <i class="fas fa-edit"></i> Update
+                                                                                </button>
+                                                                                <button type="button"
+                                                                                    class="btn btn-danger btn-sm"
+                                                                                    data-toggle="modal"
+                                                                                    data-target="#deleteChemotherapy<?= $chemotherapy['id'] ?>">
+                                                                                    <i class="fas fa-trash"></i> Delete
+                                                                                </button>
                                                                             </td>
-                                                                            <td><input
-                                                                                    value="<?= $chemotherapy['chemotherapy_end'] ?>"
-                                                                                    type="text" name="chemotherapy_end[]"
-                                                                                    class="form-control"><br><span>Example:
-                                                                                    2010-12-01</span></td>
-                                                                            <td><input
-                                                                                    value="<?= $chemotherapy['chemotherapy_dose'] ?>"
-                                                                                    type="text" name="chemotherapy_dose[]"
-                                                                                    class="form-control"><br><span>(mg)</span>
-                                                                            </td>
-                                                                            <td><input
-                                                                                    value="<?= $chemotherapy['chemotherapy_frequecy'] ?>"
-                                                                                    type="text" name="chemotherapy_frequecy[]"
-                                                                                    class="form-control"><br><span>(numbers)</span>
-                                                                            </td>
-                                                                            <td><input
-                                                                                    value="<?= $chemotherapy['chemotherapy_remarks'] ?>"
-                                                                                    type="text" name="chemotherapy_remarks[]"
-                                                                                    class="form-control">
-                                                                            </td>
-                                                                            <td><input value="<?= $chemotherapy['id'] ?>"
-                                                                                    type="hidden" name="chemotherapy_id[]"></td>
                                                                         </tr>
+
+                                                                        <!-- Update Modal -->
+                                                                        <div class="modal fade"
+                                                                            id="updateChemotherapy<?= $chemotherapy['id'] ?>"
+                                                                            tabindex="-1" role="dialog">
+                                                                            <div class="modal-dialog modal-lg" role="document">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header">
+                                                                                        <h5 class="modal-title">Update
+                                                                                            Chemotherapy</h5>
+                                                                                        <button type="button" class="close"
+                                                                                            data-dismiss="modal">&times;</button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        <form method="post">
+                                                                                            <div class="form-group row">
+                                                                                                <label
+                                                                                                    class="col-sm-3 col-form-label">Type
+                                                                                                    of Chemotherapy</label>
+                                                                                                <div class="col-sm-9">
+                                                                                                    <input type="text"
+                                                                                                        name="chemotherapy"
+                                                                                                        value="<?= $chemotherapy['chemotherapy'] ?>"
+                                                                                                        class="form-control">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-group row">
+                                                                                                <label
+                                                                                                    class="col-sm-3 col-form-label">Start
+                                                                                                    Date</label>
+                                                                                                <div class="col-sm-9">
+                                                                                                    <input type="date"
+                                                                                                        name="chemotherapy_start"
+                                                                                                        value="<?= $chemotherapy['chemotherapy_start'] ?>"
+                                                                                                        class="form-control">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-group row">
+                                                                                                <label
+                                                                                                    class="col-sm-3 col-form-label">Ongoing?</label>
+                                                                                                <div class="col-sm-9">
+                                                                                                    <select
+                                                                                                        name="chemotherapy_ongoing"
+                                                                                                        class="form-control">
+                                                                                                        <option value="1"
+                                                                                                            <?= $chemotherapy['chemotherapy_ongoing'] == 1 ? 'selected' : '' ?>>Yes</option>
+                                                                                                        <option value="2"
+                                                                                                            <?= $chemotherapy['chemotherapy_ongoing'] == 2 ? 'selected' : '' ?>>No</option>
+                                                                                                    </select>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-group row">
+                                                                                                <label
+                                                                                                    class="col-sm-3 col-form-label">End
+                                                                                                    Date</label>
+                                                                                                <div class="col-sm-9">
+                                                                                                    <input type="date"
+                                                                                                        name="chemotherapy_end"
+                                                                                                        value="<?= $chemotherapy['chemotherapy_end'] ?>"
+                                                                                                        class="form-control">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-group row">
+                                                                                                <label
+                                                                                                    class="col-sm-3 col-form-label">Dose
+                                                                                                    (mg)</label>
+                                                                                                <div class="col-sm-9">
+                                                                                                    <input type="text"
+                                                                                                        name="chemotherapy_dose"
+                                                                                                        value="<?= $chemotherapy['chemotherapy_dose'] ?>"
+                                                                                                        class="form-control">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-group row">
+                                                                                                <label
+                                                                                                    class="col-sm-3 col-form-label">Frequency
+                                                                                                    (numbers)</label>
+                                                                                                <div class="col-sm-9">
+                                                                                                    <input type="text"
+                                                                                                        name="chemotherapy_frequecy"
+                                                                                                        value="<?= $chemotherapy['chemotherapy_frequecy'] ?>"
+                                                                                                        class="form-control">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-group row">
+                                                                                                <label
+                                                                                                    class="col-sm-3 col-form-label">Remarks</label>
+                                                                                                <div class="col-sm-9">
+                                                                                                    <input type="text"
+                                                                                                        name="chemotherapy_remarks"
+                                                                                                        value="<?= $chemotherapy['chemotherapy_remarks'] ?>"
+                                                                                                        class="form-control">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <input type="hidden"
+                                                                                                name="chemotherapy_id"
+                                                                                                value="<?= $chemotherapy['id'] ?>">
+                                                                                            <input type="hidden"
+                                                                                                name="other_herbal"
+                                                                                                value="<?= $patient['other_herbal'] ?>">
+                                                                                            <input type="hidden"
+                                                                                                name="chemotherapy_performed"
+                                                                                                value="<?= $patient['chemotherapy_performed'] ?>">
+                                                                                            <input type="submit"
+                                                                                                name="update_chemotherapy"
+                                                                                                class="btn btn-success mt-2"
+                                                                                                value="Save">
+                                                                                            <button type="button"
+                                                                                                class="btn btn-secondary mt-2"
+                                                                                                data-dismiss="modal">Cancel</button>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <!-- Delete Modal -->
+                                                                        <div class="modal fade"
+                                                                            id="deleteChemotherapy<?= $chemotherapy['id'] ?>"
+                                                                            tabindex="-1" role="dialog">
+                                                                            <div class="modal-dialog" role="document">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header">
+                                                                                        <h5 class="modal-title">Delete
+                                                                                            Chemotherapy</h5>
+                                                                                        <button type="button" class="close"
+                                                                                            data-dismiss="modal">&times;</button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        <p>Are you sure you want to delete this
+                                                                                            record?</p>
+                                                                                        <form method="post">
+                                                                                            <input type="hidden"
+                                                                                                name="chemotherapy_id"
+                                                                                                value="<?= $chemotherapy['id'] ?>">
+                                                                                            <input type="submit"
+                                                                                                name="delete_chemotherapy"
+                                                                                                class="btn btn-danger mt-2"
+                                                                                                value="Delete">
+                                                                                            <button type="button"
+                                                                                                class="btn btn-secondary mt-2"
+                                                                                                data-dismiss="modal">Cancel</button>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                         <?php
                                                                         $x++;
                                                                     }
                                                                     ?>
                                                                 </tbody>
                                                             </table>
-                                                            <button type="button" id="add-row3" class="btn btn-primary">Add
-                                                                Row</button>
                                                         </div>
                                                     </div>
                                                     <hr>
@@ -3868,6 +4175,7 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
                                         </div>
                                         <div class="card-footer">
                                             <div class="form-group">
