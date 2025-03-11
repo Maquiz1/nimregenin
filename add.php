@@ -3419,11 +3419,11 @@ if ($user->isLoggedIn()) {
                                                     <h3 class="card-title">Provide lists of treatments and supportive care
                                                         given to the
                                                         cancer patient</h3>
+                                                    <h4>(To be retrieved from patient file/medical personnel)</h4>
+                                                    <h5>(all medication should be in generic names)</h5>
                                                     <hr>
                                                 </div>
                                                 <div class="card-body">
-                                                    <h4>(To be retrieved from patient file/medical personnel)</h4>
-                                                    <h5>(all medication should be in generic names)</h5>
                                                     <hr>
                                                     <div class="card card-primary">
                                                         <div class="card-header">
@@ -3865,7 +3865,7 @@ if ($user->isLoggedIn()) {
 
                                                     <div class="card card-primary">
                                                         <div class="card-header">
-                                                            <h3 class="card-title">Chemotherapy</h3>
+                                                            <h3 class="card-title">2. Chemotherapy</h3>
                                                             <div class="card-tools">
                                                                 <button type="button" class="btn btn-success btn-sm"
                                                                     data-toggle="modal" data-target="#addChemotherapy">
@@ -4076,102 +4076,229 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                     <hr>
 
+                                                    <!-- Add Modal for Surgery -->
+                                                    <div class="modal fade" id="addSurgery" tabindex="-1" role="dialog">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">Add New Surgery</h5>
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal">&times;</button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form method="post">
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">Type of
+                                                                                Surgery</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input type="text" name="surgery"
+                                                                                    class="form-control"
+                                                                                    placeholder="Type of Surgery">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-3 col-form-label">Start
+                                                                                Date</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input type="date" name="surgery_start"
+                                                                                    class="form-control"
+                                                                                    placeholder="Start Date">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label
+                                                                                class="col-sm-3 col-form-label">Frequency</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input type="text" name="surgery_number"
+                                                                                    class="form-control"
+                                                                                    placeholder="Frequency (numbers)">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label
+                                                                                class="col-sm-3 col-form-label">Remarks</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input type="text" name="surgery_remarks"
+                                                                                    class="form-control"
+                                                                                    placeholder="Remarks">
+                                                                            </div>
+                                                                        </div>
+                                                                        <input type="hidden" name="other_herbal"
+                                                                            value="<?= $patient['other_herbal'] ?>">
+                                                                        <input type="hidden" name="surgery_performed"
+                                                                            value="<?= $patient['surgery_performed'] ?>">
+                                                                        <input type="submit" name="add_surgery"
+                                                                            class="btn btn-success mt-2" value="Save">
+                                                                        <button type="button" class="btn btn-secondary mt-2"
+                                                                            data-dismiss="modal">Cancel</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                     <div class="card card-primary">
                                                         <div class="card-header">
-                                                            <h3 class="card-title">3. Surgery</h3>
+                                                            <h3 class="card-title">Surgery</h3>
+                                                            <div class="card-tools">
+                                                                <button type="button" class="btn btn-success btn-sm"
+                                                                    data-toggle="modal" data-target="#addSurgery">
+                                                                    <i class="fas fa-plus"></i> Add New
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                         <div class="card-body">
-                                                            <div class="form-group row">
-                                                                <label class="col-sm-3 col-form-label">2. Is there any
-                                                                    Surgery
-                                                                    performed?:</label>
-                                                                <div class="col-sm-9">
-                                                                    <select name="surgery_performed" id="surgery_performed"
-                                                                        class="form-control" required>
-                                                                        <?php if ($patient['surgery_performed'] == "1") { ?>
-                                                                            <option
-                                                                                value="<?= $patient['surgery_performed'] ?>">Yes
-                                                                            </option>
-                                                                        <?php } elseif ($patient['surgery_performed'] == "2") { ?>
-                                                                            <option
-                                                                                value="<?= $patient['surgery_performed'] ?>">No
-                                                                            </option>
-                                                                        <?php } else { ?>
-                                                                            <option value="">Select</option>
-                                                                        <?php } ?>
-                                                                        <option value="1">Yes</option>
-                                                                        <option value="2">No</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <hr>
-
-                                                            <div class="form-group">
-                                                                <label>Surgery Details</label>
-                                                                <table class="table table-bordered" id="surgery_table">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Type of Surgery</th>
-                                                                            <th>Start Date</th>
-                                                                            <th>Frequency</th>
-                                                                            <th>Remarks</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <?php
-                                                                        $x = 1;
-                                                                        foreach ($override->get1('surgery', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']) as $surgery) {
-                                                                            ?>
-                                                                            <tr>
-                                                                                <td><input value="<?= $surgery['surgery'] ?>"
-                                                                                        type="text" name="surgery[]"
-                                                                                        class="form-control">
-                                                                                </td>
-                                                                                <td><input
-                                                                                        value="<?= $surgery['surgery_start'] ?>"
-                                                                                        type="text" name="surgery_start[]"
-                                                                                        class="form-control"><br><span>Example:
-                                                                                        2010-12-01</span></td>
-                                                                                <td><input
-                                                                                        value="<?= $surgery['surgery_number'] ?>"
-                                                                                        type="text" name="surgery_number[]"
-                                                                                        class="form-control"><br><span>(numbers)</span>
-                                                                                </td>
-                                                                                <td><input
-                                                                                        value="<?= $surgery['surgery_remarks'] ?>"
-                                                                                        type="text" name="surgery_remarks[]"
-                                                                                        class="form-control"></td>
-                                                                                <td><input value="<?= $surgery['id'] ?>"
-                                                                                        type="hidden" name="surgery_id[]"></td>
-                                                                            </tr>
-                                                                            <?php
-                                                                            $x++;
-                                                                        }
+                                                            <table class="table table-bordered" id="surgery_table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Type of Surgery</th>
+                                                                        <th>Start Date</th>
+                                                                        <th>Frequency</th>
+                                                                        <th>Remarks</th>
+                                                                        <th>Actions</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?php
+                                                                    $x = 1;
+                                                                    foreach ($override->get1('surgery', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']) as $surgery) {
                                                                         ?>
-                                                                    </tbody>
-                                                                </table>
-                                                                <button type="button" id="add-row4"
-                                                                    class="btn btn-primary">Add
-                                                                    Row</button>
-                                                            </div>
-                                                        </div>
-                                                        <hr>
+                                                                        <tr>
+                                                                            <td><?= $surgery['surgery'] ?></td>
+                                                                            <td><?= $surgery['surgery_start'] ?></td>
+                                                                            <td><?= $surgery['surgery_number'] ?></td>
+                                                                            <td><?= $surgery['surgery_remarks'] ?></td>
+                                                                            <td>
+                                                                                <button type="button"
+                                                                                    class="btn btn-success btn-sm"
+                                                                                    data-toggle="modal"
+                                                                                    data-target="#updateSurgery<?= $surgery['id'] ?>">
+                                                                                    <i class="fas fa-edit"></i> Update
+                                                                                </button>
+                                                                                <button type="button"
+                                                                                    class="btn btn-danger btn-sm"
+                                                                                    data-toggle="modal"
+                                                                                    data-target="#deleteSurgery<?= $surgery['id'] ?>">
+                                                                                    <i class="fas fa-trash"></i> Delete
+                                                                                </button>
+                                                                            </td>
+                                                                        </tr>
 
-                                                        <div class="card card-primary">
-                                                            <hr>
-                                                            <div class="card-header">
-                                                                <h3 class="card-title">Form Completion</h3>
-                                                            </div>
-                                                            <hr>
-                                                            <div class="form-group row">
-                                                                <label class="col-sm-3 col-form-label">Date of
-                                                                    Completion:</label>
-                                                                <div class="col-sm-9">
-                                                                    <input value="<?= $patient['crf1_cmpltd_date'] ?>"
-                                                                        type="date" name="crf1_cmpltd_date"
-                                                                        id="crf1_cmpltd_date" class="form-control">
-                                                                </div>
-                                                            </div>
+                                                                        <!-- Update Modal for Surgery -->
+                                                                        <div class="modal fade"
+                                                                            id="updateSurgery<?= $surgery['id'] ?>"
+                                                                            tabindex="-1" role="dialog">
+                                                                            <div class="modal-dialog modal-lg" role="document">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header">
+                                                                                        <h5 class="modal-title">Update Surgery
+                                                                                        </h5>
+                                                                                        <button type="button" class="close"
+                                                                                            data-dismiss="modal">&times;</button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        <form method="post">
+                                                                                            <div class="form-group row">
+                                                                                                <label
+                                                                                                    class="col-sm-3 col-form-label">Type
+                                                                                                    of Surgery</label>
+                                                                                                <div class="col-sm-9">
+                                                                                                    <input type="text"
+                                                                                                        name="surgery"
+                                                                                                        value="<?= $surgery['surgery'] ?>"
+                                                                                                        class="form-control">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-group row">
+                                                                                                <label
+                                                                                                    class="col-sm-3 col-form-label">Start
+                                                                                                    Date</label>
+                                                                                                <div class="col-sm-9">
+                                                                                                    <input type="date"
+                                                                                                        name="surgery_start"
+                                                                                                        value="<?= $surgery['surgery_start'] ?>"
+                                                                                                        class="form-control">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-group row">
+                                                                                                <label
+                                                                                                    class="col-sm-3 col-form-label">Frequency</label>
+                                                                                                <div class="col-sm-9">
+                                                                                                    <input type="text"
+                                                                                                        name="surgery_number"
+                                                                                                        value="<?= $surgery['surgery_number'] ?>"
+                                                                                                        class="form-control">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-group row">
+                                                                                                <label
+                                                                                                    class="col-sm-3 col-form-label">Remarks</label>
+                                                                                                <div class="col-sm-9">
+                                                                                                    <input type="text"
+                                                                                                        name="surgery_remarks"
+                                                                                                        value="<?= $surgery['surgery_remarks'] ?>"
+                                                                                                        class="form-control">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <input type="hidden"
+                                                                                                name="surgery_id"
+                                                                                                value="<?= $surgery['id'] ?>">
+                                                                                            <input type="hidden"
+                                                                                                name="other_herbal"
+                                                                                                value="<?= $patient['other_herbal'] ?>">
+                                                                                            <input type="hidden"
+                                                                                                name="surgery_performed"
+                                                                                                value="<?= $patient['surgery_performed'] ?>">
+                                                                                            <input type="submit"
+                                                                                                name="update_surgery"
+                                                                                                class="btn btn-success mt-2"
+                                                                                                value="Save">
+                                                                                            <button type="button"
+                                                                                                class="btn btn-secondary mt-2"
+                                                                                                data-dismiss="modal">Cancel</button>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <!-- Delete Modal for Surgery -->
+                                                                        <div class="modal fade"
+                                                                            id="deleteSurgery<?= $surgery['id'] ?>"
+                                                                            tabindex="-1" role="dialog">
+                                                                            <div class="modal-dialog" role="document">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header">
+                                                                                        <h5 class="modal-title">Delete Surgery
+                                                                                        </h5>
+                                                                                        <button type="button" class="close"
+                                                                                            data-dismiss="modal">&times;</button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        <p>Are you sure you want to delete this
+                                                                                            record?</p>
+                                                                                        <form method="post">
+                                                                                            <input type="hidden"
+                                                                                                name="surgery_id"
+                                                                                                value="<?= $surgery['id'] ?>">
+                                                                                            <input type="submit"
+                                                                                                name="delete_surgery"
+                                                                                                class="btn btn-danger mt-2"
+                                                                                                value="Delete">
+                                                                                            <button type="button"
+                                                                                                class="btn btn-secondary mt-2"
+                                                                                                data-dismiss="modal">Cancel</button>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <?php
+                                                                        $x++;
+                                                                    }
+                                                                    ?>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
