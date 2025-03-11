@@ -2702,6 +2702,8 @@ if ($user->isLoggedIn()) {
                                                 </div>
                                             </div>
 
+                                            
+
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">6. Specify the medical
                                                     conditions?</label>
@@ -4161,7 +4163,7 @@ if ($user->isLoggedIn()) {
                                                                 <tbody>
                                                                     <?php
                                                                     $x = 1;
-                                                                    foreach ($override->get1('surgery', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']) as $surgery) {
+                                                                    foreach ($override->get1('surgery', 'patient_id', $_GET['cid'], 'status', 1) as $surgery) {
                                                                         ?>
                                                                         <tr>
                                                                             <td><?= $surgery['surgery'] ?></td>
