@@ -2450,7 +2450,7 @@ if ($user->isLoggedIn()) {
                                                     diagnosis:</label>
                                                 <div class="col-sm-9">
                                                     <input value="<?= $patient['diagnosis_date'] ?>" type="date"
-                                                        name="diagnosis_date" id="diagnosis_date" class="form-control" />
+                                                        name="diagnosis_date" id="diagnosis_date" class="form-control" required/>
                                                     <span>Example : 2000-12-26 </span>
                                                 </div>
                                             </div>
@@ -3875,6 +3875,27 @@ if ($user->isLoggedIn()) {
                                                                 </button>
                                                             </div>
                                                         </div>
+
+                                                        <div class="form-group">
+                                                            <label for="chemotherapy_performed">2. Is there any Chemotherapy
+                                                                performed?</label>
+                                                            <select name="chemotherapy_performed"
+                                                                id="chemotherapy_performed" class="form-control" required>
+                                                                <?php if ($patient['chemotherapy_performed'] == "1") { ?>
+                                                                    <option value="<?= $patient['chemotherapy_performed'] ?>">
+                                                                        Yes
+                                                                    </option>
+                                                                <?php } elseif ($patient['chemotherapy_performed'] == "2") { ?>
+                                                                    <option value="<?= $patient['chemotherapy_performed'] ?>">No
+                                                                    </option>
+                                                                <?php } else { ?>
+                                                                    <option value="">Select</option>
+                                                                <?php } ?>
+                                                                <option value="1">Yes</option>
+                                                                <option value="2">No</option>
+                                                            </select>
+                                                        </div>
+
                                                         <div class="card-body">
                                                             <table class="table table-bordered" id="chemotherapy_table">
                                                                 <thead>
@@ -4149,6 +4170,27 @@ if ($user->isLoggedIn()) {
                                                                 </button>
                                                             </div>
                                                         </div>
+
+                                                        <div class="form-group">
+                                                            <label for="surgery_performed">3. Is there any Surgery
+                                                                performed?</label>
+                                                            <select name="surgery_performed"
+                                                                id="surgery_performed" class="form-control" required>
+                                                                <?php if ($patient['surgery_performed'] == "1") { ?>
+                                                                    <option value="<?= $patient['surgery_performed'] ?>">
+                                                                        Yes
+                                                                    </option>
+                                                                <?php } elseif ($patient['surgery_performed'] == "2") { ?>
+                                                                    <option value="<?= $patient['surgery_performed'] ?>">No
+                                                                    </option>
+                                                                <?php } else { ?>
+                                                                    <option value="">Select</option>
+                                                                <?php } ?>
+                                                                <option value="1">Yes</option>
+                                                                <option value="2">No</option>
+                                                            </select>
+                                                        </div>
+
                                                         <div class="card-body">
                                                             <table class="table table-bordered" id="surgery_table">
                                                                 <thead>
