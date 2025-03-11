@@ -2766,22 +2766,22 @@ if ($user->isLoggedIn()) {
                                             <tr>
                                                 <!-- <th><input type="checkbox" name="checkall" /></th> -->
                                                 <td width="2">#</td>
-                                                <th width="8%">ParticipantID
+                                                <th width="20%">ParticipantID
                                                     <hr> Enrollment Date
                                                 </th>
                                                 <!-- <th width="6%">AGREE USING NIMREGENIN ?</th> -->
-                                                <th width="6%">USING NIMREGENIN ?</th>
-                                                <th width="10%">Name
+                                                <th width="10%">USING NIMREGENIN ?</th>
+                                                <th width="20%">Name
                                                     <hr>Gender
                                                     <hr>Age
                                                 </th>
-                                                <th width="3%">PATIENT TYPE
+                                                <th width="8%">PATIENT TYPE
                                                     <hr>SITE
                                                 </th>
                                                 <!-- <th width="3%">TREATMENT TYPE</th> -->
                                                 <!-- <th width="4%">CATEGORY</th>  -->
-                                                <th width="40%">STATUS</th>
-                                                 <th width="40%">
+                                                <th width="10%">STATUS</th>
+                                                 <th width="30%">
                                                 <?php if ($_GET['status'] == 4) { ?>
                                                     REASON 
                                                     <?php } else { ?>
