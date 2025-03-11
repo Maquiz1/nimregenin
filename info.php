@@ -2766,27 +2766,28 @@ if ($user->isLoggedIn()) {
                                             <tr>
                                                 <!-- <th><input type="checkbox" name="checkall" /></th> -->
                                                 <td width="2">#</td>
-                                                <th width="20">Picture</th>
-                                                <th width="8%">ParticipantID</th>
-                                                <th width="8%">Enrollment Date</th>
+                                                <th width="8%">ParticipantID
+                                                    <hr> Enrollment Date
+                                                </th>
                                                 <!-- <th width="6%">AGREE USING NIMREGENIN ?</th> -->
                                                 <th width="6%">USING NIMREGENIN ?</th>
-                                                <th width="10%">Name</th>
-                                                <th width="8%">Gender</th>
-                                                <th width="8%">Age</th>
-                                                <th width="3%">PATIENT TYPE</th>
+                                                <th width="10%">Name
+                                                    <hr>Gender
+                                                    <hr>Age
+                                                </th>
+                                                <th width="3%">PATIENT TYPE
+                                                    <hr>SITE
+                                                </th>
                                                 <!-- <th width="3%">TREATMENT TYPE</th> -->
                                                 <!-- <th width="4%">CATEGORY</th>  -->
-                                                <th width="8%">SITE</th>
-                                                <th width="10%">STATUS</th>
+                                                <th width="40%">STATUS</th>
+                                                 <th width="40%">
                                                 <?php if ($_GET['status'] == 4) { ?>
-
-                                                    <th width="10%">REASON</th>
-                                                <?php } else { ?>
-                                                    <th width="40%">ACTION</th>
-
+                                                    REASON 
+                                                    <?php } else { ?>
+                                                    ACTION
                                                 <?php } ?>
-
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -2875,17 +2876,9 @@ if ($user->isLoggedIn()) {
                                                 <tr>
                                                     <!-- <td><input type="checkbox" name="checkbox" /></td> -->
                                                     <td><?= $x ?></td>
-                                                    <td width="100">
-                                                        <?php if ($client['client_image'] != '' || is_null($client['client_image'])) {
-                                                            $img = $client['client_image'];
-                                                        } else {
-                                                            $img = 'img/users/blank.png';
-                                                        } ?>
-                                                        <a href="#img<?= $client['id'] ?>" data-toggle="modal"><img
-                                                                src="<?= $img ?>" width="90" height="90" class="" /></a>
+                                                    <td><?= $client['study_id'] ?>
+                                                        <hr> <?= $visit_date['visit_date'] ?>
                                                     </td>
-                                                    <td><?= $client['study_id'] ?></td>
-                                                    <td><?= $visit_date['visit_date'] ?></td>
                                                     <!-- <?php if ($client['consented_nimregenin'] == 1) { ?>
                                                     <td>Yes</td>
                                                 <?php } else { ?>
@@ -2904,18 +2897,19 @@ if ($user->isLoggedIn()) {
                                                             <a href="#" class="btn btn-danger">NOT DONE</a>
                                                         </td>
                                                     <?php } ?>
-                                                    <td> <?= $client['firstname'] . ' ' . $client['lastname'] ?></td>
-                                                    <td><?= $client['gender'] ?></td>
-                                                    <td><?= $client['age'] ?></td>
-                                                    <td><?= $cat ?></td>
+                                                    <td> <?= $client['firstname'] . ' ' . $client['lastname'] ?>
+                                                        <hr><?= $client['gender'] ?>
+                                                        <hr><?= $client['age'] ?>
+                                                    </td>
+                                                    <td><?= $cat ?>
+                                                        <hr>
+                                                        <?php if ($client['site_id'] == 1) { ?>
+                                                            MNH - UPANGA
+                                                        <?php } else { ?>
 
-                                                    <?php if ($category['patient_category'] == 1) { ?>
-                                                        <td>Intervention</td>
-                                                    <?php } elseif ($category['patient_category'] == 2) { ?>
-                                                        <td>Control</td>
-                                                    <?php } else { ?>
-                                                        <td>Not Done</td>
-                                                    <?php } ?>
+                                                            ORCI
+                                                        <?php } ?>
+                                                    </td>
                                                     <!-- <?php if ($category['patient_category'] == 1) { ?>
                                                     <td>NEW PATIENT</td>
                                                 <?php } else { ?>
@@ -2929,11 +2923,6 @@ if ($user->isLoggedIn()) {
                                                 <?php } else { ?>
                                                     <td>Surgery</td>
                                                 <?php } ?> -->
-                                                    <?php if ($client['site_id'] == 1) { ?>
-                                                        <td>MNH - UPANGA </td>
-                                                    <?php } else { ?>
-                                                        <td>ORCI </td>
-                                                    <?php } ?>
 
                                                     <?php if ($_GET['status'] == '') { ?>
 
@@ -3807,10 +3796,10 @@ if ($user->isLoggedIn()) {
                                                                         <div class="col-md-3">Comments:</div>
                                                                         <div class="col-md-9">
                                                                             <textarea name="comments" rows="4">
-                                                                                                                                                            <?php if ($client['comments']) {
-                                                                                                                                                                print_r($client['comments']);
-                                                                                                                                                            } ?>
-                                                                                                                                                            </textarea>
+                                                                                                                                                                                    <?php if ($client['comments']) {
+                                                                                                                                                                                        print_r($client['comments']);
+                                                                                                                                                                                    } ?>
+                                                                                                                                                                                    </textarea>
                                                                         </div>
                                                                     </div>
 
@@ -6411,9 +6400,9 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Date of Follow Up Visit:</label>
                                                                                         <input value="<?php if ($visit['status'] != 0) {
                                                                                             echo $visit['visit_date'];
-                                                                                        } ?>" class="form-control"
-                                                                                            type="date" name="visit_date"
-                                                                                            id="visit_date" />
+                                                                                        } ?>"
+                                                                                            class="form-control" type="date"
+                                                                                            name="visit_date" id="visit_date" />
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -7538,8 +7527,8 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Available Amount</label>
                                                                                         <input class="form-control" value="<?php if ($value['amount']) {
                                                                                             echo $value['amount'];
-                                                                                        } ?>" type="number" min="0"
-                                                                                            name="amount" id="amount"
+                                                                                        } ?>" type="number"
+                                                                                            min="0" name="amount" id="amount"
                                                                                             readonly />
                                                                                     </div>
                                                                                 </div>
@@ -7566,8 +7555,9 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Total Price ( TSHS )</label>
                                                                                         <input class="form-control" value="<?php if ($value['price']) {
                                                                                             echo $value['price'];
-                                                                                        } ?>" type="number" min="0"
-                                                                                            name="price" id="price" readonly />
+                                                                                        } ?>" type="number"
+                                                                                            min="0" name="price" id="price"
+                                                                                            readonly />
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -7640,8 +7630,8 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Available Amount</label>
                                                                                         <input class="form-control" value="<?php if ($value['amount']) {
                                                                                             echo $value['amount'];
-                                                                                        } ?>" type="number" min="0"
-                                                                                            name="amount" id="amount"
+                                                                                        } ?>" type="number"
+                                                                                            min="0" name="amount" id="amount"
                                                                                             readonly />
                                                                                     </div>
                                                                                 </div>
