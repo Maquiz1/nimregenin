@@ -3798,10 +3798,10 @@ if ($user->isLoggedIn()) {
                                                                         <div class="col-md-3">Comments:</div>
                                                                         <div class="col-md-9">
                                                                             <textarea name="comments" rows="4">
-                                                                                                                                                                                            <?php if ($client['comments']) {
-                                                                                                                                                                                                print_r($client['comments']);
-                                                                                                                                                                                            } ?>
-                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                    <?php if ($client['comments']) {
+                                                                                                                                                                                                        print_r($client['comments']);
+                                                                                                                                                                                                    } ?>
+                                                                                                                                                                                                    </textarea>
                                                                         </div>
                                                                     </div>
 
@@ -6428,8 +6428,8 @@ if ($user->isLoggedIn()) {
                                                 <th>Expected Date</th>
                                                 <th>Visit Date</th>
                                                 <th>Status</th>
-                                                 <th>Action 1</th>
-                                               <!-- <th>Action 2</th> -->
+                                                <th>Action 1</th>
+                                                <!-- <th>Action 2</th> -->
                                             </tfoot>
                                         </table>
                                     </div>
