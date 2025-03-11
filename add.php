@@ -274,31 +274,6 @@ if ($user->isLoggedIn()) {
                             }
                         }
 
-                        if (Input::get('radiotherapy_performed') == 1) {
-                            for ($i = 0; $i < count(Input::get('radiotherapy')); $i++) {
-                                $user->updateRecord('radiotherapy', array(
-                                    'vid' => $_GET["vid"],
-                                    'vcode' => $_GET["vcode"],
-                                    'study_id' => $_GET['sid'],
-                                    'other_herbal' => Input::get('other_herbal'),
-                                    'radiotherapy_performed' => Input::get('radiotherapy_performed'),
-                                    'radiotherapy' => Input::get('radiotherapy')[$i],
-                                    'radiotherapy_start' => Input::get('radiotherapy_start')[$i],
-                                    'radiotherapy_ongoing' => Input::get('radiotherapy_ongoing')[$i],
-                                    'radiotherapy_end' => Input::get('radiotherapy_end')[$i],
-                                    'radiotherapy_dose' => Input::get('radiotherapy_dose')[$i],
-                                    'radiotherapy_frequecy' => Input::get('radiotherapy_frequecy')[$i],
-                                    'radiotherapy_remarks' => Input::get('radiotherapy_remarks')[$i],
-                                    'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                                    'patient_id' => $_GET['cid'],
-                                    'staff_id' => $user->data()->id,
-                                    'status' => 1,
-                                    'created_on' => date('Y-m-d'),
-                                    'site_id' => $user->data()->site_id,
-                                ), Input::get('radiotherapy_id')[$i]);
-                            }
-                        }
-
 
                         if (Input::get('chemotherapy_performed') == 1) {
                             for ($i = 0; $i < count(Input::get('chemotherapy')); $i++) {
@@ -409,33 +384,6 @@ if ($user->isLoggedIn()) {
                                 ));
                             }
                         }
-
-                        if (Input::get('radiotherapy_performed')) {
-
-                            for ($i = 0; $i < count(Input::get('radiotherapy')); $i++) {
-                                $user->createRecord('radiotherapy', array(
-                                    'vid' => $_GET["vid"],
-                                    'vcode' => $_GET["vcode"],
-                                    'study_id' => $_GET['sid'],
-                                    'other_herbal' => Input::get('other_herbal'),
-                                    'radiotherapy_performed' => Input::get('radiotherapy_performed'),
-                                    'radiotherapy' => Input::get('radiotherapy')[$i],
-                                    'radiotherapy_start' => Input::get('radiotherapy_start')[$i],
-                                    'radiotherapy_ongoing' => Input::get('radiotherapy_ongoing')[$i],
-                                    'radiotherapy_end' => Input::get('radiotherapy_end')[$i],
-                                    'radiotherapy_dose' => Input::get('radiotherapy_dose')[$i],
-                                    'radiotherapy_frequecy' => Input::get('radiotherapy_frequecy')[$i],
-                                    'radiotherapy_remarks' => Input::get('radiotherapy_remarks')[$i],
-                                    'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
-                                    'patient_id' => $_GET['cid'],
-                                    'staff_id' => $user->data()->id,
-                                    'status' => 1,
-                                    'created_on' => date('Y-m-d'),
-                                    'site_id' => $user->data()->site_id,
-                                ));
-                            }
-                        }
-
 
                         if (Input::get('chemotherapy_performed')) {
 
@@ -609,24 +557,24 @@ if ($user->isLoggedIn()) {
             ));
             if ($validate->passed()) {
                 try {
-                    $user->updateRecord('herbal_treatment', array(
+                    $user->createRecord('herbal_treatment', array(
                         'vid' => $_GET["vid"],
                         'vcode' => $_GET["vcode"],
                         'other_herbal' => Input::get('other_herbal'),
-                        'herbal_preparation' => Input::get('herbal_preparation')[$i],
-                        'herbal_start' => Input::get('herbal_start')[$i],
-                        'herbal_ongoing' => Input::get('herbal_ongoing')[$i],
-                        'herbal_end' => Input::get('herbal_end')[$i],
-                        'herbal_dose' => Input::get('herbal_dose')[$i],
-                        'herbal_frequency' => Input::get('herbal_frequency')[$i],
-                        'herbal_remarks' => Input::get('herbal_remarks')[$i],
+                        'herbal_preparation' => Input::get('herbal_preparation'),
+                        'herbal_start' => Input::get('herbal_start'),
+                        'herbal_ongoing' => Input::get('herbal_ongoing'),
+                        'herbal_end' => Input::get('herbal_end'),
+                        'herbal_dose' => Input::get('herbal_dose'),
+                        'herbal_frequency' => Input::get('herbal_frequency'),
+                        'herbal_remarks' => Input::get('herbal_remarks'),
                         'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
                         'patient_id' => $_GET['cid'],
                         'staff_id' => $user->data()->id,
                         'status' => 1,
                         'created_on' => date('Y-m-d'),
                         'site_id' => $user->data()->site_id,
-                    ), Input::get('herbal_id')[$i]);
+                    ));
 
                     Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
                 } catch (Exception $e) {
@@ -648,20 +596,20 @@ if ($user->isLoggedIn()) {
                         'vcode' => $_GET["vcode"],
                         'study_id' => $_GET['sid'],
                         'other_herbal' => Input::get('other_herbal'),
-                        'herbal_preparation' => Input::get('herbal_preparation')[$i],
-                        'herbal_start' => Input::get('herbal_start')[$i],
-                        'herbal_ongoing' => Input::get('herbal_ongoing')[$i],
-                        'herbal_end' => Input::get('herbal_end')[$i],
-                        'herbal_dose' => Input::get('herbal_dose')[$i],
-                        'herbal_frequency' => Input::get('herbal_frequency')[$i],
-                        'herbal_remarks' => Input::get('herbal_remarks')[$i],
+                        'herbal_preparation' => Input::get('herbal_preparation'),
+                        'herbal_start' => Input::get('herbal_start'),
+                        'herbal_ongoing' => Input::get('herbal_ongoing'),
+                        'herbal_end' => Input::get('herbal_end'),
+                        'herbal_dose' => Input::get('herbal_dose'),
+                        'herbal_frequency' => Input::get('herbal_frequency'),
+                        'herbal_remarks' => Input::get('herbal_remarks'),
                         'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
                         'patient_id' => $_GET['cid'],
                         'staff_id' => $user->data()->id,
                         'status' => 1,
                         'created_on' => date('Y-m-d'),
                         'site_id' => $user->data()->site_id,
-                    ));
+                    ), Input::get('herbal_id'));
 
                     Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
                 } catch (Exception $e) {
@@ -678,13 +626,100 @@ if ($user->isLoggedIn()) {
             ));
             if ($validate->passed()) {
                 try {
-                    $user->updateRecord('nimregenin', array(
+                    $user->updateRecord('herbal_treatment', array(
                         'status' => 0,
-                    ), Input::get('nimregenin_id'));
+                    ), Input::get('herbal_id'));
 
-                    $user->updateRecord('clients', array(
-                        'nimregenin' => 0,
-                    ), $_GET['cid']);
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('add_radiotherapy')) {
+            $validate = $validate->check($_POST, array(
+                // 'diagnosis_date' => array(
+                //     'required' => true,
+                // ),
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->createRecord('radiotherapy', array(
+                        'vid' => $_GET["vid"],
+                        'vcode' => $_GET["vcode"],
+                        'study_id' => $_GET['sid'],
+                        'other_herbal' => Input::get('other_herbal'),
+                        'radiotherapy_performed' => Input::get('radiotherapy_performed'),
+                        'radiotherapy' => Input::get('radiotherapy'),
+                        'radiotherapy_start' => Input::get('radiotherapy_start'),
+                        'radiotherapy_ongoing' => Input::get('radiotherapy_ongoing'),
+                        'radiotherapy_end' => Input::get('radiotherapy_end'),
+                        'radiotherapy_dose' => Input::get('radiotherapy_dose'),
+                        'radiotherapy_frequecy' => Input::get('radiotherapy_frequecy'),
+                        'radiotherapy_remarks' => Input::get('radiotherapy_remarks'),
+                        'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ));
+
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('update_radiotherapy')) {
+            $validate = $validate->check($_POST, array(
+                // 'diagnosis_date' => array(
+                //     'required' => true,
+                // ),
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->updateRecord('radiotherapy', array(
+                        'vid' => $_GET["vid"],
+                        'vcode' => $_GET["vcode"],
+                        'study_id' => $_GET['sid'],
+                        'other_herbal' => Input::get('other_herbal'),
+                        'radiotherapy_performed' => Input::get('radiotherapy_performed'),
+                        'radiotherapy' => Input::get('radiotherapy'),
+                        'radiotherapy_start' => Input::get('radiotherapy_start'),
+                        'radiotherapy_ongoing' => Input::get('radiotherapy_ongoing'),
+                        'radiotherapy_end' => Input::get('radiotherapy_end'),
+                        'radiotherapy_dose' => Input::get('radiotherapy_dose'),
+                        'radiotherapy_frequecy' => Input::get('radiotherapy_frequecy'),
+                        'radiotherapy_remarks' => Input::get('radiotherapy_remarks'),
+                        'crf1_cmpltd_date' => Input::get('crf1_cmpltd_date'),
+                        'patient_id' => $_GET['cid'],
+                        'staff_id' => $user->data()->id,
+                        'status' => 1,
+                        'created_on' => date('Y-m-d'),
+                        'site_id' => $user->data()->site_id,
+                    ), Input::get('radiotherapy_id'));
+
+                    Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            } else {
+                $pageError = $validate->errors();
+            }
+        } elseif (Input::get('delete_radiotherapy')) {
+            $validate = $validate->check($_POST, array(
+                // 'diagnosis_date' => array(
+                //     'required' => true,
+                // ),
+            ));
+            if ($validate->passed()) {
+                try {
+                    $user->updateRecord('radiotherapy', array(
+                        'status' => 0,
+                    ), Input::get('radiotherapy_id'));
 
                     Redirect::to('info.php?id=6&cid=' . $_GET['cid'] . '&vid=' . $_GET['vid'] . '&vcode=' . $_GET['vcode'] . '&sid=' . $_GET['sid']);
                 } catch (Exception $e) {
@@ -3041,6 +3076,8 @@ if ($user->isLoggedIn()) {
                                                                                     placeholder="Remarks">
                                                                             </div>
                                                                         </div>
+                                                                        <input type="hidden" name="other_herbal"
+                                                                            value="<?= $patient['other_herbal'] ?>">
                                                                         <input type="submit" name="add_other_herbal"
                                                                             class="btn btn-success mt-2" value="Save" />
                                                                         <button type="button" class="btn btn-secondary mt-2"
@@ -3205,6 +3242,8 @@ if ($user->isLoggedIn()) {
                                                                                         </div>
                                                                                         <input type="hidden" name="herbal_id"
                                                                                             value="<?= $herbal['id'] ?>">
+                                                                                        <input type="hidden" name="other_herbal"
+                                                                                            value="<?= $patient['other_herbal'] ?>">
                                                                                         <input type="hidden"
                                                                                             name="crf1_cmpltd_date"
                                                                                             value="<?= $patient['crf1_cmpltd_date'] ?>">
@@ -3298,86 +3337,322 @@ if ($user->isLoggedIn()) {
                                                             </select>
                                                         </div>
 
-                                                        <div class="form-group">
-                                                            <label>Radiotherapy Details</label>
-                                                            <table class="table table-bordered" id="radiotherapy_table">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>Type of Radiotherapy</th>
-                                                                        <th>Start Date</th>
-                                                                        <th>Ongoing ?</th>
-                                                                        <th>End Date</th>
-                                                                        <th>Dose</th>
-                                                                        <th>Frequency</th>
-                                                                        <th>Remarks</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <?php
-                                                                    $x = 1;
-                                                                    foreach ($override->get1('radiotherapy', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']) as $radiotherapy) {
-                                                                        ?>
-                                                                        <tr>
-                                                                            <td><input
-                                                                                    value="<?= $radiotherapy['radiotherapy'] ?>"
-                                                                                    type="text" name="radiotherapy[]"
-                                                                                    class="form-control"></td>
-                                                                            <td><input
-                                                                                    value="<?= $radiotherapy['radiotherapy_start'] ?>"
-                                                                                    type="text" name="radiotherapy_start[]"
-                                                                                    class="form-control"><br><span>Example:
-                                                                                    2010-12-01</span>
-                                                                            </td>
-                                                                            <td>
-                                                                                <select name="radiotherapy_ongoing[]"
-                                                                                    class="form-control">
-                                                                                    <?php if ($radiotherapy['radiotherapy_ongoing'] == "1") { ?>
-                                                                                        <option
-                                                                                            value="<?= $radiotherapy['radiotherapy_ongoing'] ?>">
-                                                                                            Yes
-                                                                                        </option>
-                                                                                    <?php } elseif ($radiotherapy['radiotherapy_ongoing'] == "2") { ?>
-                                                                                        <option
-                                                                                            value="<?= $radiotherapy['radiotherapy_ongoing'] ?>">
-                                                                                            No
-                                                                                        </option>
-                                                                                    <?php } else { ?>
+                                                        <!-- Add Modal -->
+                                                        <div class="modal fade" id="addRadiotherapy" tabindex="-1"
+                                                            role="dialog">
+                                                            <div class="modal-dialog modal-lg" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">Add New Radiotherapy</h5>
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal">&times;</button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form method="post">
+                                                                            <div class="form-group row">
+                                                                                <label class="col-sm-3 col-form-label">Type
+                                                                                    of Radiotherapy</label>
+                                                                                <div class="col-sm-9">
+                                                                                    <input type="text" name="radiotherapy"
+                                                                                        class="form-control"
+                                                                                        placeholder="Type of Radiotherapy">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <label class="col-sm-3 col-form-label">Start
+                                                                                    Date</label>
+                                                                                <div class="col-sm-9">
+                                                                                    <input type="date"
+                                                                                        name="radiotherapy_start"
+                                                                                        class="form-control"
+                                                                                        placeholder="Start Date">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <label
+                                                                                    class="col-sm-3 col-form-label">Ongoing?</label>
+                                                                                <div class="col-sm-9">
+                                                                                    <select name="radiotherapy_ongoing"
+                                                                                        class="form-control">
                                                                                         <option value="">Select</option>
-                                                                                    <?php } ?>
-                                                                                    <option value="1">Yes</option>
-                                                                                    <option value="2">No</option>
-                                                                                </select>
-                                                                            </td>
-                                                                            <td><input
-                                                                                    value="<?= $radiotherapy['radiotherapy_end'] ?>"
-                                                                                    type="text" name="radiotherapy_end[]"
-                                                                                    class="form-control"><br><span>Example:
-                                                                                    2010-12-01</span></td>
-                                                                            <td><input
-                                                                                    value="<?= $radiotherapy['radiotherapy_dose'] ?>"
-                                                                                    type="text" name="radiotherapy_dose[]"
-                                                                                    class="form-control"><br><span>(Grays)</span>
-                                                                            </td>
-                                                                            <td><input
-                                                                                    value="<?= $radiotherapy['radiotherapy_frequecy'] ?>"
-                                                                                    type="text" name="radiotherapy_frequecy[]"
-                                                                                    class="form-control"><br><span>(numbers)</span>
-                                                                            </td>
-                                                                            <td><input
-                                                                                    value="<?= $radiotherapy['radiotherapy_remarks'] ?>"
-                                                                                    type="text" name="radiotherapy_remarks[]"
-                                                                                    class="form-control">
-                                                                            </td>
-                                                                            <td><input value="<?= $radiotherapy['id'] ?>"
-                                                                                    type="hidden" name="radiotherapy_id[]"></td>
-                                                                        </tr>
+                                                                                        <option value="1">Yes</option>
+                                                                                        <option value="2">No</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <label class="col-sm-3 col-form-label">End
+                                                                                    Date</label>
+                                                                                <div class="col-sm-9">
+                                                                                    <input type="date"
+                                                                                        name="radiotherapy_end"
+                                                                                        class="form-control"
+                                                                                        placeholder="End Date">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <label class="col-sm-3 col-form-label">Dose
+                                                                                    (Grays)</label>
+                                                                                <div class="col-sm-9">
+                                                                                    <input type="text"
+                                                                                        name="radiotherapy_dose"
+                                                                                        class="form-control"
+                                                                                        placeholder="Dose (Grays)">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <label
+                                                                                    class="col-sm-3 col-form-label">Frequency
+                                                                                    (numbers)</label>
+                                                                                <div class="col-sm-9">
+                                                                                    <input type="text"
+                                                                                        name="radiotherapy_frequecy"
+                                                                                        class="form-control"
+                                                                                        placeholder="Frequency (numbers)">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <label
+                                                                                    class="col-sm-3 col-form-label">Remarks</label>
+                                                                                <div class="col-sm-9">
+                                                                                    <input type="text"
+                                                                                        name="radiotherapy_remarks"
+                                                                                        class="form-control"
+                                                                                        placeholder="Remarks">
+                                                                                </div>
+                                                                            </div>
+                                                                            <input type="hidden" name="other_herbal"
+                                                                                value="<?= $patient['other_herbal'] ?>">
+                                                                            <input type="hidden"
+                                                                                name="radiotherapy_performed"
+                                                                                value="<?= $patient['radiotherapy_performed'] ?>">
+                                                                            <input type="submit" name="add_radiotherapy"
+                                                                                class="btn btn-success mt-2" value="Save">
+                                                                            <button type="button"
+                                                                                class="btn btn-secondary mt-2"
+                                                                                data-dismiss="modal">Cancel</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
+                                                        <div class="card card-primary">
+                                                            <div class="card-header">
+                                                                <h3 class="card-title">Radiotherapy</h3>
+                                                                <div class="card-tools">
+                                                                    <button type="button" class="btn btn-success btn-sm"
+                                                                        data-toggle="modal" data-target="#addRadiotherapy">
+                                                                        <i class="fas fa-plus"></i> Add New
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <table class="table table-bordered" id="radiotherapy_table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Type of Radiotherapy</th>
+                                                                            <th>Start Date</th>
+                                                                            <th>Ongoing ?</th>
+                                                                            <th>End Date</th>
+                                                                            <th>Dose</th>
+                                                                            <th>Frequency</th>
+                                                                            <th>Remarks</th>
+                                                                            <th>Actions</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
                                                                         <?php
-                                                                        $x++;
-                                                                    }
-                                                                    ?>
-                                                                </tbody>
-                                                            </table>
+                                                                        $x = 1;
+                                                                        foreach ($override->get1('radiotherapy', 'patient_id', $_GET['cid'], 'status', 1) as $radiotherapy) {
+                                                                            ?>
+                                                                            <tr>
+                                                                                <td><?= $radiotherapy['radiotherapy'] ?></td>
+                                                                                <td><?= $radiotherapy['radiotherapy_start'] ?>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <?= $radiotherapy['radiotherapy_ongoing'] == 1 ? "Yes" : "No" ?>
+                                                                                </td>
+                                                                                <td><?= $radiotherapy['radiotherapy_end'] ?>
+                                                                                </td>
+                                                                                <td><?= $radiotherapy['radiotherapy_dose'] ?>
+                                                                                </td>
+                                                                                <td><?= $radiotherapy['radiotherapy_frequecy'] ?>
+                                                                                </td>
+                                                                                <td><?= $radiotherapy['radiotherapy_remarks'] ?>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <button type="button"
+                                                                                        class="btn btn-success btn-sm"
+                                                                                        data-toggle="modal"
+                                                                                        data-target="#updateRadiotherapy<?= $radiotherapy['id'] ?>">
+                                                                                        <i class="fas fa-edit"></i> Update
+                                                                                    </button>
+                                                                                    <button type="button"
+                                                                                        class="btn btn-danger btn-sm"
+                                                                                        data-toggle="modal"
+                                                                                        data-target="#deleteRadiotherapy<?= $radiotherapy['id'] ?>">
+                                                                                        <i class="fas fa-trash"></i> Delete
+                                                                                    </button>
+                                                                                </td>
+                                                                            </tr>
+
+                                                                            <!-- Update Modal -->
+                                                                            <div class="modal fade"
+                                                                                id="updateRadiotherapy<?= $radiotherapy['id'] ?>"
+                                                                                tabindex="-1" role="dialog">
+                                                                                <div class="modal-dialog modal-lg"
+                                                                                    role="document">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h5 class="modal-title">Update
+                                                                                                Radiotherapy</h5>
+                                                                                            <button type="button" class="close"
+                                                                                                data-dismiss="modal">&times;</button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <form method="post">
+                                                                                                <div class="form-group row">
+                                                                                                    <label
+                                                                                                        class="col-sm-3 col-form-label">Type
+                                                                                                        of Radiotherapy</label>
+                                                                                                    <div class="col-sm-9">
+                                                                                                        <input type="text"
+                                                                                                            name="radiotherapy"
+                                                                                                            value="<?= $radiotherapy['radiotherapy'] ?>"
+                                                                                                            class="form-control">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="form-group row">
+                                                                                                    <label
+                                                                                                        class="col-sm-3 col-form-label">Start
+                                                                                                        Date</label>
+                                                                                                    <div class="col-sm-9">
+                                                                                                        <input type="date"
+                                                                                                            name="radiotherapy_start"
+                                                                                                            value="<?= $radiotherapy['radiotherapy_start'] ?>"
+                                                                                                            class="form-control">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="form-group row">
+                                                                                                    <label
+                                                                                                        class="col-sm-3 col-form-label">Ongoing?</label>
+                                                                                                    <div class="col-sm-9">
+                                                                                                        <select
+                                                                                                            name="radiotherapy_ongoing"
+                                                                                                            class="form-control">
+                                                                                                            <option value="1"
+                                                                                                                <?= $radiotherapy['radiotherapy_ongoing'] == 1 ? 'selected' : '' ?>>Yes
+                                                                                                            </option>
+                                                                                                            <option value="2"
+                                                                                                                <?= $radiotherapy['radiotherapy_ongoing'] == 2 ? 'selected' : '' ?>>No
+                                                                                                            </option>
+                                                                                                        </select>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="form-group row">
+                                                                                                    <label
+                                                                                                        class="col-sm-3 col-form-label">End
+                                                                                                        Date</label>
+                                                                                                    <div class="col-sm-9">
+                                                                                                        <input type="date"
+                                                                                                            name="radiotherapy_end"
+                                                                                                            value="<?= $radiotherapy['radiotherapy_end'] ?>"
+                                                                                                            class="form-control">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="form-group row">
+                                                                                                    <label
+                                                                                                        class="col-sm-3 col-form-label">Dose
+                                                                                                        (Grays)</label>
+                                                                                                    <div class="col-sm-9">
+                                                                                                        <input type="text"
+                                                                                                            name="radiotherapy_dose"
+                                                                                                            value="<?= $radiotherapy['radiotherapy_dose'] ?>"
+                                                                                                            class="form-control">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="form-group row">
+                                                                                                    <label
+                                                                                                        class="col-sm-3 col-form-label">Frequency
+                                                                                                        (numbers)</label>
+                                                                                                    <div class="col-sm-9">
+                                                                                                        <input type="text"
+                                                                                                            name="radiotherapy_frequecy"
+                                                                                                            value="<?= $radiotherapy['radiotherapy_frequecy'] ?>"
+                                                                                                            class="form-control">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="form-group row">
+                                                                                                    <label
+                                                                                                        class="col-sm-3 col-form-label">Remarks</label>
+                                                                                                    <div class="col-sm-9">
+                                                                                                        <input type="text"
+                                                                                                            name="radiotherapy_remarks"
+                                                                                                            value="<?= $radiotherapy['radiotherapy_remarks'] ?>"
+                                                                                                            class="form-control">
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <input type="hidden"
+                                                                                                    name="radiotherapy_id"
+                                                                                                    value="<?= $radiotherapy['id'] ?>">
+                                                                                                <input type="hidden"
+                                                                                                    name="other_herbal"
+                                                                                                    value="<?= $patient['other_herbal'] ?>">
+                                                                                                <input type="hidden"
+                                                                                                    name="radiotherapy_performed"
+                                                                                                    value="<?= $patient['radiotherapy_performed'] ?>">
+                                                                                                <input type="submit"
+                                                                                                    name="update_radiotherapy"
+                                                                                                    class="btn btn-success mt-2"
+                                                                                                    value="Save">
+                                                                                                <button type="button"
+                                                                                                    class="btn btn-secondary mt-2"
+                                                                                                    data-dismiss="modal">Cancel</button>
+                                                                                            </form>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <!-- Delete Modal -->
+                                                                            <div class="modal fade"
+                                                                                id="deleteRadiotherapy<?= $radiotherapy['id'] ?>"
+                                                                                tabindex="-1" role="dialog">
+                                                                                <div class="modal-dialog" role="document">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h5 class="modal-title">Delete
+                                                                                                Radiotherapy</h5>
+                                                                                            <button type="button" class="close"
+                                                                                                data-dismiss="modal">&times;</button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <p>Are you sure you want to delete
+                                                                                                this record?</p>
+                                                                                            <form method="post">
+                                                                                                <input type="hidden"
+                                                                                                    name="radiotherapy_id"
+                                                                                                    value="<?= $radiotherapy['id'] ?>">
+                                                                                                <input type="submit"
+                                                                                                    name="delete_radiotherapy"
+                                                                                                    class="btn btn-danger mt-2"
+                                                                                                    value="Delete">
+                                                                                                <button type="button"
+                                                                                                    class="btn btn-secondary mt-2"
+                                                                                                    data-dismiss="modal">Cancel</button>
+                                                                                            </form>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <?php
+                                                                            $x++;
+                                                                        }
+                                                                        ?>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <hr>
