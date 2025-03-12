@@ -2450,7 +2450,8 @@ if ($user->isLoggedIn()) {
                                                     diagnosis:</label>
                                                 <div class="col-sm-9">
                                                     <input value="<?= $patient['diagnosis_date'] ?>" type="date"
-                                                        name="diagnosis_date" id="diagnosis_date" class="form-control" required/>
+                                                        name="diagnosis_date" id="diagnosis_date" class="form-control"
+                                                        required />
                                                     <span>Example : 2000-12-26 </span>
                                                 </div>
                                             </div>
@@ -4174,8 +4175,8 @@ if ($user->isLoggedIn()) {
                                                         <div class="form-group">
                                                             <label for="surgery_performed">3. Is there any Surgery
                                                                 performed?</label>
-                                                            <select name="surgery_performed"
-                                                                id="surgery_performed" class="form-control" required>
+                                                            <select name="surgery_performed" id="surgery_performed"
+                                                                class="form-control" required>
                                                                 <?php if ($patient['surgery_performed'] == "1") { ?>
                                                                     <option value="<?= $patient['surgery_performed'] ?>">
                                                                         Yes

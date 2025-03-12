@@ -6186,9 +6186,8 @@ if ($user->isLoggedIn()) {
                                                     <th width="8%">Visit Name</th>
                                                     <th width="10%">Expected Date</th>
                                                     <th width="10%">Visit Date</th>
-                                                    <th width="5%">Status</th>
-                                                    <th width="15%">Action 1</th>
-                                                    <th width="15%">Action 2</th>
+                                                    <th width="20%">Status</th>
+                                                                                                        <th width="20%">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -6269,8 +6268,7 @@ if ($user->isLoggedIn()) {
                                                                         <a href="#addVisit<?= $visit['id'] ?>" role="button"
                                                                             class="btn btn-info" data-toggle="modal"><?= $btnV ?>Visit</a>
                                                                     <?php } ?>
-                                                                </td>
-                                                                <td>
+                                                              <hr>
 
                                                                     <?php if ($visit['status'] == 1 && $visit['visit_code'] == 'D0') { ?>
 
@@ -6427,9 +6425,7 @@ if ($user->isLoggedIn()) {
                                                 <th>Visit Name</th>
                                                 <th>Expected Date</th>
                                                 <th>Visit Date</th>
-                                                <th>Status</th>
-                                                <th>Action 1</th>
-                                                <!-- <th>Action 2</th> -->
+                                                <th>Status <hr> Action</th>
                                             </tfoot>
                                         </table>
                                     </div>
