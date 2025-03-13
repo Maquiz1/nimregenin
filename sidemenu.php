@@ -415,7 +415,26 @@ if ($user->isLoggedIn()) {
                             </a>
                         </li>
                     </ul>
-                </li>              
+                </li>    
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <span class="badge badge-info right"></span>
+                        <p>
+                            Reports <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">                
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <span class="badge badge-info right"></span>
+                                <p>Summary</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
                
 

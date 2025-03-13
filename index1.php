@@ -241,7 +241,7 @@ if ($user->isLoggedIn()) {
           <!-- Main row -->
           <div class="row">
 
-            <section class="content">
+            <section class="col-lg-12 content">
               <div class="container-fluid">
                 <div class="row">
                   <div class="col-md-12">
