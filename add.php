@@ -1104,9 +1104,9 @@ if ($user->isLoggedIn()) {
             }
         } elseif (Input::get('add_crf4')) {
             $validate = $validate->check($_POST, array(
-                // 'sample_date' => array(
-                //     'required' => true,
-                // ),
+                'sample_date' => array(
+                    'required' => true,
+                ),
             ));
             if ($validate->passed()) {
                 print_r($_POST);
@@ -1119,12 +1119,12 @@ if ($user->isLoggedIn()) {
                             'vcode' => $_GET["vcode"],
                             'sample_date' => Input::get('sample_date'),
                             'renal_urea' => Input::get('renal_urea'),
-                            'renal_urea_units' => Input::get('renal_urea_units'),
+                            // 'renal_urea_units' => Input::get('renal_urea_units'),
                             'renal_creatinine' => Input::get('renal_creatinine'),
-                            'renal_creatinine_units' => Input::get('renal_creatinine_units'),
+                            // 'renal_creatinine_units' => Input::get('renal_creatinine_units'),
                             'renal_creatinine_grade' => Input::get('renal_creatinine_grade'),
                             'renal_egfr' => Input::get('renal_egfr'),
-                            'renal_egfr_units' => Input::get('renal_egfr_units'),
+                            // 'renal_egfr_units' => Input::get('renal_egfr_units'),
                             'renal_egfr_grade' => Input::get('renal_egfr_grade'),
                             'liver_ast' => Input::get('liver_ast'),
                             'liver_ast_grade' => Input::get('liver_ast_grade'),
@@ -1142,10 +1142,10 @@ if ($user->isLoggedIn()) {
                             'liver_albumin' => Input::get('liver_albumin'),
                             'liver_albumin_grade' => Input::get('liver_albumin_grade'),
                             'liver_bilirubin_total' => Input::get('liver_bilirubin_total'),
-                            'liver_bilirubin_total_units' => Input::get('liver_bilirubin_total_units'),
+                            // 'liver_bilirubin_total_units' => Input::get('liver_bilirubin_total_units'),
                             'bilirubin_total_grade' => Input::get('bilirubin_total_grade'),
                             'liver_bilirubin_direct' => Input::get('liver_bilirubin_direct'),
-                            'liver_bilirubin_direct_units' => Input::get('liver_bilirubin_direct_units'),
+                            // 'liver_bilirubin_direct_units' => Input::get('liver_bilirubin_direct_units'),
                             'bilirubin_direct_grade' => Input::get('bilirubin_direct_grade'),
                             'rbg' => Input::get('rbg'),
                             'rbg_units' => Input::get('rbg_units'),
