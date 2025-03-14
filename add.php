@@ -6454,8 +6454,7 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
+                                            
 
 
                                         <div class="row">
@@ -6854,9 +6853,11 @@ if ($user->isLoggedIn()) {
 
                                         <div class="row-form clearfix" id="crf4_cmpltd_date">
                                             <div class="col-md-3">Date of Completion</div>
-                                            <input value="<?= $patient['crf4_cmpltd_date'] ?>" type="text"
+                                            <input value="<?= $patient['crf4_cmpltd_date'] ?>" type="date"
                                                 name="crf4_cmpltd_date" id="crf1_cmpltd_date" class="form-control" />
                                             <small>example : 2023-02-24</small>
+                                        </div>
+                                        </div>
                                         </div>
 
 
