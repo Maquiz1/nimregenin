@@ -8141,11 +8141,12 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?= $patient['self_care'] ?>">
                                                                 <?php if ($patient['self_care']) {
                                                                     if ($patient['self_care'] == 1) {
-                                                                        echo 'Sina tatizo katika kutembea';
+                                                                        echo 'Sina tatizo kujihudumia mwenyewe';
                                                                     } elseif ($patient['self_care'] == 2) {
-                                                                        echo 'Nina matatizo kiasi katika kutembea';
+                                                                        echo 'Nina matatizo kiasi katika kujisafisha au
+                                                                kuvaa mwenyewe';
                                                                     } elseif ($patient['self_care'] == 3) {
-                                                                        echo 'Siwezi kutembea kabisa';
+                                                                        echo 'Siwezi kujisafisha wala kuvaa mwenyewe';
                                                                     }
                                                                 } else {
                                                                     echo 'Select';
