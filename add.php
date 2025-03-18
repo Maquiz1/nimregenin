@@ -6552,32 +6552,26 @@ if ($user->isLoggedIn()) {
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col-sm-3">
-                                                                <div class="form-group">
+                                                                <div class="form-group" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
                                                                     <label for="hb">Hemoglobin levels (Hb)</label>
-                                                                    <input value="<?= $patient['hb'] ?>" type="text"
-                                                                        class="form-control" name="hb" id="hb" />
+                                                                    <input value="<?= $patient['hb'] ?>" type="text" class="form-control" name="hb" id="hb" />
                                                                     <span class="help-block">XX.X (mg/dl)</span>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-sm-3">
-                                                                <div class="form-group">
-                                                                    <label for="hb_grade">Grade</label>
-                                                                    <select name="hb_grade" id="hb_grade" class="form-control">
-                                                                        <option value="0" <?= $patient['hb_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
-                                                                        <option value="1" <?= $patient['hb_grade'] == "1" ? 'selected' : '' ?>>One</option>
-                                                                        <option value="2" <?= $patient['hb_grade'] == "2" ? 'selected' : '' ?>>Two</option>
-                                                                        <option value="3" <?= $patient['hb_grade'] == "3" ? 'selected' : '' ?>>Three</option>
-                                                                        <option value="4" <?= $patient['hb_grade'] == "4" ? 'selected' : '' ?>>Four</option>
-                                                                    </select>
+                                                                    <div class="input-group mt-1">
+                                                                        <select name="hb_grade" id="hb_grade" class="form-control select2">
+                                                                            <option value="0" <?= $patient['hb_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
+                                                                            <option value="1" <?= $patient['hb_grade'] == "1" ? 'selected' : '' ?>>One</option>
+                                                                            <option value="2" <?= $patient['hb_grade'] == "2" ? 'selected' : '' ?>>Two</option>
+                                                                            <option value="3" <?= $patient['hb_grade'] == "3" ? 'selected' : '' ?>>Three</option>
+                                                                            <option value="4" <?= $patient['hb_grade'] == "4" ? 'selected' : '' ?>>Four</option>
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-sm-3">
                                                                 <div class="form-group">
                                                                     <label for="hct">Hematocrit levels (Hct)</label>
-                                                                    <input value="<?= $patient['hct'] ?>" type="text"
-                                                                        class="form-control" name="hct" id="hct" />
+                                                                    <input value="<?= $patient['hct'] ?>" type="text" class="form-control" name="hct" id="hct" />
                                                                     <span class="help-block">XX ( % )</span>
                                                                 </div>
                                                             </div>
@@ -6585,225 +6579,163 @@ if ($user->isLoggedIn()) {
                                                             <div class="col-sm-3">
                                                                 <div class="form-group">
                                                                     <label for="rbc">Red blood cell count (RBC)</label>
-                                                                    <input value="<?= $patient['rbc'] ?>" type="text"
-                                                                        class="form-control" name="rbc" id="rbc" />
+                                                                    <input value="<?= $patient['rbc'] ?>" type="text" class="form-control" name="rbc" id="rbc" />
                                                                     <span class="help-block">XXXXXXX (cells/microliter)</span>
                                                                 </div>
                                                             </div>
-                                                        </div>
 
-                                                        <div class="row">
                                                             <div class="col-sm-3">
-                                                                <div class="form-group">
+                                                                <div class="form-group" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
                                                                     <label for="wbc">White blood cell count (WBC)</label>
-                                                                    <input value="<?= $patient['wbc'] ?>" type="text"
-                                                                        class="form-control" name="wbc" id="wbc" />
+                                                                    <input value="<?= $patient['wbc'] ?>" type="text" class="form-control" name="wbc" id="wbc" />
                                                                     <span class="help-block">XXXXXXX (cells/microliter)</span>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-sm-3">
-                                                                <div class="form-group">
-                                                                    <label for="wbc_grade">Grade</label>
-                                                                    <select name="wbc_grade" id="wbc_grade" class="form-control">
-                                                                        <option value="0" <?= $patient['wbc_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
-                                                                        <option value="1" <?= $patient['wbc_grade'] == "1" ? 'selected' : '' ?>>One</option>
-                                                                        <option value="2" <?= $patient['wbc_grade'] == "2" ? 'selected' : '' ?>>Two</option>
-                                                                        <option value="3" <?= $patient['wbc_grade'] == "3" ? 'selected' : '' ?>>Three</option>
-                                                                        <option value="4" <?= $patient['wbc_grade'] == "4" ? 'selected' : '' ?>>Four</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-sm-3">
-                                                                <div class="form-group">
-                                                                    <label for="abs_lymphocytes">ABS Lymphocytes</label>
-                                                                    <input value="<?= $patient['abs_lymphocytes'] ?>" type="text"
-                                                                        class="form-control" name="abs_lymphocytes"
-                                                                        id="abs_lymphocytes" />
-                                                                    <span class="help-block">XXXXX</span>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-sm-3">
-                                                                <div class="form-group">
-                                                                    <label for="abs_lymphocytes_grade">Grade</label>
-                                                                    <select name="abs_lymphocytes_grade" id="abs_lymphocytes_grade"
-                                                                        class="form-control">
-                                                                        <option value="0" <?= $patient['abs_lymphocytes_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
-                                                                        <option value="1" <?= $patient['abs_lymphocytes_grade'] == "1" ? 'selected' : '' ?>>One</option>
-                                                                        <option value="2" <?= $patient['abs_lymphocytes_grade'] == "2" ? 'selected' : '' ?>>Two</option>
-                                                                        <option value="3" <?= $patient['abs_lymphocytes_grade'] == "3" ? 'selected' : '' ?>>Three</option>
-                                                                        <option value="4" <?= $patient['abs_lymphocytes_grade'] == "4" ? 'selected' : '' ?>>Four</option>
-                                                                    </select>
+                                                                    <div class="input-group mt-1">
+                                                                        <select name="wbc_grade" id="wbc_grade" class="form-control select2">
+                                                                            <option value="0" <?= $patient['wbc_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
+                                                                            <option value="1" <?= $patient['wbc_grade'] == "1" ? 'selected' : '' ?>>One</option>
+                                                                            <option value="2" <?= $patient['wbc_grade'] == "2" ? 'selected' : '' ?>>Two</option>
+                                                                            <option value="3" <?= $patient['wbc_grade'] == "3" ? 'selected' : '' ?>>Three</option>
+                                                                            <option value="4" <?= $patient['wbc_grade'] == "4" ? 'selected' : '' ?>>Four</option>
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
 
                                                         <div class="row">
-                                                            <div class="col-sm-6">
-                                                                <div class="form-group">
-                                                                    <label for="plt">Platelet count (Plt)</label>
-                                                                    <input value="<?= $patient['plt'] ?>" type="text"
-                                                                        class="form-control" name="plt" id="plt" />
-                                                                    <span class="help-block">XXXXXX (cells/microliter)</span>
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
+                                                                    <label for="abs_lymphocytes">ABS Lymphocytes</label>
+                                                                    <input value="<?= $patient['abs_lymphocytes'] ?>" type="text" class="form-control" name="abs_lymphocytes" id="abs_lymphocytes" />
+                                                                    <span class="help-block">XXXXX</span>
+                                                                    <div class="input-group mt-1">
+                                                                        <select name="abs_lymphocytes_grade" id="abs_lymphocytes_grade" class="form-control select2">
+                                                                            <option value="0" <?= $patient['abs_lymphocytes_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
+                                                                            <option value="1" <?= $patient['abs_lymphocytes_grade'] == "1" ? 'selected' : '' ?>>One</option>
+                                                                            <option value="2" <?= $patient['abs_lymphocytes_grade'] == "2" ? 'selected' : '' ?>>Two</option>
+                                                                            <option value="3" <?= $patient['abs_lymphocytes_grade'] == "3" ? 'selected' : '' ?>>Three</option>
+                                                                            <option value="4" <?= $patient['abs_lymphocytes_grade'] == "4" ? 'selected' : '' ?>>Four</option>
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
                                                             </div>
 
-                                                            <div class="col-sm-6">
-                                                                <div class="form-group">
-                                                                    <label for="plt_grade">Grade</label>
-                                                                    <select name="plt_grade" id="plt_grade" class="form-control">
-                                                                        <option value="0" <?= $patient['plt_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
-                                                                        <option value="1" <?= $patient['plt_grade'] == "1" ? 'selected' : '' ?>>One</option>
-                                                                        <option value="2" <?= $patient['plt_grade'] == "2" ? 'selected' : '' ?>>Two</option>
-                                                                        <option value="3" <?= $patient['plt_grade'] == "3" ? 'selected' : '' ?>>Three</option>
-                                                                        <option value="4" <?= $patient['plt_grade'] == "4" ? 'selected' : '' ?>>Four</option>
-                                                                    </select>
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
+                                                                    <label>9. Cancer antigen 15-3</label>
+                                                                    <input value="<?= $patient['cancer'] ?>" type="text" name="cancer" id="cancer" class="form-control" />
+                                                                    <small>XX ( U/ml )</small>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
+                                                                    <label>9. PSA (Prostate specific antigen)</label>
+                                                                    <input value="<?= $patient['prostate'] ?>" type="text" name="prostate" id="prostate" class="form-control" />
+                                                                    <small>XX ( ng/ml )</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
+                                                                    <label>9. Chest X-ray</label>
+                                                                    <div class="input-group">
+                                                                        <select name="chest_xray" id="chest_xray" class="form-control" required>
+                                                                            <?php if ($patient['chest_xray'] == "1") { ?>
+                                                                                <option value="<?= $patient['chest_xray'] ?>">Normal</option>
+                                                                            <?php } elseif ($patient['chest_xray'] == "2") { ?>
+                                                                                <option value="<?= $patient['chest_xray'] ?>">Abnormal</option>
+                                                                            <?php } else { ?>
+                                                                                <option value="">Select</option>
+                                                                            <?php } ?>
+                                                                            <option value="1">Normal</option>
+                                                                            <option value="2">Abnormal</option>
+                                                                        </select>
+                                                                        <input value="<?= $patient['chest_specify'] ?>" type="text" name="chest_specify" class="form-control" placeholder="Specify (Report from Radiologist)" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
+                                                                    <label>10. CT-Scan chest and abdomen report</label>
+                                                                    <div class="input-group">
+                                                                        <select name="ct_chest" class="form-control" required>
+                                                                            <?php if ($patient['ct_chest'] == "1") { ?>
+                                                                                <option value="<?= $patient['ct_chest'] ?>">Normal</option>
+                                                                            <?php } elseif ($patient['ct_chest'] == "2") { ?>
+                                                                                <option value="<?= $patient['ct_chest'] ?>">Abnormal</option>
+                                                                            <?php } else { ?>
+                                                                                <option value="">Select</option>
+                                                                            <?php } ?>
+                                                                            <option value="1">Normal</option>
+                                                                            <option value="2">Abnormal</option>
+                                                                        </select>
+                                                                        <input value="<?= $patient['ct_chest_specify'] ?>" type="text" name="ct_chest_specify" class="form-control" placeholder="Specify (Report from Radiologist)" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
+                                                                    <label>11. Abdominal Ultrasound report</label>
+                                                                    <div class="input-group">
+                                                                        <select name="ultrasound" id="ultrasound" class="form-control" required>
+                                                                            <?php if ($patient['ultrasound'] == "1") { ?>
+                                                                                <option value="<?= $patient['ultrasound'] ?>">Normal</option>
+                                                                            <?php } elseif ($patient['ultrasound'] == "2") { ?>
+                                                                                <option value="<?= $patient['ultrasound'] ?>">Abnormal</option>
+                                                                            <?php } else { ?>
+                                                                                <option value="">Select</option>
+                                                                            <?php } ?>
+                                                                            <option value="1">Normal</option>
+                                                                            <option value="2">Abnormal</option>
+                                                                        </select>
+                                                                        <input value="<?= $patient['ultrasound_specify'] ?>" type="text" name="ultrasound_specify" class="form-control" placeholder="Specify (Report from Radiologist)" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
+                                                                    <label>12. Date of Completion</label>
+                                                                    <div class="input-group">
+                                                                        <input value="<?= $patient['crf4_cmpltd_date'] ?>" type="date" name="crf4_cmpltd_date" class="form-control" placeholder="Specify (Report from Radiologist)" required />
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-
-
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label>9. Cancer antigen 15-3</label>
-                                                            <input value="<?= $patient['cancer'] ?>" type="text" name="cancer"
-                                                                id="cancer" class="form-control" />
-                                                            <small>XX ( U/ml )</small>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- PSA Section -->
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label>9. PSA (Prostate specific antigen)</label>
-                                                            <input value="<?= $patient['prostate'] ?>" type="text" name="prostate"
-                                                                id="prostate" class="form-control" />
-                                                            <small>XX ( ng/ml )</small>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label>9. Chest X-ray</label>
-                                                            <select name="chest_xray" id="chest_xray" class="form-control">
-                                                                <?php if ($patient['chest_xray'] == "1") { ?>
-                                                                    <option value="<?= $patient['chest_xray'] ?>">Normal</option>
-                                                                <?php } elseif ($patient['chest_xray'] == "2") { ?>
-                                                                    <option value="<?= $patient['chest_xray'] ?>">Abnormal</option>
-                                                                <?php } else { ?>
-                                                                    <option value="">Select</option>
-                                                                <?php } ?>
-                                                                <option value="1">Normal</option>
-                                                                <option value="2">Abnormal</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6" id="chest_specify">
-                                                        <div class="form-group">
-                                                            <label>9. Specify (Report from Radiologist)</label>
-                                                            <input value="<?= $patient['chest_specify'] ?>" type="text"
-                                                                name="chest_specify" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label>10. CT-Scan chest and abdomen report</label>
-                                                            <select name="ct_chest" class="form-control" required>
-                                                                <?php if ($patient['ct_chest'] == "1") { ?>
-                                                                    <option value="<?= $patient['ct_chest'] ?>">Normal</option>
-                                                                <?php } elseif ($patient['ct_chest'] == "2") { ?>
-                                                                    <option value="<?= $patient['ct_chest'] ?>">Abnormal</option>
-                                                                <?php } else { ?>
-                                                                    <option value="">Select</option>
-                                                                <?php } ?>
-                                                                <option value="1">Normal</option>
-                                                                <option value="2">Abnormal</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6" id="ct_chest_specify">
-                                                        <div class="form-group">
-                                                            <label>10. Specify (Report from Radiologist)</label>
-                                                            <input value="<?= $patient['ct_chest_specify'] ?>" type="text"
-                                                                name="ct_chest_specify" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label>11. Abdominal Ultrasound report</label>
-                                                            <select name="ultrasound" id="ultrasound" class="form-control">
-                                                                <?php if ($patient['ultrasound'] == "1") { ?>
-                                                                    <option value="<?= $patient['ultrasound'] ?>">Normal</option>
-                                                                <?php } elseif ($patient['ultrasound'] == "2") { ?>
-                                                                    <option value="<?= $patient['ultrasound'] ?>">Abnormal</option>
-                                                                <?php } else { ?>
-                                                                    <option value="">Select</option>
-                                                                <?php } ?>
-                                                                <option value="1">Normal</option>
-                                                                <option value="2">Abnormal</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6" id="ultrasound_specify">
-                                                        <div class="form-group">
-                                                            <label>11. Specify (Report from Radiologist)</label>
-                                                            <input value="<?= $patient['ultrasound_specify'] ?>" type="text"
-                                                                name="ultrasound_specify" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row-form clearfix" id="crf4_cmpltd_date">
-                                                    <div class="col-md-3">Date of Completion</div>
-                                                    <input value="<?= $patient['crf4_cmpltd_date'] ?>" type="date"
-                                                        name="crf4_cmpltd_date" id="crf1_cmpltd_date" class="form-control" />
-                                                    <small>example : 2023-02-24</small>
                                                 </div>
                                             </div>
                                         </div>
-                                </div>
-                            </div>
 
-                            <div class="card-footer">
-                                <div class="form-group">
-                                    <input type="hidden" name="id" value="<?= $patient['id'] ?>">
-                                    <input type="submit" name="add_crf4" value="Submit" class="btn btn-info">
-                                    <a href="index1.php" class="btn btn-default">Cancel</a>
+                                        <div class="card-footer">
+                                            <div class="form-group">
+                                                <input type="hidden" name="id" value="<?= $patient['id'] ?>">
+                                                <input type="submit" name="add_crf4" value="Submit" class="btn btn-info">
+                                                <a href="index1.php" class="btn btn-default">Cancel</a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- Form End -->
                                 </div>
                             </div>
-                            </form>
-                            <!-- Form End -->
                         </div>
                     </div>
+                </section>
+                <!-- /.content -->
             </div>
-    </div>
-    </section>
-    <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-<?php } elseif ($_GET['id'] == 12) { ?>
+            <!-- /.content-wrapper -->
+        <?php } elseif ($_GET['id'] == 12) { ?>
 
-    <?php $patient = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
-    <?php $herbal_treatment = $override->get1('herbal_treatment', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
-    <?php $chemotherapy = $override->get1('chemotherapy', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
-    <?php $surgery = $override->get1('surgery', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
-    <?php
+            <?php $patient = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
+            <?php $herbal_treatment = $override->get1('herbal_treatment', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
+            <?php $chemotherapy = $override->get1('chemotherapy', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
+            <?php $surgery = $override->get1('surgery', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
+            <?php
 
             $patients = $override->get('clients', 'id', $_GET['cid'])[0];
             $visits_status = $override->firstRow1('visit', 'status', 'id', 'client_id', $_GET['cid'], 'visit_code', 'EV')[0]['status'];
@@ -6835,533 +6767,533 @@ if ($user->isLoggedIn()) {
 
             $name = 'Name: ' . $patients['firstname'] . ' ' . $patients['lastname'] . ' Age: ' . $patients['age'] . ' Gender: ' . $gender . ' Type: ' . $cat;
 
-    ?>
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Add New Position</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item">
-                                <a href="info.php?id=2">
-                                    < Back </a>
-                            </li>&nbsp;&nbsp;
-                            <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
-                            <li class="breadcrumb-item">
-                                <a href="info.php?id=2">
-                                    Go to Position list >
-                                </a>
-                            </li>&nbsp;&nbsp;
-                            <li class="breadcrumb-item active">Add New Position</li>
-                        </ol>
-                    </div>
-                </div>
-            </div><!-- /.container-fluid -->
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <?php
-                    // $staff = $override->getNews('user', 'status', 1, 'id', $_GET['staff_id'])[0];
-                    // $site = $override->get('site', 'id', $staff['site_id'])[0];
-                    $position = $override->get('position', 'id', $_GET['position_id'])[0];
-                    ?>
-                    <!-- right column -->
-                    <div class="col-md-12">
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <h3 class="card-title">CRF 5: ADVERSE EVENT TRACKING LOG
-                                </h3>
+            ?>
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1>Add New Position</h1>
                             </div>
-                            <form id="crf5" method="post">
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item">
+                                        <a href="info.php?id=2">
+                                            < Back </a>
+                                    </li>&nbsp;&nbsp;
+                                    <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
+                                    <li class="breadcrumb-item">
+                                        <a href="info.php?id=2">
+                                            Go to Position list >
+                                        </a>
+                                    </li>&nbsp;&nbsp;
+                                    <li class="breadcrumb-item active">Add New Position</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div><!-- /.container-fluid -->
+                </section>
 
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="row-form clearfix">
-                                                <div class="form-group">
-                                                    <label>Date Reported:</label>
-                                                    <?php
-                                                    $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                    foreach ($data as $st) {
-                                                        if ($st['date_reported'] != "") {
-                                                    ?>
-                                                            <div class="col-md-9"><input value="<?= $st['date_reported'] ?>"
-                                                                    class="validate[required,custom[date]]" type="text"
-                                                                    name="date_reported" id="date_reported" required />
-                                                                <span>Example: 2023-01-01</span>
-                                                            </div>
-                                                        <?php
-                                                        } else {
-                                                        ?>
-                                                            <div class="col-md-9"><input value=""
-                                                                    class="validate[required,custom[date]]" type="text"
-                                                                    name="date_reported" id="date_reported" required />
-                                                                <span>Example: 2023-01-01</span>
-                                                            </div>
-                                                    <?php
-                                                        }
-                                                    }
-                                                    ?>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-8">
-                                            <div class="row-form clearfix">
-                                                <div class="form-group">
-                                                    <label>Adverse Event Description:</label>
-                                                    <?php
-                                                    $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                    foreach ($data as $st) {
-                                                        if ($st['ae_description'] != "") {
-                                                    ?>
-                                                            <textarea value="<?= $st['tdate'] ?>" name="ae_description"
-                                                                rows="4"></textarea>
-                                                        <?php
-                                                        } else {
-                                                        ?>
-                                                            <textarea value="" name="ae_description" rows="4"></textarea>
-                                                    <?php
-                                                        }
-                                                    }
-                                                    ?>
-                                                </div>
-                                            </div>
-                                        </div>
+                <!-- Main content -->
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <?php
+                            // $staff = $override->getNews('user', 'status', 1, 'id', $_GET['staff_id'])[0];
+                            // $site = $override->get('site', 'id', $staff['site_id'])[0];
+                            $position = $override->get('position', 'id', $_GET['position_id'])[0];
+                            ?>
+                            <!-- right column -->
+                            <div class="col-md-12">
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">CRF 5: ADVERSE EVENT TRACKING LOG
+                                        </h3>
                                     </div>
+                                    <form id="crf5" method="post">
+
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Date Reported:</label>
+                                                            <?php
+                                                            $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                            foreach ($data as $st) {
+                                                                if ($st['date_reported'] != "") {
+                                                            ?>
+                                                                    <div class="col-md-9"><input value="<?= $st['date_reported'] ?>"
+                                                                            class="validate[required,custom[date]]" type="text"
+                                                                            name="date_reported" id="date_reported" required />
+                                                                        <span>Example: 2023-01-01</span>
+                                                                    </div>
+                                                                <?php
+                                                                } else {
+                                                                ?>
+                                                                    <div class="col-md-9"><input value=""
+                                                                            class="validate[required,custom[date]]" type="text"
+                                                                            name="date_reported" id="date_reported" required />
+                                                                        <span>Example: 2023-01-01</span>
+                                                                    </div>
+                                                            <?php
+                                                                }
+                                                            }
+                                                            ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-8">
+                                                    <div class="row-form clearfix">
+                                                        <div class="form-group">
+                                                            <label>Adverse Event Description:</label>
+                                                            <?php
+                                                            $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                            foreach ($data as $st) {
+                                                                if ($st['ae_description'] != "") {
+                                                            ?>
+                                                                    <textarea value="<?= $st['tdate'] ?>" name="ae_description"
+                                                                        rows="4"></textarea>
+                                                                <?php
+                                                                } else {
+                                                                ?>
+                                                                    <textarea value="" name="ae_description" rows="4"></textarea>
+                                                            <?php
+                                                                }
+                                                            }
+                                                            ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
 
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Adverse Event Category</label>
-                                                    <?php
-                                                    $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                    foreach ($data as $st) {
-                                                        if ($st['ae_category'] != "") {
-                                                    ?>
-                                                            <input value="<?= $st['ae_category'] ?>" type="text"
-                                                                name="ae_category" id="ae_category" required />
-                                                        <?php
-                                                        } else {
-                                                        ?>
-                                                            <input value="" type="text" name="ae_category" id="ae_category"
-                                                                required />
-                                                    <?php
-                                                        }
-                                                    }
-                                                    ?>
-                                                    <!-- <span>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="row-form clearfix">
+                                                        <!-- select -->
+                                                        <div class="form-group">
+                                                            <label>Adverse Event Category</label>
+                                                            <?php
+                                                            $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                            foreach ($data as $st) {
+                                                                if ($st['ae_category'] != "") {
+                                                            ?>
+                                                                    <input value="<?= $st['ae_category'] ?>" type="text"
+                                                                        name="ae_category" id="ae_category" required />
+                                                                <?php
+                                                                } else {
+                                                                ?>
+                                                                    <input value="" type="text" name="ae_category" id="ae_category"
+                                                                        required />
+                                                            <?php
+                                                                }
+                                                            }
+                                                            ?>
+                                                            <!-- <span>
                                                         <a href="http://safetyprofiler-ctep.nci.nih.gov/CTC/CTC.aspx" class="btn btn-info">
                                                             **lookup corresponding AE Category at: http://safetyprofiler-ctep.nci.nih.gov/CTC/CTC.aspx
                                                         </a>
                                                     </span> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <div class="row-form clearfix">
+                                                        <!-- select -->
+                                                        <div class="form-group">
+                                                            <label>Start date</label>
+                                                            <?php
+                                                            $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                            foreach ($data as $st) {
+                                                                if ($st['ae_start_date'] != "") {
+                                                            ?>
+                                                                    <input value="<?= $st['ae_start_date'] ?>" type="text"
+                                                                        name="ae_start_date" id="ae_start_date" />
+                                                                <?php
+                                                                } else {
+                                                                ?>
+                                                                    <input value="" type="text" name="ae_start_date" />
+                                                            <?php
+                                                                }
+                                                            }
+                                                            ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <div class="row-form clearfix">
+                                                        <!-- select -->
+                                                        <div class="form-group">
+                                                            <label>Ongoing ?</label>
+                                                            <select name="ae_ongoing" id="ae_ongoing" style="width: 100%;"
+                                                                required>
+                                                                <?php
+                                                                $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                                foreach ($data as $st) {
+                                                                    if ($st['ae_ongoing'] == 1) { ?>
+                                                                        <option value="<?= $st['ae_ongoing'] ?>">Yes</option>
+                                                                    <?php } else if ($st['ae_ongoing'] == 2) { ?>
+                                                                        <option value="<?= $st['ae_ongoing'] ?>">No</option>
+                                                                    <?php } else { ?>
+                                                                        <option value="">Select</option>
+                                                                <?php }
+                                                                } ?>
+                                                                <option value="1">Yes</option>
+                                                                <option value="2">No</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4" id="ae_end_date">
+                                                    <div class="row-form clearfix">
+                                                        <!-- select -->
+                                                        <div class="form-group">
+                                                            <label>End date:</label>
+                                                            <?php
+                                                            $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                            foreach ($data as $st) {
+                                                                if ($st['ae_end_date'] != "") {
+                                                            ?>
+                                                                    <input value="<?= $st['ae_end_date'] ?>" type="text"
+                                                                        name="ae_end_date" id="ae_end_date" />
+                                                                <?php
+                                                                } else {
+                                                                ?>
+                                                                    <input value="" type="text" name="ae_end_date" />
+                                                            <?php
+                                                                }
+                                                            }
+                                                            ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+
+                                                <div class="col-sm-4">
+                                                    <div class="row-form clearfix">
+                                                        <!-- select -->
+                                                        <div class="form-group">
+                                                            <label>Outcome</label>
+                                                            <select name="ae_outcome" id="ae_outcome" style="width: 100%;"
+                                                                required>
+                                                                <?php
+                                                                $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                                foreach ($data as $st) {
+                                                                    if ($st['ae_outcome'] == 0) { ?>
+                                                                        <option value="<?= $st['ae_outcome'] ?>">Fatal</option>
+                                                                    <?php } else if ($st['ae_outcome'] == 1) { ?>
+                                                                        <option value="<?= $st['ae_outcome'] ?>">Intervention
+                                                                            continues</option>
+                                                                    <?php } else if ($st['ae_outcome'] == 2) { ?>
+                                                                        <option value="<?= $st['ae_outcome'] ?>">Not recovered/not
+                                                                            resolved </option>
+                                                                    <?php } else if ($st['ae_outcome'] == 3) { ?>
+                                                                        <option value="<?= $st['ae_outcome'] ?>">Recovered
+                                                                            w/sequelae</option>
+                                                                    <?php } else if ($st['ae_outcome'] == 4) { ?>
+                                                                        <option value="<?= $st['ae_outcome'] ?>">Recovered w/o
+                                                                            sequelae</option>
+                                                                    <?php } else if ($st['ae_outcome'] == 5) { ?>
+                                                                        <option value="<?= $st['ae_outcome'] ?>">Recovered/
+                                                                            Resolving</option>
+                                                                    <?php } else { ?>
+                                                                        <option value="">Select</option>
+                                                                <?php }
+                                                                } ?>
+                                                                <option value="0">Fatal</option>
+                                                                <option value="1">Intervention continues</option>
+                                                                <option value="2">Not recovered/not resolved </option>
+                                                                <option value="3">Recovered w/sequelae</option>
+                                                                <option value="4">Recovered w/o sequelae</option>
+                                                                <option value="5">Recovered/ Resolving</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <div class="row-form clearfix">
+                                                        <!-- select -->
+                                                        <div class="form-group">
+                                                            <label>Severity</label>
+                                                            <select name="ae_severity" id="ae_severity" style="width: 100%;"
+                                                                required>
+                                                                <?php
+                                                                $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                                foreach ($data as $st) {
+                                                                    if ($st['ae_severity'] == 1) { ?>
+                                                                        <option value="<?= $st['ae_severity'] ?>">Mild</option>
+                                                                    <?php } else if ($st['ae_severity'] == 2) { ?>
+                                                                        <option value="<?= $st['ae_severity'] ?>">Moderate</option>
+                                                                    <?php } else if ($st['ae_severity'] == 3) { ?>
+                                                                        <option value="<?= $st['ae_severity'] ?>">severe </option>
+                                                                    <?php } else if ($st['ae_severity'] == 4) { ?>
+                                                                        <option value="<?= $st['ae_severity'] ?>">Life-threatening
+                                                                        </option>
+                                                                    <?php } else if ($st['ae_severity'] == 5) { ?>
+                                                                        <option value="<?= $st['ae_severity'] ?>">Fatal</option>
+                                                                    <?php } else { ?>
+                                                                        <option value="">Select</option>
+                                                                <?php }
+                                                                } ?>
+                                                                <option value="1">Mild</option>
+                                                                <option value="2">Moderate</option>
+                                                                <option value="3">severe</option>
+                                                                <option value="4">Life-threatening</option>
+                                                                <option value="5">Fatal</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="col-sm-4">
+                                                    <div class="row-form clearfix">
+                                                        <!-- select -->
+                                                        <div class="form-group">
+                                                            <label>Serious</label>
+                                                            <select name="ae_serious" id="ae_serious" style="width: 100%;"
+                                                                required>
+                                                                <?php
+                                                                $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                                foreach ($data as $st) {
+                                                                    if ($st['ae_serious'] == 1) { ?>
+                                                                        <option value="<?= $st['ae_serious'] ?>">Yes</option>
+                                                                    <?php } else if ($st['ae_serious'] == 2) { ?>
+                                                                        <option value="<?= $st['ae_serious'] ?>">No</option>
+                                                                    <?php } else { ?>
+                                                                        <option value="">Select</option>
+                                                                <?php }
+                                                                } ?>
+                                                                <option value="1">Yes</option>
+                                                                <option value="2">No</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="row-form clearfix">
+                                                        <!-- select -->
+                                                        <div class="form-group">
+                                                            <label>Expected</label>
+                                                            <select name="ae_expected" id="ae_expected" style="width: 100%;"
+                                                                required>
+                                                                <?php
+                                                                $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                                foreach ($data as $st) {
+                                                                    if ($st['ae_expected'] == 1) { ?>
+                                                                        <option value="<?= $st['ae_expected'] ?>">Yes</option>
+                                                                    <?php } else if ($st['ae_expected'] == 2) { ?>
+                                                                        <option value="<?= $st['ae_expected'] ?>">No</option>
+                                                                    <?php } else { ?>
+                                                                        <option value="">Select</option>
+                                                                <?php }
+                                                                } ?>
+                                                                <option value="1">Yes</option>
+                                                                <option value="2">No</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <div class="row-form clearfix">
+                                                        <!-- select -->
+                                                        <div class="form-group">
+                                                            <label>Treatment</label>
+                                                            <select name="ae_treatment" id="ae_treatment"
+                                                                style="width: 100%;" required>
+                                                                <?php
+                                                                $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                                foreach ($data as $st) {
+                                                                    if ($st['ae_treatment'] == 1) { ?>
+                                                                        <option value="<?= $st['ae_treatment'] ?>">Medication(s)
+                                                                        </option>
+                                                                    <?php } else if ($st['ae_treatment'] == 2) { ?>
+                                                                        <option value="<?= $st['ae_treatment'] ?>">Non-medication TX
+                                                                        </option>
+                                                                    <?php } else if ($st['ae_treatment'] == 3) { ?>
+                                                                        <option value="<?= $st['ae_treatment'] ?>">Subject
+                                                                            discontinued</option>
+                                                                    <?php } else { ?>
+                                                                        <option value="">Select</option>
+                                                                <?php }
+                                                                } ?>
+                                                                <option value="0">None</option>
+                                                                <option value="1">Medication(s)</option>
+                                                                <option value="2">Non-medication TX </option>
+                                                                <option value="3">Subject discontinued</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="row-form clearfix">
+                                                        <!-- select -->
+                                                        <div class="form-group">
+                                                            <label>Action Taken</label>
+                                                            <select name="ae_taken" id="ae_taken" style="width: 100%;"
+                                                                required>
+                                                                <?php
+                                                                $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                                foreach ($data as $st) {
+                                                                    if ($st['ae_taken'] == 0) { ?>
+                                                                        <option value="<?= $st['ae_taken'] ?>">Not Applicable
+                                                                        </option>
+                                                                    <?php } else if ($st['ae_taken'] == 1) { ?>
+                                                                        <option value="<?= $st['ae_taken'] ?>">None</option>
+                                                                    <?php } else if ($st['ae_taken'] == 2) { ?>
+                                                                        <option value="<?= $st['ae_taken'] ?>">Interrupted</option>
+                                                                    <?php } else if ($st['ae_taken'] == 3) { ?>
+                                                                        <option value="<?= $st['ae_taken'] ?>">Discontinued</option>
+                                                                    <?php } else { ?>
+                                                                        <option value="">Select</option>
+                                                                <?php }
+                                                                } ?>
+                                                                <option value="0">Not Applicable</option>
+                                                                <option value="1">None</option>
+                                                                <option value="2">Interrupted </option>
+                                                                <option value="3">Discontinued</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <div class="row-form clearfix">
+                                                        <!-- select -->
+                                                        <div class="form-group">
+                                                            <label>Relationship to study teatment</label>
+                                                            <select name="ae_relationship" id="ae_relationship"
+                                                                style="width: 100%;" required>
+                                                                <?php
+                                                                $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                                foreach ($data as $st) {
+                                                                    if ($st['ae_relationship'] == 1) { ?>
+                                                                        <option value="<?= $st['ae_relationship'] ?>">Unrelated
+                                                                        </option>
+                                                                    <?php } else if ($st['ae_relationship'] == 2) { ?>
+                                                                        <option value="<?= $st['ae_relationship'] ?>">Unlikely
+                                                                        </option>
+                                                                    <?php } else if ($st['ae_relationship'] == 3) { ?>
+                                                                        <option value="<?= $st['ae_relationship'] ?>">Possible
+                                                                        </option>
+                                                                    <?php } else if ($st['ae_relationship'] == 4) { ?>
+                                                                        <option value="<?= $st['ae_relationship'] ?>">Probable
+                                                                        </option>
+                                                                    <?php } else if ($st['ae_relationship'] == 5) { ?>
+                                                                        <option value="<?= $st['ae_relationship'] ?>">Definite
+                                                                        </option>
+                                                                    <?php } else { ?>
+                                                                        <option value="">Select</option>
+                                                                <?php }
+                                                                } ?>
+                                                                <option value="1">Unrelated</option>
+                                                                <option value="2">Unlikely</option>
+                                                                <option value="3">Possible </option>
+                                                                <option value="4">Probable</option>
+                                                                <option value="5">Definite</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="row-form clearfix">
+                                                        <!-- select -->
+                                                        <div class="form-group">
+                                                            <label>Staff Initials</label>
+                                                            <?php
+                                                            $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                            foreach ($data as $st) {
+                                                                if ($st['ae_staff_initial'] != "") {
+                                                            ?>
+                                                                    <input value="<?= $st['ae_staff_initial'] ?>" type="text"
+                                                                        name="ae_staff_initial" id="ae_staff_initial" />
+                                                                <?php
+                                                                } else {
+                                                                ?>
+                                                                    <input value="" type="text" name="ae_staff_initial"
+                                                                        id="ae_staff_initial" />
+                                                            <?php
+                                                                }
+                                                            }
+                                                            ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <div class="row-form clearfix">
+                                                        <!-- select -->
+                                                        <div class="form-group">
+                                                            <label>Date:</label>
+                                                            <?php
+                                                            $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                            foreach ($data as $st) {
+                                                                if ($st['ae_date'] != "") {
+                                                            ?>
+                                                                    <input value="<?= $st['ae_date'] ?>" type="text" name="ae_date"
+                                                                        id="ae_date" />
+
+                                                                <?php
+                                                                } else {
+                                                                ?>
+                                                                    <input value="" type="text" name="ae_date" id="ae_date" />
+                                                            <?php
+                                                                }
+                                                            }
+                                                            ?>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-
-
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Start date</label>
-                                                    <?php
-                                                    $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                    foreach ($data as $st) {
-                                                        if ($st['ae_start_date'] != "") {
-                                                    ?>
-                                                            <input value="<?= $st['ae_start_date'] ?>" type="text"
-                                                                name="ae_start_date" id="ae_start_date" />
-                                                        <?php
-                                                        } else {
-                                                        ?>
-                                                            <input value="" type="text" name="ae_start_date" />
-                                                    <?php
-                                                        }
-                                                    }
-                                                    ?>
-                                                </div>
+                                        <div class="card-footer">
+                                            <div class="form-group">
+                                                <input type="hidden" name="id" value="<?= $patient['id'] ?>">
+                                                <input type="submit" name="add_crf5" value="Submit" class="btn btn-info">
+                                                <a href="index1.php" class="btn btn-default">Cancel</a>
                                             </div>
                                         </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Ongoing ?</label>
-                                                    <select name="ae_ongoing" id="ae_ongoing" style="width: 100%;"
-                                                        required>
-                                                        <?php
-                                                        $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                        foreach ($data as $st) {
-                                                            if ($st['ae_ongoing'] == 1) { ?>
-                                                                <option value="<?= $st['ae_ongoing'] ?>">Yes</option>
-                                                            <?php } else if ($st['ae_ongoing'] == 2) { ?>
-                                                                <option value="<?= $st['ae_ongoing'] ?>">No</option>
-                                                            <?php } else { ?>
-                                                                <option value="">Select</option>
-                                                        <?php }
-                                                        } ?>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4" id="ae_end_date">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>End date:</label>
-                                                    <?php
-                                                    $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                    foreach ($data as $st) {
-                                                        if ($st['ae_end_date'] != "") {
-                                                    ?>
-                                                            <input value="<?= $st['ae_end_date'] ?>" type="text"
-                                                                name="ae_end_date" id="ae_end_date" />
-                                                        <?php
-                                                        } else {
-                                                        ?>
-                                                            <input value="" type="text" name="ae_end_date" />
-                                                    <?php
-                                                        }
-                                                    }
-                                                    ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-
-                                        <div class="col-sm-4">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Outcome</label>
-                                                    <select name="ae_outcome" id="ae_outcome" style="width: 100%;"
-                                                        required>
-                                                        <?php
-                                                        $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                        foreach ($data as $st) {
-                                                            if ($st['ae_outcome'] == 0) { ?>
-                                                                <option value="<?= $st['ae_outcome'] ?>">Fatal</option>
-                                                            <?php } else if ($st['ae_outcome'] == 1) { ?>
-                                                                <option value="<?= $st['ae_outcome'] ?>">Intervention
-                                                                    continues</option>
-                                                            <?php } else if ($st['ae_outcome'] == 2) { ?>
-                                                                <option value="<?= $st['ae_outcome'] ?>">Not recovered/not
-                                                                    resolved </option>
-                                                            <?php } else if ($st['ae_outcome'] == 3) { ?>
-                                                                <option value="<?= $st['ae_outcome'] ?>">Recovered
-                                                                    w/sequelae</option>
-                                                            <?php } else if ($st['ae_outcome'] == 4) { ?>
-                                                                <option value="<?= $st['ae_outcome'] ?>">Recovered w/o
-                                                                    sequelae</option>
-                                                            <?php } else if ($st['ae_outcome'] == 5) { ?>
-                                                                <option value="<?= $st['ae_outcome'] ?>">Recovered/
-                                                                    Resolving</option>
-                                                            <?php } else { ?>
-                                                                <option value="">Select</option>
-                                                        <?php }
-                                                        } ?>
-                                                        <option value="0">Fatal</option>
-                                                        <option value="1">Intervention continues</option>
-                                                        <option value="2">Not recovered/not resolved </option>
-                                                        <option value="3">Recovered w/sequelae</option>
-                                                        <option value="4">Recovered w/o sequelae</option>
-                                                        <option value="5">Recovered/ Resolving</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Severity</label>
-                                                    <select name="ae_severity" id="ae_severity" style="width: 100%;"
-                                                        required>
-                                                        <?php
-                                                        $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                        foreach ($data as $st) {
-                                                            if ($st['ae_severity'] == 1) { ?>
-                                                                <option value="<?= $st['ae_severity'] ?>">Mild</option>
-                                                            <?php } else if ($st['ae_severity'] == 2) { ?>
-                                                                <option value="<?= $st['ae_severity'] ?>">Moderate</option>
-                                                            <?php } else if ($st['ae_severity'] == 3) { ?>
-                                                                <option value="<?= $st['ae_severity'] ?>">severe </option>
-                                                            <?php } else if ($st['ae_severity'] == 4) { ?>
-                                                                <option value="<?= $st['ae_severity'] ?>">Life-threatening
-                                                                </option>
-                                                            <?php } else if ($st['ae_severity'] == 5) { ?>
-                                                                <option value="<?= $st['ae_severity'] ?>">Fatal</option>
-                                                            <?php } else { ?>
-                                                                <option value="">Select</option>
-                                                        <?php }
-                                                        } ?>
-                                                        <option value="1">Mild</option>
-                                                        <option value="2">Moderate</option>
-                                                        <option value="3">severe</option>
-                                                        <option value="4">Life-threatening</option>
-                                                        <option value="5">Fatal</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-
-                                        <div class="col-sm-4">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Serious</label>
-                                                    <select name="ae_serious" id="ae_serious" style="width: 100%;"
-                                                        required>
-                                                        <?php
-                                                        $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                        foreach ($data as $st) {
-                                                            if ($st['ae_serious'] == 1) { ?>
-                                                                <option value="<?= $st['ae_serious'] ?>">Yes</option>
-                                                            <?php } else if ($st['ae_serious'] == 2) { ?>
-                                                                <option value="<?= $st['ae_serious'] ?>">No</option>
-                                                            <?php } else { ?>
-                                                                <option value="">Select</option>
-                                                        <?php }
-                                                        } ?>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Expected</label>
-                                                    <select name="ae_expected" id="ae_expected" style="width: 100%;"
-                                                        required>
-                                                        <?php
-                                                        $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                        foreach ($data as $st) {
-                                                            if ($st['ae_expected'] == 1) { ?>
-                                                                <option value="<?= $st['ae_expected'] ?>">Yes</option>
-                                                            <?php } else if ($st['ae_expected'] == 2) { ?>
-                                                                <option value="<?= $st['ae_expected'] ?>">No</option>
-                                                            <?php } else { ?>
-                                                                <option value="">Select</option>
-                                                        <?php }
-                                                        } ?>
-                                                        <option value="1">Yes</option>
-                                                        <option value="2">No</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Treatment</label>
-                                                    <select name="ae_treatment" id="ae_treatment"
-                                                        style="width: 100%;" required>
-                                                        <?php
-                                                        $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                        foreach ($data as $st) {
-                                                            if ($st['ae_treatment'] == 1) { ?>
-                                                                <option value="<?= $st['ae_treatment'] ?>">Medication(s)
-                                                                </option>
-                                                            <?php } else if ($st['ae_treatment'] == 2) { ?>
-                                                                <option value="<?= $st['ae_treatment'] ?>">Non-medication TX
-                                                                </option>
-                                                            <?php } else if ($st['ae_treatment'] == 3) { ?>
-                                                                <option value="<?= $st['ae_treatment'] ?>">Subject
-                                                                    discontinued</option>
-                                                            <?php } else { ?>
-                                                                <option value="">Select</option>
-                                                        <?php }
-                                                        } ?>
-                                                        <option value="0">None</option>
-                                                        <option value="1">Medication(s)</option>
-                                                        <option value="2">Non-medication TX </option>
-                                                        <option value="3">Subject discontinued</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Action Taken</label>
-                                                    <select name="ae_taken" id="ae_taken" style="width: 100%;"
-                                                        required>
-                                                        <?php
-                                                        $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                        foreach ($data as $st) {
-                                                            if ($st['ae_taken'] == 0) { ?>
-                                                                <option value="<?= $st['ae_taken'] ?>">Not Applicable
-                                                                </option>
-                                                            <?php } else if ($st['ae_taken'] == 1) { ?>
-                                                                <option value="<?= $st['ae_taken'] ?>">None</option>
-                                                            <?php } else if ($st['ae_taken'] == 2) { ?>
-                                                                <option value="<?= $st['ae_taken'] ?>">Interrupted</option>
-                                                            <?php } else if ($st['ae_taken'] == 3) { ?>
-                                                                <option value="<?= $st['ae_taken'] ?>">Discontinued</option>
-                                                            <?php } else { ?>
-                                                                <option value="">Select</option>
-                                                        <?php }
-                                                        } ?>
-                                                        <option value="0">Not Applicable</option>
-                                                        <option value="1">None</option>
-                                                        <option value="2">Interrupted </option>
-                                                        <option value="3">Discontinued</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Relationship to study teatment</label>
-                                                    <select name="ae_relationship" id="ae_relationship"
-                                                        style="width: 100%;" required>
-                                                        <?php
-                                                        $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                        foreach ($data as $st) {
-                                                            if ($st['ae_relationship'] == 1) { ?>
-                                                                <option value="<?= $st['ae_relationship'] ?>">Unrelated
-                                                                </option>
-                                                            <?php } else if ($st['ae_relationship'] == 2) { ?>
-                                                                <option value="<?= $st['ae_relationship'] ?>">Unlikely
-                                                                </option>
-                                                            <?php } else if ($st['ae_relationship'] == 3) { ?>
-                                                                <option value="<?= $st['ae_relationship'] ?>">Possible
-                                                                </option>
-                                                            <?php } else if ($st['ae_relationship'] == 4) { ?>
-                                                                <option value="<?= $st['ae_relationship'] ?>">Probable
-                                                                </option>
-                                                            <?php } else if ($st['ae_relationship'] == 5) { ?>
-                                                                <option value="<?= $st['ae_relationship'] ?>">Definite
-                                                                </option>
-                                                            <?php } else { ?>
-                                                                <option value="">Select</option>
-                                                        <?php }
-                                                        } ?>
-                                                        <option value="1">Unrelated</option>
-                                                        <option value="2">Unlikely</option>
-                                                        <option value="3">Possible </option>
-                                                        <option value="4">Probable</option>
-                                                        <option value="5">Definite</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Staff Initials</label>
-                                                    <?php
-                                                    $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                    foreach ($data as $st) {
-                                                        if ($st['ae_staff_initial'] != "") {
-                                                    ?>
-                                                            <input value="<?= $st['ae_staff_initial'] ?>" type="text"
-                                                                name="ae_staff_initial" id="ae_staff_initial" />
-                                                        <?php
-                                                        } else {
-                                                        ?>
-                                                            <input value="" type="text" name="ae_staff_initial"
-                                                                id="ae_staff_initial" />
-                                                    <?php
-                                                        }
-                                                    }
-                                                    ?>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6">
-                                            <div class="row-form clearfix">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Date:</label>
-                                                    <?php
-                                                    $data = $override->get1('crf5', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                    foreach ($data as $st) {
-                                                        if ($st['ae_date'] != "") {
-                                                    ?>
-                                                            <input value="<?= $st['ae_date'] ?>" type="text" name="ae_date"
-                                                                id="ae_date" />
-
-                                                        <?php
-                                                        } else {
-                                                        ?>
-                                                            <input value="" type="text" name="ae_date" id="ae_date" />
-                                                    <?php
-                                                        }
-                                                    }
-                                                    ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </form>
+                                    <!-- Form End -->
                                 </div>
-                                <div class="card-footer">
-                                    <div class="form-group">
-                                        <input type="hidden" name="id" value="<?= $patient['id'] ?>">
-                                        <input type="submit" name="add_crf5" value="Submit" class="btn btn-info">
-                                        <a href="index1.php" class="btn btn-default">Cancel</a>
-                                    </div>
-                                </div>
-                            </form>
-                            <!-- Form End -->
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
+                <!-- /.content -->
             </div>
-        </section>
-        <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-<?php } elseif ($_GET['id'] == 13) { ?>
+            <!-- /.content-wrapper -->
+        <?php } elseif ($_GET['id'] == 13) { ?>
 
-    <?php $patient = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
-    <?php $herbal_treatment = $override->get1('herbal_treatment', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
-    <?php $chemotherapy = $override->get1('chemotherapy', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
-    <?php $surgery = $override->get1('surgery', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
-    <?php
+            <?php $patient = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
+            <?php $herbal_treatment = $override->get1('herbal_treatment', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
+            <?php $chemotherapy = $override->get1('chemotherapy', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
+            <?php $surgery = $override->get1('surgery', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
+            <?php
 
             $patients = $override->get('clients', 'id', $_GET['cid'])[0];
             $visits_status = $override->firstRow1('visit', 'status', 'id', 'client_id', $_GET['cid'], 'visit_code', 'EV')[0]['status'];
@@ -7393,549 +7325,549 @@ if ($user->isLoggedIn()) {
 
             $name = 'Name: ' . $patients['firstname'] . ' ' . $patients['lastname'] . ' Age: ' . $patients['age'] . ' Gender: ' . $gender . ' Type: ' . $cat;
 
-    ?>
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Add New Position</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item">
-                                <a href="info.php?id=2">
-                                    < Back </a>
-                            </li>&nbsp;&nbsp;
-                            <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
-                            <li class="breadcrumb-item">
-                                <a href="info.php?id=2">
-                                    Go to Position list >
-                                </a>
-                            </li>&nbsp;&nbsp;
-                            <li class="breadcrumb-item active">Add New Position</li>
-                        </ol>
-                    </div>
-                </div>
-            </div><!-- /.container-fluid -->
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <?php
-                    // $staff = $override->getNews('user', 'status', 1, 'id', $_GET['staff_id'])[0];
-                    // $site = $override->get('site', 'id', $staff['site_id'])[0];
-                    $position = $override->get('position', 'id', $_GET['position_id'])[0];
-                    ?>
-                    <!-- right column -->
-                    <div class="col-md-12">
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <h3 class="card-title">CRF 6: TERMINATION OF STUDY
-                                </h3>
+            ?>
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1>Add New Position</h1>
                             </div>
-                            <form id="crf6" method="post">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="today_date">1.a Today's date:</label>
-                                                <?php
-                                                $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                if ($data) {
-                                                    foreach ($data as $st) {
-                                                        if ($st['today_date'] != "") {
-                                                ?>
-                                                            <input value="<?= $st['today_date'] ?>" class="form-control"
-                                                                type="date" name="today_date" id="today_date" required />
-                                                            <span class="form-text text-muted">Example: 2023-01-01</span>
-                                                    <?php
-                                                        }
-                                                    }
-                                                } else {
-                                                    ?>
-                                                    <input value="" class="form-control" type="date" name="today_date"
-                                                        id="today_date" required />
-                                                    <span class="form-text text-muted">Example: 2023-01-01</span>
-                                                <?php
-                                                } ?>
-                                            </div>
-                                        </div>
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item">
+                                        <a href="info.php?id=2">
+                                            < Back </a>
+                                    </li>&nbsp;&nbsp;
+                                    <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
+                                    <li class="breadcrumb-item">
+                                        <a href="info.php?id=2">
+                                            Go to Position list >
+                                        </a>
+                                    </li>&nbsp;&nbsp;
+                                    <li class="breadcrumb-item active">Add New Position</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div><!-- /.container-fluid -->
+                </section>
 
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="terminate_date">1.b Date patient terminated the
-                                                    study:</label>
-                                                <?php
-                                                $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                if ($data) {
-                                                    foreach ($data as $st) {
-                                                        if ($st['terminate_date'] != "") {
-                                                ?>
-                                                            <input value="<?= $st['terminate_date'] ?>" class="form-control"
-                                                                type="date" name="terminate_date" id="terminate_date"
-                                                                required />
-                                                            <span class="form-text text-muted">Example: 2023-01-01</span>
-                                                    <?php
-                                                        }
-                                                    }
-                                                } else {
-                                                    ?>
-                                                    <input value="" class="form-control" type="date"
-                                                        name="terminate_date" id="terminate_date" required />
-                                                    <span class="form-text text-muted">Example: 2023-01-01</span>
-                                                <?php
-                                                } ?>
-                                            </div>
-                                        </div>
+                <!-- Main content -->
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <?php
+                            // $staff = $override->getNews('user', 'status', 1, 'id', $_GET['staff_id'])[0];
+                            // $site = $override->get('site', 'id', $staff['site_id'])[0];
+                            $position = $override->get('position', 'id', $_GET['position_id'])[0];
+                            ?>
+                            <!-- right column -->
+                            <div class="col-md-12">
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">CRF 6: TERMINATION OF STUDY
+                                        </h3>
                                     </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label>2. Reason for study termination</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="completed120days">2. a. Patient completed 120 days of
-                                                    follow-up</label>
-                                                <select name="completed120days" id="completed120days"
-                                                    class="form-control" required>
-                                                    <?php
-                                                    $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                    foreach ($data as $st) {
-                                                        if ($st['completed120days'] == 1) { ?>
-                                                            <option value="<?= $st['completed120days'] ?>">Yes</option>
-                                                        <?php } else if ($st['completed120days'] == 2) { ?>
-                                                            <option value="<?= $st['completed120days'] ?>">No</option>
-                                                        <?php } else { ?>
-                                                            <option value="">Select</option>
-                                                    <?php }
-                                                    } ?>
-                                                    <option value="1">Yes</option>
-                                                    <option value="2">No</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="reported_dead">2. b. Patient is reported/known to have
-                                                    died</label>
-                                                <select name="reported_dead" id="reported_dead" class="form-control"
-                                                    required>
-                                                    <?php
-                                                    $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                    foreach ($data as $st) {
-                                                        if ($st['reported_dead'] == 1) { ?>
-                                                            <option value="<?= $st['reported_dead'] ?>">Yes</option>
-                                                        <?php } else if ($st['reported_dead'] == 2) { ?>
-                                                            <option value="<?= $st['reported_dead'] ?>">No</option>
-                                                        <?php } else { ?>
-                                                            <option value="">Select</option>
-                                                    <?php }
-                                                    } ?>
-                                                    <option value="1">Yes</option>
-                                                    <option value="2">No</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="withdrew_consent">2. c. Patient withdrew consent to
-                                                    participate</label>
-                                                <select name="withdrew_consent" id="withdrew_consent"
-                                                    class="form-control" required>
-                                                    <?php
-                                                    $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                    foreach ($data as $st) {
-                                                        if ($st['withdrew_consent'] == 1) { ?>
-                                                            <option value="<?= $st['withdrew_consent'] ?>">Yes</option>
-                                                        <?php } else if ($st['withdrew_consent'] == 2) { ?>
-                                                            <option value="<?= $st['withdrew_consent'] ?>">No</option>
-                                                        <?php } else { ?>
-                                                            <option value="">Select</option>
-                                                    <?php }
-                                                    } ?>
-                                                    <option value="1">Yes</option>
-                                                    <option value="2">No</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row" id="start_end_date">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="start_date">2.a.i Start date</label>
-                                                <?php
-                                                $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                if ($data) {
-                                                    foreach ($data as $st) {
-                                                        if ($st['start_date'] != "") {
-                                                ?>
-                                                            <input value="<?= $st['start_date'] ?>" class="form-control"
-                                                                type="date" name="start_date" id="start_date" required />
+                                    <form id="crf6" method="post">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="today_date">1.a Today's date:</label>
+                                                        <?php
+                                                        $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                        if ($data) {
+                                                            foreach ($data as $st) {
+                                                                if ($st['today_date'] != "") {
+                                                        ?>
+                                                                    <input value="<?= $st['today_date'] ?>" class="form-control"
+                                                                        type="date" name="today_date" id="today_date" required />
+                                                                    <span class="form-text text-muted">Example: 2023-01-01</span>
+                                                            <?php
+                                                                }
+                                                            }
+                                                        } else {
+                                                            ?>
+                                                            <input value="" class="form-control" type="date" name="today_date"
+                                                                id="today_date" required />
                                                             <span class="form-text text-muted">Example: 2023-01-01</span>
                                                         <?php
-                                                        } else { ?>
+                                                        } ?>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="terminate_date">1.b Date patient terminated the
+                                                            study:</label>
+                                                        <?php
+                                                        $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                        if ($data) {
+                                                            foreach ($data as $st) {
+                                                                if ($st['terminate_date'] != "") {
+                                                        ?>
+                                                                    <input value="<?= $st['terminate_date'] ?>" class="form-control"
+                                                                        type="date" name="terminate_date" id="terminate_date"
+                                                                        required />
+                                                                    <span class="form-text text-muted">Example: 2023-01-01</span>
+                                                            <?php
+                                                                }
+                                                            }
+                                                        } else {
+                                                            ?>
+                                                            <input value="" class="form-control" type="date"
+                                                                name="terminate_date" id="terminate_date" required />
+                                                            <span class="form-text text-muted">Example: 2023-01-01</span>
+                                                        <?php
+                                                        } ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>2. Reason for study termination</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label for="completed120days">2. a. Patient completed 120 days of
+                                                            follow-up</label>
+                                                        <select name="completed120days" id="completed120days"
+                                                            class="form-control" required>
+                                                            <?php
+                                                            $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                            foreach ($data as $st) {
+                                                                if ($st['completed120days'] == 1) { ?>
+                                                                    <option value="<?= $st['completed120days'] ?>">Yes</option>
+                                                                <?php } else if ($st['completed120days'] == 2) { ?>
+                                                                    <option value="<?= $st['completed120days'] ?>">No</option>
+                                                                <?php } else { ?>
+                                                                    <option value="">Select</option>
+                                                            <?php }
+                                                            } ?>
+                                                            <option value="1">Yes</option>
+                                                            <option value="2">No</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label for="reported_dead">2. b. Patient is reported/known to have
+                                                            died</label>
+                                                        <select name="reported_dead" id="reported_dead" class="form-control"
+                                                            required>
+                                                            <?php
+                                                            $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                            foreach ($data as $st) {
+                                                                if ($st['reported_dead'] == 1) { ?>
+                                                                    <option value="<?= $st['reported_dead'] ?>">Yes</option>
+                                                                <?php } else if ($st['reported_dead'] == 2) { ?>
+                                                                    <option value="<?= $st['reported_dead'] ?>">No</option>
+                                                                <?php } else { ?>
+                                                                    <option value="">Select</option>
+                                                            <?php }
+                                                            } ?>
+                                                            <option value="1">Yes</option>
+                                                            <option value="2">No</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label for="withdrew_consent">2. c. Patient withdrew consent to
+                                                            participate</label>
+                                                        <select name="withdrew_consent" id="withdrew_consent"
+                                                            class="form-control" required>
+                                                            <?php
+                                                            $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                            foreach ($data as $st) {
+                                                                if ($st['withdrew_consent'] == 1) { ?>
+                                                                    <option value="<?= $st['withdrew_consent'] ?>">Yes</option>
+                                                                <?php } else if ($st['withdrew_consent'] == 2) { ?>
+                                                                    <option value="<?= $st['withdrew_consent'] ?>">No</option>
+                                                                <?php } else { ?>
+                                                                    <option value="">Select</option>
+                                                            <?php }
+                                                            } ?>
+                                                            <option value="1">Yes</option>
+                                                            <option value="2">No</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" id="start_end_date">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="start_date">2.a.i Start date</label>
+                                                        <?php
+                                                        $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                        if ($data) {
+                                                            foreach ($data as $st) {
+                                                                if ($st['start_date'] != "") {
+                                                        ?>
+                                                                    <input value="<?= $st['start_date'] ?>" class="form-control"
+                                                                        type="date" name="start_date" id="start_date" required />
+                                                                    <span class="form-text text-muted">Example: 2023-01-01</span>
+                                                                <?php
+                                                                } else { ?>
+                                                                    <input value="" class="form-control" type="date" name="start_date"
+                                                                        id="start_date" />
+                                                                    <span class="form-text text-muted">Example: 2023-01-01</span>
+                                                            <?php
+                                                                }
+                                                            }
+                                                        } else {
+                                                            ?>
                                                             <input value="" class="form-control" type="date" name="start_date"
-                                                                id="start_date" />
-                                                            <span class="form-text text-muted">Example: 2023-01-01</span>
-                                                    <?php
-                                                        }
-                                                    }
-                                                } else {
-                                                    ?>
-                                                    <input value="" class="form-control" type="date" name="start_date"
-                                                        id="start_date" required />
-                                                    <span class="form-text text-muted">Example: 2023-01-01</span>
-                                                <?php
-                                                } ?>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="end_date">2.a.ii End date:</label>
-                                                <?php
-                                                $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                if ($data) {
-                                                    foreach ($data as $st) {
-                                                        if ($st['end_date'] != "") {
-                                                ?>
-                                                            <input value="<?= $st['end_date'] ?>" class="form-control"
-                                                                type="date" name="end_date" id="end_date" required />
+                                                                id="start_date" required />
                                                             <span class="form-text text-muted">Example: 2023-01-01</span>
                                                         <?php
-                                                        } else { ?>
+                                                        } ?>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="end_date">2.a.ii End date:</label>
+                                                        <?php
+                                                        $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                        if ($data) {
+                                                            foreach ($data as $st) {
+                                                                if ($st['end_date'] != "") {
+                                                        ?>
+                                                                    <input value="<?= $st['end_date'] ?>" class="form-control"
+                                                                        type="date" name="end_date" id="end_date" required />
+                                                                    <span class="form-text text-muted">Example: 2023-01-01</span>
+                                                                <?php
+                                                                } else { ?>
+                                                                    <input value="" class="form-control" type="date" name="end_date"
+                                                                        id="end_date" />
+                                                                    <span class="form-text text-muted">Example: 2023-01-01</span>
+                                                            <?php
+                                                                }
+                                                            }
+                                                        } else {
+                                                            ?>
                                                             <input value="" class="form-control" type="date" name="end_date"
                                                                 id="end_date" />
-                                                            <span class="form-text text-muted">Example: 2023-01-01</span>
-                                                    <?php
-                                                        }
-                                                    }
-                                                } else {
-                                                    ?>
-                                                    <input value="" class="form-control" type="date" name="end_date"
-                                                        id="end_date" />
-                                                <?php
-                                                } ?>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row" id="death_details">
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="date_death">2. b.i When was the date of death?</label>
-                                                <?php
-                                                $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                if ($data) {
-                                                    foreach ($data as $st) {
-                                                        if ($st['date_death'] != "") {
-                                                ?>
-                                                            <input value="<?= $st['date_death'] ?>" class="form-control"
-                                                                type="date" name="date_death" id="date_death" />
-                                                    <?php
-                                                        }
-                                                    }
-                                                } else {
-                                                    ?>
-                                                    <input value="" class="form-control" type="date" name="date_death"
-                                                        id="date_death" />
-                                                <?php
-                                                } ?>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="primary_cause">2. b.ii The primary cause of
-                                                    death</label>
-                                                <?php
-                                                $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                if ($data) {
-                                                    foreach ($data as $st) {
-                                                        if ($st['primary_cause'] != "") {
-                                                ?>
-                                                            <textarea class="form-control" name="primary_cause"
-                                                                rows="4"><?= $st['primary_cause'] ?></textarea>
-                                                    <?php
-                                                        }
-                                                    }
-                                                } else {
-                                                    ?>
-                                                    <textarea class="form-control" name="primary_cause"
-                                                        rows="4"></textarea>
-                                                <?php
-                                                } ?>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="secondary_cause">2. b.iii The secondary cause of
-                                                    death</label>
-                                                <?php
-                                                $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                if ($data) {
-                                                    foreach ($data as $st) {
-                                                        if ($st['secondary_cause'] != "") {
-                                                ?>
-                                                            <textarea class="form-control" name="secondary_cause"
-                                                                rows="4"><?= $st['secondary_cause'] ?></textarea>
-                                                    <?php
-                                                        }
-                                                    }
-                                                } else {
-                                                    ?>
-                                                    <textarea class="form-control" name="secondary_cause"
-                                                        rows="4"></textarea>
-                                                <?php
-                                                } ?>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row" id="withdrew_reason1">
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label for="withdrew_reason">2. b). Reason for withdrawal</label>
-                                                <select name="withdrew_reason" id="withdrew_reason"
-                                                    class="form-control">
-                                                    <?php
-                                                    $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                    foreach ($data as $st) {
-                                                        if ($st['withdrew_reason'] == 1) { ?>
-                                                            <option value="<?= $st['withdrew_reason'] ?>">Unwilling to say
-                                                            </option>
-                                                        <?php } else if ($st['withdrew_reason'] == 2) { ?>
-                                                            <option value="<?= $st['withdrew_reason'] ?>">Side effects of
-                                                                the herbal preparation (NIMRCAF/ Covidol / Bupiji )</option>
-                                                        <?php } else if ($st['withdrew_reason'] == 3) { ?>
-                                                            <option value="<?= $st['withdrew_reason'] ?>">Side effects of
-                                                                Standard Care</option>
-                                                        <?php } else if ($st['withdrew_reason'] == 4) { ?>
-                                                            <option value="<?= $st['withdrew_reason'] ?>">Moving to another
-                                                                area</option>
-                                                        <?php } else if ($st['withdrew_reason'] == 5) { ?>
-                                                            <option value="<?= $st['withdrew_reason'] ?>">Other
-                                                                {withdrew_other}</option>
-                                                        <?php } else { ?>
-                                                            <option value="">Select</option>
-                                                    <?php }
-                                                    } ?>
-                                                    <option value="1">Unwilling to say</option>
-                                                    <option value="2">Side effects of the herbal preparation
-                                                        (NIMRCAF/ Covidol / Bupiji )</option>
-                                                    <option value="3">Side effects of Standard Care</option>
-                                                    <option value="4">Moving to another area</option>
-                                                    <option value="5">Other {withdrew_other}</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-12" id="withdrew_other">
-                                            <div class="form-group">
-                                                <label for="withdrew_other">2 d) Specify the reason</label>
-                                                <?php
-                                                $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                if ($data) {
-                                                    foreach ($data as $st) {
-                                                        if ($st['withdrew_other'] != "") {
-                                                ?>
-                                                            <textarea class="form-control" name="withdrew_other"
-                                                                rows="4"><?= $st['withdrew_other'] ?></textarea>
-                                                    <?php
-                                                        }
-                                                    }
-                                                } else {
-                                                    ?>
-                                                    <textarea class="form-control" name="withdrew_other"
-                                                        rows="4"></textarea>
-                                                <?php
-                                                } ?>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="outcome">4. Outcome</label>
-                                                <select name="outcome" id="outcome" class="form-control" required>
-                                                    <?php
-                                                    $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                    foreach ($data as $st) {
-                                                        if ($st['outcome'] == 1) { ?>
-                                                            <option value="<?= $st['outcome'] ?>">Recovered/Resolved
-                                                            </option>
-                                                        <?php } else if ($st['outcome'] == 2) { ?>
-                                                            <option value="<?= $st['outcome'] ?>">Recovered with sequelae
-                                                            </option>
-                                                        <?php } else if ($st['outcome'] == 3) { ?>
-                                                            <option value="<?= $st['outcome'] ?>">Severity worsened</option>
-                                                        <?php } else if ($st['outcome'] == 4) { ?>
-                                                            <option value="<?= $st['outcome'] ?>">Recovering/Resolving at
-                                                                the end of study</option>
-                                                        <?php } else if ($st['outcome'] == 5) { ?>
-                                                            <option value="<?= $st['outcome'] ?>">Not recovered/resolved at
-                                                                the end of study</option>
-                                                        <?php } else if ($st['outcome'] == 6) { ?>
-                                                            <option value="<?= $st['outcome'] ?>">Unknown/Lost to follow up
-                                                            </option>
-                                                        <?php } else { ?>
-                                                            <option value="">Select</option>
-                                                    <?php }
-                                                    } ?>
-                                                    <option value="1">Recovered/Resolved</option>
-                                                    <option value="2">Recovered with sequelae</option>
-                                                    <option value="3">Severity worsened</option>
-                                                    <option value="4">Recovering/Resolving at the end of study
-                                                    </option>
-                                                    <option value="5">Not recovered/resolved at the end of study
-                                                    </option>
-                                                    <option value="6">Unknown/Lost to follow up</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="outcome_date">5. Outcome date</label>
-                                                <?php
-                                                $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                if ($data) {
-                                                    foreach ($data as $st) {
-                                                        if ($st['outcome_date'] != "") {
-                                                ?>
-                                                            <input value="<?= $st['outcome_date'] ?>" class="form-control"
-                                                                type="date" name="outcome_date" id="outcome_date" />
-                                                    <?php
-                                                        }
-                                                    }
-                                                } else {
-                                                    ?>
-                                                    <input value="" class="form-control" type="date" name="outcome_date"
-                                                        id="outcome_date" />
-                                                <?php
-                                                } ?>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label>6. Provide/summarise the adverse event</label>
-                                                <?php
-                                                $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                if ($data) {
-                                                    foreach ($data as $st) {
-                                                        if ($st['summary'] != "") {
-                                                ?>
-                                                            <textarea class="form-control" name="summary"
-                                                                rows="4"><?= $st['summary'] ?></textarea>
-                                                    <?php
-                                                        }
-                                                    }
-                                                } else {
-                                                    ?>
-                                                    <textarea class="form-control" name="summary" rows="4"></textarea>
-                                                <?php
-                                                } ?>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label>7. Responsible Clinician Name</label>
-                                                <?php
-                                                $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                if ($data) {
-                                                    foreach ($data as $st) {
-                                                        if ($st['clinician_name'] != "") {
-                                                ?>
-                                                            <input value="<?= $st['clinician_name'] ?>" type="text"
-                                                                name="clinician_name" id="clinician_name"
-                                                                class="form-control" />
                                                         <?php
-                                                        } else { ?>
+                                                        } ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" id="death_details">
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label for="date_death">2. b.i When was the date of death?</label>
+                                                        <?php
+                                                        $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                        if ($data) {
+                                                            foreach ($data as $st) {
+                                                                if ($st['date_death'] != "") {
+                                                        ?>
+                                                                    <input value="<?= $st['date_death'] ?>" class="form-control"
+                                                                        type="date" name="date_death" id="date_death" />
+                                                            <?php
+                                                                }
+                                                            }
+                                                        } else {
+                                                            ?>
+                                                            <input value="" class="form-control" type="date" name="date_death"
+                                                                id="date_death" />
+                                                        <?php
+                                                        } ?>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label for="primary_cause">2. b.ii The primary cause of
+                                                            death</label>
+                                                        <?php
+                                                        $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                        if ($data) {
+                                                            foreach ($data as $st) {
+                                                                if ($st['primary_cause'] != "") {
+                                                        ?>
+                                                                    <textarea class="form-control" name="primary_cause"
+                                                                        rows="4"><?= $st['primary_cause'] ?></textarea>
+                                                            <?php
+                                                                }
+                                                            }
+                                                        } else {
+                                                            ?>
+                                                            <textarea class="form-control" name="primary_cause"
+                                                                rows="4"></textarea>
+                                                        <?php
+                                                        } ?>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label for="secondary_cause">2. b.iii The secondary cause of
+                                                            death</label>
+                                                        <?php
+                                                        $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                        if ($data) {
+                                                            foreach ($data as $st) {
+                                                                if ($st['secondary_cause'] != "") {
+                                                        ?>
+                                                                    <textarea class="form-control" name="secondary_cause"
+                                                                        rows="4"><?= $st['secondary_cause'] ?></textarea>
+                                                            <?php
+                                                                }
+                                                            }
+                                                        } else {
+                                                            ?>
+                                                            <textarea class="form-control" name="secondary_cause"
+                                                                rows="4"></textarea>
+                                                        <?php
+                                                        } ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" id="withdrew_reason1">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="withdrew_reason">2. b). Reason for withdrawal</label>
+                                                        <select name="withdrew_reason" id="withdrew_reason"
+                                                            class="form-control">
+                                                            <?php
+                                                            $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                            foreach ($data as $st) {
+                                                                if ($st['withdrew_reason'] == 1) { ?>
+                                                                    <option value="<?= $st['withdrew_reason'] ?>">Unwilling to say
+                                                                    </option>
+                                                                <?php } else if ($st['withdrew_reason'] == 2) { ?>
+                                                                    <option value="<?= $st['withdrew_reason'] ?>">Side effects of
+                                                                        the herbal preparation (NIMRCAF/ Covidol / Bupiji )</option>
+                                                                <?php } else if ($st['withdrew_reason'] == 3) { ?>
+                                                                    <option value="<?= $st['withdrew_reason'] ?>">Side effects of
+                                                                        Standard Care</option>
+                                                                <?php } else if ($st['withdrew_reason'] == 4) { ?>
+                                                                    <option value="<?= $st['withdrew_reason'] ?>">Moving to another
+                                                                        area</option>
+                                                                <?php } else if ($st['withdrew_reason'] == 5) { ?>
+                                                                    <option value="<?= $st['withdrew_reason'] ?>">Other
+                                                                        {withdrew_other}</option>
+                                                                <?php } else { ?>
+                                                                    <option value="">Select</option>
+                                                            <?php }
+                                                            } ?>
+                                                            <option value="1">Unwilling to say</option>
+                                                            <option value="2">Side effects of the herbal preparation
+                                                                (NIMRCAF/ Covidol / Bupiji )</option>
+                                                            <option value="3">Side effects of Standard Care</option>
+                                                            <option value="4">Moving to another area</option>
+                                                            <option value="5">Other {withdrew_other}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-12" id="withdrew_other">
+                                                    <div class="form-group">
+                                                        <label for="withdrew_other">2 d) Specify the reason</label>
+                                                        <?php
+                                                        $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                        if ($data) {
+                                                            foreach ($data as $st) {
+                                                                if ($st['withdrew_other'] != "") {
+                                                        ?>
+                                                                    <textarea class="form-control" name="withdrew_other"
+                                                                        rows="4"><?= $st['withdrew_other'] ?></textarea>
+                                                            <?php
+                                                                }
+                                                            }
+                                                        } else {
+                                                            ?>
+                                                            <textarea class="form-control" name="withdrew_other"
+                                                                rows="4"></textarea>
+                                                        <?php
+                                                        } ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="outcome">4. Outcome</label>
+                                                        <select name="outcome" id="outcome" class="form-control" required>
+                                                            <?php
+                                                            $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                            foreach ($data as $st) {
+                                                                if ($st['outcome'] == 1) { ?>
+                                                                    <option value="<?= $st['outcome'] ?>">Recovered/Resolved
+                                                                    </option>
+                                                                <?php } else if ($st['outcome'] == 2) { ?>
+                                                                    <option value="<?= $st['outcome'] ?>">Recovered with sequelae
+                                                                    </option>
+                                                                <?php } else if ($st['outcome'] == 3) { ?>
+                                                                    <option value="<?= $st['outcome'] ?>">Severity worsened</option>
+                                                                <?php } else if ($st['outcome'] == 4) { ?>
+                                                                    <option value="<?= $st['outcome'] ?>">Recovering/Resolving at
+                                                                        the end of study</option>
+                                                                <?php } else if ($st['outcome'] == 5) { ?>
+                                                                    <option value="<?= $st['outcome'] ?>">Not recovered/resolved at
+                                                                        the end of study</option>
+                                                                <?php } else if ($st['outcome'] == 6) { ?>
+                                                                    <option value="<?= $st['outcome'] ?>">Unknown/Lost to follow up
+                                                                    </option>
+                                                                <?php } else { ?>
+                                                                    <option value="">Select</option>
+                                                            <?php }
+                                                            } ?>
+                                                            <option value="1">Recovered/Resolved</option>
+                                                            <option value="2">Recovered with sequelae</option>
+                                                            <option value="3">Severity worsened</option>
+                                                            <option value="4">Recovering/Resolving at the end of study
+                                                            </option>
+                                                            <option value="5">Not recovered/resolved at the end of study
+                                                            </option>
+                                                            <option value="6">Unknown/Lost to follow up</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="outcome_date">5. Outcome date</label>
+                                                        <?php
+                                                        $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                        if ($data) {
+                                                            foreach ($data as $st) {
+                                                                if ($st['outcome_date'] != "") {
+                                                        ?>
+                                                                    <input value="<?= $st['outcome_date'] ?>" class="form-control"
+                                                                        type="date" name="outcome_date" id="outcome_date" />
+                                                            <?php
+                                                                }
+                                                            }
+                                                        } else {
+                                                            ?>
+                                                            <input value="" class="form-control" type="date" name="outcome_date"
+                                                                id="outcome_date" />
+                                                        <?php
+                                                        } ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>6. Provide/summarise the adverse event</label>
+                                                        <?php
+                                                        $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                        if ($data) {
+                                                            foreach ($data as $st) {
+                                                                if ($st['summary'] != "") {
+                                                        ?>
+                                                                    <textarea class="form-control" name="summary"
+                                                                        rows="4"><?= $st['summary'] ?></textarea>
+                                                            <?php
+                                                                }
+                                                            }
+                                                        } else {
+                                                            ?>
+                                                            <textarea class="form-control" name="summary" rows="4"></textarea>
+                                                        <?php
+                                                        } ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>7. Responsible Clinician Name</label>
+                                                        <?php
+                                                        $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                        if ($data) {
+                                                            foreach ($data as $st) {
+                                                                if ($st['clinician_name'] != "") {
+                                                        ?>
+                                                                    <input value="<?= $st['clinician_name'] ?>" type="text"
+                                                                        name="clinician_name" id="clinician_name"
+                                                                        class="form-control" />
+                                                                <?php
+                                                                } else { ?>
+                                                                    <input value="" type="text" name="clinician_name"
+                                                                        id="clinician_name" class="form-control" />
+                                                            <?php
+                                                                }
+                                                            }
+                                                        } else {
+                                                            ?>
                                                             <input value="" type="text" name="clinician_name"
                                                                 id="clinician_name" class="form-control" />
-                                                    <?php
-                                                        }
-                                                    }
-                                                } else {
-                                                    ?>
-                                                    <input value="" type="text" name="clinician_name"
-                                                        id="clinician_name" class="form-control" />
-                                                <?php
-                                                } ?>
-                                            </div>
-                                        </div>
+                                                        <?php
+                                                        } ?>
+                                                    </div>
+                                                </div>
 
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label>Date of Completion</label>
-                                                <?php
-                                                $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                if ($data) {
-                                                    foreach ($data as $st) {
-                                                        if ($st['crf6_cmpltd_date'] != "") {
-                                                ?>
-                                                            <input value="<?= $st['crf6_cmpltd_date'] ?>" type="date"
-                                                                name="crf6_cmpltd_date" id="crf6_cmpltd_date"
-                                                                class="form-control" />
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Date of Completion</label>
+                                                        <?php
+                                                        $data = $override->get1('crf6', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                                                        if ($data) {
+                                                            foreach ($data as $st) {
+                                                                if ($st['crf6_cmpltd_date'] != "") {
+                                                        ?>
+                                                                    <input value="<?= $st['crf6_cmpltd_date'] ?>" type="date"
+                                                                        name="crf6_cmpltd_date" id="crf6_cmpltd_date"
+                                                                        class="form-control" />
+                                                                    <span class="form-text text-muted">Example: 2002-08-21</span>
+                                                            <?php
+                                                                }
+                                                            }
+                                                        } else {
+                                                            ?>
+                                                            <input value="" type="date" name="crf6_cmpltd_date"
+                                                                id="crf6_cmpltd_date" class="form-control" />
                                                             <span class="form-text text-muted">Example: 2002-08-21</span>
-                                                    <?php
-                                                        }
-                                                    }
-                                                } else {
-                                                    ?>
-                                                    <input value="" type="date" name="crf6_cmpltd_date"
-                                                        id="crf6_cmpltd_date" class="form-control" />
-                                                    <span class="form-text text-muted">Example: 2002-08-21</span>
-                                                <?php
-                                                } ?>
+                                                        <?php
+                                                        } ?>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                        <div class="card-footer">
+                                            <div class="form-group">
+                                                <input type="hidden" name="id" value="<?= $patient['id'] ?>">
+                                                <input type="submit" name="add_crf6" value="Submit" class="btn btn-info">
+                                                <a href="index1.php" class="btn btn-default">Cancel</a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- Form End -->
                                 </div>
-                                <div class="card-footer">
-                                    <div class="form-group">
-                                        <input type="hidden" name="id" value="<?= $patient['id'] ?>">
-                                        <input type="submit" name="add_crf6" value="Submit" class="btn btn-info">
-                                        <a href="index1.php" class="btn btn-default">Cancel</a>
-                                    </div>
-                                </div>
-                            </form>
-                            <!-- Form End -->
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
+                <!-- /.content -->
             </div>
-        </section>
-        <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-<?php } elseif ($_GET['id'] == 15) { ?>
+            <!-- /.content-wrapper -->
+        <?php } elseif ($_GET['id'] == 15) { ?>
 
-    <?php $patient = $override->get1('crf7', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
-    <?php $herbal_treatment = $override->get1('herbal_treatment', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
-    <?php $chemotherapy = $override->get1('chemotherapy', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
-    <?php $surgery = $override->get1('surgery', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
-    <?php
+            <?php $patient = $override->get1('crf7', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
+            <?php $herbal_treatment = $override->get1('herbal_treatment', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
+            <?php $chemotherapy = $override->get1('chemotherapy', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
+            <?php $surgery = $override->get1('surgery', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode'])[0] ?>
+            <?php
 
             $patients = $override->get('clients', 'id', $_GET['cid'])[0];
             $visits_status = $override->firstRow1('visit', 'status', 'id', 'client_id', $_GET['cid'], 'visit_code', 'EV')[0]['status'];
@@ -7967,811 +7899,811 @@ if ($user->isLoggedIn()) {
 
             $name = 'Name: ' . $patients['firstname'] . ' ' . $patients['lastname'] . ' Age: ' . $patients['age'] . ' Gender: ' . $gender . ' Type: ' . $cat;
 
-    ?>
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Add New Position</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item">
-                                <a href="info.php?id=2">
-                                    < Back </a>
-                            </li>&nbsp;&nbsp;
-                            <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
-                            <li class="breadcrumb-item">
-                                <a href="info.php?id=2">
-                                    Go to Position list >
-                                </a>
-                            </li>&nbsp;&nbsp;
-                            <li class="breadcrumb-item active">Add New Position</li>
-                        </ol>
-                    </div>
-                </div>
-            </div><!-- /.container-fluid -->
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <?php
-                    // $staff = $override->getNews('user', 'status', 1, 'id', $_GET['staff_id'])[0];
-                    // $site = $override->get('site', 'id', $staff['site_id'])[0];
-                    $position = $override->get('position', 'id', $_GET['position_id'])[0];
-                    ?>
-                    <!-- right column -->
-                    <div class="col-md-12">
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <h3 class="card-title">CRF 7: Quality of Life Questionnaire
-                                </h3>
+            ?>
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1>Add New Position</h1>
                             </div>
-                            <form id="crf7" method="post">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="tdate">Tarehe ya Leo:</label>
-                                                <input type="date" class="form-control" id="tdate" name="tdate"
-                                                    value="<?php if ($patient['tdate']) {
-                                                                print_r($patient['tdate']);
-                                                            } ?>" required>
-                                            </div>
-                                        </div>
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item">
+                                        <a href="info.php?id=2">
+                                            < Back </a>
+                                    </li>&nbsp;&nbsp;
+                                    <li class="breadcrumb-item"><a href="index1.php">Home</a></li>&nbsp;&nbsp;
+                                    <li class="breadcrumb-item">
+                                        <a href="info.php?id=2">
+                                            Go to Position list >
+                                        </a>
+                                    </li>&nbsp;&nbsp;
+                                    <li class="breadcrumb-item active">Add New Position</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div><!-- /.container-fluid -->
+                </section>
 
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="mobility">A. Uwezo wa kutembea</label>
-                                                <select class="form-control" name="mobility" style="width: 100%;"
-                                                    required>
-                                                    <option value="<?= $patient['mobility'] ?>">
-                                                        <?php if ($patient['mobility']) {
-                                                            if ($patient['mobility'] == 1) {
-                                                                echo 'Sina tatizo katika kutembea';
-                                                            } elseif ($patient['mobility'] == 2) {
-                                                                echo 'Nina matatizo kiasi katika kutembea';
-                                                            } elseif ($patient['mobility'] == 3) {
-                                                                echo 'Siwezi kutembea kabisa';
-                                                            }
-                                                        } else {
-                                                            echo 'Select';
-                                                        } ?></option>
-                                                    <option value="1">Sina tatizo katika
-                                                        kutembea</option>
-                                                    <option value="2">Nina matatizo kiasi
-                                                        katika kutembea</option>
-                                                    <option value="3">Siwezi kutembea kabisa</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="self_care">B. Uwezo wa kujihudumia</label>
-                                                <select class="form-control" name="self_care" style="width: 100%;"
-                                                    required>
-                                                    <option value="<?= $patient['self_care'] ?>">
-                                                        <?php if ($patient['self_care']) {
-                                                            if ($patient['self_care'] == 1) {
-                                                                echo 'Sina tatizo kujihudumia mwenyewe';
-                                                            } elseif ($patient['self_care'] == 2) {
-                                                                echo 'Nina matatizo kiasi katika kujisafisha au
-                                                                kuvaa mwenyewe';
-                                                            } elseif ($patient['self_care'] == 3) {
-                                                                echo 'Siwezi kujisafisha wala kuvaa mwenyewe';
-                                                            }
-                                                        } else {
-                                                            echo 'Select';
-                                                        } ?></option>
-                                                    <option value="1">Sina tatizo kujihudumia mwenyewe</option>
-                                                    <option value="2">Nina matatizo kiasi katika kujisafisha au
-                                                        kuvaa mwenyewe</option>
-                                                    <option value="3">Siwezi kujisafisha wala kuvaa mwenyewe</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="usual_active">C. Shughuli za kila siku</label>
-                                                <select class="form-control" name="usual_active" style="width: 100%;"
-                                                    required>
-                                                    <option value="<?= $patient['usual_active'] ?>">
-                                                        <?php if ($patient['usual_active']) {
-                                                            if ($patient['usual_active'] == 1) {
-                                                                echo 'Sina tatizo katika kufanya shughuli zangu za
-                                                                kila siku';
-                                                            } elseif ($patient['usual_active'] == 2) {
-                                                                echo 'Nina matatizo kiasi katika kufanya shughuli
-                                                                zangu za kila siku';
-                                                            } elseif ($patient['usual_active'] == 3) {
-                                                                echo 'Siwezi kabisa kufanya shughuli zangu za kila
-                                                                siku';
-                                                            }
-                                                        } else {
-                                                            echo 'Select';
-                                                        } ?></option>
-                                                    <option value="1">Sina tatizo katika kufanya shughuli zangu za
-                                                        kila siku</option>
-                                                    <option value="2">Nina matatizo kiasi katika kufanya shughuli
-                                                        zangu za kila siku</option>
-                                                    <option value="3">Siwezi kabisa kufanya shughuli zangu za kila
-                                                        siku</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="pain">D. Maumivu/Kutojisikia vizuri</label>
-                                                <select class="form-control" name="pain" style="width: 100%;"
-                                                    required>
-                                                    <option value="<?= $patient['pain'] ?>">
-                                                        <?php if ($patient['pain']) {
-                                                            if ($patient['pain'] == 1) {
-                                                                echo 'Sina maumivu au najisikia vizuri';
-                                                            } elseif ($patient['pain'] == 2) {
-                                                                echo 'Nina maumivu kiasi au najisikia vibaya kiasi';
-                                                            } elseif ($patient['pain'] == 3) {
-                                                                echo 'Nina maumivu makali au najisikia vibaya sana';
-                                                            }
-                                                        } else {
-                                                            echo 'Select';
-                                                        } ?></option>
-                                                    <option value="1">Sina maumivu au najisikia vizuri</option>
-                                                    <option value="2">Nina maumivu kiasi au najisikia vibaya kiasi
-                                                    </option>
-                                                    <option value="3">Nina maumivu makali au najisikia vibaya sana
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="anxiety">E. Wasiwasi/sonona</label>
-                                                <select class="form-control" name="anxiety" style="width: 100%;"
-                                                    required>
-                                                    <option value="<?= $patient['anxiety'] ?>">
-                                                        <?php if ($patient['anxiety']) {
-                                                            if ($patient['anxiety'] == 1) {
-                                                                echo 'Sina wasiwasi au sonona';
-                                                            } elseif ($patient['anxiety'] == 2) {
-                                                                echo 'Nina wasiwasi kiasi au sonona kiasi';
-                                                            } elseif ($patient['anxiety'] == 3) {
-                                                                echo 'Nina wasiwasi sana au nina sonona sana';
-                                                            }
-                                                        } else {
-                                                            echo 'Select';
-                                                        } ?></option>
-                                                    <option value="1">Sina wasiwasi au sonona</option>
-                                                    <option value="2">Nina wasiwasi kiasi au sonona kiasi</option>
-                                                    <option value="3">Nina wasiwasi sana au nina sonona sana
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                <!-- Main content -->
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <?php
+                            // $staff = $override->getNews('user', 'status', 1, 'id', $_GET['staff_id'])[0];
+                            // $site = $override->get('site', 'id', $staff['site_id'])[0];
+                            $position = $override->get('position', 'id', $_GET['position_id'])[0];
+                            ?>
+                            <!-- right column -->
+                            <div class="col-md-12">
+                                <div class="card card-primary">
                                     <div class="card-header">
-                                        <h3 class="card-title">ON-SITE MONITORING</h3>
+                                        <h3 class="card-title">CRF 7: Quality of Life Questionnaire
+                                        </h3>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="FDATE">DATE FORM COMPLETED:</label>
-                                                <input type="date" class="form-control" id="FDATE" name="FDATE"
-                                                    value="<?php if ($patient['FDATE']) {
-                                                                print_r($patient['FDATE']);
-                                                            } ?>" required>
+                                    <form id="crf7" method="post">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="tdate">Tarehe ya Leo:</label>
+                                                        <input type="date" class="form-control" id="tdate" name="tdate"
+                                                            value="<?php if ($patient['tdate']) {
+                                                                        print_r($patient['tdate']);
+                                                                    } ?>" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="mobility">A. Uwezo wa kutembea</label>
+                                                        <select class="form-control" name="mobility" style="width: 100%;"
+                                                            required>
+                                                            <option value="<?= $patient['mobility'] ?>">
+                                                                <?php if ($patient['mobility']) {
+                                                                    if ($patient['mobility'] == 1) {
+                                                                        echo 'Sina tatizo katika kutembea';
+                                                                    } elseif ($patient['mobility'] == 2) {
+                                                                        echo 'Nina matatizo kiasi katika kutembea';
+                                                                    } elseif ($patient['mobility'] == 3) {
+                                                                        echo 'Siwezi kutembea kabisa';
+                                                                    }
+                                                                } else {
+                                                                    echo 'Select';
+                                                                } ?></option>
+                                                            <option value="1">Sina tatizo katika
+                                                                kutembea</option>
+                                                            <option value="2">Nina matatizo kiasi
+                                                                katika kutembea</option>
+                                                            <option value="3">Siwezi kutembea kabisa</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="self_care">B. Uwezo wa kujihudumia</label>
+                                                        <select class="form-control" name="self_care" style="width: 100%;"
+                                                            required>
+                                                            <option value="<?= $patient['self_care'] ?>">
+                                                                <?php if ($patient['self_care']) {
+                                                                    if ($patient['self_care'] == 1) {
+                                                                        echo 'Sina tatizo kujihudumia mwenyewe';
+                                                                    } elseif ($patient['self_care'] == 2) {
+                                                                        echo 'Nina matatizo kiasi katika kujisafisha au
+                                                                kuvaa mwenyewe';
+                                                                    } elseif ($patient['self_care'] == 3) {
+                                                                        echo 'Siwezi kujisafisha wala kuvaa mwenyewe';
+                                                                    }
+                                                                } else {
+                                                                    echo 'Select';
+                                                                } ?></option>
+                                                            <option value="1">Sina tatizo kujihudumia mwenyewe</option>
+                                                            <option value="2">Nina matatizo kiasi katika kujisafisha au
+                                                                kuvaa mwenyewe</option>
+                                                            <option value="3">Siwezi kujisafisha wala kuvaa mwenyewe</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="cpersid">NAME OF PERSON CHECKING FORM:</label>
-                                                <input type="text" class="form-control" id="cpersid" name="cpersid"
-                                                    value="<?php if ($patient['cpersid']) {
-                                                                print_r($patient['cpersid']);
-                                                            } ?>" required>
+
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="usual_active">C. Shughuli za kila siku</label>
+                                                        <select class="form-control" name="usual_active" style="width: 100%;"
+                                                            required>
+                                                            <option value="<?= $patient['usual_active'] ?>">
+                                                                <?php if ($patient['usual_active']) {
+                                                                    if ($patient['usual_active'] == 1) {
+                                                                        echo 'Sina tatizo katika kufanya shughuli zangu za
+                                                                kila siku';
+                                                                    } elseif ($patient['usual_active'] == 2) {
+                                                                        echo 'Nina matatizo kiasi katika kufanya shughuli
+                                                                zangu za kila siku';
+                                                                    } elseif ($patient['usual_active'] == 3) {
+                                                                        echo 'Siwezi kabisa kufanya shughuli zangu za kila
+                                                                siku';
+                                                                    }
+                                                                } else {
+                                                                    echo 'Select';
+                                                                } ?></option>
+                                                            <option value="1">Sina tatizo katika kufanya shughuli zangu za
+                                                                kila siku</option>
+                                                            <option value="2">Nina matatizo kiasi katika kufanya shughuli
+                                                                zangu za kila siku</option>
+                                                            <option value="3">Siwezi kabisa kufanya shughuli zangu za kila
+                                                                siku</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="pain">D. Maumivu/Kutojisikia vizuri</label>
+                                                        <select class="form-control" name="pain" style="width: 100%;"
+                                                            required>
+                                                            <option value="<?= $patient['pain'] ?>">
+                                                                <?php if ($patient['pain']) {
+                                                                    if ($patient['pain'] == 1) {
+                                                                        echo 'Sina maumivu au najisikia vizuri';
+                                                                    } elseif ($patient['pain'] == 2) {
+                                                                        echo 'Nina maumivu kiasi au najisikia vibaya kiasi';
+                                                                    } elseif ($patient['pain'] == 3) {
+                                                                        echo 'Nina maumivu makali au najisikia vibaya sana';
+                                                                    }
+                                                                } else {
+                                                                    echo 'Select';
+                                                                } ?></option>
+                                                            <option value="1">Sina maumivu au najisikia vizuri</option>
+                                                            <option value="2">Nina maumivu kiasi au najisikia vibaya kiasi
+                                                            </option>
+                                                            <option value="3">Nina maumivu makali au najisikia vibaya sana
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="anxiety">E. Wasiwasi/sonona</label>
+                                                        <select class="form-control" name="anxiety" style="width: 100%;"
+                                                            required>
+                                                            <option value="<?= $patient['anxiety'] ?>">
+                                                                <?php if ($patient['anxiety']) {
+                                                                    if ($patient['anxiety'] == 1) {
+                                                                        echo 'Sina wasiwasi au sonona';
+                                                                    } elseif ($patient['anxiety'] == 2) {
+                                                                        echo 'Nina wasiwasi kiasi au sonona kiasi';
+                                                                    } elseif ($patient['anxiety'] == 3) {
+                                                                        echo 'Nina wasiwasi sana au nina sonona sana';
+                                                                    }
+                                                                } else {
+                                                                    echo 'Select';
+                                                                } ?></option>
+                                                            <option value="1">Sina wasiwasi au sonona</option>
+                                                            <option value="2">Nina wasiwasi kiasi au sonona kiasi</option>
+                                                            <option value="3">Nina wasiwasi sana au nina sonona sana
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="card-header">
+                                                <h3 class="card-title">ON-SITE MONITORING</h3>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="FDATE">DATE FORM COMPLETED:</label>
+                                                        <input type="date" class="form-control" id="FDATE" name="FDATE"
+                                                            value="<?php if ($patient['FDATE']) {
+                                                                        print_r($patient['FDATE']);
+                                                                    } ?>" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="cpersid">NAME OF PERSON CHECKING FORM:</label>
+                                                        <input type="text" class="form-control" id="cpersid" name="cpersid"
+                                                            value="<?php if ($patient['cpersid']) {
+                                                                        print_r($patient['cpersid']);
+                                                                    } ?>" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="cDATE">DATE FORM CHECKED:</label>
+                                                        <input type="date" class="form-control" id="cDATE" name="cDATE"
+                                                            value="<?php if ($patient['cDATE']) {
+                                                                        print_r($patient['cDATE']);
+                                                                    } ?>" required>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4">
+                                        <div class="card-footer">
                                             <div class="form-group">
-                                                <label for="cDATE">DATE FORM CHECKED:</label>
-                                                <input type="date" class="form-control" id="cDATE" name="cDATE"
-                                                    value="<?php if ($patient['cDATE']) {
-                                                                print_r($patient['cDATE']);
-                                                            } ?>" required>
+                                                <input type="hidden" name="id" value="<?= $patient['id'] ?>">
+                                                <input type="submit" name="add_crf7" value="Submit" class="btn btn-info">
+                                                <a href="index1.php" class="btn btn-default">Cancel</a>
                                             </div>
                                         </div>
-                                    </div>
+                                    </form>
+                                    <!-- Form End -->
                                 </div>
-
-                                <div class="card-footer">
-                                    <div class="form-group">
-                                        <input type="hidden" name="id" value="<?= $patient['id'] ?>">
-                                        <input type="submit" name="add_crf7" value="Submit" class="btn btn-info">
-                                        <a href="index1.php" class="btn btn-default">Cancel</a>
-                                    </div>
-                                </div>
-                            </form>
-                            <!-- Form End -->
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
+                <!-- /.content -->
             </div>
-        </section>
-        <!-- /.content -->
+            <!-- /.content-wrapper -->
+        <?php } ?>
+        <!-- footer -->
+        <?php include 'footer.php'; ?>
+        <!-- footer -->
+
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
     </div>
-    <!-- /.content-wrapper -->
-<?php } ?>
-<!-- footer -->
-<?php include 'footer.php'; ?>
-<!-- footer -->
-
-
-<!-- Control Sidebar -->
-<aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-</aside>
-<!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
-
-
-
-<!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- Select2 -->
-<script src="plugins/select2/js/select2.full.min.js"></script>
-<!-- Bootstrap4 Duallistbox -->
-<script src="plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
-<!-- InputMask -->
-<script src="plugins/moment/moment.min.js"></script>
-<script src="plugins/inputmask/jquery.inputmask.min.js"></script>
-<!-- date-range-picker -->
-<script src="plugins/daterangepicker/daterangepicker.js"></script>
-<!-- bootstrap color picker -->
-<script src="plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Bootstrap Switch -->
-<script src="plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-<!-- BS-Stepper -->
-<script src="plugins/bs-stepper/js/bs-stepper.min.js"></script>
-<!-- dropzonejs -->
-<script src="plugins/dropzone/min/dropzone.min.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<!-- <script src="../../dist/js/demo.js"></script> -->
-<!-- Page specific script -->
-
-<!-- Staff Signs Js -->
-<script src="myjs/add/staff/staff.js"></script>
-
-<!-- Clients Signs Js -->
-<script src="myjs/add/clients/clients.js"></script>
-<script src="myjs/add/clients/relation.js"></script>
-
-<!-- demographic Js -->
-<script src="myjs/add/demographic/chw.js"></script>
-<script src="myjs/add/demographic/referred.js"></script>
-
-
-<!-- Vital Signs Js -->
-<script src="myjs/add/vital/vital.js"></script>
-
-<!-- main_diagnosis Signs Js -->
-<script src="myjs/add/main_diagnosis/main_diagnosis.js"></script>
-
-<!-- Medications Js -->
-<script src="myjs/add/medications/basal_changed.js"></script>
-<script src="myjs/add/medications/prandial_changed.js"></script>
-<script src="myjs/add/medications/fluid_restriction.js"></script>
-<script src="myjs/add/medications/support.js"></script>
-<script src="myjs/add/medications/cardiology.js"></script>
-<script src="myjs/add/medications/referrals.js"></script>
-<script src="myjs/add/medications/social_support.js"></script>
-<script src="myjs/add/medications/transfusion.js"></script>
-<script src="myjs/add/medications/vaccination.js"></script>
-<script src="myjs/add/medications/completed.js"></script>
-<!-- <script src="myjs/add/medications/medication.js"></script> -->
-<!-- <script src="myjs/add/medications/medication2.js"></script> -->
-
-
-
-<!-- History Js -->
-<script src="myjs/add/history/active_smoker.js"></script>
-<script src="myjs/add/history/cardiovascular.js"></script>
-<script src="myjs/add/history/retinopathy.js"></script>
-<script src="myjs/add/history/alcohol.js"></script>
-<script src="myjs/add/history/alcohol_type.js"></script>
-<script src="myjs/add/history/art.js"></script>
-<script src="myjs/add/history/blood_transfusion.js"></script>
-<script src="myjs/add/history/hepatitis.js"></script>
-<script src="myjs/add/history/history_other.js"></script>
-<script src="myjs/add/history/hiv.js"></script>
-<script src="myjs/add/history/neuropathy.js"></script>
-<script src="myjs/add/history/other_complication.js"></script>
-<script src="myjs/add/history/pvd.js"></script>
-<script src="myjs/add/history/renal.js"></script>
-<script src="myjs/add/history/sexual_dysfunction.js"></script>
-<script src="myjs/add/history/smoking.js"></script>
-<script src="myjs/add/history/stroke_tia.js"></script>
-<script src="myjs/add/history/surgery.js"></script>
-<script src="myjs/add/history/surgery_type.js"></script>
-<script src="myjs/add/history/tb.js"></script>
-<script src="myjs/add/history/type_smoked.js"></script>
-
-
-
-<!-- Symptoms Js -->
-
-
-<script src="myjs/add/symptoms/abnorminal_pain.js"></script>
-<script src="myjs/add/symptoms/chest_pain.js"></script>
-<script src="myjs/add/symptoms/foot_exam.js"></script>
-<script src="myjs/add/symptoms/foot_exam_finding.js"></script>
-<script src="myjs/add/symptoms/headache.js"></script>
-<script src="myjs/add/symptoms/hypoglycemia_severe.js"></script>
-<script src="myjs/add/symptoms/joints.js"></script>
-<script src="myjs/add/symptoms/lower_arms.js"></script>
-<script src="myjs/add/symptoms/lungs.js"></script>
-<script src="myjs/add/symptoms/other_pain.js"></script>
-<script src="myjs/add/symptoms/other_symptoms.js"></script>
-<script src="myjs/add/symptoms/upper_arms.js"></script>
-<script src="myjs/add/symptoms/waist.js"></script>
-<script src="myjs/add/symptoms/other_lab.js"></script>
-
-<!-- Results Js -->
-
-<script src="myjs/add/results/confirmatory_test.js"></script>
-<script src="myjs/add/results/ecg.js"></script>
-<script src="myjs/add/results/ecg_performed.js"></script>
-<script src="myjs/add/results/echo_other.js"></script>
-<script src="myjs/add/results/echo_performed.js"></script>
-<script src="myjs/add/results/scd_done.js"></script>
-<script src="myjs/add/results/scd_test.js"></script>
-
-
-<!-- hospitalizations Js -->
-
-<script src="myjs/add/hospitalizations/hospitalizations.js"></script>
-<script src="myjs/add/hospitalizations/hydroxyurea.js"></script>
-<script src="myjs/add/hospitalizations/injection_sites.js"></script>
-<script src="myjs/add/hospitalizations/opioid.js"></script>
-<script src="myjs/add/hospitalizations/ncd_hospitalizations.js"></script>
-<script src="myjs/add/hospitalizations"></script>
-
-
-<!-- hospitalization_details Js -->
-
-<script src="myjs/add/hospitalization_details/hospitalization_ncd.js"></script>
-
-<!-- Diagnosis, Complications & Comorbidities Js -->
-
-<script src="myjs/add/diagnosis_complications_comorbidities/diagns_changed.js"></script>
-<script src="myjs/add/diagnosis_complications_comorbidities/diagns_specify.js"></script>
-<script src="myjs/add/diagnosis_complications_comorbidities/new_complications.js"></script>
-<script src="myjs/add/diagnosis_complications_comorbidities/new_ncd_diagnosis.js"></script>
-<script src="myjs/add/diagnosis_complications_comorbidities/other_complications.js"></script>
-<script src="myjs/add/diagnosis_complications_comorbidities"></script>
-
-
-<!-- RISKS Js -->
-
-<script src="myjs/add/risks/risk_art.js"></script>
-<script src="myjs/add/risks/risk_hiv.js"></script>
-<script src="myjs/add/risks/risk_tb.js"></script>
-<script src="myjs/add/risks"></script>
-
-
-<!-- LAB DETAILS Js -->
-
-<script src="myjs/add/lab_details/cardiac_surgery.js"></script>
-<script src="myjs/add/lab_details/chemistry_test.js"></script>
-<script src="myjs/add/lab_details/chemistry_test2.js"></script>
-<script src="myjs/add/lab_details/hematology_test.js"></script>
-<script src="myjs/add/lab_details/hematology_test.js"></script>
-<script src="myjs/add/lab_details/lab_Other.js"></script>
-<script src="myjs/add/lab_details/other_lab_diabetes.js"></script>
-
-<!-- CARDIACS Js -->
-
-<script src="myjs/add/cardiac/arrhythmia.js"></script>
-<script src="myjs/add/cardiac/cardiomyopathy.js"></script>
-<script src="myjs/add/cardiac/congenital.js"></script>
-<script src="myjs/add/cardiac/diagnosis_other.js"></script>
-<script src="myjs/add/cardiac/heart_failure.js"></script>
-<script src="myjs/add/cardiac/heumatic.js"></script>
-<script src="myjs/add/cardiac/pericardial.js"></script>
-<script src="myjs/add/cardiac/stroke.js"></script>
-<script src="myjs/add/cardiac/sub_arrhythmia.js"></script>
-<script src="myjs/add/cardiac/sub_cardiomyopathy.js"></script>
-<script src="myjs/add/cardiac/sub_congenital.js"></script>
-<script src="myjs/add/cardiac/sub_heumatic.js"></script>
-<script src="myjs/add/cardiac/sub_pericardial.js"></script>
-<script src="myjs/add/cardiac/sub_thromboembolic.js"></script>
-<script src="myjs/add/cardiac/thromboembolic.js"></script>
-
-<!-- DIABETIC Js -->
-
-<script src="myjs/add/diabetic/diagnosis_other.js"></script>
-<script src="myjs/add/diabetic/hypertension.js"></script>
-
-<!-- SICKLE CELL Js -->
-
-<script src="myjs/add/sickle_cell/diagnosis.js"></script>
-
-<!-- SUMMARY Js -->
-
-<script src="myjs/add/economics/transport_mode.js"></script>
-<script src="myjs/add/economics"></script>
-<script src="myjs/add/economics"></script>
-<script src="myjs/add/economics"></script>
-<script src="myjs/add/economics"></script>
-<script src="myjs/add/economics"></script>
-<script src="myjs/add/economics"></script>
-<script src="myjs/add/economics"></script>
-<script src="myjs/add/economics"></script>
-<script src="myjs/add/economics"></script>
-<script src="myjs/add/economics"></script>
-<script src="myjs/add/economics"></script>
-<script src="myjs/add/economics"></script>
-<script src="myjs/add/economics"></script>
-<script src="myjs/add/economics"></script>
-
-<!-- TREATMENT PALN Js -->
-
-<script src="myjs/add/treatment/basal.js"></script>
-<script src="myjs/add/treatment/cardiology.js"></script>
-<script src="myjs/add/treatment/other_support.js"></script>
-<script src="myjs/add/treatment/prandial.js"></script>
-<script src="myjs/add/treatment/referral.js"></script>
-<script src="myjs/add/treatment/restriction.js"></script>
-<script src="myjs/add/treatment/support.js"></script>
-<script src="myjs/add/treatment/transfusion.js"></script>
-<script src="myjs/add/treatment/vaccination.js"></script>
-<script src="myjs/add/treatment"></script>
-<script src="myjs/add/treatment"></script>
-<script src="myjs/add/treatment"></script>
-<script src="myjs/add/treatment"></script>
-<script src="myjs/add/treatment"></script>
-<script src="myjs/add/treatment"></script>
-<script src="myjs/add/treatment"></script>
-<script src="myjs/add/treatment"></script>
-<script src="myjs/add/treatment"></script>
-<script src="myjs/add/treatment"></script>
-<script src="myjs/add/treatment"></script>
-
-
-
-<!-- SUMMARY Js -->
-
-<script src="myjs/add/summary/cause_death.js"></script>
-<script src="myjs/add/summary/diagnosis_summary.js"></script>
-<script src="myjs/add/summary/outcome.js"></script>
-<script src="myjs/add/summary/transfer_out.js"></script>
-<script src="myjs/add/summary/set_next.js"></script>
-
-
-
-<script>
-    $(function() {
-        //Initialize Select2 Elements
-        $('.select2').select2()
-
-        //Initialize Select2 Elements
-        $('.select2bs4').select2({
-            theme: 'bootstrap4'
-        })
-
-        //Datemask dd/mm/yyyy
-        $('#datemask').inputmask('dd/mm/yyyy', {
-            'placeholder': 'dd/mm/yyyy'
-        })
-        //Datemask2 mm/dd/yyyy
-        $('#datemask2').inputmask('mm/dd/yyyy', {
-            'placeholder': 'mm/dd/yyyy'
-        })
-        //Money Euro
-        $('[data-mask]').inputmask()
-
-        //Date picker
-        $('#reservationdate').datetimepicker({
-            format: 'L'
-        });
-
-        //Date and time picker
-        $('#reservationdatetime').datetimepicker({
-            icons: {
-                time: 'far fa-clock'
-            }
-        });
-
-        //Date range picker
-        $('#reservation').daterangepicker()
-        //Date range picker with time picker
-        $('#reservationtime').daterangepicker({
-            timePicker: true,
-            timePickerIncrement: 30,
-            locale: {
-                format: 'MM/DD/YYYY hh:mm A'
-            }
-        })
-        //Date range as a button
-        $('#daterange-btn').daterangepicker({
-                ranges: {
-                    'Today': [moment(), moment()],
-                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                    'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                },
-                startDate: moment().subtract(29, 'days'),
-                endDate: moment()
-            },
-            function(start, end) {
-                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-            }
-        )
-
-        //Timepicker
-        $('#timepicker').datetimepicker({
-            format: 'LT'
-        })
-
-        //Bootstrap Duallistbox
-        $('.duallistbox').bootstrapDualListbox()
-
-        //Colorpicker
-        $('.my-colorpicker1').colorpicker()
-        //color picker with addon
-        $('.my-colorpicker2').colorpicker()
-
-        $('.my-colorpicker2').on('colorpickerChange', function(event) {
-            $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
-        })
-
-        $("input[data-bootstrap-switch]").each(function() {
-            $(this).bootstrapSwitch('state', $(this).prop('checked'));
-        })
-
-
-        $('#regions_id').change(function() {
-            var region_id = $(this).val();
-            $.ajax({
-                url: "process.php?content=region_id",
-                method: "GET",
-                data: {
-                    region_id: region_id
-                },
-                dataType: "text",
-                success: function(data) {
-                    $('#districts_id').html(data);
+    <!-- ./wrapper -->
+
+
+
+    <!-- jQuery -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Select2 -->
+    <script src="plugins/select2/js/select2.full.min.js"></script>
+    <!-- Bootstrap4 Duallistbox -->
+    <script src="plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+    <!-- InputMask -->
+    <script src="plugins/moment/moment.min.js"></script>
+    <script src="plugins/inputmask/jquery.inputmask.min.js"></script>
+    <!-- date-range-picker -->
+    <script src="plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- bootstrap color picker -->
+    <script src="plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Bootstrap Switch -->
+    <script src="plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+    <!-- BS-Stepper -->
+    <script src="plugins/bs-stepper/js/bs-stepper.min.js"></script>
+    <!-- dropzonejs -->
+    <script src="plugins/dropzone/min/dropzone.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <!-- <script src="../../dist/js/demo.js"></script> -->
+    <!-- Page specific script -->
+
+    <!-- Staff Signs Js -->
+    <script src="myjs/add/staff/staff.js"></script>
+
+    <!-- Clients Signs Js -->
+    <script src="myjs/add/clients/clients.js"></script>
+    <script src="myjs/add/clients/relation.js"></script>
+
+    <!-- demographic Js -->
+    <script src="myjs/add/demographic/chw.js"></script>
+    <script src="myjs/add/demographic/referred.js"></script>
+
+
+    <!-- Vital Signs Js -->
+    <script src="myjs/add/vital/vital.js"></script>
+
+    <!-- main_diagnosis Signs Js -->
+    <script src="myjs/add/main_diagnosis/main_diagnosis.js"></script>
+
+    <!-- Medications Js -->
+    <script src="myjs/add/medications/basal_changed.js"></script>
+    <script src="myjs/add/medications/prandial_changed.js"></script>
+    <script src="myjs/add/medications/fluid_restriction.js"></script>
+    <script src="myjs/add/medications/support.js"></script>
+    <script src="myjs/add/medications/cardiology.js"></script>
+    <script src="myjs/add/medications/referrals.js"></script>
+    <script src="myjs/add/medications/social_support.js"></script>
+    <script src="myjs/add/medications/transfusion.js"></script>
+    <script src="myjs/add/medications/vaccination.js"></script>
+    <script src="myjs/add/medications/completed.js"></script>
+    <!-- <script src="myjs/add/medications/medication.js"></script> -->
+    <!-- <script src="myjs/add/medications/medication2.js"></script> -->
+
+
+
+    <!-- History Js -->
+    <script src="myjs/add/history/active_smoker.js"></script>
+    <script src="myjs/add/history/cardiovascular.js"></script>
+    <script src="myjs/add/history/retinopathy.js"></script>
+    <script src="myjs/add/history/alcohol.js"></script>
+    <script src="myjs/add/history/alcohol_type.js"></script>
+    <script src="myjs/add/history/art.js"></script>
+    <script src="myjs/add/history/blood_transfusion.js"></script>
+    <script src="myjs/add/history/hepatitis.js"></script>
+    <script src="myjs/add/history/history_other.js"></script>
+    <script src="myjs/add/history/hiv.js"></script>
+    <script src="myjs/add/history/neuropathy.js"></script>
+    <script src="myjs/add/history/other_complication.js"></script>
+    <script src="myjs/add/history/pvd.js"></script>
+    <script src="myjs/add/history/renal.js"></script>
+    <script src="myjs/add/history/sexual_dysfunction.js"></script>
+    <script src="myjs/add/history/smoking.js"></script>
+    <script src="myjs/add/history/stroke_tia.js"></script>
+    <script src="myjs/add/history/surgery.js"></script>
+    <script src="myjs/add/history/surgery_type.js"></script>
+    <script src="myjs/add/history/tb.js"></script>
+    <script src="myjs/add/history/type_smoked.js"></script>
+
+
+
+    <!-- Symptoms Js -->
+
+
+    <script src="myjs/add/symptoms/abnorminal_pain.js"></script>
+    <script src="myjs/add/symptoms/chest_pain.js"></script>
+    <script src="myjs/add/symptoms/foot_exam.js"></script>
+    <script src="myjs/add/symptoms/foot_exam_finding.js"></script>
+    <script src="myjs/add/symptoms/headache.js"></script>
+    <script src="myjs/add/symptoms/hypoglycemia_severe.js"></script>
+    <script src="myjs/add/symptoms/joints.js"></script>
+    <script src="myjs/add/symptoms/lower_arms.js"></script>
+    <script src="myjs/add/symptoms/lungs.js"></script>
+    <script src="myjs/add/symptoms/other_pain.js"></script>
+    <script src="myjs/add/symptoms/other_symptoms.js"></script>
+    <script src="myjs/add/symptoms/upper_arms.js"></script>
+    <script src="myjs/add/symptoms/waist.js"></script>
+    <script src="myjs/add/symptoms/other_lab.js"></script>
+
+    <!-- Results Js -->
+
+    <script src="myjs/add/results/confirmatory_test.js"></script>
+    <script src="myjs/add/results/ecg.js"></script>
+    <script src="myjs/add/results/ecg_performed.js"></script>
+    <script src="myjs/add/results/echo_other.js"></script>
+    <script src="myjs/add/results/echo_performed.js"></script>
+    <script src="myjs/add/results/scd_done.js"></script>
+    <script src="myjs/add/results/scd_test.js"></script>
+
+
+    <!-- hospitalizations Js -->
+
+    <script src="myjs/add/hospitalizations/hospitalizations.js"></script>
+    <script src="myjs/add/hospitalizations/hydroxyurea.js"></script>
+    <script src="myjs/add/hospitalizations/injection_sites.js"></script>
+    <script src="myjs/add/hospitalizations/opioid.js"></script>
+    <script src="myjs/add/hospitalizations/ncd_hospitalizations.js"></script>
+    <script src="myjs/add/hospitalizations"></script>
+
+
+    <!-- hospitalization_details Js -->
+
+    <script src="myjs/add/hospitalization_details/hospitalization_ncd.js"></script>
+
+    <!-- Diagnosis, Complications & Comorbidities Js -->
+
+    <script src="myjs/add/diagnosis_complications_comorbidities/diagns_changed.js"></script>
+    <script src="myjs/add/diagnosis_complications_comorbidities/diagns_specify.js"></script>
+    <script src="myjs/add/diagnosis_complications_comorbidities/new_complications.js"></script>
+    <script src="myjs/add/diagnosis_complications_comorbidities/new_ncd_diagnosis.js"></script>
+    <script src="myjs/add/diagnosis_complications_comorbidities/other_complications.js"></script>
+    <script src="myjs/add/diagnosis_complications_comorbidities"></script>
+
+
+    <!-- RISKS Js -->
+
+    <script src="myjs/add/risks/risk_art.js"></script>
+    <script src="myjs/add/risks/risk_hiv.js"></script>
+    <script src="myjs/add/risks/risk_tb.js"></script>
+    <script src="myjs/add/risks"></script>
+
+
+    <!-- LAB DETAILS Js -->
+
+    <script src="myjs/add/lab_details/cardiac_surgery.js"></script>
+    <script src="myjs/add/lab_details/chemistry_test.js"></script>
+    <script src="myjs/add/lab_details/chemistry_test2.js"></script>
+    <script src="myjs/add/lab_details/hematology_test.js"></script>
+    <script src="myjs/add/lab_details/hematology_test.js"></script>
+    <script src="myjs/add/lab_details/lab_Other.js"></script>
+    <script src="myjs/add/lab_details/other_lab_diabetes.js"></script>
+
+    <!-- CARDIACS Js -->
+
+    <script src="myjs/add/cardiac/arrhythmia.js"></script>
+    <script src="myjs/add/cardiac/cardiomyopathy.js"></script>
+    <script src="myjs/add/cardiac/congenital.js"></script>
+    <script src="myjs/add/cardiac/diagnosis_other.js"></script>
+    <script src="myjs/add/cardiac/heart_failure.js"></script>
+    <script src="myjs/add/cardiac/heumatic.js"></script>
+    <script src="myjs/add/cardiac/pericardial.js"></script>
+    <script src="myjs/add/cardiac/stroke.js"></script>
+    <script src="myjs/add/cardiac/sub_arrhythmia.js"></script>
+    <script src="myjs/add/cardiac/sub_cardiomyopathy.js"></script>
+    <script src="myjs/add/cardiac/sub_congenital.js"></script>
+    <script src="myjs/add/cardiac/sub_heumatic.js"></script>
+    <script src="myjs/add/cardiac/sub_pericardial.js"></script>
+    <script src="myjs/add/cardiac/sub_thromboembolic.js"></script>
+    <script src="myjs/add/cardiac/thromboembolic.js"></script>
+
+    <!-- DIABETIC Js -->
+
+    <script src="myjs/add/diabetic/diagnosis_other.js"></script>
+    <script src="myjs/add/diabetic/hypertension.js"></script>
+
+    <!-- SICKLE CELL Js -->
+
+    <script src="myjs/add/sickle_cell/diagnosis.js"></script>
+
+    <!-- SUMMARY Js -->
+
+    <script src="myjs/add/economics/transport_mode.js"></script>
+    <script src="myjs/add/economics"></script>
+    <script src="myjs/add/economics"></script>
+    <script src="myjs/add/economics"></script>
+    <script src="myjs/add/economics"></script>
+    <script src="myjs/add/economics"></script>
+    <script src="myjs/add/economics"></script>
+    <script src="myjs/add/economics"></script>
+    <script src="myjs/add/economics"></script>
+    <script src="myjs/add/economics"></script>
+    <script src="myjs/add/economics"></script>
+    <script src="myjs/add/economics"></script>
+    <script src="myjs/add/economics"></script>
+    <script src="myjs/add/economics"></script>
+    <script src="myjs/add/economics"></script>
+
+    <!-- TREATMENT PALN Js -->
+
+    <script src="myjs/add/treatment/basal.js"></script>
+    <script src="myjs/add/treatment/cardiology.js"></script>
+    <script src="myjs/add/treatment/other_support.js"></script>
+    <script src="myjs/add/treatment/prandial.js"></script>
+    <script src="myjs/add/treatment/referral.js"></script>
+    <script src="myjs/add/treatment/restriction.js"></script>
+    <script src="myjs/add/treatment/support.js"></script>
+    <script src="myjs/add/treatment/transfusion.js"></script>
+    <script src="myjs/add/treatment/vaccination.js"></script>
+    <script src="myjs/add/treatment"></script>
+    <script src="myjs/add/treatment"></script>
+    <script src="myjs/add/treatment"></script>
+    <script src="myjs/add/treatment"></script>
+    <script src="myjs/add/treatment"></script>
+    <script src="myjs/add/treatment"></script>
+    <script src="myjs/add/treatment"></script>
+    <script src="myjs/add/treatment"></script>
+    <script src="myjs/add/treatment"></script>
+    <script src="myjs/add/treatment"></script>
+    <script src="myjs/add/treatment"></script>
+
+
+
+    <!-- SUMMARY Js -->
+
+    <script src="myjs/add/summary/cause_death.js"></script>
+    <script src="myjs/add/summary/diagnosis_summary.js"></script>
+    <script src="myjs/add/summary/outcome.js"></script>
+    <script src="myjs/add/summary/transfer_out.js"></script>
+    <script src="myjs/add/summary/set_next.js"></script>
+
+
+
+    <script>
+        $(function() {
+            //Initialize Select2 Elements
+            $('.select2').select2()
+
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
+
+            //Datemask dd/mm/yyyy
+            $('#datemask').inputmask('dd/mm/yyyy', {
+                'placeholder': 'dd/mm/yyyy'
+            })
+            //Datemask2 mm/dd/yyyy
+            $('#datemask2').inputmask('mm/dd/yyyy', {
+                'placeholder': 'mm/dd/yyyy'
+            })
+            //Money Euro
+            $('[data-mask]').inputmask()
+
+            //Date picker
+            $('#reservationdate').datetimepicker({
+                format: 'L'
+            });
+
+            //Date and time picker
+            $('#reservationdatetime').datetimepicker({
+                icons: {
+                    time: 'far fa-clock'
                 }
             });
-        });
 
-        $('#region').change(function() {
-            var region = $(this).val();
-            $.ajax({
-                url: "process.php?content=region_id",
-                method: "GET",
-                data: {
-                    region_id: region
-                },
-                dataType: "text",
-                success: function(data) {
-                    $('#district').html(data);
+            //Date range picker
+            $('#reservation').daterangepicker()
+            //Date range picker with time picker
+            $('#reservationtime').daterangepicker({
+                timePicker: true,
+                timePickerIncrement: 30,
+                locale: {
+                    format: 'MM/DD/YYYY hh:mm A'
                 }
-            });
-        });
-
-        $('#district').change(function() {
-            var district_id = $(this).val();
-            $.ajax({
-                url: "process.php?content=district_id",
-                method: "GET",
-                data: {
-                    district_id: district_id
+            })
+            //Date range as a button
+            $('#daterange-btn').daterangepicker({
+                    ranges: {
+                        'Today': [moment(), moment()],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                    },
+                    startDate: moment().subtract(29, 'days'),
+                    endDate: moment()
                 },
-                dataType: "text",
-                success: function(data) {
-                    $('#ward').html(data);
+                function(start, end) {
+                    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
                 }
+            )
+
+            //Timepicker
+            $('#timepicker').datetimepicker({
+                format: 'LT'
+            })
+
+            //Bootstrap Duallistbox
+            $('.duallistbox').bootstrapDualListbox()
+
+            //Colorpicker
+            $('.my-colorpicker1').colorpicker()
+            //color picker with addon
+            $('.my-colorpicker2').colorpicker()
+
+            $('.my-colorpicker2').on('colorpickerChange', function(event) {
+                $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+            })
+
+            $("input[data-bootstrap-switch]").each(function() {
+                $(this).bootstrapSwitch('state', $(this).prop('checked'));
+            })
+
+
+            $('#regions_id').change(function() {
+                var region_id = $(this).val();
+                $.ajax({
+                    url: "process.php?content=region_id",
+                    method: "GET",
+                    data: {
+                        region_id: region_id
+                    },
+                    dataType: "text",
+                    success: function(data) {
+                        $('#districts_id').html(data);
+                    }
+                });
             });
-        });
 
-    })
+            $('#region').change(function() {
+                var region = $(this).val();
+                $.ajax({
+                    url: "process.php?content=region_id",
+                    method: "GET",
+                    data: {
+                        region_id: region
+                    },
+                    dataType: "text",
+                    success: function(data) {
+                        $('#district').html(data);
+                    }
+                });
+            });
+
+            $('#district').change(function() {
+                var district_id = $(this).val();
+                $.ajax({
+                    url: "process.php?content=district_id",
+                    method: "GET",
+                    data: {
+                        district_id: district_id
+                    },
+                    dataType: "text",
+                    success: function(data) {
+                        $('#ward').html(data);
+                    }
+                });
+            });
+
+        })
 
 
-    // BS-Stepper Init
-    document.addEventListener('DOMContentLoaded', function() {
-        window.stepper = new Stepper(document.querySelector('.bs-stepper'))
-    })
+        // BS-Stepper Init
+        document.addEventListener('DOMContentLoaded', function() {
+            window.stepper = new Stepper(document.querySelector('.bs-stepper'))
+        })
 
-    // DropzoneJS Demo Code Start
-    Dropzone.autoDiscover = false
+        // DropzoneJS Demo Code Start
+        Dropzone.autoDiscover = false
 
-    // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
-    var previewNode = document.querySelector("#template")
-    previewNode.id = ""
-    var previewTemplate = previewNode.parentNode.innerHTML
-    previewNode.parentNode.removeChild(previewNode)
+        // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
+        var previewNode = document.querySelector("#template")
+        previewNode.id = ""
+        var previewTemplate = previewNode.parentNode.innerHTML
+        previewNode.parentNode.removeChild(previewNode)
 
-    var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
-        url: "/target-url", // Set the url
-        thumbnailWidth: 80,
-        thumbnailHeight: 80,
-        parallelUploads: 20,
-        previewTemplate: previewTemplate,
-        autoQueue: false, // Make sure the files aren't queued until manually added
-        previewsContainer: "#previews", // Define the container to display the previews
-        clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
-    })
+        var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
+            url: "/target-url", // Set the url
+            thumbnailWidth: 80,
+            thumbnailHeight: 80,
+            parallelUploads: 20,
+            previewTemplate: previewTemplate,
+            autoQueue: false, // Make sure the files aren't queued until manually added
+            previewsContainer: "#previews", // Define the container to display the previews
+            clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
+        })
 
-    myDropzone.on("addedfile", function(file) {
-        // Hookup the start button
-        file.previewElement.querySelector(".start").onclick = function() {
-            myDropzone.enqueueFile(file)
+        myDropzone.on("addedfile", function(file) {
+            // Hookup the start button
+            file.previewElement.querySelector(".start").onclick = function() {
+                myDropzone.enqueueFile(file)
+            }
+        })
+
+        // Update the total progress bar
+        myDropzone.on("totaluploadprogress", function(progress) {
+            document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
+        })
+
+        myDropzone.on("sending", function(file) {
+            // Show the total progress bar when upload starts
+            document.querySelector("#total-progress").style.opacity = "1"
+            // And disable the start button
+            file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
+        })
+
+        // Hide the total progress bar when nothing's uploading anymore
+        myDropzone.on("queuecomplete", function(progress) {
+            document.querySelector("#total-progress").style.opacity = "0"
+        })
+
+        // Setup the buttons for all transfers
+        // The "add files" button doesn't need to be setup because the config
+        // `clickable` has already been specified.
+        document.querySelector("#actions .start").onclick = function() {
+            myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
         }
-    })
-
-    // Update the total progress bar
-    myDropzone.on("totaluploadprogress", function(progress) {
-        document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
-    })
-
-    myDropzone.on("sending", function(file) {
-        // Show the total progress bar when upload starts
-        document.querySelector("#total-progress").style.opacity = "1"
-        // And disable the start button
-        file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
-    })
-
-    // Hide the total progress bar when nothing's uploading anymore
-    myDropzone.on("queuecomplete", function(progress) {
-        document.querySelector("#total-progress").style.opacity = "0"
-    })
-
-    // Setup the buttons for all transfers
-    // The "add files" button doesn't need to be setup because the config
-    // `clickable` has already been specified.
-    document.querySelector("#actions .start").onclick = function() {
-        myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
-    }
-    document.querySelector("#actions .cancel").onclick = function() {
-        myDropzone.removeAllFiles(true)
-    }
-    // DropzoneJS Demo Code End
+        document.querySelector("#actions .cancel").onclick = function() {
+            myDropzone.removeAllFiles(true)
+        }
+        // DropzoneJS Demo Code End
 
 
-    var items = 0;
+        var items = 0;
 
-    function add_Medication() {
-        items++;
+        function add_Medication() {
+            items++;
 
-        var html = "<tr>";
-        html += '<td><input type="hidden" name="medication[]" value=""></td>';
-        // html += "<td>" + items + "</td>";
-        html += "<td><?= $_GET['vday']; ?></td>";
-        html += '<td><input class="form-control"  type="date" name="date[]" value=""  max="<?= date('Y-m-d') ?>" required></td>';
-        html += '<td><input class="form-control"  type="date" name="start_date[]" value=""></td>';
-        html += '<td><select class="form-control select2" name="medication_id[]" id="medication_id[]" style="width: 100%;" required><option value="">Select</option><?php foreach ($override->get('medications', 'status', 1) as $medication) { ?><option value="<?= $medication['id']; ?>"><?= $medication['name']; ?></option> <?php } ?></select></td>';
-        // html += '<td><select class="form-control select2" name="batch_id[]" id="batch_id[]" style="width: 100%;" required><option value="">Select</option><?php foreach ($override->get('batch', 'status', 1) as $batch) { ?><option value="<?= $batch['id']; ?>"><?= $override->getNews('medications', 'status', 1, 'id', $batch['medication_id'])[0]['name'] . ' - ( ' . $batch['serial_name'] . ' ) : ( ' . $batch['amount'] . ' )'; ?></option> <?php } ?></select></td>';
-        html += '<td><select class="form-control" name="medication_action[]" id="medication_action[]" style="width: 100%;" required><option value="">Select</option><option value="1">Continue</option><option value="2">Start</option><option value="3">Stop</option><option value="4">Not Eligible</option></select></td>';
-        html += '<textarea class="form-control" name="medication_units" id="medication_units" rows="3" placeholder="Type medication dose here..." required></textarea>'
-        html += '<td><input class="form-control"  min="0" max="10000" type="number" name="medication_dose[]" value="" required></td>';
-        html += '<td><input class="form-control"  type="date" name="end_date[]" value=""></td>';
-        html += "<td><button type='button' onclick='deleteRow(this);'>Remove</button></td>"
-        html += "</tr>";
+            var html = "<tr>";
+            html += '<td><input type="hidden" name="medication[]" value=""></td>';
+            // html += "<td>" + items + "</td>";
+            html += "<td><?= $_GET['vday']; ?></td>";
+            html += '<td><input class="form-control"  type="date" name="date[]" value=""  max="<?= date('Y-m-d') ?>" required></td>';
+            html += '<td><input class="form-control"  type="date" name="start_date[]" value=""></td>';
+            html += '<td><select class="form-control select2" name="medication_id[]" id="medication_id[]" style="width: 100%;" required><option value="">Select</option><?php foreach ($override->get('medications', 'status', 1) as $medication) { ?><option value="<?= $medication['id']; ?>"><?= $medication['name']; ?></option> <?php } ?></select></td>';
+            // html += '<td><select class="form-control select2" name="batch_id[]" id="batch_id[]" style="width: 100%;" required><option value="">Select</option><?php foreach ($override->get('batch', 'status', 1) as $batch) { ?><option value="<?= $batch['id']; ?>"><?= $override->getNews('medications', 'status', 1, 'id', $batch['medication_id'])[0]['name'] . ' - ( ' . $batch['serial_name'] . ' ) : ( ' . $batch['amount'] . ' )'; ?></option> <?php } ?></select></td>';
+            html += '<td><select class="form-control" name="medication_action[]" id="medication_action[]" style="width: 100%;" required><option value="">Select</option><option value="1">Continue</option><option value="2">Start</option><option value="3">Stop</option><option value="4">Not Eligible</option></select></td>';
+            html += '<textarea class="form-control" name="medication_units" id="medication_units" rows="3" placeholder="Type medication dose here..." required></textarea>'
+            html += '<td><input class="form-control"  min="0" max="10000" type="number" name="medication_dose[]" value="" required></td>';
+            html += '<td><input class="form-control"  type="date" name="end_date[]" value=""></td>';
+            html += "<td><button type='button' onclick='deleteRow(this);'>Remove</button></td>"
+            html += "</tr>";
 
 
 
-        var row = document.getElementById("tbody").insertRow();
-        row.innerHTML = html;
-    }
+            var row = document.getElementById("tbody").insertRow();
+            row.innerHTML = html;
+        }
 
-    function deleteRow(button) {
-        items--
-        button.parentElement.parentElement.remove();
-        // first parentElement will be td and second will be tr.
-    }
+        function deleteRow(button) {
+            items--
+            button.parentElement.parentElement.remove();
+            // first parentElement will be td and second will be tr.
+        }
 
-    var items2 = 0;
+        var items2 = 0;
 
-    function add_Admission() {
-        items2++;
+        function add_Admission() {
+            items2++;
 
-        var html = "<tr>";
-        html += '<td><input type="hidden" name="admission[]" value=""></td>';
-        // html += "<td>" + items2 + "</td>";
-        html += "<td><?= $_GET['vday']; ?></td>";
-        html += '<td><input class="form-control" type="date" name="entry_date[]" value="" max="<?= date('Y-m-d') ?>" required></td>';
-        html += '<td><input class="form-control" type="date" name="admission_date[]" value="" required></td>';
-        html += '<td><textarea class="form-control"  type="text" name="admission_reason[]" rows="3" placeholder="Type admission reason here..." required></textarea></td>';
-        html += '<td><textarea class="form-control"  type="text" name="discharge_diagnosis[]" rows="3" placeholder="Type Discharge diagnosis here..." required></textarea></td>';
-        html += '<td><input class="form-control"  type="date" name="discharge_date[]" value=""></td>';
-        html += "<td><button type='button' onclick='deleteRow2(this);'>Remove</button></td>"
-        html += "</tr>";
+            var html = "<tr>";
+            html += '<td><input type="hidden" name="admission[]" value=""></td>';
+            // html += "<td>" + items2 + "</td>";
+            html += "<td><?= $_GET['vday']; ?></td>";
+            html += '<td><input class="form-control" type="date" name="entry_date[]" value="" max="<?= date('Y-m-d') ?>" required></td>';
+            html += '<td><input class="form-control" type="date" name="admission_date[]" value="" required></td>';
+            html += '<td><textarea class="form-control"  type="text" name="admission_reason[]" rows="3" placeholder="Type admission reason here..." required></textarea></td>';
+            html += '<td><textarea class="form-control"  type="text" name="discharge_diagnosis[]" rows="3" placeholder="Type Discharge diagnosis here..." required></textarea></td>';
+            html += '<td><input class="form-control"  type="date" name="discharge_date[]" value=""></td>';
+            html += "<td><button type='button' onclick='deleteRow2(this);'>Remove</button></td>"
+            html += "</tr>";
 
-        var row = document.getElementById("tbody_2").insertRow();
-        row.innerHTML = html;
-    }
+            var row = document.getElementById("tbody_2").insertRow();
+            row.innerHTML = html;
+        }
 
-    function deleteRow2(button) {
-        items--
-        button.parentElement.parentElement.remove();
-        // first parentElement will be td and second will be tr.
-    }
-
-
-    var items3 = 0;
-
-    function add_Siblings() {
-        items3++;
-
-        var html = "<tr>";
-        html += '<td><input type="hidden" name="sibling[]" value=""></td>';
-        // html += "<td>" + items3 + "</td>";
-        html += "<td><?= $_GET['vday']; ?></td>";
-        html += '<td><input class="form-control" type="date" name="entry_date[]" value="" max="<?= date('Y-m-d') ?>" required></td>';
-        html += '<td><input class="form-control" type="number" name="age[]" value="" min="0" max="100" required></td>';
-        html += '<td><select class="form-control" name="sex[]" id="sex[]" style="width: 100%;" required><option value="">Select</option><option value="1">Male</option><option value="2">Female</option></select></td>';
-        html += '<td><select class="form-control" name="sickle_status[]" id="sickle_status[]" style="width: 100%;" required><option value="">Select</option><option value="1">Positive</option><option value="2">Negative</option><option value="99">Unknown</option><option value="96">Other</option></select></td>';
-        html += '<td><textarea class="form-control"  type="text" name="other[]" rows="3" placeholder="Type other here..."></textarea></td>';
-        html += "<td><button type='button' onclick='deleteRow3(this);'><ion-icon name='remove-circle-outline'></ion-icon>Remove</button></td>"
-        html += "</tr>";
-
-        var row = document.getElementById("tbody_3").insertRow();
-        row.innerHTML = html;
-    }
-
-    function deleteRow3(button) {
-        items--
-        button.parentElement.parentElement.remove();
-        // first parentElement will be td and second will be tr.
-    }
-
-    // $(document).ready(function() {
-
-    // });
-</script>
-
-<script>
-    function fillUpdateModal(data) {
-        document.querySelector('#updateModal [name="id"]').value = data.id;
-        document.querySelector('#updateModal [name="nimregenin_preparation"]').value = data.nimregenin_preparation;
-        document.querySelector('#updateModal [name="nimregenin_start"]').value = data.nimregenin_start;
-        document.querySelector('#updateModal [name="nimregenin_ongoing"]').value = data.nimregenin_ongoing;
-        document.querySelector('#updateModal [name="nimregenin_end"]').value = data.nimregenin_end;
-        document.querySelector('#updateModal [name="nimregenin_dose"]').value = data.nimregenin_dose;
-        document.querySelector('#updateModal [name="nimregenin_frequency"]').value = data.nimregenin_frequency;
-        document.querySelector('#updateModal [name="nimregenin_remarks"]').value = data.nimregenin_remarks;
-    }
-
-    function setDeleteId(id) {
-        document.querySelector('#deleteModal [name="id"]').value = id;
-    }
-</script>
+        function deleteRow2(button) {
+            items--
+            button.parentElement.parentElement.remove();
+            // first parentElement will be td and second will be tr.
+        }
 
 
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        var items3 = 0;
+
+        function add_Siblings() {
+            items3++;
+
+            var html = "<tr>";
+            html += '<td><input type="hidden" name="sibling[]" value=""></td>';
+            // html += "<td>" + items3 + "</td>";
+            html += "<td><?= $_GET['vday']; ?></td>";
+            html += '<td><input class="form-control" type="date" name="entry_date[]" value="" max="<?= date('Y-m-d') ?>" required></td>';
+            html += '<td><input class="form-control" type="number" name="age[]" value="" min="0" max="100" required></td>';
+            html += '<td><select class="form-control" name="sex[]" id="sex[]" style="width: 100%;" required><option value="">Select</option><option value="1">Male</option><option value="2">Female</option></select></td>';
+            html += '<td><select class="form-control" name="sickle_status[]" id="sickle_status[]" style="width: 100%;" required><option value="">Select</option><option value="1">Positive</option><option value="2">Negative</option><option value="99">Unknown</option><option value="96">Other</option></select></td>';
+            html += '<td><textarea class="form-control"  type="text" name="other[]" rows="3" placeholder="Type other here..."></textarea></td>';
+            html += "<td><button type='button' onclick='deleteRow3(this);'><ion-icon name='remove-circle-outline'></ion-icon>Remove</button></td>"
+            html += "</tr>";
+
+            var row = document.getElementById("tbody_3").insertRow();
+            row.innerHTML = html;
+        }
+
+        function deleteRow3(button) {
+            items--
+            button.parentElement.parentElement.remove();
+            // first parentElement will be td and second will be tr.
+        }
+
+        // $(document).ready(function() {
+
+        // });
+    </script>
+
+    <script>
+        function fillUpdateModal(data) {
+            document.querySelector('#updateModal [name="id"]').value = data.id;
+            document.querySelector('#updateModal [name="nimregenin_preparation"]').value = data.nimregenin_preparation;
+            document.querySelector('#updateModal [name="nimregenin_start"]').value = data.nimregenin_start;
+            document.querySelector('#updateModal [name="nimregenin_ongoing"]').value = data.nimregenin_ongoing;
+            document.querySelector('#updateModal [name="nimregenin_end"]').value = data.nimregenin_end;
+            document.querySelector('#updateModal [name="nimregenin_dose"]').value = data.nimregenin_dose;
+            document.querySelector('#updateModal [name="nimregenin_frequency"]').value = data.nimregenin_frequency;
+            document.querySelector('#updateModal [name="nimregenin_remarks"]').value = data.nimregenin_remarks;
+        }
+
+        function setDeleteId(id) {
+            document.querySelector('#deleteModal [name="id"]').value = id;
+        }
+    </script>
+
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>
