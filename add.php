@@ -6463,7 +6463,7 @@ if ($user->isLoggedIn()) {
 
                                                         <hr>
                                                         <div class="row">
-                                                            <div class="col-md-3">
+                                                            <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label for="liver_bilirubin_total">Bilirubin Total</label>
                                                                     <div class="input-group">
@@ -6492,37 +6492,31 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             </div>
 
-                                                            <div class="col-sm-3">
+                                                            <div class="col-sm-4">
                                                                 <div class="row-form clearfix">
                                                                     <!-- select -->
                                                                     <div class="form-group">
                                                                         <label>Bilirubin direct</label>
                                                                         <div class="input-group">
                                                                             <input value="<?= $patient['liver_bilirubin_direct'] ?>" type="text" name="liver_bilirubin_direct" id="liver_bilirubin_direct" />
-                                                                            <select name="liver_bilirubin_direct_units" required>
-                                                                                <?php if ($patient['liver_bilirubin_direct_units'] == "1") { ?>
-                                                                                    <option value="<?= $patient['liver_bilirubin_direct_units'] ?>">micromol/l</option>
-                                                                                <?php } elseif ($patient['liver_bilirubin_direct_units'] == "2") { ?>
-                                                                                    <option value="<?= $patient['liver_bilirubin_direct_units'] ?>">mg/dl</option>
-                                                                                <?php } else if ($patient['liver_bilirubin_direct_units'] == "3") { ?>
-                                                                                    <option value="<?= $patient['liver_bilirubin_direct_units'] ?>">grams/L</option>
-                                                                                <?php } else { ?>
+                                                                            <div class="input-group-append">
+                                                                                <select class="form-control select2" name="liver_bilirubin_direct_units" id="liver_bilirubin_direct_units" style="width: 100%;" required>
                                                                                     <option value="">Select Units</option>
-                                                                                <?php } ?>
-                                                                                <option value="1"> micromol/l </option>
-                                                                                <option value="2"> mg/dl </option>
-                                                                                <option value="3"> grams/L </option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="input-group mt-1">
-                                                                            <select class="form-control select2" name="bilirubin_direct_grade" id="bilirubin_direct_grade" style="width: 100%;">
-                                                                                <option value="">Select</option>
-                                                                                <option value="0" <?= $patient['bilirubin_direct_grade'] == "0" ? "selected" : "" ?>>Zero</option>
-                                                                                <option value="1" <?= $patient['bilirubin_direct_grade'] == "1" ? "selected" : "" ?>>One</option>
-                                                                                <option value="2" <?= $patient['bilirubin_direct_grade'] == "2" ? "selected" : "" ?>>Two</option>
-                                                                                <option value="3" <?= $patient['bilirubin_direct_grade'] == "3" ? "selected" : "" ?>>Three</option>
-                                                                                <option value="4" <?= $patient['bilirubin_direct_grade'] == "4" ? "selected" : "" ?>>Four</option>
-                                                                            </select>
+                                                                                    <option value="1" <?= $patient['liver_bilirubin_direct_units'] == "1" ? "selected" : "" ?>>micromol/l</option>
+                                                                                    <option value="2" <?= $patient['liver_bilirubin_direct_units'] == "2" ? "selected" : "" ?>>mg/dl</option>
+                                                                                    <option value="3" <?= $patient['liver_bilirubin_direct_units'] == "3" ? "selected" : "" ?>>grams/L</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="input-group-append">
+                                                                                <select class="form-control select2" name="bilirubin_direct_grade" id="bilirubin_direct_grade" style="width: 100%;">
+                                                                                    <option value="">Select Grades</option>
+                                                                                    <option value="0" <?= $patient['bilirubin_direct_grade'] == "0" ? "selected" : "" ?>>Zero</option>
+                                                                                    <option value="1" <?= $patient['bilirubin_direct_grade'] == "1" ? "selected" : "" ?>>One</option>
+                                                                                    <option value="2" <?= $patient['bilirubin_direct_grade'] == "2" ? "selected" : "" ?>>Two</option>
+                                                                                    <option value="3" <?= $patient['bilirubin_direct_grade'] == "3" ? "selected" : "" ?>>Three</option>
+                                                                                    <option value="4" <?= $patient['bilirubin_direct_grade'] == "4" ? "selected" : "" ?>>Four</option>
+                                                                                </select>
+                                                                            </div>
                                                                         </div>
                                                                         <div id="liver_bilirubin_directError" class="text text-danger"></div>
                                                                         <div id="liver_bilirubin_direct_unitsError" class="text text-danger"></div>
@@ -6532,7 +6526,7 @@ if ($user->isLoggedIn()) {
                                                             </div>
 
                                                             <!-- RBG Input and Units -->
-                                                            <div class="col-sm-3">
+                                                            <div class="col-sm-4">
                                                                 <div class="form-group">
                                                                     <label for="rbg">RBG</label>
                                                                     <div class="input-group">
@@ -6545,22 +6539,17 @@ if ($user->isLoggedIn()) {
                                                                             </select>
                                                                         </div>
                                                                     </div>
+                                                                    <div class="input-group mt-1">
+                                                                        <select class="form-control select2" name="rbg_grade" id="rbg_grade" style="width: 100%;">
+                                                                            <option value="">Select</option>
+                                                                            <option value="0" <?= $patient['rbg_grade'] == "0" ? "selected" : "" ?>>Zero</option>
+                                                                            <option value="1" <?= $patient['rbg_grade'] == "1" ? "selected" : "" ?>>One</option>
+                                                                            <option value="2" <?= $patient['rbg_grade'] == "2" ? "selected" : "" ?>>Two</option>
+                                                                            <option value="3" <?= $patient['rbg_grade'] == "3" ? "selected" : "" ?>>Three</option>
+                                                                            <option value="4" <?= $patient['rbg_grade'] == "4" ? "selected" : "" ?>>Four</option>
+                                                                        </select>
+                                                                    </div>
                                                                     <small class="text-muted">XX</small>
-                                                                </div>
-                                                            </div>
-
-                                                            <!-- RBG Grade -->
-                                                            <div class="col-sm-3">
-                                                                <div class="form-group">
-                                                                    <label for="rbg_grade">Grade</label>
-                                                                    <select class="form-control select2" name="rbg_grade" id="rbg_grade" style="width: 100%;">
-                                                                        <option value="">Select</option>
-                                                                        <option value="0" <?= $patient['rbg_grade'] == "0" ? "selected" : "" ?>>Zero</option>
-                                                                        <option value="1" <?= $patient['rbg_grade'] == "1" ? "selected" : "" ?>>One</option>
-                                                                        <option value="2" <?= $patient['rbg_grade'] == "2" ? "selected" : "" ?>>Two</option>
-                                                                        <option value="3" <?= $patient['rbg_grade'] == "3" ? "selected" : "" ?>>Three</option>
-                                                                        <option value="4" <?= $patient['rbg_grade'] == "4" ? "selected" : "" ?>>Four</option>
-                                                                    </select>
                                                                 </div>
                                                             </div>
                                                         </div>
