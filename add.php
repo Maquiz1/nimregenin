@@ -8100,80 +8100,57 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="tdate">Tarehe ya Leo:</label>
-                                                        <?php
-                                                        $data = $override->get1('crf7', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                        foreach ($data as $st) {
-                                                            if ($st['tdate'] != "") {
-                                                                ?>
-                                                                <input type="date" class="form-control" id="tdate" name="tdate"
-                                                                    value="<?= $st['tdate'] ?>" placeholder="Example: 2023-01-01">
-                                                                <?php
-                                                            } else {
-                                                                ?>
-                                                                <input type="date" class="form-control" id="tdate" name="tdate"
-                                                                    placeholder="Example: 2023-01-01">
-                                                                <?php
-                                                            }
-                                                        }
-                                                        ?>
+                                                        <input type="date" class="form-control" id="tdate" name="tdate"
+                                                        value="<?= $patient['tdate'] ?>" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="mobility">A. Uwezo wa kutembea</label>
-                                                        <select class="form-control select2" id="mobility" name="mobility"
-                                                            style="width: 100%;">
-                                                            <?php
-                                                            $data = $override->get1('crf7', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                            foreach ($data as $st) {
-                                                                if ($st['mobility'] == 1) { ?>
-                                                                    <option value="<?= $st['mobility'] ?>">Sina tatizo katika
-                                                                        kutembea</option>
-                                                                <?php } else if ($st['mobility'] == 2) { ?>
-                                                                        <option value="<?= $st['mobility'] ?>">Nina matatizo kiasi
-                                                                            katika kutembea</option>
-                                                                <?php } else if ($st['mobility'] == 3) { ?>
-                                                                            <option value="<?= $st['mobility'] ?>">Siwezi kutembea kabisa
-                                                                            </option>
-                                                                <?php } else { ?>
-                                                                            <option value="">Select</option>
-                                                                <?php }
-                                                            } ?>
-                                                            <option value="1">Sina tatizo katika kutembea</option>
-                                                            <option value="2">Nina matatizo kiasi katika kutembea</option>
-                                                            <option value="3">Siwezi kutembea kabisa</option>
-                                                        </select>
+                                                        <select class="form-control" name="mobility" style="width: 100%;"
+                                                                required>
+                                                                <option value="<?= $patient['mobility'] ?>"><?php if ($patient['mobility']) {
+                                                                      if ($patient['mobility'] == 1) {
+                                                                          echo 'Sina tatizo katika kutembea';
+                                                                      } elseif ($patient['mobility'] == 2) {
+                                                                          echo 'Nina matatizo kiasi katika kutembea';
+                                                                      } elseif ($patient['mobility'] == 3) {
+                                                                        echo 'Siwezi kutembea kabisa';
+                                                                    }
+                                                                  } else {
+                                                                      echo 'Select';
+                                                                  } ?></option>
+                                                                <option value="1">Sina tatizo katika
+                                                                kutembea</option>
+                                                                <option value="2">Nina matatizo kiasi
+                                                                katika kutembea</option>
+                                                                <option value="3">Siwezi kutembea kabisa</option>
+                                                            </select>                                                       
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="self_care">B. Uwezo wa kujihudumia</label>
-                                                        <select class="form-control select2" id="self_care" name="self_care"
-                                                            style="width: 100%;">
-                                                            <?php
-                                                            $data = $override->get1('crf7', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                            foreach ($data as $st) {
-                                                                if ($st['self_care'] == 1) { ?>
-                                                                    <option value="<?= $st['self_care'] ?>">Sina tatizo kujihudumia
-                                                                        mwenyewe</option>
-                                                                <?php } else if ($st['self_care'] == 2) { ?>
-                                                                        <option value="<?= $st['self_care'] ?>">Nina matatizo kiasi
-                                                                            katika kujisafisha au kuvaa mwenyewe</option>
-                                                                <?php } else if ($st['self_care'] == 3) { ?>
-                                                                            <option value="<?= $st['self_care'] ?>">Siwezi kujisafisha wala
-                                                                                kuvaa mwenyewe</option>
-                                                                <?php } else { ?>
-                                                                            <option value="">Select</option>
-                                                                <?php }
-                                                            } ?>
-                                                            <option value="1">Sina tatizo kujihudumia mwenyewe</option>
-                                                            <option value="2">Nina matatizo kiasi katika kujisafisha au
+                                                        <select class="form-control" name="self_care" style="width: 100%;"
+                                                                required>
+                                                                <option value="<?= $patient['self_care'] ?>"><?php if ($patient['self_care']) {
+                                                                      if ($patient['self_care'] == 1) {
+                                                                          echo 'Sina tatizo katika kutembea';
+                                                                      } elseif ($patient['self_care'] == 2) {
+                                                                          echo 'Nina matatizo kiasi katika kutembea';
+                                                                      } elseif ($patient['self_care'] == 3) {
+                                                                        echo 'Siwezi kutembea kabisa';
+                                                                    }
+                                                                  } else {
+                                                                      echo 'Select';
+                                                                  } ?></option>
+                                                                <option value="1">Sina tatizo kujihudumia mwenyewe</option>
+                                                                <option value="2">Nina matatizo kiasi katika kujisafisha au
                                                                 kuvaa mwenyewe</option>
-                                                            <option value="3">Siwezi kujisafisha wala kuvaa mwenyewe
-                                                            </option>
-                                                        </select>
+                                                                <option value="3">Siwezi kujisafisha wala kuvaa mwenyewe</option>
+                                                            </select>                                                            
                                                     </div>
                                                 </div>
                                             </div>
