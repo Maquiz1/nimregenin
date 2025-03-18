@@ -2348,444 +2348,440 @@ if ($user->isLoggedIn()) {
                                         <h3 class="card-title">CRF 1: MEDICAL HISTORY, USE OF HERBAL MEDICINES AND STANDARD
                                             TREATMENT</h3>
                                     </div>
-                                     <!-- Add Modal -->
-                                     <div class="modal fade" id="addNimregenin" tabindex="-1" role="dialog">
-                                                    <div class="modal-dialog modal-lg" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title">Add New Record</h5>
-                                                                <button type="button" class="close"
-                                                                    data-dismiss="modal">&times;</button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form method="post">
-                                                                    <div class="form-group row">
-                                                                        <label class="col-sm-3 col-form-label">Type of
-                                                                            NIMREGENIN</label>
-                                                                        <div class="col-sm-9">
-                                                                            <input type="text" name="nimregenin_preparation"
-                                                                                value="<?= $patient['nimregenin_preparation'] ?>"
-                                                                                class="form-control"
-                                                                                placeholder="Type of NIMREGENIN">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label class="col-sm-3 col-form-label">Start
-                                                                            Date</label>
-                                                                        <div class="col-sm-9">
-                                                                            <input type="date" name="nimregenin_start"
-                                                                                value="<?= $patient['nimregenin_start'] ?>"
-                                                                                class="form-control"
-                                                                                placeholder="Start Date">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label
-                                                                            class="col-sm-3 col-form-label">Ongoing?</label>
-                                                                        <div class="col-sm-9">
-                                                                            <select name="nimregenin_ongoing"
-                                                                                class="form-control">
-                                                                                <option value="">Select</option>
-                                                                                <option value="1">Yes</option>
-                                                                                <option value="2">No</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label class="col-sm-3 col-form-label">End
-                                                                            Date</label>
-                                                                        <div class="col-sm-9">
-                                                                            <input type="date" name="nimregenin_end"
-                                                                                value="<?= $patient['nimregenin_end'] ?>"
-                                                                                class="form-control" placeholder="End Date">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label class="col-sm-3 col-form-label">Dose
-                                                                            (mls)</label>
-                                                                        <div class="col-sm-9">
-                                                                            <input type="text" name="nimregenin_dose"
-                                                                                value="<?= $patient['nimregenin_dose'] ?>"
-                                                                                class="form-control"
-                                                                                placeholder="Dose (mls)">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label class="col-sm-3 col-form-label">Frequency
-                                                                            (per day)</label>
-                                                                        <div class="col-sm-9">
-                                                                            <input type="text" name="nimregenin_frequency"
-                                                                                value="<?= $patient['nimregenin_frequency'] ?>"
-                                                                                class="form-control"
-                                                                                placeholder="Frequency (per day)">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label
-                                                                            class="col-sm-3 col-form-label">Remarks</label>
-                                                                        <div class="col-sm-9">
-                                                                            <input type="text" name="nimregenin_remarks"
-                                                                                value="<?= $patient['nimregenin_remarks'] ?>"
-                                                                                class="form-control" placeholder="Remarks">
-                                                                        </div>
-                                                                    </div>
-                                                                    <input type="hidden" name="nimregenin_herbal"
-                                                                        value="<?= $patient['nimregenin_herbal'] ?>">
-                                                                    <input type="hidden" name="crf1_cmpltd_date"
-                                                                        value="<?= $patient['crf1_cmpltd_date'] ?>">
-                                                                    <input type="submit" name="add_nimregenin"
-                                                                        class="btn btn-success mt-2l" value="Save">
-                                                                    <button type="button" class="btn btn-secondary mt-2"
-                                                                        data-dismiss="modal">Cancel</button>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                    <!-- Add Modal -->
+                                    <div class="modal fade" id="addNimregenin" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Add New Record</h5>
+                                                    <button type="button" class="close"
+                                                        data-dismiss="modal">&times;</button>
                                                 </div>
-
-                                                <div class="modal fade" id="addOtherHerbal" tabindex="-1" role="dialog">
-                                                        <div class="modal-dialog modal-lg" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title">Add New Other Herbal
-                                                                        Preparation</h5>
-                                                                    <button type="button" class="close"
-                                                                        data-dismiss="modal">&times;</button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <form method="post">
-                                                                        <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">Type
-                                                                                of Herbal Preparation</label>
-                                                                            <div class="col-sm-9">
-                                                                                <input type="text" name="herbal_preparation"
-                                                                                    class="form-control"
-                                                                                    placeholder="Type of Herbal Preparation">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">Start
-                                                                                Date</label>
-                                                                            <div class="col-sm-9">
-                                                                                <input type="date" name="herbal_start"
-                                                                                    class="form-control"
-                                                                                    placeholder="Start Date">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label
-                                                                                class="col-sm-3 col-form-label">Ongoing?</label>
-                                                                            <div class="col-sm-9">
-                                                                                <select name="herbal_ongoing"
-                                                                                    class="form-control">
-                                                                                    <option value="">Select</option>
-                                                                                    <option value="1">Yes</option>
-                                                                                    <option value="2">No</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">End
-                                                                                Date</label>
-                                                                            <div class="col-sm-9">
-                                                                                <input type="date" name="herbal_end"
-                                                                                    class="form-control"
-                                                                                    placeholder="End Date">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">Dose
-                                                                                (mls)</label>
-                                                                            <div class="col-sm-9">
-                                                                                <input type="text" name="herbal_dose"
-                                                                                    class="form-control"
-                                                                                    placeholder="Dose (mls)">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">Frequency
-                                                                                (per day)</label>
-                                                                            <div class="col-sm-9">
-                                                                                <input type="text" name="herbal_frequency"
-                                                                                    class="form-control"
-                                                                                    placeholder="Frequency (per day)">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label
-                                                                                class="col-sm-3 col-form-label">Remarks</label>
-                                                                            <div class="col-sm-9">
-                                                                                <input type="text" name="herbal_remarks"
-                                                                                    class="form-control"
-                                                                                    placeholder="Remarks">
-                                                                            </div>
-                                                                        </div>
-                                                                        <input type="hidden" name="other_herbal"
-                                                                            value="<?= $patient['other_herbal'] ?>">
-                                                                        <input type="submit" name="add_other_herbal"
-                                                                            class="btn btn-success mt-2" value="Save" />
-                                                                        <button type="button" class="btn btn-secondary mt-2"
-                                                                            data-dismiss="modal">Cancel</button>
-                                                                    </form>
-                                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="post">
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Type of
+                                                                NIMREGENIN</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" name="nimregenin_preparation"
+                                                                    value="<?= $patient['nimregenin_preparation'] ?>"
+                                                                    class="form-control"
+                                                                    placeholder="Type of NIMREGENIN">
                                                             </div>
                                                         </div>
-                                                    </div>
-
-                                                    <!-- Add Modal -->
-                                                    <div class="modal fade" id="addRadiotherapy" tabindex="-1"
-                                                            role="dialog">
-                                                            <div class="modal-dialog modal-lg" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title">Add New Radiotherapy</h5>
-                                                                        <button type="button" class="close"
-                                                                            data-dismiss="modal">&times;</button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <form method="post">
-                                                                            <div class="form-group row">
-                                                                                <label class="col-sm-3 col-form-label">Type
-                                                                                    of Radiotherapy</label>
-                                                                                <div class="col-sm-9">
-                                                                                    <input type="text" name="radiotherapy"
-                                                                                        class="form-control"
-                                                                                        placeholder="Type of Radiotherapy">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group row">
-                                                                                <label class="col-sm-3 col-form-label">Start
-                                                                                    Date</label>
-                                                                                <div class="col-sm-9">
-                                                                                    <input type="date"
-                                                                                        name="radiotherapy_start"
-                                                                                        class="form-control"
-                                                                                        placeholder="Start Date">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group row">
-                                                                                <label
-                                                                                    class="col-sm-3 col-form-label">Ongoing?</label>
-                                                                                <div class="col-sm-9">
-                                                                                    <select name="radiotherapy_ongoing"
-                                                                                        class="form-control">
-                                                                                        <option value="">Select</option>
-                                                                                        <option value="1">Yes</option>
-                                                                                        <option value="2">No</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group row">
-                                                                                <label class="col-sm-3 col-form-label">End
-                                                                                    Date</label>
-                                                                                <div class="col-sm-9">
-                                                                                    <input type="date"
-                                                                                        name="radiotherapy_end"
-                                                                                        class="form-control"
-                                                                                        placeholder="End Date">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group row">
-                                                                                <label class="col-sm-3 col-form-label">Dose
-                                                                                    (Grays)</label>
-                                                                                <div class="col-sm-9">
-                                                                                    <input type="text"
-                                                                                        name="radiotherapy_dose"
-                                                                                        class="form-control"
-                                                                                        placeholder="Dose (Grays)">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group row">
-                                                                                <label
-                                                                                    class="col-sm-3 col-form-label">Frequency
-                                                                                    (numbers)</label>
-                                                                                <div class="col-sm-9">
-                                                                                    <input type="text"
-                                                                                        name="radiotherapy_frequecy"
-                                                                                        class="form-control"
-                                                                                        placeholder="Frequency (numbers)">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group row">
-                                                                                <label
-                                                                                    class="col-sm-3 col-form-label">Remarks</label>
-                                                                                <div class="col-sm-9">
-                                                                                    <input type="text"
-                                                                                        name="radiotherapy_remarks"
-                                                                                        class="form-control"
-                                                                                        placeholder="Remarks">
-                                                                                </div>
-                                                                            </div>
-                                                                            <input type="hidden" name="other_herbal"
-                                                                                value="<?= $patient['other_herbal'] ?>">
-                                                                            <input type="hidden"
-                                                                                name="radiotherapy_performed"
-                                                                                value="<?= $patient['radiotherapy_performed'] ?>">
-                                                                            <input type="submit" name="add_radiotherapy"
-                                                                                class="btn btn-success mt-2" value="Save">
-                                                                            <button type="button"
-                                                                                class="btn btn-secondary mt-2"
-                                                                                data-dismiss="modal">Cancel</button>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Start
+                                                                Date</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="date" name="nimregenin_start"
+                                                                    value="<?= $patient['nimregenin_start'] ?>"
+                                                                    class="form-control"
+                                                                    placeholder="Start Date">
                                                             </div>
                                                         </div>
-                                                          <!-- Add Modal -->
-                                                    <div class="modal fade" id="addChemotherapy" tabindex="-1"
-                                                        role="dialog">
-                                                        <div class="modal-dialog modal-lg" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title">Add New Chemotherapy</h5>
-                                                                    <button type="button" class="close"
-                                                                        data-dismiss="modal">&times;</button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <form method="post">
-                                                                        <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">Type of
-                                                                                Chemotherapy</label>
-                                                                            <div class="col-sm-9">
-                                                                                <input type="text" name="chemotherapy"
-                                                                                    class="form-control"
-                                                                                    placeholder="Type of Chemotherapy">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">Start
-                                                                                Date</label>
-                                                                            <div class="col-sm-9">
-                                                                                <input type="date" name="chemotherapy_start"
-                                                                                    class="form-control"
-                                                                                    placeholder="Start Date">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label
-                                                                                class="col-sm-3 col-form-label">Ongoing?</label>
-                                                                            <div class="col-sm-9">
-                                                                                <select name="chemotherapy_ongoing"
-                                                                                    class="form-control">
-                                                                                    <option value="">Select</option>
-                                                                                    <option value="1">Yes</option>
-                                                                                    <option value="2">No</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">End
-                                                                                Date</label>
-                                                                            <div class="col-sm-9">
-                                                                                <input type="date" name="chemotherapy_end"
-                                                                                    class="form-control"
-                                                                                    placeholder="End Date">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">Dose
-                                                                                (mg)</label>
-                                                                            <div class="col-sm-9">
-                                                                                <input type="text" name="chemotherapy_dose"
-                                                                                    class="form-control"
-                                                                                    placeholder="Dose (mg)">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">Frequency
-                                                                                (numbers)</label>
-                                                                            <div class="col-sm-9">
-                                                                                <input type="text"
-                                                                                    name="chemotherapy_frequecy"
-                                                                                    class="form-control"
-                                                                                    placeholder="Frequency (numbers)">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label
-                                                                                class="col-sm-3 col-form-label">Remarks</label>
-                                                                            <div class="col-sm-9">
-                                                                                <input type="text"
-                                                                                    name="chemotherapy_remarks"
-                                                                                    class="form-control"
-                                                                                    placeholder="Remarks">
-                                                                            </div>
-                                                                        </div>
-                                                                        <input type="hidden" name="other_herbal"
-                                                                            value="<?= $patient['other_herbal'] ?>">
-                                                                        <input type="hidden" name="chemotherapy_performed"
-                                                                            value="<?= $patient['chemotherapy_performed'] ?>">
-                                                                        <input type="submit" name="add_chemotherapy"
-                                                                            class="btn btn-success mt-2" value="Save">
-                                                                        <button type="button" class="btn btn-secondary mt-2"
-                                                                            data-dismiss="modal">Cancel</button>
-                                                                    </form>
-                                                                </div>
+                                                        <div class="form-group row">
+                                                            <label
+                                                                class="col-sm-3 col-form-label">Ongoing?</label>
+                                                            <div class="col-sm-9">
+                                                                <select name="nimregenin_ongoing"
+                                                                    class="form-control">
+                                                                    <option value="">Select</option>
+                                                                    <option value="1">Yes</option>
+                                                                    <option value="2">No</option>
+                                                                </select>
                                                             </div>
                                                         </div>
-                                                    </div>
-
-
-                                                    <!-- Add Modal for Surgery -->
-                                                    <div class="modal fade" id="addSurgery" tabindex="-1" role="dialog">
-                                                        <div class="modal-dialog modal-lg" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title">Add New Surgery</h5>
-                                                                    <button type="button" class="close"
-                                                                        data-dismiss="modal">&times;</button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <form method="post">
-                                                                        <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">Type of
-                                                                                Surgery</label>
-                                                                            <div class="col-sm-9">
-                                                                                <input type="text" name="surgery"
-                                                                                    class="form-control"
-                                                                                    placeholder="Type of Surgery">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label class="col-sm-3 col-form-label">Start
-                                                                                Date</label>
-                                                                            <div class="col-sm-9">
-                                                                                <input type="date" name="surgery_start"
-                                                                                    class="form-control"
-                                                                                    placeholder="Start Date">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label
-                                                                                class="col-sm-3 col-form-label">Frequency</label>
-                                                                            <div class="col-sm-9">
-                                                                                <input type="text" name="surgery_number"
-                                                                                    class="form-control"
-                                                                                    placeholder="Frequency (numbers)">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label
-                                                                                class="col-sm-3 col-form-label">Remarks</label>
-                                                                            <div class="col-sm-9">
-                                                                                <input type="text" name="surgery_remarks"
-                                                                                    class="form-control"
-                                                                                    placeholder="Remarks">
-                                                                            </div>
-                                                                        </div>
-                                                                        <input type="hidden" name="other_herbal"
-                                                                            value="<?= $patient['other_herbal'] ?>">
-                                                                        <input type="hidden" name="surgery_performed"
-                                                                            value="<?= $patient['surgery_performed'] ?>">
-                                                                        <input type="submit" name="add_surgery"
-                                                                            class="btn btn-success mt-2" value="Save">
-                                                                        <button type="button" class="btn btn-secondary mt-2"
-                                                                            data-dismiss="modal">Cancel</button>
-                                                                    </form>
-                                                                </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">End
+                                                                Date</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="date" name="nimregenin_end"
+                                                                    value="<?= $patient['nimregenin_end'] ?>"
+                                                                    class="form-control" placeholder="End Date">
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Dose
+                                                                (mls)</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" name="nimregenin_dose"
+                                                                    value="<?= $patient['nimregenin_dose'] ?>"
+                                                                    class="form-control"
+                                                                    placeholder="Dose (mls)">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Frequency
+                                                                (per day)</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" name="nimregenin_frequency"
+                                                                    value="<?= $patient['nimregenin_frequency'] ?>"
+                                                                    class="form-control"
+                                                                    placeholder="Frequency (per day)">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label
+                                                                class="col-sm-3 col-form-label">Remarks</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" name="nimregenin_remarks"
+                                                                    value="<?= $patient['nimregenin_remarks'] ?>"
+                                                                    class="form-control" placeholder="Remarks">
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" name="nimregenin_herbal"
+                                                            value="<?= $patient['nimregenin_herbal'] ?>">
+                                                        <input type="hidden" name="crf1_cmpltd_date"
+                                                            value="<?= $patient['crf1_cmpltd_date'] ?>">
+                                                        <input type="submit" name="add_nimregenin"
+                                                            class="btn btn-success mt-2l" value="Save">
+                                                        <button type="button" class="btn btn-secondary mt-2"
+                                                            data-dismiss="modal">Cancel</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" id="addOtherHerbal" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Add New Other Herbal
+                                                        Preparation</h5>
+                                                    <button type="button" class="close"
+                                                        data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="post">
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Type
+                                                                of Herbal Preparation</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" name="herbal_preparation"
+                                                                    class="form-control"
+                                                                    placeholder="Type of Herbal Preparation">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Start
+                                                                Date</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="date" name="herbal_start"
+                                                                    class="form-control"
+                                                                    placeholder="Start Date">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label
+                                                                class="col-sm-3 col-form-label">Ongoing?</label>
+                                                            <div class="col-sm-9">
+                                                                <select name="herbal_ongoing"
+                                                                    class="form-control">
+                                                                    <option value="">Select</option>
+                                                                    <option value="1">Yes</option>
+                                                                    <option value="2">No</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">End
+                                                                Date</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="date" name="herbal_end"
+                                                                    class="form-control"
+                                                                    placeholder="End Date">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Dose
+                                                                (mls)</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" name="herbal_dose"
+                                                                    class="form-control"
+                                                                    placeholder="Dose (mls)">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Frequency
+                                                                (per day)</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" name="herbal_frequency"
+                                                                    class="form-control"
+                                                                    placeholder="Frequency (per day)">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label
+                                                                class="col-sm-3 col-form-label">Remarks</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" name="herbal_remarks"
+                                                                    class="form-control"
+                                                                    placeholder="Remarks">
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" name="other_herbal"
+                                                            value="<?= $patient['other_herbal'] ?>">
+                                                        <input type="submit" name="add_other_herbal"
+                                                            class="btn btn-success mt-2" value="Save" />
+                                                        <button type="button" class="btn btn-secondary mt-2"
+                                                            data-dismiss="modal">Cancel</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Add Modal -->
+                                    <div class="modal fade" id="addRadiotherapy" tabindex="-1"
+                                        role="dialog">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Add New Radiotherapy</h5>
+                                                    <button type="button" class="close"
+                                                        data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="post">
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Type
+                                                                of Radiotherapy</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" name="radiotherapy"
+                                                                    class="form-control"
+                                                                    placeholder="Type of Radiotherapy">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Start
+                                                                Date</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="date"
+                                                                    name="radiotherapy_start"
+                                                                    class="form-control"
+                                                                    placeholder="Start Date">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label
+                                                                class="col-sm-3 col-form-label">Ongoing?</label>
+                                                            <div class="col-sm-9">
+                                                                <select name="radiotherapy_ongoing"
+                                                                    class="form-control">
+                                                                    <option value="">Select</option>
+                                                                    <option value="1">Yes</option>
+                                                                    <option value="2">No</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">End
+                                                                Date</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="date"
+                                                                    name="radiotherapy_end"
+                                                                    class="form-control"
+                                                                    placeholder="End Date">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Dose
+                                                                (Grays)</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text"
+                                                                    name="radiotherapy_dose"
+                                                                    class="form-control"
+                                                                    placeholder="Dose (Grays)">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label
+                                                                class="col-sm-3 col-form-label">Frequency
+                                                                (numbers)</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text"
+                                                                    name="radiotherapy_frequecy"
+                                                                    class="form-control"
+                                                                    placeholder="Frequency (numbers)">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label
+                                                                class="col-sm-3 col-form-label">Remarks</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text"
+                                                                    name="radiotherapy_remarks"
+                                                                    class="form-control"
+                                                                    placeholder="Remarks">
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" name="other_herbal"
+                                                            value="<?= $patient['other_herbal'] ?>">
+                                                        <input type="hidden"
+                                                            name="radiotherapy_performed"
+                                                            value="<?= $patient['radiotherapy_performed'] ?>">
+                                                        <input type="submit" name="add_radiotherapy"
+                                                            class="btn btn-success mt-2" value="Save">
+                                                        <button type="button"
+                                                            class="btn btn-secondary mt-2"
+                                                            data-dismiss="modal">Cancel</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Add Modal -->
+                                    <div class="modal fade" id="addChemotherapy" tabindex="-1"
+                                        role="dialog">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Add New Chemotherapy</h5>
+                                                    <button type="button" class="close"
+                                                        data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="post">
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Type of
+                                                                Chemotherapy</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" name="chemotherapy"
+                                                                    class="form-control"
+                                                                    placeholder="Type of Chemotherapy">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Start
+                                                                Date</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="date" name="chemotherapy_start"
+                                                                    class="form-control"
+                                                                    placeholder="Start Date">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label
+                                                                class="col-sm-3 col-form-label">Ongoing?</label>
+                                                            <div class="col-sm-9">
+                                                                <select name="chemotherapy_ongoing"
+                                                                    class="form-control">
+                                                                    <option value="">Select</option>
+                                                                    <option value="1">Yes</option>
+                                                                    <option value="2">No</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">End
+                                                                Date</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="date" name="chemotherapy_end"
+                                                                    class="form-control"
+                                                                    placeholder="End Date">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Dose
+                                                                (mg)</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" name="chemotherapy_dose"
+                                                                    class="form-control"
+                                                                    placeholder="Dose (mg)">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Frequency
+                                                                (numbers)</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text"
+                                                                    name="chemotherapy_frequecy"
+                                                                    class="form-control"
+                                                                    placeholder="Frequency (numbers)">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label
+                                                                class="col-sm-3 col-form-label">Remarks</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text"
+                                                                    name="chemotherapy_remarks"
+                                                                    class="form-control"
+                                                                    placeholder="Remarks">
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" name="other_herbal"
+                                                            value="<?= $patient['other_herbal'] ?>">
+                                                        <input type="hidden" name="chemotherapy_performed"
+                                                            value="<?= $patient['chemotherapy_performed'] ?>">
+                                                        <input type="submit" name="add_chemotherapy"
+                                                            class="btn btn-success mt-2" value="Save">
+                                                        <button type="button" class="btn btn-secondary mt-2"
+                                                            data-dismiss="modal">Cancel</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Add Modal for Surgery -->
+                                    <div class="modal fade" id="addSurgery" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Add New Surgery</h5>
+                                                    <button type="button" class="close"
+                                                        data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="post">
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Type of
+                                                                Surgery</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" name="surgery"
+                                                                    class="form-control"
+                                                                    placeholder="Type of Surgery">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-3 col-form-label">Start
+                                                                Date</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="date" name="surgery_start"
+                                                                    class="form-control"
+                                                                    placeholder="Start Date">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label
+                                                                class="col-sm-3 col-form-label">Frequency</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" name="surgery_number"
+                                                                    class="form-control"
+                                                                    placeholder="Frequency (numbers)">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label
+                                                                class="col-sm-3 col-form-label">Remarks</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" name="surgery_remarks"
+                                                                    class="form-control"
+                                                                    placeholder="Remarks">
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" name="other_herbal"
+                                                            value="<?= $patient['other_herbal'] ?>">
+                                                        <input type="hidden" name="surgery_performed"
+                                                            value="<?= $patient['surgery_performed'] ?>">
+                                                        <input type="submit" name="add_surgery"
+                                                            class="btn btn-success mt-2" value="Save">
+                                                        <button type="button" class="btn btn-secondary mt-2"
+                                                            data-dismiss="modal">Cancel</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <form id="crf1" method="post" onsubmit="return checkForm(event)">
                                         <script>
                                             function checkForm(event) {
@@ -3122,7 +3118,7 @@ if ($user->isLoggedIn()) {
                                                 </div>
 
                                                 <hr>
-                                               
+
                                                 <div class="card-body">
                                                     <button type="button" class="btn btn-info mb-3" data-toggle="modal"
                                                         data-target="#addNimregenin">
@@ -3371,7 +3367,7 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
 
-                                                  
+
 
                                                     <div class="card-body">
                                                         <button type="button" class="btn btn-info mb-3" data-toggle="modal"
@@ -3622,7 +3618,7 @@ if ($user->isLoggedIn()) {
                                                             </select>
                                                         </div>
 
-                                                        
+
 
                                                         <div class="card card-primary">
                                                             <div class="card-header">
@@ -3844,7 +3840,7 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                     <hr>
 
-                                                  
+
 
                                                     <div class="card card-primary">
                                                         <div class="card-header">
