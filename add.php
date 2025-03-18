@@ -1442,7 +1442,7 @@ if ($user->isLoggedIn()) {
             ));
             if ($validate->passed()) {
                 try {
-                    $data = $override->getNews5('crf2', 'status', 1, 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
+                    $data = $override->getNews5('crf7', 'status', 1, 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
                     if ($data) {
                         $user->updateRecord('crf7', array(
                             'study_id' => $_GET['sid'],
