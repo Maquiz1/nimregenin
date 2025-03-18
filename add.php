@@ -6388,7 +6388,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                     <div class="input-group mt-1">
                                                                         <select class="form-control select2" name="liver_pt_grade" id="liver_pt_grade" style="width: 100%;">
-                                                                            <option value="" <?= empty($patient['liver_pt_grade']) ? 'selected' : '' ?>>Select</option>
+                                                                            <option value="" <?= empty($patient['liver_pt_grade']) ? 'selected' : '' ?>>Select Grade</option>
                                                                             <option value="0" <?= $patient['liver_pt_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
                                                                             <option value="1" <?= $patient['liver_pt_grade'] == "1" ? 'selected' : '' ?>>One</option>
                                                                             <option value="2" <?= $patient['liver_pt_grade'] == "2" ? 'selected' : '' ?>>Two</option>
@@ -6412,8 +6412,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                     <div class="input-group mt-1">
                                                                         <select class="form-control select2" name="liver_ptt_grade" id="liver_ptt_grade">
-                                                                            <option value="">Select</option>
-                                                                            <option value="0" <?= $patient['liver_ptt_grade'] == "0" ? "selected" : "" ?>>Zero</option>
+                                                                        <option value="" <?= empty($patient['liver_ptt_grade']) ? 'selected' : '' ?>>Select Grade</option>
+                                                                        <option value="0" <?= $patient['liver_ptt_grade'] == "0" ? "selected" : "" ?>>Zero</option>
                                                                             <option value="1" <?= $patient['liver_ptt_grade'] == "1" ? "selected" : "" ?>>One</option>
                                                                             <option value="2" <?= $patient['liver_ptt_grade'] == "2" ? "selected" : "" ?>>Two</option>
                                                                             <option value="3" <?= $patient['liver_ptt_grade'] == "3" ? "selected" : "" ?>>Three</option>
@@ -6434,7 +6434,7 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                     <div class="input-group mt-1">
                                                                         <select class="form-control select2" name="liver_inr_grade" id="liver_inr_grade">
-                                                                            <option value="">Select</option>
+                                                                        <option value="" <?= empty($patient['liver_inr_grade']) ? 'selected' : '' ?>>Select Grade</option>
                                                                             <option value="0" <?= $patient['liver_inr_grade'] == "0" ? "selected" : "" ?>>Zero</option>
                                                                             <option value="1" <?= $patient['liver_inr_grade'] == "1" ? "selected" : "" ?>>One</option>
                                                                             <option value="2" <?= $patient['liver_inr_grade'] == "2" ? "selected" : "" ?>>Two</option>
@@ -6481,9 +6481,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                     <div class="input-group mt-1">
                                                                         <select class="form-control select2" name="bilirubin_total_grade" id="bilirubin_total_grade">
-                                                                            <option value="">Select</option>
-                                                                            <option value="0" <?= $patient['bilirubin_total_grade'] == "0" ? "selected" : "" ?>>Zero</option>
-                                                                            <option value="1" <?= $patient['bilirubin_total_grade'] == "1" ? "selected" : "" ?>>One</option>
+                                                                        <option value="" <?= empty($patient['bilirubin_total_grade']) ? 'selected' : '' ?>>Select Grade</option>
+                                                                        <option value="1" <?= $patient['bilirubin_total_grade'] == "1" ? "selected" : "" ?>>One</option>
                                                                             <option value="2" <?= $patient['bilirubin_total_grade'] == "2" ? "selected" : "" ?>>Two</option>
                                                                             <option value="3" <?= $patient['bilirubin_total_grade'] == "3" ? "selected" : "" ?>>Three</option>
                                                                             <option value="4" <?= $patient['bilirubin_total_grade'] == "4" ? "selected" : "" ?>>Four</option>
@@ -6510,8 +6509,8 @@ if ($user->isLoggedIn()) {
                                                                         </div>
                                                                         <div class="input-group-append">
                                                                             <select class="form-control select2" name="bilirubin_direct_grade" id="bilirubin_direct_grade" style="width: 100%;">
-                                                                                <option value="">Select Grades</option>
-                                                                                <option value="0" <?= $patient['bilirubin_direct_grade'] == "0" ? "selected" : "" ?>>Zero</option>
+                                                                            <option value="" <?= empty($patient['bilirubin_direct_grade']) ? 'selected' : '' ?>>Select Grade</option>
+                                                                            <option value="0" <?= $patient['bilirubin_direct_grade'] == "0" ? "selected" : "" ?>>Zero</option>
                                                                                 <option value="1" <?= $patient['bilirubin_direct_grade'] == "1" ? "selected" : "" ?>>One</option>
                                                                                 <option value="2" <?= $patient['bilirubin_direct_grade'] == "2" ? "selected" : "" ?>>Two</option>
                                                                                 <option value="3" <?= $patient['bilirubin_direct_grade'] == "3" ? "selected" : "" ?>>Three</option>
@@ -6541,8 +6540,8 @@ if ($user->isLoggedIn()) {
                                                                     </div>
                                                                     <div class="input-group mt-1">
                                                                         <select class="form-control select2" name="rbg_grade" id="rbg_grade" style="width: 100%;">
-                                                                            <option value="">Select</option>
-                                                                            <option value="0" <?= $patient['rbg_grade'] == "0" ? "selected" : "" ?>>Zero</option>
+                                                                        <option value="" <?= empty($patient['rbg_grade']) ? 'selected' : '' ?>>Select Grade</option>
+                                                                        <option value="0" <?= $patient['rbg_grade'] == "0" ? "selected" : "" ?>>Zero</option>
                                                                             <option value="1" <?= $patient['rbg_grade'] == "1" ? "selected" : "" ?>>One</option>
                                                                             <option value="2" <?= $patient['rbg_grade'] == "2" ? "selected" : "" ?>>Two</option>
                                                                             <option value="3" <?= $patient['rbg_grade'] == "3" ? "selected" : "" ?>>Three</option>
@@ -6570,6 +6569,7 @@ if ($user->isLoggedIn()) {
                                                                     <span class="help-block">XX.X (mg/dl)</span>
                                                                     <div class="input-group mt-1">
                                                                         <select name="hb_grade" id="hb_grade" class="form-control select2">
+                                                                        <option value="" <?= empty($patient['hb_grade']) ? 'selected' : '' ?>>Select Grade</option>
                                                                             <option value="0" <?= $patient['hb_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
                                                                             <option value="1" <?= $patient['hb_grade'] == "1" ? 'selected' : '' ?>>One</option>
                                                                             <option value="2" <?= $patient['hb_grade'] == "2" ? 'selected' : '' ?>>Two</option>
@@ -6603,6 +6603,7 @@ if ($user->isLoggedIn()) {
                                                                     <span class="help-block">XXXXXXX (cells/microliter)</span>
                                                                     <div class="input-group mt-1">
                                                                         <select name="wbc_grade" id="wbc_grade" class="form-control select2">
+                                                                        <option value="" <?= empty($patient['wbc_grade']) ? 'selected' : '' ?>>Select Grade</option>
                                                                             <option value="0" <?= $patient['wbc_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
                                                                             <option value="1" <?= $patient['wbc_grade'] == "1" ? 'selected' : '' ?>>One</option>
                                                                             <option value="2" <?= $patient['wbc_grade'] == "2" ? 'selected' : '' ?>>Two</option>
@@ -6622,6 +6623,7 @@ if ($user->isLoggedIn()) {
                                                                     <span class="help-block">XXXXX</span>
                                                                     <div class="input-group mt-1">
                                                                         <select name="abs_lymphocytes_grade" id="abs_lymphocytes_grade" class="form-control select2">
+                                                                        <option value="" <?= empty($patient['abs_lymphocytes_grade']) ? 'selected' : '' ?>>Select Grade</option>
                                                                             <option value="0" <?= $patient['abs_lymphocytes_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
                                                                             <option value="1" <?= $patient['abs_lymphocytes_grade'] == "1" ? 'selected' : '' ?>>One</option>
                                                                             <option value="2" <?= $patient['abs_lymphocytes_grade'] == "2" ? 'selected' : '' ?>>Two</option>
