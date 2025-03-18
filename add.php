@@ -2080,8 +2080,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?php if ($client['gender']) {
                                                                                 print_r($client['gender']);
                                                                             } ?>"><?php if ($client['gender']) {
-                                                                        print_r($client['gender']);
-                                                                    } ?></option>
+                                                                                        print_r($client['gender']);
+                                                                                    } ?></option>
                                                             <option value="male">Male</option>
                                                             <option value="female">Female</option>
                                                         </select>
@@ -2109,8 +2109,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?php if ($client['marital_status']) {
                                                                                 print_r($client['marital_status']);
                                                                             } ?>"><?php if ($client['marital_status']) {
-                                                                        print_r($client['marital_status']);
-                                                                    } ?></option>
+                                                                                        print_r($client['marital_status']);
+                                                                                    } ?></option>
                                                             <option value="Single">Single</option>
                                                             <option value="Married">Married</option>
                                                             <option value="Divorced">Divorced</option>
@@ -2132,8 +2132,8 @@ if ($user->isLoggedIn()) {
                                                             <option value="<?php if ($client['education_level']) {
                                                                                 print_r($client['education_level']);
                                                                             } ?>"><?php if ($client['education_level']) {
-                                                                        print_r($client['education_level']);
-                                                                    } ?></option>
+                                                                                        print_r($client['education_level']);
+                                                                                    } ?></option>
                                                             <option value="Not attended school">Not attended school</option>
                                                             <option value="Primary">Primary</option>
                                                             <option value="Secondary">Secondary</option>
@@ -8101,7 +8101,9 @@ if ($user->isLoggedIn()) {
                                                     <div class="form-group">
                                                         <label for="tdate">Tarehe ya Leo:</label>
                                                         <input type="date" class="form-control" id="tdate" name="tdate"
-                                                            value="<?= $patient['tdate'] ?>" required>
+                                                            value="<?php if ($patient['tdate']) {
+                                                                        print_r($patient['tdate']);
+                                                                    } ?>" required>
                                                     </div>
                                                 </div>
 
@@ -8110,17 +8112,18 @@ if ($user->isLoggedIn()) {
                                                         <label for="mobility">A. Uwezo wa kutembea</label>
                                                         <select class="form-control" name="mobility" style="width: 100%;"
                                                             required>
-                                                            <option value="<?= $patient['mobility'] ?>"><?php if ($patient['mobility']) {
-                                                                                                            if ($patient['mobility'] == 1) {
-                                                                                                                echo 'Sina tatizo katika kutembea';
-                                                                                                            } elseif ($patient['mobility'] == 2) {
-                                                                                                                echo 'Nina matatizo kiasi katika kutembea';
-                                                                                                            } elseif ($patient['mobility'] == 3) {
-                                                                                                                echo 'Siwezi kutembea kabisa';
-                                                                                                            }
-                                                                                                        } else {
-                                                                                                            echo 'Select';
-                                                                                                        } ?></option>
+                                                            <option value="<?= $patient['mobility'] ?>">
+                                                                <?php if ($patient['mobility']) {
+                                                                    if ($patient['mobility'] == 1) {
+                                                                        echo 'Sina tatizo katika kutembea';
+                                                                    } elseif ($patient['mobility'] == 2) {
+                                                                        echo 'Nina matatizo kiasi katika kutembea';
+                                                                    } elseif ($patient['mobility'] == 3) {
+                                                                        echo 'Siwezi kutembea kabisa';
+                                                                    }
+                                                                } else {
+                                                                    echo 'Select';
+                                                                } ?></option>
                                                             <option value="1">Sina tatizo katika
                                                                 kutembea</option>
                                                             <option value="2">Nina matatizo kiasi
@@ -8135,17 +8138,18 @@ if ($user->isLoggedIn()) {
                                                         <label for="self_care">B. Uwezo wa kujihudumia</label>
                                                         <select class="form-control" name="self_care" style="width: 100%;"
                                                             required>
-                                                            <option value="<?= $patient['self_care'] ?>"><?php if ($patient['self_care']) {
-                                                                                                                if ($patient['self_care'] == 1) {
-                                                                                                                    echo 'Sina tatizo katika kutembea';
-                                                                                                                } elseif ($patient['self_care'] == 2) {
-                                                                                                                    echo 'Nina matatizo kiasi katika kutembea';
-                                                                                                                } elseif ($patient['self_care'] == 3) {
-                                                                                                                    echo 'Siwezi kutembea kabisa';
-                                                                                                                }
-                                                                                                            } else {
-                                                                                                                echo 'Select';
-                                                                                                            } ?></option>
+                                                            <option value="<?= $patient['self_care'] ?>">
+                                                                <?php if ($patient['self_care']) {
+                                                                    if ($patient['self_care'] == 1) {
+                                                                        echo 'Sina tatizo katika kutembea';
+                                                                    } elseif ($patient['self_care'] == 2) {
+                                                                        echo 'Nina matatizo kiasi katika kutembea';
+                                                                    } elseif ($patient['self_care'] == 3) {
+                                                                        echo 'Siwezi kutembea kabisa';
+                                                                    }
+                                                                } else {
+                                                                    echo 'Select';
+                                                                } ?></option>
                                                             <option value="1">Sina tatizo kujihudumia mwenyewe</option>
                                                             <option value="2">Nina matatizo kiasi katika kujisafisha au
                                                                 kuvaa mwenyewe</option>
@@ -8161,20 +8165,21 @@ if ($user->isLoggedIn()) {
                                                         <label for="usual_active">C. Shughuli za kila siku</label>
                                                         <select class="form-control" name="usual_active" style="width: 100%;"
                                                             required>
-                                                            <option value="<?= $patient['usual_active'] ?>"><?php if ($patient['usual_active']) {
-                                                                                                                if ($patient['usual_active'] == 1) {
-                                                                                                                    echo 'Sina tatizo katika kufanya shughuli zangu za
+                                                            <option value="<?= $patient['usual_active'] ?>">
+                                                                <?php if ($patient['usual_active']) {
+                                                                    if ($patient['usual_active'] == 1) {
+                                                                        echo 'Sina tatizo katika kufanya shughuli zangu za
                                                                 kila siku';
-                                                                                                                } elseif ($patient['usual_active'] == 2) {
-                                                                                                                    echo 'Nina matatizo kiasi katika kufanya shughuli
+                                                                    } elseif ($patient['usual_active'] == 2) {
+                                                                        echo 'Nina matatizo kiasi katika kufanya shughuli
                                                                 zangu za kila siku';
-                                                                                                                } elseif ($patient['usual_active'] == 3) {
-                                                                                                                    echo 'Siwezi kabisa kufanya shughuli zangu za kila
+                                                                    } elseif ($patient['usual_active'] == 3) {
+                                                                        echo 'Siwezi kabisa kufanya shughuli zangu za kila
                                                                 siku';
-                                                                                                                }
-                                                                                                            } else {
-                                                                                                                echo 'Select';
-                                                                                                            } ?></option>
+                                                                    }
+                                                                } else {
+                                                                    echo 'Select';
+                                                                } ?></option>
                                                             <option value="1">Sina tatizo katika kufanya shughuli zangu za
                                                                 kila siku</option>
                                                             <option value="2">Nina matatizo kiasi katika kufanya shughuli
@@ -8190,17 +8195,18 @@ if ($user->isLoggedIn()) {
                                                         <label for="pain">D. Maumivu/Kutojisikia vizuri</label>
                                                         <select class="form-control" name="pain" style="width: 100%;"
                                                             required>
-                                                            <option value="<?= $patient['pain'] ?>"><?php if ($patient['pain']) {
-                                                                                                        if ($patient['pain'] == 1) {
-                                                                                                            echo 'Sina maumivu au najisikia vizuri';
-                                                                                                        } elseif ($patient['pain'] == 2) {
-                                                                                                            echo 'Nina maumivu kiasi au najisikia vibaya kiasi';
-                                                                                                        } elseif ($patient['pain'] == 3) {
-                                                                                                            echo 'Nina maumivu makali au najisikia vibaya sana';
-                                                                                                        }
-                                                                                                    } else {
-                                                                                                        echo 'Select';
-                                                                                                    } ?></option>
+                                                            <option value="<?= $patient['pain'] ?>">
+                                                                <?php if ($patient['pain']) {
+                                                                    if ($patient['pain'] == 1) {
+                                                                        echo 'Sina maumivu au najisikia vizuri';
+                                                                    } elseif ($patient['pain'] == 2) {
+                                                                        echo 'Nina maumivu kiasi au najisikia vibaya kiasi';
+                                                                    } elseif ($patient['pain'] == 3) {
+                                                                        echo 'Nina maumivu makali au najisikia vibaya sana';
+                                                                    }
+                                                                } else {
+                                                                    echo 'Select';
+                                                                } ?></option>
                                                             <option value="1">Sina maumivu au najisikia vizuri</option>
                                                             <option value="2">Nina maumivu kiasi au najisikia vibaya kiasi
                                                             </option>
@@ -8215,17 +8221,18 @@ if ($user->isLoggedIn()) {
                                                         <label for="anxiety">E. Wasiwasi/sonona</label>
                                                         <select class="form-control" name="anxiety" style="width: 100%;"
                                                             required>
-                                                            <option value="<?= $patient['anxiety'] ?>"><?php if ($patient['anxiety']) {
-                                                                                                            if ($patient['anxiety'] == 1) {
-                                                                                                                echo 'Sina wasiwasi au sonona';
-                                                                                                            } elseif ($patient['anxiety'] == 2) {
-                                                                                                                echo 'Nina wasiwasi kiasi au sonona kiasi';
-                                                                                                            } elseif ($patient['anxiety'] == 3) {
-                                                                                                                echo 'Nina wasiwasi sana au nina sonona sana';
-                                                                                                            }
-                                                                                                        } else {
-                                                                                                            echo 'Select';
-                                                                                                        } ?></option>
+                                                            <option value="<?= $patient['anxiety'] ?>">
+                                                                <?php if ($patient['anxiety']) {
+                                                                    if ($patient['anxiety'] == 1) {
+                                                                        echo 'Sina wasiwasi au sonona';
+                                                                    } elseif ($patient['anxiety'] == 2) {
+                                                                        echo 'Nina wasiwasi kiasi au sonona kiasi';
+                                                                    } elseif ($patient['anxiety'] == 3) {
+                                                                        echo 'Nina wasiwasi sana au nina sonona sana';
+                                                                    }
+                                                                } else {
+                                                                    echo 'Select';
+                                                                } ?></option>
                                                             <option value="1">Sina wasiwasi au sonona</option>
                                                             <option value="2">Nina wasiwasi kiasi au sonona kiasi</option>
                                                             <option value="3">Nina wasiwasi sana au nina sonona sana
@@ -8242,64 +8249,29 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="FDATE">DATE FORM COMPLETED:</label>
-                                                        <?php
-                                                        $data = $override->get1('crf7', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                        foreach ($data as $st) {
-                                                            if ($st['FDATE'] != "") {
-                                                        ?>
-                                                                <input type="date" class="form-control" id="FDATE" name="FDATE"
-                                                                    value="<?= $st['FDATE'] ?>" placeholder="Example: 2023-01-01">
-                                                            <?php
-                                                            } else {
-                                                            ?>
-                                                                <input type="date" class="form-control" id="FDATE" name="FDATE"
-                                                                    placeholder="Example: 2023-01-01">
-                                                        <?php
-                                                            }
-                                                        }
-                                                        ?>
+                                                        <input type="date" class="form-control" id="FDATE" name="FDATE"
+                                                            value="<?php if ($patient['FDATE']) {
+                                                                        print_r($patient['FDATE']);
+                                                                    } ?>" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="cpersid">NAME OF PERSON CHECKING FORM:</label>
-                                                        <?php
-                                                        $data = $override->get1('crf7', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                        foreach ($data as $st) {
-                                                            if ($st['cpersid'] != "") {
-                                                        ?>
-                                                                <input type="text" class="form-control" id="cpersid" name="cpersid"
-                                                                    value="<?= $st['cpersid'] ?>">
-                                                            <?php
-                                                            } else {
-                                                            ?>
-                                                                <input type="text" class="form-control" id="cpersid" name="cpersid">
-                                                        <?php
-                                                            }
-                                                        }
-                                                        ?>
+                                                        <input type="date" class="form-control" id="cpersid" name="cpersid"
+                                                            value="<?php if ($patient['cpersid']) {
+                                                                        print_r($patient['cpersid']);
+                                                                    } ?>" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="cDATE">DATE FORM CHECKED:</label>
-                                                        <?php
-                                                        $data = $override->get1('crf7', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']);
-                                                        foreach ($data as $st) {
-                                                            if ($st['cDATE'] != "") {
-                                                        ?>
-                                                                <input type="date" class="form-control" id="cDATE" name="cDATE"
-                                                                    value="<?= $st['cDATE'] ?>" placeholder="Example: 2023-01-01">
-                                                            <?php
-                                                            } else {
-                                                            ?>
-                                                                <input type="date" class="form-control" id="cDATE" name="cDATE"
-                                                                    placeholder="Example: 2023-01-01">
-                                                        <?php
-                                                            }
-                                                        }
-                                                        ?>
+                                                        <input type="date" class="form-control" id="cDATE" name="cDATE"
+                                                            value="<?php if ($patient['cDATE']) {
+                                                                        print_r($patient['cDATE']);
+                                                                    } ?>" required>
                                                     </div>
                                                 </div>
                                             </div>
