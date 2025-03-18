@@ -8259,7 +8259,7 @@ if ($user->isLoggedIn()) {
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="cpersid">NAME OF PERSON CHECKING FORM:</label>
-                                                        <input type="date" class="form-control" id="cpersid" name="cpersid"
+                                                        <input type="text" class="form-control" id="cpersid" name="cpersid"
                                                             value="<?php if ($patient['cpersid']) {
                                                                         print_r($patient['cpersid']);
                                                                     } ?>" required>
