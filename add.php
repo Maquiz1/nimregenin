@@ -6238,130 +6238,88 @@ if ($user->isLoggedIn()) {
                                                 <h3 class="card-title">Blood Tests</h3>
                                             </div>
                                             <div class="card-body">
-
                                                 <!-- Renal Function Test -->
                                                 <div class="card card-secondary">
                                                     <div class="card-header">
                                                         <h3 class="card-title">1. Renal Function Test</h3>
                                                     </div>
                                                     <div class="card-body">
-
                                                         <div class="row">
-                                                            <!-- Serum Creatinine Levels -->
-                                                            <div class="col-sm-6">
+                                                            <!-- Sample Date -->
+                                                            <div class="col-sm-3">
                                                                 <div class="form-group">
-                                                                    <label for="renal_creatinine">Serum Creatinine
-                                                                        Levels</label>
+                                                                    <label for="sample_date">Date of Sample Collection</label>
+                                                                    <input type="date" class="form-control" name="sample_date" id="sample_date"
+                                                                        value="<?php if ($patient['sample_date']) {
+                                                                                    print_r($patient['sample_date']);
+                                                                                } ?>" required />
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Serum Creatinine Levels -->
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group">
+                                                                    <label for="renal_creatinine">Serum Creatinine Levels</label>
                                                                     <div class="input-group">
-                                                                        <input type="text" class="form-control"
-                                                                            name="renal_creatinine" id="renal_creatinine"
+                                                                        <input type="text" class="form-control" name="renal_creatinine" id="renal_creatinine"
                                                                             value="<?= $patient['renal_creatinine'] ?>" />
                                                                         <div class="input-group-append">
                                                                             <span class="input-group-text">mg/dl</span>
                                                                         </div>
                                                                     </div>
+                                                                    <div class="input-group mt-1">
+                                                                        <select class="form-control select2" name="renal_creatinine_grade" id="renal_creatinine_grade" required>
+                                                                            <option value="" <?= empty($patient['renal_creatinine_grade']) ? 'selected' : '' ?>>Select Grade</option>
+                                                                            <option value="0" <?= $patient['renal_creatinine_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
+                                                                            <option value="1" <?= $patient['renal_creatinine_grade'] == "1" ? 'selected' : '' ?>>One</option>
+                                                                            <option value="2" <?= $patient['renal_creatinine_grade'] == "2" ? 'selected' : '' ?>>Two</option>
+                                                                            <option value="3" <?= $patient['renal_creatinine_grade'] == "3" ? 'selected' : '' ?>>Three</option>
+                                                                            <option value="4" <?= $patient['renal_creatinine_grade'] == "4" ? 'selected' : '' ?>>Four</option>
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
                                                             </div>
 
-                                                            <!-- Sample Date -->
-                                                            <div class="col-sm-6">
-                                                                <div class="form-group">
-                                                                    <label for="sample_date">Date of Sample
-                                                                        Collection</label>
-                                                                    <input type="date" class="form-control"
-                                                                        name="sample_date" id="sample_date"
-                                                                        value="<?= $patient['sample_date'] ?>" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row">
                                                             <!-- Serum Urea Levels -->
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-3">
                                                                 <div class="form-group">
                                                                     <label for="renal_urea">Serum Urea Levels</label>
                                                                     <div class="input-group">
-                                                                        <input type="text" class="form-control"
-                                                                            name="renal_urea" id="renal_urea"
-                                                                            value="<?= $patient['renal_urea'] ?>"
-                                                                            required />
+                                                                        <input type="text" class="form-control" name="renal_urea" id="renal_urea"
+                                                                            value="<?= $patient['renal_urea'] ?>" required />
                                                                         <div class="input-group-append">
                                                                             <span class="input-group-text">Units</span>
                                                                         </div>
                                                                     </div>
-                                                                    <select class="form-control select2 mt-1"
-                                                                        name="renal_urea_units" id="renal_urea_units"
-                                                                        required>
-                                                                        <option value=""
-                                                                            <?= empty($patient['renal_urea_units']) ? 'selected' : '' ?>>Select Units</option>
-                                                                        <option value="1"
-                                                                            <?= $patient['renal_urea_units'] == "1" ? 'selected' : '' ?>>mg/dl</option>
-                                                                        <option value="2"
-                                                                            <?= $patient['renal_urea_units'] == "2" ? 'selected' : '' ?>>mmol/l</option>
+                                                                    <select class="form-control select2 mt-1" name="renal_urea_units" id="renal_urea_units" required>
+                                                                        <option value="" <?= empty($patient['renal_urea_units']) ? 'selected' : '' ?>>Select Units</option>
+                                                                        <option value="1" <?= $patient['renal_urea_units'] == "1" ? 'selected' : '' ?>>mg/dl</option>
+                                                                        <option value="2" <?= $patient['renal_urea_units'] == "2" ? 'selected' : '' ?>>mmol/l</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
 
-                                                            <!-- Creatinine Grade -->
-                                                            <div class="col-sm-6">
-                                                                <div class="form-group">
-                                                                    <label for="renal_creatinine_grade">Grade</label>
-                                                                    <select class="form-control select2"
-                                                                        name="renal_creatinine_grade"
-                                                                        id="renal_creatinine_grade">
-                                                                        <option value=""
-                                                                            <?= empty($patient['renal_creatinine_grade']) ? 'selected' : '' ?>>Select</option>
-                                                                        <option value="0"
-                                                                            <?= $patient['renal_creatinine_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
-                                                                        <option value="1"
-                                                                            <?= $patient['renal_creatinine_grade'] == "1" ? 'selected' : '' ?>>One</option>
-                                                                        <option value="2"
-                                                                            <?= $patient['renal_creatinine_grade'] == "2" ? 'selected' : '' ?>>Two</option>
-                                                                        <option value="3"
-                                                                            <?= $patient['renal_creatinine_grade'] == "3" ? 'selected' : '' ?>>Three</option>
-                                                                        <option value="4"
-                                                                            <?= $patient['renal_creatinine_grade'] == "4" ? 'selected' : '' ?>>Four</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row">
                                                             <!-- eGFR -->
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-3">
                                                                 <div class="form-group">
-                                                                    <label for="renal_egfr">eGFR (mL/min per 1.73
-                                                                        m²)</label>
+                                                                    <label for="renal_egfr">eGFR (mL/min per 1.73 m²)</label>
                                                                     <div class="input-group">
-                                                                        <input type="text" class="form-control"
-                                                                            name="renal_egfr" id="renal_egfr"
+                                                                        <input type="text" class="form-control" name="renal_egfr" id="renal_egfr"
                                                                             value="<?= $patient['renal_egfr'] ?>" />
                                                                         <div class="input-group-append">
                                                                             <span class="input-group-text">mL/min</span>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <!-- eGFR Grade -->
-                                                            <div class="col-sm-6">
-                                                                <div class="form-group">
-                                                                    <label for="renal_egfr_grade">Grade</label>
-                                                                    <select class="form-control select2"
-                                                                        name="renal_egfr_grade" id="renal_egfr_grade">
-                                                                        <option value=""
-                                                                            <?= empty($patient['renal_egfr_grade']) ? 'selected' : '' ?>>Select</option>
-                                                                        <option value="0"
-                                                                            <?= $patient['renal_egfr_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
-                                                                        <option value="1"
-                                                                            <?= $patient['renal_egfr_grade'] == "1" ? 'selected' : '' ?>>One</option>
-                                                                        <option value="2"
-                                                                            <?= $patient['renal_egfr_grade'] == "2" ? 'selected' : '' ?>>Two</option>
-                                                                        <option value="3"
-                                                                            <?= $patient['renal_egfr_grade'] == "3" ? 'selected' : '' ?>>Three</option>
-                                                                        <option value="4"
-                                                                            <?= $patient['renal_egfr_grade'] == "4" ? 'selected' : '' ?>>Four</option>
-                                                                    </select>
+                                                                    <div class="input-group mt-1">
+                                                                        <select class="form-control select2" name="renal_egfr_grade" id="renal_egfr_grade" required>
+                                                                            <option value="" <?= empty($patient['renal_egfr_grade']) ? 'selected' : '' ?>>Select Grade</option>
+                                                                            <option value="0" <?= $patient['renal_egfr_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
+                                                                            <option value="1" <?= $patient['renal_egfr_grade'] == "1" ? 'selected' : '' ?>>One</option>
+                                                                            <option value="2" <?= $patient['renal_egfr_grade'] == "2" ? 'selected' : '' ?>>Two</option>
+                                                                            <option value="3" <?= $patient['renal_egfr_grade'] == "3" ? 'selected' : '' ?>>Three</option>
+                                                                            <option value="4" <?= $patient['renal_egfr_grade'] == "4" ? 'selected' : '' ?>>Four</option>
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -6369,497 +6327,496 @@ if ($user->isLoggedIn()) {
                                                     </div>
                                                 </div>
 
+                                                <!-- Liver Function Test -->
+                                                <div class="card card-secondary">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">2. Liver Function Test</h3>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <!-- AST levels -->
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group">
+                                                                    <label for="liver_ast">AST levels</label>
+                                                                    <div class="input-group">
+                                                                        <input type="text" class="form-control" name="liver_ast"
+                                                                            id="liver_ast" value="<?= $patient['liver_ast'] ?>" />
+                                                                        <div class="input-group-append">
+                                                                            <span class="input-group-text">units/L</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- ALT levels -->
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group">
+                                                                    <label for="liver_alt">ALT levels</label>
+                                                                    <div class="input-group">
+                                                                        <input type="text" class="form-control" name="liver_alt"
+                                                                            id="liver_alt" value="<?= $patient['liver_alt'] ?>" />
+                                                                        <div class="input-group-append">
+                                                                            <span class="input-group-text">units/L</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- ALP levels -->
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group">
+                                                                    <label for="liver_alp">ALP levels</label>
+                                                                    <div class="input-group">
+                                                                        <input type="text" class="form-control" name="liver_alp"
+                                                                            id="liver_alp" value="<?= $patient['liver_alp'] ?>" />
+                                                                        <div class="input-group-append">
+                                                                            <span class="input-group-text">units/L</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <!-- PT -->
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="liver_pt">PT</label>
+                                                                    <div class="input-group">
+                                                                        <input type="text" class="form-control" name="liver_pt"
+                                                                            id="liver_pt" value="<?= $patient['liver_pt'] ?>" />
+                                                                        <div class="input-group-append">
+                                                                            <span class="input-group-text">units/L</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Grade -->
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label for="liver_pt_grade">Grade</label>
+                                                                    <select class="form-control select2" name="liver_pt_grade"
+                                                                        id="liver_pt_grade" style="width: 100%;">
+                                                                        <option value="" <?= empty($patient['liver_pt_grade']) ? 'selected' : '' ?>>Select</option>
+                                                                        <option value="0" <?= $patient['liver_pt_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
+                                                                        <option value="1" <?= $patient['liver_pt_grade'] == "1" ? 'selected' : '' ?>>One</option>
+                                                                        <option value="2" <?= $patient['liver_pt_grade'] == "2" ? 'selected' : '' ?>>Two</option>
+                                                                        <option value="3" <?= $patient['liver_pt_grade'] == "3" ? 'selected' : '' ?>>Three</option>
+                                                                        <option value="4" <?= $patient['liver_pt_grade'] == "4" ? 'selected' : '' ?>>Four</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <div class="form-group">
+                                                                    <label for="liver_ptt">PTT</label>
+                                                                    <div class="input-group">
+                                                                        <input type="text" class="form-control" name="liver_ptt"
+                                                                            id="liver_ptt" value="<?= $patient['liver_ptt'] ?>">
+                                                                        <div class="input-group-append">
+                                                                            <span class="input-group-text">units/L</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-3">
+                                                                <div class="form-group">
+                                                                    <label for="liver_ptt_grade">Grade</label>
+                                                                    <select class="form-control select2" name="liver_ptt_grade"
+                                                                        id="liver_ptt_grade">
+                                                                        <option value="">Select</option>
+                                                                        <option value="0" <?= $patient['liver_ptt_grade'] == "0" ? "selected" : "" ?>>Zero</option>
+                                                                        <option value="1" <?= $patient['liver_ptt_grade'] == "1" ? "selected" : "" ?>>One</option>
+                                                                        <option value="2" <?= $patient['liver_ptt_grade'] == "2" ? "selected" : "" ?>>Two</option>
+                                                                        <option value="3" <?= $patient['liver_ptt_grade'] == "3" ? "selected" : "" ?>>Three</option>
+                                                                        <option value="4" <?= $patient['liver_ptt_grade'] == "4" ? "selected" : "" ?>>Four</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-3">
+                                                                <div class="form-group">
+                                                                    <label for="liver_inr">INR</label>
+                                                                    <div class="input-group">
+                                                                        <input type="text" class="form-control" name="liver_inr"
+                                                                            id="liver_inr" value="<?= $patient['liver_inr'] ?>">
+                                                                        <div class="input-group-append">
+                                                                            <span class="input-group-text">units/L</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-3">
+                                                                <div class="form-group">
+                                                                    <label for="liver_inr_grade">Grade</label>
+                                                                    <select class="form-control select2" name="liver_inr_grade"
+                                                                        id="liver_inr_grade">
+                                                                        <option value="">Select</option>
+                                                                        <option value="0" <?= $patient['liver_inr_grade'] == "0" ? "selected" : "" ?>>Zero</option>
+                                                                        <option value="1" <?= $patient['liver_inr_grade'] == "1" ? "selected" : "" ?>>One</option>
+                                                                        <option value="2" <?= $patient['liver_inr_grade'] == "2" ? "selected" : "" ?>>Two</option>
+                                                                        <option value="3" <?= $patient['liver_inr_grade'] == "3" ? "selected" : "" ?>>Three</option>
+                                                                        <option value="4" <?= $patient['liver_inr_grade'] == "4" ? "selected" : "" ?>>Four</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <div class="form-group">
+                                                                    <label for="liver_ggt">GGT Levels</label>
+                                                                    <input type="text" class="form-control" name="liver_ggt" id="liver_ggt"
+                                                                        value="<?= $patient['liver_ggt'] ?>">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-3">
+                                                                <div class="form-group">
+                                                                    <label for="liver_albumin">Serum Albumin Levels</label>
+                                                                    <input type="text" class="form-control" name="liver_albumin"
+                                                                        id="liver_albumin" value="<?= $patient['liver_albumin'] ?>">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-3">
+                                                                <div class="form-group">
+                                                                    <label for="liver_bilirubin_total">Bilirubin Total</label>
+                                                                    <div class="input-group">
+                                                                        <input type="text" class="form-control" name="liver_bilirubin_total"
+                                                                            id="liver_bilirubin_total"
+                                                                            value="<?= $patient['liver_bilirubin_total'] ?>">
+                                                                        <select class="form-control select2"
+                                                                            name="liver_bilirubin_total_units" required>
+                                                                            <option value="">Select Units</option>
+                                                                            <option value="1"
+                                                                                <?= $patient['liver_bilirubin_total_units'] == "1" ? "selected" : "" ?>>micromol/L</option>
+                                                                            <option value="2"
+                                                                                <?= $patient['liver_bilirubin_total_units'] == "2" ? "selected" : "" ?>>mg/dL</option>
+                                                                            <option value="3"
+                                                                                <?= $patient['liver_bilirubin_total_units'] == "3" ? "selected" : "" ?>>grams/L</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <span class="text-danger" id="liver_bilirubin_totalError"></span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-3">
+                                                                <div class="form-group">
+                                                                    <label for="bilirubin_total_grade">Grade</label>
+                                                                    <select class="form-control select2" name="bilirubin_total_grade"
+                                                                        id="bilirubin_total_grade">
+                                                                        <option value="">Select</option>
+                                                                        <option value="0" <?= $patient['bilirubin_total_grade'] == "0" ? "selected" : "" ?>>Zero</option>
+                                                                        <option value="1" <?= $patient['bilirubin_total_grade'] == "1" ? "selected" : "" ?>>One</option>
+                                                                        <option value="2" <?= $patient['bilirubin_total_grade'] == "2" ? "selected" : "" ?>>Two</option>
+                                                                        <option value="3" <?= $patient['bilirubin_total_grade'] == "3" ? "selected" : "" ?>>Three</option>
+                                                                        <option value="4" <?= $patient['bilirubin_total_grade'] == "4" ? "selected" : "" ?>>Four</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="row">
+                                                            <!-- Bilirubin Direct Grade -->
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group">
+                                                                    <label for="bilirubin_direct_grade">Grade</label>
+                                                                    <select class="form-control select2" name="bilirubin_direct_grade"
+                                                                        id="bilirubin_direct_grade" style="width: 100%;">
+                                                                        <option value="">Select</option>
+                                                                        <option value="0" <?= $patient['bilirubin_direct_grade'] == "0" ? "selected" : "" ?>>Zero</option>
+                                                                        <option value="1" <?= $patient['bilirubin_direct_grade'] == "1" ? "selected" : "" ?>>One</option>
+                                                                        <option value="2" <?= $patient['bilirubin_direct_grade'] == "2" ? "selected" : "" ?>>Two</option>
+                                                                        <option value="3" <?= $patient['bilirubin_direct_grade'] == "3" ? "selected" : "" ?>>Three</option>
+                                                                        <option value="4" <?= $patient['bilirubin_direct_grade'] == "4" ? "selected" : "" ?>>Four</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- RBG Input and Units -->
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group">
+                                                                    <label for="rbg">RBG</label>
+                                                                    <div class="input-group">
+                                                                        <input type="text" class="form-control" name="rbg" id="rbg"
+                                                                            value="<?= $patient['rbg'] ?>" required>
+                                                                        <div class="input-group-append">
+                                                                            <select class="form-control select2" name="rbg_units" required>
+                                                                                <option value="">Select Units</option>
+                                                                                <option value="1" <?= $patient['rbg_units'] == "1" ? "selected" : "" ?>>mmol/L</option>
+                                                                                <option value="2" <?= $patient['rbg_units'] == "2" ? "selected" : "" ?>>mg/dL</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <small class="text-muted">XX</small>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- RBG Grade -->
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group">
+                                                                    <label for="rbg_grade">Grade</label>
+                                                                    <select class="form-control select2" name="rbg_grade" id="rbg_grade"
+                                                                        style="width: 100%;">
+                                                                        <option value="">Select</option>
+                                                                        <option value="0" <?= $patient['rbg_grade'] == "0" ? "selected" : "" ?>>Zero</option>
+                                                                        <option value="1" <?= $patient['rbg_grade'] == "1" ? "selected" : "" ?>>One</option>
+                                                                        <option value="2" <?= $patient['rbg_grade'] == "2" ? "selected" : "" ?>>Two</option>
+                                                                        <option value="3" <?= $patient['rbg_grade'] == "3" ? "selected" : "" ?>>Three</option>
+                                                                        <option value="4" <?= $patient['rbg_grade'] == "4" ? "selected" : "" ?>>Four</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="box box-primary">
+                                                            <div class="box-header with-border">
+                                                                <h3 class="box-title">Full blood count</h3>
+                                                            </div>
+
+                                                            <div class="box-body">
+                                                                <div class="row">
+                                                                    <div class="col-sm-3">
+                                                                        <div class="form-group">
+                                                                            <label for="hb">Hemoglobin levels (Hb)</label>
+                                                                            <input value="<?= $patient['hb'] ?>" type="text"
+                                                                                class="form-control" name="hb" id="hb" />
+                                                                            <span class="help-block">XX.X (mg/dl)</span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <div class="form-group">
+                                                                            <label for="hb_grade">Grade</label>
+                                                                            <select name="hb_grade" id="hb_grade" class="form-control">
+                                                                                <option value="0" <?= $patient['hb_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
+                                                                                <option value="1" <?= $patient['hb_grade'] == "1" ? 'selected' : '' ?>>One</option>
+                                                                                <option value="2" <?= $patient['hb_grade'] == "2" ? 'selected' : '' ?>>Two</option>
+                                                                                <option value="3" <?= $patient['hb_grade'] == "3" ? 'selected' : '' ?>>Three</option>
+                                                                                <option value="4" <?= $patient['hb_grade'] == "4" ? 'selected' : '' ?>>Four</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <div class="form-group">
+                                                                            <label for="hct">Hematocrit levels (Hct)</label>
+                                                                            <input value="<?= $patient['hct'] ?>" type="text"
+                                                                                class="form-control" name="hct" id="hct" />
+                                                                            <span class="help-block">XX ( % )</span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <div class="form-group">
+                                                                            <label for="rbc">Red blood cell count (RBC)</label>
+                                                                            <input value="<?= $patient['rbc'] ?>" type="text"
+                                                                                class="form-control" name="rbc" id="rbc" />
+                                                                            <span class="help-block">XXXXXXX (cells/microliter)</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    <div class="col-sm-3">
+                                                                        <div class="form-group">
+                                                                            <label for="wbc">White blood cell count (WBC)</label>
+                                                                            <input value="<?= $patient['wbc'] ?>" type="text"
+                                                                                class="form-control" name="wbc" id="wbc" />
+                                                                            <span class="help-block">XXXXXXX (cells/microliter)</span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <div class="form-group">
+                                                                            <label for="wbc_grade">Grade</label>
+                                                                            <select name="wbc_grade" id="wbc_grade" class="form-control">
+                                                                                <option value="0" <?= $patient['wbc_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
+                                                                                <option value="1" <?= $patient['wbc_grade'] == "1" ? 'selected' : '' ?>>One</option>
+                                                                                <option value="2" <?= $patient['wbc_grade'] == "2" ? 'selected' : '' ?>>Two</option>
+                                                                                <option value="3" <?= $patient['wbc_grade'] == "3" ? 'selected' : '' ?>>Three</option>
+                                                                                <option value="4" <?= $patient['wbc_grade'] == "4" ? 'selected' : '' ?>>Four</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <div class="form-group">
+                                                                            <label for="abs_lymphocytes">ABS Lymphocytes</label>
+                                                                            <input value="<?= $patient['abs_lymphocytes'] ?>" type="text"
+                                                                                class="form-control" name="abs_lymphocytes"
+                                                                                id="abs_lymphocytes" />
+                                                                            <span class="help-block">XXXXX</span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-sm-3">
+                                                                        <div class="form-group">
+                                                                            <label for="abs_lymphocytes_grade">Grade</label>
+                                                                            <select name="abs_lymphocytes_grade" id="abs_lymphocytes_grade"
+                                                                                class="form-control">
+                                                                                <option value="0" <?= $patient['abs_lymphocytes_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
+                                                                                <option value="1" <?= $patient['abs_lymphocytes_grade'] == "1" ? 'selected' : '' ?>>One</option>
+                                                                                <option value="2" <?= $patient['abs_lymphocytes_grade'] == "2" ? 'selected' : '' ?>>Two</option>
+                                                                                <option value="3" <?= $patient['abs_lymphocytes_grade'] == "3" ? 'selected' : '' ?>>Three</option>
+                                                                                <option value="4" <?= $patient['abs_lymphocytes_grade'] == "4" ? 'selected' : '' ?>>Four</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    <div class="col-sm-6">
+                                                                        <div class="form-group">
+                                                                            <label for="plt">Platelet count (Plt)</label>
+                                                                            <input value="<?= $patient['plt'] ?>" type="text"
+                                                                                class="form-control" name="plt" id="plt" />
+                                                                            <span class="help-block">XXXXXX (cells/microliter)</span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-sm-6">
+                                                                        <div class="form-group">
+                                                                            <label for="plt_grade">Grade</label>
+                                                                            <select name="plt_grade" id="plt_grade" class="form-control">
+                                                                                <option value="0" <?= $patient['plt_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
+                                                                                <option value="1" <?= $patient['plt_grade'] == "1" ? 'selected' : '' ?>>One</option>
+                                                                                <option value="2" <?= $patient['plt_grade'] == "2" ? 'selected' : '' ?>>Two</option>
+                                                                                <option value="3" <?= $patient['plt_grade'] == "3" ? 'selected' : '' ?>>Three</option>
+                                                                                <option value="4" <?= $patient['plt_grade'] == "4" ? 'selected' : '' ?>>Four</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label>9. Cancer antigen 15-3</label>
+                                                                    <input value="<?= $patient['cancer'] ?>" type="text" name="cancer"
+                                                                        id="cancer" class="form-control" />
+                                                                    <small>XX ( U/ml )</small>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- PSA Section -->
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label>9. PSA (Prostate specific antigen)</label>
+                                                                    <input value="<?= $patient['prostate'] ?>" type="text" name="prostate"
+                                                                        id="prostate" class="form-control" />
+                                                                    <small>XX ( ng/ml )</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label>9. Chest X-ray</label>
+                                                                    <select name="chest_xray" id="chest_xray" class="form-control">
+                                                                        <?php if ($patient['chest_xray'] == "1") { ?>
+                                                                            <option value="<?= $patient['chest_xray'] ?>">Normal</option>
+                                                                        <?php } elseif ($patient['chest_xray'] == "2") { ?>
+                                                                            <option value="<?= $patient['chest_xray'] ?>">Abnormal</option>
+                                                                        <?php } else { ?>
+                                                                            <option value="">Select</option>
+                                                                        <?php } ?>
+                                                                        <option value="1">Normal</option>
+                                                                        <option value="2">Abnormal</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-6" id="chest_specify">
+                                                                <div class="form-group">
+                                                                    <label>9. Specify (Report from Radiologist)</label>
+                                                                    <input value="<?= $patient['chest_specify'] ?>" type="text"
+                                                                        name="chest_specify" class="form-control" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label>10. CT-Scan chest and abdomen report</label>
+                                                                    <select name="ct_chest" class="form-control" required>
+                                                                        <?php if ($patient['ct_chest'] == "1") { ?>
+                                                                            <option value="<?= $patient['ct_chest'] ?>">Normal</option>
+                                                                        <?php } elseif ($patient['ct_chest'] == "2") { ?>
+                                                                            <option value="<?= $patient['ct_chest'] ?>">Abnormal</option>
+                                                                        <?php } else { ?>
+                                                                            <option value="">Select</option>
+                                                                        <?php } ?>
+                                                                        <option value="1">Normal</option>
+                                                                        <option value="2">Abnormal</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-6" id="ct_chest_specify">
+                                                                <div class="form-group">
+                                                                    <label>10. Specify (Report from Radiologist)</label>
+                                                                    <input value="<?= $patient['ct_chest_specify'] ?>" type="text"
+                                                                        name="ct_chest_specify" class="form-control" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label>11. Abdominal Ultrasound report</label>
+                                                                    <select name="ultrasound" id="ultrasound" class="form-control">
+                                                                        <?php if ($patient['ultrasound'] == "1") { ?>
+                                                                            <option value="<?= $patient['ultrasound'] ?>">Normal</option>
+                                                                        <?php } elseif ($patient['ultrasound'] == "2") { ?>
+                                                                            <option value="<?= $patient['ultrasound'] ?>">Abnormal</option>
+                                                                        <?php } else { ?>
+                                                                            <option value="">Select</option>
+                                                                        <?php } ?>
+                                                                        <option value="1">Normal</option>
+                                                                        <option value="2">Abnormal</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-6" id="ultrasound_specify">
+                                                                <div class="form-group">
+                                                                    <label>11. Specify (Report from Radiologist)</label>
+                                                                    <input value="<?= $patient['ultrasound_specify'] ?>" type="text"
+                                                                        name="ultrasound_specify" class="form-control" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row-form clearfix" id="crf4_cmpltd_date">
+                                                            <div class="col-md-3">Date of Completion</div>
+                                                            <input value="<?= $patient['crf4_cmpltd_date'] ?>" type="date"
+                                                                name="crf4_cmpltd_date" id="crf1_cmpltd_date" class="form-control" />
+                                                            <small>example : 2023-02-24</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
 
-
-                                        <!-- Liver Function Test -->
-                                        <div class="card card-primary">
-                                            <div class="card-header">
-                                                <h3 class="card-title">2. Liver Function Test</h3>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <!-- AST levels -->
-                                                    <div class="col-sm-4">
-                                                        <div class="form-group">
-                                                            <label for="liver_ast">AST levels</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" name="liver_ast"
-                                                                    id="liver_ast" value="<?= $patient['liver_ast'] ?>" />
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text">units/L</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- ALT levels -->
-                                                    <div class="col-sm-4">
-                                                        <div class="form-group">
-                                                            <label for="liver_alt">ALT levels</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" name="liver_alt"
-                                                                    id="liver_alt" value="<?= $patient['liver_alt'] ?>" />
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text">units/L</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- ALP levels -->
-                                                    <div class="col-sm-4">
-                                                        <div class="form-group">
-                                                            <label for="liver_alp">ALP levels</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" name="liver_alp"
-                                                                    id="liver_alp" value="<?= $patient['liver_alp'] ?>" />
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text">units/L</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <!-- PT -->
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label for="liver_pt">PT</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" name="liver_pt"
-                                                                    id="liver_pt" value="<?= $patient['liver_pt'] ?>" />
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text">units/L</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- Grade -->
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label for="liver_pt_grade">Grade</label>
-                                                            <select class="form-control select2" name="liver_pt_grade"
-                                                                id="liver_pt_grade" style="width: 100%;">
-                                                                <option value="" <?= empty($patient['liver_pt_grade']) ? 'selected' : '' ?>>Select</option>
-                                                                <option value="0" <?= $patient['liver_pt_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
-                                                                <option value="1" <?= $patient['liver_pt_grade'] == "1" ? 'selected' : '' ?>>One</option>
-                                                                <option value="2" <?= $patient['liver_pt_grade'] == "2" ? 'selected' : '' ?>>Two</option>
-                                                                <option value="3" <?= $patient['liver_pt_grade'] == "3" ? 'selected' : '' ?>>Three</option>
-                                                                <option value="4" <?= $patient['liver_pt_grade'] == "4" ? 'selected' : '' ?>>Four</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label for="liver_ptt">PTT</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" name="liver_ptt"
-                                                                    id="liver_ptt" value="<?= $patient['liver_ptt'] ?>">
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text">units/L</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label for="liver_ptt_grade">Grade</label>
-                                                            <select class="form-control select2" name="liver_ptt_grade"
-                                                                id="liver_ptt_grade">
-                                                                <option value="">Select</option>
-                                                                <option value="0" <?= $patient['liver_ptt_grade'] == "0" ? "selected" : "" ?>>Zero</option>
-                                                                <option value="1" <?= $patient['liver_ptt_grade'] == "1" ? "selected" : "" ?>>One</option>
-                                                                <option value="2" <?= $patient['liver_ptt_grade'] == "2" ? "selected" : "" ?>>Two</option>
-                                                                <option value="3" <?= $patient['liver_ptt_grade'] == "3" ? "selected" : "" ?>>Three</option>
-                                                                <option value="4" <?= $patient['liver_ptt_grade'] == "4" ? "selected" : "" ?>>Four</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label for="liver_inr">INR</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" name="liver_inr"
-                                                                    id="liver_inr" value="<?= $patient['liver_inr'] ?>">
-                                                                <div class="input-group-append">
-                                                                    <span class="input-group-text">units/L</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label for="liver_inr_grade">Grade</label>
-                                                            <select class="form-control select2" name="liver_inr_grade"
-                                                                id="liver_inr_grade">
-                                                                <option value="">Select</option>
-                                                                <option value="0" <?= $patient['liver_inr_grade'] == "0" ? "selected" : "" ?>>Zero</option>
-                                                                <option value="1" <?= $patient['liver_inr_grade'] == "1" ? "selected" : "" ?>>One</option>
-                                                                <option value="2" <?= $patient['liver_inr_grade'] == "2" ? "selected" : "" ?>>Two</option>
-                                                                <option value="3" <?= $patient['liver_inr_grade'] == "3" ? "selected" : "" ?>>Three</option>
-                                                                <option value="4" <?= $patient['liver_inr_grade'] == "4" ? "selected" : "" ?>>Four</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label for="liver_ggt">GGT Levels</label>
-                                                            <input type="text" class="form-control" name="liver_ggt" id="liver_ggt"
-                                                                value="<?= $patient['liver_ggt'] ?>">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label for="liver_albumin">Serum Albumin Levels</label>
-                                                            <input type="text" class="form-control" name="liver_albumin"
-                                                                id="liver_albumin" value="<?= $patient['liver_albumin'] ?>">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label for="liver_bilirubin_total">Bilirubin Total</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" name="liver_bilirubin_total"
-                                                                    id="liver_bilirubin_total"
-                                                                    value="<?= $patient['liver_bilirubin_total'] ?>">
-                                                                <select class="form-control select2"
-                                                                    name="liver_bilirubin_total_units" required>
-                                                                    <option value="">Select Units</option>
-                                                                    <option value="1"
-                                                                        <?= $patient['liver_bilirubin_total_units'] == "1" ? "selected" : "" ?>>micromol/L</option>
-                                                                    <option value="2"
-                                                                        <?= $patient['liver_bilirubin_total_units'] == "2" ? "selected" : "" ?>>mg/dL</option>
-                                                                    <option value="3"
-                                                                        <?= $patient['liver_bilirubin_total_units'] == "3" ? "selected" : "" ?>>grams/L</option>
-                                                                </select>
-                                                            </div>
-                                                            <span class="text-danger" id="liver_bilirubin_totalError"></span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label for="bilirubin_total_grade">Grade</label>
-                                                            <select class="form-control select2" name="bilirubin_total_grade"
-                                                                id="bilirubin_total_grade">
-                                                                <option value="">Select</option>
-                                                                <option value="0" <?= $patient['bilirubin_total_grade'] == "0" ? "selected" : "" ?>>Zero</option>
-                                                                <option value="1" <?= $patient['bilirubin_total_grade'] == "1" ? "selected" : "" ?>>One</option>
-                                                                <option value="2" <?= $patient['bilirubin_total_grade'] == "2" ? "selected" : "" ?>>Two</option>
-                                                                <option value="3" <?= $patient['bilirubin_total_grade'] == "3" ? "selected" : "" ?>>Three</option>
-                                                                <option value="4" <?= $patient['bilirubin_total_grade'] == "4" ? "selected" : "" ?>>Four</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="row">
-                                                    <!-- Bilirubin Direct Grade -->
-                                                    <div class="col-sm-3">
-                                                        <div class="form-group">
-                                                            <label for="bilirubin_direct_grade">Grade</label>
-                                                            <select class="form-control select2" name="bilirubin_direct_grade"
-                                                                id="bilirubin_direct_grade" style="width: 100%;">
-                                                                <option value="">Select</option>
-                                                                <option value="0" <?= $patient['bilirubin_direct_grade'] == "0" ? "selected" : "" ?>>Zero</option>
-                                                                <option value="1" <?= $patient['bilirubin_direct_grade'] == "1" ? "selected" : "" ?>>One</option>
-                                                                <option value="2" <?= $patient['bilirubin_direct_grade'] == "2" ? "selected" : "" ?>>Two</option>
-                                                                <option value="3" <?= $patient['bilirubin_direct_grade'] == "3" ? "selected" : "" ?>>Three</option>
-                                                                <option value="4" <?= $patient['bilirubin_direct_grade'] == "4" ? "selected" : "" ?>>Four</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- RBG Input and Units -->
-                                                    <div class="col-sm-3">
-                                                        <div class="form-group">
-                                                            <label for="rbg">RBG</label>
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control" name="rbg" id="rbg"
-                                                                    value="<?= $patient['rbg'] ?>" required>
-                                                                <div class="input-group-append">
-                                                                    <select class="form-control select2" name="rbg_units" required>
-                                                                        <option value="">Select Units</option>
-                                                                        <option value="1" <?= $patient['rbg_units'] == "1" ? "selected" : "" ?>>mmol/L</option>
-                                                                        <option value="2" <?= $patient['rbg_units'] == "2" ? "selected" : "" ?>>mg/dL</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <small class="text-muted">XX</small>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- RBG Grade -->
-                                                    <div class="col-sm-3">
-                                                        <div class="form-group">
-                                                            <label for="rbg_grade">Grade</label>
-                                                            <select class="form-control select2" name="rbg_grade" id="rbg_grade"
-                                                                style="width: 100%;">
-                                                                <option value="">Select</option>
-                                                                <option value="0" <?= $patient['rbg_grade'] == "0" ? "selected" : "" ?>>Zero</option>
-                                                                <option value="1" <?= $patient['rbg_grade'] == "1" ? "selected" : "" ?>>One</option>
-                                                                <option value="2" <?= $patient['rbg_grade'] == "2" ? "selected" : "" ?>>Two</option>
-                                                                <option value="3" <?= $patient['rbg_grade'] == "3" ? "selected" : "" ?>>Three</option>
-                                                                <option value="4" <?= $patient['rbg_grade'] == "4" ? "selected" : "" ?>>Four</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="box box-primary">
-                                                    <div class="box-header with-border">
-                                                        <h3 class="box-title">Full blood count</h3>
-                                                    </div>
-
-                                                    <div class="box-body">
-                                                        <div class="row">
-                                                            <div class="col-sm-3">
-                                                                <div class="form-group">
-                                                                    <label for="hb">Hemoglobin levels (Hb)</label>
-                                                                    <input value="<?= $patient['hb'] ?>" type="text"
-                                                                        class="form-control" name="hb" id="hb" />
-                                                                    <span class="help-block">XX.X (mg/dl)</span>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-sm-3">
-                                                                <div class="form-group">
-                                                                    <label for="hb_grade">Grade</label>
-                                                                    <select name="hb_grade" id="hb_grade" class="form-control">
-                                                                        <option value="0" <?= $patient['hb_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
-                                                                        <option value="1" <?= $patient['hb_grade'] == "1" ? 'selected' : '' ?>>One</option>
-                                                                        <option value="2" <?= $patient['hb_grade'] == "2" ? 'selected' : '' ?>>Two</option>
-                                                                        <option value="3" <?= $patient['hb_grade'] == "3" ? 'selected' : '' ?>>Three</option>
-                                                                        <option value="4" <?= $patient['hb_grade'] == "4" ? 'selected' : '' ?>>Four</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-sm-3">
-                                                                <div class="form-group">
-                                                                    <label for="hct">Hematocrit levels (Hct)</label>
-                                                                    <input value="<?= $patient['hct'] ?>" type="text"
-                                                                        class="form-control" name="hct" id="hct" />
-                                                                    <span class="help-block">XX ( % )</span>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-sm-3">
-                                                                <div class="form-group">
-                                                                    <label for="rbc">Red blood cell count (RBC)</label>
-                                                                    <input value="<?= $patient['rbc'] ?>" type="text"
-                                                                        class="form-control" name="rbc" id="rbc" />
-                                                                    <span class="help-block">XXXXXXX (cells/microliter)</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row">
-                                                            <div class="col-sm-3">
-                                                                <div class="form-group">
-                                                                    <label for="wbc">White blood cell count (WBC)</label>
-                                                                    <input value="<?= $patient['wbc'] ?>" type="text"
-                                                                        class="form-control" name="wbc" id="wbc" />
-                                                                    <span class="help-block">XXXXXXX (cells/microliter)</span>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-sm-3">
-                                                                <div class="form-group">
-                                                                    <label for="wbc_grade">Grade</label>
-                                                                    <select name="wbc_grade" id="wbc_grade" class="form-control">
-                                                                        <option value="0" <?= $patient['wbc_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
-                                                                        <option value="1" <?= $patient['wbc_grade'] == "1" ? 'selected' : '' ?>>One</option>
-                                                                        <option value="2" <?= $patient['wbc_grade'] == "2" ? 'selected' : '' ?>>Two</option>
-                                                                        <option value="3" <?= $patient['wbc_grade'] == "3" ? 'selected' : '' ?>>Three</option>
-                                                                        <option value="4" <?= $patient['wbc_grade'] == "4" ? 'selected' : '' ?>>Four</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-sm-3">
-                                                                <div class="form-group">
-                                                                    <label for="abs_lymphocytes">ABS Lymphocytes</label>
-                                                                    <input value="<?= $patient['abs_lymphocytes'] ?>" type="text"
-                                                                        class="form-control" name="abs_lymphocytes"
-                                                                        id="abs_lymphocytes" />
-                                                                    <span class="help-block">XXXXX</span>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-sm-3">
-                                                                <div class="form-group">
-                                                                    <label for="abs_lymphocytes_grade">Grade</label>
-                                                                    <select name="abs_lymphocytes_grade" id="abs_lymphocytes_grade"
-                                                                        class="form-control">
-                                                                        <option value="0" <?= $patient['abs_lymphocytes_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
-                                                                        <option value="1" <?= $patient['abs_lymphocytes_grade'] == "1" ? 'selected' : '' ?>>One</option>
-                                                                        <option value="2" <?= $patient['abs_lymphocytes_grade'] == "2" ? 'selected' : '' ?>>Two</option>
-                                                                        <option value="3" <?= $patient['abs_lymphocytes_grade'] == "3" ? 'selected' : '' ?>>Three</option>
-                                                                        <option value="4" <?= $patient['abs_lymphocytes_grade'] == "4" ? 'selected' : '' ?>>Four</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row">
-                                                            <div class="col-sm-6">
-                                                                <div class="form-group">
-                                                                    <label for="plt">Platelet count (Plt)</label>
-                                                                    <input value="<?= $patient['plt'] ?>" type="text"
-                                                                        class="form-control" name="plt" id="plt" />
-                                                                    <span class="help-block">XXXXXX (cells/microliter)</span>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-sm-6">
-                                                                <div class="form-group">
-                                                                    <label for="plt_grade">Grade</label>
-                                                                    <select name="plt_grade" id="plt_grade" class="form-control">
-                                                                        <option value="0" <?= $patient['plt_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
-                                                                        <option value="1" <?= $patient['plt_grade'] == "1" ? 'selected' : '' ?>>One</option>
-                                                                        <option value="2" <?= $patient['plt_grade'] == "2" ? 'selected' : '' ?>>Two</option>
-                                                                        <option value="3" <?= $patient['plt_grade'] == "3" ? 'selected' : '' ?>>Three</option>
-                                                                        <option value="4" <?= $patient['plt_grade'] == "4" ? 'selected' : '' ?>>Four</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label>9. Cancer antigen 15-3</label>
-                                                            <input value="<?= $patient['cancer'] ?>" type="text" name="cancer"
-                                                                id="cancer" class="form-control" />
-                                                            <small>XX ( U/ml )</small>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- PSA Section -->
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label>9. PSA (Prostate specific antigen)</label>
-                                                            <input value="<?= $patient['prostate'] ?>" type="text" name="prostate"
-                                                                id="prostate" class="form-control" />
-                                                            <small>XX ( ng/ml )</small>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label>9. Chest X-ray</label>
-                                                            <select name="chest_xray" id="chest_xray" class="form-control">
-                                                                <?php if ($patient['chest_xray'] == "1") { ?>
-                                                                    <option value="<?= $patient['chest_xray'] ?>">Normal</option>
-                                                                <?php } elseif ($patient['chest_xray'] == "2") { ?>
-                                                                    <option value="<?= $patient['chest_xray'] ?>">Abnormal</option>
-                                                                <?php } else { ?>
-                                                                    <option value="">Select</option>
-                                                                <?php } ?>
-                                                                <option value="1">Normal</option>
-                                                                <option value="2">Abnormal</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6" id="chest_specify">
-                                                        <div class="form-group">
-                                                            <label>9. Specify (Report from Radiologist)</label>
-                                                            <input value="<?= $patient['chest_specify'] ?>" type="text"
-                                                                name="chest_specify" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label>10. CT-Scan chest and abdomen report</label>
-                                                            <select name="ct_chest" class="form-control" required>
-                                                                <?php if ($patient['ct_chest'] == "1") { ?>
-                                                                    <option value="<?= $patient['ct_chest'] ?>">Normal</option>
-                                                                <?php } elseif ($patient['ct_chest'] == "2") { ?>
-                                                                    <option value="<?= $patient['ct_chest'] ?>">Abnormal</option>
-                                                                <?php } else { ?>
-                                                                    <option value="">Select</option>
-                                                                <?php } ?>
-                                                                <option value="1">Normal</option>
-                                                                <option value="2">Abnormal</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6" id="ct_chest_specify">
-                                                        <div class="form-group">
-                                                            <label>10. Specify (Report from Radiologist)</label>
-                                                            <input value="<?= $patient['ct_chest_specify'] ?>" type="text"
-                                                                name="ct_chest_specify" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <label>11. Abdominal Ultrasound report</label>
-                                                            <select name="ultrasound" id="ultrasound" class="form-control">
-                                                                <?php if ($patient['ultrasound'] == "1") { ?>
-                                                                    <option value="<?= $patient['ultrasound'] ?>">Normal</option>
-                                                                <?php } elseif ($patient['ultrasound'] == "2") { ?>
-                                                                    <option value="<?= $patient['ultrasound'] ?>">Abnormal</option>
-                                                                <?php } else { ?>
-                                                                    <option value="">Select</option>
-                                                                <?php } ?>
-                                                                <option value="1">Normal</option>
-                                                                <option value="2">Abnormal</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6" id="ultrasound_specify">
-                                                        <div class="form-group">
-                                                            <label>11. Specify (Report from Radiologist)</label>
-                                                            <input value="<?= $patient['ultrasound_specify'] ?>" type="text"
-                                                                name="ultrasound_specify" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row-form clearfix" id="crf4_cmpltd_date">
-                                                    <div class="col-md-3">Date of Completion</div>
-                                                    <input value="<?= $patient['crf4_cmpltd_date'] ?>" type="date"
-                                                        name="crf4_cmpltd_date" id="crf1_cmpltd_date" class="form-control" />
-                                                    <small>example : 2023-02-24</small>
-                                                </div>
-                                            </div>
-                                        </div>
 
 
                                         <div class="card-footer">
