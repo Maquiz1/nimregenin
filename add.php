@@ -1119,12 +1119,12 @@ if ($user->isLoggedIn()) {
                             'vcode' => $_GET["vcode"],
                             'sample_date' => Input::get('sample_date'),
                             'renal_urea' => Input::get('renal_urea'),
-                            // 'renal_urea_units' => Input::get('renal_urea_units'),
+                            'renal_urea_units' => Input::get('renal_urea_units'),
                             'renal_creatinine' => Input::get('renal_creatinine'),
-                            // 'renal_creatinine_units' => Input::get('renal_creatinine_units'),
+                            'renal_creatinine_units' => Input::get('renal_creatinine_units'),
                             'renal_creatinine_grade' => Input::get('renal_creatinine_grade'),
                             'renal_egfr' => Input::get('renal_egfr'),
-                            // 'renal_egfr_units' => Input::get('renal_egfr_units'),
+                            'renal_egfr_units' => Input::get('renal_egfr_units'),
                             'renal_egfr_grade' => Input::get('renal_egfr_grade'),
                             'liver_ast' => Input::get('liver_ast'),
                             'liver_ast_grade' => Input::get('liver_ast_grade'),
@@ -1142,10 +1142,10 @@ if ($user->isLoggedIn()) {
                             'liver_albumin' => Input::get('liver_albumin'),
                             'liver_albumin_grade' => Input::get('liver_albumin_grade'),
                             'liver_bilirubin_total' => Input::get('liver_bilirubin_total'),
-                            // 'liver_bilirubin_total_units' => Input::get('liver_bilirubin_total_units'),
+                            'liver_bilirubin_total_units' => Input::get('liver_bilirubin_total_units'),
                             'bilirubin_total_grade' => Input::get('bilirubin_total_grade'),
                             'liver_bilirubin_direct' => Input::get('liver_bilirubin_direct'),
-                            // 'liver_bilirubin_direct_units' => Input::get('liver_bilirubin_direct_units'),
+                            'liver_bilirubin_direct_units' => Input::get('liver_bilirubin_direct_units'),
                             'bilirubin_direct_grade' => Input::get('bilirubin_direct_grade'),
                             'rbg' => Input::get('rbg'),
                             'rbg_units' => Input::get('rbg_units'),
@@ -6253,6 +6253,8 @@ if ($user->isLoggedIn()) {
                                                                 <div class="form-group">
                                                                     <label for="renal_creatinine">Serum Creatinine Levels</label>
                                                                     <div class="input-group">
+                                                                        <input type="hidden" name="renal_creatinine_units" id="renal_creatinine_units"
+                                                                            value="1" />
                                                                         <input type="text" class="form-control" name="renal_creatinine" id="renal_creatinine"
                                                                             value="<?= $patient['renal_creatinine'] ?>" />
                                                                         <div class="input-group-append">
@@ -6296,6 +6298,8 @@ if ($user->isLoggedIn()) {
                                                                 <div class="form-group">
                                                                     <label for="renal_egfr">eGFR (mL/min per 1.73 m²)</label>
                                                                     <div class="input-group">
+                                                                    <input type="hidden" name="renal_egfr_units" id="renal_egfr_units"
+                                                                    value="1" />
                                                                         <input type="text" class="form-control" name="renal_egfr" id="renal_egfr"
                                                                             value="<?= $patient['renal_egfr'] ?>" />
                                                                         <div class="input-group-append">
@@ -6458,6 +6462,8 @@ if ($user->isLoggedIn()) {
                                                                 <div class="form-group" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
                                                                     <label for="liver_bilirubin_total">Bilirubin Total</label>
                                                                     <div class="input-group">
+                                                                    <input type="hidden" name="liver_bilirubin_total_units" id="liver_bilirubin_total_units"
+                                                                    value="1" />
                                                                         <input type="text" class="form-control" name="liver_bilirubin_total" id="liver_bilirubin_total"
                                                                             value="<?= $patient['liver_bilirubin_total'] ?>">
                                                                         <div class="input-group-append">
@@ -6487,6 +6493,8 @@ if ($user->isLoggedIn()) {
                                                                 <div class="form-group" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
                                                                     <label>Bilirubin direct</label>
                                                                     <div class="input-group">
+                                                                    <input type="hidden" name="liver_bilirubin_direct_units" id="liver_bilirubin_direct_units"
+                                                                    value="1" />
                                                                         <input value="<?= $patient['liver_bilirubin_direct'] ?>" type="text" name="liver_bilirubin_direct" id="liver_bilirubin_direct" />
                                                                         <div class="input-group-append">
                                                                             <select class="form-control select2" name="liver_bilirubin_direct_units" id="liver_bilirubin_direct_units" style="width: 100%;" required>
