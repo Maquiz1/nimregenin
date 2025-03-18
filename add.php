@@ -6298,8 +6298,8 @@ if ($user->isLoggedIn()) {
                                                                 <div class="form-group">
                                                                     <label for="renal_egfr">eGFR (mL/min per 1.73 m²)</label>
                                                                     <div class="input-group">
-                                                                    <input type="hidden" name="renal_egfr_units" id="renal_egfr_units"
-                                                                    value="1" />
+                                                                        <input type="hidden" name="renal_egfr_units" id="renal_egfr_units"
+                                                                            value="1" />
                                                                         <input type="text" class="form-control" name="renal_egfr" id="renal_egfr"
                                                                             value="<?= $patient['renal_egfr'] ?>" />
                                                                         <div class="input-group-append">
@@ -6462,8 +6462,8 @@ if ($user->isLoggedIn()) {
                                                                 <div class="form-group" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
                                                                     <label for="liver_bilirubin_total">Bilirubin Total</label>
                                                                     <div class="input-group">
-                                                                    <input type="hidden" name="liver_bilirubin_total_units" id="liver_bilirubin_total_units"
-                                                                    value="1" />
+                                                                        <input type="hidden" name="liver_bilirubin_total_units" id="liver_bilirubin_total_units"
+                                                                            value="1" />
                                                                         <input type="text" class="form-control" name="liver_bilirubin_total" id="liver_bilirubin_total"
                                                                             value="<?= $patient['liver_bilirubin_total'] ?>">
                                                                         <div class="input-group-append">
@@ -6493,8 +6493,8 @@ if ($user->isLoggedIn()) {
                                                                 <div class="form-group" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
                                                                     <label>Bilirubin direct</label>
                                                                     <div class="input-group">
-                                                                    <input type="hidden" name="liver_bilirubin_direct_units" id="liver_bilirubin_direct_units"
-                                                                    value="1" />
+                                                                        <input type="hidden" name="liver_bilirubin_direct_units" id="liver_bilirubin_direct_units"
+                                                                            value="1" />
                                                                         <input value="<?= $patient['liver_bilirubin_direct'] ?>" type="text" name="liver_bilirubin_direct" id="liver_bilirubin_direct" />
                                                                         <div class="input-group-append">
                                                                             <select class="form-control select2" name="liver_bilirubin_direct_units" id="liver_bilirubin_direct_units" style="width: 100%;" required>
