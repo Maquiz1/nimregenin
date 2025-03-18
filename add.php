@@ -6601,7 +6601,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             </div>
                                                         </div>
-
+                                                        <hr>
                                                         <div class="row">
                                                             <div class="col-sm-4">
                                                                 <div class="form-group" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
@@ -6636,7 +6636,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             </div>
                                                         </div>
-
+                                                        <hr>
                                                         <div class="row">
                                                             <div class="col-sm-3">
                                                                 <div class="form-group" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
