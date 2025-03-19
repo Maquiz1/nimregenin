@@ -1739,4 +1739,29 @@ WHERE t1.status = '1' AND t1.site_id = '$site'  AND t2.expected_date <= '$date' 
         return $result ? $result[0]['count'] : 0;
     }
 
+    // public function getDistinctYears($table, $dateColumn, $where, $value) {
+    //     $query = $this->_pdo->query("SELECT DISTINCT YEAR($dateColumn) AS year FROM $table WHERE $where = '$value' ORDER BY year DESC");
+    //     $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    //     return $result;
+    //  }
+    
+    //  public function getMonthsByYear($table, $dateColumn, $where, $value) {
+    //     $query = $this->_pdo->query("SELECT DISTINCT MONTH($dateColumn) AS month FROM $table WHERE YEAR($dateColumn) = ? AND $where = '$value' ORDER BY month ASC");
+    //     $result = $query->fetchAll(PDO::FETCH_ASSOC);
+    //     return $result;
+    //  }
+
+    
+    // public function countRowsByMonth($table, $dateColumn, $year, $month) {
+    //     $query = "SELECT COUNT(*) AS count FROM $table WHERE YEAR($dateColumn) = ? AND MONTH($dateColumn) = ? AND status = 1";
+    //     return $this->query($query, [$year, $month])->first()->count;
+    // }
+
+    // public function countRowsByMonth($table, $dateColumn, $year, $month) {
+    //     $query = $this->_pdo->prepare("SELECT COUNT(*) as count FROM $table WHERE YEAR($dateColumn) = :year AND MONTH($dateColumn) = :month AND status = :status");
+    //     $query->execute(['year' => $year, 'month' => $month, 'status' => 1]);
+    //     $result = $query->fetch(PDO::FETCH_ASSOC);
+    //     return $result['count'];
+    // }
+
 }

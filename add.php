@@ -6266,7 +6266,7 @@ if ($user->isLoggedIn()) {
                                                                         </div>
                                                                     </div>
                                                                     <div class="input-group mt-1">
-                                                                        <select class="form-control select2" name="renal_creatinine_grade" id="renal_creatinine_grade" required>
+                                                                        <select class="form-control select2" name="renal_creatinine_grade" id="renal_creatinine_grade">
                                                                             <option value="" <?= empty($patient['renal_creatinine_grade']) ? 'selected' : '' ?>>Select Grade</option>
                                                                             <option value="0" <?= $patient['renal_creatinine_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
                                                                             <option value="1" <?= $patient['renal_creatinine_grade'] == "1" ? 'selected' : '' ?>>One</option>
@@ -6284,7 +6284,7 @@ if ($user->isLoggedIn()) {
                                                                     <label for="renal_urea">Serum Urea Levels</label>
                                                                     <div class="input-group">
                                                                         <input type="text" class="form-control" name="renal_urea" id="renal_urea"
-                                                                            value="<?= $patient['renal_urea'] ?>" required />
+                                                                            value="<?= $patient['renal_urea'] ?>" />
                                                                         <div class="input-group-append">
                                                                             <span class="input-group-text">Units</span>
                                                                         </div>
@@ -6311,7 +6311,7 @@ if ($user->isLoggedIn()) {
                                                                         </div>
                                                                     </div>
                                                                     <div class="input-group mt-1">
-                                                                        <select class="form-control select2" name="renal_egfr_grade" id="renal_egfr_grade" required>
+                                                                        <select class="form-control select2" name="renal_egfr_grade" id="renal_egfr_grade">
                                                                             <option value="" <?= empty($patient['renal_egfr_grade']) ? 'selected' : '' ?>>Select Grade</option>
                                                                             <option value="0" <?= $patient['renal_egfr_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
                                                                             <option value="1" <?= $patient['renal_egfr_grade'] == "1" ? 'selected' : '' ?>>One</option>
@@ -6529,7 +6529,7 @@ if ($user->isLoggedIn()) {
                                                                 <div class="form-group" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
                                                                     <label for="rbg">RBG</label>
                                                                     <div class="input-group">
-                                                                        <input type="text" class="form-control" name="rbg" id="rbg" value="<?= $patient['rbg'] ?>" required>
+                                                                        <input type="text" class="form-control" name="rbg" id="rbg" value="<?= $patient['rbg'] ?>">
                                                                         <div class="input-group-append">
                                                                             <select class="form-control select2" name="rbg_units" required>
                                                                                 <option value="">Select Units</option>
@@ -6656,7 +6656,7 @@ if ($user->isLoggedIn()) {
                                                                 <div class="form-group" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
                                                                     <label>9. Chest X-ray</label>
                                                                     <div class="input-group">
-                                                                        <select name="chest_xray" id="chest_xray" class="form-control" required>
+                                                                        <select name="chest_xray" id="chest_xray" class="form-control">
                                                                             <?php if ($patient['chest_xray'] == "1") { ?>
                                                                                 <option value="<?= $patient['chest_xray'] ?>">Normal</option>
                                                                             <?php } elseif ($patient['chest_xray'] == "2") { ?>
@@ -6676,7 +6676,7 @@ if ($user->isLoggedIn()) {
                                                                 <div class="form-group" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
                                                                     <label>10. CT-Scan chest and abdomen report</label>
                                                                     <div class="input-group">
-                                                                        <select name="ct_chest" class="form-control" required>
+                                                                        <select name="ct_chest" class="form-control">
                                                                             <?php if ($patient['ct_chest'] == "1") { ?>
                                                                                 <option value="<?= $patient['ct_chest'] ?>">Normal</option>
                                                                             <?php } elseif ($patient['ct_chest'] == "2") { ?>
@@ -6696,7 +6696,7 @@ if ($user->isLoggedIn()) {
                                                                 <div class="form-group" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
                                                                     <label>11. Abdominal Ultrasound report</label>
                                                                     <div class="input-group">
-                                                                        <select name="ultrasound" id="ultrasound" class="form-control" required>
+                                                                        <select name="ultrasound" id="ultrasound" class="form-control">
                                                                             <?php if ($patient['ultrasound'] == "1") { ?>
                                                                                 <option value="<?= $patient['ultrasound'] ?>">Normal</option>
                                                                             <?php } elseif ($patient['ultrasound'] == "2") { ?>
