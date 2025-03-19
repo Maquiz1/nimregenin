@@ -6716,7 +6716,7 @@ if ($user->isLoggedIn()) {
                                                                 <div class="form-group" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
                                                                     <label>12. Date of Completion</label>
                                                                     <div class="input-group">
-                                                                        <input value="<?= $patient['crf4_cmpltd_date'] ?>" type="date" name="crf4_cmpltd_date" class="form-control" placeholder="Specify (Report from Radiologist)" required />
+                                                                        <input value="<?= $patient['crf4_cmpltd_date'] ?>" type="date" name="crf4_cmpltd_date" class="form-control" placeholder="Specify (Report from Radiologist)" />
                                                                     </div>
                                                                 </div>
                                                             </div>
