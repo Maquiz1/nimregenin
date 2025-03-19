@@ -1788,7 +1788,7 @@ WHERE t1.status = '1' AND t1.site_id = '$site'  AND t2.expected_date <= '$date' 
 
     public function eligible_enrolled_counts($value)
     {
-        $query = $this->_pdo->query("SELECT `study_id`,`id_number`,`firstname`,`middlename`,`lastname` FROM `clients` WHERE `status`=1 AND `eligible`=1 AND `enrolled`=1 AND `site_id`='$value' ORDER BY `site_id`");
+        $query = $this->_pdo->query("SELECT `study_id`,`id_number`,`firstname`,`middlename`,`lastname`,`eligibility1`,`eligibility2`,`eligible`,`enrolled`,`site_id`,`status` FROM `clients` WHERE `status`=1 AND `eligible`=1 AND `enrolled`=1 AND `site_id`='$value' ORDER BY `site_id`");
         $num = $query->rowCount();
         return $num;       
 
@@ -1796,7 +1796,7 @@ WHERE t1.status = '1' AND t1.site_id = '$site'  AND t2.expected_date <= '$date' 
 
     public function eligible_enrolled($value)
     {
-        $query = $this->_pdo->query("SELECT `study_id`,`id_number`,`firstname`,`middlename`,`lastname` FROM `clients` WHERE `status`=1 AND `eligible`=1 AND `enrolled`=1 AND `site_id`='$value' ORDER BY `site_id`");
+        $query = $this->_pdo->query("SELECT `study_id`,`id_number`,`firstname`,`middlename`,`lastname`,`eligibility1`,`eligibility2`,`eligible`,`enrolled`,`site_id`,`status` FROM `clients` WHERE `status`=1 AND `eligible`=1 AND `enrolled`=1 AND `site_id`='$value' ORDER BY `site_id`");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;     
 
@@ -1804,7 +1804,7 @@ WHERE t1.status = '1' AND t1.site_id = '$site'  AND t2.expected_date <= '$date' 
 
     public function eligible_not_enrolled_counts($value)
     {
-        $query = $this->_pdo->query("SELECT `study_id`,`id_number`,`firstname`,`middlename`,`lastname` FROM `clients` WHERE `status`=1 AND `eligible`=1 AND `enrolled`=0 OR `enrolled`=2 AND `site_id`='$value' ORDER BY `site_id`");
+        $query = $this->_pdo->query("SELECT `study_id`,`id_number`,`firstname`,`middlename`,`lastname`,`eligibility1`,`eligibility2`,`eligible`,`enrolled`,`site_id`,`status` FROM `clients` WHERE `status`=1 AND `eligible`=1 AND `enrolled`=0 OR `enrolled`=2 AND `site_id`='$value' ORDER BY `site_id`");
         $num = $query->rowCount();
         return $num;       
 
@@ -1812,7 +1812,7 @@ WHERE t1.status = '1' AND t1.site_id = '$site'  AND t2.expected_date <= '$date' 
 
     public function eligible_not_enrolled($value)
     {
-        $query = $this->_pdo->query("SELECT `study_id`,`id_number`,`firstname`,`middlename`,`lastname` FROM `clients` WHERE `status`=1 AND `eligible`=1 AND `enrolled`=0 OR `enrolled`=2 AND `site_id`='$value' ORDER BY `site_id`");
+        $query = $this->_pdo->query("SELECT `study_id`,`id_number`,`firstname`,`middlename`,`lastname`,`eligibility1`,`eligibility2`,`eligible`,`enrolled`,`site_id`,`status` FROM `clients` WHERE `status`=1 AND `eligible`=1 AND `enrolled`=0 OR `enrolled`=2 AND `site_id`='$value' ORDER BY `site_id`");
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;     
 

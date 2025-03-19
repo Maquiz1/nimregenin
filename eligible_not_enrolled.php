@@ -8,7 +8,7 @@ $random = new Random();
 
 if ($user->isLoggedIn()) {
     try {
-        $site = 1;
+        $site = 2;
 
         $eligible_counts = $override->eligible_counts($site);
         $eligible = $override->eligible($site);
@@ -29,7 +29,7 @@ if ($user->isLoggedIn()) {
     Redirect::to('index.php');
 }
 
-$title = 'MNH - Eligible Clients but not_enrolled ' . date('Y-m-d');
+$title = 'ORCI - Eligible Clients but not enrolled ' . date('Y-m-d');
 
 $pdf = new Pdf();
 
@@ -42,21 +42,27 @@ $output = ' ';
 $output .= '
     <table width="100%" border="1" cellpadding="5" cellspacing="0">
                 <tr>
-                    <td colspan="9" align="center" style="font-size: 18px">
+                    <td colspan="21" align="center" style="font-size: 18px">
                         <b>' . $title . '</b>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="9" align="center" style="font-size: 18px">
+                    <td colspan="21" align="center" style="font-size: 18px">
                         <b>Total Eligible ( ' . $eligible_counts . ' ):  Total Enrolled( ' . $eligible_enrolled_counts . ' ):  Not Enrolled( ' . $eligible_not_enrolled_counts . ' )</b>
                     </td>
                 </tr>    
                 <tr>
                     <th colspan="1">No.</th>
-                    <th colspan="2">Date</th>
                     <th colspan="2">Study ID</th>
-                    <th colspan="2">ELIGIBILTY</th>        
-                    <th colspan="2">Reason</th>
+                    <th colspan="2">ID NUMBER</th>
+                    <th colspan="2">First Name</th>
+                    <th colspan="2">Middle Name</th>
+                    <th colspan="2">Last Name</th>                 
+                    <th colspan="2">INCLUSION</th>        
+                    <th colspan="2">EXCLUSION</th>        
+                    <th colspan="2">ELIGIBILTY</th>   
+                    <th colspan="2">ENROLLMENT</th>   
+                    <th colspan="2">STATUS</th>   
                 </tr>
     
      ';
@@ -64,12 +70,29 @@ $output .= '
 // Load HTML content into dompdf
 $x = 1;
 foreach ($eligible_not_enrolled as $client) {
+    if ($client['eligibility1'] == 1) {
+        $eligibility1 = 'ELIGIBLE';
+    } else if ($client['eligibility1'] == 2) {
+        $eligibility1 = 'NOT ELIGIBLE';
+    } else {
+        $eligibility1 = 'NOT DONE';
+    }
+
     if ($client['eligible'] == 1) {
         $eligible = 'ELIGIBLE';
-    } else if ($site == 2) {
+    } else if ($client['eligible'] == 2) {
         $eligible = 'NOT ELIGIBLE';
     } else {
         $eligible = 'NOT DONE';
+    }
+
+
+    if ($client['eligibility2'] == 1) {
+        $eligibility2 = 'ELIGIBLE';
+    } else if ($client['eligibility2'] == 2) {
+        $eligibility2 = 'NOT ELIGIBLE';
+    } else {
+        $eligibility2 = 'NOT DONE';
     }
 
     if ($client['enrolled'] == 1) {
@@ -77,7 +100,7 @@ foreach ($eligible_not_enrolled as $client) {
     }else if ($client['enrolled'] == 2) {
         $enrolled = 'NOT Enrolled';
     } else {
-        $enrolled = 'NOT DONE';
+        $enrolled = 'NOT Enrolled';
     }
 
     $screening = $override->get('screening', 'client_id', $client['id'])[0];
@@ -91,6 +114,15 @@ foreach ($eligible_not_enrolled as $client) {
         $site = 'No Site Asigned';
     }
 
+    if ($client['status'] == 1) {
+        $status = 'Active';
+    }else if ($client['status'] == 2) {
+        $status = 'NOT Active';
+    } else {
+        $status = 'NOT Active';
+    }
+
+
     $output .= '
          <tr>
             <td colspan="1">' . $x . '</td>
@@ -99,9 +131,11 @@ foreach ($eligible_not_enrolled as $client) {
             <td colspan="2">' . $client['firstname'] . '</td>
             <td colspan="2">' . $client['middlename'] . '</td>
             <td colspan="2">' . $client['lastname'] . '</td>
+            <td colspan="2">' . $eligibility1 . '</td>
+            <td colspan="2">' . $eligibility2 . '</td>
             <td colspan="2">' . $eligible . '</td>
             <td colspan="2">' . $enrolled . '</td>
-            <td colspan="2">' . $site . '</td>
+            <td colspan="2">' . $status . '</td>
         </tr>
         ';
 
