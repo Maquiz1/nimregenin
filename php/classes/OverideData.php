@@ -1725,19 +1725,19 @@ WHERE t1.status = '1' AND t1.site_id = '$site'  AND t2.expected_date <= '$date' 
         return $result;
     }
 
-    public function getCountByMonthYear($table, $col1, $val1, $month, $year, $col2 = null, $val2 = null)
-    {
-        $query = "SELECT COUNT(*) AS count FROM $table WHERE $col1 = ? AND MONTH(created_on) = ? AND YEAR(created_on) = ?";
-        $params = [$val1, $month, $year];
+    // public function getCountByMonthYear($table, $col1, $val1, $month, $year, $col2 = null, $val2 = null)
+    // {
+    //     $query = "SELECT COUNT(*) AS count FROM $table WHERE $col1 = ? AND MONTH(created_on) = ? AND YEAR(created_on) = ?";
+    //     $params = [$val1, $month, $year];
 
-        if ($col2 !== null && $val2 !== null) {
-            $query .= " AND $col2 = ?";
-            $params[] = $val2;
-        }
+    //     if ($col2 !== null && $val2 !== null) {
+    //         $query .= " AND $col2 = ?";
+    //         $params[] = $val2;
+    //     }
 
-        $result = $this->db->query($query, $params);
-        return $result ? $result[0]['count'] : 0;
-    }
+    //     $result = $this->db->query($query, $params);
+    //     return $result ? $result[0]['count'] : 0;
+    // }
 
     // public function getDistinctYears($table, $dateColumn, $where, $value) {
     //     $query = $this->_pdo->query("SELECT DISTINCT YEAR($dateColumn) AS year FROM $table WHERE $where = '$value' ORDER BY year DESC");
@@ -1763,5 +1763,59 @@ WHERE t1.status = '1' AND t1.site_id = '$site'  AND t2.expected_date <= '$date' 
     //     $result = $query->fetch(PDO::FETCH_ASSOC);
     //     return $result['count'];
     // }
+
+
+    public function eligible_counts($value)
+    {
+        $query = $this->_pdo->query("SELECT `study_id`,`id_number`,`firstname`,`middlename`,`lastname` FROM `clients` WHERE `status`=1 AND `eligible`=1 AND `site_id`='$value' ORDER BY `site_id`
+");
+        $num = $query->rowCount();
+        return $num;      
+
+    }
+
+    public function eligible($value)
+    {
+        $query = $this->_pdo->query("SELECT `study_id`,`id_number`,`firstname`,`middlename`,`lastname` FROM `clients` WHERE `status`=1 AND `eligible`=1 AND `site_id`='$value' ORDER BY `site_id`
+");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;       
+
+    }
+
+   
+
+
+    public function eligible_enrolled_counts($value)
+    {
+        $query = $this->_pdo->query("SELECT `study_id`,`id_number`,`firstname`,`middlename`,`lastname` FROM `clients` WHERE `status`=1 AND `eligible`=1 AND `enrolled`=1 AND `site_id`='$value' ORDER BY `site_id`");
+        $num = $query->rowCount();
+        return $num;       
+
+    }
+
+    public function eligible_enrolled($value)
+    {
+        $query = $this->_pdo->query("SELECT `study_id`,`id_number`,`firstname`,`middlename`,`lastname` FROM `clients` WHERE `status`=1 AND `eligible`=1 AND `enrolled`=1 AND `site_id`='$value' ORDER BY `site_id`");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;     
+
+    }
+
+    public function eligible_not_enrolled_counts($value)
+    {
+        $query = $this->_pdo->query("SELECT `study_id`,`id_number`,`firstname`,`middlename`,`lastname` FROM `clients` WHERE `status`=1 AND `eligible`=1 AND `enrolled`=0 OR `enrolled`=2 AND `site_id`='$value' ORDER BY `site_id`");
+        $num = $query->rowCount();
+        return $num;       
+
+    }
+
+    public function eligible_not_enrolled($value)
+    {
+        $query = $this->_pdo->query("SELECT `study_id`,`id_number`,`firstname`,`middlename`,`lastname` FROM `clients` WHERE `status`=1 AND `eligible`=1 AND `enrolled`=0 OR `enrolled`=2 AND `site_id`='$value' ORDER BY `site_id`");
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;     
+
+    }
 
 }

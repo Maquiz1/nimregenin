@@ -443,9 +443,25 @@ if ($user->isLoggedIn()) {
                             </a>
                         </li>
                     </ul>
-                </li>
-
-               
+                    <ul class="nav nav-treeview">                
+                        <li class="nav-item">
+                            <a href="eligible_not_enrolled.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <span class="badge badge-info right"></span>
+                                <p>Eligible Not Enrolled</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">                
+                        <li class="nav-item">
+                            <a href="screened_not_eligible.php" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <span class="badge badge-info right"></span>
+                                <p>Screened Not Eligible</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>               
 
                 <?php if ($user->data()->accessLevel == 1 || $user->data()->accessLevel == 3) { ?>
 
