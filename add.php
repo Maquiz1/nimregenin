@@ -5543,7 +5543,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- Date Section -->
                                                 <div class="form-group">
                                                     <label for="crf3_date">Date:</label>
-                                                    <input type="text" class="form-control" name="crf3_date" id="crf3_date" value="<?= $patient['crf3_date'] ?>" placeholder="Example: 2023-01-01">
+                                                    <input type="date" class="form-control" name="crf3_date" id="crf3_date" value="<?= $patient['crf3_date'] ?>" placeholder="Example: 2023-01-01" required>
                                                 </div>
 
                                                 <!-- Clinical Symptoms Section -->
@@ -5556,7 +5556,7 @@ if ($user->isLoggedIn()) {
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label for="fever">A. Fever:</label>
-                                                                    <select class="form-control" name="fever" id="fever">
+                                                                    <select class="form-control" name="fever" id="fever" required>
                                                                         <option value="">Select</option>
                                                                         <option value="1" <?= $patient['fever'] == "1" ? 'selected' : '' ?>>Yes</option>
                                                                         <option value="2" <?= $patient['fever'] == "2" ? 'selected' : '' ?>>No</option>
@@ -5566,7 +5566,7 @@ if ($user->isLoggedIn()) {
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label for="vomiting">B. Vomiting:</label>
-                                                                    <select class="form-control" name="vomiting" id="vomiting">
+                                                                    <select class="form-control" name="vomiting" id="vomiting" required>
                                                                         <option value="">Select</option>
                                                                         <option value="1" <?= $patient['vomiting'] == "1" ? 'selected' : '' ?>>Yes</option>
                                                                         <option value="2" <?= $patient['vomiting'] == "2" ? 'selected' : '' ?>>No</option>
@@ -5576,7 +5576,7 @@ if ($user->isLoggedIn()) {
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label for="nausea">C. Nausea:</label>
-                                                                    <select class="form-control" name="nausea" id="nausea">
+                                                                    <select class="form-control" name="nausea" id="nausea" required>
                                                                         <option value="">Select</option>
                                                                         <option value="1" <?= $patient['nausea'] == "1" ? 'selected' : '' ?>>Yes</option>
                                                                         <option value="2" <?= $patient['nausea'] == "2" ? 'selected' : '' ?>>No</option>
@@ -5586,7 +5586,7 @@ if ($user->isLoggedIn()) {
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label for="diarrhoea">D. Diarrhoea:</label>
-                                                                    <select class="form-control" name="diarrhoea" id="diarrhoea">
+                                                                    <select class="form-control" name="diarrhoea" id="diarrhoea" required>
                                                                         <option value="">Select</option>
                                                                         <option value="1" <?= $patient['diarrhoea'] == "1" ? 'selected' : '' ?>>Yes</option>
                                                                         <option value="2" <?= $patient['diarrhoea'] == "2" ? 'selected' : '' ?>>No</option>
@@ -5594,11 +5594,12 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             </div>
                                                         </div>
+
                                                         <div class="row">
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label for="loss_appetite">E. Loss of appetite:</label>
-                                                                    <select class="form-control" name="loss_appetite" id="loss_appetite">
+                                                                    <select class="form-control" name="loss_appetite" id="loss_appetite" required>
                                                                         <option value="">Select</option>
                                                                         <option value="1" <?= $patient['loss_appetite'] == "1" ? 'selected' : '' ?>>Yes</option>
                                                                         <option value="2" <?= $patient['loss_appetite'] == "2" ? 'selected' : '' ?>>No</option>
@@ -5608,7 +5609,7 @@ if ($user->isLoggedIn()) {
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label for="headaches">F. Headaches:</label>
-                                                                    <select class="form-control" name="headaches" id="headaches">
+                                                                    <select class="form-control" name="headaches" id="headaches" required>
                                                                         <option value="">Select</option>
                                                                         <option value="1" <?= $patient['headaches'] == "1" ? 'selected' : '' ?>>Yes</option>
                                                                         <option value="2" <?= $patient['headaches'] == "2" ? 'selected' : '' ?>>No</option>
@@ -5618,7 +5619,7 @@ if ($user->isLoggedIn()) {
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label for="difficult_breathing">G. Difficulty in breathing:</label>
-                                                                    <select class="form-control" name="difficult_breathing" id="difficult_breathing">
+                                                                    <select class="form-control" name="difficult_breathing" id="difficult_breathing" required>
                                                                         <option value="">Select</option>
                                                                         <option value="1" <?= $patient['difficult_breathing'] == "1" ? 'selected' : '' ?>>Yes</option>
                                                                         <option value="2" <?= $patient['difficult_breathing'] == "2" ? 'selected' : '' ?>>No</option>
@@ -5628,7 +5629,7 @@ if ($user->isLoggedIn()) {
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label for="sore_throat">H. Sore throat:</label>
-                                                                    <select class="form-control" name="sore_throat" id="sore_throat">
+                                                                    <select class="form-control" name="sore_throat" id="sore_throat" required>
                                                                         <option value="">Select</option>
                                                                         <option value="1" <?= $patient['sore_throat'] == "1" ? 'selected' : '' ?>>Yes</option>
                                                                         <option value="2" <?= $patient['sore_throat'] == "2" ? 'selected' : '' ?>>No</option>
@@ -5641,7 +5642,7 @@ if ($user->isLoggedIn()) {
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label for="fatigue">I. Fatigue:</label>
-                                                                    <select class="form-control" name="fatigue" id="fatigue">
+                                                                    <select class="form-control" name="fatigue" id="fatigue" required>
                                                                         <option value="">Select</option>
                                                                         <option value="1" <?= $patient['fatigue'] == "1" ? 'selected' : '' ?>>Yes</option>
                                                                         <option value="2" <?= $patient['fatigue'] == "2" ? 'selected' : '' ?>>No</option>
@@ -5651,7 +5652,7 @@ if ($user->isLoggedIn()) {
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label for="muscle_pain">J. Muscle pain:</label>
-                                                                    <select class="form-control" name="muscle_pain" id="muscle_pain">
+                                                                    <select class="form-control" name="muscle_pain" id="muscle_pain" required>
                                                                         <option value="">Select</option>
                                                                         <option value="1" <?= $patient['muscle_pain'] == "1" ? 'selected' : '' ?>>Yes</option>
                                                                         <option value="2" <?= $patient['muscle_pain'] == "2" ? 'selected' : '' ?>>No</option>
@@ -5661,7 +5662,7 @@ if ($user->isLoggedIn()) {
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label for="loss_consciousness">K. Loss of consciousness:</label>
-                                                                    <select class="form-control" name="loss_consciousness" id="loss_consciousness">
+                                                                    <select class="form-control" name="loss_consciousness" id="loss_consciousness" required>
                                                                         <option value="">Select</option>
                                                                         <option value="1" <?= $patient['loss_consciousness'] == "1" ? 'selected' : '' ?>>Yes</option>
                                                                         <option value="2" <?= $patient['loss_consciousness'] == "2" ? 'selected' : '' ?>>No</option>
@@ -5671,7 +5672,7 @@ if ($user->isLoggedIn()) {
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label for="backpain">L. Backpain:</label>
-                                                                    <select class="form-control" name="backpain" id="backpain">
+                                                                    <select class="form-control" name="backpain" id="backpain" required>
                                                                         <option value="">Select</option>
                                                                         <option value="1" <?= $patient['backpain'] == "1" ? 'selected' : '' ?>>Yes</option>
                                                                         <option value="2" <?= $patient['backpain'] == "2" ? 'selected' : '' ?>>No</option>
@@ -5684,7 +5685,7 @@ if ($user->isLoggedIn()) {
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label for="weight_loss">M. Unexplained weight loss:</label>
-                                                                    <select class="form-control" name="weight_loss" id="weight_loss">
+                                                                    <select class="form-control" name="weight_loss" id="weight_loss" required>
                                                                         <option value="">Select</option>
                                                                         <option value="1" <?= $patient['weight_loss'] == "1" ? 'selected' : '' ?>>Yes</option>
                                                                         <option value="2" <?= $patient['weight_loss'] == "2" ? 'selected' : '' ?>>No</option>
@@ -5694,7 +5695,7 @@ if ($user->isLoggedIn()) {
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label for="heartburn_indigestion">N. Heartburn and Indigestion:</label>
-                                                                    <select class="form-control" name="heartburn_indigestion" id="heartburn_indigestion">
+                                                                    <select class="form-control" name="heartburn_indigestion" id="heartburn_indigestion" required>
                                                                         <option value="">Select</option>
                                                                         <option value="1" <?= $patient['heartburn_indigestion'] == "1" ? 'selected' : '' ?>>Yes</option>
                                                                         <option value="2" <?= $patient['heartburn_indigestion'] == "2" ? 'selected' : '' ?>>No</option>
@@ -5704,7 +5705,7 @@ if ($user->isLoggedIn()) {
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label for="swelling">O. Swelling (changes of existing swelling):</label>
-                                                                    <select class="form-control" name="swelling" id="swelling">
+                                                                    <select class="form-control" name="swelling" id="swelling" required>
                                                                         <option value="">Select</option>
                                                                         <option value="1" <?= $patient['swelling'] == "1" ? 'selected' : '' ?>>Yes</option>
                                                                         <option value="2" <?= $patient['swelling'] == "2" ? 'selected' : '' ?>>No</option>
@@ -5714,7 +5715,7 @@ if ($user->isLoggedIn()) {
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label for="pv_bleeding">P. Abnormal PV bleeding:</label>
-                                                                    <select class="form-control" name="pv_bleeding" id="pv_bleeding">
+                                                                    <select class="form-control" name="pv_bleeding" id="pv_bleeding" required>
                                                                         <option value="">Select</option>
                                                                         <option value="1" <?= $patient['pv_bleeding'] == "1" ? 'selected' : '' ?>>Yes</option>
                                                                         <option value="2" <?= $patient['pv_bleeding'] == "2" ? 'selected' : '' ?>>No</option>
@@ -5727,7 +5728,7 @@ if ($user->isLoggedIn()) {
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label for="pv_discharge">Q. Abnormal PV discharge:</label>
-                                                                    <select class="form-control" name="pv_discharge" id="pv_discharge">
+                                                                    <select class="form-control" name="pv_discharge" id="pv_discharge" required>
                                                                         <option value="">Select</option>
                                                                         <option value="1" <?= $patient['pv_discharge'] == "1" ? 'selected' : '' ?>>Yes</option>
                                                                         <option value="2" <?= $patient['pv_discharge'] == "2" ? 'selected' : '' ?>>No</option>
@@ -5737,7 +5738,7 @@ if ($user->isLoggedIn()) {
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label for="micitrition">R. Abnormal micitrition habits:</label>
-                                                                    <select class="form-control" name="micitrition" id="micitrition">
+                                                                    <select class="form-control" name="micitrition" id="micitrition" required>
                                                                         <option value="">Select</option>
                                                                         <option value="1" <?= $patient['micitrition'] == "1" ? 'selected' : '' ?>>Yes</option>
                                                                         <option value="2" <?= $patient['micitrition'] == "2" ? 'selected' : '' ?>>No</option>
@@ -5747,7 +5748,7 @@ if ($user->isLoggedIn()) {
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label for="convulsions">S. Convulsions:</label>
-                                                                    <select class="form-control" name="convulsions" id="convulsions">
+                                                                    <select class="form-control" name="convulsions" id="convulsions" required>
                                                                         <option value="">Select</option>
                                                                         <option value="1" <?= $patient['convulsions'] == "1" ? 'selected' : '' ?>>Yes</option>
                                                                         <option value="2" <?= $patient['convulsions'] == "2" ? 'selected' : '' ?>>No</option>
@@ -5757,7 +5758,7 @@ if ($user->isLoggedIn()) {
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label for="blood_urine">T. Blood in urine:</label>
-                                                                    <select class="form-control" name="blood_urine" id="blood_urine">
+                                                                    <select class="form-control" name="blood_urine" id="blood_urine" required>
                                                                         <option value="">Select</option>
                                                                         <option value="1" <?= $patient['blood_urine'] == "1" ? 'selected' : '' ?>>Yes</option>
                                                                         <option value="2" <?= $patient['blood_urine'] == "2" ? 'selected' : '' ?>>No</option>
@@ -5770,7 +5771,7 @@ if ($user->isLoggedIn()) {
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="symptoms_other">U. Other symptoms:</label>
-                                                                    <select class="form-control" name="symptoms_other" id="symptoms_other">
+                                                                    <select class="form-control" name="symptoms_other" id="symptoms_other" required>
                                                                         <option value="">Select</option>
                                                                         <option value="1" <?= $patient['symptoms_other'] == "1" ? 'selected' : '' ?>>Yes</option>
                                                                         <option value="2" <?= $patient['symptoms_other'] == "2" ? 'selected' : '' ?>>No</option>
