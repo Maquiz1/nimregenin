@@ -5846,7 +5846,7 @@ if ($user->isLoggedIn()) {
 
                                                 <div class="form-group">
                                                     <label for="crf3_cmpltd_date">Date of Completion:</label>
-                                                    <input type="text" class="form-control" name="crf3_cmpltd_date" id="crf3_cmpltd_date" value="<?= $patient['crf3_cmpltd_date'] ?>">
+                                                    <input type="date" class="form-control" name="crf3_cmpltd_date" id="crf3_cmpltd_date" value="<?= $patient['crf3_cmpltd_date'] ?>">
                                                 </div>
                                             </div>
 
