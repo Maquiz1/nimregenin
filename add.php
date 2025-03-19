@@ -5525,6 +5525,9 @@ if ($user->isLoggedIn()) {
                             // $staff = $override->getNews('user', 'status', 1, 'id', $_GET['staff_id'])[0];
                             // $site = $override->get('site', 'id', $staff['site_id'])[0];
                             $position = $override->get('position', 'id', $_GET['position_id'])[0];
+                            // print_r($patient);
+                            // print_r($_POST);
+
                             ?>
                             <!-- right column -->
                             <div class="col-md-12">
@@ -5543,7 +5546,7 @@ if ($user->isLoggedIn()) {
                                                 <!-- Date Section -->
                                                 <div class="form-group">
                                                     <label for="crf3_date">Date:</label>
-                                                    <input type="date" class="form-control" name="crf3_date" id="crf3_date" value="<?= $patient['crf3_date'] ?>" placeholder="Example: 2023-01-01" required>
+                                                    <input type="date" class="form-control" name="crf3_date" id="crf3_date" value="<?php if($patient['crf3_date']){ print_r($patient['crf3_date']); } ?>" placeholder="Example: 2023-01-01" required>
                                                 </div>
 
                                                 <!-- Clinical Symptoms Section -->
@@ -5799,7 +5802,7 @@ if ($user->isLoggedIn()) {
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
                                                                         <label for="adherence">1. Do you take NIMREGENIN as advised (i.e., daily)?:</label>
-                                                                        <select class="form-control" name="adherence" id="adherence">
+                                                                        <select class="form-control" name="adherence" id="adherence" required>
                                                                             <option value="">Select</option>
                                                                             <option value="1" <?= $patient['adherence'] == "1" ? 'selected' : '' ?>>Yes</option>
                                                                             <option value="2" <?= $patient['adherence'] == "2" ? 'selected' : '' ?>>No</option>
@@ -5825,7 +5828,7 @@ if ($user->isLoggedIn()) {
                                                     <div class="card-body">
                                                         <div class="form-group">
                                                             <label for="herbal_medication">Have you taken any herbal medication?</label>
-                                                            <select class="form-control" name="herbal_medication" id="herbal_medication">
+                                                            <select class="form-control" name="herbal_medication" id="herbal_medication" required>
                                                                 <option value="">Select</option>
                                                                 <option value="1" <?= $patient['herbal_medication'] == "1" ? 'selected' : '' ?>>Yes</option>
                                                                 <option value="2" <?= $patient['herbal_medication'] == "2" ? 'selected' : '' ?>>No</option>
@@ -5852,7 +5855,7 @@ if ($user->isLoggedIn()) {
 
                                             <div class="card-footer">
                                                 <input type="hidden" name="id" value="<?= $patient['id'] ?>">
-                                                <button type="submit" name="add_crf3" class="btn btn-primary">Submit</button>
+                                                <input type="submit" name="add_crf3" value="Submit" class="btn btn-primary">
                                                 <a href="index1.php" class="btn btn-default">Cancel</a>
                                             </div>
                                         </div>
