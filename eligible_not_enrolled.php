@@ -8,16 +8,16 @@ $random = new Random();
 
 if ($user->isLoggedIn()) {
     try {
-        $site = 2;
+        $site_id =;
 
-        $eligible_counts = $override->eligible_counts($site);
-        $eligible = $override->eligible($site);
+        $eligible_counts = $override->eligible_counts($site_id);
+        $eligible = $override->eligible($site_id);
 
-        $eligible_enrolled_counts = $override->eligible_enrolled_counts($site);
-        $eligible_enrolled = $override->eligible_enrolled($site);
+        $eligible_enrolled_counts = $override->eligible_enrolled_counts($site_id);
+        $eligible_enrolled = $override->eligible_enrolled($site_id);
 
-        $eligible_not_enrolled_counts = $override->eligible_not_enrolled_counts($site);
-        $eligible_not_enrolled = $override->eligible_not_enrolled($site);
+        $eligible_not_enrolled_counts = $override->eligible_not_enrolled_counts($site_id);
+        $eligible_not_enrolled = $override->eligible_not_enrolled($site_id);
 
 
 
@@ -29,7 +29,13 @@ if ($user->isLoggedIn()) {
     Redirect::to('index.php');
 }
 
-$title = 'ORCI - Eligible Clients but not enrolled ' . date('Y-m-d');
+if($site_id==1){
+    $title = 'MNH - Eligible Clients but not enrolled ' . date('Y-m-d');
+}elseif($site_id==2){        
+    $title = 'ORCI - Eligible Clients but not enrolled ' . date('Y-m-d');
+}else{
+    $title = 'All Sites - Eligible Clients but not enrolled ' . date('Y-m-d');
+}
 
 $pdf = new Pdf();
 
@@ -42,12 +48,12 @@ $output = ' ';
 $output .= '
     <table width="100%" border="1" cellpadding="5" cellspacing="0">
                 <tr>
-                    <td colspan="21" align="center" style="font-size: 18px">
+                    <td colspan="23" align="center" style="font-size: 18px">
                         <b>' . $title . '</b>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="21" align="center" style="font-size: 18px">
+                    <td colspan="23" align="center" style="font-size: 18px">
                         <b>Total Eligible ( ' . $eligible_counts . ' ):  Total Enrolled( ' . $eligible_enrolled_counts . ' ):  Not Enrolled( ' . $eligible_not_enrolled_counts . ' )</b>
                     </td>
                 </tr>    
@@ -62,6 +68,7 @@ $output .= '
                     <th colspan="2">EXCLUSION</th>        
                     <th colspan="2">ELIGIBILTY</th>   
                     <th colspan="2">ENROLLMENT</th>   
+                    <th colspan="2">SITE</th>   
                     <th colspan="2">STATUS</th>   
                 </tr>
     
@@ -106,12 +113,12 @@ foreach ($eligible_not_enrolled as $client) {
     $screening = $override->get('screening', 'client_id', $client['id'])[0];
 
 
-    if ($site == 1) {
+    if ($client['site_id'] == 1) {
         $site = 'MNH';
-    }else if ($site == 2) {
+    }else if ($client['site_id'] == 2) {
         $site = 'ORCI';
     } else {
-        $site = 'No Site Asigned';
+        $site = 'NOT Active';
     }
 
     if ($client['status'] == 1) {
@@ -135,6 +142,7 @@ foreach ($eligible_not_enrolled as $client) {
             <td colspan="2">' . $eligibility2 . '</td>
             <td colspan="2">' . $eligible . '</td>
             <td colspan="2">' . $enrolled . '</td>
+            <td colspan="2">' . $site . '</td>
             <td colspan="2">' . $status . '</td>
         </tr>
         ';
