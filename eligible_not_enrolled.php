@@ -8,7 +8,7 @@ $random = new Random();
 
 if ($user->isLoggedIn()) {
     try {
-        $site_id =;
+        $site_id =1;
 
         $eligible_counts = $override->eligible_counts($site_id);
         $eligible = $override->eligible($site_id);

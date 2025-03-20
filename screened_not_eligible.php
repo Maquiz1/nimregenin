@@ -10,14 +10,14 @@ if ($user->isLoggedIn()) {
     try {
         $site_id =1;
 
+        $screened_counts = $override->screened_counts($site_id);
+        $screened = $override->screened($site_id);
+
         $eligible_counts = $override->eligible_counts($site_id);
         $eligible = $override->eligible($site_id);
 
-        $eligible_enrolled_counts = $override->eligible_enrolled_counts($site_id);
-        $eligible_enrolled = $override->eligible_enrolled($site_id);
-
-        $eligible_not_enrolled_counts = $override->eligible_not_enrolled_counts($site_id);
-        $eligible_not_enrolled = $override->eligible_not_enrolled($site_id);
+        $not_eligible_counts = $override->not_eligible_counts($site_id);
+        $not_eligible = $override->not_eligible($site_id);
 
         $successMessage = 'Report Successful Created';
     } catch (Exception $e) {
@@ -28,11 +28,11 @@ if ($user->isLoggedIn()) {
 }
 
 if($site_id==1){
-    $title = 'MNH - Eligible Clients but not enrolled ' . date('Y-m-d');
+    $title = 'MNH - Screend Clients but not Eligible ' . date('Y-m-d');
 }elseif($site_id==2){        
-    $title = 'ORCI - Eligible Clients but not enrolled ' . date('Y-m-d');
+    $title = 'ORCI - Screend Clients but not Eligible ' . date('Y-m-d');
 }else{
-    $title = 'All Sites - Eligible Clients but not enrolled ' . date('Y-m-d');
+    $title = 'All Sites - Screend Clients but not Eligible ' . date('Y-m-d');
 }
 
 $pdf = new Pdf();
@@ -46,13 +46,13 @@ $output = ' ';
 $output .= '
     <table width="100%" border="1" cellpadding="5" cellspacing="0">
                 <tr>
-                    <td colspan="23" align="center" style="font-size: 18px">
+                    <td colspan="25" align="center" style="font-size: 18px">
                         <b>' . $title . '</b>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="23" align="center" style="font-size: 18px">
-                        <b>Total Eligible ( ' . $eligible_counts . ' ):  Total Enrolled( ' . $eligible_enrolled_counts . ' ):  Not Enrolled( ' . $eligible_not_enrolled_counts . ' )</b>
+                    <td colspan="25" align="center" style="font-size: 18px">
+                        <b>Total Screened ( ' . $screened_counts . ' ):  Eligible( ' . $eligible_counts . ' ):  Not Eligible( ' . $not_eligible_counts . ' ) </b>
                     </td>
                 </tr>    
                 <tr>
@@ -61,20 +61,21 @@ $output .= '
                     <th colspan="2">ID NUMBER</th>
                     <th colspan="2">First Name</th>
                     <th colspan="2">Middle Name</th>
-                    <th colspan="2">Last Name</th>                 
-                    <th colspan="2">INCLUSION</th>        
-                    <th colspan="2">EXCLUSION</th>        
-                    <th colspan="2">ELIGIBILTY</th>   
-                    <th colspan="2">ENROLLMENT</th>   
+                    <th colspan="2">Last Name</th>  
+                    <th colspan="2">SCREE NING</th>                                
+                    <th colspan="2">INCLU SION</th>        
+                    <th colspan="2">EXCLU SION</th>        
+                    <th colspan="2">ELIGI BILTY</th>   
+                    <th colspan="2">ENROLL MENT</th>   
                     <th colspan="2">SITE</th>   
-                    <th colspan="2">STATUS</th>   
+                    <th colspan="2">STA TUS</th>   
                 </tr>
     
      ';
 
 // Load HTML content into dompdf
 $x = 1;
-foreach ($eligible_not_enrolled as $client) {
+foreach ($not_eligible as $client) {
     if ($client['eligibility1'] == 1) {
         $eligibility1 = 'ELIGIBLE';
     } else if ($client['eligibility1'] == 2) {
@@ -127,6 +128,14 @@ foreach ($eligible_not_enrolled as $client) {
         $status = 'NOT Active';
     }
 
+    if ($client['screened'] == 1) {
+        $screened = 'DONE';
+    }else if ($client['screened'] == 2) {
+        $screened = 'NOT DONE';
+    } else {
+        $screened = 'NOT FOUND';
+    }
+
 
     $output .= '
          <tr>
@@ -136,6 +145,7 @@ foreach ($eligible_not_enrolled as $client) {
             <td colspan="2">' . $client['firstname'] . '</td>
             <td colspan="2">' . $client['middlename'] . '</td>
             <td colspan="2">' . $client['lastname'] . '</td>
+            <td colspan="2">' . $screened . '</td>
             <td colspan="2">' . $eligibility1 . '</td>
             <td colspan="2">' . $eligibility2 . '</td>
             <td colspan="2">' . $eligible . '</td>
