@@ -8,7 +8,7 @@ $random = new Random();
 
 if ($user->isLoggedIn()) {
     try {
-        $site_id =1;
+        $site_id =2;
 
         $screened_counts = $override->screened_counts($site_id);
         $screened = $override->screened($site_id);
@@ -84,14 +84,6 @@ foreach ($not_eligible as $client) {
         $eligibility1 = 'NOT DONE';
     }
 
-    if ($client['eligible'] == 1) {
-        $eligible = 'ELIGIBLE';
-    } else if ($client['eligible'] == 2) {
-        $eligible = 'NOT ELIGIBLE';
-    } else {
-        $eligible = 'NOT DONE';
-    }
-
 
     if ($client['eligibility2'] == 1) {
         $eligibility2 = 'ELIGIBLE';
@@ -99,6 +91,14 @@ foreach ($not_eligible as $client) {
         $eligibility2 = 'NOT ELIGIBLE';
     } else {
         $eligibility2 = 'NOT DONE';
+    }
+
+    if ($client['eligible'] == 1) {
+        $eligible = 'ELIGIBLE';
+    } else if ($client['eligible'] == 2) {
+        $eligible = 'NOT ELIGIBLE';
+    } else {
+        $eligible = 'NOT DONE';
     }
 
     if ($client['enrolled'] == 1) {
