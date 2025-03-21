@@ -47,8 +47,6 @@ if ($user->isLoggedIn()) {
 //     $title = 'Supplies';
 // }
 
-
-
 $title = 'NIMREGENIN SUMMARY REPORT_' . date('Y-m-d');
 
 $pdf = new Pdf();

@@ -22,6 +22,14 @@ $GLOBALS['config'] = array(
 spl_autoload_register(function($class){
 	require_once 'php/classes/'.$class.'.php';
 });
+
+// Include Dompdf dependencies
+require_once 'dompdf/lib/php-font-lib/src/FontLib/Autoloader.php';
+require_once 'dompdf/lib/php-svg-lib/src/autoload.php';
+require_once 'dompdf/src/Autoloader.php';
+
+Dompdf\Autoloader::register();
+
 date_default_timezone_set("Africa/Dar_es_Salaam");
 include_once 'php/functions/sanitize.php';
 include_once 'php/classes/OverideData.php';
