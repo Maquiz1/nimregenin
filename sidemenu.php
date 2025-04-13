@@ -427,7 +427,7 @@ if ($user->isLoggedIn()) {
                     </a>
                     <ul class="nav nav-treeview">                
                         <li class="nav-item">
-                            <a href="report.php" class="nav-link">
+                            <a href="report_summary.php" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <span class="badge badge-info right"></span>
                                 <p>Summary</p>
