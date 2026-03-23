@@ -2,10 +2,16 @@
 session_start();
 
 $GLOBALS['config'] = array(
+//   'mysql' => array(
+//       'host' => '41.59.228.21',
+//       'username' => 'maquiz',
+//       'password' => '@Subaru@2025',
+//       'db' => 'nimregenin'
+//   	),
   'mysql' => array(
       'host' => 'localhost',
       'username' => 'root',
-      'password' => 'Data@2020',
+      'password' => '',
       'db' => 'nimregenin'
   	),
   'remember' =>array(

@@ -8,7 +8,7 @@ $random = new Random();
 
 if ($user->isLoggedIn()) {
     try {
-        $site_id =2;
+        $site_id =1;
 
         $screened_counts = $override->screened_counts($site_id);
         $screened = $override->screened($site_id);

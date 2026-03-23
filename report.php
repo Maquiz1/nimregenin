@@ -63,14 +63,23 @@ if ($site_data) {
     $x = 1;
     foreach ($site_data as $row) {
         $registered = $override->countData('clients', 'status', 1, 'site_id', $row['id']);
+        $registeredTotal = $override->getCount('clients', 'status', 1);
         $screened = $override->countData2('clients', 'status', 1, 'screened', 1, 'site_id', $row['id']);
+        $screenedTotal = $override->countData('clients', 'status', 1, 'screened', 1);
         $eligible = $override->countData2('clients', 'status', 1, 'eligible', 1, 'site_id', $row['id']);
+        $eligibleTotal = $override->countData('clients', 'status', 1, 'eligible', 1);
         $enrolled = $override->countData2('clients', 'status', 1, 'enrolled', 1, 'site_id', $row['id']);
+        $enrolledTotal = $override->countData('clients', 'status', 1, 'enrolled', 1);
         $end_study = $override->countData2('clients', 'status', 1, 'end_study', 1, 'site_id', $row['id']);
+        $end_studyTotal = $override->countData('clients', 'status', 1, 'end_study', 1);
         $breast_cancer = $override->countData2('screening', 'status', 1, 'breast_cancer', 1, 'site_id', $row['id']);
+        $breast_cancerTotal = $override->countData('screening', 'status', 1, 'breast_cancer', 1);
         $brain_cancer = $override->countData2('screening', 'status', 1, 'brain_cancer', 1, 'site_id', $row['id']);
+        $brain_cancerTotal = $override->countData('screening', 'status', 1, 'brain_cancer', 1);
         $cervical_cancer = $override->countData2('screening', 'status', 1, 'cervical_cancer', 1, 'site_id', $row['id']);
+        $cervical_cancerTotal = $override->countData('screening', 'status', 1, 'cervical_cancer', 1);
         $prostate_cancer = $override->countData2('screening', 'status', 1, 'prostate_cancer', 1, 'site_id', $row['id']);
+        $prostate_cancerTotal = $override->countData('screening', 'status', 1, 'prostate_cancer', 1);
 
         $output .= '
             <tr>
@@ -90,6 +99,23 @@ if ($site_data) {
 
         $x++;
     }
+
+    $output .= '
+                <tr>
+                    <td align="right" colspan="2"><b>Total</b></td>
+                    <td align="right"><b>' . $registeredTotal . '</b></td>
+                    <td align="right"><b>' . $screenedTotal . '</b></td>
+                    <td align="right"><b>' . $eligibleTotal . '</b></td>
+                    <td align="right"><b>' . $enrolledTotal . '</b></td>
+                    <td align="right"><b>' . $end_studyTotal . '</b></td>
+                    <td align="right"><b>' . $breast_cancerTotal . '</b></td>
+                    <td align="right"><b>' . $brain_cancerTotal . '</b></td>
+                    <td align="right"><b>' . $cervical_cancerTotal . '</b></td>
+                    <td align="right"><b>' . $prostate_cancerTotal . '</b></td>
+                </tr>
+
+    '
+    ;
 
     $output .= '
             </table>

@@ -1888,7 +1888,7 @@ if ($user->isLoggedIn()) {
                                                     $position = $override->getNews('position', 'status', 1, 'id', $staff['position'])[0];
                                                     $sites = $override->getNews('site', 'status', 1, 'id', $staff['site_id'])[0];
 
-                                                    ?>
+                                                ?>
                                                     <tr>
                                                         <td>
                                                             <?= $x; ?>
@@ -2103,7 +2103,7 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
 
-                                                    <?php $x++;
+                                                <?php $x++;
                                                 } ?>
                                             </tbody>
                                             <tfoot>
@@ -2125,27 +2125,27 @@ if ($user->isLoggedIn()) {
                                         <ul class="pagination pagination-sm m-0 float-right">
                                             <li class="page-item">
                                                 <a class="page-link" href="info.php?id=1&status=<?= $_GET['status'] ?>site_id=<?= $_GET['site_id'] ?>&page=<?php if (($_GET['page'] - 1) > 0) {
-                                                        echo $_GET['page'] - 1;
-                                                    } else {
-                                                        echo 1;
-                                                    } ?>">&laquo;
+                                                                                                                                                                echo $_GET['page'] - 1;
+                                                                                                                                                            } else {
+                                                                                                                                                                echo 1;
+                                                                                                                                                            } ?>">&laquo;
                                                 </a>
                                             </li>
                                             <?php for ($i = 1; $i <= $pages; $i++) { ?>
                                                 <li class="page-item">
                                                     <a class="page-link <?php if ($i == $_GET['page']) {
-                                                        echo 'active';
-                                                    } ?>"
+                                                                            echo 'active';
+                                                                        } ?>"
                                                         href="info.php?id=1&status=<?= $_GET['status'] ?>&site_id=<?= $_GET['site_id'] ?>&page=<?= $i ?>"><?= $i ?>
                                                     </a>
                                                 </li>
                                             <?php } ?>
                                             <li class="page-item">
                                                 <a class="page-link" href="info.php?id=1&status=<?= $_GET['status'] ?>&site_id=<?= $_GET['site_id'] ?>&page=<?php if (($_GET['page'] + 1) <= $pages) {
-                                                        echo $_GET['page'] + 1;
-                                                    } else {
-                                                        echo $i - 1;
-                                                    } ?>">&raquo;
+                                                                                                                                                                echo $_GET['page'] + 1;
+                                                                                                                                                            } else {
+                                                                                                                                                                echo $i - 1;
+                                                                                                                                                            } ?>">&raquo;
                                                 </a>
                                             </li>
                                         </ul>
@@ -2247,7 +2247,7 @@ if ($user->isLoggedIn()) {
                                                     $position = $override->getNews('position', 'status', 1, 'id', $staff['position'])[0];
                                                     $access_level = $override->getNews('site', 'status', 1, 'id', $staff['site_id'])[0];
 
-                                                    ?>
+                                                ?>
                                                     <tr>
                                                         <td>
                                                             <?= $x; ?>
@@ -2265,7 +2265,7 @@ if ($user->isLoggedIn()) {
                                                                 class="btn btn-danger" data-toggle="modal">Delete</a>
                                                         </td>
                                                     </tr>
-                                                    <?php $x++;
+                                                <?php $x++;
                                                 } ?>
                                             </tbody>
                                             <tfoot>
@@ -2284,27 +2284,27 @@ if ($user->isLoggedIn()) {
                                         <ul class="pagination pagination-sm m-0 float-right">
                                             <li class="page-item">
                                                 <a class="page-link" href="info.php?id=2&status=<?= $_GET['status'] ?>site_id=<?= $_GET['site_id'] ?>&page=<?php if (($_GET['page'] - 1) > 0) {
-                                                        echo $_GET['page'] - 1;
-                                                    } else {
-                                                        echo 1;
-                                                    } ?>">&laquo;
+                                                                                                                                                                echo $_GET['page'] - 1;
+                                                                                                                                                            } else {
+                                                                                                                                                                echo 1;
+                                                                                                                                                            } ?>">&laquo;
                                                 </a>
                                             </li>
                                             <?php for ($i = 1; $i <= $pages; $i++) { ?>
                                                 <li class="page-item">
                                                     <a class="page-link <?php if ($i == $_GET['page']) {
-                                                        echo 'active';
-                                                    } ?>"
+                                                                            echo 'active';
+                                                                        } ?>"
                                                         href="info.php?id=2&status=<?= $_GET['status'] ?>&site_id=<?= $_GET['site_id'] ?>&page=<?= $i ?>"><?= $i ?>
                                                     </a>
                                                 </li>
                                             <?php } ?>
                                             <li class="page-item">
                                                 <a class="page-link" href="info.php?id=2&status=<?= $_GET['status'] ?>&site_id=<?= $_GET['site_id'] ?>&page=<?php if (($_GET['page'] + 1) <= $pages) {
-                                                        echo $_GET['page'] + 1;
-                                                    } else {
-                                                        echo $i - 1;
-                                                    } ?>">&raquo;
+                                                                                                                                                                echo $_GET['page'] + 1;
+                                                                                                                                                            } else {
+                                                                                                                                                                echo $i - 1;
+                                                                                                                                                            } ?>">&raquo;
                                                 </a>
                                             </li>
                                         </ul>
@@ -2344,23 +2344,23 @@ if ($user->isLoggedIn()) {
                                     <?php
                                     if ($_GET['status'] == 1) {
                                         echo $title = 'Screening for ' . $Site;
-                                        ?>
-                                        <?php
+                                    ?>
+                                    <?php
                                     } elseif ($_GET['status'] == 2) {
                                         echo $title = 'Eligibility  for ' . $Site;
-                                        ?>
-                                        <?php
+                                    ?>
+                                    <?php
                                     } elseif ($_GET['status'] == 3) {
                                         echo $title = 'Enrollment for ' . $Site;
-                                        ?>
-                                        <?php
+                                    ?>
+                                    <?php
                                     } elseif ($_GET['status'] == 4) {
                                         echo $title = 'Termination for ' . $Site;
-                                        ?>
-                                        <?php
+                                    ?>
+                                    <?php
                                     } elseif ($_GET['status'] == 5) {
                                         echo $title = 'Registration for ' . $Site; ?>
-                                        <?php
+                                    <?php
                                     } ?>
                                 </h1>
                             </div>
@@ -2643,7 +2643,7 @@ if ($user->isLoggedIn()) {
                                                 $patient = $override->get('clients', 'id', $_GET['cid'])[0];
 
                                                 // $visits_status = $override->firstRow1('visit', 'status', 'id', 'client_id', $_GET['cid'], 'visit_code', 'EV')[0]['status'];
-                                            
+
                                                 // $patient = $override->get('clients', 'id', $_GET['cid'])[0];
                                                 $category = $override->get('clients', 'id', $_GET['cid'])[0];
                                                 $cat = '';
@@ -2673,27 +2673,27 @@ if ($user->isLoggedIn()) {
                                                     <h3 class="card-title">List of Screened Clients for <?= $Site; ?></h3>
                                                     &nbsp;&nbsp;
                                                     <span class="badge badge-info right"><?= $screened; ?></span>
-                                                    <?php
+                                                <?php
                                                 } elseif ($_GET['status'] == 2) { ?>
                                                     <h3 class="card-title">List of Eligible Clients for <?= $Site; ?></h3>
                                                     &nbsp;&nbsp;
                                                     <span class="badge badge-info right"><?= $eligible; ?></span>
-                                                    <?php
+                                                <?php
                                                 } elseif ($_GET['status'] == 3) { ?>
                                                     <h3 class="card-title">List of Enrolled Clients for <?= $Site; ?></h3>
                                                     &nbsp;&nbsp;
                                                     <span class="badge badge-info right"><?= $enrolled; ?></span>
-                                                    <?php
+                                                <?php
                                                 } elseif ($_GET['status'] == 4) { ?>
                                                     <h3 class="card-title">List of Terminated Clients for <?= $Site; ?></h3>
                                                     &nbsp;&nbsp;
                                                     <span class="badge badge-info right"><?= $end; ?></span>
-                                                    <?php
+                                                <?php
                                                 } elseif ($_GET['status'] == 5) { ?>
                                                     <h3 class="card-title">List of Registered Clients for <?= $Site; ?></h3>
                                                     &nbsp;&nbsp;
                                                     <span class="badge badge-info right"><?= $registered; ?></span>
-                                                    <?php
+                                                <?php
                                                 } elseif ($_GET['status'] == 7) { ?>
                                                     <h3 class="card-title">List of Registered Clients for <?= $Site; ?></h3>
                                                     &nbsp;&nbsp;
@@ -2712,7 +2712,7 @@ if ($user->isLoggedIn()) {
 
                                             <?php
                                             if ($user->data()->accessLevel == 1 || $user->data()->accessLevel == 3) {
-                                                ?>
+                                            ?>
                                                 <div class="card-tools">
                                                     <div class="input-group input-group-sm float-left" style="width: 350px;">
                                                         <form method="post">
@@ -2826,7 +2826,7 @@ if ($user->isLoggedIn()) {
 
 
                                                 // $category = 0;
-                                        
+
                                                 // if ($type['cardiac'] == 1) {
                                                 //     $category =  $override->countData('cardiac', 'patient_id', $client['id'], 'status', 1);
                                                 // } elseif ($type['diabetes'] == 1) {
@@ -2836,7 +2836,7 @@ if ($user->isLoggedIn()) {
                                                 // } else {
                                                 //     $category = 0;
                                                 // }
-                                        
+
 
                                                 $crf1 = $override->countData('crf1', 'patient_id', $client['id'], 'status', 1);
                                                 $crf2 = $override->countData('crf2', 'patient_id', $client['id'], 'status', 1);
@@ -2872,7 +2872,7 @@ if ($user->isLoggedIn()) {
                                                 }
 
                                                 $client_progress = intval(intval($Total_CRF_available) / intval($Total_CRF_required) * 100);
-                                                ?>
+                                            ?>
                                                 <tr>
                                                     <!-- <td><input type="checkbox" name="checkbox" /></td> -->
                                                     <td><?= $x ?></td>
@@ -2934,7 +2934,7 @@ if ($user->isLoggedIn()) {
                                                             <td>
                                                                 <a href="#" class="btn btn-danger">Not Eligible</a>
                                                             </td>
-                                                        <?php }
+                                                    <?php }
                                                     } ?>
 
                                                     <?php if ($_GET['status'] == 1) { ?>
@@ -2947,7 +2947,7 @@ if ($user->isLoggedIn()) {
                                                             <td>
                                                                 <a href="#" class="btn btn-danger">Not Eligible</a>
                                                             </td>
-                                                        <?php }
+                                                    <?php }
                                                     } ?>
 
                                                     <?php if ($_GET['status'] == 2) { ?>
@@ -2960,7 +2960,7 @@ if ($user->isLoggedIn()) {
                                                             <td>
                                                                 <a href="#" class="btn btn-danger">Not Enrolled</a>
                                                             </td>
-                                                        <?php }
+                                                    <?php }
                                                     } ?>
 
                                                     <?php if ($_GET['status'] == 3) { ?>
@@ -2973,7 +2973,7 @@ if ($user->isLoggedIn()) {
                                                             <td>
                                                                 <a href="#" class="btn btn-danger">Not Enrolled</a>
                                                             </td>
-                                                        <?php }
+                                                    <?php }
                                                     } ?>
 
                                                     <?php if ($_GET['status'] == 4) { ?>
@@ -2992,17 +2992,17 @@ if ($user->isLoggedIn()) {
                                                                 <td>
                                                                     <a href="#" class="btn btn-info">Reported Dead</a>
                                                                 </td>
-                                                                <?php
+                                                            <?php
                                                             } elseif ($end_study['withdrew_consent'] == 1) { ?>
                                                                 <td>
                                                                     <a href="#" class="btn btn-info">Withdrew Consent</a>
                                                                 </td>
-                                                                <?php
+                                                            <?php
                                                             } else { ?>
                                                                 <td>
                                                                     <a href="#" class="btn btn-info">Other</a>
                                                                 </td>
-                                                                <?php
+                                                            <?php
                                                             } ?>
 
                                                             <!-- <td>
@@ -3012,7 +3012,7 @@ if ($user->isLoggedIn()) {
                                                             <td>
                                                                 <a href="#" class="btn btn-success">ACTIVE</a>
                                                             </td>
-                                                        <?php }
+                                                    <?php }
                                                     } ?>
 
                                                     <?php if ($_GET['status'] == 5 || $_GET['status'] == 6 || $_GET['status'] == 7 || $_GET['status'] == 8) { ?>
@@ -3025,7 +3025,7 @@ if ($user->isLoggedIn()) {
                                                             <td>
                                                                 <a href="#" class="btn btn-danger">NOT SCREENED</a>
                                                             </td>
-                                                        <?php }
+                                                    <?php }
                                                     } ?>
 
                                                     <td>
@@ -3062,7 +3062,7 @@ if ($user->isLoggedIn()) {
                                                             <hr>
                                                             <?php
                                                             //  if ($screened == 1) {
-                                                
+
                                                             ?>
                                                             <?php if ($screening1 >= 1) { ?>
                                                                 <a href="#addInclusion<?= $client['id'] ?>" role="button"
@@ -3082,11 +3082,11 @@ if ($user->isLoggedIn()) {
                                                                 <a href="#addExclusion<?= $client['id'] ?>" role="button"
                                                                     class="btn btn-warning" data-toggle="modal">Add Exclusion</a>
 
-                                                                <?php
+                                                        <?php
                                                             }
-                                                        // }
-                                                    }
-                                                    ?>
+                                                            // }
+                                                        }
+                                                        ?>
                                                         <?php if ($_GET['status'] == 2) { ?>
                                                             <?php if ($eligible == 1) { ?>
                                                                 <?php if ($visit >= 1) { ?>
@@ -3096,7 +3096,7 @@ if ($user->isLoggedIn()) {
                                                                     <a href="#addEnrollment<?= $client['id'] ?>" role="button"
                                                                         class="btn btn-warning" data-toggle="modal">Add Enrollment</a>
 
-                                                                <?php }
+                                                            <?php }
                                                             } ?>
                                                         <?php } ?>
                                                         <?php if ($visit >= 1) { ?>
@@ -3168,267 +3168,215 @@ if ($user->isLoggedIn()) {
                                                                             ?>
                                                                         </span>
                                                                     <?php } ?>
-                                                                <?php }
+                                                        <?php }
                                                             }
                                                         } ?>
                                                     </td>
                                                 </tr>
-                                                <div class="modal fade" id="clientView<?= $client['id'] ?>" tabindex="-1"
-                                                    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <form method="post">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <button type="button" class="close"
-                                                                        data-dismiss="modal"><span
-                                                                            aria-hidden="true">&times;</span><span
-                                                                            class="sr-only">Close</span></button>
-                                                                    <h4>Edit Client View</h4>
-                                                                </div>
-                                                                <div class="modal-body modal-body-np">
-                                                                    <div class="row">
-                                                                        <div class="block-fluid">
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="col-md-2">Study</div>
-                                                                                <div class="col-md-6">
-                                                                                    <select name="position" style="width: 100%;"
-                                                                                        disabled>
-                                                                                        <?php foreach ($override->getData('study') as $study) { ?>
-                                                                                            <option value="<?= $study['id'] ?>">
-                                                                                                <?= $study['name'] ?>
-                                                                                            </option>
-                                                                                        <?php } ?>
-                                                                                    </select>
+                                                <div class="modal fade" id="clientView<?= $client['id'] ?>" tabindex="-1">
+                                                    <div class="modal-dialog modal-xl">
+                                                        <div class="modal-content shadow-lg border-0">
+
+                                                            <!-- HEADER -->
+                                                            <div class="modal-header bg-primary text-white">
+                                                                <h5 class="modal-title">Client Details</h5>
+                                                                <button type="button" class="btn-close btn-close-white" data-dismiss="modal"></button>
+                                                            </div>
+
+                                                            <!-- BODY -->
+                                                            <div class="modal-body bg-light">
+
+                                                                <form>
+
+                                                                    <!-- STUDY + IMAGE -->
+                                                                    <div class="row mb-3 align-items-center">
+                                                                        <div class="col-md-8">
+                                                                            <label class="fw-bold">Study</label>
+                                                                            <select class="form-control" disabled>
+                                                                                <?php foreach ($override->getData('study') as $study) { ?>
+                                                                                    <option value="<?= $study['id'] ?>">
+                                                                                        <?= $study['name'] ?>
+                                                                                    </option>
+                                                                                <?php } ?>
+                                                                            </select>
+                                                                        </div>
+
+                                                                        <div class="col-md-4 text-center">
+                                                                            <img src="<?= $img ?>" class="img-thumbnail shadow-sm" style="max-height:120px;">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!-- BASIC INFO -->
+                                                                    <div class="card mb-3">
+                                                                        <div class="card-header bg-secondary text-white">Basic Information</div>
+                                                                        <div class="card-body">
+                                                                            <div class="row">
+
+                                                                                <div class="col-md-4 mb-2">
+                                                                                    <label>Participant ID</label>
+                                                                                    <input class="form-control" value="<?= $client['participant_id'] ?>" disabled>
                                                                                 </div>
-                                                                                <div class="col-md-4 pull-right">
-                                                                                    <img src="<?= $img ?>" class="img-thumbnail"
-                                                                                        width="50%" height="50%" />
+
+                                                                                <div class="col-md-4 mb-2">
+                                                                                    <label>Date</label>
+                                                                                    <input class="form-control" value="<?= $client['clinic_date'] ?>" disabled>
                                                                                 </div>
+
+                                                                                <div class="col-md-4 mb-2">
+                                                                                    <label>Initials</label>
+                                                                                    <input class="form-control" value="<?= $client['initials'] ?>" disabled>
+                                                                                </div>
+
                                                                             </div>
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="col-md-3">ParticipantID:</div>
-                                                                                <div class="col-md-9">
-                                                                                    <input
-                                                                                        value="<?= $client['participant_id'] ?>"
-                                                                                        class="validate[required]" type="text"
-                                                                                        name="participant_id"
-                                                                                        id="participant_id" disabled />
+
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 mb-2">
+                                                                                    <label>First Name</label>
+                                                                                    <input class="form-control" value="<?= $client['firstname'] ?>" disabled>
                                                                                 </div>
-                                                                            </div>
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="col-md-3">Date:</div>
-                                                                                <div class="col-md-9">
-                                                                                    <input value="<?= $client['clinic_date'] ?>"
-                                                                                        class="validate[required,custom[date]]"
-                                                                                        type="text" name="clinic_date"
-                                                                                        id="clinic_date" disabled />
-                                                                                    <span>Example:
-                                                                                        2010-12-01</span>
+
+                                                                                <div class="col-md-4 mb-2">
+                                                                                    <label>Middle Name</label>
+                                                                                    <input class="form-control" value="<?= $client['middlename'] ?>" disabled>
                                                                                 </div>
-                                                                            </div>
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="col-md-3">First Name:</div>
-                                                                                <div class="col-md-9">
-                                                                                    <input value="<?= $client['firstname'] ?>"
-                                                                                        class="validate[required]" type="text"
-                                                                                        name="firstname" id="firstname"
-                                                                                        disabled />
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="col-md-3">Middle Name:</div>
-                                                                                <div class="col-md-9">
-                                                                                    <input value="<?= $client['middlename'] ?>"
-                                                                                        class="validate[required]" type="text"
-                                                                                        name="middlename" id="middlename"
-                                                                                        disabled />
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="col-md-3">Last Name:</div>
-                                                                                <div class="col-md-9">
-                                                                                    <input value="<?= $client['lastname'] ?>"
-                                                                                        class="validate[required]" type="text"
-                                                                                        name="lastname" id="lastname"
-                                                                                        disabled />
+
+                                                                                <div class="col-md-4 mb-2">
+                                                                                    <label>Last Name</label>
+                                                                                    <input class="form-control" value="<?= $client['lastname'] ?>" disabled>
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="col-md-3">Date of Birth:</div>
-                                                                                <div class="col-md-9">
-                                                                                    <input value="<?= $client['dob'] ?>"
-                                                                                        class="validate[required,custom[date]]"
-                                                                                        type="text" name="dob" id="dob"
-                                                                                        disabled />
-                                                                                    <span>Example: 2010-12-01</span>
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 mb-2">
+                                                                                    <label>Date of Birth</label>
+                                                                                    <input class="form-control" value="<?= $client['dob'] ?>" disabled>
                                                                                 </div>
-                                                                            </div>
 
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="col-md-3">Age:</div>
-                                                                                <div class="col-md-9">
-                                                                                    <input value="<?= $client['age'] ?>"
-                                                                                        class="validate[required]" type="text"
-                                                                                        name="age" id="age" disabled />
+                                                                                <div class="col-md-4 mb-2">
+                                                                                    <label>Age</label>
+                                                                                    <input class="form-control" value="<?= $client['age'] ?>" disabled>
                                                                                 </div>
-                                                                            </div>
 
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="col-md-3">Initials:</div>
-                                                                                <div class="col-md-9">
-                                                                                    <input value="<?= $client['initials'] ?>"
-                                                                                        class="validate[required]" type="text"
-                                                                                        name="initials" id="initials"
-                                                                                        disabled />
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="col-md-3">Gender</div>
-                                                                                <div class="col-md-9">
-                                                                                    <select name="gender" style="width: 100%;"
-                                                                                        disabled>
-                                                                                        <option
-                                                                                            value="<?= $client['gender'] ?>">
-                                                                                            <?= $client['gender'] ?>
-                                                                                        </option>
-                                                                                        <option value="male">Male</option>
-                                                                                        <option value="female">Female</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="col-md-3">Hospital ID:</div>
-                                                                                <div class="col-md-9">
-                                                                                    <input value="<?= $client['id_number'] ?>"
-                                                                                        class="validate[required]" type="text"
-                                                                                        name="id_number" id="id_number"
-                                                                                        disabled />
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="col-md-3">Marital Status</div>
-                                                                                <div class="col-md-9">
-                                                                                    <select name="marital_status"
-                                                                                        style="width: 100%;" disabled>
-                                                                                        <option
-                                                                                            value="<?= $client['marital_status'] ?>">
-                                                                                            <?= $client['marital_status'] ?>
-                                                                                        </option>
-                                                                                        <option value="Single">Single</option>
-                                                                                        <option value="Married">Married</option>
-                                                                                        <option value="Divorced">Divorced
-                                                                                        </option>
-                                                                                        <option value="Separated">Separated
-                                                                                        </option>
-                                                                                        <option value="Widower">Widower/Widow
-                                                                                        </option>
-                                                                                        <option value="Cohabit">Cohabit</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="col-md-3">Education Level</div>
-                                                                                <div class="col-md-9">
-                                                                                    <select name="education_level"
-                                                                                        style="width: 100%;" disabled>
-                                                                                        <option
-                                                                                            value="<?= $client['education_level'] ?>">
-                                                                                            <?= $client['education_level'] ?>
-                                                                                        </option>
-                                                                                        <option value="Not attended school">Not
-                                                                                            attended school</option>
-                                                                                        <option value="Primary">Primary</option>
-                                                                                        <option value="Secondary">Secondary
-                                                                                        </option>
-                                                                                        <option value="Certificate">Certificate
-                                                                                        </option>
-                                                                                        <option value="Diploma">Diploma</option>
-                                                                                        <option value="Undergraduate degree">
-                                                                                            Undergraduate degree</option>
-                                                                                        <option value="Postgraduate degree">
-                                                                                            Postgraduate degree</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="col-md-3">Workplace/station site:
-                                                                                </div>
-                                                                                <div class="col-md-9"><input
-                                                                                        value="<?= $client['workplace'] ?>"
-                                                                                        class="" type="text" name="workplace"
-                                                                                        id="workplace" disabled /></div>
-                                                                            </div>
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="col-md-3">Occupation:</div>
-                                                                                <div class="col-md-9"><input
-                                                                                        value="<?= $client['occupation'] ?>"
-                                                                                        class="" type="text" name="occupation"
-                                                                                        id="occupation" disabled /></div>
-                                                                            </div>
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="col-md-3">Phone Number:</div>
-                                                                                <div class="col-md-9"><input
-                                                                                        value="<?= $client['phone_number'] ?>"
-                                                                                        class="" type="text" name="phone_number"
-                                                                                        id="phone" disabled /> <span>Example:
-                                                                                        0700
-                                                                                        000 111</span></div>
-                                                                            </div>
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="col-md-3">Relative's Phone Number:
-                                                                                </div>
-                                                                                <div class="col-md-9"><input
-                                                                                        value="<?= $client['other_phone'] ?>"
-                                                                                        class="" type="text" name="other_phone"
-                                                                                        id="phone" disabled /> <span>Example:
-                                                                                        0700
-                                                                                        000 111</span></div>
-                                                                            </div>
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="col-md-3">Residence Street:</div>
-                                                                                <div class="col-md-9"><input
-                                                                                        value="<?= $client['street'] ?>"
-                                                                                        class="" type="text" name="street"
-                                                                                        id="street" disabled /></div>
-                                                                            </div>
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="col-md-3">Ward:</div>
-                                                                                <div class="col-md-9"><input
-                                                                                        value="<?= $client['ward'] ?>" class=""
-                                                                                        type="text" name="ward" id="ward"
-                                                                                        disabled /></div>
-                                                                            </div>
-
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="col-md-3">House Number:</div>
-                                                                                <div class="col-md-9"><input
-                                                                                        value="<?= $client['block_no'] ?>"
-                                                                                        class="" type="text" name="block_no"
-                                                                                        id="block_no" disabled /></div>
-                                                                            </div>
-                                                                            <div class="row-form clearfix">
-                                                                                <div class="col-md-3">Comments:</div>
-                                                                                <div class="col-md-9"><textarea name="comments"
-                                                                                        rows="4"
-                                                                                        disabled><?= $client['comments'] ?></textarea>
+                                                                                <div class="col-md-4 mb-2">
+                                                                                    <label>Gender</label>
+                                                                                    <input class="form-control" value="<?= $client['gender'] ?>" disabled>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="dr"><span></span></div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <input type="hidden" name="id" value="<?= $client['id'] ?>">
-                                                                    <button class="btn btn-default" data-dismiss="modal"
-                                                                        aria-hidden="true">Close</button>
-                                                                </div>
+
+                                                                    <!-- SOCIAL INFO -->
+                                                                    <div class="card mb-3">
+                                                                        <div class="card-header bg-secondary text-white">Social Information</div>
+                                                                        <div class="card-body">
+                                                                            <div class="row">
+
+                                                                                <div class="col-md-4 mb-2">
+                                                                                    <label>Marital Status</label>
+                                                                                    <input class="form-control" value="<?= $client['marital_status'] ?>" disabled>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 mb-2">
+                                                                                    <label>Education Level</label>
+                                                                                    <input class="form-control" value="<?= $client['education_level'] ?>" disabled>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 mb-2">
+                                                                                    <label>Occupation</label>
+                                                                                    <input class="form-control" value="<?= $client['occupation'] ?>" disabled>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!-- IDENTIFICATION -->
+                                                                    <div class="card mb-3">
+                                                                        <div class="card-header bg-secondary text-white">Identification</div>
+                                                                        <div class="card-body">
+                                                                            <div class="row">
+
+                                                                                <div class="col-md-6 mb-2">
+                                                                                    <label>Hospital ID</label>
+                                                                                    <input class="form-control" value="<?= $client['id_number'] ?>" disabled>
+                                                                                </div>
+
+                                                                                <div class="col-md-6 mb-2">
+                                                                                    <label>National ID</label>
+                                                                                    <input class="form-control" value="<?= $client['national_id'] ?>" disabled>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!-- CONTACT -->
+                                                                    <div class="card mb-3">
+                                                                        <div class="card-header bg-secondary text-white">Contact Information</div>
+                                                                        <div class="card-body">
+                                                                            <div class="row">
+
+                                                                                <div class="col-md-4 mb-2">
+                                                                                    <label>Phone Number</label>
+                                                                                    <input class="form-control" value="<?= $client['phone_number'] ?>" disabled>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 mb-2">
+                                                                                    <label>Relative Phone</label>
+                                                                                    <input class="form-control" value="<?= $client['other_phone'] ?>" disabled>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 mb-2">
+                                                                                    <label>Street</label>
+                                                                                    <input class="form-control" value="<?= $client['street'] ?>" disabled>
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 mb-2">
+                                                                                    <label>Region</label>
+                                                                                    <input class="form-control" value="<?= $client['region'] ?>" disabled>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 mb-2">
+                                                                                    <label>District</label>
+                                                                                    <input class="form-control" value="<?= $client['district'] ?>" disabled>
+                                                                                </div>
+
+                                                                                <div class="col-md-4 mb-2">
+                                                                                    <label>Ward</label>
+                                                                                    <input class="form-control" value="<?= $client['ward'] ?>" disabled>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 mb-2">
+                                                                                    <label>House Number</label>
+                                                                                    <input class="form-control" value="<?= $client['block_no'] ?>" disabled>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!-- COMMENTS -->
+                                                                    <div class="card">
+                                                                        <div class="card-header bg-secondary text-white">Comments</div>
+                                                                        <div class="card-body">
+                                                                            <textarea class="form-control" rows="3" disabled><?= $client['comments'] ?></textarea>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </form>
                                                             </div>
-                                                        </form>
+
+                                                            <!-- FOOTER -->
+                                                            <div class="modal-footer">
+                                                                <input type="hidden" value="<?= $client['id'] ?>">
+                                                                <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            </div>
+
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="modal fade" id="client<?= $client['id'] ?>" tabindex="-1"
@@ -3455,8 +3403,8 @@ if ($user->isLoggedIn()) {
                                                                                         class="validate[required,custom[date]]"
                                                                                         type="text" name="clinic_date"
                                                                                         id="clinic_date" value="<?php if ($client['clinic_date']) {
-                                                                                            print_r($client['clinic_date']);
-                                                                                        } ?>" />
+                                                                                                                    print_r($client['clinic_date']);
+                                                                                                                } ?>" />
                                                                                     <span>Example: 2010-12-01</span>
                                                                                 </div>
                                                                             </div>
@@ -3468,8 +3416,8 @@ if ($user->isLoggedIn()) {
                                                                                     <label>First Name</label>
                                                                                     <input type="text" name="firstname"
                                                                                         id="firstname" value="<?php if ($client['firstname']) {
-                                                                                            print_r($client['firstname']);
-                                                                                        } ?>" />
+                                                                                                                    print_r($client['firstname']);
+                                                                                                                } ?>" />
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -3480,8 +3428,8 @@ if ($user->isLoggedIn()) {
                                                                                     <label>Middle Name</label>
                                                                                     <input type="text" name="middlename"
                                                                                         id="middlename" value="<?php if ($client['middlename']) {
-                                                                                            print_r($client['middlename']);
-                                                                                        } ?>" />
+                                                                                                                    print_r($client['middlename']);
+                                                                                                                } ?>" />
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -3492,8 +3440,8 @@ if ($user->isLoggedIn()) {
                                                                                     <label>Last Name</label>
                                                                                     <input type="text" name="lastname"
                                                                                         id="lastname" value="<?php if ($client['lastname']) {
-                                                                                            print_r($client['lastname']);
-                                                                                        } ?>" />
+                                                                                                                    print_r($client['lastname']);
+                                                                                                                } ?>" />
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -3508,8 +3456,8 @@ if ($user->isLoggedIn()) {
                                                                                     <input
                                                                                         class="validate[required,custom[date]]"
                                                                                         type="text" name="dob" id="dob" value="<?php if ($client['dob']) {
-                                                                                            print_r($client['dob']);
-                                                                                        } ?>" />
+                                                                                                                                    print_r($client['dob']);
+                                                                                                                                } ?>" />
                                                                                     <span>Example: 2010-12-01</span>
                                                                                 </div>
                                                                             </div>
@@ -3521,8 +3469,8 @@ if ($user->isLoggedIn()) {
                                                                                     <label>Age</label>
                                                                                     <input type="text" name="Age" id="Age"
                                                                                         value="<?php if ($client['age']) {
-                                                                                            print_r($client['age']);
-                                                                                        } ?>" disabled />
+                                                                                                    print_r($client['age']);
+                                                                                                } ?>" disabled />
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -3533,8 +3481,8 @@ if ($user->isLoggedIn()) {
                                                                                     <label>Initials</label>
                                                                                     <input type="text" name="initials"
                                                                                         id="initials" value="<?php if ($client['initials']) {
-                                                                                            print_r($client['initials']);
-                                                                                        } ?>" />
+                                                                                                                    print_r($client['initials']);
+                                                                                                                } ?>" />
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -3574,8 +3522,8 @@ if ($user->isLoggedIn()) {
                                                                                     <label>Hospital ID Number</label>
                                                                                     <input type="text" name="id_number"
                                                                                         id="id_number" value="<?php if ($client['id_number']) {
-                                                                                            print_r($client['id_number']);
-                                                                                        } ?>" />
+                                                                                                                    print_r($client['id_number']);
+                                                                                                                } ?>" />
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -3676,8 +3624,8 @@ if ($user->isLoggedIn()) {
                                                                                     <label>Occupation</label>
                                                                                     <input type="text" name="occupation"
                                                                                         id="occupation" value="<?php if ($client['occupation']) {
-                                                                                            print_r($client['occupation']);
-                                                                                        } ?>" />
+                                                                                                                    print_r($client['occupation']);
+                                                                                                                } ?>" />
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -3692,8 +3640,8 @@ if ($user->isLoggedIn()) {
                                                                                     <label>Occupation</label>
                                                                                     <input type="text" name="occupation"
                                                                                         id="occupation" value="<?php if ($client['occupation']) {
-                                                                                            print_r($client['occupation']);
-                                                                                        } ?>" />
+                                                                                                                    print_r($client['occupation']);
+                                                                                                                } ?>" />
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -3705,8 +3653,8 @@ if ($user->isLoggedIn()) {
                                                                                     <label>National ID</label>
                                                                                     <input type="text" name="national_id"
                                                                                         id="national_id" value="<?php if ($client['national_id']) {
-                                                                                            print_r($client['national_id']);
-                                                                                        } ?>" />
+                                                                                                                    print_r($client['national_id']);
+                                                                                                                } ?>" />
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -3718,8 +3666,8 @@ if ($user->isLoggedIn()) {
                                                                                     <label>Phone Number</label>
                                                                                     <input type="text" name="phone_number"
                                                                                         id="phone_number" value="<?php if ($client['phone_number']) {
-                                                                                            print_r($client['phone_number']);
-                                                                                        } ?>" />
+                                                                                                                        print_r($client['phone_number']);
+                                                                                                                    } ?>" />
                                                                                 </div>
                                                                                 <span>Example: 0700 000 111</span>
                                                                             </div>
@@ -3732,8 +3680,8 @@ if ($user->isLoggedIn()) {
                                                                                     <label>Relative's Phone Number</label>
                                                                                     <input type="text" name="other_phone"
                                                                                         id="other_phone" value="<?php if ($client['other_phone']) {
-                                                                                            print_r($client['other_phone']);
-                                                                                        } ?>" />
+                                                                                                                    print_r($client['other_phone']);
+                                                                                                                } ?>" />
                                                                                 </div>
                                                                                 <span>Example: 0700 000 111</span>
                                                                             </div>
@@ -3749,8 +3697,8 @@ if ($user->isLoggedIn()) {
                                                                                     <label>Residence Street:</label>
                                                                                     <input type="text" name="street" id="street"
                                                                                         value="<?php if ($client['street']) {
-                                                                                            print_r($client['street']);
-                                                                                        } ?>" />
+                                                                                                    print_r($client['street']);
+                                                                                                } ?>" />
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -3762,8 +3710,8 @@ if ($user->isLoggedIn()) {
                                                                                     <label>Region</label>
                                                                                     <input type="text" name="region" id="region"
                                                                                         value="<?php if ($client['region']) {
-                                                                                            print_r($client['region']);
-                                                                                        } ?>" />
+                                                                                                    print_r($client['region']);
+                                                                                                } ?>" />
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -3775,8 +3723,8 @@ if ($user->isLoggedIn()) {
                                                                                     <label>District</label>
                                                                                     <input type="text" name="district"
                                                                                         id="district" value="<?php if ($client['district']) {
-                                                                                            print_r($client['district']);
-                                                                                        } ?>" />
+                                                                                                                    print_r($client['district']);
+                                                                                                                } ?>" />
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -3788,8 +3736,8 @@ if ($user->isLoggedIn()) {
                                                                                     <label>Ward</label>
                                                                                     <input type="text" name="ward" id="ward"
                                                                                         value="<?php if ($client['ward']) {
-                                                                                            print_r($client['ward']);
-                                                                                        } ?>" />
+                                                                                                    print_r($client['ward']);
+                                                                                                } ?>" />
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -3924,8 +3872,8 @@ if ($user->isLoggedIn()) {
                                                                                     class="form-control validate[required,custom[date]]"
                                                                                     type="date" name="screening_date"
                                                                                     id="screening_date" value="<?php if ($screening['screening_date']) {
-                                                                                        print_r($screening['screening_date']);
-                                                                                    } ?>" required />
+                                                                                                                    print_r($screening['screening_date']);
+                                                                                                                } ?>" required />
                                                                                 <span>Example: 2010-12-01</span>
                                                                             </div>
                                                                         </div>
@@ -4203,8 +4151,8 @@ if ($user->isLoggedIn()) {
                                                                         <label>Date of Screening:</label>
                                                                         <input type="date" class="form-control"
                                                                             name="screening_date" id="screening_date" value="<?php if ($lab['screening_date']) {
-                                                                                print_r($lab['screening_date']);
-                                                                            } ?>" required>
+                                                                                                                                    print_r($lab['screening_date']);
+                                                                                                                                } ?>" required>
                                                                         <small class="form-text text-muted">Example:
                                                                             2010-12-01</small>
                                                                     </div>
@@ -4441,10 +4389,10 @@ if ($user->isLoggedIn()) {
                                                                                         <option value="<?= $client['pt_type'] ?>">
                                                                                             New Patient</option>
                                                                                     <?php } else if ($client['pt_type'] == 2) { ?>
-                                                                                            <option value="<?= $client['pt_type'] ?>">
-                                                                                                Already Enrolled</option>
+                                                                                        <option value="<?= $client['pt_type'] ?>">
+                                                                                            Already Enrolled</option>
                                                                                     <?php } else { ?>
-                                                                                            <option value="">Select</option>
+                                                                                        <option value="">Select</option>
                                                                                     <?php } ?>
                                                                                     <option value="1">New Patient</option>
                                                                                     <option value="2">Already Enrolled</option>
@@ -4462,28 +4410,28 @@ if ($user->isLoggedIn()) {
                                                                                             value="<?= $client['treatment_type'] ?>">
                                                                                             Radiotherapy Treatment</option>
                                                                                     <?php } else if ($client['treatment_type'] == 2) { ?>
-                                                                                            <option
-                                                                                                value="<?= $client['treatment_type'] ?>">
-                                                                                                Chemotherapy Treatment</option>
+                                                                                        <option
+                                                                                            value="<?= $client['treatment_type'] ?>">
+                                                                                            Chemotherapy Treatment</option>
                                                                                     <?php } else if ($client['treatment_type'] == 3) { ?>
-                                                                                                <option
-                                                                                                    value="<?= $client['treatment_type'] ?>">
-                                                                                                    Surgery Treatment</option>
+                                                                                        <option
+                                                                                            value="<?= $client['treatment_type'] ?>">
+                                                                                            Surgery Treatment</option>
                                                                                     <?php } else if ($client['treatment_type'] == 4) { ?>
-                                                                                                    <option
-                                                                                                        value="<?= $client['treatment_type'] ?>">
-                                                                                                        Active surveillance</option>
+                                                                                        <option
+                                                                                            value="<?= $client['treatment_type'] ?>">
+                                                                                            Active surveillance</option>
                                                                                     <?php } else if ($client['treatment_type'] == 5) { ?>
-                                                                                                        <option
-                                                                                                            value="<?= $client['treatment_type'] ?>">
-                                                                                                            Hormonal therapy ie ADT</option>
+                                                                                        <option
+                                                                                            value="<?= $client['treatment_type'] ?>">
+                                                                                            Hormonal therapy ie ADT</option>
                                                                                     <?php } else if ($client['treatment_type'] == 6) { ?>
-                                                                                                            <option
-                                                                                                                value="<?= $client['treatment_type'] ?>">
-                                                                                                                Other (If Other write in Notes /
-                                                                                                                Remarks)</option>
+                                                                                        <option
+                                                                                            value="<?= $client['treatment_type'] ?>">
+                                                                                            Other (If Other write in Notes /
+                                                                                            Remarks)</option>
                                                                                     <?php } else { ?>
-                                                                                                            <option value="">Select</option>
+                                                                                        <option value="">Select</option>
                                                                                     <?php } ?>
                                                                                     <option value="1">Radiotherapy Treatment
                                                                                     </option>
@@ -4523,32 +4471,32 @@ if ($user->isLoggedIn()) {
                                                                                             value="<?= $client['treatment_type2'] ?>">
                                                                                             Radiotherapy Treatment</option>
                                                                                     <?php } else if ($client['treatment_type2'] == 2) { ?>
-                                                                                            <option
-                                                                                                value="<?= $client['treatment_type2'] ?>">
-                                                                                                Chemotherapy Treatment</option>
+                                                                                        <option
+                                                                                            value="<?= $client['treatment_type2'] ?>">
+                                                                                            Chemotherapy Treatment</option>
                                                                                     <?php } else if ($client['treatment_type2'] == 3) { ?>
-                                                                                                <option
-                                                                                                    value="<?= $client['treatment_type2'] ?>">
-                                                                                                    Surgery Treatment</option>
+                                                                                        <option
+                                                                                            value="<?= $client['treatment_type2'] ?>">
+                                                                                            Surgery Treatment</option>
                                                                                     <?php } else if ($client['treatment_type2'] == 4) { ?>
-                                                                                                    <option
-                                                                                                        value="<?= $client['treatment_type2'] ?>">
-                                                                                                        Active surveillance</option>
+                                                                                        <option
+                                                                                            value="<?= $client['treatment_type2'] ?>">
+                                                                                            Active surveillance</option>
                                                                                     <?php } else if ($client['treatment_type2'] == 5) { ?>
-                                                                                                        <option
-                                                                                                            value="<?= $client['treatment_type2'] ?>">
-                                                                                                            Hormonal therapy ie ADT</option>
+                                                                                        <option
+                                                                                            value="<?= $client['treatment_type2'] ?>">
+                                                                                            Hormonal therapy ie ADT</option>
                                                                                     <?php } else if ($client['treatment_type2'] == 96) { ?>
-                                                                                                            <option
-                                                                                                                value="<?= $client['treatment_type2'] ?>">
-                                                                                                                Other (If Other write in Notes /
-                                                                                                                Remarks)</option>
+                                                                                        <option
+                                                                                            value="<?= $client['treatment_type2'] ?>">
+                                                                                            Other (If Other write in Notes /
+                                                                                            Remarks)</option>
                                                                                     <?php } else if ($client['treatment_type2'] == 99) { ?>
-                                                                                                                <option
-                                                                                                                    value="<?= $client['treatment_type2'] ?>">
-                                                                                                                    NA</option>
+                                                                                        <option
+                                                                                            value="<?= $client['treatment_type2'] ?>">
+                                                                                            NA</option>
                                                                                     <?php } else { ?>
-                                                                                                                <option value="">Select</option>
+                                                                                        <option value="">Select</option>
                                                                                     <?php } ?>
                                                                                     <option value="1">Radiotherapy Treatment
                                                                                     </option>
@@ -4907,7 +4855,7 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <?php $x++;
+                                            <?php $x++;
                                             } ?>
                                         </tbody>
                                     </table>
@@ -4917,27 +4865,27 @@ if ($user->isLoggedIn()) {
                                     <ul class="pagination pagination-sm m-0 float-right">
                                         <li class="page-item">
                                             <a class="page-link" href="info.php?id=3&status=<?= $_GET['status'] ?>site_id=<?= $_GET['site_id'] ?>&page=<?php if (($_GET['page'] - 1) > 0) {
-                                                    echo $_GET['page'] - 1;
-                                                } else {
-                                                    echo 1;
-                                                } ?>">&laquo;
+                                                                                                                                                            echo $_GET['page'] - 1;
+                                                                                                                                                        } else {
+                                                                                                                                                            echo 1;
+                                                                                                                                                        } ?>">&laquo;
                                             </a>
                                         </li>
                                         <?php for ($i = 1; $i <= $pages; $i++) { ?>
                                             <li class="page-item">
                                                 <a class="page-link <?php if ($i == $_GET['page']) {
-                                                    echo 'active';
-                                                } ?>"
+                                                                        echo 'active';
+                                                                    } ?>"
                                                     href="info.php?id=3&status=<?= $_GET['status'] ?>&site_id=<?= $_GET['site_id'] ?>&page=<?= $i ?>"><?= $i ?>
                                                 </a>
                                             </li>
                                         <?php } ?>
                                         <li class="page-item">
                                             <a class="page-link" href="info.php?id=3&status=<?= $_GET['status'] ?>&site_id=<?= $_GET['site_id'] ?>&page=<?php if (($_GET['page'] + 1) <= $pages) {
-                                                    echo $_GET['page'] + 1;
-                                                } else {
-                                                    echo $i - 1;
-                                                } ?>">&raquo;
+                                                                                                                                                            echo $_GET['page'] + 1;
+                                                                                                                                                        } else {
+                                                                                                                                                            echo $i - 1;
+                                                                                                                                                        } ?>">&raquo;
                                             </a>
                                         </li>
                                     </ul>
@@ -5030,7 +4978,7 @@ if ($user->isLoggedIn()) {
                                                     <li class="breadcrumb-item"><a href="#">
                                                             <?php if ($visit['seq_no'] >= 1) {
                                                                 $summary = '';
-                                                                ?>
+                                                            ?>
                                                                 <?php
                                                                 //  if ($visit['visit_status']) {
                                                                 ?>
@@ -5038,9 +4986,9 @@ if ($user->isLoggedIn()) {
                                                                     class="btn btn-info" data-toggle="modal">Update</a>
                                                             <?php } else {
                                                                 $summary = 1;
-                                                                ?>
+                                                            ?>
                                                                 <a href="index1.php">Go Home</a>
-                                                                <?php
+                                                            <?php
                                                                 //  }
                                                             } ?>
                                                         </a>
@@ -5171,7 +5119,7 @@ if ($user->isLoggedIn()) {
 
                                                     $visit_name = $visit['visit_name'];
 
-                                                    ?>
+                                                ?>
                                                     <tr>
                                                         <td>
                                                             <?= $visit['visit_day'] ?><br>
@@ -5320,7 +5268,7 @@ if ($user->isLoggedIn()) {
                                                                             class="btn btn-danger" data-toggle="modal">Delete Visit</a>
                                                                         <hr>
                                                                     <?php } ?>
-                                                                <?php }
+                                                            <?php }
                                                             } ?>
 
 
@@ -5437,7 +5385,7 @@ if ($user->isLoggedIn()) {
 
                                                                         <a href="#deleteVisit<?= $visit['id'] ?>" role="button"
                                                                             class="btn btn-danger" data-toggle="modal">Delete Visit</a>
-                                                                        <?php
+                                                            <?php
                                                                     }
                                                                 }
                                                             } ?>
@@ -5465,8 +5413,8 @@ if ($user->isLoggedIn()) {
                                                                                         max="<?= date('Y-m-d'); ?>" type="date"
                                                                                         name="visit_date" id="visit_date"
                                                                                         style="width: 100%;" value="<?php if ($visit['visit_date']) {
-                                                                                            print_r($visit['visit_date']);
-                                                                                        } ?>" required />
+                                                                                                                        print_r($visit['visit_date']);
+                                                                                                                    } ?>" required />
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-sm-6">
@@ -5504,8 +5452,8 @@ if ($user->isLoggedIn()) {
                                                                                         name="reasons" rows="3"
                                                                                         placeholder="Type reason / comments here..."
                                                                                         required><?php if ($visit['reasons']) {
-                                                                                            print_r($visit['reasons']);
-                                                                                        } ?></textarea>
+                                                                                                        print_r($visit['reasons']);
+                                                                                                    } ?></textarea>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -5552,8 +5500,8 @@ if ($user->isLoggedIn()) {
                                                                                             name="expected_date"
                                                                                             id="expected_date"
                                                                                             style="width: 100%;" value="<?php if ($visit['expected_date']) {
-                                                                                                print_r($visit['expected_date']);
-                                                                                            } ?>" required />
+                                                                                                                            print_r($visit['expected_date']);
+                                                                                                                        } ?>" required />
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -5607,7 +5555,7 @@ if ($user->isLoggedIn()) {
                                                             </form>
                                                         </div>
                                                     </div>
-                                                    <?php $x++;
+                                                <?php $x++;
                                                 } ?>
                                             </tbody>
                                             <tfoot>
@@ -5740,7 +5688,7 @@ if ($user->isLoggedIn()) {
                                                                     <option value="<?= $tables['Tables_in_penplus'] ?>">
                                                                         <?= $x . ' - ' . $tables['Tables_in_penplus'] ?>
                                                                     </option>
-                                                                <?php }
+                                                            <?php }
                                                                 $x++;
                                                             } ?>
                                                         </select>
@@ -5828,7 +5776,7 @@ if ($user->isLoggedIn()) {
             $patient = $override->get('clients', 'id', $_GET['cid'])[0];
 
             // $visits_status = $override->firstRow1('visit', 'status', 'id', 'client_id', $_GET['cid'], 'visit_code', 'EV')[0]['status'];
-        
+
             // $patient = $override->get('clients', 'id', $_GET['cid'])[0];
             $category = $override->get('clients', 'id', $_GET['cid'])[0];
             $cat = '';
@@ -5886,8 +5834,8 @@ if ($user->isLoggedIn()) {
                                     <div class="alert alert-danger text-center">
                                         <h4>Error!</h4>
                                         <?php foreach ($pageError as $error) {
-                                            echo $error . ' , ';
-                                        } ?>
+                                                echo $error . ' , ';
+                                            } ?>
                                     </div>
                                 <?php } elseif ($_GET['msg']) { ?>
                                     <div class="alert alert-success text-center">
@@ -6114,8 +6062,8 @@ if ($user->isLoggedIn()) {
                                     <div class="alert alert-danger text-center">
                                         <h4>Error!</h4>
                                         <?php foreach ($pageError as $error) {
-                                            echo $error . ' , ';
-                                        } ?>
+                                                echo $error . ' , ';
+                                            } ?>
                                     </div>
                                 <?php } elseif ($_GET['msg']) { ?>
                                     <div class="alert alert-success text-center">
@@ -6187,7 +6135,7 @@ if ($user->isLoggedIn()) {
                                                     <th width="10%">Expected Date</th>
                                                     <th width="10%">Visit Date</th>
                                                     <th width="20%">Status</th>
-                                                                                                        <th width="20%">Action</th>
+                                                    <th width="20%">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -6242,7 +6190,7 @@ if ($user->isLoggedIn()) {
 
                                                     if ($x == 1 || ($x > 1 && $sc['eligibility'] == 1 && $lb['eligibility'] == 1)) {
 
-                                                        ?>
+                                                ?>
                                                         <tr>
                                                             <td> <?= $visit['visit_name'] ?></td>
                                                             <td> <?= $visit['expected_date'] ?></td>
@@ -6268,7 +6216,7 @@ if ($user->isLoggedIn()) {
                                                                         <a href="#addVisit<?= $visit['id'] ?>" role="button"
                                                                             class="btn btn-info" data-toggle="modal"><?= $btnV ?>Visit</a>
                                                                     <?php } ?>
-                                                              <hr>
+                                                                    <hr>
 
                                                                     <?php if ($visit['status'] == 1 && $visit['visit_code'] == 'D0') { ?>
 
@@ -6321,8 +6269,8 @@ if ($user->isLoggedIn()) {
                                                                     ?>
 
 
-                                                                </td>
-                                                            <?php } ?>
+                                                            </td>
+                                                        <?php } ?>
                                                         </tr>
                                                         <div class="modal fade" id="addVisit<?= $visit['id'] ?>" tabindex="-1"
                                                             role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -6385,16 +6333,16 @@ if ($user->isLoggedIn()) {
                                                                                         <label>Notes / Remarks / Reason:</label>
                                                                                         <textarea name="reasons"
                                                                                             class="form-control" rows="4"><?php if ($visit['status'] != 0) {
-                                                                                                echo $visit['reasons'];
-                                                                                            } ?></textarea>
+                                                                                                                                echo $visit['reasons'];
+                                                                                                                            } ?></textarea>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-sm-4">
                                                                                     <div class="form-group">
                                                                                         <label>Date of Follow Up Visit:</label>
                                                                                         <input value="<?php if ($visit['status'] != 0) {
-                                                                                            echo $visit['visit_date'];
-                                                                                        } ?>" class="form-control"
+                                                                                                            echo $visit['visit_date'];
+                                                                                                        } ?>" class="form-control"
                                                                                             type="date" name="visit_date"
                                                                                             id="visit_date" />
                                                                                     </div>
@@ -6417,7 +6365,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    <?php }
+                                                <?php }
                                                     $x++;
                                                 } ?>
                                             </tbody>
@@ -6425,7 +6373,9 @@ if ($user->isLoggedIn()) {
                                                 <th>Visit Name</th>
                                                 <th>Expected Date</th>
                                                 <th>Visit Date</th>
-                                                <th>Status <hr> Action</th>
+                                                <th>Status
+                                                    <hr> Action
+                                                </th>
                                             </tfoot>
                                         </table>
                                     </div>
@@ -6823,7 +6773,7 @@ if ($user->isLoggedIn()) {
                                                         <?php
                                                         $x = 1;
                                                         foreach ($override->get1('other_medication', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']) as $medication) {
-                                                            ?>
+                                                        ?>
                                                             <tr>
                                                                 <td><input value='<?= $medication['other_specify'] ?>'
                                                                         type="text" name="other_specify[]"></td>
@@ -6852,7 +6802,7 @@ if ($user->isLoggedIn()) {
                                                                         name="medication_id[]"></td>
 
                                                             </tr>
-                                                            <?php
+                                                        <?php
                                                             $x++;
                                                         }
                                                         ?>
@@ -6911,7 +6861,7 @@ if ($user->isLoggedIn()) {
                                                         <?php
                                                         $x = 1;
                                                         foreach ($override->get1('nimregenin', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']) as $nimregenin) {
-                                                            ?>
+                                                        ?>
                                                             <tr>
                                                                 <td><input value='<?= $nimregenin['nimregenin_preparation'] ?>'
                                                                         type="text" name="nimregenin_preparation[]"></td>
@@ -6950,7 +6900,7 @@ if ($user->isLoggedIn()) {
                                                                 <td><input value='<?= $nimregenin['id'] ?>' type="hidden"
                                                                         name="nimregenin_id[]"></td>
                                                             </tr>
-                                                            <?php
+                                                        <?php
                                                             $x++;
                                                         }
                                                         ?>
@@ -7007,7 +6957,7 @@ if ($user->isLoggedIn()) {
                                                         <?php
                                                         $x = 1;
                                                         foreach ($override->get1('herbal_treatment', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']) as $herbal_treatment) {
-                                                            ?>
+                                                        ?>
                                                             <tr>
                                                                 <td><input
                                                                         value='<?= $herbal_treatment['herbal_preparation'] ?>'
@@ -7048,7 +6998,7 @@ if ($user->isLoggedIn()) {
                                                                 <td><input value='<?= $herbal_treatment['id'] ?>' type="hidden"
                                                                         name="herbal_id[]"></td>
                                                             </tr>
-                                                            <?php
+                                                        <?php
                                                             $x++;
                                                         }
                                                         ?>
@@ -7117,7 +7067,7 @@ if ($user->isLoggedIn()) {
                                                         <?php
                                                         $x = 1;
                                                         foreach ($override->get1('radiotherapy', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']) as $radiotherapy) {
-                                                            ?>
+                                                        ?>
                                                             <tr>
                                                                 <td><input value="<?= $radiotherapy['radiotherapy'] ?>"
                                                                         type="text" name="radiotherapy[]"></td>
@@ -7158,7 +7108,7 @@ if ($user->isLoggedIn()) {
                                                                 <td><input value="<?= $radiotherapy['id'] ?>" type="hidden"
                                                                         name="radiotherapy_id[]"></td>
                                                             </tr>
-                                                            <?php
+                                                        <?php
                                                             $x++;
                                                         }
                                                         ?>
@@ -7213,7 +7163,7 @@ if ($user->isLoggedIn()) {
                                                         <?php
                                                         $x = 1;
                                                         foreach ($override->get1('chemotherapy', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']) as $chemotherapy) {
-                                                            ?>
+                                                        ?>
                                                             <tr>
                                                                 <td><input value="<?= $chemotherapy['chemotherapy'] ?>"
                                                                         type="text" name="chemotherapy[]"></td>
@@ -7255,7 +7205,7 @@ if ($user->isLoggedIn()) {
                                                                 <td><input value="<?= $chemotherapy['id'] ?>" type="hidden"
                                                                         name="chemotherapy_id[]"></td>
                                                             </tr>
-                                                            <?php
+                                                        <?php
                                                             $x++;
                                                         }
                                                         ?>
@@ -7303,7 +7253,7 @@ if ($user->isLoggedIn()) {
                                                             <?php
                                                             $x = 1;
                                                             foreach ($override->get1('surgery', 'patient_id', $_GET['cid'], 'vcode', $_GET['vcode']) as $surgery) {
-                                                                ?>
+                                                            ?>
                                                                 <tr>
                                                                     <td><input value="<?= $surgery['surgery'] ?>" type="text"
                                                                             name="surgery[]"></td>
@@ -7321,7 +7271,7 @@ if ($user->isLoggedIn()) {
                                                                     <td><input value="<?= $surgery['id'] ?>" type="hidden"
                                                                             name="surgery_id[]"></td>
                                                                 </tr>
-                                                                <?php
+                                                            <?php
                                                                 $x++;
                                                             }
                                                             ?>
@@ -7459,7 +7409,7 @@ if ($user->isLoggedIn()) {
                                                         $batch_sum = 0;
                                                     }
 
-                                                    ?>
+                                                ?>
                                                     <tr>
                                                         <td><?= $name['name'] ?></td>
                                                         <td><?= $value['serial_name'] ?></td>
@@ -7520,8 +7470,8 @@ if ($user->isLoggedIn()) {
                                                                                     <div class="form-group">
                                                                                         <label>Available Amount</label>
                                                                                         <input class="form-control" value="<?php if ($value['amount']) {
-                                                                                            echo $value['amount'];
-                                                                                        } ?>" type="number" min="0"
+                                                                                                                                echo $value['amount'];
+                                                                                                                            } ?>" type="number" min="0"
                                                                                             name="amount" id="amount"
                                                                                             readonly />
                                                                                     </div>
@@ -7548,8 +7498,8 @@ if ($user->isLoggedIn()) {
                                                                                     <div class="form-group">
                                                                                         <label>Total Price ( TSHS )</label>
                                                                                         <input class="form-control" value="<?php if ($value['price']) {
-                                                                                            echo $value['price'];
-                                                                                        } ?>" type="number" min="0"
+                                                                                                                                echo $value['price'];
+                                                                                                                            } ?>" type="number" min="0"
                                                                                             name="price" id="price" readonly />
                                                                                     </div>
                                                                                 </div>
@@ -7622,8 +7572,8 @@ if ($user->isLoggedIn()) {
                                                                                     <div class="form-group">
                                                                                         <label>Available Amount</label>
                                                                                         <input class="form-control" value="<?php if ($value['amount']) {
-                                                                                            echo $value['amount'];
-                                                                                        } ?>" type="number" min="0"
+                                                                                                                                echo $value['amount'];
+                                                                                                                            } ?>" type="number" min="0"
                                                                                             name="amount" id="amount"
                                                                                             readonly />
                                                                                     </div>
@@ -7662,7 +7612,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- /.modal-dialog -->
                                                     </div>
                                                     <!-- /.modal -->
-                                                    <?php $x++;
+                                                <?php $x++;
                                                 } ?>
                                             </tbody>
                                             <tfoot>
@@ -7777,7 +7727,7 @@ if ($user->isLoggedIn()) {
                                                         $batch_sum = 0;
                                                     }
 
-                                                    ?>
+                                                ?>
                                                     <tr>
                                                         <td><?= $medication['name'] ?></td>
                                                         <td><?= $value['serial_name'] ?></td>
@@ -7834,7 +7784,7 @@ if ($user->isLoggedIn()) {
                                                         <!-- /.modal-dialog -->
                                                     </div>
                                                     <!-- /.modal -->
-                                                    <?php $x++;
+                                                <?php $x++;
                                                 } ?>
                                             </tbody>
                                             <tfoot>
