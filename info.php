@@ -3030,7 +3030,7 @@ if ($user->isLoggedIn()) {
 
                                                     <td>
                                                         <?php if ($_GET['status'] == 1 || $_GET['status'] == 5 || $_GET['status'] == 6 || $_GET['status'] == 7 || $_GET['status'] == 8) { ?>
-                                                            <?php if ($user->data()->accessLevel == 1 || $user->data()->power == 1) { ?>
+                                                            <?php if ($user->data()->accessLevel == 1 || $user->data()->accessLevel == 2 || $user->data()->accessLevel == 3 || $user->data()->power == 1) { ?>
                                                                 <a href="#clientView<?= $client['id'] ?>" role="button"
                                                                     class="btn btn-default" data-toggle="modal">View</a>
                                                                 <a href="id.php?cid=<?= $client['id'] ?>"
