@@ -6341,7 +6341,7 @@ if ($user->isLoggedIn()) {
                                                         </div>
                                                         <hr>
                                                         <div class="row">
-                                                            <div class="col-sm-4">
+                                                            <div class="col-sm-3">
                                                                 <div class="form-group" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
                                                                     <label for="abs_lymphocytes">ABS Lymphocytes</label>
                                                                     <input value="<?= $patient['abs_lymphocytes'] ?>" type="text" class="form-control" name="abs_lymphocytes" id="abs_lymphocytes" />
@@ -6359,7 +6359,25 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             </div>
 
-                                                            <div class="col-sm-4">
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
+                                                                    <label for="plt">PLT</label>
+                                                                    <input value="<?= $patient['plt'] ?>" type="text" class="form-control" name="plt" id="plt" />
+                                                                    <span class="help-block">XXXXX</span>
+                                                                    <div class="input-group mt-1">
+                                                                        <select name="plt_grade" id="plt_grade" class="form-control select2">
+                                                                            <option value="" <?= empty($patient['plt_grade']) ? 'selected' : '' ?>>Select Grade</option>
+                                                                            <option value="0" <?= $patient['plt_grade'] == "0" ? 'selected' : '' ?>>Zero</option>
+                                                                            <option value="1" <?= $patient['plt_grade'] == "1" ? 'selected' : '' ?>>One</option>
+                                                                            <option value="2" <?= $patient['plt_grade'] == "2" ? 'selected' : '' ?>>Two</option>
+                                                                            <option value="3" <?= $patient['plt_grade'] == "3" ? 'selected' : '' ?>>Three</option>
+                                                                            <option value="4" <?= $patient['plt_grade'] == "4" ? 'selected' : '' ?>>Four</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-3">
                                                                 <div class="form-group" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
                                                                     <label>9. Cancer antigen 15-3</label>
                                                                     <input value="<?= $patient['cancer'] ?>" type="text" name="cancer" id="cancer" class="form-control" />
@@ -6367,7 +6385,7 @@ if ($user->isLoggedIn()) {
                                                                 </div>
                                                             </div>
 
-                                                            <div class="col-sm-4">
+                                                            <div class="col-sm-3">
                                                                 <div class="form-group" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
                                                                     <label>9. PSA (Prostate specific antigen)</label>
                                                                     <input value="<?= $patient['prostate'] ?>" type="text" name="prostate" id="prostate" class="form-control" />
